@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "Hardware/Inc/lcd.h"
+#include "Components/Inc/lcd.h"
 #include "Hardware/Inc/ltdc_dsi.h"
 
 
