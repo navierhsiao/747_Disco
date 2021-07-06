@@ -1,0 +1,1860 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"usbh_msc_bot.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.USBH_MSC_BOT_REQ_Reset,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	USBH_MSC_BOT_REQ_Reset
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	USBH_MSC_BOT_REQ_Reset:
+  27              	.LVL0:
+  28              	.LFB151:
+  29              		.file 1 ".//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c"
+   1:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+   2:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   ******************************************************************************
+   3:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @file    usbh_msc_bot.c
+   4:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @author  MCD Application Team
+   5:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @brief   This file includes the BOT protocol related functions
+   6:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   ******************************************************************************
+   7:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @attention
+   8:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *
+   9:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * <h2><center>&copy; Copyright (c) 2015 STMicroelectronics.
+  10:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * All rights reserved.</center></h2>
+  11:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *
+  12:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  13:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  14:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * the License. You may obtain a copy of the License at:
+  15:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *                      www.st.com/SLA0044
+  16:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *
+  17:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   ******************************************************************************
+  18:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   */
+  19:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  20:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /* BSPDependencies
+  21:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** - "stm32xxxxx_{eval}{discovery}{nucleo_144}.c"
+  22:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** - "stm32xxxxx_{eval}{discovery}_io.c"
+  23:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** - "stm32xxxxx_{eval}{discovery}{adafruit}_lcd.c"
+  24:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** - "stm32xxxxx_{eval}{discovery}_sdram.c"
+  25:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** EndBSPDependencies */
+  26:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  27:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /* Includes ------------------------------------------------------------------*/
+  28:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #include "usbh_msc_bot.h"
+  29:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #include "usbh_msc.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 2
+
+
+  30:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  31:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @addtogroup USBH_LIB
+  32:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  33:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  34:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  35:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @addtogroup USBH_CLASS
+  36:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  37:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  38:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  39:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @addtogroup USBH_MSC_CLASS
+  40:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  41:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  42:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  43:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT
+  44:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @brief    This file includes the mass storage related functions
+  45:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  46:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  47:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  48:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  49:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT_Private_TypesDefinitions
+  50:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  51:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  52:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+  53:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @}
+  54:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  55:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  56:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT_Private_Defines
+  57:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  58:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  59:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+  60:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @}
+  61:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  62:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  63:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT_Private_Macros
+  64:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  65:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  66:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+  67:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @}
+  68:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  69:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  70:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  71:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT_Private_Variables
+  72:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  73:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  74:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  75:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+  76:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @}
+  77:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  78:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  79:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  80:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT_Private_FunctionPrototypes
+  81:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  82:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  83:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** static USBH_StatusTypeDef USBH_MSC_BOT_Abort(USBH_HandleTypeDef *phost, uint8_t lun, uint8_t dir);
+  84:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** static BOT_CSWStatusTypeDef USBH_MSC_DecodeCSW(USBH_HandleTypeDef *phost);
+  85:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+  86:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @}
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 3
+
+
+  87:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  88:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  89:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  90:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT_Exported_Variables
+  91:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+  92:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  93:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+  94:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @}
+  95:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+  96:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  97:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  98:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /** @defgroup USBH_MSC_BOT_Private_Functions
+  99:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** * @{
+ 100:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** */
+ 101:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 102:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+ 103:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @brief  USBH_MSC_BOT_REQ_Reset
+ 104:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *         The function the MSC BOT Reset request.
+ 105:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  phost: Host handle
+ 106:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @retval USBH Status
+ 107:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   */
+ 108:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** USBH_StatusTypeDef USBH_MSC_BOT_REQ_Reset(USBH_HandleTypeDef *phost)
+ 109:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+  30              		.loc 1 109 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+ 110:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 111:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.bmRequestType = USB_H2D | USB_REQ_TYPE_CLASS
+  35              		.loc 1 111 3 view .LVU1
+ 112:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                          | USB_REQ_RECIPIENT_INTERFACE;
+ 113:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 114:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.bRequest = USB_REQ_BOT_RESET;
+  36              		.loc 1 114 3 view .LVU2
+ 115:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wValue.w = 0U;
+  37              		.loc 1 115 3 view .LVU3
+ 116:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wIndex.w = 0U;
+  38              		.loc 1 116 3 view .LVU4
+ 117:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 0U;
+  39              		.loc 1 117 3 view .LVU5
+ 109:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+  40              		.loc 1 109 1 is_stmt 0 view .LVU6
+  41 0000 10B4     		push	{r4}
+  42              	.LCFI0:
+  43              		.cfi_def_cfa_offset 4
+  44              		.cfi_offset 4, -4
+ 116:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wIndex.w = 0U;
+  45              		.loc 1 116 35 view .LVU7
+  46 0002 0022     		movs	r2, #0
+ 111:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                          | USB_REQ_RECIPIENT_INTERFACE;
+  47              		.loc 1 111 40 view .LVU8
+  48 0004 4FF62174 		movw	r4, #65313
+ 118:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 119:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   return USBH_CtlReq(phost, 0U, 0U);
+  49              		.loc 1 119 10 view .LVU9
+  50 0008 1146     		mov	r1, r2
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 4
+
+
+ 116:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 0U;
+  51              		.loc 1 116 35 view .LVU10
+  52 000a C0E90442 		strd	r4, r2, [r0, #16]
+  53              		.loc 1 119 3 is_stmt 1 view .LVU11
+ 120:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+  54              		.loc 1 120 1 is_stmt 0 view .LVU12
+  55 000e 5DF8044B 		ldr	r4, [sp], #4
+  56              	.LCFI1:
+  57              		.cfi_restore 4
+  58              		.cfi_def_cfa_offset 0
+ 119:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+  59              		.loc 1 119 10 view .LVU13
+  60 0012 FFF7FEBF 		b	USBH_CtlReq
+  61              	.LVL1:
+ 119:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+  62              		.loc 1 119 10 view .LVU14
+  63              		.cfi_endproc
+  64              	.LFE151:
+  66 0016 00BF     		.section	.text.USBH_MSC_BOT_REQ_GetMaxLUN,"ax",%progbits
+  67              		.align	1
+  68              		.p2align 2,,3
+  69              		.global	USBH_MSC_BOT_REQ_GetMaxLUN
+  70              		.syntax unified
+  71              		.thumb
+  72              		.thumb_func
+  73              		.fpu fpv5-d16
+  75              	USBH_MSC_BOT_REQ_GetMaxLUN:
+  76              	.LVL2:
+  77              	.LFB152:
+ 121:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 122:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+ 123:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @brief  USBH_MSC_BOT_REQ_GetMaxLUN
+ 124:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *         The function the MSC BOT GetMaxLUN request.
+ 125:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  phost: Host handle
+ 126:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  Maxlun: pointer to Maxlun variable
+ 127:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @retval USBH Status
+ 128:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   */
+ 129:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** USBH_StatusTypeDef USBH_MSC_BOT_REQ_GetMaxLUN(USBH_HandleTypeDef *phost, uint8_t *Maxlun)
+ 130:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+  78              		.loc 1 130 1 is_stmt 1 view -0
+  79              		.cfi_startproc
+  80              		@ args = 0, pretend = 0, frame = 0
+  81              		@ frame_needed = 0, uses_anonymous_args = 0
+  82              		@ link register save eliminated.
+ 131:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.bmRequestType = USB_D2H | USB_REQ_TYPE_CLASS
+  83              		.loc 1 131 3 view .LVU16
+ 132:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                          | USB_REQ_RECIPIENT_INTERFACE;
+ 133:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 134:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.bRequest = USB_REQ_GET_MAX_LUN;
+  84              		.loc 1 134 3 view .LVU17
+ 135:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wValue.w = 0U;
+  85              		.loc 1 135 3 view .LVU18
+ 136:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wIndex.w = 0U;
+  86              		.loc 1 136 3 view .LVU19
+ 137:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 1U;
+  87              		.loc 1 137 3 view .LVU20
+ 130:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.bmRequestType = USB_D2H | USB_REQ_TYPE_CLASS
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 5
+
+
+  88              		.loc 1 130 1 is_stmt 0 view .LVU21
+  89 0000 30B4     		push	{r4, r5}
+  90              	.LCFI2:
+  91              		.cfi_def_cfa_offset 8
+  92              		.cfi_offset 4, -8
+  93              		.cfi_offset 5, -4
+ 131:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                          | USB_REQ_RECIPIENT_INTERFACE;
+  94              		.loc 1 131 40 view .LVU22
+  95 0002 4FF6A165 		movw	r5, #65185
+ 136:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 1U;
+  96              		.loc 1 136 35 view .LVU23
+  97 0006 4FF48034 		mov	r4, #65536
+ 138:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 139:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   return USBH_CtlReq(phost, Maxlun, 1U);
+  98              		.loc 1 139 10 view .LVU24
+  99 000a 0122     		movs	r2, #1
+ 136:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 1U;
+ 100              		.loc 1 136 35 view .LVU25
+ 101 000c C0E90454 		strd	r5, r4, [r0, #16]
+ 102              		.loc 1 139 3 is_stmt 1 view .LVU26
+ 140:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 103              		.loc 1 140 1 is_stmt 0 view .LVU27
+ 104 0010 30BC     		pop	{r4, r5}
+ 105              	.LCFI3:
+ 106              		.cfi_restore 5
+ 107              		.cfi_restore 4
+ 108              		.cfi_def_cfa_offset 0
+ 139:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 109              		.loc 1 139 10 view .LVU28
+ 110 0012 FFF7FEBF 		b	USBH_CtlReq
+ 111              	.LVL3:
+ 139:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 112              		.loc 1 139 10 view .LVU29
+ 113              		.cfi_endproc
+ 114              	.LFE152:
+ 116 0016 00BF     		.section	.text.USBH_MSC_BOT_Init,"ax",%progbits
+ 117              		.align	1
+ 118              		.p2align 2,,3
+ 119              		.global	USBH_MSC_BOT_Init
+ 120              		.syntax unified
+ 121              		.thumb
+ 122              		.thumb_func
+ 123              		.fpu fpv5-d16
+ 125              	USBH_MSC_BOT_Init:
+ 126              	.LVL4:
+ 127              	.LFB153:
+ 141:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 142:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 143:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 144:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+ 145:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @brief  USBH_MSC_BOT_Init
+ 146:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *         The function Initializes the BOT protocol.
+ 147:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  phost: Host handle
+ 148:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @retval USBH Status
+ 149:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   */
+ 150:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** USBH_StatusTypeDef USBH_MSC_BOT_Init(USBH_HandleTypeDef *phost)
+ 151:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 6
+
+
+ 128              		.loc 1 151 1 is_stmt 1 view -0
+ 129              		.cfi_startproc
+ 130              		@ args = 0, pretend = 0, frame = 0
+ 131              		@ frame_needed = 0, uses_anonymous_args = 0
+ 132              		@ link register save eliminated.
+ 152:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 153:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_HandleTypeDef *MSC_Handle = (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+ 133              		.loc 1 153 3 view .LVU31
+ 134              		.loc 1 153 22 is_stmt 0 view .LVU32
+ 135 0000 D0F87C34 		ldr	r3, [r0, #1148]
+ 154:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 155:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.cbw.field.Signature = BOT_CBW_SIGNATURE;
+ 156:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.cbw.field.Tag = BOT_CBW_TAG;
+ 157:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.state = BOT_SEND_CBW;
+ 136              		.loc 1 157 26 view .LVU33
+ 137 0004 0122     		movs	r2, #1
+ 156:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.state = BOT_SEND_CBW;
+ 138              		.loc 1 156 34 view .LVU34
+ 139 0006 0749     		ldr	r1, .L8
+ 158:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.cmd_state = BOT_CMD_SEND;
+ 159:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 160:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   return USBH_OK;
+ 161:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 140              		.loc 1 161 1 view .LVU35
+ 141 0008 0020     		movs	r0, #0
+ 142              	.LVL5:
+ 153:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 143              		.loc 1 153 22 view .LVU36
+ 144 000a DB69     		ldr	r3, [r3, #28]
+ 145              	.LVL6:
+ 155:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.cbw.field.Tag = BOT_CBW_TAG;
+ 146              		.loc 1 155 3 is_stmt 1 view .LVU37
+ 151:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 147              		.loc 1 151 1 is_stmt 0 view .LVU38
+ 148 000c 10B4     		push	{r4}
+ 149              	.LCFI4:
+ 150              		.cfi_def_cfa_offset 4
+ 151              		.cfi_offset 4, -4
+ 155:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.cbw.field.Tag = BOT_CBW_TAG;
+ 152              		.loc 1 155 40 view .LVU39
+ 153 000e 064C     		ldr	r4, .L8+4
+ 157:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.cmd_state = BOT_CMD_SEND;
+ 154              		.loc 1 157 26 view .LVU40
+ 155 0010 83F85020 		strb	r2, [r3, #80]
+ 158:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 156              		.loc 1 158 30 view .LVU41
+ 157 0014 83F85220 		strb	r2, [r3, #82]
+ 156:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.state = BOT_SEND_CBW;
+ 158              		.loc 1 156 34 view .LVU42
+ 159 0018 C3E91541 		strd	r4, r1, [r3, #84]
+ 157:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_Handle->hbot.cmd_state = BOT_CMD_SEND;
+ 160              		.loc 1 157 3 is_stmt 1 view .LVU43
+ 158:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 161              		.loc 1 158 3 view .LVU44
+ 160:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 162              		.loc 1 160 3 view .LVU45
+ 163              		.loc 1 161 1 is_stmt 0 view .LVU46
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 7
+
+
+ 164 001c 5DF8044B 		ldr	r4, [sp], #4
+ 165              	.LCFI5:
+ 166              		.cfi_restore 4
+ 167              		.cfi_def_cfa_offset 0
+ 168 0020 7047     		bx	lr
+ 169              	.L9:
+ 170 0022 00BF     		.align	2
+ 171              	.L8:
+ 172 0024 50403020 		.word	540033104
+ 173 0028 55534243 		.word	1128420181
+ 174              		.cfi_endproc
+ 175              	.LFE153:
+ 177              		.section	.text.USBH_MSC_BOT_Process,"ax",%progbits
+ 178              		.align	1
+ 179              		.p2align 2,,3
+ 180              		.global	USBH_MSC_BOT_Process
+ 181              		.syntax unified
+ 182              		.thumb
+ 183              		.thumb_func
+ 184              		.fpu fpv5-d16
+ 186              	USBH_MSC_BOT_Process:
+ 187              	.LVL7:
+ 188              	.LFB154:
+ 162:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 163:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 164:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 165:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+ 166:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @brief  USBH_MSC_BOT_Process
+ 167:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *         The function handle the BOT protocol.
+ 168:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  phost: Host handle
+ 169:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  lun: Logical Unit Number
+ 170:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @retval USBH Status
+ 171:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   */
+ 172:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** USBH_StatusTypeDef USBH_MSC_BOT_Process(USBH_HandleTypeDef *phost, uint8_t lun)
+ 173:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+ 189              		.loc 1 173 1 is_stmt 1 view -0
+ 190              		.cfi_startproc
+ 191              		@ args = 0, pretend = 0, frame = 0
+ 192              		@ frame_needed = 0, uses_anonymous_args = 0
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   status = USBH_BUSY;
+ 175:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 176:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   BOT_CSWStatusTypeDef CSW_Status = BOT_CSW_CMD_FAILED;
+ 177:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_URBStateTypeDef URB_Status = USBH_URB_IDLE;
+ 178:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_HandleTypeDef *MSC_Handle = (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+ 193              		.loc 1 178 22 is_stmt 0 view .LVU48
+ 194 0000 D0F87C34 		ldr	r3, [r0, #1148]
+ 173:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   status = USBH_BUSY;
+ 195              		.loc 1 173 1 view .LVU49
+ 196 0004 F0B5     		push	{r4, r5, r6, r7, lr}
+ 197              	.LCFI6:
+ 198              		.cfi_def_cfa_offset 20
+ 199              		.cfi_offset 4, -20
+ 200              		.cfi_offset 5, -16
+ 201              		.cfi_offset 6, -12
+ 202              		.cfi_offset 7, -8
+ 203              		.cfi_offset 14, -4
+ 204              		.loc 1 178 22 view .LVU50
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 8
+
+
+ 205 0006 DE69     		ldr	r6, [r3, #28]
+ 173:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   status = USBH_BUSY;
+ 206              		.loc 1 173 1 view .LVU51
+ 207 0008 83B0     		sub	sp, sp, #12
+ 208              	.LCFI7:
+ 209              		.cfi_def_cfa_offset 32
+ 173:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   status = USBH_BUSY;
+ 210              		.loc 1 173 1 view .LVU52
+ 211 000a 0446     		mov	r4, r0
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   status = USBH_BUSY;
+ 212              		.loc 1 174 3 is_stmt 1 view .LVU53
+ 213              	.LVL8:
+ 175:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   BOT_CSWStatusTypeDef CSW_Status = BOT_CSW_CMD_FAILED;
+ 214              		.loc 1 175 3 view .LVU54
+ 176:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_URBStateTypeDef URB_Status = USBH_URB_IDLE;
+ 215              		.loc 1 176 3 view .LVU55
+ 177:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_HandleTypeDef *MSC_Handle = (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+ 216              		.loc 1 177 3 view .LVU56
+ 217              		.loc 1 178 3 view .LVU57
+ 179:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   uint8_t toggle = 0U;
+ 218              		.loc 1 179 3 view .LVU58
+ 180:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 181:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   switch (MSC_Handle->hbot.state)
+ 219              		.loc 1 181 3 view .LVU59
+ 220              		.loc 1 181 27 is_stmt 0 view .LVU60
+ 221 000c 96F85050 		ldrb	r5, [r6, #80]	@ zero_extendqisi2
+ 222 0010 6B1E     		subs	r3, r5, #1
+ 223 0012 0A2B     		cmp	r3, #10
+ 224 0014 10D8     		bhi	.L45
+ 225 0016 DFE803F0 		tbb	[pc, r3]
+ 226              	.L13:
+ 227 001a 22       		.byte	(.L23-.L13)/2
+ 228 001b 30       		.byte	(.L22-.L13)/2
+ 229 001c 4A       		.byte	(.L21-.L13)/2
+ 230 001d 06       		.byte	(.L20-.L13)/2
+ 231 001e 7F       		.byte	(.L19-.L13)/2
+ 232 001f 8B       		.byte	(.L18-.L13)/2
+ 233 0020 55       		.byte	(.L17-.L13)/2
+ 234 0021 60       		.byte	(.L16-.L13)/2
+ 235 0022 6B       		.byte	(.L15-.L13)/2
+ 236 0023 76       		.byte	(.L14-.L13)/2
+ 237 0024 13       		.byte	(.L12-.L13)/2
+ 238 0025 00       		.p2align 1
+ 239              	.L20:
+ 182:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   {
+ 183:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_SEND_CBW:
+ 184:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       MSC_Handle->hbot.cbw.field.LUN = lun;
+ 185:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       MSC_Handle->hbot.state = BOT_SEND_CBW_WAIT;
+ 186:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       USBH_BulkSendData(phost, MSC_Handle->hbot.cbw.data,
+ 187:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         BOT_CBW_LENGTH, MSC_Handle->OutPipe, 1U);
+ 188:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 189:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 190:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 191:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_SEND_CBW_WAIT:
+ 192:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 193:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       URB_Status = USBH_LL_GetURBState(phost, MSC_Handle->OutPipe);
+ 194:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 9
+
+
+ 195:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (URB_Status == USBH_URB_DONE)
+ 196:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 197:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (MSC_Handle->hbot.cbw.field.DataTransferLength != 0U)
+ 198:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 199:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           /* If there is Data Transfer Stage */
+ 200:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           if (((MSC_Handle->hbot.cbw.field.Flags) & USB_REQ_DIR_MASK) == USB_D2H)
+ 201:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           {
+ 202:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****             /* Data Direction is IN */
+ 203:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****             MSC_Handle->hbot.state = BOT_DATA_IN;
+ 204:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           }
+ 205:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           else
+ 206:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           {
+ 207:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****             /* Data Direction is OUT */
+ 208:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****             MSC_Handle->hbot.state = BOT_DATA_OUT;
+ 209:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           }
+ 210:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 211:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 212:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         else
+ 213:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 214:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           /* If there is NO Data Transfer Stage */
+ 215:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.state = BOT_RECEIVE_CSW;
+ 216:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 217:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 218:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 219:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 220:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 221:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 222:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 223:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 224:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 225:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 226:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 227:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else if (URB_Status == USBH_URB_NOTREADY)
+ 228:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 229:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* Re-send CBW */
+ 230:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state = BOT_SEND_CBW;
+ 231:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 232:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 233:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 234:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 235:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 236:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 237:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 238:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 239:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 240:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 241:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else
+ 242:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 243:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (URB_Status == USBH_URB_STALL)
+ 244:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 245:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.state  = BOT_ERROR_OUT;
+ 246:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 247:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 248:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 249:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 250:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 251:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 10
+
+
+ 252:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 253:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 254:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 255:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 256:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 257:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 258:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 259:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_DATA_IN:
+ 260:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       /* Send first packet */
+ 261:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       USBH_BulkReceiveData(phost, MSC_Handle->hbot.pbuf,
+ 262:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                            MSC_Handle->InEpSize, MSC_Handle->InPipe);
+ 263:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 264:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       MSC_Handle->hbot.state = BOT_DATA_IN_WAIT;
+ 265:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 266:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 267:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 268:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_DATA_IN_WAIT:
+ 269:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 270:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       URB_Status = USBH_LL_GetURBState(phost, MSC_Handle->InPipe);
+ 240              		.loc 1 270 7 is_stmt 1 view .LVU61
+ 241              		.loc 1 270 20 is_stmt 0 view .LVU62
+ 242 0026 3179     		ldrb	r1, [r6, #4]	@ zero_extendqisi2
+ 243              	.LVL9:
+ 244              		.loc 1 270 20 view .LVU63
+ 245 0028 FFF7FEFF 		bl	USBH_LL_GetURBState
+ 246              	.LVL10:
+ 271:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 272:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (URB_Status == USBH_URB_DONE)
+ 247              		.loc 1 272 10 view .LVU64
+ 248 002c 0128     		cmp	r0, #1
+ 270:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 249              		.loc 1 270 20 view .LVU65
+ 250 002e 0546     		mov	r5, r0
+ 251              	.LVL11:
+ 252              		.loc 1 272 7 is_stmt 1 view .LVU66
+ 253              		.loc 1 272 10 is_stmt 0 view .LVU67
+ 254 0030 00F0BD80 		beq	.L57
+ 273:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 274:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* Adjust Data pointer and data length */
+ 275:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (MSC_Handle->hbot.cbw.field.DataTransferLength > MSC_Handle->InEpSize)
+ 276:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 277:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.pbuf += MSC_Handle->InEpSize;
+ 278:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->InEpSize;
+ 279:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 280:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         else
+ 281:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 282:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength = 0U;
+ 283:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 284:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 285:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* More Data To be Received */
+ 286:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (MSC_Handle->hbot.cbw.field.DataTransferLength > 0U)
+ 287:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 288:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           /* Send next packet */
+ 289:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           USBH_BulkReceiveData(phost, MSC_Handle->hbot.pbuf,
+ 290:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                MSC_Handle->InEpSize, MSC_Handle->InPipe);
+ 291:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 292:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         else
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 11
+
+
+ 293:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 294:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           /* If value was 0, and successful transfer, then change the state */
+ 295:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.state  = BOT_RECEIVE_CSW;
+ 296:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 297:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 298:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 299:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 300:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 301:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 302:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 303:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 304:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 305:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 306:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 307:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else if (URB_Status == USBH_URB_STALL)
+ 255              		.loc 1 307 12 is_stmt 1 view .LVU68
+ 256              		.loc 1 307 15 is_stmt 0 view .LVU69
+ 257 0034 0528     		cmp	r0, #5
+ 258 0036 59D0     		beq	.L55
+ 259              	.LVL12:
+ 260              	.L45:
+ 181:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   {
+ 261              		.loc 1 181 27 view .LVU70
+ 262 0038 0125     		movs	r5, #1
+ 263              	.LVL13:
+ 264              	.L11:
+ 308:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 309:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* This is Data IN Stage STALL Condition */
+ 310:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state  = BOT_ERROR_IN;
+ 311:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 312:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* Refer to USB Mass-Storage Class : BOT (www.usb.org)
+ 313:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         6.7.2 Host expects to receive data from the device
+ 314:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         3. On a STALL condition receiving data, then:
+ 315:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         The host shall accept the data received.
+ 316:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         The host shall clear the Bulk-In pipe.
+ 317:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         4. The host shall attempt to receive a CSW.*/
+ 318:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 319:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 320:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 321:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 322:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 323:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 324:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 325:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 326:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 327:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 328:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else
+ 329:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 330:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 331:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 332:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 333:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_DATA_OUT:
+ 334:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 335:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       USBH_BulkSendData(phost, MSC_Handle->hbot.pbuf,
+ 336:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         MSC_Handle->OutEpSize, MSC_Handle->OutPipe, 1U);
+ 337:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 338:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       MSC_Handle->hbot.state  = BOT_DATA_OUT_WAIT;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 12
+
+
+ 339:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 340:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 341:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_DATA_OUT_WAIT:
+ 342:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       URB_Status = USBH_LL_GetURBState(phost, MSC_Handle->OutPipe);
+ 343:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 344:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (URB_Status == USBH_URB_DONE)
+ 345:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 346:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* Adjust Data pointer and data length */
+ 347:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (MSC_Handle->hbot.cbw.field.DataTransferLength > MSC_Handle->OutEpSize)
+ 348:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 349:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.pbuf += MSC_Handle->OutEpSize;
+ 350:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->OutEpSize;
+ 351:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 352:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         else
+ 353:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 354:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength = 0U;
+ 355:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 356:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 357:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* More Data To be Sent */
+ 358:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (MSC_Handle->hbot.cbw.field.DataTransferLength > 0U)
+ 359:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 360:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           USBH_BulkSendData(phost, MSC_Handle->hbot.pbuf,
+ 361:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                             MSC_Handle->OutEpSize, MSC_Handle->OutPipe, 1U);
+ 362:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 363:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         else
+ 364:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 365:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           /* If value was 0, and successful transfer, then change the state */
+ 366:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.state  = BOT_RECEIVE_CSW;
+ 367:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 368:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 369:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 370:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 371:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 372:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 373:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 374:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 375:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 376:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 377:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 378:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 379:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else if (URB_Status == USBH_URB_NOTREADY)
+ 380:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 381:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* Resend same data */
+ 382:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state  = BOT_DATA_OUT;
+ 383:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 384:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 385:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 386:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 387:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 388:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 389:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 390:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 391:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 392:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 393:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 394:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else if (URB_Status == USBH_URB_STALL)
+ 395:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 13
+
+
+ 396:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state  = BOT_ERROR_OUT;
+ 397:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 398:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* Refer to USB Mass-Storage Class : BOT (www.usb.org)
+ 399:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         6.7.3 Ho - Host expects to send data to the device
+ 400:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         3. On a STALL condition sending data, then:
+ 401:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         " The host shall clear the Bulk-Out pipe.
+ 402:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         4. The host shall attempt to receive a CSW.
+ 403:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         */
+ 404:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 405:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 406:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 407:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 408:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 409:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 410:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 411:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 412:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 413:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 414:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else
+ 415:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 416:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 417:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 418:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 419:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_RECEIVE_CSW:
+ 420:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 421:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       USBH_BulkReceiveData(phost, MSC_Handle->hbot.csw.data,
+ 422:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                            BOT_CSW_LENGTH, MSC_Handle->InPipe);
+ 423:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 424:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       MSC_Handle->hbot.state  = BOT_RECEIVE_CSW_WAIT;
+ 425:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 426:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 427:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_RECEIVE_CSW_WAIT:
+ 428:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 429:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       URB_Status = USBH_LL_GetURBState(phost, MSC_Handle->InPipe);
+ 430:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 431:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       /* Decode CSW */
+ 432:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (URB_Status == USBH_URB_DONE)
+ 433:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 434:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state = BOT_SEND_CBW;
+ 435:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.cmd_state = BOT_CMD_SEND;
+ 436:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         CSW_Status = USBH_MSC_DecodeCSW(phost);
+ 437:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 438:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (CSW_Status == BOT_CSW_CMD_PASSED)
+ 439:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 440:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           status = USBH_OK;
+ 441:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 442:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         else
+ 443:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 444:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           status = USBH_FAIL;
+ 445:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 446:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 447:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 448:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 449:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 450:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 451:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 452:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 14
+
+
+ 453:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 454:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 455:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 456:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else if (URB_Status == USBH_URB_STALL)
+ 457:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 458:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state  = BOT_ERROR_IN;
+ 459:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 460:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (USBH_USE_OS == 1U)
+ 461:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         phost->os_msg = (uint32_t)USBH_URB_EVENT;
+ 462:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 463:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessagePut(phost->os_event, phost->os_msg, 0U);
+ 464:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #else
+ 465:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         (void)osMessageQueuePut(phost->os_event, &phost->os_msg, 0U, NULL);
+ 466:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 467:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 468:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 469:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else
+ 470:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 471:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 472:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 473:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 474:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_ERROR_IN:
+ 475:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       error = USBH_MSC_BOT_Abort(phost, lun, BOT_DIR_IN);
+ 476:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 477:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (error == USBH_OK)
+ 478:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 479:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state = BOT_RECEIVE_CSW;
+ 480:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 481:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else if (error == USBH_UNRECOVERED_ERROR)
+ 482:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 483:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* This means that there is a STALL Error limit, Do Reset Recovery */
+ 484:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state = BOT_UNRECOVERED_ERROR;
+ 485:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 486:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else
+ 487:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 488:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 489:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 490:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 491:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_ERROR_OUT:
+ 492:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       error = USBH_MSC_BOT_Abort(phost, lun, BOT_DIR_OUT);
+ 493:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 494:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (error == USBH_OK)
+ 495:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 496:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 497:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         toggle = USBH_LL_GetToggle(phost, MSC_Handle->OutPipe);
+ 498:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         USBH_LL_SetToggle(phost, MSC_Handle->OutPipe, 1U - toggle);
+ 499:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         USBH_LL_SetToggle(phost, MSC_Handle->InPipe, 0U);
+ 500:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state = BOT_ERROR_IN;
+ 501:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 502:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       else
+ 503:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 504:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (error == USBH_UNRECOVERED_ERROR)
+ 505:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 506:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.state = BOT_UNRECOVERED_ERROR;
+ 507:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 508:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 509:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 15
+
+
+ 510:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 511:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 512:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_UNRECOVERED_ERROR:
+ 513:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       status = USBH_MSC_BOT_REQ_Reset(phost);
+ 514:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (status == USBH_OK)
+ 515:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 516:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state = BOT_SEND_CBW;
+ 517:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 518:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 519:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 520:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     default:
+ 521:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 522:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   }
+ 523:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   return status;
+ 265              		.loc 1 523 3 is_stmt 1 view .LVU71
+ 524:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 266              		.loc 1 524 1 is_stmt 0 view .LVU72
+ 267 003a 2846     		mov	r0, r5
+ 268 003c 03B0     		add	sp, sp, #12
+ 269              	.LCFI8:
+ 270              		.cfi_remember_state
+ 271              		.cfi_def_cfa_offset 20
+ 272              		@ sp needed
+ 273 003e F0BD     		pop	{r4, r5, r6, r7, pc}
+ 274              	.LVL14:
+ 275              	.L12:
+ 276              	.LCFI9:
+ 277              		.cfi_restore_state
+ 513:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (status == USBH_OK)
+ 278              		.loc 1 513 7 is_stmt 1 view .LVU73
+ 279              	.LBB16:
+ 280              	.LBI16:
+ 108:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+ 281              		.loc 1 108 20 view .LVU74
+ 282              	.LBB17:
+ 111:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                          | USB_REQ_RECIPIENT_INTERFACE;
+ 283              		.loc 1 111 3 view .LVU75
+ 114:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wValue.w = 0U;
+ 284              		.loc 1 114 3 view .LVU76
+ 115:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wIndex.w = 0U;
+ 285              		.loc 1 115 3 view .LVU77
+ 116:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 0U;
+ 286              		.loc 1 116 3 view .LVU78
+ 117:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 287              		.loc 1 117 3 view .LVU79
+ 116:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 0U;
+ 288              		.loc 1 116 35 is_stmt 0 view .LVU80
+ 289 0040 0022     		movs	r2, #0
+ 111:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                          | USB_REQ_RECIPIENT_INTERFACE;
+ 290              		.loc 1 111 40 view .LVU81
+ 291 0042 4FF62173 		movw	r3, #65313
+ 119:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 292              		.loc 1 119 10 view .LVU82
+ 293 0046 1146     		mov	r1, r2
+ 294              	.LVL15:
+ 116:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   phost->Control.setup.b.wLength.w = 0U;
+ 295              		.loc 1 116 35 view .LVU83
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 16
+
+
+ 296 0048 C0E90432 		strd	r3, r2, [r0, #16]
+ 119:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 297              		.loc 1 119 3 is_stmt 1 view .LVU84
+ 119:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 298              		.loc 1 119 10 is_stmt 0 view .LVU85
+ 299 004c FFF7FEFF 		bl	USBH_CtlReq
+ 300              	.LVL16:
+ 119:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 301              		.loc 1 119 10 view .LVU86
+ 302              	.LBE17:
+ 303              	.LBE16:
+ 514:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 304              		.loc 1 514 7 is_stmt 1 view .LVU87
+ 514:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 305              		.loc 1 514 10 is_stmt 0 view .LVU88
+ 306 0050 0546     		mov	r5, r0
+ 307 0052 0028     		cmp	r0, #0
+ 308 0054 F1D1     		bne	.L11
+ 516:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 309              		.loc 1 516 9 is_stmt 1 view .LVU89
+ 516:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 310              		.loc 1 516 32 is_stmt 0 view .LVU90
+ 311 0056 0123     		movs	r3, #1
+ 312 0058 86F85030 		strb	r3, [r6, #80]
+ 313 005c EDE7     		b	.L11
+ 314              	.LVL17:
+ 315              	.L23:
+ 184:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       MSC_Handle->hbot.state = BOT_SEND_CBW_WAIT;
+ 316              		.loc 1 184 7 is_stmt 1 view .LVU91
+ 185:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       USBH_BulkSendData(phost, MSC_Handle->hbot.cbw.data,
+ 317              		.loc 1 185 30 is_stmt 0 view .LVU92
+ 318 005e 0227     		movs	r7, #2
+ 186:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         BOT_CBW_LENGTH, MSC_Handle->OutPipe, 1U);
+ 319              		.loc 1 186 7 view .LVU93
+ 320 0060 0122     		movs	r2, #1
+ 184:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       MSC_Handle->hbot.state = BOT_SEND_CBW_WAIT;
+ 321              		.loc 1 184 38 view .LVU94
+ 322 0062 86F86110 		strb	r1, [r6, #97]
+ 185:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       USBH_BulkSendData(phost, MSC_Handle->hbot.cbw.data,
+ 323              		.loc 1 185 7 is_stmt 1 view .LVU95
+ 186:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         BOT_CBW_LENGTH, MSC_Handle->OutPipe, 1U);
+ 324              		.loc 1 186 7 is_stmt 0 view .LVU96
+ 325 0066 06F15401 		add	r1, r6, #84
+ 326              	.LVL18:
+ 186:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         BOT_CBW_LENGTH, MSC_Handle->OutPipe, 1U);
+ 327              		.loc 1 186 7 view .LVU97
+ 328 006a 7379     		ldrb	r3, [r6, #5]	@ zero_extendqisi2
+ 185:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       USBH_BulkSendData(phost, MSC_Handle->hbot.cbw.data,
+ 329              		.loc 1 185 30 view .LVU98
+ 330 006c 86F85070 		strb	r7, [r6, #80]
+ 186:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         BOT_CBW_LENGTH, MSC_Handle->OutPipe, 1U);
+ 331              		.loc 1 186 7 is_stmt 1 view .LVU99
+ 332 0070 0092     		str	r2, [sp]
+ 333              	.LVL19:
+ 186:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         BOT_CBW_LENGTH, MSC_Handle->OutPipe, 1U);
+ 334              		.loc 1 186 7 is_stmt 0 view .LVU100
+ 335 0072 1F22     		movs	r2, #31
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 17
+
+
+ 336 0074 FFF7FEFF 		bl	USBH_BulkSendData
+ 337              	.LVL20:
+ 189:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 338              		.loc 1 189 7 is_stmt 1 view .LVU101
+ 339 0078 DFE7     		b	.L11
+ 340              	.LVL21:
+ 341              	.L22:
+ 193:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 342              		.loc 1 193 7 view .LVU102
+ 193:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 343              		.loc 1 193 20 is_stmt 0 view .LVU103
+ 344 007a 7179     		ldrb	r1, [r6, #5]	@ zero_extendqisi2
+ 345              	.LVL22:
+ 193:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 346              		.loc 1 193 20 view .LVU104
+ 347 007c FFF7FEFF 		bl	USBH_LL_GetURBState
+ 348              	.LVL23:
+ 195:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 349              		.loc 1 195 10 view .LVU105
+ 350 0080 0128     		cmp	r0, #1
+ 193:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 351              		.loc 1 193 20 view .LVU106
+ 352 0082 0546     		mov	r5, r0
+ 353              	.LVL24:
+ 195:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 354              		.loc 1 195 7 is_stmt 1 view .LVU107
+ 195:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 355              		.loc 1 195 10 is_stmt 0 view .LVU108
+ 356 0084 77D0     		beq	.L58
+ 227:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 357              		.loc 1 227 12 is_stmt 1 view .LVU109
+ 227:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 358              		.loc 1 227 15 is_stmt 0 view .LVU110
+ 359 0086 0228     		cmp	r0, #2
+ 360 0088 6ED0     		beq	.L59
+ 361              	.L40:
+ 394:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 362              		.loc 1 394 12 is_stmt 1 view .LVU111
+ 394:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 363              		.loc 1 394 15 is_stmt 0 view .LVU112
+ 364 008a 052D     		cmp	r5, #5
+ 365 008c D4D1     		bne	.L45
+ 396:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 366              		.loc 1 396 9 is_stmt 1 view .LVU113
+ 396:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 367              		.loc 1 396 33 is_stmt 0 view .LVU114
+ 368 008e 0A20     		movs	r0, #10
+ 369              	.LVL25:
+ 370              	.L51:
+ 320:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 371              		.loc 1 320 23 view .LVU115
+ 372 0090 0222     		movs	r2, #2
+ 324:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 373              		.loc 1 324 15 view .LVU116
+ 374 0092 0023     		movs	r3, #0
+ 310:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 375              		.loc 1 310 33 view .LVU117
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 18
+
+
+ 376 0094 86F85000 		strb	r0, [r6, #80]
+ 320:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 377              		.loc 1 320 9 is_stmt 1 view .LVU118
+ 324:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 378              		.loc 1 324 15 is_stmt 0 view .LVU119
+ 379 0098 04F59C61 		add	r1, r4, #1248
+ 320:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 380              		.loc 1 320 23 view .LVU120
+ 381 009c C4F8E024 		str	r2, [r4, #1248]
+ 324:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 382              		.loc 1 324 9 is_stmt 1 view .LVU121
+ 324:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 383              		.loc 1 324 15 is_stmt 0 view .LVU122
+ 384 00a0 1A46     		mov	r2, r3
+ 385 00a2 D4F8D804 		ldr	r0, [r4, #1240]
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 386              		.loc 1 174 24 view .LVU123
+ 387 00a6 0125     		movs	r5, #1
+ 324:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 388              		.loc 1 324 15 view .LVU124
+ 389 00a8 FFF7FEFF 		bl	osMessageQueuePut
+ 390              	.LVL26:
+ 391 00ac C5E7     		b	.L11
+ 392              	.LVL27:
+ 393              	.L21:
+ 261:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                            MSC_Handle->InEpSize, MSC_Handle->InPipe);
+ 394              		.loc 1 261 7 is_stmt 1 view .LVU125
+ 395 00ae 3379     		ldrb	r3, [r6, #4]	@ zero_extendqisi2
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 396              		.loc 1 174 24 is_stmt 0 view .LVU126
+ 397 00b0 0125     		movs	r5, #1
+ 261:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                            MSC_Handle->InEpSize, MSC_Handle->InPipe);
+ 398              		.loc 1 261 7 view .LVU127
+ 399 00b2 7289     		ldrh	r2, [r6, #10]
+ 400 00b4 D6F88C10 		ldr	r1, [r6, #140]
+ 401              	.LVL28:
+ 261:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                            MSC_Handle->InEpSize, MSC_Handle->InPipe);
+ 402              		.loc 1 261 7 view .LVU128
+ 403 00b8 FFF7FEFF 		bl	USBH_BulkReceiveData
+ 404              	.LVL29:
+ 264:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 405              		.loc 1 264 7 is_stmt 1 view .LVU129
+ 264:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 406              		.loc 1 264 30 is_stmt 0 view .LVU130
+ 407 00bc 0423     		movs	r3, #4
+ 408 00be 86F85030 		strb	r3, [r6, #80]
+ 266:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 409              		.loc 1 266 7 is_stmt 1 view .LVU131
+ 410 00c2 BAE7     		b	.L11
+ 411              	.LVL30:
+ 412              	.L17:
+ 421:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                            BOT_CSW_LENGTH, MSC_Handle->InPipe);
+ 413              		.loc 1 421 7 view .LVU132
+ 414 00c4 3379     		ldrb	r3, [r6, #4]	@ zero_extendqisi2
+ 415 00c6 0D22     		movs	r2, #13
+ 416 00c8 06F17801 		add	r1, r6, #120
+ 417              	.LVL31:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 19
+
+
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 418              		.loc 1 174 24 is_stmt 0 view .LVU133
+ 419 00cc 0125     		movs	r5, #1
+ 421:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                            BOT_CSW_LENGTH, MSC_Handle->InPipe);
+ 420              		.loc 1 421 7 view .LVU134
+ 421 00ce FFF7FEFF 		bl	USBH_BulkReceiveData
+ 422              	.LVL32:
+ 424:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 423              		.loc 1 424 7 is_stmt 1 view .LVU135
+ 424:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 424              		.loc 1 424 31 is_stmt 0 view .LVU136
+ 425 00d2 0823     		movs	r3, #8
+ 426 00d4 86F85030 		strb	r3, [r6, #80]
+ 425:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 427              		.loc 1 425 7 is_stmt 1 view .LVU137
+ 428 00d8 AFE7     		b	.L11
+ 429              	.LVL33:
+ 430              	.L16:
+ 429:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 431              		.loc 1 429 7 view .LVU138
+ 429:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 432              		.loc 1 429 20 is_stmt 0 view .LVU139
+ 433 00da 3179     		ldrb	r1, [r6, #4]	@ zero_extendqisi2
+ 434              	.LVL34:
+ 429:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 435              		.loc 1 429 20 view .LVU140
+ 436 00dc FFF7FEFF 		bl	USBH_LL_GetURBState
+ 437              	.LVL35:
+ 432:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 438              		.loc 1 432 10 view .LVU141
+ 439 00e0 0128     		cmp	r0, #1
+ 429:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 440              		.loc 1 429 20 view .LVU142
+ 441 00e2 0346     		mov	r3, r0
+ 442              	.LVL36:
+ 432:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 443              		.loc 1 432 7 is_stmt 1 view .LVU143
+ 432:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 444              		.loc 1 432 10 is_stmt 0 view .LVU144
+ 445 00e4 00F09E80 		beq	.L60
+ 456:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 446              		.loc 1 456 12 is_stmt 1 view .LVU145
+ 456:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 447              		.loc 1 456 15 is_stmt 0 view .LVU146
+ 448 00e8 0528     		cmp	r0, #5
+ 449 00ea A5D1     		bne	.L45
+ 450              	.L55:
+ 310:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 451              		.loc 1 310 9 is_stmt 1 view .LVU147
+ 310:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 452              		.loc 1 310 33 is_stmt 0 view .LVU148
+ 453 00ec 0920     		movs	r0, #9
+ 454              	.LVL37:
+ 310:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 455              		.loc 1 310 33 view .LVU149
+ 456 00ee CFE7     		b	.L51
+ 457              	.LVL38:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 20
+
+
+ 458              	.L15:
+ 475:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 459              		.loc 1 475 7 is_stmt 1 view .LVU150
+ 460              	.LBB18:
+ 461              	.LBI18:
+ 525:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 526:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+ 527:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @brief  USBH_MSC_BOT_Abort
+ 528:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *         The function handle the BOT Abort process.
+ 529:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  phost: Host handle
+ 530:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  lun: Logical Unit Number
+ 531:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  dir: direction (0: out / 1 : in)
+ 532:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @retval USBH Status
+ 533:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   */
+ 534:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** static USBH_StatusTypeDef USBH_MSC_BOT_Abort(USBH_HandleTypeDef *phost, uint8_t lun, uint8_t dir)
+ 462              		.loc 1 534 27 view .LVU151
+ 463              	.LBB19:
+ 535:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+ 536:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   /* Prevent unused argument(s) compilation warning */
+ 537:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   UNUSED(lun);
+ 464              		.loc 1 537 3 view .LVU152
+ 538:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 539:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef status = USBH_FAIL;
+ 465              		.loc 1 539 3 view .LVU153
+ 540:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_HandleTypeDef *MSC_Handle = (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+ 466              		.loc 1 540 3 view .LVU154
+ 541:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 542:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   switch (dir)
+ 467              		.loc 1 542 3 view .LVU155
+ 543:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   {
+ 544:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_DIR_IN :
+ 545:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       /* send ClrFeture on Bulk IN endpoint */
+ 546:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       status = USBH_ClrFeature(phost, MSC_Handle->InEp);
+ 468              		.loc 1 546 7 view .LVU156
+ 469              		.loc 1 546 16 is_stmt 0 view .LVU157
+ 470 00f0 F179     		ldrb	r1, [r6, #7]	@ zero_extendqisi2
+ 471              	.LVL39:
+ 472              		.loc 1 546 16 view .LVU158
+ 473 00f2 FFF7FEFF 		bl	USBH_ClrFeature
+ 474              	.LVL40:
+ 547:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 548:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 475              		.loc 1 548 7 is_stmt 1 view .LVU159
+ 549:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 550:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     case BOT_DIR_OUT :
+ 551:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       /*send ClrFeature on Bulk OUT endpoint */
+ 552:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       status = USBH_ClrFeature(phost, MSC_Handle->OutEp);
+ 553:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 554:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 555:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     default:
+ 556:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 557:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   }
+ 558:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   return status;
+ 476              		.loc 1 558 3 view .LVU160
+ 477              		.loc 1 558 3 is_stmt 0 view .LVU161
+ 478              	.LBE19:
+ 479              	.LBE18:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 21
+
+
+ 477:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 480              		.loc 1 477 7 is_stmt 1 view .LVU162
+ 477:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 481              		.loc 1 477 10 is_stmt 0 view .LVU163
+ 482 00f6 90B3     		cbz	r0, .L61
+ 481:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 483              		.loc 1 481 12 is_stmt 1 view .LVU164
+ 481:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 484              		.loc 1 481 15 is_stmt 0 view .LVU165
+ 485 00f8 0428     		cmp	r0, #4
+ 486 00fa 9DD1     		bne	.L45
+ 487              	.L53:
+ 506:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 488              		.loc 1 506 11 is_stmt 1 view .LVU166
+ 506:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 489              		.loc 1 506 34 is_stmt 0 view .LVU167
+ 490 00fc 0B23     		movs	r3, #11
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 491              		.loc 1 174 24 view .LVU168
+ 492 00fe 0125     		movs	r5, #1
+ 506:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 493              		.loc 1 506 34 view .LVU169
+ 494 0100 86F85030 		strb	r3, [r6, #80]
+ 495 0104 99E7     		b	.L11
+ 496              	.LVL41:
+ 497              	.L14:
+ 492:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 498              		.loc 1 492 7 is_stmt 1 view .LVU170
+ 499              	.LBB20:
+ 500              	.LBI20:
+ 534:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+ 501              		.loc 1 534 27 view .LVU171
+ 502              	.LBB21:
+ 537:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 503              		.loc 1 537 3 view .LVU172
+ 539:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_HandleTypeDef *MSC_Handle = (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+ 504              		.loc 1 539 3 view .LVU173
+ 540:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 505              		.loc 1 540 3 view .LVU174
+ 542:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   {
+ 506              		.loc 1 542 3 view .LVU175
+ 552:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 507              		.loc 1 552 7 view .LVU176
+ 552:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 508              		.loc 1 552 16 is_stmt 0 view .LVU177
+ 509 0106 B179     		ldrb	r1, [r6, #6]	@ zero_extendqisi2
+ 510              	.LVL42:
+ 552:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 511              		.loc 1 552 16 view .LVU178
+ 512 0108 FFF7FEFF 		bl	USBH_ClrFeature
+ 513              	.LVL43:
+ 553:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 514              		.loc 1 553 7 is_stmt 1 view .LVU179
+ 515              		.loc 1 558 3 view .LVU180
+ 516              		.loc 1 558 3 is_stmt 0 view .LVU181
+ 517              	.LBE21:
+ 518              	.LBE20:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 22
+
+
+ 494:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 519              		.loc 1 494 7 is_stmt 1 view .LVU182
+ 494:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 520              		.loc 1 494 10 is_stmt 0 view .LVU183
+ 521 010c 0746     		mov	r7, r0
+ 522 010e 0028     		cmp	r0, #0
+ 523 0110 72D0     		beq	.L62
+ 504:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 524              		.loc 1 504 9 is_stmt 1 view .LVU184
+ 504:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 525              		.loc 1 504 12 is_stmt 0 view .LVU185
+ 526 0112 0428     		cmp	r0, #4
+ 527 0114 90D1     		bne	.L45
+ 528 0116 F1E7     		b	.L53
+ 529              	.LVL44:
+ 530              	.L19:
+ 335:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         MSC_Handle->OutEpSize, MSC_Handle->OutPipe, 1U);
+ 531              		.loc 1 335 7 is_stmt 1 view .LVU186
+ 532 0118 0125     		movs	r5, #1
+ 533 011a 7379     		ldrb	r3, [r6, #5]	@ zero_extendqisi2
+ 534 011c 3289     		ldrh	r2, [r6, #8]
+ 535 011e D6F88C10 		ldr	r1, [r6, #140]
+ 536              	.LVL45:
+ 335:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                         MSC_Handle->OutEpSize, MSC_Handle->OutPipe, 1U);
+ 537              		.loc 1 335 7 is_stmt 0 view .LVU187
+ 538 0122 0095     		str	r5, [sp]
+ 539 0124 FFF7FEFF 		bl	USBH_BulkSendData
+ 540              	.LVL46:
+ 338:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 541              		.loc 1 338 7 is_stmt 1 view .LVU188
+ 338:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       break;
+ 542              		.loc 1 338 31 is_stmt 0 view .LVU189
+ 543 0128 0623     		movs	r3, #6
+ 544 012a 86F85030 		strb	r3, [r6, #80]
+ 339:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 545              		.loc 1 339 7 is_stmt 1 view .LVU190
+ 546 012e 84E7     		b	.L11
+ 547              	.LVL47:
+ 548              	.L18:
+ 342:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 549              		.loc 1 342 7 view .LVU191
+ 342:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 550              		.loc 1 342 20 is_stmt 0 view .LVU192
+ 551 0130 7179     		ldrb	r1, [r6, #5]	@ zero_extendqisi2
+ 552              	.LVL48:
+ 342:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 553              		.loc 1 342 20 view .LVU193
+ 554 0132 FFF7FEFF 		bl	USBH_LL_GetURBState
+ 555              	.LVL49:
+ 344:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 556              		.loc 1 344 10 view .LVU194
+ 557 0136 0128     		cmp	r0, #1
+ 342:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 558              		.loc 1 342 20 view .LVU195
+ 559 0138 0546     		mov	r5, r0
+ 560              	.LVL50:
+ 344:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 23
+
+
+ 561              		.loc 1 344 7 is_stmt 1 view .LVU196
+ 344:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 562              		.loc 1 344 10 is_stmt 0 view .LVU197
+ 563 013a 4AD0     		beq	.L63
+ 379:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 564              		.loc 1 379 12 is_stmt 1 view .LVU198
+ 379:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 565              		.loc 1 379 15 is_stmt 0 view .LVU199
+ 566 013c 0228     		cmp	r0, #2
+ 567 013e A4D1     		bne	.L40
+ 382:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 568              		.loc 1 382 9 is_stmt 1 view .LVU200
+ 382:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 569              		.loc 1 382 33 is_stmt 0 view .LVU201
+ 570 0140 0522     		movs	r2, #5
+ 389:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 571              		.loc 1 389 15 view .LVU202
+ 572 0142 0023     		movs	r3, #0
+ 573 0144 04F59C61 		add	r1, r4, #1248
+ 382:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 574              		.loc 1 382 33 view .LVU203
+ 575 0148 86F85020 		strb	r2, [r6, #80]
+ 576              	.LVL51:
+ 577              	.L52:
+ 385:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 578              		.loc 1 385 9 is_stmt 1 view .LVU204
+ 385:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 579              		.loc 1 385 23 is_stmt 0 view .LVU205
+ 580 014c C4F8E054 		str	r5, [r4, #1248]
+ 389:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 581              		.loc 1 389 9 is_stmt 1 view .LVU206
+ 389:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 582              		.loc 1 389 15 is_stmt 0 view .LVU207
+ 583 0150 1A46     		mov	r2, r3
+ 584 0152 D4F8D804 		ldr	r0, [r4, #1240]
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 585              		.loc 1 174 24 view .LVU208
+ 586 0156 0125     		movs	r5, #1
+ 389:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 587              		.loc 1 389 15 view .LVU209
+ 588 0158 FFF7FEFF 		bl	osMessageQueuePut
+ 589              	.LVL52:
+ 590 015c 6DE7     		b	.L11
+ 591              	.LVL53:
+ 592              	.L61:
+ 479:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 593              		.loc 1 479 9 is_stmt 1 view .LVU210
+ 479:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 594              		.loc 1 479 32 is_stmt 0 view .LVU211
+ 595 015e 0723     		movs	r3, #7
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 596              		.loc 1 174 24 view .LVU212
+ 597 0160 0125     		movs	r5, #1
+ 479:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 598              		.loc 1 479 32 view .LVU213
+ 599 0162 86F85030 		strb	r3, [r6, #80]
+ 600 0166 68E7     		b	.L11
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 24
+
+
+ 601              	.LVL54:
+ 602              	.L59:
+ 230:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 603              		.loc 1 230 9 is_stmt 1 view .LVU214
+ 230:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 604              		.loc 1 230 32 is_stmt 0 view .LVU215
+ 605 0168 0120     		movs	r0, #1
+ 606              	.LVL55:
+ 237:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 607              		.loc 1 237 15 view .LVU216
+ 608 016a 0023     		movs	r3, #0
+ 609 016c 04F59C61 		add	r1, r4, #1248
+ 230:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 610              		.loc 1 230 32 view .LVU217
+ 611 0170 86F85000 		strb	r0, [r6, #80]
+ 233:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 612              		.loc 1 233 9 is_stmt 1 view .LVU218
+ 613 0174 EAE7     		b	.L52
+ 614              	.LVL56:
+ 615              	.L58:
+ 197:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 616              		.loc 1 197 9 view .LVU219
+ 197:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 617              		.loc 1 197 12 is_stmt 0 view .LVU220
+ 618 0176 F36D     		ldr	r3, [r6, #92]
+ 619 0178 ABB1     		cbz	r3, .L38
+ 200:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           {
+ 620              		.loc 1 200 11 is_stmt 1 view .LVU221
+ 200:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           {
+ 621              		.loc 1 200 14 is_stmt 0 view .LVU222
+ 622 017a 96F96030 		ldrsb	r3, [r6, #96]
+ 623 017e 002B     		cmp	r3, #0
+ 203:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           }
+ 624              		.loc 1 203 13 is_stmt 1 view .LVU223
+ 203:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           }
+ 625              		.loc 1 203 36 is_stmt 0 view .LVU224
+ 626 0180 B4BF     		ite	lt
+ 627 0182 0323     		movlt	r3, #3
+ 208:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           }
+ 628              		.loc 1 208 13 is_stmt 1 view .LVU225
+ 208:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           }
+ 629              		.loc 1 208 36 is_stmt 0 view .LVU226
+ 630 0184 0523     		movge	r3, #5
+ 631 0186 86F85030 		strb	r3, [r6, #80]
+ 632              	.LVL57:
+ 633              	.L42:
+ 448:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 634              		.loc 1 448 9 is_stmt 1 view .LVU227
+ 448:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 635              		.loc 1 448 23 is_stmt 0 view .LVU228
+ 636 018a 0222     		movs	r2, #2
+ 452:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 637              		.loc 1 452 15 view .LVU229
+ 638 018c 0023     		movs	r3, #0
+ 639              	.LVL58:
+ 640              	.L54:
+ 448:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 25
+
+
+ 641              		.loc 1 448 23 view .LVU230
+ 642 018e C4F8E024 		str	r2, [r4, #1248]
+ 452:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 643              		.loc 1 452 9 is_stmt 1 view .LVU231
+ 452:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 644              		.loc 1 452 15 is_stmt 0 view .LVU232
+ 645 0192 04F59C61 		add	r1, r4, #1248
+ 646 0196 D4F8D804 		ldr	r0, [r4, #1240]
+ 647 019a 1A46     		mov	r2, r3
+ 648 019c FFF7FEFF 		bl	osMessageQueuePut
+ 649              	.LVL59:
+ 650 01a0 4BE7     		b	.L11
+ 651              	.LVL60:
+ 652              	.L36:
+ 354:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 653              		.loc 1 354 11 is_stmt 1 view .LVU233
+ 354:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 654              		.loc 1 354 57 is_stmt 0 view .LVU234
+ 655 01a2 0023     		movs	r3, #0
+ 656 01a4 F365     		str	r3, [r6, #92]
+ 358:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 657              		.loc 1 358 9 is_stmt 1 view .LVU235
+ 658              	.L38:
+ 366:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 659              		.loc 1 366 11 view .LVU236
+ 366:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 660              		.loc 1 366 35 is_stmt 0 view .LVU237
+ 661 01a6 0723     		movs	r3, #7
+ 662 01a8 86F85030 		strb	r3, [r6, #80]
+ 663 01ac EDE7     		b	.L42
+ 664              	.L57:
+ 275:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 665              		.loc 1 275 9 is_stmt 1 view .LVU238
+ 275:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 666              		.loc 1 275 39 is_stmt 0 view .LVU239
+ 667 01ae F36D     		ldr	r3, [r6, #92]
+ 275:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 668              		.loc 1 275 71 view .LVU240
+ 669 01b0 7289     		ldrh	r2, [r6, #10]
+ 275:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 670              		.loc 1 275 12 view .LVU241
+ 671 01b2 9342     		cmp	r3, r2
+ 672 01b4 4DD9     		bls	.L31
+ 277:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->InEpSize;
+ 673              		.loc 1 277 11 is_stmt 1 view .LVU242
+ 277:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->InEpSize;
+ 674              		.loc 1 277 33 is_stmt 0 view .LVU243
+ 675 01b6 D6F88C10 		ldr	r1, [r6, #140]
+ 278:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 676              		.loc 1 278 57 view .LVU244
+ 677 01ba 9B1A     		subs	r3, r3, r2
+ 277:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->InEpSize;
+ 678              		.loc 1 277 33 view .LVU245
+ 679 01bc 1144     		add	r1, r1, r2
+ 278:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 680              		.loc 1 278 57 view .LVU246
+ 681 01be F365     		str	r3, [r6, #92]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 26
+
+
+ 277:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->InEpSize;
+ 682              		.loc 1 277 33 view .LVU247
+ 683 01c0 C6F88C10 		str	r1, [r6, #140]
+ 278:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 684              		.loc 1 278 11 is_stmt 1 view .LVU248
+ 286:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 685              		.loc 1 286 9 view .LVU249
+ 286:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 686              		.loc 1 286 12 is_stmt 0 view .LVU250
+ 687 01c4 002B     		cmp	r3, #0
+ 688 01c6 46D0     		beq	.L33
+ 289:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                MSC_Handle->InEpSize, MSC_Handle->InPipe);
+ 689              		.loc 1 289 11 is_stmt 1 view .LVU251
+ 690 01c8 3379     		ldrb	r3, [r6, #4]	@ zero_extendqisi2
+ 691 01ca 2046     		mov	r0, r4
+ 692              	.LVL61:
+ 289:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                                MSC_Handle->InEpSize, MSC_Handle->InPipe);
+ 693              		.loc 1 289 11 is_stmt 0 view .LVU252
+ 694 01cc FFF7FEFF 		bl	USBH_BulkReceiveData
+ 695              	.LVL62:
+ 696 01d0 33E7     		b	.L11
+ 697              	.LVL63:
+ 698              	.L63:
+ 347:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 699              		.loc 1 347 9 is_stmt 1 view .LVU253
+ 347:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 700              		.loc 1 347 39 is_stmt 0 view .LVU254
+ 701 01d2 F36D     		ldr	r3, [r6, #92]
+ 347:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 702              		.loc 1 347 71 view .LVU255
+ 703 01d4 3289     		ldrh	r2, [r6, #8]
+ 347:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 704              		.loc 1 347 12 view .LVU256
+ 705 01d6 9342     		cmp	r3, r2
+ 706 01d8 E3D9     		bls	.L36
+ 349:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->OutEpSize;
+ 707              		.loc 1 349 11 is_stmt 1 view .LVU257
+ 349:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->OutEpSize;
+ 708              		.loc 1 349 33 is_stmt 0 view .LVU258
+ 709 01da D6F88C10 		ldr	r1, [r6, #140]
+ 350:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 710              		.loc 1 350 57 view .LVU259
+ 711 01de 9B1A     		subs	r3, r3, r2
+ 349:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->OutEpSize;
+ 712              		.loc 1 349 33 view .LVU260
+ 713 01e0 1144     		add	r1, r1, r2
+ 350:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 714              		.loc 1 350 57 view .LVU261
+ 715 01e2 F365     		str	r3, [r6, #92]
+ 349:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****           MSC_Handle->hbot.cbw.field.DataTransferLength -= MSC_Handle->OutEpSize;
+ 716              		.loc 1 349 33 view .LVU262
+ 717 01e4 C6F88C10 		str	r1, [r6, #140]
+ 350:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 718              		.loc 1 350 11 is_stmt 1 view .LVU263
+ 358:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 719              		.loc 1 358 9 view .LVU264
+ 358:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 27
+
+
+ 720              		.loc 1 358 12 is_stmt 0 view .LVU265
+ 721 01e8 002B     		cmp	r3, #0
+ 722 01ea DCD0     		beq	.L38
+ 360:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                             MSC_Handle->OutEpSize, MSC_Handle->OutPipe, 1U);
+ 723              		.loc 1 360 11 is_stmt 1 view .LVU266
+ 724 01ec 7379     		ldrb	r3, [r6, #5]	@ zero_extendqisi2
+ 725 01ee 0090     		str	r0, [sp]
+ 726 01f0 2046     		mov	r0, r4
+ 727              	.LVL64:
+ 360:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****                             MSC_Handle->OutEpSize, MSC_Handle->OutPipe, 1U);
+ 728              		.loc 1 360 11 is_stmt 0 view .LVU267
+ 729 01f2 FFF7FEFF 		bl	USBH_BulkSendData
+ 730              	.LVL65:
+ 731 01f6 C8E7     		b	.L42
+ 732              	.LVL66:
+ 733              	.L62:
+ 497:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         USBH_LL_SetToggle(phost, MSC_Handle->OutPipe, 1U - toggle);
+ 734              		.loc 1 497 9 is_stmt 1 view .LVU268
+ 497:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         USBH_LL_SetToggle(phost, MSC_Handle->OutPipe, 1U - toggle);
+ 735              		.loc 1 497 18 is_stmt 0 view .LVU269
+ 736 01f8 7179     		ldrb	r1, [r6, #5]	@ zero_extendqisi2
+ 737 01fa 2046     		mov	r0, r4
+ 738              	.LVL67:
+ 497:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         USBH_LL_SetToggle(phost, MSC_Handle->OutPipe, 1U - toggle);
+ 739              		.loc 1 497 18 view .LVU270
+ 740 01fc FFF7FEFF 		bl	USBH_LL_GetToggle
+ 741              	.LVL68:
+ 742 0200 0246     		mov	r2, r0
+ 743              	.LVL69:
+ 498:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         USBH_LL_SetToggle(phost, MSC_Handle->InPipe, 0U);
+ 744              		.loc 1 498 9 is_stmt 1 view .LVU271
+ 745 0202 7179     		ldrb	r1, [r6, #5]	@ zero_extendqisi2
+ 746 0204 2046     		mov	r0, r4
+ 747 0206 C2F10102 		rsb	r2, r2, #1
+ 748              	.LVL70:
+ 174:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   USBH_StatusTypeDef   error  = USBH_BUSY;
+ 749              		.loc 1 174 24 is_stmt 0 view .LVU272
+ 750 020a 0125     		movs	r5, #1
+ 498:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         USBH_LL_SetToggle(phost, MSC_Handle->InPipe, 0U);
+ 751              		.loc 1 498 9 view .LVU273
+ 752 020c D2B2     		uxtb	r2, r2
+ 753 020e FFF7FEFF 		bl	USBH_LL_SetToggle
+ 754              	.LVL71:
+ 499:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.state = BOT_ERROR_IN;
+ 755              		.loc 1 499 9 is_stmt 1 view .LVU274
+ 756 0212 3A46     		mov	r2, r7
+ 757 0214 2046     		mov	r0, r4
+ 758 0216 3179     		ldrb	r1, [r6, #4]	@ zero_extendqisi2
+ 759 0218 FFF7FEFF 		bl	USBH_LL_SetToggle
+ 760              	.LVL72:
+ 500:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 761              		.loc 1 500 9 view .LVU275
+ 500:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       }
+ 762              		.loc 1 500 32 is_stmt 0 view .LVU276
+ 763 021c 0923     		movs	r3, #9
+ 764 021e 86F85030 		strb	r3, [r6, #80]
+ 765 0222 0AE7     		b	.L11
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 28
+
+
+ 766              	.LVL73:
+ 767              	.L60:
+ 434:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.cmd_state = BOT_CMD_SEND;
+ 768              		.loc 1 434 9 is_stmt 1 view .LVU277
+ 434:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         MSC_Handle->hbot.cmd_state = BOT_CMD_SEND;
+ 769              		.loc 1 434 32 is_stmt 0 view .LVU278
+ 770 0224 86F85000 		strb	r0, [r6, #80]
+ 435:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         CSW_Status = USBH_MSC_DecodeCSW(phost);
+ 771              		.loc 1 435 9 is_stmt 1 view .LVU279
+ 772              	.LBB22:
+ 773              	.LBB23:
+ 559:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** }
+ 560:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 561:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** /**
+ 562:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @brief  USBH_MSC_BOT_DecodeCSW
+ 563:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *         This function decodes the CSW received by the device and updates the
+ 564:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *         same to upper layer.
+ 565:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @param  phost: Host handle
+ 566:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @retval USBH Status
+ 567:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   * @notes
+ 568:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *     Refer to USB Mass-Storage Class : BOT (www.usb.org)
+ 569:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *    6.3.1 Valid CSW Conditions :
+ 570:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *     The host shall consider the CSW valid when:
+ 571:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *     1. dCSWSignature is equal to 53425355h
+ 572:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *     2. the CSW is 13 (Dh) bytes in length,
+ 573:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   *     3. dCSWTag matches the dCBWTag from the corresponding CBW.
+ 574:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   */
+ 575:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 576:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** static BOT_CSWStatusTypeDef USBH_MSC_DecodeCSW(USBH_HandleTypeDef *phost)
+ 577:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+ 578:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   MSC_HandleTypeDef *MSC_Handle = (MSC_HandleTypeDef *) phost->pActiveClass->pData;
+ 579:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   BOT_CSWStatusTypeDef status = BOT_CSW_CMD_FAILED;
+ 580:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 581:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   /*Checking if the transfer length is different than 13*/
+ 582:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   if (USBH_LL_GetLastXferSize(phost, MSC_Handle->InPipe) != BOT_CSW_LENGTH)
+ 774              		.loc 1 582 7 is_stmt 0 view .LVU280
+ 775 0228 2046     		mov	r0, r4
+ 776              	.LVL74:
+ 777              		.loc 1 582 7 view .LVU281
+ 778              	.LBE23:
+ 779              	.LBE22:
+ 435:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         CSW_Status = USBH_MSC_DecodeCSW(phost);
+ 780              		.loc 1 435 36 view .LVU282
+ 781 022a 86F85230 		strb	r3, [r6, #82]
+ 436:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 782              		.loc 1 436 9 is_stmt 1 view .LVU283
+ 783              	.LVL75:
+ 784              	.LBB27:
+ 785              	.LBI22:
+ 576:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** {
+ 786              		.loc 1 576 29 view .LVU284
+ 787              	.LBB24:
+ 578:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   BOT_CSWStatusTypeDef status = BOT_CSW_CMD_FAILED;
+ 788              		.loc 1 578 3 view .LVU285
+ 578:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   BOT_CSWStatusTypeDef status = BOT_CSW_CMD_FAILED;
+ 789              		.loc 1 578 22 is_stmt 0 view .LVU286
+ 790 022e D4F87C34 		ldr	r3, [r4, #1148]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 29
+
+
+ 791 0232 DD69     		ldr	r5, [r3, #28]
+ 792              	.LVL76:
+ 579:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 793              		.loc 1 579 3 is_stmt 1 view .LVU287
+ 794              		.loc 1 582 3 view .LVU288
+ 795              		.loc 1 582 7 is_stmt 0 view .LVU289
+ 796 0234 2979     		ldrb	r1, [r5, #4]	@ zero_extendqisi2
+ 797 0236 FFF7FEFF 		bl	USBH_LL_GetLastXferSize
+ 798              	.LVL77:
+ 799              		.loc 1 582 6 view .LVU290
+ 800 023a 0D28     		cmp	r0, #13
+ 801 023c 07D1     		bne	.L48
+ 583:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   {
+ 584:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     /*(4) Hi > Dn (Host expects to receive data from the device,
+ 585:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     Device intends to transfer no data)
+ 586:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     (5) Hi > Di (Host expects to receive data from the device,
+ 587:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     Device intends to send data to the host)
+ 588:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     (9) Ho > Dn (Host expects to send data to the device,
+ 589:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     Device intends to transfer no data)
+ 590:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     (11) Ho > Do  (Host expects to send data to the device,
+ 591:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     Device intends to receive data from the host)*/
+ 592:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 593:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 594:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     status = BOT_CSW_PHASE_ERROR;
+ 595:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   }
+ 596:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   else
+ 597:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****   {
+ 598:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     /* CSW length is Correct */
+ 599:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 600:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     /* Check validity of the CSW Signature and CSWStatus */
+ 601:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     if (MSC_Handle->hbot.csw.field.Signature == BOT_CSW_SIGNATURE)
+ 802              		.loc 1 601 5 is_stmt 1 view .LVU291
+ 803              		.loc 1 601 8 is_stmt 0 view .LVU292
+ 804 023e 0C4B     		ldr	r3, .L65
+ 805 0240 AA6F     		ldr	r2, [r5, #120]
+ 806 0242 9A42     		cmp	r2, r3
+ 807 0244 03D1     		bne	.L48
+ 602:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****     {
+ 603:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       /* Check Condition 1. dCSWSignature is equal to 53425355h */
+ 604:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 605:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       if (MSC_Handle->hbot.csw.field.Tag == MSC_Handle->hbot.cbw.field.Tag)
+ 808              		.loc 1 605 7 is_stmt 1 view .LVU293
+ 809              		.loc 1 605 10 is_stmt 0 view .LVU294
+ 810 0246 EA6F     		ldr	r2, [r5, #124]
+ 811 0248 AB6D     		ldr	r3, [r5, #88]
+ 812 024a 9A42     		cmp	r2, r3
+ 813 024c 09D0     		beq	.L64
+ 814              	.L48:
+ 815              		.loc 1 605 10 view .LVU295
+ 816              	.LBE24:
+ 817              	.LBE27:
+ 444:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 818              		.loc 1 444 18 view .LVU296
+ 819 024e 0225     		movs	r5, #2
+ 820              	.LVL78:
+ 444:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 821              		.loc 1 444 18 view .LVU297
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 30
+
+
+ 822 0250 9BE7     		b	.L42
+ 823              	.LVL79:
+ 824              	.L31:
+ 282:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 825              		.loc 1 282 11 is_stmt 1 view .LVU298
+ 282:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 826              		.loc 1 282 57 is_stmt 0 view .LVU299
+ 827 0252 0023     		movs	r3, #0
+ 828 0254 F365     		str	r3, [r6, #92]
+ 286:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         {
+ 829              		.loc 1 286 9 is_stmt 1 view .LVU300
+ 830              	.L33:
+ 295:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 831              		.loc 1 295 11 view .LVU301
+ 295:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 832              		.loc 1 295 35 is_stmt 0 view .LVU302
+ 833 0256 0721     		movs	r1, #7
+ 298:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 834              		.loc 1 298 25 view .LVU303
+ 835 0258 0222     		movs	r2, #2
+ 302:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #endif
+ 836              		.loc 1 302 17 view .LVU304
+ 837 025a 0023     		movs	r3, #0
+ 295:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 838              		.loc 1 295 35 view .LVU305
+ 839 025c 86F85010 		strb	r1, [r6, #80]
+ 298:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** #if (osCMSIS < 0x20000U)
+ 840              		.loc 1 298 11 is_stmt 1 view .LVU306
+ 841 0260 95E7     		b	.L54
+ 842              	.LVL80:
+ 843              	.L64:
+ 844              	.LBB28:
+ 845              	.LBB25:
+ 606:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****       {
+ 607:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         /* Check Condition 3. dCSWTag matches the dCBWTag from the
+ 608:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         corresponding CBW */
+ 609:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c **** 
+ 610:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         if (MSC_Handle->hbot.csw.field.Status == 0U)
+ 846              		.loc 1 610 9 view .LVU307
+ 847              		.loc 1 610 39 is_stmt 0 view .LVU308
+ 848 0262 95F88450 		ldrb	r5, [r5, #132]	@ zero_extendqisi2
+ 849              	.LVL81:
+ 850              		.loc 1 610 39 view .LVU309
+ 851              	.LBE25:
+ 852              	.LBE28:
+ 444:.//Libraries/STM32_USB_Host_Library/Class/MSC/Src/usbh_msc_bot.c ****         }
+ 853              		.loc 1 444 18 view .LVU310
+ 854 0266 002D     		cmp	r5, #0
+ 855 0268 18BF     		it	ne
+ 856 026a 0225     		movne	r5, #2
+ 857              	.LBB29:
+ 858              	.LBB26:
+ 859 026c 8DE7     		b	.L42
+ 860              	.L66:
+ 861 026e 00BF     		.align	2
+ 862              	.L65:
+ 863 0270 55534253 		.word	1396855637
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 31
+
+
+ 864              	.LBE26:
+ 865              	.LBE29:
+ 866              		.cfi_endproc
+ 867              	.LFE154:
+ 869              		.text
+ 870              	.Letext0:
+ 871              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 872              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 873              		.file 4 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
+ 874              		.file 5 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 875              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 876              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 877              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 878              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 879              		.file 10 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 880              		.file 11 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 881              		.file 12 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 882              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 883              		.file 14 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 884              		.file 15 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/stdlib.
+ 885              		.file 16 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ 886              		.file 17 ".//Libraries/STM32_USB_Host_Library/Core/Inc/usbh_def.h"
+ 887              		.file 18 ".//Libraries/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h"
+ 888              		.file 19 ".//Libraries/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_bot.h"
+ 889              		.file 20 ".//Libraries/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc_scsi.h"
+ 890              		.file 21 ".//Libraries/STM32_USB_Host_Library/Class/MSC/Inc/usbh_msc.h"
+ 891              		.file 22 ".//Libraries/STM32_USB_Host_Library/Core/Inc/usbh_core.h"
+ 892              		.file 23 ".//Libraries/STM32_USB_Host_Library/Core/Inc/usbh_ioreq.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s 			page 32
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 usbh_msc_bot.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:17     .text.USBH_MSC_BOT_REQ_Reset:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:26     .text.USBH_MSC_BOT_REQ_Reset:0000000000000000 USBH_MSC_BOT_REQ_Reset
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:67     .text.USBH_MSC_BOT_REQ_GetMaxLUN:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:75     .text.USBH_MSC_BOT_REQ_GetMaxLUN:0000000000000000 USBH_MSC_BOT_REQ_GetMaxLUN
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:117    .text.USBH_MSC_BOT_Init:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:125    .text.USBH_MSC_BOT_Init:0000000000000000 USBH_MSC_BOT_Init
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:172    .text.USBH_MSC_BOT_Init:0000000000000024 $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:178    .text.USBH_MSC_BOT_Process:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:186    .text.USBH_MSC_BOT_Process:0000000000000000 USBH_MSC_BOT_Process
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:227    .text.USBH_MSC_BOT_Process:000000000000001a $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:863    .text.USBH_MSC_BOT_Process:0000000000000270 $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:238    .text.USBH_MSC_BOT_Process:0000000000000025 $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccijqkm8.s:238    .text.USBH_MSC_BOT_Process:0000000000000026 $t
+
+UNDEFINED SYMBOLS
+USBH_CtlReq
+USBH_LL_GetURBState
+USBH_BulkSendData
+osMessageQueuePut
+USBH_BulkReceiveData
+USBH_ClrFeature
+USBH_LL_GetToggle
+USBH_LL_SetToggle
+USBH_LL_GetLastXferSize

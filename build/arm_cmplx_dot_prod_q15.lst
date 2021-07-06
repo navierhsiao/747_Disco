@@ -1,0 +1,350 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_cmplx_dot_prod_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_cmplx_dot_prod_q15,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_cmplx_dot_prod_q15
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_cmplx_dot_prod_q15:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c"
+   1:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * Title:        arm_cmplx_dot_prod_q15.c
+   4:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * Description:  Processing function for the Q15 Complex Dot product
+   5:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @ingroup groupCmplxMath
+  33:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @addtogroup cmplx_dot_prod
+  37:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @brief         Q15 complex dot product.
+  42:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @param[in]     pSrcA       points to the first input vector
+  43:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @param[in]     pSrcB       points to the second input vector
+  44:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @param[in]     numSamples  number of samples in each vector
+  45:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @param[out]    realResult  real part of the result returned here
+  46:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @param[out]    imagResult  imaginary part of the result returned her
+  47:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @return        none
+  48:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  49:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   @par           Scaling and Overflow Behavior
+  50:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****                    The function is implemented using an internal 64-bit accumulator.
+  51:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****                    The intermediate 1.15 by 1.15 multiplications are performed with full precision 
+  52:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****                    These are accumulated in a 64-bit accumulator with 34.30 precision.
+  53:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****                    As a final step, the accumulators are converted to 8.24 format.
+  54:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****                    The return results <code>realResult</code> and <code>imagResult</code> are in 8.
+  55:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****  */
+  56:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  57:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** void arm_cmplx_dot_prod_q15(
+  58:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   const q15_t * pSrcA,
+  59:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   const q15_t * pSrcB,
+  60:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         uint32_t numSamples,
+  61:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         q31_t * realResult,
+  62:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         q31_t * imagResult)
+  63:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** {
+  30              		.loc 1 63 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 4, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  64:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
+  34              		.loc 1 64 9 view .LVU1
+  65:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         q63_t real_sum = 0, imag_sum = 0;              /* Temporary result variables */
+  35              		.loc 1 65 9 view .LVU2
+  66:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         q15_t a0,b0,c0,d0;
+  36              		.loc 1 66 9 view .LVU3
+  67:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  68:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  69:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  70:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+  71:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   blkCnt = numSamples >> 2U;
+  72:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  73:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   while (blkCnt > 0U)
+  74:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   {
+  75:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     a0 = *pSrcA++;
+  76:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     b0 = *pSrcA++;
+  77:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     c0 = *pSrcB++;
+  78:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     d0 = *pSrcB++;
+  79:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s 			page 3
+
+
+  80:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum += (q31_t)a0 * c0;
+  81:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)a0 * d0;
+  82:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum -= (q31_t)b0 * d0;
+  83:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)b0 * c0;
+  84:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  85:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     a0 = *pSrcA++;
+  86:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     b0 = *pSrcA++;
+  87:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     c0 = *pSrcB++;
+  88:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     d0 = *pSrcB++;
+  89:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  90:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum += (q31_t)a0 * c0;
+  91:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)a0 * d0;
+  92:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum -= (q31_t)b0 * d0;
+  93:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)b0 * c0;
+  94:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+  95:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     a0 = *pSrcA++;
+  96:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     b0 = *pSrcA++;
+  97:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     c0 = *pSrcB++;
+  98:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     d0 = *pSrcB++;
+  99:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 100:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum += (q31_t)a0 * c0;
+ 101:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)a0 * d0;
+ 102:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum -= (q31_t)b0 * d0;
+ 103:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)b0 * c0;
+ 104:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 105:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     a0 = *pSrcA++;
+ 106:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     b0 = *pSrcA++;
+ 107:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     c0 = *pSrcB++;
+ 108:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     d0 = *pSrcB++;
+ 109:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 110:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum += (q31_t)a0 * c0;
+ 111:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)a0 * d0;
+ 112:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum -= (q31_t)b0 * d0;
+ 113:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)b0 * c0;
+ 114:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 115:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     /* Decrement loop counter */
+ 116:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     blkCnt--;
+ 117:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   }
+ 118:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 119:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   /* Loop unrolling: Compute remaining outputs */
+ 120:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   blkCnt = numSamples % 0x4U;
+ 121:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 122:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** #else
+ 123:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 124:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   /* Initialize blkCnt with number of samples */
+ 125:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   blkCnt = numSamples;
+  37              		.loc 1 125 3 view .LVU4
+ 126:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 127:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 128:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 129:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   while (blkCnt > 0U)
+  38              		.loc 1 129 3 view .LVU5
+  39              		.loc 1 129 9 view .LVU6
+  63:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
+  40              		.loc 1 63 1 is_stmt 0 view .LVU7
+  41 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  42              	.LCFI0:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s 			page 4
+
+
+  43              		.cfi_def_cfa_offset 36
+  44              		.cfi_offset 4, -36
+  45              		.cfi_offset 5, -32
+  46              		.cfi_offset 6, -28
+  47              		.cfi_offset 7, -24
+  48              		.cfi_offset 8, -20
+  49              		.cfi_offset 9, -16
+  50              		.cfi_offset 10, -12
+  51              		.cfi_offset 11, -8
+  52              		.cfi_offset 14, -4
+  53 0004 83B0     		sub	sp, sp, #12
+  54              	.LCFI1:
+  55              		.cfi_def_cfa_offset 48
+  63:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
+  56              		.loc 1 63 1 view .LVU8
+  57 0006 0193     		str	r3, [sp, #4]
+  58              		.loc 1 129 9 view .LVU9
+  59 0008 7AB3     		cbz	r2, .L4
+  65:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         q15_t a0,b0,c0,d0;
+  60              		.loc 1 65 29 view .LVU10
+  61 000a 4FF0000A 		mov	r10, #0
+  62 000e 4FF0000B 		mov	fp, #0
+  63              		.loc 1 129 9 view .LVU11
+  64 0012 0023     		movs	r3, #0
+  65              	.LVL1:
+  66              		.loc 1 129 9 view .LVU12
+  67 0014 871C     		adds	r7, r0, #2
+  68 0016 01F1020C 		add	ip, r1, #2
+  65:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****         q15_t a0,b0,c0,d0;
+  69              		.loc 1 65 15 view .LVU13
+  70 001a D046     		mov	r8, r10
+  71 001c D946     		mov	r9, fp
+  72              	.LVL2:
+  73              	.L3:
+ 130:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   {
+ 131:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     a0 = *pSrcA++;
+  74              		.loc 1 131 5 is_stmt 1 view .LVU14
+  75              		.loc 1 131 8 is_stmt 0 view .LVU15
+  76 001e 30F923E0 		ldrsh	lr, [r0, r3, lsl #2]
+  77              	.LVL3:
+ 132:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     b0 = *pSrcA++;
+  78              		.loc 1 132 5 is_stmt 1 view .LVU16
+ 133:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     c0 = *pSrcB++;
+  79              		.loc 1 133 8 is_stmt 0 view .LVU17
+  80 0022 31F92360 		ldrsh	r6, [r1, r3, lsl #2]
+ 132:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     b0 = *pSrcA++;
+  81              		.loc 1 132 8 view .LVU18
+  82 0026 37F92350 		ldrsh	r5, [r7, r3, lsl #2]
+  83              	.LVL4:
+  84              		.loc 1 133 5 is_stmt 1 view .LVU19
+ 134:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     d0 = *pSrcB++;
+  85              		.loc 1 134 5 view .LVU20
+  86              		.loc 1 134 8 is_stmt 0 view .LVU21
+  87 002a 3CF92340 		ldrsh	r4, [ip, r3, lsl #2]
+  88              	.LVL5:
+ 135:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 136:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum += (q31_t)a0 * c0;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s 			page 5
+
+
+  89              		.loc 1 136 5 is_stmt 1 view .LVU22
+  90              		.loc 1 136 14 is_stmt 0 view .LVU23
+  91 002e CEFB8689 		smlalbb	r8, r9, lr, r6
+  92              	.LVL6:
+ 137:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)a0 * d0;
+  93              		.loc 1 137 5 is_stmt 1 view .LVU24
+  94 0032 0133     		adds	r3, r3, #1
+  95              	.LVL7:
+  96              		.loc 1 137 14 is_stmt 0 view .LVU25
+  97 0034 CEFB84AB 		smlalbb	r10, fp, lr, r4
+  98              	.LVL8:
+ 138:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum -= (q31_t)b0 * d0;
+  99              		.loc 1 138 5 is_stmt 1 view .LVU26
+ 100              		.loc 1 138 27 is_stmt 0 view .LVU27
+ 101 0038 04FB05F4 		mul	r4, r4, r5
+ 102              	.LVL9:
+ 139:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     imag_sum += (q31_t)b0 * c0;
+ 103              		.loc 1 139 14 view .LVU28
+ 104 003c C6FB85AB 		smlalbb	r10, fp, r6, r5
+ 105              	.LVL10:
+ 138:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum -= (q31_t)b0 * d0;
+ 106              		.loc 1 138 14 view .LVU29
+ 107 0040 B8EB0408 		subs	r8, r8, r4
+ 108              	.LVL11:
+ 138:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     real_sum -= (q31_t)b0 * d0;
+ 109              		.loc 1 138 14 view .LVU30
+ 110 0044 69EBE479 		sbc	r9, r9, r4, asr #31
+ 111              	.LVL12:
+ 112              		.loc 1 139 5 is_stmt 1 view .LVU31
+ 140:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 141:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     /* Decrement loop counter */
+ 142:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****     blkCnt--;
+ 113              		.loc 1 142 5 view .LVU32
+ 129:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   {
+ 114              		.loc 1 129 9 view .LVU33
+ 115 0048 9A42     		cmp	r2, r3
+ 116 004a E8D1     		bne	.L3
+ 117 004c 4FEA9813 		lsr	r3, r8, #6
+ 118              	.LVL13:
+ 129:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   {
+ 119              		.loc 1 129 9 is_stmt 0 view .LVU34
+ 120 0050 4FEA9A12 		lsr	r2, r10, #6
+ 121              	.LVL14:
+ 129:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   {
+ 122              		.loc 1 129 9 view .LVU35
+ 123 0054 43EA8963 		orr	r3, r3, r9, lsl #26
+ 124 0058 42EA8B62 		orr	r2, r2, fp, lsl #26
+ 125              	.LVL15:
+ 126              	.L2:
+ 143:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   }
+ 144:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** 
+ 145:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   /* Store real and imaginary result in 8.24 format  */
+ 146:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   /* Convert real data in 34.30 to 8.24 by 6 right shifts */
+ 147:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   *realResult = (q31_t) (real_sum >> 6);
+ 127              		.loc 1 147 3 is_stmt 1 view .LVU36
+ 128              		.loc 1 147 15 is_stmt 0 view .LVU37
+ 129 005c 0199     		ldr	r1, [sp, #4]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s 			page 6
+
+
+ 130 005e 0B60     		str	r3, [r1]
+ 148:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   /* Convert imaginary data in 34.30 to 8.24 by 6 right shifts */
+ 149:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   *imagResult = (q31_t) (imag_sum >> 6);
+ 131              		.loc 1 149 3 is_stmt 1 view .LVU38
+ 132              		.loc 1 149 15 is_stmt 0 view .LVU39
+ 133 0060 0C9B     		ldr	r3, [sp, #48]
+ 134 0062 1A60     		str	r2, [r3]
+ 150:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c **** }
+ 135              		.loc 1 150 1 view .LVU40
+ 136 0064 03B0     		add	sp, sp, #12
+ 137              	.LCFI2:
+ 138              		.cfi_remember_state
+ 139              		.cfi_def_cfa_offset 36
+ 140              		@ sp needed
+ 141 0066 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 142              	.LVL16:
+ 143              	.L4:
+ 144              	.LCFI3:
+ 145              		.cfi_restore_state
+ 129:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   {
+ 146              		.loc 1 129 9 view .LVU41
+ 147 006a 1346     		mov	r3, r2
+ 148              	.LVL17:
+ 129:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_dot_prod_q15.c ****   {
+ 149              		.loc 1 129 9 view .LVU42
+ 150 006c F6E7     		b	.L2
+ 151              		.cfi_endproc
+ 152              	.LFE145:
+ 154 006e 00BF     		.text
+ 155              	.Letext0:
+ 156              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 157              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 158              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 159              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 160              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 161              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 162              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 163              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_cmplx_dot_prod_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s:17     .text.arm_cmplx_dot_prod_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccNjZNib.s:26     .text.arm_cmplx_dot_prod_q15:0000000000000000 arm_cmplx_dot_prod_q15
+
+NO UNDEFINED SYMBOLS

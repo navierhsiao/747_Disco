@@ -1,0 +1,481 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"usbh_pipes.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.USBH_OpenPipe,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	USBH_OpenPipe
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	USBH_OpenPipe:
+  27              	.LVL0:
+  28              	.LFB151:
+  29              		.file 1 ".//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c"
+   1:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+   2:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   ******************************************************************************
+   3:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @file    usbh_pipes.c
+   4:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @author  MCD Application Team
+   5:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief   This file implements functions for opening and closing Pipes
+   6:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   ******************************************************************************
+   7:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @attention
+   8:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *
+   9:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * <h2><center>&copy; Copyright (c) 2015 STMicroelectronics.
+  10:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * All rights reserved.</center></h2>
+  11:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *
+  12:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  13:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  14:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * the License. You may obtain a copy of the License at:
+  15:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *                      www.st.com/SLA0044
+  16:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *
+  17:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   ******************************************************************************
+  18:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  19:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  20:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /* Includes ------------------------------------------------------------------*/
+  21:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** #include "usbh_pipes.h"
+  22:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  23:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @addtogroup USBH_LIB
+  24:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
+  25:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  26:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  27:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @addtogroup USBH_LIB_CORE
+  28:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** * @{
+  29:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 2
+
+
+  30:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  31:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @defgroup USBH_PIPES
+  32:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief This file includes opening and closing Pipes
+  33:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
+  34:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  35:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  36:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @defgroup USBH_PIPES_Private_Defines
+  37:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
+  38:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  39:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+  40:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @}
+  41:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  42:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  43:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @defgroup USBH_PIPES_Private_TypesDefinitions
+  44:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
+  45:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  46:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+  47:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @}
+  48:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  49:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  50:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  51:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @defgroup USBH_PIPES_Private_Macros
+  52:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
+  53:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  54:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+  55:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @}
+  56:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  57:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  58:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  59:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @defgroup USBH_PIPES_Private_Variables
+  60:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
+  61:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  62:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  63:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+  64:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @}
+  65:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  66:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  67:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  68:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @defgroup USBH_PIPES_Private_Functions
+  69:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
+  70:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  71:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** static uint16_t USBH_GetFreePipe(USBH_HandleTypeDef *phost);
+  72:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  73:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  74:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+  75:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief  USBH_Open_Pipe
+  76:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *         Open a  pipe
+  77:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  phost: Host Handle
+  78:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  pipe_num: Pipe Number
+  79:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  dev_address: USB Device address allocated to attached device
+  80:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  speed : USB device speed (Full/Low)
+  81:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  ep_type: end point type (Bulk/int/ctl)
+  82:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  mps: max pkt size
+  83:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @retval USBH Status
+  84:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+  85:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** USBH_StatusTypeDef USBH_OpenPipe(USBH_HandleTypeDef *phost, uint8_t pipe_num,
+  86:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****                                  uint8_t epnum, uint8_t dev_address,
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 3
+
+
+  87:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****                                  uint8_t speed, uint8_t ep_type, uint16_t mps)
+  88:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
+  30              		.loc 1 88 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 12, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  89:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
+  34              		.loc 1 89 3 view .LVU1
+  88:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
+  35              		.loc 1 88 1 is_stmt 0 view .LVU2
+  36 0000 30B5     		push	{r4, r5, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 12
+  39              		.cfi_offset 4, -12
+  40              		.cfi_offset 5, -8
+  41              		.cfi_offset 14, -4
+  42 0002 85B0     		sub	sp, sp, #20
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 32
+  88:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
+  45              		.loc 1 88 1 view .LVU3
+  46 0004 9DF82040 		ldrb	r4, [sp, #32]	@ zero_extendqisi2
+  47 0008 9DF82450 		ldrb	r5, [sp, #36]	@ zero_extendqisi2
+  48              		.loc 1 89 3 view .LVU4
+  49 000c 0094     		str	r4, [sp]
+  88:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
+  50              		.loc 1 88 1 view .LVU5
+  51 000e BDF82840 		ldrh	r4, [sp, #40]
+  52              		.loc 1 89 3 view .LVU6
+  53 0012 CDE90154 		strd	r5, r4, [sp, #4]
+  54 0016 FFF7FEFF 		bl	USBH_LL_OpenPipe
+  55              	.LVL1:
+  90:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  91:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return USBH_OK;
+  56              		.loc 1 91 3 is_stmt 1 view .LVU7
+  92:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+  57              		.loc 1 92 1 is_stmt 0 view .LVU8
+  58 001a 0020     		movs	r0, #0
+  59 001c 05B0     		add	sp, sp, #20
+  60              	.LCFI2:
+  61              		.cfi_def_cfa_offset 12
+  62              		@ sp needed
+  63 001e 30BD     		pop	{r4, r5, pc}
+  64              		.loc 1 92 1 view .LVU9
+  65              		.cfi_endproc
+  66              	.LFE151:
+  68              		.section	.text.USBH_ClosePipe,"ax",%progbits
+  69              		.align	1
+  70              		.p2align 2,,3
+  71              		.global	USBH_ClosePipe
+  72              		.syntax unified
+  73              		.thumb
+  74              		.thumb_func
+  75              		.fpu fpv5-d16
+  77              	USBH_ClosePipe:
+  78              	.LVL2:
+  79              	.LFB152:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 4
+
+
+  93:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  94:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+  95:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+  96:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief  USBH_ClosePipe
+  97:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *         Close a  pipe
+  98:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  phost: Host Handle
+  99:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  pipe_num: Pipe Number
+ 100:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @retval USBH Status
+ 101:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+ 102:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** USBH_StatusTypeDef USBH_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe_num)
+ 103:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
+  80              		.loc 1 103 1 is_stmt 1 view -0
+  81              		.cfi_startproc
+  82              		@ args = 0, pretend = 0, frame = 0
+  83              		@ frame_needed = 0, uses_anonymous_args = 0
+ 104:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_ClosePipe(phost, pipe_num);
+  84              		.loc 1 104 3 view .LVU11
+ 103:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_ClosePipe(phost, pipe_num);
+  85              		.loc 1 103 1 is_stmt 0 view .LVU12
+  86 0000 08B5     		push	{r3, lr}
+  87              	.LCFI3:
+  88              		.cfi_def_cfa_offset 8
+  89              		.cfi_offset 3, -8
+  90              		.cfi_offset 14, -4
+  91              		.loc 1 104 3 view .LVU13
+  92 0002 FFF7FEFF 		bl	USBH_LL_ClosePipe
+  93              	.LVL3:
+ 105:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 106:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return USBH_OK;
+  94              		.loc 1 106 3 is_stmt 1 view .LVU14
+ 107:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+  95              		.loc 1 107 1 is_stmt 0 view .LVU15
+  96 0006 0020     		movs	r0, #0
+  97 0008 08BD     		pop	{r3, pc}
+  98              		.cfi_endproc
+  99              	.LFE152:
+ 101 000a 00BF     		.section	.text.USBH_AllocPipe,"ax",%progbits
+ 102              		.align	1
+ 103              		.p2align 2,,3
+ 104              		.global	USBH_AllocPipe
+ 105              		.syntax unified
+ 106              		.thumb
+ 107              		.thumb_func
+ 108              		.fpu fpv5-d16
+ 110              	USBH_AllocPipe:
+ 111              	.LVL4:
+ 112              	.LFB153:
+ 108:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 109:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 110:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+ 111:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief  USBH_Alloc_Pipe
+ 112:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *         Allocate a new Pipe
+ 113:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  phost: Host Handle
+ 114:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  ep_addr: End point for which the Pipe to be allocated
+ 115:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @retval Pipe number
+ 116:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+ 117:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** uint8_t USBH_AllocPipe(USBH_HandleTypeDef *phost, uint8_t ep_addr)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 5
+
+
+ 118:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
+ 113              		.loc 1 118 1 is_stmt 1 view -0
+ 114              		.cfi_startproc
+ 115              		@ args = 0, pretend = 0, frame = 0
+ 116              		@ frame_needed = 0, uses_anonymous_args = 0
+ 117              		@ link register save eliminated.
+ 119:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint16_t pipe;
+ 118              		.loc 1 119 3 view .LVU17
+ 120:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 121:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   pipe =  USBH_GetFreePipe(phost);
+ 119              		.loc 1 121 3 view .LVU18
+ 118:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint16_t pipe;
+ 120              		.loc 1 118 1 is_stmt 0 view .LVU19
+ 121 0000 30B4     		push	{r4, r5}
+ 122              	.LCFI4:
+ 123              		.cfi_def_cfa_offset 8
+ 124              		.cfi_offset 4, -8
+ 125              		.cfi_offset 5, -4
+ 118:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint16_t pipe;
+ 126              		.loc 1 118 1 view .LVU20
+ 127 0002 0023     		movs	r3, #0
+ 128 0004 0546     		mov	r5, r0
+ 129              	.LVL5:
+ 130              	.LBB4:
+ 131              	.LBI4:
+ 122:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 123:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   if (pipe != 0xFFFFU)
+ 124:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 125:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     phost->Pipes[pipe & 0xFU] = 0x8000U | ep_addr;
+ 126:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 127:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 128:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return (uint8_t)pipe;
+ 129:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 130:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 131:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 132:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+ 133:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief  USBH_Free_Pipe
+ 134:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *         Free the USB Pipe
+ 135:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  phost: Host Handle
+ 136:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  idx: Pipe number to be freed
+ 137:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @retval USBH Status
+ 138:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+ 139:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** USBH_StatusTypeDef USBH_FreePipe(USBH_HandleTypeDef *phost, uint8_t idx)
+ 140:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
+ 141:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   if (idx < 11U)
+ 142:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 143:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     phost->Pipes[idx] &= 0x7FFFU;
+ 144:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 145:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 146:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return USBH_OK;
+ 147:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 148:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 149:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 150:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
+ 151:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief  USBH_GetFreePipe
+ 152:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  phost: Host Handle
+ 153:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *         Get a free Pipe number for allocation to a device endpoint
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 6
+
+
+ 154:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @retval idx: Free Pipe number
+ 155:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
+ 156:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** static uint16_t USBH_GetFreePipe(USBH_HandleTypeDef *phost)
+ 132              		.loc 1 156 17 is_stmt 1 view .LVU21
+ 133              	.LBB5:
+ 157:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
+ 158:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint8_t idx = 0U;
+ 134              		.loc 1 158 3 view .LVU22
+ 159:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 160:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   for (idx = 0U ; idx < 11U ; idx++)
+ 135              		.loc 1 160 3 view .LVU23
+ 136              		.loc 1 160 19 view .LVU24
+ 137 0006 00F59062 		add	r2, r0, #1152
+ 138              	.LVL6:
+ 139              	.L9:
+ 140              		.loc 1 160 31 view .LVU25
+ 141              		.loc 1 160 19 view .LVU26
+ 161:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 162:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     if ((phost->Pipes[idx] & 0x8000U) == 0U)
+ 142              		.loc 1 162 28 is_stmt 0 view .LVU27
+ 143 000a 52F8044F 		ldr	r4, [r2, #4]!
+ 144 000e D8B2     		uxtb	r0, r3
+ 145              	.LVL7:
+ 146              		.loc 1 162 5 is_stmt 1 view .LVU28
+ 147              		.loc 1 162 8 is_stmt 0 view .LVU29
+ 148 0010 2404     		lsls	r4, r4, #16
+ 149 0012 05D5     		bpl	.L12
+ 150 0014 0133     		adds	r3, r3, #1
+ 160:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 151              		.loc 1 160 3 view .LVU30
+ 152 0016 0B2B     		cmp	r3, #11
+ 153 0018 F7D1     		bne	.L9
+ 154 001a FF20     		movs	r0, #255
+ 155              	.LVL8:
+ 160:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 156              		.loc 1 160 3 view .LVU31
+ 157              	.LBE5:
+ 158              	.LBE4:
+ 128:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 159              		.loc 1 128 3 is_stmt 1 view .LVU32
+ 129:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 160              		.loc 1 129 1 is_stmt 0 view .LVU33
+ 161 001c 30BC     		pop	{r4, r5}
+ 162              	.LCFI5:
+ 163              		.cfi_remember_state
+ 164              		.cfi_restore 5
+ 165              		.cfi_restore 4
+ 166              		.cfi_def_cfa_offset 0
+ 167              	.LVL9:
+ 129:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 168              		.loc 1 129 1 view .LVU34
+ 169 001e 7047     		bx	lr
+ 170              	.LVL10:
+ 171              	.L12:
+ 172              	.LCFI6:
+ 173              		.cfi_restore_state
+ 174              	.LBB7:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 7
+
+
+ 175              	.LBB6:
+ 163:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     {
+ 164:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****       return (uint16_t)idx;
+ 176              		.loc 1 164 7 is_stmt 1 view .LVU35
+ 177              		.loc 1 164 7 is_stmt 0 view .LVU36
+ 178              	.LBE6:
+ 179              	.LBE7:
+ 123:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 180              		.loc 1 123 3 is_stmt 1 view .LVU37
+ 125:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 181              		.loc 1 125 5 view .LVU38
+ 125:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 182              		.loc 1 125 31 is_stmt 0 view .LVU39
+ 183 0020 05EB8303 		add	r3, r5, r3, lsl #2
+ 125:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 184              		.loc 1 125 41 view .LVU40
+ 185 0024 41F40041 		orr	r1, r1, #32768
+ 186              	.LVL11:
+ 129:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 187              		.loc 1 129 1 view .LVU41
+ 188 0028 30BC     		pop	{r4, r5}
+ 189              	.LCFI7:
+ 190              		.cfi_restore 5
+ 191              		.cfi_restore 4
+ 192              		.cfi_def_cfa_offset 0
+ 193              	.LVL12:
+ 125:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 194              		.loc 1 125 31 view .LVU42
+ 195 002a C3F88414 		str	r1, [r3, #1156]
+ 196              	.LVL13:
+ 128:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 197              		.loc 1 128 3 is_stmt 1 view .LVU43
+ 129:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 198              		.loc 1 129 1 is_stmt 0 view .LVU44
+ 199 002e 7047     		bx	lr
+ 200              		.cfi_endproc
+ 201              	.LFE153:
+ 203              		.section	.text.USBH_FreePipe,"ax",%progbits
+ 204              		.align	1
+ 205              		.p2align 2,,3
+ 206              		.global	USBH_FreePipe
+ 207              		.syntax unified
+ 208              		.thumb
+ 209              		.thumb_func
+ 210              		.fpu fpv5-d16
+ 212              	USBH_FreePipe:
+ 213              	.LVL14:
+ 214              	.LFB154:
+ 140:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   if (idx < 11U)
+ 215              		.loc 1 140 1 is_stmt 1 view -0
+ 216              		.cfi_startproc
+ 217              		@ args = 0, pretend = 0, frame = 0
+ 218              		@ frame_needed = 0, uses_anonymous_args = 0
+ 219              		@ link register save eliminated.
+ 141:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 220              		.loc 1 141 3 view .LVU46
+ 141:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 8
+
+
+ 221              		.loc 1 141 6 is_stmt 0 view .LVU47
+ 222 0000 0A29     		cmp	r1, #10
+ 223 0002 07D8     		bhi	.L14
+ 143:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 224              		.loc 1 143 5 is_stmt 1 view .LVU48
+ 225 0004 00EB8100 		add	r0, r0, r1, lsl #2
+ 226              	.LVL15:
+ 143:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 227              		.loc 1 143 23 is_stmt 0 view .LVU49
+ 228 0008 D0F88434 		ldr	r3, [r0, #1156]
+ 229 000c C3F30E03 		ubfx	r3, r3, #0, #15
+ 230 0010 C0F88434 		str	r3, [r0, #1156]
+ 231              	.L14:
+ 146:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 232              		.loc 1 146 3 is_stmt 1 view .LVU50
+ 147:.//Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 233              		.loc 1 147 1 is_stmt 0 view .LVU51
+ 234 0014 0020     		movs	r0, #0
+ 235 0016 7047     		bx	lr
+ 236              		.cfi_endproc
+ 237              	.LFE154:
+ 239              		.text
+ 240              	.Letext0:
+ 241              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 242              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 243              		.file 4 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
+ 244              		.file 5 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 245              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 246              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 247              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 248              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 249              		.file 10 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 250              		.file 11 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 251              		.file 12 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 252              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 253              		.file 14 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 254              		.file 15 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/stdlib.
+ 255              		.file 16 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ 256              		.file 17 ".//Libraries/STM32_USB_Host_Library/Core/Inc/usbh_def.h"
+ 257              		.file 18 ".//Libraries/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h"
+ 258              		.file 19 ".//Libraries/STM32_USB_Host_Library/Core/Inc/usbh_core.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 usbh_pipes.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:17     .text.USBH_OpenPipe:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:26     .text.USBH_OpenPipe:0000000000000000 USBH_OpenPipe
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:69     .text.USBH_ClosePipe:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:77     .text.USBH_ClosePipe:0000000000000000 USBH_ClosePipe
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:102    .text.USBH_AllocPipe:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:110    .text.USBH_AllocPipe:0000000000000000 USBH_AllocPipe
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:204    .text.USBH_FreePipe:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7CCoBR.s:212    .text.USBH_FreePipe:0000000000000000 USBH_FreePipe
+
+UNDEFINED SYMBOLS
+USBH_LL_OpenPipe
+USBH_LL_ClosePipe

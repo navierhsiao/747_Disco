@@ -1,0 +1,389 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_scale_q31.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_scale_q31,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_scale_q31
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_scale_q31:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c"
+   1:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * Title:        arm_scale_q31.c
+   4:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * Description:  Multiplies a Q31 vector by a scalar
+   5:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @ingroup groupMath
+  33:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @addtogroup BasicScale
+  37:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @brief         Multiplies a Q31 vector by a scalar.
+  42:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @param[in]     pSrc       points to the input vector
+  43:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @param[in]     scaleFract fractional portion of the scale value
+  44:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @param[in]     shift      number of bits to shift the result by
+  45:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @param[out]    pDst       points to the output vector
+  46:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @param[in]     blockSize  number of samples in each vector
+  47:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @return        none
+  48:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  49:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   @par           Scaling and Overflow Behavior
+  50:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****                    The input data <code>*pSrc</code> and <code>scaleFract</code> are in 1.31 format
+  51:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****                    These are multiplied to yield a 2.62 intermediate result and this is shifted wit
+  52:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****  */
+  53:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  54:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** void arm_scale_q31(
+  55:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   const q31_t *pSrc,
+  56:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         q31_t scaleFract,
+  57:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         int8_t shift,
+  58:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         q31_t *pDst,
+  59:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         uint32_t blockSize)
+  60:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** {
+  30              		.loc 1 60 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 4, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  61:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
+  34              		.loc 1 61 9 view .LVU1
+  62:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         q31_t in, out;                                 /* Temporary variables */
+  35              		.loc 1 62 9 view .LVU2
+  63:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         int8_t kShift = shift + 1;                     /* Shift to apply after scaling */
+  36              		.loc 1 63 9 view .LVU3
+  37              		.loc 1 63 31 is_stmt 0 view .LVU4
+  38 0000 0132     		adds	r2, r2, #1
+  39              	.LVL1:
+  60:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
+  40              		.loc 1 60 1 view .LVU5
+  41 0002 F0B5     		push	{r4, r5, r6, r7, lr}
+  42              	.LCFI0:
+  43              		.cfi_def_cfa_offset 20
+  44              		.cfi_offset 4, -20
+  45              		.cfi_offset 5, -16
+  46              		.cfi_offset 6, -12
+  47              		.cfi_offset 7, -8
+  48              		.cfi_offset 14, -4
+  49              		.loc 1 63 16 view .LVU6
+  50 0004 55B2     		sxtb	r5, r2
+  51              	.LVL2:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 3
+
+
+  64:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         int8_t sign = (kShift & 0x80);
+  52              		.loc 1 64 9 is_stmt 1 view .LVU7
+  65:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  66:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  67:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  68:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+  69:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   blkCnt = blockSize >> 2U;
+  70:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  71:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   if (sign == 0U)
+  72:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   {
+  73:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     while (blkCnt > 0U)
+  74:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+  75:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* C = A * scale */
+  76:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  77:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Scale input and store result in destination buffer. */
+  78:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;                                /* read input from source */
+  79:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;        /* multiply input with scaler value */
+  80:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;                          /* apply shifting */
+  81:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       if (in != (out >> kShift))                   /* saturate the result */
+  82:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         out = 0x7FFFFFFF ^ (in >> 31);
+  83:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;                               /* Store result destination */
+  84:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  85:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+  86:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+  87:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;
+  88:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       if (in != (out >> kShift))
+  89:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         out = 0x7FFFFFFF ^ (in >> 31);
+  90:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+  91:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  92:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+  93:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+  94:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;
+  95:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       if (in != (out >> kShift))
+  96:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         out = 0x7FFFFFFF ^ (in >> 31);
+  97:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+  98:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+  99:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+ 100:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+ 101:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;
+ 102:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       if (in != (out >> kShift))
+ 103:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         out = 0x7FFFFFFF ^ (in >> 31);
+ 104:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+ 105:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 106:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Decrement loop counter */
+ 107:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       blkCnt--;
+ 108:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     }
+ 109:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   }
+ 110:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   else
+ 111:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   {
+ 112:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     while (blkCnt > 0U)
+ 113:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+ 114:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* C = A * scale */
+ 115:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 116:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Scale input and store result in destination buffer. */
+ 117:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;                                /* read four inputs from source */
+ 118:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;        /* multiply input with scaler value */
+ 119:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;                         /* apply shifting */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 4
+
+
+ 120:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;                               /* Store result destination */
+ 121:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 122:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+ 123:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+ 124:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;
+ 125:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+ 126:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 127:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+ 128:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+ 129:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;
+ 130:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+ 131:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 132:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+ 133:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+ 134:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;
+ 135:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+ 136:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 137:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Decrement loop counter */
+ 138:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       blkCnt--;
+ 139:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     }
+ 140:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   }
+ 141:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 142:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   /* Loop unrolling: Compute remaining outputs */
+ 143:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   blkCnt = blockSize % 0x4U;
+ 144:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 145:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** #else
+ 146:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 147:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   /* Initialize blkCnt with number of samples */
+ 148:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   blkCnt = blockSize;
+  53              		.loc 1 148 3 view .LVU8
+  60:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
+  54              		.loc 1 60 1 is_stmt 0 view .LVU9
+  55 0006 1E46     		mov	r6, r3
+  56 0008 059C     		ldr	r4, [sp, #20]
+  57              	.LVL3:
+ 149:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 150:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 151:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 152:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   if (sign == 0U)
+  58              		.loc 1 152 3 is_stmt 1 view .LVU10
+  59              		.loc 1 152 6 is_stmt 0 view .LVU11
+  60 000a 002D     		cmp	r5, #0
+  61 000c 13DB     		blt	.L15
+ 153:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   {
+ 154:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     while (blkCnt > 0U)
+  62              		.loc 1 154 11 is_stmt 1 view .LVU12
+  63 000e 8CB1     		cbz	r4, .L1
+ 155:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+ 156:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* C = A * scale */
+ 157:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 158:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Scale input and store result in destination buffer. */
+ 159:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+ 160:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+ 161:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;
+ 162:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       if (in != (out >> kShift))
+ 163:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****           out = 0x7FFFFFFF ^ (in >> 31);
+  64              		.loc 1 163 15 is_stmt 0 view .LVU13
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 5
+
+
+  65 0010 6FF0004E 		mvn	lr, #-2147483648
+  66              	.LVL4:
+  67              	.L6:
+ 159:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+  68              		.loc 1 159 7 is_stmt 1 view .LVU14
+ 160:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;
+  69              		.loc 1 160 7 view .LVU15
+  70              		.loc 1 163 11 view .LVU16
+ 160:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;
+  71              		.loc 1 160 24 is_stmt 0 view .LVU17
+  72 0014 50F8042B 		ldr	r2, [r0], #4
+  73              	.LVL5:
+ 160:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in << kShift;
+  74              		.loc 1 160 24 view .LVU18
+  75 0018 81FB0223 		smull	r2, r3, r1, r2
+  76              	.LVL6:
+ 161:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       if (in != (out >> kShift))
+  77              		.loc 1 161 7 is_stmt 1 view .LVU19
+ 161:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       if (in != (out >> kShift))
+  78              		.loc 1 161 11 is_stmt 0 view .LVU20
+  79 001c 03FA05F7 		lsl	r7, r3, r5
+  80              	.LVL7:
+ 162:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****           out = 0x7FFFFFFF ^ (in >> 31);
+  81              		.loc 1 162 7 is_stmt 1 view .LVU21
+ 162:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****           out = 0x7FFFFFFF ^ (in >> 31);
+  82              		.loc 1 162 22 is_stmt 0 view .LVU22
+  83 0020 47FA05FC 		asr	ip, r7, r5
+ 162:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****           out = 0x7FFFFFFF ^ (in >> 31);
+  84              		.loc 1 162 10 view .LVU23
+  85 0024 9C45     		cmp	ip, r3
+  86              		.loc 1 163 15 view .LVU24
+  87 0026 18BF     		it	ne
+  88 0028 8EEAE377 		eorne	r7, lr, r3, asr #31
+  89              	.LVL8:
+ 164:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+  90              		.loc 1 164 7 is_stmt 1 view .LVU25
+ 154:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+  91              		.loc 1 154 11 is_stmt 0 view .LVU26
+  92 002c 013C     		subs	r4, r4, #1
+  93              	.LVL9:
+  94              		.loc 1 164 15 view .LVU27
+  95 002e 46F8047B 		str	r7, [r6], #4
+  96              	.LVL10:
+ 165:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 166:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Decrement loop counter */
+ 167:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       blkCnt--;
+  97              		.loc 1 167 7 is_stmt 1 view .LVU28
+ 154:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+  98              		.loc 1 154 11 view .LVU29
+  99 0032 EFD1     		bne	.L6
+ 100              	.LVL11:
+ 101              	.L1:
+ 168:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     }
+ 169:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   }
+ 170:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   else
+ 171:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   {
+ 172:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     while (blkCnt > 0U)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 6
+
+
+ 173:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+ 174:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* C = A * scale */
+ 175:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 176:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Scale input and store result in destination buffer. */
+ 177:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = *pSrc++;
+ 178:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+ 179:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;
+ 180:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+ 181:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 182:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       /* Decrement loop counter */
+ 183:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       blkCnt--;
+ 184:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     }
+ 185:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****   }
+ 186:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 187:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** }
+ 102              		.loc 1 187 1 is_stmt 0 view .LVU30
+ 103 0034 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 104              	.LVL12:
+ 105              	.L15:
+ 172:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+ 106              		.loc 1 172 11 is_stmt 1 view .LVU31
+ 107 0036 002C     		cmp	r4, #0
+ 108 0038 FCD0     		beq	.L1
+ 109 003a 6D42     		rsbs	r5, r5, #0
+ 110              	.LVL13:
+ 111              	.L7:
+ 177:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       in = ((q63_t) in * scaleFract) >> 32;
+ 112              		.loc 1 177 7 view .LVU32
+ 178:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;
+ 113              		.loc 1 178 7 view .LVU33
+ 178:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;
+ 114              		.loc 1 178 24 is_stmt 0 view .LVU34
+ 115 003c 50F8042B 		ldr	r2, [r0], #4
+ 116              	.LVL14:
+ 172:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+ 117              		.loc 1 172 11 view .LVU35
+ 118 0040 013C     		subs	r4, r4, #1
+ 119              	.LVL15:
+ 178:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       out = in >> -kShift;
+ 120              		.loc 1 178 24 view .LVU36
+ 121 0042 81FB0223 		smull	r2, r3, r1, r2
+ 122              	.LVL16:
+ 179:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+ 123              		.loc 1 179 7 is_stmt 1 view .LVU37
+ 180:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 124              		.loc 1 180 7 view .LVU38
+ 179:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****       *pDst++ = out;
+ 125              		.loc 1 179 11 is_stmt 0 view .LVU39
+ 126 0046 43FA05F3 		asr	r3, r3, r5
+ 127              	.LVL17:
+ 180:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c **** 
+ 128              		.loc 1 180 15 view .LVU40
+ 129 004a 46F8043B 		str	r3, [r6], #4
+ 130              	.LVL18:
+ 183:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     }
+ 131              		.loc 1 183 7 is_stmt 1 view .LVU41
+ 172:.//Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q31.c ****     {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 7
+
+
+ 132              		.loc 1 172 11 view .LVU42
+ 133 004e F5D1     		bne	.L7
+ 134              		.loc 1 187 1 is_stmt 0 view .LVU43
+ 135 0050 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 136              		.loc 1 187 1 view .LVU44
+ 137              		.cfi_endproc
+ 138              	.LFE145:
+ 140 0052 00BF     		.text
+ 141              	.Letext0:
+ 142              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 143              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 144              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 145              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 146              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 147              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 148              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 149              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_scale_q31.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s:17     .text.arm_scale_q31:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccFSy2i6.s:26     .text.arm_scale_q31:0000000000000000 arm_scale_q31
+
+NO UNDEFINED SYMBOLS

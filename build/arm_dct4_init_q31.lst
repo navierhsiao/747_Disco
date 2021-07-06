@@ -1,0 +1,367 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_dct4_init_q31.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_dct4_init_q31,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_dct4_init_q31
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_dct4_init_q31:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c"
+   1:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * Title:        arm_dct4_init_q31.c
+   4:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * Description:  Initialization function of DCT-4 & IDCT4 Q31
+   5:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** #include "arm_common_tables.h"
+  31:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  32:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** /**
+  33:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @ingroup DCT4_IDCT4
+  34:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  */
+  35:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  36:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  37:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** /**
+  38:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @addtogroup DCT4_IDCT4
+  39:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @{
+  40:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  */
+  41:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  42:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** /**
+  43:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @brief  Initialization function for the Q31 DCT4/IDCT4.
+  44:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @param[in,out] S          points to an instance of Q31 DCT4/IDCT4 structure.
+  45:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @param[in]     S_RFFT     points to an instance of Q31 RFFT/RIFFT structure
+  46:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @param[in]     S_CFFT     points to an instance of Q31 CFFT/CIFFT structure
+  47:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @param[in]     N          length of the DCT4.
+  48:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @param[in]     Nby2       half of the length of the DCT4.
+  49:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @param[in]     normalize  normalizing factor.
+  50:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @return        execution status
+  51:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****                    - \ref ARM_MATH_SUCCESS        : Operation successful
+  52:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****                    - \ref ARM_MATH_ARGUMENT_ERROR : <code>N</code> is not a supported transform len
+  53:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  54:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   @par           Normalizing factor:
+  55:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****                    The normalizing factor is <code>sqrt(2/N)</code>, which depends on the size of t
+  56:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****                    Normalizing factors in 1.31 format are mentioned in the table below for differen
+  57:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  58:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****                    \image html dct4NormalizingQ31Table.gif
+  59:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****  */
+  60:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  61:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** arm_status arm_dct4_init_q31(
+  62:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   arm_dct4_instance_q31 * S,
+  63:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   arm_rfft_instance_q31 * S_RFFT,
+  64:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   arm_cfft_radix4_instance_q31 * S_CFFT,
+  65:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   uint16_t N,
+  66:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   uint16_t Nby2,
+  67:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   q31_t normalize)
+  68:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** {
+  30              		.loc 1 68 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 8, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  69:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the default arm status */
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   arm_status status = ARM_MATH_SUCCESS;
+  34              		.loc 1 70 3 view .LVU1
+  71:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  72:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the DCT4 length */
+  73:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   S->N = N;
+  35              		.loc 1 73 3 view .LVU2
+  68:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the default arm status */
+  36              		.loc 1 68 1 is_stmt 0 view .LVU3
+  37 0000 70B5     		push	{r4, r5, r6, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 16
+  40              		.cfi_offset 4, -16
+  41              		.cfi_offset 5, -12
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s 			page 3
+
+
+  42              		.cfi_offset 6, -8
+  43              		.cfi_offset 14, -4
+  68:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the default arm status */
+  44              		.loc 1 68 1 view .LVU4
+  45 0002 059D     		ldr	r5, [sp, #20]
+  46 0004 0446     		mov	r4, r0
+  47 0006 BDF81060 		ldrh	r6, [sp, #16]
+  74:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  75:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the half of DCT4 length */
+  76:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   S->Nby2 = Nby2;
+  77:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  78:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the DCT4 Normalizing factor */
+  79:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   S->normalize = normalize;
+  80:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  81:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize Real FFT Instance */
+  82:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   S->pRfft = S_RFFT;
+  83:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  84:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize Complex FFT Instance */
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   S->pCfft = S_CFFT;
+  86:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   switch (N)
+  48              		.loc 1 87 3 view .LVU5
+  49 000a B3F5006F 		cmp	r3, #2048
+  68:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the default arm status */
+  50              		.loc 1 68 1 view .LVU6
+  51 000e 0846     		mov	r0, r1
+  52              	.LVL1:
+  82:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  53              		.loc 1 82 12 view .LVU7
+  54 0010 2161     		str	r1, [r4, #16]
+  73:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  55              		.loc 1 73 8 view .LVU8
+  56 0012 2380     		strh	r3, [r4]	@ movhi
+  76:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  57              		.loc 1 76 3 is_stmt 1 view .LVU9
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  58              		.loc 1 85 12 is_stmt 0 view .LVU10
+  59 0014 6261     		str	r2, [r4, #20]
+  76:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  60              		.loc 1 76 11 view .LVU11
+  61 0016 6680     		strh	r6, [r4, #2]	@ movhi
+  79:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  62              		.loc 1 79 3 is_stmt 1 view .LVU12
+  79:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  63              		.loc 1 79 16 is_stmt 0 view .LVU13
+  64 0018 6560     		str	r5, [r4, #4]
+  82:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  65              		.loc 1 82 3 is_stmt 1 view .LVU14
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  66              		.loc 1 85 3 view .LVU15
+  67              		.loc 1 87 3 view .LVU16
+  68 001a 23D0     		beq	.L2
+  69 001c 10D8     		bhi	.L3
+  70 001e 802B     		cmp	r3, #128
+  71 0020 1AD0     		beq	.L4
+  72 0022 B3F5007F 		cmp	r3, #512
+  73 0026 14D1     		bne	.L7
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s 			page 4
+
+
+  88:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   {
+  89:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #if !defined(ARM_DSP_CONFIG_TABLES) || defined(ARM_ALL_FFT_TABLES) || defined(ARM_TABLE_DCT4_Q31_
+  90:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     /* Initialize the table modifier values */
+  91:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   case 8192U:
+  92:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pTwiddle = WeightsQ31_8192;
+  93:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_8192;
+  94:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+  95:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #endif
+  96:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  97:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #if !defined(ARM_DSP_CONFIG_TABLES) || defined(ARM_ALL_FFT_TABLES) || defined(ARM_TABLE_DCT4_Q31_
+  98:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   case 2048U:
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pTwiddle = WeightsQ31_2048;
+ 100:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_2048;
+ 101:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 102:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #endif 
+ 103:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+ 104:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #if !defined(ARM_DSP_CONFIG_TABLES) || defined(ARM_ALL_FFT_TABLES) || defined(ARM_TABLE_DCT4_Q31_
+ 105:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   case 512U:
+ 106:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pTwiddle = WeightsQ31_512;
+  74              		.loc 1 106 5 view .LVU17
+  75              		.loc 1 106 17 is_stmt 0 view .LVU18
+  76 0028 1149     		ldr	r1, .L10
+  77              	.LVL2:
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+  78              		.loc 1 70 14 view .LVU19
+  79 002a 0025     		movs	r5, #0
+ 107:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_512;
+  80              		.loc 1 107 19 view .LVU20
+  81 002c 114A     		ldr	r2, .L10+4
+  82              	.LVL3:
+  83              		.loc 1 107 19 view .LVU21
+  84 002e C4E90212 		strd	r1, r2, [r4, #8]
+ 108:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+  85              		.loc 1 108 5 is_stmt 1 view .LVU22
+  86              	.L6:
+  87              	.LVL4:
+ 109:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #endif 
+ 110:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+ 111:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #if !defined(ARM_DSP_CONFIG_TABLES) || defined(ARM_ALL_FFT_TABLES) || defined(ARM_TABLE_DCT4_Q31_
+ 112:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   case 128U:
+ 113:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pTwiddle = WeightsQ31_128;
+ 114:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_128;
+ 115:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 116:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #endif
+ 117:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   default:
+ 118:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     status = ARM_MATH_ARGUMENT_ERROR;
+ 119:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   }
+ 120:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+ 121:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* Initialize the RFFT/RIFFT Function */
+ 122:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   arm_rfft_init_q31(S->pRfft,  S->N, 0U, 1U);
+  88              		.loc 1 122 3 view .LVU23
+  89 0032 1946     		mov	r1, r3
+  90 0034 0022     		movs	r2, #0
+  91 0036 0123     		movs	r3, #1
+  92              	.LVL5:
+  93              		.loc 1 122 3 is_stmt 0 view .LVU24
+  94 0038 FFF7FEFF 		bl	arm_rfft_init_q31
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s 			page 5
+
+
+  95              	.LVL6:
+ 123:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+ 124:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   /* return the status of DCT4 Init function */
+ 125:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   return (status);
+  96              		.loc 1 125 3 is_stmt 1 view .LVU25
+ 126:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** }
+  97              		.loc 1 126 1 is_stmt 0 view .LVU26
+  98 003c 2846     		mov	r0, r5
+  99 003e 70BD     		pop	{r4, r5, r6, pc}
+ 100              	.LVL7:
+ 101              	.L3:
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   {
+ 102              		.loc 1 87 3 view .LVU27
+ 103 0040 B3F5005F 		cmp	r3, #8192
+ 104 0044 05D1     		bne	.L7
+  92:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_8192;
+ 105              		.loc 1 92 5 is_stmt 1 view .LVU28
+  92:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_8192;
+ 106              		.loc 1 92 17 is_stmt 0 view .LVU29
+ 107 0046 0C49     		ldr	r1, .L10+8
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+ 108              		.loc 1 70 14 view .LVU30
+ 109 0048 0025     		movs	r5, #0
+  93:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 110              		.loc 1 93 19 view .LVU31
+ 111 004a 0C4A     		ldr	r2, .L10+12
+ 112              	.LVL8:
+  93:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 113              		.loc 1 93 19 view .LVU32
+ 114 004c C4E90212 		strd	r1, r2, [r4, #8]
+  94:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #endif
+ 115              		.loc 1 94 5 is_stmt 1 view .LVU33
+ 116 0050 EFE7     		b	.L6
+ 117              	.LVL9:
+ 118              	.L7:
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   {
+ 119              		.loc 1 87 3 is_stmt 0 view .LVU34
+ 120 0052 4FF0FF35 		mov	r5, #-1
+ 121 0056 ECE7     		b	.L6
+ 122              	.L4:
+ 113:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_128;
+ 123              		.loc 1 113 5 is_stmt 1 view .LVU35
+ 113:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_128;
+ 124              		.loc 1 113 17 is_stmt 0 view .LVU36
+ 125 0058 0949     		ldr	r1, .L10+16
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+ 126              		.loc 1 70 14 view .LVU37
+ 127 005a 0025     		movs	r5, #0
+ 114:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 128              		.loc 1 114 19 view .LVU38
+ 129 005c 094A     		ldr	r2, .L10+20
+ 130              	.LVL10:
+ 114:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 131              		.loc 1 114 19 view .LVU39
+ 132 005e C4E90212 		strd	r1, r2, [r4, #8]
+ 115:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #endif
+ 133              		.loc 1 115 5 is_stmt 1 view .LVU40
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s 			page 6
+
+
+ 134 0062 E6E7     		b	.L6
+ 135              	.LVL11:
+ 136              	.L2:
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_2048;
+ 137              		.loc 1 99 5 view .LVU41
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     S->pCosFactor = cos_factorsQ31_2048;
+ 138              		.loc 1 99 17 is_stmt 0 view .LVU42
+ 139 0064 0849     		ldr	r1, .L10+24
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c **** 
+ 140              		.loc 1 70 14 view .LVU43
+ 141 0066 0025     		movs	r5, #0
+ 100:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 142              		.loc 1 100 19 view .LVU44
+ 143 0068 084A     		ldr	r2, .L10+28
+ 144              	.LVL12:
+ 100:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****     break;
+ 145              		.loc 1 100 19 view .LVU45
+ 146 006a C4E90212 		strd	r1, r2, [r4, #8]
+ 101:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_dct4_init_q31.c ****   #endif 
+ 147              		.loc 1 101 5 is_stmt 1 view .LVU46
+ 148 006e E0E7     		b	.L6
+ 149              	.L11:
+ 150              		.align	2
+ 151              	.L10:
+ 152 0070 00000000 		.word	WeightsQ31_512
+ 153 0074 00000000 		.word	cos_factorsQ31_512
+ 154 0078 00000000 		.word	WeightsQ31_8192
+ 155 007c 00000000 		.word	cos_factorsQ31_8192
+ 156 0080 00000000 		.word	WeightsQ31_128
+ 157 0084 00000000 		.word	cos_factorsQ31_128
+ 158 0088 00000000 		.word	WeightsQ31_2048
+ 159 008c 00000000 		.word	cos_factorsQ31_2048
+ 160              		.cfi_endproc
+ 161              	.LFE145:
+ 163              		.text
+ 164              	.Letext0:
+ 165              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 166              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 167              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 168              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 169              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 170              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 171              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 172              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ 173              		.file 10 ".//Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_dct4_init_q31.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s:17     .text.arm_dct4_init_q31:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s:26     .text.arm_dct4_init_q31:0000000000000000 arm_dct4_init_q31
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZtx6lq.s:152    .text.arm_dct4_init_q31:0000000000000070 $d
+
+UNDEFINED SYMBOLS
+arm_rfft_init_q31
+WeightsQ31_512
+cos_factorsQ31_512
+WeightsQ31_8192
+cos_factorsQ31_8192
+WeightsQ31_128
+cos_factorsQ31_128
+WeightsQ31_2048
+cos_factorsQ31_2048

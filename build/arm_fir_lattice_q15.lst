@@ -1,0 +1,844 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_fir_lattice_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_fir_lattice_q15,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_fir_lattice_q15
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_fir_lattice_q15:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c"
+   1:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * Title:        arm_fir_lattice_q15.c
+   4:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * Description:  Q15 FIR lattice filter processing function
+   5:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @ingroup groupFilters
+  33:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @addtogroup FIR_Lattice
+  37:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @brief         Processing function for Q15 FIR lattice filter.
+  42:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @param[in]     S          points to an instance of the Q15 FIR lattice structure
+  43:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @param[in]     pSrc       points to the block of input data
+  44:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @param[out]    pDst       points to the block of output data
+  45:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @param[in]     blockSize  number of samples to process
+  46:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   @return        none
+  47:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****  */
+  48:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  49:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** void arm_fir_lattice_q15(
+  50:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   const arm_fir_lattice_instance_q15 * S,
+  51:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   const q15_t * pSrc,
+  52:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         q15_t * pDst,
+  53:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         uint32_t blockSize)
+  54:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** {
+  30              		.loc 1 54 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  55:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         q15_t *pState = S->pState;                     /* State pointer */
+  34              		.loc 1 55 9 view .LVU1
+  54:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         q15_t *pState = S->pState;                     /* State pointer */
+  35              		.loc 1 54 1 is_stmt 0 view .LVU2
+  36 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 36
+  39              		.cfi_offset 4, -36
+  40              		.cfi_offset 5, -32
+  41              		.cfi_offset 6, -28
+  42              		.cfi_offset 7, -24
+  43              		.cfi_offset 8, -20
+  44              		.cfi_offset 9, -16
+  45              		.cfi_offset 10, -12
+  46              		.cfi_offset 11, -8
+  47              		.cfi_offset 14, -4
+  56:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+  48              		.loc 1 56 16 view .LVU3
+  49 0004 D0E9018A 		ldrd	r8, r10, [r0, #4]
+  50              	.LVL1:
+  57:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         q15_t *px;                                     /* Temporary state pointer */
+  51              		.loc 1 57 9 is_stmt 1 view .LVU4
+  58:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   const q15_t *pk;                                     /* Temporary coefficient pointer */
+  52              		.loc 1 58 3 view .LVU5
+  59:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         uint32_t numStages = S->numStages;             /* Number of stages in the filter */
+  53              		.loc 1 59 9 view .LVU6
+  54:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         q15_t *pState = S->pState;                     /* State pointer */
+  54              		.loc 1 54 1 is_stmt 0 view .LVU7
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 3
+
+
+  55 0008 83B0     		sub	sp, sp, #12
+  56              	.LCFI1:
+  57              		.cfi_def_cfa_offset 48
+  58              		.loc 1 59 18 view .LVU8
+  59 000a B0F80090 		ldrh	r9, [r0]
+  60              	.LVL2:
+  60:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         uint32_t blkCnt, stageCnt;                     /* Loop counters */
+  61              		.loc 1 60 9 is_stmt 1 view .LVU9
+  61:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****         q31_t fcurr0, fnext0, gnext0, gcurr0;          /* Temporary variables */
+  62              		.loc 1 61 9 view .LVU10
+  62:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  63:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #if (1)
+  64:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** //#if !defined(ARM_MATH_CM0_FAMILY)
+  65:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  66:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  67:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   q31_t fcurr1, fnext1, gnext1;                  /* Temporary variables for second sample in loop u
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   q31_t fcurr2, fnext2, gnext2;                  /* Temporary variables for third sample in loop un
+  69:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   q31_t fcurr3, fnext3, gnext3;                  /* Temporary variables for fourth sample in loop u
+  70:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #endif
+  71:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  72:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   gcurr0 = 0;
+  63              		.loc 1 72 3 view .LVU11
+  73:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  74:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  75:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  76:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+  77:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   blkCnt = blockSize >> 2U;
+  78:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  79:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   while (blkCnt > 0U)
+  80:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   {
+  81:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Read two samples from input buffer */
+  82:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f0(n) = x(n) */
+  83:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr0 = *pSrc++;
+  84:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr1 = *pSrc++;
+  85:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  86:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Initialize state pointer */
+  87:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     px = pState;
+  88:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  89:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Initialize coeff pointer */
+  90:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     pk = pCoeffs;
+  91:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  92:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Read g0(n-1) from state buffer */
+  93:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gcurr0 = *px;
+  94:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  95:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Process first sample for first tap */
+  96:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f1(n) = f0(n) +  K1 * g0(n-1) */
+  97:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = (q31_t) ((gcurr0 * (*pk)) >> 15U) + fcurr0;
+  98:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = __SSAT(fnext0, 16);
+  99:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 100:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* g1(n) = f0(n) * K1  +  g0(n-1) */
+ 101:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = (q31_t) ((fcurr0 * (*pk)) >> 15U) + gcurr0;
+ 102:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 103:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 104:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Process second sample for first tap */
+ 105:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext1 = (q31_t) ((fcurr0 * (*pk)) >> 15U) + fcurr1;
+ 106:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext1 = __SSAT(fnext1, 16);
+ 107:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext1 = (q31_t) ((fcurr1 * (*pk)) >> 15U) + fcurr0;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 4
+
+
+ 108:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext1 = __SSAT(gnext1, 16);
+ 109:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 110:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Read next two samples from input buffer */
+ 111:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f0(n+2) = x(n+2) */
+ 112:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr2 = *pSrc++;
+ 113:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr3 = *pSrc++;
+ 114:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 115:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Process third sample for first tap */
+ 116:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext2 = (q31_t) ((fcurr1 * (*pk)) >> 15U) + fcurr2;
+ 117:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext2 = __SSAT(fnext2, 16);
+ 118:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext2 = (q31_t) ((fcurr2 * (*pk)) >> 15U) + fcurr1;
+ 119:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext2 = __SSAT(gnext2, 16);
+ 120:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 121:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Process fourth sample for first tap */
+ 122:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext3 = (q31_t) ((fcurr2 * (*pk  )) >> 15U) + fcurr3;
+ 123:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext3 = __SSAT(fnext3, 16);
+ 124:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext3 = (q31_t) ((fcurr3 * (*pk++)) >> 15U) + fcurr2;
+ 125:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext3 = __SSAT(gnext3, 16);
+ 126:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 127:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Copy only last input sample into the state buffer
+ 128:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****        which will be used for next samples processing */
+ 129:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     *px++ = (q15_t) fcurr3;
+ 130:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 131:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Update of f values for next coefficient set processing */
+ 132:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr0 = fnext0;
+ 133:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr1 = fnext1;
+ 134:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr2 = fnext2;
+ 135:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr3 = fnext3;
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 137:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Loop unrolling.  Process 4 taps at a time . */
+ 138:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     stageCnt = (numStages - 1U) >> 2U;
+ 139:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 140:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Loop over the number of taps.  Unroll by a factor of 4.
+ 141:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****        Repeat until we've computed numStages-3 coefficients. */
+ 142:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 143:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Process 2nd, 3rd, 4th and 5th taps ... here */
+ 144:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     while (stageCnt > 0U)
+ 145:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     {
+ 146:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Read g1(n-1), g3(n-1) .... from state */
+ 147:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gcurr0 = *px;
+ 148:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 149:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* save g1(n) in state buffer */
+ 150:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       *px++ = (q15_t) gnext3;
+ 151:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 152:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process first sample for 2nd, 6th .. tap */
+ 153:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Sample processing for K2, K6.... */
+ 154:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f1(n) = f0(n) +  K1 * g0(n-1) */
+ 155:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = (q31_t) ((gcurr0 * (*pk)) >> 15U) + fcurr0;
+ 156:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = __SSAT(fnext0, 16);
+ 157:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 158:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process second sample for 2nd, 6th .. tap */
+ 159:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* for sample 2 processing */
+ 160:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext1 = (q31_t) ((gnext0 * (*pk)) >> 15U) + fcurr1;
+ 161:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext1 = __SSAT(fnext1, 16);
+ 162:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 163:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process third sample for 2nd, 6th .. tap */
+ 164:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext2 = (q31_t) ((gnext1 * (*pk)) >> 15U) + fcurr2;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 5
+
+
+ 165:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext2 = __SSAT(fnext2, 16);
+ 166:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 167:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process fourth sample for 2nd, 6th .. tap */
+ 168:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext3 = (q31_t) ((gnext2 * (*pk)) >> 15U) + fcurr3;
+ 169:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext3 = __SSAT(fnext3, 16);
+ 170:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 171:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* g1(n) = f0(n) * K1  +  g0(n-1) */
+ 172:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Calculation of state values for next stage */
+ 173:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = (q31_t) ((fcurr3 * (*pk)) >> 15U) + gnext2;
+ 174:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = __SSAT(gnext3, 16);
+ 175:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 176:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = (q31_t) ((fcurr2 * (*pk)) >> 15U) + gnext1;
+ 177:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = __SSAT(gnext2, 16);
+ 178:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 179:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = (q31_t) ((fcurr1 * (*pk)) >> 15U) + gnext0;
+ 180:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = __SSAT(gnext1, 16);
+ 181:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 182:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = (q31_t) ((fcurr0 * (*pk++)) >> 15U) + gcurr0;
+ 183:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = __SSAT(gnext0, 16);
+ 184:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 185:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 186:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Read g2(n-1), g4(n-1) .... from state */
+ 187:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gcurr0 = *px;
+ 188:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 189:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* save g1(n) in state buffer */
+ 190:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       *px++ = (q15_t) gnext3;
+ 191:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 192:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Sample processing for K3, K7.... */
+ 193:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process first sample for 3rd, 7th .. tap */
+ 194:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f3(n) = f2(n) +  K3 * g2(n-1) */
+ 195:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr0 = (q31_t) ((gcurr0 * (*pk)) >> 15U) + fnext0;
+ 196:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr0 = __SSAT(fcurr0, 16);
+ 197:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 198:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process second sample for 3rd, 7th .. tap */
+ 199:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr1 = (q31_t) ((gnext0 * (*pk)) >> 15U) + fnext1;
+ 200:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr1 = __SSAT(fcurr1, 16);
+ 201:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 202:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process third sample for 3rd, 7th .. tap */
+ 203:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr2 = (q31_t) ((gnext1 * (*pk)) >> 15U) + fnext2;
+ 204:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr2 = __SSAT(fcurr2, 16);
+ 205:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 206:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process fourth sample for 3rd, 7th .. tap */
+ 207:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr3 = (q31_t) ((gnext2 * (*pk)) >> 15U) + fnext3;
+ 208:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr3 = __SSAT(fcurr3, 16);
+ 209:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 210:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Calculation of state values for next stage */
+ 211:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* g3(n) = f2(n) * K3  +  g2(n-1) */
+ 212:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = (q31_t) ((fnext3 * (*pk)) >> 15U) + gnext2;
+ 213:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = __SSAT(gnext3, 16);
+ 214:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 215:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = (q31_t) ((fnext2 * (*pk)) >> 15U) + gnext1;
+ 216:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = __SSAT(gnext2, 16);
+ 217:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 218:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = (q31_t) ((fnext1 * (*pk)) >> 15U) + gnext0;
+ 219:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = __SSAT(gnext1, 16);
+ 220:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 221:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = (q31_t) ((fnext0 * (*pk++)) >> 15U) + gcurr0;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 6
+
+
+ 222:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = __SSAT(gnext0, 16);
+ 223:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 224:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Read g1(n-1), g3(n-1) .... from state */
+ 225:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gcurr0 = *px;
+ 226:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 227:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* save g1(n) in state buffer */
+ 228:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       *px++ = (q15_t) gnext3;
+ 229:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 230:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Sample processing for K4, K8.... */
+ 231:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process first sample for 4th, 8th .. tap */
+ 232:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f4(n) = f3(n) +  K4 * g3(n-1) */
+ 233:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = (q31_t) ((gcurr0 * (*pk)) >> 15U) + fcurr0;
+ 234:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = __SSAT(fnext0, 16);
+ 235:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 236:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process second sample for 4th, 8th .. tap */
+ 237:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* for sample 2 processing */
+ 238:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext1 = (q31_t) ((gnext0 * (*pk)) >> 15U) + fcurr1;
+ 239:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext1 = __SSAT(fnext1, 16);
+ 240:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 241:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process third sample for 4th, 8th .. tap */
+ 242:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext2 = (q31_t) ((gnext1 * (*pk)) >> 15U) + fcurr2;
+ 243:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext2 = __SSAT(fnext2, 16);
+ 244:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 245:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process fourth sample for 4th, 8th .. tap */
+ 246:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext3 = (q31_t) ((gnext2 * (*pk)) >> 15U) + fcurr3;
+ 247:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext3 = __SSAT(fnext3, 16);
+ 248:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 249:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* g4(n) = f3(n) * K4  +  g3(n-1) */
+ 250:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Calculation of state values for next stage */
+ 251:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = (q31_t) ((fcurr3 * (*pk)) >> 15U) + gnext2;
+ 252:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = __SSAT(gnext3, 16);
+ 253:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 254:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = (q31_t) ((fcurr2 * (*pk)) >> 15U) + gnext1;
+ 255:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = __SSAT(gnext2, 16);
+ 256:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 257:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = (q31_t) ((fcurr1 * (*pk)) >> 15U) + gnext0;
+ 258:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = __SSAT(gnext1, 16);
+ 259:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 260:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = (q31_t) ((fcurr0 * (*pk++)) >> 15U) + gcurr0;
+ 261:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = __SSAT(gnext0, 16);
+ 262:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 263:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Read g2(n-1), g4(n-1) .... from state */
+ 264:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gcurr0 = *px;
+ 265:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 266:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* save g4(n) in state buffer */
+ 267:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       *px++ = (q15_t) gnext3;
+ 268:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 269:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Sample processing for K5, K9.... */
+ 270:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process first sample for 5th, 9th .. tap */
+ 271:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f5(n) = f4(n) +  K5 * g4(n-1) */
+ 272:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr0 = (q31_t) ((gcurr0 * (*pk)) >> 15U) + fnext0;
+ 273:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr0 = __SSAT(fcurr0, 16);
+ 274:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 275:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process second sample for 5th, 9th .. tap */
+ 276:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr1 = (q31_t) ((gnext0 * (*pk)) >> 15U) + fnext1;
+ 277:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr1 = __SSAT(fcurr1, 16);
+ 278:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 7
+
+
+ 279:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process third sample for 5th, 9th .. tap */
+ 280:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr2 = (q31_t) ((gnext1 * (*pk)) >> 15U) + fnext2;
+ 281:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr2 = __SSAT(fcurr2, 16);
+ 282:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 283:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process fourth sample for 5th, 9th .. tap */
+ 284:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr3 = (q31_t) ((gnext2 * (*pk)) >> 15U) + fnext3;
+ 285:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr3 = __SSAT(fcurr3, 16);
+ 286:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 287:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Calculation of state values for next stage */
+ 288:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* g5(n) = f4(n) * K5  +  g4(n-1) */
+ 289:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = (q31_t) ((fnext3 * (*pk)) >> 15U) + gnext2;
+ 290:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = __SSAT(gnext3, 16);
+ 291:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 292:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = (q31_t) ((fnext2 * (*pk)) >> 15U) + gnext1;
+ 293:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = __SSAT(gnext2, 16);
+ 294:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 295:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = (q31_t) ((fnext1 * (*pk)) >> 15U) + gnext0;
+ 296:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = __SSAT(gnext1, 16);
+ 297:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 298:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = (q31_t) ((fnext0 * (*pk++)) >> 15U) + gcurr0;
+ 299:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = __SSAT(gnext0, 16);
+ 300:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 301:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       stageCnt--;
+ 302:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     }
+ 303:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* If the (filter length -1) is not a multiple of 4, compute the remaining filter taps */
+ 305:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     stageCnt = (numStages - 1U) % 0x4U;
+ 306:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 307:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     while (stageCnt > 0U)
+ 308:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     {
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gcurr0 = *px;
+ 310:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 311:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* save g value in state buffer */
+ 312:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       *px++ = (q15_t) gnext3;
+ 313:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 314:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Process four samples for last three taps here */
+ 315:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = (q31_t) ((gcurr0 * (*pk)) >> 15U) + fcurr0;
+ 316:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = __SSAT(fnext0, 16);
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 318:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext1 = (q31_t) ((gnext0 * (*pk)) >> 15U) + fcurr1;
+ 319:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext1 = __SSAT(fnext1, 16);
+ 320:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 321:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext2 = (q31_t) ((gnext1 * (*pk)) >> 15U) + fcurr2;
+ 322:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext2 = __SSAT(fnext2, 16);
+ 323:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 324:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext3 = (q31_t) ((gnext2 * (*pk)) >> 15U) + fcurr3;
+ 325:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext3 = __SSAT(fnext3, 16);
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 327:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* g1(n) = f0(n) * K1  +  g0(n-1) */
+ 328:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = (q31_t) ((fcurr3 * (*pk)) >> 15U) + gnext2;
+ 329:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext3 = __SSAT(gnext3, 16);
+ 330:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 331:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = (q31_t) ((fcurr2 * (*pk)) >> 15U) + gnext1;
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext2 = __SSAT(gnext2, 16);
+ 333:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 334:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = (q31_t) ((fcurr1 * (*pk)) >> 15U) + gnext0;
+ 335:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext1 = __SSAT(gnext1, 16);
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 8
+
+
+ 336:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 337:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = (q31_t) ((fcurr0 * (*pk++)) >> 15U) + gcurr0;
+ 338:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = __SSAT(gnext0, 16);
+ 339:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 340:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Update of f values for next coefficient set processing */
+ 341:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr0 = fnext0;
+ 342:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr1 = fnext1;
+ 343:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr2 = fnext2;
+ 344:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr3 = fnext3;
+ 345:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 346:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       stageCnt--;
+ 347:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     }
+ 348:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 349:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* The results in the 4 accumulators, store in the destination buffer. */
+ 350:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* y(n) = fN(n) */
+ 351:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 352:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #ifndef  ARM_MATH_BIG_ENDIAN
+ 353:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     write_q15x2_ia (&pDst, __PKHBT(fcurr0, fcurr1, 16));
+ 354:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     write_q15x2_ia (&pDst, __PKHBT(fcurr2, fcurr3, 16));
+ 355:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #else
+ 356:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     write_q15x2_ia (&pDst, __PKHBT(fcurr1, fcurr0, 16));
+ 357:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     write_q15x2_ia (&pDst, __PKHBT(fcurr3, fcurr2, 16));
+ 358:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #endif /* #ifndef  ARM_MATH_BIG_ENDIAN */
+ 359:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 360:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     blkCnt--;
+ 361:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   }
+ 362:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 363:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   /* Loop unrolling: Compute remaining outputs */
+ 364:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   blkCnt = blockSize % 0x4U;
+ 365:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 366:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #else
+ 367:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 368:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   /* Initialize blkCnt with number of samples */
+ 369:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   blkCnt = blockSize;
+  64              		.loc 1 369 3 view .LVU12
+ 370:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 371:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 372:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 373:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   while (blkCnt > 0U)
+  65              		.loc 1 373 3 view .LVU13
+  66              		.loc 1 373 9 view .LVU14
+  67 000e D3B3     		cbz	r3, .L1
+  68 0010 08F10200 		add	r0, r8, #2
+  69              	.LVL3:
+  70              		.loc 1 373 9 is_stmt 0 view .LVU15
+  71 0014 09F1FF39 		add	r9, r9, #-1
+  72              	.LVL4:
+  73              		.loc 1 373 9 view .LVU16
+  74 0018 0AF1020B 		add	fp, r10, #2
+  75 001c 0190     		str	r0, [sp, #4]
+  76              	.LVL5:
+  77              	.L5:
+ 374:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   {
+ 375:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f0(n) = x(n) */
+ 376:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr0 = *pSrc++;
+  78              		.loc 1 376 5 is_stmt 1 view .LVU17
+  79              		.loc 1 376 14 is_stmt 0 view .LVU18
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 9
+
+
+  80 001e 31F902CB 		ldrsh	ip, [r1], #2
+  81              	.LVL6:
+ 377:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 378:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Initialize state pointer */
+ 379:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     px = pState;
+  82              		.loc 1 379 5 is_stmt 1 view .LVU19
+ 380:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 381:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Initialize coeff pointer */
+ 382:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     pk = pCoeffs;
+  83              		.loc 1 382 5 view .LVU20
+ 383:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 384:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* read g2(n) from state buffer */
+ 385:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gcurr0 = *px;
+  84              		.loc 1 385 5 view .LVU21
+ 386:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 387:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* for sample 1 processing */
+ 388:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f1(n) = f0(n) +  K1 * g0(n-1) */
+ 389:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = (((q31_t) gcurr0 * (*pk)) >> 15U) + fcurr0;
+  85              		.loc 1 389 34 is_stmt 0 view .LVU22
+  86 0022 BAF90000 		ldrsh	r0, [r10]
+ 385:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+  87              		.loc 1 385 14 view .LVU23
+  88 0026 B8F90050 		ldrsh	r5, [r8]
+  89              	.LVL7:
+  90              		.loc 1 389 5 is_stmt 1 view .LVU24
+ 390:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = __SSAT(fnext0, 16);
+  91              		.loc 1 390 5 view .LVU25
+  92              	.LBB2:
+  93              		.loc 1 390 14 view .LVU26
+  94              		.loc 1 390 14 view .LVU27
+  95              	.LBE2:
+ 391:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 392:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* g1(n) = f0(n) * K1  +  g0(n-1) */
+ 393:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = (((q31_t) fcurr0 * (*pk++)) >> 15U) + gcurr0;
+  96              		.loc 1 393 31 is_stmt 0 view .LVU28
+  97 002a 00FB0CF4 		mul	r4, r0, ip
+ 389:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = __SSAT(fnext0, 16);
+  98              		.loc 1 389 31 view .LVU29
+  99 002e 00FB05F0 		mul	r0, r0, r5
+ 100              	.LVL8:
+ 394:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 395:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 396:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* save g1(n) in state buffer */
+ 397:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     *px++ = (q15_t) fcurr0;
+ 101              		.loc 1 397 11 view .LVU30
+ 102 0032 A8F800C0 		strh	ip, [r8]	@ movhi
+ 103              	.LVL9:
+ 393:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 104              		.loc 1 393 12 view .LVU31
+ 105 0036 05EBE435 		add	r5, r5, r4, asr #15
+ 106              	.LVL10:
+ 389:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = __SSAT(fnext0, 16);
+ 107              		.loc 1 389 12 view .LVU32
+ 108 003a 0CEBE03C 		add	ip, ip, r0, asr #15
+ 109              	.LVL11:
+ 110              	.LBB3:
+ 394:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 10
+
+
+ 111              		.loc 1 394 14 view .LVU33
+ 112              		.syntax unified
+ 113              	@ 394 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c" 1
+ 114 003e 05F30F05 		ssat r5, #16, r5
+ 115              	@ 0 "" 2
+ 116              		.thumb
+ 117              		.syntax unified
+ 118              	.LBE3:
+ 119              	.LBB4:
+ 390:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 120              		.loc 1 390 14 view .LVU34
+ 121              		.syntax unified
+ 122              	@ 390 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c" 1
+ 123 0042 0CF30F0C 		ssat ip, #16, ip
+ 124              	@ 0 "" 2
+ 125              	.LVL12:
+ 390:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 126              		.loc 1 390 14 is_stmt 1 view .LVU35
+ 390:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 127              		.loc 1 390 14 is_stmt 0 view .LVU36
+ 128              		.thumb
+ 129              		.syntax unified
+ 130              	.LBE4:
+ 393:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 131              		.loc 1 393 5 is_stmt 1 view .LVU37
+ 394:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 132              		.loc 1 394 5 view .LVU38
+ 133              	.LBB5:
+ 394:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 134              		.loc 1 394 14 view .LVU39
+ 394:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 135              		.loc 1 394 14 view .LVU40
+ 394:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 136              		.loc 1 394 14 view .LVU41
+ 394:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 137              		.loc 1 394 14 is_stmt 0 view .LVU42
+ 138              	.LBE5:
+ 139              		.loc 1 397 5 is_stmt 1 view .LVU43
+ 398:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 399:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f1(n) is saved in fcurr0 for next stage processing */
+ 400:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr0 = fnext0;
+ 140              		.loc 1 400 5 view .LVU44
+ 401:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 402:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     stageCnt = (numStages - 1U);
+ 141              		.loc 1 402 5 view .LVU45
+ 403:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 404:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* stage loop */
+ 405:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     while (stageCnt > 0U)
+ 142              		.loc 1 405 5 view .LVU46
+ 143              		.loc 1 405 11 view .LVU47
+ 144 0046 B9F1000F 		cmp	r9, #0
+ 145 004a 16D0     		beq	.L3
+ 146              		.loc 1 405 11 is_stmt 0 view .LVU48
+ 147 004c 4F46     		mov	r7, r9
+ 393:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 148              		.loc 1 393 37 view .LVU49
+ 149 004e DE46     		mov	lr, fp
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 11
+
+
+ 397:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 150              		.loc 1 397 8 view .LVU50
+ 151 0050 019E     		ldr	r6, [sp, #4]
+ 152              	.LVL13:
+ 153              	.L4:
+ 406:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     {
+ 407:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* read g2(n) from state buffer */
+ 408:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gcurr0 = *px;
+ 154              		.loc 1 408 7 is_stmt 1 view .LVU51
+ 155              		.loc 1 408 16 is_stmt 0 view .LVU52
+ 156 0052 B6F90000 		ldrsh	r0, [r6]
+ 157              	.LVL14:
+ 409:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 410:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* save g1(n) in state buffer */
+ 411:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       *px++ = (q15_t) gnext0;
+ 158              		.loc 1 411 7 is_stmt 1 view .LVU53
+ 405:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     {
+ 159              		.loc 1 405 11 is_stmt 0 view .LVU54
+ 160 0056 013F     		subs	r7, r7, #1
+ 161              	.LVL15:
+ 162              		.loc 1 411 15 view .LVU55
+ 163 0058 26F8025B 		strh	r5, [r6], #2	@ movhi
+ 164              	.LVL16:
+ 412:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 413:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Sample processing for K2, K3.... */
+ 414:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f2(n) = f1(n) +  K2 * g1(n-1) */
+ 415:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = (((q31_t) gcurr0 * (*pk)) >> 15U) + fcurr0;
+ 165              		.loc 1 415 7 is_stmt 1 view .LVU56
+ 166              		.loc 1 415 36 is_stmt 0 view .LVU57
+ 167 005c 3EF9024B 		ldrsh	r4, [lr], #2
+ 168              	.LVL17:
+ 416:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = __SSAT(fnext0, 16);
+ 169              		.loc 1 416 7 is_stmt 1 view .LVU58
+ 170              	.LBB6:
+ 171              		.loc 1 416 16 view .LVU59
+ 172              		.loc 1 416 16 view .LVU60
+ 173              	.LBE6:
+ 415:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = __SSAT(fnext0, 16);
+ 174              		.loc 1 415 33 is_stmt 0 view .LVU61
+ 175 0060 04FB00F5 		mul	r5, r4, r0
+ 176              	.LVL18:
+ 417:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 418:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* g2(n) = f1(n) * K2  +  g1(n-1) */
+ 419:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = (((q31_t) fcurr0 * (*pk++)) >> 15U) + gcurr0;
+ 177              		.loc 1 419 33 view .LVU62
+ 178 0064 0CFB04F4 		mul	r4, ip, r4
+ 179              	.LVL19:
+ 415:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = __SSAT(fnext0, 16);
+ 180              		.loc 1 415 14 view .LVU63
+ 181 0068 0CEBE53C 		add	ip, ip, r5, asr #15
+ 182              	.LVL20:
+ 183              		.loc 1 419 14 view .LVU64
+ 184 006c 00EBE430 		add	r0, r0, r4, asr #15
+ 185              	.LVL21:
+ 186              	.LBB7:
+ 416:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 187              		.loc 1 416 16 view .LVU65
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 12
+
+
+ 188              		.syntax unified
+ 189              	@ 416 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c" 1
+ 190 0070 0CF30F0C 		ssat ip, #16, ip
+ 191              	@ 0 "" 2
+ 192              	.LVL22:
+ 416:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 193              		.loc 1 416 16 is_stmt 1 view .LVU66
+ 416:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 194              		.loc 1 416 16 is_stmt 0 view .LVU67
+ 195              		.thumb
+ 196              		.syntax unified
+ 197              	.LBE7:
+ 198              		.loc 1 419 7 is_stmt 1 view .LVU68
+ 420:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = __SSAT(gnext0, 16);
+ 199              		.loc 1 420 7 view .LVU69
+ 200              	.LBB8:
+ 201              		.loc 1 420 16 view .LVU70
+ 202              		.loc 1 420 16 view .LVU71
+ 203              		.syntax unified
+ 204              	@ 420 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c" 1
+ 205 0074 00F30F05 		ssat r5, #16, r0
+ 206              	@ 0 "" 2
+ 207              	.LVL23:
+ 208              		.loc 1 420 16 view .LVU72
+ 209              		.loc 1 420 16 is_stmt 0 view .LVU73
+ 210              		.thumb
+ 211              		.syntax unified
+ 212              	.LBE8:
+ 421:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 422:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f1(n) is saved in fcurr0 for next stage processing */
+ 423:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr0 = fnext0;
+ 213              		.loc 1 423 7 is_stmt 1 view .LVU74
+ 424:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 425:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       stageCnt--;
+ 214              		.loc 1 425 7 view .LVU75
+ 405:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     {
+ 215              		.loc 1 405 11 view .LVU76
+ 216 0078 EBD1     		bne	.L4
+ 217              	.LVL24:
+ 218              	.L3:
+ 426:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     }
+ 427:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 428:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* y(n) = fN(n) */
+ 429:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     *pDst++ = __SSAT(fcurr0, 16);
+ 219              		.loc 1 429 5 view .LVU77
+ 220              	.LBB9:
+ 221              		.loc 1 429 15 view .LVU78
+ 222              		.loc 1 429 15 view .LVU79
+ 223              	.LBE9:
+ 373:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   {
+ 224              		.loc 1 373 9 is_stmt 0 view .LVU80
+ 225 007a 013B     		subs	r3, r3, #1
+ 226              	.LVL25:
+ 227              	.LBB10:
+ 228              		.loc 1 429 15 view .LVU81
+ 229              		.syntax unified
+ 230              	@ 429 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c" 1
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 13
+
+
+ 231 007c 0CF30F0C 		ssat ip, #16, ip
+ 232              	@ 0 "" 2
+ 233              	.LVL26:
+ 234              		.loc 1 429 15 is_stmt 1 view .LVU82
+ 235              		.loc 1 429 15 is_stmt 0 view .LVU83
+ 236              		.thumb
+ 237              		.syntax unified
+ 238              	.LBE10:
+ 239              		.loc 1 429 13 view .LVU84
+ 240 0080 22F802CB 		strh	ip, [r2], #2	@ movhi
+ 241              	.LVL27:
+ 430:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 431:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     blkCnt--;
+ 242              		.loc 1 431 5 is_stmt 1 view .LVU85
+ 373:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   {
+ 243              		.loc 1 373 9 view .LVU86
+ 244 0084 CBD1     		bne	.L5
+ 245              	.LVL28:
+ 246              	.L1:
+ 432:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   }
+ 433:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 434:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #else
+ 435:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** /* alternate version for CM0_FAMILY */
+ 436:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 437:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   blkCnt = blockSize;
+ 438:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 439:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   while (blkCnt > 0U)
+ 440:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   {
+ 441:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f0(n) = x(n) */
+ 442:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr0 = *pSrc++;
+ 443:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 444:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Initialize state pointer */
+ 445:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     px = pState;
+ 446:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 447:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* Initialize coeff pointer */
+ 448:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     pk = pCoeffs;
+ 449:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 450:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* read g0(n-1) from state buffer */
+ 451:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gcurr0 = *px;
+ 452:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 453:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* for sample 1 processing */
+ 454:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f1(n) = f0(n) +  K1 * g0(n-1) */
+ 455:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = ((gcurr0 * (*pk)) >> 15U) + fcurr0;
+ 456:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fnext0 = __SSAT(fnext, 16);
+ 457:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 458:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* g1(n) = f0(n) * K1  +  g0(n-1) */
+ 459:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = ((fcurr0 * (*pk++)) >> 15U) + gcurr0;
+ 460:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     gnext0 = __SSAT(gnext0, 16);
+ 461:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 462:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* save f0(n) in state buffer */
+ 463:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     *px++ = (q15_t) fcurr0;
+ 464:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 465:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* f1(n) is saved in fcurr for next stage processing */
+ 466:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     fcurr0 = fnext0;
+ 467:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 468:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     stageCnt = (numStages - 1U);
+ 469:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 14
+
+
+ 470:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* stage loop */
+ 471:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     while (stageCnt > 0U)
+ 472:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     {
+ 473:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* read g1(n-1) from state buffer */
+ 474:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gcurr0 = *px;
+ 475:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 476:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* save g0(n-1) in state buffer */
+ 477:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       *px++ = (q15_t) gnext0;
+ 478:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 479:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* Sample processing for K2, K3.... */
+ 480:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f2(n) = f1(n) +  K2 * g1(n-1) */
+ 481:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = ((gcurr0 * (*pk)) >> 15U) + fcurr0;
+ 482:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fnext0 = __SSAT(fnext0, 16);
+ 483:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 484:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* g2(n) = f1(n) * K2  +  g1(n-1) */
+ 485:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = ((fcurr0 * (*pk++)) >> 15U) + gcurr0;
+ 486:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       gnext0 = __SSAT(gnext0, 16);
+ 487:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 488:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       /* f1(n) is saved in fcurr0 for next stage processing */
+ 489:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       fcurr0 = fnext0;
+ 490:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 491:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****       stageCnt--;
+ 492:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     }
+ 493:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 494:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     /* y(n) = fN(n) */
+ 495:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     *pDst++ = __SSAT(fcurr0, 16);
+ 496:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 497:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****     blkCnt--;
+ 498:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c ****   }
+ 499:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 500:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** #endif /* #if !defined(ARM_MATH_CM0_FAMILY) */
+ 501:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** 
+ 502:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_lattice_q15.c **** }
+ 247              		.loc 1 502 1 is_stmt 0 view .LVU87
+ 248 0086 03B0     		add	sp, sp, #12
+ 249              	.LCFI2:
+ 250              		.cfi_def_cfa_offset 36
+ 251              		@ sp needed
+ 252 0088 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 253              		.loc 1 502 1 view .LVU88
+ 254              		.cfi_endproc
+ 255              	.LFE145:
+ 257              		.text
+ 258              	.Letext0:
+ 259              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 260              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 261              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 262              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 263              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 264              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 265              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 266              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_fir_lattice_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s:17     .text.arm_fir_lattice_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cczXobWX.s:26     .text.arm_fir_lattice_q15:0000000000000000 arm_fir_lattice_q15
+
+NO UNDEFINED SYMBOLS

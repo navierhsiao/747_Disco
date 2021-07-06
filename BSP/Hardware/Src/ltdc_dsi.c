@@ -26,16 +26,6 @@ static DSI_LPCmdTypeDef LPCmd;
 static DSI_PLLInitTypeDef dsiPllInit;
 static RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
 
-#define VSYNC           1
-#define VBP             1
-#define VFP             1
-#define VACT            480
-#define HSYNC           1
-#define HBP             1
-#define HFP             1
-#define LAYER0_ADDRESS  (0xD0000000)
-#define HACT            400
-
 static void LCD_Reset(void);
 static void LCD_MspInit(void);
 
@@ -44,6 +34,7 @@ void DSI_Config_Channel(DSI_LPCmdTypeDef *cmd)
     LPCmd=*cmd;
     HAL_DSI_ConfigCommand(&hdsi, &LPCmd);
 }
+
 
 void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams)
 {
@@ -206,6 +197,16 @@ void LTDC_DSI_Init(void)
 
     /* Start DSI */
     HAL_DSI_Start(&hdsi);
+}
+
+void LTDC_Enable(void)
+{
+  __HAL_LTDC_ENABLE(&hltdc);
+}
+
+void LTDC_Set_Pitch(uint32_t linePitchInPixel,uint32_t layerIndex)
+{
+  HAL_LTDC_SetPitch(&hltdc, linePitchInPixel, layerIndex);
 }
 
 void LCD_LayerInit(uint16_t LayerIndex, uint32_t Address, int LCD_Xsize,int LCD_Ysize)

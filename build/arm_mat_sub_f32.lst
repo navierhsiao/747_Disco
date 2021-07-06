@@ -1,0 +1,375 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_mat_sub_f32.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_mat_sub_f32,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_mat_sub_f32
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_mat_sub_f32:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c"
+   1:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * Title:        arm_mat_sub_f32.c
+   4:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * Description:  Floating-point matrix subtraction
+   5:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @ingroup groupMatrix
+  33:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @defgroup MatrixSub Matrix Subtraction
+  37:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  38:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   Subtract two matrices.
+  39:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   \image html MatrixSubtraction.gif "Subraction of two 3 x 3 matrices"
+  40:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  41:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   The functions check to make sure that
+  42:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   <code>pSrcA</code>, <code>pSrcB</code>, and <code>pDst</code> have the same
+  43:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   number of rows and columns.
+  44:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  */
+  45:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  46:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** /**
+  47:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @addtogroup MatrixSub
+  48:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @{
+  49:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  */
+  50:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  51:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** /**
+  52:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @brief         Floating-point matrix subtraction.
+  53:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @param[in]     pSrcA      points to the first input matrix structure
+  54:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @param[in]     pSrcB      points to the second input matrix structure
+  55:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @param[out]    pDst       points to output matrix structure
+  56:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   @return        execution status
+  57:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****                    - \ref ARM_MATH_SUCCESS       : Operation successful
+  58:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****                    - \ref ARM_MATH_SIZE_MISMATCH : Matrix size check failed
+  59:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****  */
+  60:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  61:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #if defined(ARM_MATH_NEON)
+  62:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** arm_status arm_mat_sub_f32(
+  63:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   const arm_matrix_instance_f32 * pSrcA,
+  64:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   const arm_matrix_instance_f32 * pSrcB,
+  65:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   arm_matrix_instance_f32 * pDst)
+  66:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** {
+  67:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pIn1 = pSrcA->pData;                /* input data matrix pointer A */
+  68:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pIn2 = pSrcB->pData;                /* input data matrix pointer B */
+  69:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pOut = pDst->pData;                 /* output data matrix pointer  */
+  70:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  71:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  72:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t inA1, inA2, inB1, inB2, out1, out2;  /* temporary variables */
+  73:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  74:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  75:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   uint32_t numSamples;                           /* total number of elements in the matrix  */
+  76:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   uint32_t blkCnt;                               /* loop counters */
+  77:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   arm_status status;                             /* status of matrix subtraction */
+  78:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  79:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #ifdef ARM_MATH_MATRIX_CHECK
+  80:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   /* Check for matrix mismatch condition */
+  81:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   if ((pSrcA->numRows != pSrcB->numRows) ||
+  82:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****      (pSrcA->numCols != pSrcB->numCols) ||
+  83:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****      (pSrcA->numRows != pDst->numRows) || (pSrcA->numCols != pDst->numCols))
+  84:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   {
+  85:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Set status as ARM_MATH_SIZE_MISMATCH */
+  86:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     status = ARM_MATH_SIZE_MISMATCH;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 3
+
+
+  87:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   }
+  88:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   else
+  89:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #endif /*    #ifdef ARM_MATH_MATRIX_CHECK    */
+  90:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   {
+  91:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     float32x4_t vec1;
+  92:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     float32x4_t vec2;
+  93:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     float32x4_t res;
+  94:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  95:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Total number of samples in the input matrix */
+  96:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     numSamples = (uint32_t) pSrcA->numRows * pSrcA->numCols;
+  97:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  98:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     blkCnt = numSamples >> 2U;
+  99:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 100:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Compute 4 outputs at a time.
+ 101:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****      ** a second loop below computes the remaining 1 to 3 samples. */
+ 102:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     while (blkCnt > 0U)
+ 103:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     {
+ 104:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* C(m,n) = A(m,n) - B(m,n) */
+ 105:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Subtract and then store the results in the destination buffer. */
+ 106:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Read values from source A */
+ 107:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       vec1 = vld1q_f32(pIn1);
+ 108:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       vec2 = vld1q_f32(pIn2);
+ 109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       res = vsubq_f32(vec1, vec2);
+ 110:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       vst1q_f32(pOut, res);
+ 111:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 112:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Update pointers to process next samples */
+ 113:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       pIn1 += 4U;
+ 114:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       pIn2 += 4U;
+ 115:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       pOut += 4U;
+ 116:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 117:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Decrement the loop counter */
+ 118:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       blkCnt--;
+ 119:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     }
+ 120:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 121:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* If the numSamples is not a multiple of 4, compute any remaining output samples here.
+ 122:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****      ** No loop unrolling is used. */
+ 123:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     blkCnt = numSamples % 0x4U;
+ 124:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 125:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 126:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     while (blkCnt > 0U)
+ 127:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     {
+ 128:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* C(m,n) = A(m,n) - B(m,n) */
+ 129:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Subtract and then store the results in the destination buffer. */
+ 130:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       *pOut++ = (*pIn1++) - (*pIn2++);
+ 131:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 132:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Decrement the loop counter */
+ 133:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       blkCnt--;
+ 134:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     }
+ 135:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 136:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Set status as ARM_MATH_SUCCESS */
+ 137:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     status = ARM_MATH_SUCCESS;
+ 138:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   }
+ 139:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 140:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   /* Return to application */
+ 141:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   return (status);
+ 142:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** }
+ 143:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #else
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 4
+
+
+ 144:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** arm_status arm_mat_sub_f32(
+ 145:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   const arm_matrix_instance_f32 * pSrcA,
+ 146:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   const arm_matrix_instance_f32 * pSrcB,
+ 147:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****         arm_matrix_instance_f32 * pDst)
+ 148:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** {
+  30              		.loc 1 148 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+ 149:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pInA = pSrcA->pData;                /* input data matrix pointer A */
+  35              		.loc 1 149 3 view .LVU1
+ 148:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pInA = pSrcA->pData;                /* input data matrix pointer A */
+  36              		.loc 1 148 1 is_stmt 0 view .LVU2
+  37 0000 30B4     		push	{r4, r5}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 4, -8
+  41              		.cfi_offset 5, -4
+ 150:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pInB = pSrcB->pData;                /* input data matrix pointer B */
+ 151:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pOut = pDst->pData;                 /* output data matrix pointer */
+ 152:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   uint32_t numSamples;                           /* total number of elements in the matrix */
+ 154:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   uint32_t blkCnt;                               /* loop counters */
+ 155:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   arm_status status;                             /* status of matrix subtraction */
+ 156:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 157:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #ifdef ARM_MATH_MATRIX_CHECK
+ 158:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 159:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   /* Check for matrix mismatch condition */
+ 160:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   if ((pSrcA->numRows != pSrcB->numRows) ||
+ 161:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       (pSrcA->numCols != pSrcB->numCols) ||
+ 162:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       (pSrcA->numRows != pDst->numRows)  ||
+ 163:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       (pSrcA->numCols != pDst->numCols)    )
+ 164:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   {
+ 165:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Set status as ARM_MATH_SIZE_MISMATCH */
+ 166:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     status = ARM_MATH_SIZE_MISMATCH;
+ 167:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   }
+ 168:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   else
+ 169:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 170:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #endif /* #ifdef ARM_MATH_MATRIX_CHECK */
+ 171:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 172:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   {
+ 173:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Total number of samples in input matrix */
+ 174:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     numSamples = (uint32_t) pSrcA->numRows * pSrcA->numCols;
+  42              		.loc 1 174 51 view .LVU3
+  43 0002 4388     		ldrh	r3, [r0, #2]
+  44              		.loc 1 174 18 view .LVU4
+  45 0004 0588     		ldrh	r5, [r0]
+ 150:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pInB = pSrcB->pData;                /* input data matrix pointer B */
+  46              		.loc 1 150 14 view .LVU5
+  47 0006 4C68     		ldr	r4, [r1, #4]
+  48              		.loc 1 174 16 view .LVU6
+  49 0008 03FB05F3 		mul	r3, r3, r5
+ 151:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  50              		.loc 1 151 14 view .LVU7
+  51 000c 5168     		ldr	r1, [r2, #4]
+  52              	.LVL1:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 5
+
+
+ 149:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pInB = pSrcB->pData;                /* input data matrix pointer B */
+  53              		.loc 1 149 14 view .LVU8
+  54 000e 4268     		ldr	r2, [r0, #4]
+  55              	.LVL2:
+ 150:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   float32_t *pInB = pSrcB->pData;                /* input data matrix pointer B */
+  56              		.loc 1 150 3 is_stmt 1 view .LVU9
+ 151:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  57              		.loc 1 151 3 view .LVU10
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   uint32_t blkCnt;                               /* loop counters */
+  58              		.loc 1 153 3 view .LVU11
+ 154:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   arm_status status;                             /* status of matrix subtraction */
+  59              		.loc 1 154 3 view .LVU12
+ 155:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+  60              		.loc 1 155 3 view .LVU13
+  61              		.loc 1 174 5 view .LVU14
+ 175:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 176:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ 177:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 178:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Loop unrolling: Compute 4 outputs at a time */
+ 179:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     blkCnt = numSamples >> 2U;
+ 180:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 181:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     while (blkCnt > 0U)
+ 182:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     {
+ 183:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* C(m,n) = A(m,n) - B(m,n) */
+ 184:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 185:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Subtract and store result in destination buffer. */
+ 186:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       *pOut++ = (*pInA++) - (*pInB++);
+ 187:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       *pOut++ = (*pInA++) - (*pInB++);
+ 188:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       *pOut++ = (*pInA++) - (*pInB++);
+ 189:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       *pOut++ = (*pInA++) - (*pInB++);
+ 190:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 191:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Decrement loop counter */
+ 192:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       blkCnt--;
+ 193:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     }
+ 194:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 195:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Loop unrolling: Compute remaining outputs */
+ 196:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     blkCnt = numSamples % 0x4U;
+ 197:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 198:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #else
+ 199:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 200:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Initialize blkCnt with number of samples */
+ 201:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     blkCnt = numSamples;
+  62              		.loc 1 201 5 view .LVU15
+ 202:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 203:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 204:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 205:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     while (blkCnt > 0U)
+  63              		.loc 1 205 5 view .LVU16
+  64              		.loc 1 205 11 view .LVU17
+  65 0010 4BB1     		cbz	r3, .L2
+  66              	.LVL3:
+  67              	.L3:
+ 206:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     {
+ 207:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* C(m,n) = A(m,n) - B(m,n) */
+ 208:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 209:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Subtract and store result in destination buffer. */
+ 210:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       *pOut++ = (*pInA++) - (*pInB++);
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 6
+
+
+  68              		.loc 1 210 7 view .LVU18
+  69              		.loc 1 210 27 is_stmt 0 view .LVU19
+  70 0012 F2EC017A 		vldmia.32	r2!, {s15}
+  71              	.LVL4:
+ 205:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     {
+  72              		.loc 1 205 11 view .LVU20
+  73 0016 013B     		subs	r3, r3, #1
+  74              	.LVL5:
+  75              		.loc 1 210 27 view .LVU21
+  76 0018 B4EC017A 		vldmia.32	r4!, {s14}
+  77              	.LVL6:
+  78              		.loc 1 210 27 view .LVU22
+  79 001c 77EEC77A 		vsub.f32	s15, s15, s14
+  80              		.loc 1 210 15 view .LVU23
+  81 0020 E1EC017A 		vstmia.32	r1!, {s15}
+  82              	.LVL7:
+ 211:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 212:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       /* Decrement loop counter */
+ 213:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****       blkCnt--;
+  83              		.loc 1 213 7 is_stmt 1 view .LVU24
+ 205:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     {
+  84              		.loc 1 205 11 view .LVU25
+  85 0024 F5D1     		bne	.L3
+  86              	.L2:
+ 214:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     }
+ 215:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 216:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     /* Set status as ARM_MATH_SUCCESS */
+ 217:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****     status = ARM_MATH_SUCCESS;
+  87              		.loc 1 217 5 view .LVU26
+  88              	.LVL8:
+ 218:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   }
+ 219:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** 
+ 220:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   /* Return to application */
+ 221:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c ****   return (status);
+  89              		.loc 1 221 3 view .LVU27
+ 222:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_sub_f32.c **** }
+  90              		.loc 1 222 1 is_stmt 0 view .LVU28
+  91 0026 0020     		movs	r0, #0
+  92              	.LVL9:
+  93              		.loc 1 222 1 view .LVU29
+  94 0028 30BC     		pop	{r4, r5}
+  95              	.LCFI1:
+  96              		.cfi_restore 5
+  97              		.cfi_restore 4
+  98              		.cfi_def_cfa_offset 0
+  99              	.LVL10:
+ 100              		.loc 1 222 1 view .LVU30
+ 101 002a 7047     		bx	lr
+ 102              		.cfi_endproc
+ 103              	.LFE145:
+ 105              		.text
+ 106              	.Letext0:
+ 107              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 108              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 109              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 110              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 111              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 7
+
+
+ 112              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 113              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 114              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_mat_sub_f32.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s:17     .text.arm_mat_sub_f32:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccZceOAO.s:26     .text.arm_mat_sub_f32:0000000000000000 arm_mat_sub_f32
+
+NO UNDEFINED SYMBOLS

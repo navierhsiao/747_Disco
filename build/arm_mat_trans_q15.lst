@@ -1,0 +1,342 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_mat_trans_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_mat_trans_q15,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_mat_trans_q15
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_mat_trans_q15:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c"
+   1:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * Title:        arm_mat_trans_q15.c
+   4:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * Description:  Q15 matrix transpose
+   5:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   @ingroup groupMatrix
+  33:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   @addtogroup MatrixTrans
+  37:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   @brief         Q15 matrix transpose.
+  42:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   @param[in]     pSrc      points to input matrix
+  43:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   @param[out]    pDst      points to output matrix
+  44:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   @return        execution status
+  45:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****                    - \ref ARM_MATH_SUCCESS       : Operation successful
+  46:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****                    - \ref ARM_MATH_SIZE_MISMATCH : Matrix size check failed
+  47:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****  */
+  48:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  49:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** arm_status arm_mat_trans_q15(
+  50:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   const arm_matrix_instance_q15 * pSrc,
+  51:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         arm_matrix_instance_q15 * pDst)
+  52:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** {
+  30              		.loc 1 52 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  53:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         q15_t *pIn = pSrc->pData;                      /* input data matrix pointer */
+  34              		.loc 1 53 9 view .LVU1
+  52:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         q15_t *pIn = pSrc->pData;                      /* input data matrix pointer */
+  35              		.loc 1 52 1 is_stmt 0 view .LVU2
+  36 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 20
+  39              		.cfi_offset 4, -20
+  40              		.cfi_offset 5, -16
+  41              		.cfi_offset 6, -12
+  42              		.cfi_offset 7, -8
+  43              		.cfi_offset 14, -4
+  54:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         q15_t *pOut = pDst->pData;                     /* output data matrix pointer */
+  55:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         uint16_t nRows = pSrc->numRows;                /* number of rows */
+  56:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         uint16_t nCols = pSrc->numCols;                /* number of columns */
+  57:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         uint32_t col, row = nRows, i = 0U;             /* Loop counters */
+  44              		.loc 1 57 23 view .LVU3
+  45 0002 B0F800C0 		ldrh	ip, [r0]
+  46 0006 4D68     		ldr	r5, [r1, #4]
+  47 0008 4788     		ldrh	r7, [r0, #2]
+  58:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         arm_status status;                             /* status of matrix transpose */
+  59:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  60:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  61:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         q31_t in;                                      /* variable to hold temporary output  */
+  62:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #endif
+  63:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  64:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #ifdef ARM_MATH_MATRIX_CHECK
+  65:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  66:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   /* Check for matrix mismatch condition */
+  67:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   if ((pSrc->numRows != pDst->numCols) ||
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s 			page 3
+
+
+  68:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       (pSrc->numCols != pDst->numRows)   )
+  69:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   {
+  70:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     /* Set status as ARM_MATH_SIZE_MISMATCH */
+  71:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     status = ARM_MATH_SIZE_MISMATCH;
+  72:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   }
+  73:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   else
+  74:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  75:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #endif /* #ifdef ARM_MATH_MATRIX_CHECK */
+  76:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  77:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   {
+  78:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     /* Matrix transpose by exchanging the rows with columns */
+  79:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     /* row loop */
+  80:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     do
+  81:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     {
+  82:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       /* Pointer pOut is set to starting address of column being processed */
+  83:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       pOut = pDst->pData + i;
+  84:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  85:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  86:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  87:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       /* Loop unrolling: Compute 4 outputs at a time */
+  88:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       col = nCols >> 2U;
+  89:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  90:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       while (col > 0U)        /* column loop */
+  91:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       {
+  92:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Read two elements from row */
+  93:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         in = read_q15x2_ia ((q15_t **) &pIn);
+  94:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  95:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Unpack and store one element in  destination */
+  96:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+  97:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) in;
+  98:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #else
+  99:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
+ 100:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
+ 101:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 102:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Update pointer pOut to point to next row of transposed matrix */
+ 103:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         pOut += nRows;
+ 104:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 105:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Unpack and store second element in destination */
+ 106:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 107:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
+ 108:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #else
+ 109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) in;
+ 110:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
+ 111:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 112:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Update  pointer pOut to point to next row of transposed matrix */
+ 113:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         pOut += nRows;
+ 114:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 115:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Read two elements from row */
+ 116:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         in = read_q15x2_ia ((q15_t **) &pIn);
+ 117:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 118:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Unpack and store one element in destination */
+ 119:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 120:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) in;
+ 121:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #else
+ 122:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
+ 123:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 124:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s 			page 4
+
+
+ 125:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 126:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Update pointer pOut to point to next row of transposed matrix */
+ 127:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         pOut += nRows;
+ 128:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 129:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Unpack and store second element in destination */
+ 130:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 131:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
+ 132:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #else
+ 133:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = (q15_t) in;
+ 134:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
+ 135:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 136:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Update pointer pOut to point to next row of transposed matrix */
+ 137:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         pOut += nRows;
+ 138:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 139:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Decrement column loop counter */
+ 140:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         col--;
+ 141:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       }
+ 142:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 143:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       /* Loop unrolling: Compute remaining outputs */
+ 144:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       col = nCols % 0x4U;
+ 145:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 146:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #else
+ 147:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 148:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       /* Initialize col with number of samples */
+ 149:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       col = nCols;
+ 150:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 151:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 152:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       while (col > 0U)
+ 154:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       {
+ 155:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Read and store input element in destination */
+ 156:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         *pOut = *pIn++;
+ 157:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 158:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Update pointer pOut to point to next row of transposed matrix */
+ 159:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         pOut += nRows;
+  48              		.loc 1 159 14 view .LVU4
+  49 000a 4FEA4C04 		lsl	r4, ip, #1
+  53:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         q15_t *pOut = pDst->pData;                     /* output data matrix pointer */
+  50              		.loc 1 53 16 view .LVU5
+  51 000e 4668     		ldr	r6, [r0, #4]
+  52              	.LVL1:
+  54:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         q15_t *pOut = pDst->pData;                     /* output data matrix pointer */
+  53              		.loc 1 54 9 is_stmt 1 view .LVU6
+  55:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         uint16_t nCols = pSrc->numCols;                /* number of columns */
+  54              		.loc 1 55 9 view .LVU7
+  56:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         uint32_t col, row = nRows, i = 0U;             /* Loop counters */
+  55              		.loc 1 56 9 view .LVU8
+  57:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         arm_status status;                             /* status of matrix transpose */
+  56              		.loc 1 57 9 view .LVU9
+  57:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         arm_status status;                             /* status of matrix transpose */
+  57              		.loc 1 57 9 is_stmt 0 view .LVU10
+  58 0010 05EB4C0C 		add	ip, r5, ip, lsl #1
+  59 0014 4FEA470E 		lsl	lr, r7, #1
+  60              	.LVL2:
+  61              	.L4:
+  58:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  62              		.loc 1 58 9 is_stmt 1 view .LVU11
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s 			page 5
+
+
+  80:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     {
+  63              		.loc 1 80 5 view .LVU12
+  83:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  64              		.loc 1 83 7 view .LVU13
+  83:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  65              		.loc 1 83 12 is_stmt 0 view .LVU14
+  66 0018 2B46     		mov	r3, r5
+  67              	.LVL3:
+ 149:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  68              		.loc 1 149 7 is_stmt 1 view .LVU15
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       {
+  69              		.loc 1 153 7 view .LVU16
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       {
+  70              		.loc 1 153 13 view .LVU17
+  71 001a 47B1     		cbz	r7, .L2
+  72 001c 3A46     		mov	r2, r7
+  73 001e 3146     		mov	r1, r6
+  74              	.LVL4:
+  75              	.L3:
+ 156:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  76              		.loc 1 156 9 view .LVU18
+ 156:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  77              		.loc 1 156 17 is_stmt 0 view .LVU19
+  78 0020 31F9020B 		ldrsh	r0, [r1], #2
+  79              	.LVL5:
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       {
+  80              		.loc 1 153 13 view .LVU20
+  81 0024 013A     		subs	r2, r2, #1
+  82              	.LVL6:
+ 156:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+  83              		.loc 1 156 15 view .LVU21
+  84 0026 1880     		strh	r0, [r3]	@ movhi
+  85              		.loc 1 159 9 is_stmt 1 view .LVU22
+  86              		.loc 1 159 14 is_stmt 0 view .LVU23
+  87 0028 2344     		add	r3, r3, r4
+  88              	.LVL7:
+ 160:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 161:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         /* Decrement column loop counter */
+ 162:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****         col--;
+  89              		.loc 1 162 9 is_stmt 1 view .LVU24
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       {
+  90              		.loc 1 153 13 view .LVU25
+  91 002a F9D1     		bne	.L3
+  92 002c 7644     		add	r6, r6, lr
+  93              	.LVL8:
+  94              	.L2:
+ 163:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       }
+ 164:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 165:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       i++;
+  95              		.loc 1 165 7 view .LVU26
+ 166:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 167:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       /* Decrement row loop counter */
+ 168:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****       row--;
+  96              		.loc 1 168 7 view .LVU27
+ 169:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 170:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     } while (row > 0U);          /* row loop end */
+  97              		.loc 1 170 13 view .LVU28
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s 			page 6
+
+
+  98 002e 0235     		adds	r5, r5, #2
+  99              		.loc 1 170 5 is_stmt 0 view .LVU29
+ 100 0030 6545     		cmp	r5, ip
+ 101 0032 F1D1     		bne	.L4
+ 171:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 172:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     /* Set status as ARM_MATH_SUCCESS */
+ 173:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****     status = ARM_MATH_SUCCESS;
+ 102              		.loc 1 173 5 is_stmt 1 view .LVU30
+ 103              	.LVL9:
+ 174:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   }
+ 175:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** 
+ 176:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   /* Return to application */
+ 177:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c ****   return (status);
+ 104              		.loc 1 177 3 view .LVU31
+ 178:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_trans_q15.c **** }
+ 105              		.loc 1 178 1 is_stmt 0 view .LVU32
+ 106 0034 0020     		movs	r0, #0
+ 107 0036 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 108              		.cfi_endproc
+ 109              	.LFE145:
+ 111              		.text
+ 112              	.Letext0:
+ 113              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 114              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 115              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 116              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 117              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 118              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 119              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 120              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_mat_trans_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s:17     .text.arm_mat_trans_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccH2RtoB.s:26     .text.arm_mat_trans_q15:0000000000000000 arm_mat_trans_q15
+
+NO UNDEFINED SYMBOLS

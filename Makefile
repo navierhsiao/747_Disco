@@ -13,7 +13,7 @@
 ######################################
 # target
 ######################################
-TARGET = TouchGFX_H747_template
+TARGET = 747_Disco
 
 ######################################
 # building variables
@@ -117,7 +117,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = stm32h747xx_flash_CM7.ld
+LDSCRIPT = STM32H747XIHX_FLASH.ld
 
 # libraries
 LIBS = -lc -lm -lnosys

@@ -1,0 +1,414 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_var_f32.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_var_f32,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_var_f32
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_var_f32:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c"
+   1:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * Title:        arm_var_f32.c
+   4:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * Description:  Variance of the elements of a floating-point vector
+   5:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @ingroup groupStats
+  33:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @defgroup variance  Variance
+  37:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  38:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   Calculates the variance of the elements in the input vector.
+  39:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   The underlying algorithm used is the direct method sometimes referred to as the two-pass method:
+  40:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  41:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   <pre>
+  42:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****       Result = sum(element - meanOfElements)^2) / numElement - 1
+  43:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  44:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****       meanOfElements = ( pSrc[0] * pSrc[0] + pSrc[1] * pSrc[1] + ... + pSrc[blockSize-1] ) / blockS
+  45:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   </pre>
+  46:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  47:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   There are separate functions for floating point, Q31, and Q15 data types.
+  48:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  */
+  49:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  50:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** /**
+  51:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @addtogroup variance
+  52:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @{
+  53:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  */
+  54:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  55:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** /**
+  56:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @brief         Variance of the elements of a floating-point vector.
+  57:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @param[in]     pSrc       points to the input vector
+  58:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @param[in]     blockSize  number of samples in input vector
+  59:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @param[out]    pResult    variance value returned here
+  60:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   @return        none
+  61:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****  */
+  62:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #if defined(ARM_MATH_NEON_EXPERIMENTAL)
+  63:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** void arm_var_f32(
+  64:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****            const float32_t * pSrc,
+  65:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****                  uint32_t blockSize,
+  66:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****                  float32_t * pResult)
+  67:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** {
+  68:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   float32_t mean;
+  69:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  70:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   float32_t sum = 0.0f;                          /* accumulator */
+  71:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   float32_t in;                                  /* Temporary variable to store input value */
+  72:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   uint32_t blkCnt;                               /* loop counter */
+  73:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  74:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   float32x4_t sumV = vdupq_n_f32(0.0f);                          /* Temporary result storage */
+  75:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   float32x2_t sumV2;
+  76:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   float32x4_t inV;
+  77:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   float32x4_t avg;
+  78:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  79:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   arm_mean_f32(pSrc,blockSize,&mean);
+  80:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   avg = vdupq_n_f32(mean);
+  81:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  82:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize >> 2U;
+  83:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  84:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Compute 4 outputs at a time.
+  85:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****    ** a second loop below computes the remaining 1 to 3 samples. */
+  86:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   while (blkCnt > 0U)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 3
+
+
+  87:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+  88:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* C = A[0] * A[0] + A[1] * A[1] + A[2] * A[2] + ... + A[blockSize-1] * A[blockSize-1] */
+  89:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* Compute Power and then store the result in a temporary variable, sum. */
+  90:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     inV = vld1q_f32(pSrc);
+  91:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     inV = vsubq_f32(inV, avg);
+  92:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     sumV = vmlaq_f32(sumV, inV, inV);
+  93:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     pSrc += 4;
+  94:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  95:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* Decrement the loop counter */
+  96:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     blkCnt--;
+  97:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  99:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   sumV2 = vpadd_f32(vget_low_f32(sumV),vget_high_f32(sumV));
+ 100:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   sum = sumV2[0] + sumV2[1];
+ 101:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 102:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* If the blockSize is not a multiple of 4, compute any remaining output samples here.
+ 103:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****    ** No loop unrolling is used. */
+ 104:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize % 0x4U;
+ 105:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 106:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   while (blkCnt > 0U)
+ 107:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+ 108:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* C = A[0] * A[0] + A[1] * A[1] + A[2] * A[2] + ... + A[blockSize-1] * A[blockSize-1] */
+ 109:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* compute power and then store the result in a temporary variable, sum. */
+ 110:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     in = *pSrc++;
+ 111:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     in = in - mean;
+ 112:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     sum += in * in;
+ 113:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 114:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* Decrement the loop counter */
+ 115:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     blkCnt--;
+ 116:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+ 117:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 118:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Variance */
+ 119:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   *pResult = sum / (float32_t)(blockSize - 1.0f);
+ 120:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 121:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** }
+ 122:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 123:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #else
+ 124:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** void arm_var_f32(
+ 125:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   const float32_t * pSrc,
+ 126:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         uint32_t blockSize,
+ 127:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         float32_t * pResult)
+ 128:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** {
+  30              		.loc 1 128 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+ 129:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         uint32_t blkCnt;                               /* Loop counter */
+  35              		.loc 1 129 9 view .LVU1
+ 130:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         float32_t sum = 0.0f;                          /* Temporary result storage */
+  36              		.loc 1 130 9 view .LVU2
+ 131:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         float32_t fSum = 0.0f;
+  37              		.loc 1 131 9 view .LVU3
+ 132:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         float32_t fMean, fValue;
+  38              		.loc 1 132 9 view .LVU4
+ 133:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   const float32_t * pInput = pSrc;
+  39              		.loc 1 133 3 view .LVU5
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 4
+
+
+ 134:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 135:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   if (blockSize <= 1U)
+  40              		.loc 1 135 3 view .LVU6
+  41              		.loc 1 135 6 is_stmt 0 view .LVU7
+  42 0000 0129     		cmp	r1, #1
+  43 0002 25D9     		bls	.L12
+  44 0004 0B46     		mov	r3, r1
+ 130:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         float32_t fSum = 0.0f;
+  45              		.loc 1 130 19 view .LVU8
+  46 0006 DFED147A 		vldr.32	s15, .L13
+ 128:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         uint32_t blkCnt;                               /* Loop counter */
+  47              		.loc 1 128 1 view .LVU9
+  48 000a 10B4     		push	{r4}
+  49              	.LCFI0:
+  50              		.cfi_def_cfa_offset 4
+  51              		.cfi_offset 4, -4
+ 133:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+  52              		.loc 1 133 21 view .LVU10
+  53 000c 0446     		mov	r4, r0
+  54              	.LVL1:
+  55              	.L2:
+ 136:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+ 137:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     *pResult = 0;
+ 138:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     return;
+ 139:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+ 140:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 141:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ 142:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 143:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+ 144:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize >> 2U;
+ 145:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 146:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   while (blkCnt > 0U)
+ 147:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+ 148:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) */
+ 149:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 150:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     sum += *pInput++;
+ 151:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     sum += *pInput++;
+ 152:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     sum += *pInput++;
+ 153:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     sum += *pInput++;
+ 154:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 155:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 156:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* Decrement loop counter */
+ 157:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     blkCnt--;
+ 158:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+ 159:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 160:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Loop unrolling: Compute remaining outputs */
+ 161:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize % 0x4U;
+ 162:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 163:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #else
+ 164:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 165:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Initialize blkCnt with number of samples */
+ 166:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize;
+ 167:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 168:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 169:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 170:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   while (blkCnt > 0U)
+ 171:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 5
+
+
+ 172:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) */
+ 173:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 174:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     sum += *pInput++;
+  56              		.loc 1 174 5 is_stmt 1 view .LVU11
+  57              		.loc 1 174 9 is_stmt 0 view .LVU12
+  58 000e B4EC017A 		vldmia.32	r4!, {s14}
+  59              	.LVL2:
+ 170:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+  60              		.loc 1 170 9 view .LVU13
+  61 0012 013B     		subs	r3, r3, #1
+  62              	.LVL3:
+  63              		.loc 1 174 9 view .LVU14
+  64 0014 77EE877A 		vadd.f32	s15, s15, s14
+  65              	.LVL4:
+ 175:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 176:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* Decrement loop counter */
+ 177:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     blkCnt--;
+  66              		.loc 1 177 5 is_stmt 1 view .LVU15
+ 170:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+  67              		.loc 1 170 9 view .LVU16
+  68 0018 F9D1     		bne	.L2
+ 178:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+ 179:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 180:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) / blockSize  */
+ 181:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   fMean = sum / (float32_t) blockSize;
+  69              		.loc 1 181 3 view .LVU17
+  70              		.loc 1 181 17 is_stmt 0 view .LVU18
+  71 001a 07EE101A 		vmov	s14, r1	@ int
+  72 001e B8EE476A 		vcvt.f32.u32	s12, s14
+ 131:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****         float32_t fMean, fValue;
+  73              		.loc 1 131 19 view .LVU19
+  74 0022 9FED0D7A 		vldr.32	s14, .L13
+  75              		.loc 1 181 9 view .LVU20
+  76 0026 C7EE866A 		vdiv.f32	s13, s15, s12
+  77              	.LVL5:
+ 182:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 183:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   pInput = pSrc;
+  78              		.loc 1 183 3 is_stmt 1 view .LVU21
+ 184:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 185:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ 186:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 187:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+ 188:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize >> 2U;
+ 189:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 190:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   while (blkCnt > 0U)
+ 191:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+ 192:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fValue = *pInput++ - fMean;
+ 193:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fSum += fValue * fValue;
+ 194:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 195:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fValue = *pInput++ - fMean;
+ 196:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fSum += fValue * fValue;
+ 197:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 198:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fValue = *pInput++ - fMean;
+ 199:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fSum += fValue * fValue;
+ 200:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 201:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fValue = *pInput++ - fMean;
+ 202:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fSum += fValue * fValue;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 6
+
+
+ 203:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 204:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* Decrement loop counter */
+ 205:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     blkCnt--;
+ 206:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+ 207:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 208:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Loop unrolling: Compute remaining outputs */
+ 209:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize % 0x4U;
+ 210:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 211:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #else
+ 212:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 213:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Initialize blkCnt with number of samples */
+ 214:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   blkCnt = blockSize;
+  79              		.loc 1 214 3 view .LVU22
+ 215:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 216:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 217:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 218:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   while (blkCnt > 0U)
+  80              		.loc 1 218 3 view .LVU23
+  81              		.loc 1 218 9 view .LVU24
+  82              	.L4:
+ 219:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+ 220:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fValue = *pInput++ - fMean;
+  83              		.loc 1 220 5 view .LVU25
+  84              		.loc 1 220 12 is_stmt 0 view .LVU26
+  85 002a F0EC017A 		vldmia.32	r0!, {s15}
+  86              	.LVL6:
+ 218:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+  87              		.loc 1 218 9 view .LVU27
+  88 002e 0139     		subs	r1, r1, #1
+  89              	.LVL7:
+  90              		.loc 1 220 12 view .LVU28
+  91 0030 77EEE67A 		vsub.f32	s15, s15, s13
+  92              	.LVL8:
+ 221:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     fSum += fValue * fValue;
+  93              		.loc 1 221 5 is_stmt 1 view .LVU29
+  94              		.loc 1 221 10 is_stmt 0 view .LVU30
+  95 0034 A7EEA77A 		vfma.f32	s14, s15, s15
+  96              	.LVL9:
+ 222:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 223:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     /* Decrement loop counter */
+ 224:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     blkCnt--;
+  97              		.loc 1 224 5 is_stmt 1 view .LVU31
+ 218:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   {
+  98              		.loc 1 218 9 view .LVU32
+  99 0038 F7D1     		bne	.L4
+ 225:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+ 226:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** 
+ 227:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   /* Variance */
+ 228:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   *pResult = fSum / (float32_t)(blockSize - 1.0f);
+ 100              		.loc 1 228 3 view .LVU33
+ 101              		.loc 1 228 21 is_stmt 0 view .LVU34
+ 102 003a F7EE007A 		vmov.f32	s15, #1.0e+0
+ 103              	.LVL10:
+ 229:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** }
+ 104              		.loc 1 229 1 view .LVU35
+ 105 003e 5DF8044B 		ldr	r4, [sp], #4
+ 106              	.LCFI1:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 7
+
+
+ 107              		.cfi_restore 4
+ 108              		.cfi_def_cfa_offset 0
+ 228:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** }
+ 109              		.loc 1 228 21 view .LVU36
+ 110 0042 36EE676A 		vsub.f32	s12, s12, s15
+ 228:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** }
+ 111              		.loc 1 228 19 view .LVU37
+ 112 0046 C7EE067A 		vdiv.f32	s15, s14, s12
+ 228:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c **** }
+ 113              		.loc 1 228 12 view .LVU38
+ 114 004a C2ED007A 		vstr.32	s15, [r2]
+ 115              	.LVL11:
+ 116              		.loc 1 229 1 view .LVU39
+ 117 004e 7047     		bx	lr
+ 118              	.LVL12:
+ 119              	.L12:
+ 137:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     return;
+ 120              		.loc 1 137 5 is_stmt 1 view .LVU40
+ 137:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****     return;
+ 121              		.loc 1 137 14 is_stmt 0 view .LVU41
+ 122 0050 0023     		movs	r3, #0
+ 123 0052 1360     		str	r3, [r2]	@ float
+ 138:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_var_f32.c ****   }
+ 124              		.loc 1 138 5 is_stmt 1 view .LVU42
+ 125 0054 7047     		bx	lr
+ 126              	.L14:
+ 127 0056 00BF     		.align	2
+ 128              	.L13:
+ 129 0058 00000000 		.word	0
+ 130              		.cfi_endproc
+ 131              	.LFE145:
+ 133              		.text
+ 134              	.Letext0:
+ 135              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 136              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 137              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 138              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 139              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 140              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 141              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 142              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s 			page 8
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_var_f32.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s:17     .text.arm_var_f32:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s:26     .text.arm_var_f32:0000000000000000 arm_var_f32
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccYfiDOX.s:129    .text.arm_var_f32:0000000000000058 $d
+
+NO UNDEFINED SYMBOLS

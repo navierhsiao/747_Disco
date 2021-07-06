@@ -1,0 +1,246 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cch1gcnr.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_mean_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_mean_q15,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_mean_q15
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_mean_q15:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c"
+   1:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * Title:        arm_mean_q15.c
+   4:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * Description:  Mean value of a Q15 vector
+   5:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cch1gcnr.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @ingroup groupStats
+  33:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @addtogroup mean
+  37:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @brief         Mean value of a Q15 vector.
+  42:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @param[in]     pSrc       points to the input vector
+  43:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @param[in]     blockSize  number of samples in input vector
+  44:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @param[out]    pResult    mean value returned here
+  45:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @return        none
+  46:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  47:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   @par           Scaling and Overflow Behavior
+  48:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****                    The function is implemented using a 32-bit internal accumulator.
+  49:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****                    The input is represented in 1.15 format and is accumulated in a 32-bit
+  50:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****                    accumulator in 17.15 format.
+  51:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****                    There is no risk of internal overflow with this approach, and the
+  52:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****                    full precision of intermediate result is preserved.
+  53:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****                    Finally, the accumulator is truncated to yield a result of 1.15 format.
+  54:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****  */
+  55:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  56:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** void arm_mean_q15(
+  57:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   const q15_t * pSrc,
+  58:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****         uint32_t blockSize,
+  59:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****         q15_t * pResult)
+  60:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** {
+  30              		.loc 1 60 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  61:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
+  35              		.loc 1 61 9 view .LVU1
+  62:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****         q31_t sum = 0;                                 /* Temporary result storage */
+  36              		.loc 1 62 9 view .LVU2
+  63:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  64:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  65:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****         q31_t in;
+  66:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** #endif
+  67:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  68:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  69:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  70:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+  71:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   blkCnt = blockSize >> 2U;
+  72:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  73:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   while (blkCnt > 0U)
+  74:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   {
+  75:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) */
+  76:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     in = read_q15x2_ia ((q15_t **) &pSrc);
+  77:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     sum += ((in << 16U) >> 16U);
+  78:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     sum +=  (in >> 16U);
+  79:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cch1gcnr.s 			page 3
+
+
+  80:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     in = read_q15x2_ia ((q15_t **) &pSrc);
+  81:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     sum += ((in << 16U) >> 16U);
+  82:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     sum +=  (in >> 16U);
+  83:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  84:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     /* Decrement the loop counter */
+  85:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     blkCnt--;
+  86:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   }
+  87:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  88:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   /* Loop unrolling: Compute remaining outputs */
+  89:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   blkCnt = blockSize % 0x4U;
+  90:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  91:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** #else
+  92:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  93:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   /* Initialize blkCnt with number of samples */
+  94:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   blkCnt = blockSize;
+  37              		.loc 1 94 3 view .LVU3
+  95:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  96:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+  97:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   while (blkCnt > 0U)
+  38              		.loc 1 98 3 view .LVU4
+  39              		.loc 1 98 9 view .LVU5
+  60:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
+  40              		.loc 1 60 1 is_stmt 0 view .LVU6
+  41 0000 30B4     		push	{r4, r5}
+  42              	.LCFI0:
+  43              		.cfi_def_cfa_offset 8
+  44              		.cfi_offset 4, -8
+  45              		.cfi_offset 5, -4
+  46              		.loc 1 98 9 view .LVU7
+  47 0002 61B1     		cbz	r1, .L4
+  48 0004 0B46     		mov	r3, r1
+  62:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+  49              		.loc 1 62 15 view .LVU8
+  50 0006 0024     		movs	r4, #0
+  51              	.LVL1:
+  52              	.L3:
+  99:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   {
+ 100:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) */
+ 101:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     sum += *pSrc++;
+  53              		.loc 1 101 5 is_stmt 1 view .LVU9
+  54              		.loc 1 101 12 is_stmt 0 view .LVU10
+  55 0008 30F9025B 		ldrsh	r5, [r0], #2
+  56              	.LVL2:
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   {
+  57              		.loc 1 98 9 view .LVU11
+  58 000c 013B     		subs	r3, r3, #1
+  59              	.LVL3:
+  60              		.loc 1 101 9 view .LVU12
+  61 000e 2C44     		add	r4, r4, r5
+  62              	.LVL4:
+ 102:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+ 103:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     /* Decrement loop counter */
+ 104:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****     blkCnt--;
+  63              		.loc 1 104 5 is_stmt 1 view .LVU13
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   {
+  64              		.loc 1 98 9 view .LVU14
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cch1gcnr.s 			page 4
+
+
+  65 0010 FAD1     		bne	.L3
+  66 0012 94FBF1F4 		sdiv	r4, r4, r1
+  67              	.LVL5:
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   {
+  68              		.loc 1 98 9 is_stmt 0 view .LVU15
+  69 0016 24B2     		sxth	r4, r4
+ 105:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   }
+ 106:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** 
+ 107:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) / blockSize  */
+ 108:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   /* Store result to destination */
+ 109:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   *pResult = (q15_t) (sum / (int32_t) blockSize);
+  70              		.loc 1 109 3 is_stmt 1 view .LVU16
+  71              		.loc 1 109 12 is_stmt 0 view .LVU17
+  72 0018 1480     		strh	r4, [r2]	@ movhi
+ 110:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** }
+  73              		.loc 1 110 1 view .LVU18
+  74 001a 30BC     		pop	{r4, r5}
+  75              	.LCFI1:
+  76              		.cfi_remember_state
+  77              		.cfi_restore 5
+  78              		.cfi_restore 4
+  79              		.cfi_def_cfa_offset 0
+  80 001c 7047     		bx	lr
+  81              	.LVL6:
+  82              	.L4:
+  83              	.LCFI2:
+  84              		.cfi_restore_state
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c ****   {
+  85              		.loc 1 98 9 view .LVU19
+  86 001e 0C46     		mov	r4, r1
+ 109:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** }
+  87              		.loc 1 109 3 is_stmt 1 view .LVU20
+ 109:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q15.c **** }
+  88              		.loc 1 109 12 is_stmt 0 view .LVU21
+  89 0020 1480     		strh	r4, [r2]	@ movhi
+  90              		.loc 1 110 1 view .LVU22
+  91 0022 30BC     		pop	{r4, r5}
+  92              	.LCFI3:
+  93              		.cfi_restore 5
+  94              		.cfi_restore 4
+  95              		.cfi_def_cfa_offset 0
+  96 0024 7047     		bx	lr
+  97              		.cfi_endproc
+  98              	.LFE145:
+ 100 0026 00BF     		.text
+ 101              	.Letext0:
+ 102              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 103              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 104              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 105              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 106              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 107              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 108              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 109              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cch1gcnr.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_mean_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cch1gcnr.s:17     .text.arm_mean_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cch1gcnr.s:26     .text.arm_mean_q15:0000000000000000 arm_mean_q15
+
+NO UNDEFINED SYMBOLS

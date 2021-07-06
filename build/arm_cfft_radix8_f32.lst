@@ -1,0 +1,1895 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_cfft_radix8_f32.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_radix8_butterfly_f32,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_radix8_butterfly_f32
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_radix8_butterfly_f32:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c"
+   1:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Title:        arm_cfft_radix8_f32.c
+   4:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Description:  Radix-8 Decimation in Frequency CFFT & CIFFT Floating point processing function
+   5:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  32:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** /* ----------------------------------------------------------------------
+  33:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * Internal helper function used by the FFTs
+  34:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****  * -------------------------------------------------------------------- */
+  35:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  36:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** /**
+  37:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   brief         Core function for the floating-point CFFT butterfly process.
+  38:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   param[in,out] pSrc             points to the in-place buffer of floating-point data type.
+  39:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   param[in]     fftLen           length of the FFT.
+  40:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   param[in]     pCoef            points to the twiddle coefficient buffer.
+  41:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   param[in]     twidCoefModifier twiddle coefficient modifier that supports different size FFTs wit
+  42:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   return        none
+  43:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** */
+  44:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  45:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** void arm_radix8_butterfly_f32(
+  46:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   float32_t * pSrc,
+  47:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   uint16_t fftLen,
+  48:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   const float32_t * pCoef,
+  49:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****   uint16_t twidCoefModifier)
+  50:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** {
+  30              		.loc 1 50 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 72
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  51:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t ia1, ia2, ia3, ia4, ia5, ia6, ia7;
+  34              		.loc 1 51 4 view .LVU1
+  52:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t i1, i2, i3, i4, i5, i6, i7, i8;
+  35              		.loc 1 52 4 view .LVU2
+  53:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t id;
+  36              		.loc 1 53 4 view .LVU3
+  54:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t n1, n2, j;
+  37              		.loc 1 54 4 view .LVU4
+  55:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  56:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    float32_t r1, r2, r3, r4, r5, r6, r7, r8;
+  38              		.loc 1 56 4 view .LVU5
+  57:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    float32_t t1, t2;
+  39              		.loc 1 57 4 view .LVU6
+  58:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    float32_t s1, s2, s3, s4, s5, s6, s7, s8;
+  40              		.loc 1 58 4 view .LVU7
+  59:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    float32_t p1, p2, p3, p4;
+  41              		.loc 1 59 4 view .LVU8
+  60:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    float32_t co2, co3, co4, co5, co6, co7, co8;
+  42              		.loc 1 60 4 view .LVU9
+  61:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    float32_t si2, si3, si4, si5, si6, si7, si8;
+  43              		.loc 1 61 4 view .LVU10
+  62:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    const float32_t C81 = 0.70710678118f;
+  44              		.loc 1 62 4 view .LVU11
+  63:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  64:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    n2 = fftLen;
+  45              		.loc 1 64 4 view .LVU12
+  50:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t ia1, ia2, ia3, ia4, ia5, ia6, ia7;
+  46              		.loc 1 50 1 is_stmt 0 view .LVU13
+  47 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  48              	.LCFI0:
+  49              		.cfi_def_cfa_offset 36
+  50              		.cfi_offset 4, -36
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 3
+
+
+  51              		.cfi_offset 5, -32
+  52              		.cfi_offset 6, -28
+  53              		.cfi_offset 7, -24
+  54              		.cfi_offset 8, -20
+  55              		.cfi_offset 9, -16
+  56              		.cfi_offset 10, -12
+  57              		.cfi_offset 11, -8
+  58              		.cfi_offset 14, -4
+  59 0004 2DED108B 		vpush.64	{d8, d9, d10, d11, d12, d13, d14, d15}
+  60              	.LCFI1:
+  61              		.cfi_def_cfa_offset 100
+  62              		.cfi_offset 80, -100
+  63              		.cfi_offset 81, -96
+  64              		.cfi_offset 82, -92
+  65              		.cfi_offset 83, -88
+  66              		.cfi_offset 84, -84
+  67              		.cfi_offset 85, -80
+  68              		.cfi_offset 86, -76
+  69              		.cfi_offset 87, -72
+  70              		.cfi_offset 88, -68
+  71              		.cfi_offset 89, -64
+  72              		.cfi_offset 90, -60
+  73              		.cfi_offset 91, -56
+  74              		.cfi_offset 92, -52
+  75              		.cfi_offset 93, -48
+  76              		.cfi_offset 94, -44
+  77              		.cfi_offset 95, -40
+  78 0008 93B0     		sub	sp, sp, #76
+  79              	.LCFI2:
+  80              		.cfi_def_cfa_offset 176
+  81              		.loc 1 64 7 view .LVU14
+  82 000a 8A46     		mov	r10, r1
+  65:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  66:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    do
+  67:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    {
+  68:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       n1 = n2;
+  69:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       n2 = n2 >> 3;
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       i1 = 0;
+  71:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+  72:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       do
+  73:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       {
+  74:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i2 = i1 + n2;
+  75:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i3 = i2 + n2;
+  76:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i4 = i3 + n2;
+  77:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i5 = i4 + n2;
+  78:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i6 = i5 + n2;
+  79:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i7 = i6 + n2;
+  80:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i8 = i7 + n2;
+  81:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = pSrc[2 * i1] + pSrc[2 * i5];
+  82:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = pSrc[2 * i1] - pSrc[2 * i5];
+  83:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = pSrc[2 * i2] + pSrc[2 * i6];
+  84:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = pSrc[2 * i2] - pSrc[2 * i6];
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r3 = pSrc[2 * i3] + pSrc[2 * i7];
+  86:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = pSrc[2 * i3] - pSrc[2 * i7];
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r4 = pSrc[2 * i4] + pSrc[2 * i8];
+  88:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = pSrc[2 * i4] - pSrc[2 * i8];
+  89:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t1 = r1 - r3;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 4
+
+
+  90:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = r1 + r3;
+  91:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r3 = r2 - r4;
+  92:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = r2 + r4;
+  93:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i1] = r1 + r2;
+  94:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5] = r1 - r2;
+  95:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = pSrc[2 * i1 + 1] + pSrc[2 * i5 + 1];
+  96:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+  97:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = pSrc[2 * i2 + 1] + pSrc[2 * i6 + 1];
+  98:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s3 = pSrc[2 * i3 + 1] + pSrc[2 * i7 + 1];
+ 100:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 101:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r4 = pSrc[2 * i4 + 1] + pSrc[2 * i8 + 1];
+ 102:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 103:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t2 = r1 - s3;
+ 104:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = r1 + s3;
+ 105:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s3 = r2 - r4;
+ 106:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = r2 + r4;
+ 107:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i1 + 1] = r1 + r2;
+ 108:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5 + 1] = r1 - r2;
+ 109:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3]     = t1 + s3;
+ 110:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7]     = t1 - s3;
+ 111:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3 + 1] = t2 - r3;
+ 112:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7 + 1] = t2 + r3;
+ 113:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = (r6 - r8) * C81;
+ 114:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = (r6 + r8) * C81;
+ 115:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = (s6 - s8) * C81;
+ 116:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = (s6 + s8) * C81;
+ 117:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t1 = r5 - r1;
+  83              		.loc 1 117 13 view .LVU15
+  84 000c DFEDBB8A 		vldr.32	s17, .L12
+  85 0010 8B46     		mov	fp, r1
+  50:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t ia1, ia2, ia3, ia4, ia5, ia6, ia7;
+  86              		.loc 1 50 1 view .LVU16
+  87 0012 1090     		str	r0, [sp, #64]
+  88              	.LVL1:
+  50:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t ia1, ia2, ia3, ia4, ia5, ia6, ia7;
+  89              		.loc 1 50 1 view .LVU17
+  90 0014 CDE90E32 		strd	r3, r2, [sp, #56]
+  91 0018 0346     		mov	r3, r0
+  92              	.LVL2:
+  50:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    uint32_t ia1, ia2, ia3, ia4, ia5, ia6, ia7;
+  93              		.loc 1 50 1 view .LVU18
+  94 001a 0433     		adds	r3, r3, #4
+  95 001c 1193     		str	r3, [sp, #68]
+  96              	.LVL3:
+  97              	.L6:
+  66:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    {
+  98              		.loc 1 66 4 is_stmt 1 view .LVU19
+  68:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       n2 = n2 >> 3;
+  99              		.loc 1 68 7 view .LVU20
+  69:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       i1 = 0;
+ 100              		.loc 1 69 7 view .LVU21
+  69:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       i1 = 0;
+ 101              		.loc 1 69 10 is_stmt 0 view .LVU22
+ 102 001e 4FEADA06 		lsr	r6, r10, #3
+ 103              	.LVL4:
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 5
+
+
+ 104              		.loc 1 70 7 is_stmt 1 view .LVU23
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 105              		.loc 1 70 7 is_stmt 0 view .LVU24
+ 106 0022 109D     		ldr	r5, [sp, #64]
+ 107 0024 DDF844C0 		ldr	ip, [sp, #68]
+ 108 0028 4FEACA03 		lsl	r3, r10, #3
+ 109 002c 05EB4611 		add	r1, r5, r6, lsl #5
+ 110 0030 0D96     		str	r6, [sp, #52]
+ 111 0032 F000     		lsls	r0, r6, #3
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 112              		.loc 1 70 10 view .LVU25
+ 113 0034 4FF0000E 		mov	lr, #0
+ 114 0038 01EB0614 		add	r4, r1, r6, lsl #4
+ 115 003c 3701     		lsls	r7, r6, #4
+ 116 003e 0390     		str	r0, [sp, #12]
+ 117 0040 A6EB8602 		sub	r2, r6, r6, lsl #2
+ 118 0044 0094     		str	r4, [sp]
+ 119 0046 0297     		str	r7, [sp, #8]
+ 120 0048 06EB4608 		add	r8, r6, r6, lsl #1
+ 121 004c 04EBC202 		add	r2, r4, r2, lsl #3
+ 122 0050 041D     		adds	r4, r0, #4
+ 123 0052 381D     		adds	r0, r7, #4
+ 124 0054 06EB8607 		add	r7, r6, r6, lsl #2
+ 125 0058 2C44     		add	r4, r4, r5
+ 126 005a C6EBC609 		rsb	r9, r6, r6, lsl #3
+ 127 005e 0197     		str	r7, [sp, #4]
+ 128 0060 2844     		add	r0, r0, r5
+ 129 0062 019D     		ldr	r5, [sp, #4]
+ 130 0064 02EB4617 		add	r7, r2, r6, lsl #5
+ 131 0068 4FEAC909 		lsl	r9, r9, #3
+ 132 006c ED00     		lsls	r5, r5, #3
+ 133 006e 01EBC606 		add	r6, r1, r6, lsl #3
+ 134              	.LVL5:
+  70:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 135              		.loc 1 70 10 view .LVU26
+ 136 0072 0195     		str	r5, [sp, #4]
+ 137 0074 4FEA0815 		lsl	r5, r8, #4
+ 138 0078 0495     		str	r5, [sp, #16]
+ 139 007a 4FEAC805 		lsl	r5, r8, #3
+ 140 007e 0595     		str	r5, [sp, #20]
+ 141 0080 0D9D     		ldr	r5, [sp, #52]
+ 142 0082 4FEA4518 		lsl	r8, r5, #5
+ 143 0086 009D     		ldr	r5, [sp]
+ 144              	.LVL6:
+ 145              	.L2:
+  72:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       {
+ 146              		.loc 1 72 7 is_stmt 1 discriminator 1 view .LVU27
+  74:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i3 = i2 + n2;
+ 147              		.loc 1 74 10 discriminator 1 view .LVU28
+  75:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i4 = i3 + n2;
+ 148              		.loc 1 75 10 discriminator 1 view .LVU29
+  76:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i5 = i4 + n2;
+ 149              		.loc 1 76 10 discriminator 1 view .LVU30
+  77:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i6 = i5 + n2;
+ 150              		.loc 1 77 10 discriminator 1 view .LVU31
+  78:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i7 = i6 + n2;
+ 151              		.loc 1 78 10 discriminator 1 view .LVU32
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 6
+
+
+  79:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i8 = i7 + n2;
+ 152              		.loc 1 79 10 discriminator 1 view .LVU33
+  80:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = pSrc[2 * i1] + pSrc[2 * i5];
+ 153              		.loc 1 80 10 discriminator 1 view .LVU34
+  81:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 154              		.loc 1 81 10 discriminator 1 view .LVU35
+  81:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 155              		.loc 1 81 34 is_stmt 0 discriminator 1 view .LVU36
+ 156 0088 D1ED006A 		vldr.32	s13, [r1]
+ 118:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = r5 + r1;
+ 119:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = r7 - r6;
+ 120:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = r7 + r6;
+ 121:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t2 = s5 - r2;
+ 122:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = s5 + r2;
+ 123:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = s7 - s6;
+ 124:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = s7 + s6;
+ 125:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2]     = r5 + s7;
+ 126:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8]     = r5 - s7;
+ 127:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6]     = t1 + s8;
+ 128:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4]     = t1 - s8;
+ 129:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2 + 1] = s5 - r7;
+ 130:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8 + 1] = s5 + r7;
+ 131:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6 + 1] = t2 - r8;
+ 132:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4 + 1] = t2 + r8;
+ 133:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 134:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i1 += n1;
+ 157              		.loc 1 134 13 discriminator 1 view .LVU37
+ 158 008c D644     		add	lr, lr, r10
+ 159              	.LVL7:
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 160              		.loc 1 85 34 discriminator 1 view .LVU38
+ 161 008e 95ED007A 		vldr.32	s14, [r5]
+  83:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 162              		.loc 1 83 34 discriminator 1 view .LVU39
+ 163 0092 96ED003A 		vldr.32	s6, [r6]
+ 135:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       } while (i1 < fftLen);
+ 164              		.loc 1 135 7 discriminator 1 view .LVU40
+ 165 0096 F345     		cmp	fp, lr
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 166              		.loc 1 87 34 discriminator 1 view .LVU41
+ 167 0098 97ED004A 		vldr.32	s8, [r7]
+  81:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 168              		.loc 1 81 19 discriminator 1 view .LVU42
+ 169 009c 1CED015A 		vldr.32	s10, [ip, #-4]
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 170              		.loc 1 85 19 discriminator 1 view .LVU43
+ 171 00a0 50ED017A 		vldr.32	s15, [r0, #-4]
+  83:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 172              		.loc 1 83 19 discriminator 1 view .LVU44
+ 173 00a4 14ED016A 		vldr.32	s12, [r4, #-4]
+  81:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 174              		.loc 1 81 13 discriminator 1 view .LVU45
+ 175 00a8 75EE262A 		vadd.f32	s5, s10, s13
+ 176              	.LVL8:
+  82:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = pSrc[2 * i2] + pSrc[2 * i6];
+ 177              		.loc 1 82 10 is_stmt 1 discriminator 1 view .LVU46
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 7
+
+
+ 178              		.loc 1 87 19 is_stmt 0 discriminator 1 view .LVU47
+ 179 00ac D2ED005A 		vldr.32	s11, [r2]
+  82:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = pSrc[2 * i2] + pSrc[2 * i6];
+ 180              		.loc 1 82 13 discriminator 1 view .LVU48
+ 181 00b0 35EE665A 		vsub.f32	s10, s10, s13
+ 182              	.LVL9:
+  83:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 183              		.loc 1 83 10 is_stmt 1 discriminator 1 view .LVU49
+  83:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 184              		.loc 1 83 13 is_stmt 0 discriminator 1 view .LVU50
+ 185 00b4 76EE033A 		vadd.f32	s7, s12, s6
+ 186              	.LVL10:
+  84:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r3 = pSrc[2 * i3] + pSrc[2 * i7];
+ 187              		.loc 1 84 10 is_stmt 1 discriminator 1 view .LVU51
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 188              		.loc 1 85 13 is_stmt 0 discriminator 1 view .LVU52
+ 189 00b8 77EE876A 		vadd.f32	s13, s15, s14
+  84:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r3 = pSrc[2 * i3] + pSrc[2 * i7];
+ 190              		.loc 1 84 13 discriminator 1 view .LVU53
+ 191 00bc 36EE436A 		vsub.f32	s12, s12, s6
+ 192              	.LVL11:
+  85:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 193              		.loc 1 85 10 is_stmt 1 discriminator 1 view .LVU54
+  86:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r4 = pSrc[2 * i4] + pSrc[2 * i8];
+ 194              		.loc 1 86 10 discriminator 1 view .LVU55
+  86:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r4 = pSrc[2 * i4] + pSrc[2 * i8];
+ 195              		.loc 1 86 13 is_stmt 0 discriminator 1 view .LVU56
+ 196 00c0 77EEC77A 		vsub.f32	s15, s15, s14
+ 197              	.LVL12:
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 198              		.loc 1 87 10 is_stmt 1 discriminator 1 view .LVU57
+  87:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 199              		.loc 1 87 13 is_stmt 0 discriminator 1 view .LVU58
+ 200 00c4 35EE847A 		vadd.f32	s14, s11, s8
+ 201              	.LVL13:
+  88:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t1 = r1 - r3;
+ 202              		.loc 1 88 10 is_stmt 1 discriminator 1 view .LVU59
+  88:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t1 = r1 - r3;
+ 203              		.loc 1 88 13 is_stmt 0 discriminator 1 view .LVU60
+ 204 00c8 75EEC45A 		vsub.f32	s11, s11, s8
+ 205              	.LVL14:
+  89:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = r1 + r3;
+ 206              		.loc 1 89 10 is_stmt 1 discriminator 1 view .LVU61
+  90:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r3 = r2 - r4;
+ 207              		.loc 1 90 13 is_stmt 0 discriminator 1 view .LVU62
+ 208 00cc 72EEA64A 		vadd.f32	s9, s5, s13
+  89:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = r1 + r3;
+ 209              		.loc 1 89 13 discriminator 1 view .LVU63
+ 210 00d0 72EEE62A 		vsub.f32	s5, s5, s13
+ 211              	.LVL15:
+  90:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r3 = r2 - r4;
+ 212              		.loc 1 90 10 is_stmt 1 discriminator 1 view .LVU64
+  91:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = r2 + r4;
+ 213              		.loc 1 91 10 discriminator 1 view .LVU65
+ 113:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = (r6 + r8) * C81;
+ 214              		.loc 1 113 19 is_stmt 0 discriminator 1 view .LVU66
+ 215 00d4 76EE656A 		vsub.f32	s13, s12, s11
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 8
+
+
+ 216              	.LVL16:
+  92:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i1] = r1 + r2;
+ 217              		.loc 1 92 13 discriminator 1 view .LVU67
+ 218 00d8 33EE874A 		vadd.f32	s8, s7, s14
+ 118:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = r7 - r6;
+ 219              		.loc 1 118 13 discriminator 1 view .LVU68
+ 220 00dc F0EE451A 		vmov.f32	s3, s10
+ 117:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = r5 + r1;
+ 221              		.loc 1 117 13 discriminator 1 view .LVU69
+ 222 00e0 A6EEE85A 		vfms.f32	s10, s13, s17
+ 223              	.LVL17:
+  93:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5] = r1 - r2;
+ 224              		.loc 1 93 28 discriminator 1 view .LVU70
+ 225 00e4 34EE843A 		vadd.f32	s6, s9, s8
+  94:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = pSrc[2 * i1 + 1] + pSrc[2 * i5 + 1];
+ 226              		.loc 1 94 28 discriminator 1 view .LVU71
+ 227 00e8 74EEC44A 		vsub.f32	s9, s9, s8
+ 228              	.LVL18:
+ 114:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = (s6 - s8) * C81;
+ 229              		.loc 1 114 19 discriminator 1 view .LVU72
+ 230 00ec 36EE256A 		vadd.f32	s12, s12, s11
+ 231              	.LVL19:
+  93:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5] = r1 - r2;
+ 232              		.loc 1 93 23 discriminator 1 view .LVU73
+ 233 00f0 0CED013A 		vstr.32	s6, [ip, #-4]
+ 234              	.LVL20:
+ 120:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t2 = s5 - r2;
+ 235              		.loc 1 120 13 discriminator 1 view .LVU74
+ 236 00f4 B0EE672A 		vmov.f32	s4, s15
+  94:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = pSrc[2 * i1 + 1] + pSrc[2 * i5 + 1];
+ 237              		.loc 1 94 23 discriminator 1 view .LVU75
+ 238 00f8 C1ED004A 		vstr.32	s9, [r1]
+ 118:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = r7 - r6;
+ 239              		.loc 1 118 13 discriminator 1 view .LVU76
+ 240 00fc E6EEA81A 		vfma.f32	s3, s13, s17
+ 241              	.LVL21:
+ 101:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 242              		.loc 1 101 38 discriminator 1 view .LVU77
+ 243 0100 D7ED015A 		vldr.32	s11, [r7, #4]
+ 244              	.LVL22:
+ 117:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = r5 + r1;
+ 245              		.loc 1 117 13 discriminator 1 view .LVU78
+ 246 0104 B0EE453A 		vmov.f32	s6, s10
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 247              		.loc 1 99 38 discriminator 1 view .LVU79
+ 248 0108 D5ED010A 		vldr.32	s1, [r5, #4]
+ 120:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t2 = s5 - r2;
+ 249              		.loc 1 120 13 discriminator 1 view .LVU80
+ 250 010c A6EE282A 		vfma.f32	s4, s12, s17
+  97:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 251              		.loc 1 97 38 discriminator 1 view .LVU81
+ 252 0110 96ED015A 		vldr.32	s10, [r6, #4]
+ 119:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = r7 + r6;
+ 253              		.loc 1 119 13 discriminator 1 view .LVU82
+ 254 0114 E6EE687A 		vfms.f32	s15, s12, s17
+ 255              	.LVL23:
+  97:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 9
+
+
+ 256              		.loc 1 97 19 discriminator 1 view .LVU83
+ 257 0118 D4ED006A 		vldr.32	s13, [r4]
+  91:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = r2 + r4;
+ 258              		.loc 1 91 13 discriminator 1 view .LVU84
+ 259 011c 33EEC76A 		vsub.f32	s12, s7, s14
+ 260              	.LVL24:
+  92:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i1] = r1 + r2;
+ 261              		.loc 1 92 10 is_stmt 1 discriminator 1 view .LVU85
+  93:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5] = r1 - r2;
+ 262              		.loc 1 93 10 discriminator 1 view .LVU86
+  94:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = pSrc[2 * i1 + 1] + pSrc[2 * i5 + 1];
+ 263              		.loc 1 94 10 discriminator 1 view .LVU87
+  95:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 264              		.loc 1 95 10 discriminator 1 view .LVU88
+ 101:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 265              		.loc 1 101 19 is_stmt 0 discriminator 1 view .LVU89
+ 266 0120 92ED014A 		vldr.32	s8, [r2, #4]
+ 267              	.LVL25:
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 268              		.loc 1 99 19 discriminator 1 view .LVU90
+ 269 0124 D0ED004A 		vldr.32	s9, [r0]
+  98:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s3 = pSrc[2 * i3 + 1] + pSrc[2 * i7 + 1];
+ 270              		.loc 1 98 13 discriminator 1 view .LVU91
+ 271 0128 76EEC53A 		vsub.f32	s7, s13, s10
+ 272              	.LVL26:
+ 102:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t2 = r1 - s3;
+ 273              		.loc 1 102 13 discriminator 1 view .LVU92
+ 274 012c 34EE658A 		vsub.f32	s16, s8, s11
+  95:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 275              		.loc 1 95 38 discriminator 1 view .LVU93
+ 276 0130 91ED010A 		vldr.32	s0, [r1, #4]
+  97:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 277              		.loc 1 97 13 discriminator 1 view .LVU94
+ 278 0134 76EE856A 		vadd.f32	s13, s13, s10
+  95:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 279              		.loc 1 95 19 discriminator 1 view .LVU95
+ 280 0138 9CED007A 		vldr.32	s14, [ip]
+ 281              	.LVL27:
+ 100:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r4 = pSrc[2 * i4 + 1] + pSrc[2 * i8 + 1];
+ 282              		.loc 1 100 13 discriminator 1 view .LVU96
+ 283 013c 34EEE05A 		vsub.f32	s10, s9, s1
+ 101:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 284              		.loc 1 101 13 discriminator 1 view .LVU97
+ 285 0140 34EE254A 		vadd.f32	s8, s8, s11
+ 116:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t1 = r5 - r1;
+ 286              		.loc 1 116 19 discriminator 1 view .LVU98
+ 287 0144 33EE881A 		vadd.f32	s2, s7, s16
+  96:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = pSrc[2 * i2 + 1] + pSrc[2 * i6 + 1];
+ 288              		.loc 1 96 13 discriminator 1 view .LVU99
+ 289 0148 77EE405A 		vsub.f32	s11, s14, s0
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 290              		.loc 1 99 13 discriminator 1 view .LVU100
+ 291 014c 74EEA04A 		vadd.f32	s9, s9, s1
+ 124:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2]     = r5 + s7;
+ 292              		.loc 1 124 13 discriminator 1 view .LVU101
+ 293 0150 F0EE450A 		vmov.f32	s1, s10
+ 115:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = (s6 + s8) * C81;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 10
+
+
+ 294              		.loc 1 115 19 discriminator 1 view .LVU102
+ 295 0154 73EEC83A 		vsub.f32	s7, s7, s16
+ 123:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = s7 + s6;
+ 296              		.loc 1 123 13 discriminator 1 view .LVU103
+ 297 0158 A1EE685A 		vfms.f32	s10, s2, s17
+ 124:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2]     = r5 + s7;
+ 298              		.loc 1 124 13 discriminator 1 view .LVU104
+ 299 015c E1EE280A 		vfma.f32	s1, s2, s17
+  95:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 300              		.loc 1 95 13 discriminator 1 view .LVU105
+ 301 0160 37EE007A 		vadd.f32	s14, s14, s0
+ 302              	.LVL28:
+  96:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = pSrc[2 * i2 + 1] + pSrc[2 * i6 + 1];
+ 303              		.loc 1 96 10 is_stmt 1 discriminator 1 view .LVU106
+  97:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 304              		.loc 1 97 10 discriminator 1 view .LVU107
+  98:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s3 = pSrc[2 * i3 + 1] + pSrc[2 * i7 + 1];
+ 305              		.loc 1 98 10 discriminator 1 view .LVU108
+  99:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 306              		.loc 1 99 10 discriminator 1 view .LVU109
+ 100:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r4 = pSrc[2 * i4 + 1] + pSrc[2 * i8 + 1];
+ 307              		.loc 1 100 10 discriminator 1 view .LVU110
+ 101:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 308              		.loc 1 101 10 discriminator 1 view .LVU111
+ 102:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t2 = r1 - s3;
+ 309              		.loc 1 102 10 discriminator 1 view .LVU112
+ 103:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = r1 + s3;
+ 310              		.loc 1 103 10 discriminator 1 view .LVU113
+ 122:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = s7 - s6;
+ 311              		.loc 1 122 13 is_stmt 0 discriminator 1 view .LVU114
+ 312 0164 B0EE651A 		vmov.f32	s2, s11
+ 121:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = s5 + r2;
+ 313              		.loc 1 121 13 discriminator 1 view .LVU115
+ 314 0168 E3EEE85A 		vfms.f32	s11, s7, s17
+ 315              	.LVL29:
+ 122:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = s7 - s6;
+ 316              		.loc 1 122 13 discriminator 1 view .LVU116
+ 317 016c A3EEA81A 		vfma.f32	s2, s7, s17
+ 318              	.LVL30:
+ 106:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i1 + 1] = r1 + r2;
+ 319              		.loc 1 106 13 discriminator 1 view .LVU117
+ 320 0170 76EE843A 		vadd.f32	s7, s13, s8
+ 105:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = r2 + r4;
+ 321              		.loc 1 105 13 discriminator 1 view .LVU118
+ 322 0174 76EEC46A 		vsub.f32	s13, s13, s8
+ 323              	.LVL31:
+ 104:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s3 = r2 - r4;
+ 324              		.loc 1 104 13 discriminator 1 view .LVU119
+ 325 0178 37EE244A 		vadd.f32	s8, s14, s9
+ 326              	.LVL32:
+ 103:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = r1 + s3;
+ 327              		.loc 1 103 13 discriminator 1 view .LVU120
+ 328 017c 37EE647A 		vsub.f32	s14, s14, s9
+ 329              	.LVL33:
+ 104:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s3 = r2 - r4;
+ 330              		.loc 1 104 10 is_stmt 1 discriminator 1 view .LVU121
+ 105:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = r2 + r4;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 11
+
+
+ 331              		.loc 1 105 10 discriminator 1 view .LVU122
+ 106:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i1 + 1] = r1 + r2;
+ 332              		.loc 1 106 10 discriminator 1 view .LVU123
+ 107:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5 + 1] = r1 - r2;
+ 333              		.loc 1 107 10 discriminator 1 view .LVU124
+ 109:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7]     = t1 - s3;
+ 334              		.loc 1 109 32 is_stmt 0 discriminator 1 view .LVU125
+ 335 0180 32EEA60A 		vadd.f32	s0, s5, s13
+ 336              	.LVL34:
+ 107:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5 + 1] = r1 - r2;
+ 337              		.loc 1 107 32 discriminator 1 view .LVU126
+ 338 0184 74EE234A 		vadd.f32	s9, s8, s7
+ 110:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3 + 1] = t2 - r3;
+ 339              		.loc 1 110 32 discriminator 1 view .LVU127
+ 340 0188 72EEE66A 		vsub.f32	s13, s5, s13
+ 341              	.LVL35:
+ 108:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3]     = t1 + s3;
+ 342              		.loc 1 108 32 discriminator 1 view .LVU128
+ 343 018c 34EE634A 		vsub.f32	s8, s8, s7
+ 344              	.LVL36:
+ 111:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7 + 1] = t2 + r3;
+ 345              		.loc 1 111 32 discriminator 1 view .LVU129
+ 346 0190 77EE462A 		vsub.f32	s5, s14, s12
+ 347              	.LVL37:
+ 107:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i5 + 1] = r1 - r2;
+ 348              		.loc 1 107 27 discriminator 1 view .LVU130
+ 349 0194 CCED004A 		vstr.32	s9, [ip]
+ 350              	.LVL38:
+ 108:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3]     = t1 + s3;
+ 351              		.loc 1 108 10 is_stmt 1 discriminator 1 view .LVU131
+ 112:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = (r6 - r8) * C81;
+ 352              		.loc 1 112 32 is_stmt 0 discriminator 1 view .LVU132
+ 353 0198 36EE077A 		vadd.f32	s14, s12, s14
+ 354              	.LVL39:
+ 112:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = (r6 - r8) * C81;
+ 355              		.loc 1 112 32 discriminator 1 view .LVU133
+ 356 019c 9C44     		add	ip, ip, r3
+ 108:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3]     = t1 + s3;
+ 357              		.loc 1 108 27 discriminator 1 view .LVU134
+ 358 019e 81ED014A 		vstr.32	s8, [r1, #4]
+ 109:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7]     = t1 - s3;
+ 359              		.loc 1 109 10 is_stmt 1 discriminator 1 view .LVU135
+ 125:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8]     = r5 - s7;
+ 360              		.loc 1 125 32 is_stmt 0 discriminator 1 view .LVU136
+ 361 01a2 71EEA03A 		vadd.f32	s7, s3, s1
+ 362              	.LVL40:
+ 109:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7]     = t1 - s3;
+ 363              		.loc 1 109 27 discriminator 1 view .LVU137
+ 364 01a6 00ED010A 		vstr.32	s0, [r0, #-4]
+ 127:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4]     = t1 - s8;
+ 365              		.loc 1 127 32 discriminator 1 view .LVU138
+ 366 01aa 33EE054A 		vadd.f32	s8, s6, s10
+ 110:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3 + 1] = t2 - r3;
+ 367              		.loc 1 110 27 discriminator 1 view .LVU139
+ 368 01ae C5ED006A 		vstr.32	s13, [r5]
+ 126:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6]     = t1 + s8;
+ 369              		.loc 1 126 32 discriminator 1 view .LVU140
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 12
+
+
+ 370 01b2 71EEE04A 		vsub.f32	s9, s3, s1
+ 111:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7 + 1] = t2 + r3;
+ 371              		.loc 1 111 27 discriminator 1 view .LVU141
+ 372 01b6 C0ED002A 		vstr.32	s5, [r0]
+ 128:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2 + 1] = s5 - r7;
+ 373              		.loc 1 128 32 discriminator 1 view .LVU142
+ 374 01ba 33EE455A 		vsub.f32	s10, s6, s10
+ 112:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = (r6 - r8) * C81;
+ 375              		.loc 1 112 27 discriminator 1 view .LVU143
+ 376 01be 85ED017A 		vstr.32	s14, [r5, #4]
+ 129:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8 + 1] = s5 + r7;
+ 377              		.loc 1 129 32 discriminator 1 view .LVU144
+ 378 01c2 31EE426A 		vsub.f32	s12, s2, s4
+ 379              	.LVL41:
+ 131:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4 + 1] = t2 + r8;
+ 380              		.loc 1 131 32 discriminator 1 view .LVU145
+ 381 01c6 35EEE77A 		vsub.f32	s14, s11, s15
+ 125:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8]     = r5 - s7;
+ 382              		.loc 1 125 27 discriminator 1 view .LVU146
+ 383 01ca 44ED013A 		vstr.32	s7, [r4, #-4]
+ 130:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6 + 1] = t2 - r8;
+ 384              		.loc 1 130 32 discriminator 1 view .LVU147
+ 385 01ce 72EE016A 		vadd.f32	s13, s4, s2
+ 126:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6]     = t1 + s8;
+ 386              		.loc 1 126 27 discriminator 1 view .LVU148
+ 387 01d2 C7ED004A 		vstr.32	s9, [r7]
+ 132:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 388              		.loc 1 132 32 discriminator 1 view .LVU149
+ 389 01d6 77EEA57A 		vadd.f32	s15, s15, s11
+ 127:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4]     = t1 - s8;
+ 390              		.loc 1 127 27 discriminator 1 view .LVU150
+ 391 01da 86ED004A 		vstr.32	s8, [r6]
+ 392 01de 1944     		add	r1, r1, r3
+ 110:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i3 + 1] = t2 - r3;
+ 393              		.loc 1 110 10 is_stmt 1 discriminator 1 view .LVU151
+ 111:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i7 + 1] = t2 + r3;
+ 394              		.loc 1 111 10 discriminator 1 view .LVU152
+ 112:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r1 = (r6 - r8) * C81;
+ 395              		.loc 1 112 10 discriminator 1 view .LVU153
+ 113:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r6 = (r6 + r8) * C81;
+ 396              		.loc 1 113 10 discriminator 1 view .LVU154
+ 114:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r2 = (s6 - s8) * C81;
+ 397              		.loc 1 114 10 discriminator 1 view .LVU155
+ 115:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s6 = (s6 + s8) * C81;
+ 398              		.loc 1 115 10 discriminator 1 view .LVU156
+ 116:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t1 = r5 - r1;
+ 399              		.loc 1 116 10 discriminator 1 view .LVU157
+ 117:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r5 = r5 + r1;
+ 400              		.loc 1 117 10 discriminator 1 view .LVU158
+ 401              	.LVL42:
+ 118:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r8 = r7 - r6;
+ 402              		.loc 1 118 10 discriminator 1 view .LVU159
+ 119:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          r7 = r7 + r6;
+ 403              		.loc 1 119 10 discriminator 1 view .LVU160
+ 120:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          t2 = s5 - r2;
+ 404              		.loc 1 120 10 discriminator 1 view .LVU161
+ 121:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s5 = s5 + r2;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 13
+
+
+ 405              		.loc 1 121 10 discriminator 1 view .LVU162
+ 122:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s8 = s7 - s6;
+ 406              		.loc 1 122 10 discriminator 1 view .LVU163
+ 123:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          s7 = s7 + s6;
+ 407              		.loc 1 123 10 discriminator 1 view .LVU164
+ 124:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2]     = r5 + s7;
+ 408              		.loc 1 124 10 discriminator 1 view .LVU165
+ 125:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8]     = r5 - s7;
+ 409              		.loc 1 125 10 discriminator 1 view .LVU166
+ 126:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6]     = t1 + s8;
+ 410              		.loc 1 126 10 discriminator 1 view .LVU167
+ 127:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4]     = t1 - s8;
+ 411              		.loc 1 127 10 discriminator 1 view .LVU168
+ 128:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2 + 1] = s5 - r7;
+ 412              		.loc 1 128 10 discriminator 1 view .LVU169
+ 128:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i2 + 1] = s5 - r7;
+ 413              		.loc 1 128 27 is_stmt 0 discriminator 1 view .LVU170
+ 414 01e0 82ED005A 		vstr.32	s10, [r2]
+ 129:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8 + 1] = s5 + r7;
+ 415              		.loc 1 129 10 is_stmt 1 discriminator 1 view .LVU171
+ 416 01e4 1D44     		add	r5, r5, r3
+ 129:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i8 + 1] = s5 + r7;
+ 417              		.loc 1 129 27 is_stmt 0 discriminator 1 view .LVU172
+ 418 01e6 84ED006A 		vstr.32	s12, [r4]
+ 130:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6 + 1] = t2 - r8;
+ 419              		.loc 1 130 10 is_stmt 1 discriminator 1 view .LVU173
+ 420 01ea 1844     		add	r0, r0, r3
+ 130:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i6 + 1] = t2 - r8;
+ 421              		.loc 1 130 27 is_stmt 0 discriminator 1 view .LVU174
+ 422 01ec C7ED016A 		vstr.32	s13, [r7, #4]
+ 131:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4 + 1] = t2 + r8;
+ 423              		.loc 1 131 10 is_stmt 1 discriminator 1 view .LVU175
+ 424 01f0 1C44     		add	r4, r4, r3
+ 131:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          pSrc[2 * i4 + 1] = t2 + r8;
+ 425              		.loc 1 131 27 is_stmt 0 discriminator 1 view .LVU176
+ 426 01f2 86ED017A 		vstr.32	s14, [r6, #4]
+ 132:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 427              		.loc 1 132 10 is_stmt 1 discriminator 1 view .LVU177
+ 428 01f6 1F44     		add	r7, r7, r3
+ 132:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 429              		.loc 1 132 27 is_stmt 0 discriminator 1 view .LVU178
+ 430 01f8 C2ED017A 		vstr.32	s15, [r2, #4]
+ 134:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       } while (i1 < fftLen);
+ 431              		.loc 1 134 10 is_stmt 1 discriminator 1 view .LVU179
+ 432              	.LVL43:
+ 433              		.loc 1 135 15 discriminator 1 view .LVU180
+ 434 01fc 1E44     		add	r6, r6, r3
+ 435 01fe 1A44     		add	r2, r2, r3
+ 436              		.loc 1 135 7 is_stmt 0 discriminator 1 view .LVU181
+ 437 0200 3FF642AF 		bhi	.L2
+ 136:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 137:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       if (n2 < 8)
+ 438              		.loc 1 137 7 is_stmt 1 view .LVU182
+ 439              		.loc 1 137 10 is_stmt 0 view .LVU183
+ 440 0204 0D9A     		ldr	r2, [sp, #52]
+ 441 0206 072A     		cmp	r2, #7
+ 442 0208 40F29F81 		bls	.L1
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 14
+
+
+ 443 020c 039A     		ldr	r2, [sp, #12]
+ 444 020e 08F10808 		add	r8, r8, #8
+ 445 0212 109F     		ldr	r7, [sp, #64]
+ 446 0214 09F10800 		add	r0, r9, #8
+ 447 0218 0832     		adds	r2, r2, #8
+ 448 021a 019E     		ldr	r6, [sp, #4]
+ 449 021c 049D     		ldr	r5, [sp, #16]
+ 450 021e 9446     		mov	ip, r2
+ 451 0220 3A46     		mov	r2, r7
+ 452 0222 0836     		adds	r6, r6, #8
+ 453 0224 059C     		ldr	r4, [sp, #20]
+ 454 0226 4244     		add	r2, r2, r8
+ 455 0228 0835     		adds	r5, r5, #8
+ 456 022a 0834     		adds	r4, r4, #8
+ 457 022c 0299     		ldr	r1, [sp, #8]
+ 458 022e 0A92     		str	r2, [sp, #40]
+ 459 0230 07EB0C02 		add	r2, r7, ip
+ 460 0234 0C31     		adds	r1, r1, #12
+ 138:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          break;
+ 139:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 140:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       ia1 = 0;
+ 461              		.loc 1 140 11 view .LVU184
+ 462 0236 4FF00008 		mov	r8, #0
+ 463 023a 0992     		str	r2, [sp, #36]
+ 464 023c BA19     		adds	r2, r7, r6
+ 465 023e 0892     		str	r2, [sp, #32]
+ 466 0240 7A19     		adds	r2, r7, r5
+ 467 0242 0792     		str	r2, [sp, #28]
+ 468 0244 3A19     		adds	r2, r7, r4
+ 469 0246 0692     		str	r2, [sp, #24]
+ 470 0248 3A18     		adds	r2, r7, r0
+ 471 024a 0592     		str	r2, [sp, #20]
+ 472 024c 7A18     		adds	r2, r7, r1
+ 473 024e 0392     		str	r2, [sp, #12]
+ 474 0250 07F10C02 		add	r2, r7, #12
+ 475 0254 0492     		str	r2, [sp, #16]
+ 141:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       j = 1;
+ 476              		.loc 1 141 9 view .LVU185
+ 477 0256 0122     		movs	r2, #1
+ 478 0258 0292     		str	r2, [sp, #8]
+ 479              	.LVL44:
+ 480              	.L5:
+ 142:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 143:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       do
+ 481              		.loc 1 143 7 is_stmt 1 view .LVU186
+ 144:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       {
+ 145:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          /*  index calculation for the coefficients */
+ 146:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          id  = ia1 + twidCoefModifier;
+ 482              		.loc 1 146 10 view .LVU187
+ 483              		.loc 1 146 14 is_stmt 0 view .LVU188
+ 484 025a 0E9A     		ldr	r2, [sp, #56]
+ 147:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia1 = id;
+ 148:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia2 = ia1 + id;
+ 149:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia3 = ia2 + id;
+ 150:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia4 = ia3 + id;
+ 151:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia5 = ia4 + id;
+ 152:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia6 = ia5 + id;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 15
+
+
+ 153:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia7 = ia6 + id;
+ 154:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 155:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co2 = pCoef[2 * ia1];
+ 156:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co3 = pCoef[2 * ia2];
+ 157:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co4 = pCoef[2 * ia3];
+ 158:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co5 = pCoef[2 * ia4];
+ 159:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co6 = pCoef[2 * ia5];
+ 160:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co7 = pCoef[2 * ia6];
+ 161:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co8 = pCoef[2 * ia7];
+ 162:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si2 = pCoef[2 * ia1 + 1];
+ 163:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si3 = pCoef[2 * ia2 + 1];
+ 164:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si4 = pCoef[2 * ia3 + 1];
+ 165:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si5 = pCoef[2 * ia4 + 1];
+ 166:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si6 = pCoef[2 * ia5 + 1];
+ 167:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si7 = pCoef[2 * ia6 + 1];
+ 168:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si8 = pCoef[2 * ia7 + 1];
+ 485              		.loc 1 168 14 view .LVU189
+ 486 025c DDF80CC0 		ldr	ip, [sp, #12]
+ 146:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia1 = id;
+ 487              		.loc 1 146 14 view .LVU190
+ 488 0260 9044     		add	r8, r8, r2
+ 489              	.LVL45:
+ 147:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia1 = id;
+ 490              		.loc 1 147 10 is_stmt 1 view .LVU191
+ 148:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia3 = ia2 + id;
+ 491              		.loc 1 148 10 view .LVU192
+ 149:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia4 = ia3 + id;
+ 492              		.loc 1 149 10 view .LVU193
+ 150:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia5 = ia4 + id;
+ 493              		.loc 1 150 10 view .LVU194
+ 151:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia6 = ia5 + id;
+ 494              		.loc 1 151 10 view .LVU195
+ 152:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          ia7 = ia6 + id;
+ 495              		.loc 1 152 10 view .LVU196
+ 153:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 496              		.loc 1 153 10 view .LVU197
+ 155:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co3 = pCoef[2 * ia2];
+ 497              		.loc 1 155 10 view .LVU198
+ 498 0262 0F9A     		ldr	r2, [sp, #60]
+ 499              		.loc 1 168 14 is_stmt 0 view .LVU199
+ 500 0264 049F     		ldr	r7, [sp, #16]
+ 501 0266 02EBC802 		add	r2, r2, r8, lsl #3
+ 502 026a 059E     		ldr	r6, [sp, #20]
+ 503 026c A8EB880E 		sub	lr, r8, r8, lsl #2
+ 504              	.LVL46:
+ 505              		.loc 1 168 14 view .LVU200
+ 506 0270 069D     		ldr	r5, [sp, #24]
+ 507 0272 02EBC801 		add	r1, r2, r8, lsl #3
+ 155:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co3 = pCoef[2 * ia2];
+ 508              		.loc 1 155 14 view .LVU201
+ 509 0276 92ED00DA 		vldr.32	s26, [r2]
+ 510              	.LVL47:
+ 156:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co4 = pCoef[2 * ia3];
+ 511              		.loc 1 156 10 is_stmt 1 view .LVU202
+ 512              		.loc 1 168 14 is_stmt 0 view .LVU203
+ 513 027a 079C     		ldr	r4, [sp, #28]
+ 514 027c 01EBC802 		add	r2, r1, r8, lsl #3
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 16
+
+
+ 156:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co4 = pCoef[2 * ia3];
+ 515              		.loc 1 156 14 view .LVU204
+ 516 0280 D1ED00CA 		vldr.32	s25, [r1]
+ 517              	.LVL48:
+ 157:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co5 = pCoef[2 * ia4];
+ 518              		.loc 1 157 10 is_stmt 1 view .LVU205
+ 519              		.loc 1 168 14 is_stmt 0 view .LVU206
+ 520 0284 0898     		ldr	r0, [sp, #32]
+ 521 0286 02EBC801 		add	r1, r2, r8, lsl #3
+ 157:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co5 = pCoef[2 * ia4];
+ 522              		.loc 1 157 14 view .LVU207
+ 523 028a 92ED00CA 		vldr.32	s24, [r2]
+ 524              	.LVL49:
+ 158:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co6 = pCoef[2 * ia5];
+ 525              		.loc 1 158 10 is_stmt 1 view .LVU208
+ 526 028e 01EBC802 		add	r2, r1, r8, lsl #3
+ 158:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co6 = pCoef[2 * ia5];
+ 527              		.loc 1 158 14 is_stmt 0 view .LVU209
+ 528 0292 D1ED00BA 		vldr.32	s23, [r1]
+ 529              	.LVL50:
+ 159:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co7 = pCoef[2 * ia6];
+ 530              		.loc 1 159 10 is_stmt 1 view .LVU210
+ 531 0296 02EBC801 		add	r1, r2, r8, lsl #3
+ 159:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co7 = pCoef[2 * ia6];
+ 532              		.loc 1 159 14 is_stmt 0 view .LVU211
+ 533 029a 92ED00BA 		vldr.32	s22, [r2]
+ 534              	.LVL51:
+ 160:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co8 = pCoef[2 * ia7];
+ 535              		.loc 1 160 10 is_stmt 1 view .LVU212
+ 536 029e 01EBC802 		add	r2, r1, r8, lsl #3
+ 160:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          co8 = pCoef[2 * ia7];
+ 537              		.loc 1 160 14 is_stmt 0 view .LVU213
+ 538 02a2 D1ED00AA 		vldr.32	s21, [r1]
+ 539              	.LVL52:
+ 161:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si2 = pCoef[2 * ia1 + 1];
+ 540              		.loc 1 161 10 is_stmt 1 view .LVU214
+ 541              		.loc 1 168 14 is_stmt 0 view .LVU215
+ 542 02a6 0999     		ldr	r1, [sp, #36]
+ 543 02a8 02EB0E1E 		add	lr, r2, lr, lsl #4
+ 161:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si2 = pCoef[2 * ia1 + 1];
+ 544              		.loc 1 161 14 view .LVU216
+ 545 02ac 92ED00AA 		vldr.32	s20, [r2]
+ 546              	.LVL53:
+ 162:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si3 = pCoef[2 * ia2 + 1];
+ 547              		.loc 1 162 10 is_stmt 1 view .LVU217
+ 548              		.loc 1 168 14 is_stmt 0 view .LVU218
+ 549 02b0 0A9A     		ldr	r2, [sp, #40]
+ 550 02b2 0EEBC809 		add	r9, lr, r8, lsl #3
+ 162:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si3 = pCoef[2 * ia2 + 1];
+ 551              		.loc 1 162 14 view .LVU219
+ 552 02b6 DEED019A 		vldr.32	s19, [lr, #4]
+ 553              	.LVL54:
+ 163:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si4 = pCoef[2 * ia3 + 1];
+ 554              		.loc 1 163 10 is_stmt 1 view .LVU220
+ 555              		.loc 1 168 14 is_stmt 0 view .LVU221
+ 556 02ba 0B92     		str	r2, [sp, #44]
+ 557 02bc 09EBC802 		add	r2, r9, r8, lsl #3
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 17
+
+
+ 163:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si4 = pCoef[2 * ia3 + 1];
+ 558              		.loc 1 163 14 view .LVU222
+ 559 02c0 99ED019A 		vldr.32	s18, [r9, #4]
+ 560              	.LVL55:
+ 164:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si5 = pCoef[2 * ia4 + 1];
+ 561              		.loc 1 164 10 is_stmt 1 view .LVU223
+ 562              		.loc 1 168 14 is_stmt 0 view .LVU224
+ 563 02c4 0C91     		str	r1, [sp, #48]
+ 564 02c6 02EBC809 		add	r9, r2, r8, lsl #3
+ 164:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si5 = pCoef[2 * ia4 + 1];
+ 565              		.loc 1 164 14 view .LVU225
+ 566 02ca 92ED018A 		vldr.32	s16, [r2, #4]
+ 567              	.LVL56:
+ 165:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si6 = pCoef[2 * ia5 + 1];
+ 568              		.loc 1 165 10 is_stmt 1 view .LVU226
+ 169:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 170:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          i1 = j;
+ 569              		.loc 1 170 13 is_stmt 0 view .LVU227
+ 570 02ce DDF808E0 		ldr	lr, [sp, #8]
+ 571 02d2 09EBC802 		add	r2, r9, r8, lsl #3
+ 165:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si6 = pCoef[2 * ia5 + 1];
+ 572              		.loc 1 165 14 view .LVU228
+ 573 02d6 99ED010A 		vldr.32	s0, [r9, #4]
+ 574              	.LVL57:
+ 166:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si7 = pCoef[2 * ia6 + 1];
+ 575              		.loc 1 166 10 is_stmt 1 view .LVU229
+ 576 02da 02EBC809 		add	r9, r2, r8, lsl #3
+ 166:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si7 = pCoef[2 * ia6 + 1];
+ 577              		.loc 1 166 14 is_stmt 0 view .LVU230
+ 578 02de D2ED010A 		vldr.32	s1, [r2, #4]
+ 579              	.LVL58:
+ 167:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si8 = pCoef[2 * ia7 + 1];
+ 580              		.loc 1 167 10 is_stmt 1 view .LVU231
+ 167:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si8 = pCoef[2 * ia7 + 1];
+ 581              		.loc 1 167 14 is_stmt 0 view .LVU232
+ 582 02e2 D9ED017A 		vldr.32	s15, [r9, #4]
+ 168:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 583              		.loc 1 168 14 view .LVU233
+ 584 02e6 09EBC802 		add	r2, r9, r8, lsl #3
+ 167:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          si8 = pCoef[2 * ia7 + 1];
+ 585              		.loc 1 167 14 view .LVU234
+ 586 02ea CDED007A 		vstr.32	s15, [sp]
+ 587              	.LVL59:
+ 168:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 588              		.loc 1 168 10 is_stmt 1 view .LVU235
+ 168:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 589              		.loc 1 168 14 is_stmt 0 view .LVU236
+ 590 02ee D2ED017A 		vldr.32	s15, [r2, #4]
+ 591              	.LVL60:
+ 168:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 592              		.loc 1 168 14 view .LVU237
+ 593 02f2 DDE90B21 		ldrd	r2, r1, [sp, #44]
+ 594 02f6 CDED017A 		vstr.32	s15, [sp, #4]
+ 595 02fa 01E0     		b	.L13
+ 596              	.L14:
+ 597              		.align	2
+ 598              	.L12:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 18
+
+
+ 599 02fc F304353F 		.word	1060439283
+ 600              	.L13:
+ 601              	.LVL61:
+ 602              		.loc 1 170 10 is_stmt 1 view .LVU238
+ 603              	.L4:
+ 171:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 172:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          do
+ 604              		.loc 1 172 10 discriminator 1 view .LVU239
+ 173:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          {
+ 174:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             /*  index calculation for the input */
+ 175:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i2 = i1 + n2;
+ 605              		.loc 1 175 13 discriminator 1 view .LVU240
+ 176:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i3 = i2 + n2;
+ 606              		.loc 1 176 13 discriminator 1 view .LVU241
+ 177:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i4 = i3 + n2;
+ 607              		.loc 1 177 13 discriminator 1 view .LVU242
+ 178:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i5 = i4 + n2;
+ 608              		.loc 1 178 13 discriminator 1 view .LVU243
+ 179:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i6 = i5 + n2;
+ 609              		.loc 1 179 13 discriminator 1 view .LVU244
+ 180:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i7 = i6 + n2;
+ 610              		.loc 1 180 13 discriminator 1 view .LVU245
+ 181:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i8 = i7 + n2;
+ 611              		.loc 1 181 13 discriminator 1 view .LVU246
+ 182:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = pSrc[2 * i1] + pSrc[2 * i5];
+ 612              		.loc 1 182 13 discriminator 1 view .LVU247
+ 183:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 184:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = pSrc[2 * i2] + pSrc[2 * i6];
+ 613              		.loc 1 184 37 is_stmt 0 discriminator 1 view .LVU248
+ 614 0300 D0ED003A 		vldr.32	s7, [r0]
+ 185:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 186:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r3 = pSrc[2 * i3] + pSrc[2 * i7];
+ 187:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 188:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r4 = pSrc[2 * i4] + pSrc[2 * i8];
+ 189:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 190:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = r1 - r3;
+ 191:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = r1 + r3;
+ 192:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r3 = r2 - r4;
+ 193:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = r2 + r4;
+ 194:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i1] = r1 + r2;
+ 195:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = r1 - r2;
+ 196:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = pSrc[2 * i1 + 1] + pSrc[2 * i5 + 1];
+ 197:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 198:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = pSrc[2 * i2 + 1] + pSrc[2 * i6 + 1];
+ 199:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 200:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s3 = pSrc[2 * i3 + 1] + pSrc[2 * i7 + 1];
+ 201:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 202:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s4 = pSrc[2 * i4 + 1] + pSrc[2 * i8 + 1];
+ 203:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 204:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = s1 - s3;
+ 205:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = s1 + s3;
+ 206:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s3 = s2 - s4;
+ 207:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = s2 + s4;
+ 208:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = t1 + s3;
+ 209:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = t1 - s3;
+ 210:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i1 + 1] = s1 + s2;
+ 211:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = s1 - s2;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 19
+
+
+ 212:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = t2 - r3;
+ 213:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = t2 + r3;
+ 214:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co5 * r2;
+ 215:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si5 * s2;
+ 216:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co5 * s2;
+ 217:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si5 * r2;
+ 218:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i5]     = p1 + p2;
+ 219:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i5 + 1] = p3 - p4;
+ 220:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co3 * r1;
+ 221:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si3 * s1;
+ 222:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co3 * s1;
+ 223:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si3 * r1;
+ 224:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i3]     = p1 + p2;
+ 225:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i3 + 1] = p3 - p4;
+ 226:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co7 * t1;
+ 227:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si7 * t2;
+ 228:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co7 * t2;
+ 229:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si7 * t1;
+ 230:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i7]     = p1 + p2;
+ 231:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i7 + 1] = p3 - p4;
+ 232:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = (r6 - r8) * C81;
+ 233:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = (r6 + r8) * C81;
+ 234:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = (s6 - s8) * C81;
+ 235:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = (s6 + s8) * C81;
+ 236:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = r5 - r1;
+ 237:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = r5 + r1;
+ 238:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = r7 - r6;
+ 239:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = r7 + r6;
+ 240:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = s5 - s1;
+ 241:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = s5 + s1;
+ 242:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = s7 - s6;
+ 243:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = s7 + s6;
+ 244:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = r5 + s7;
+ 245:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = r5 - s7;
+ 246:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = t1 + s8;
+ 247:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = t1 - s8;
+ 248:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = s5 - r7;
+ 249:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = s5 + r7;
+ 250:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = t2 - r8;
+ 251:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = t2 + r8;
+ 252:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co2 * r1;
+ 253:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si2 * s1;
+ 254:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co2 * s1;
+ 255:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si2 * r1;
+ 256:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i2]     = p1 + p2;
+ 257:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i2 + 1] = p3 - p4;
+ 258:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co8 * r5;
+ 259:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si8 * s5;
+ 260:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co8 * s5;
+ 261:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si8 * r5;
+ 262:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i8]     = p1 + p2;
+ 263:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i8 + 1] = p3 - p4;
+ 264:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co6 * r6;
+ 265:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si6 * s6;
+ 266:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co6 * s6;
+ 267:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si6 * r6;
+ 268:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i6]     = p1 + p2;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 20
+
+
+ 269:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i6 + 1] = p3 - p4;
+ 270:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co4 * t1;
+ 271:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si4 * t2;
+ 272:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co4 * t2;
+ 273:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si4 * t1;
+ 274:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i4]     = p1 + p2;
+ 275:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i4 + 1] = p3 - p4;
+ 276:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 277:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             i1 += n1;
+ 615              		.loc 1 277 16 discriminator 1 view .LVU249
+ 616 0304 D644     		add	lr, lr, r10
+ 617              	.LVL62:
+ 182:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 618              		.loc 1 182 37 discriminator 1 view .LVU250
+ 619 0306 92ED007A 		vldr.32	s14, [r2]
+ 186:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 620              		.loc 1 186 37 discriminator 1 view .LVU251
+ 621 030a D4ED007A 		vldr.32	s15, [r4]
+ 278:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          } while (i1 < fftLen);
+ 622              		.loc 1 278 10 discriminator 1 view .LVU252
+ 623 030e F345     		cmp	fp, lr
+ 188:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 624              		.loc 1 188 22 discriminator 1 view .LVU253
+ 625 0310 95ED006A 		vldr.32	s12, [r5]
+ 188:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 626              		.loc 1 188 37 discriminator 1 view .LVU254
+ 627 0314 D6ED006A 		vldr.32	s13, [r6]
+ 182:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 628              		.loc 1 182 22 discriminator 1 view .LVU255
+ 629 0318 57ED014A 		vldr.32	s9, [r7, #-4]
+ 186:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 630              		.loc 1 186 22 discriminator 1 view .LVU256
+ 631 031c 1CED015A 		vldr.32	s10, [ip, #-4]
+ 184:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 632              		.loc 1 184 22 discriminator 1 view .LVU257
+ 633 0320 91ED004A 		vldr.32	s8, [r1]
+ 182:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = pSrc[2 * i1] - pSrc[2 * i5];
+ 634              		.loc 1 182 16 discriminator 1 view .LVU258
+ 635 0324 34EE872A 		vadd.f32	s4, s9, s14
+ 636              	.LVL63:
+ 183:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = pSrc[2 * i2] + pSrc[2 * i6];
+ 637              		.loc 1 183 13 is_stmt 1 discriminator 1 view .LVU259
+ 183:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = pSrc[2 * i2] + pSrc[2 * i6];
+ 638              		.loc 1 183 16 is_stmt 0 discriminator 1 view .LVU260
+ 639 0328 74EEC74A 		vsub.f32	s9, s9, s14
+ 640              	.LVL64:
+ 184:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 641              		.loc 1 184 13 is_stmt 1 discriminator 1 view .LVU261
+ 196:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 642              		.loc 1 196 22 is_stmt 0 discriminator 1 view .LVU262
+ 643 032c 97ED00FA 		vldr.32	s30, [r7]
+ 186:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 644              		.loc 1 186 16 discriminator 1 view .LVU263
+ 645 0330 35EE277A 		vadd.f32	s14, s10, s15
+ 184:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = pSrc[2 * i2] - pSrc[2 * i6];
+ 646              		.loc 1 184 16 discriminator 1 view .LVU264
+ 647 0334 74EE232A 		vadd.f32	s5, s8, s7
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 21
+
+
+ 648              	.LVL65:
+ 185:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r3 = pSrc[2 * i3] + pSrc[2 * i7];
+ 649              		.loc 1 185 13 is_stmt 1 discriminator 1 view .LVU265
+ 187:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r4 = pSrc[2 * i4] + pSrc[2 * i8];
+ 650              		.loc 1 187 16 is_stmt 0 discriminator 1 view .LVU266
+ 651 0338 35EE675A 		vsub.f32	s10, s10, s15
+ 188:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 652              		.loc 1 188 16 discriminator 1 view .LVU267
+ 653 033c 76EE267A 		vadd.f32	s15, s12, s13
+ 191:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r3 = r2 - r4;
+ 654              		.loc 1 191 16 discriminator 1 view .LVU268
+ 655 0340 72EE07EA 		vadd.f32	s29, s4, s14
+ 189:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = r1 - r3;
+ 656              		.loc 1 189 16 discriminator 1 view .LVU269
+ 657 0344 36EE666A 		vsub.f32	s12, s12, s13
+ 193:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i1] = r1 + r2;
+ 658              		.loc 1 193 16 discriminator 1 view .LVU270
+ 659 0348 32EEA73A 		vadd.f32	s6, s5, s15
+ 185:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r3 = pSrc[2 * i3] + pSrc[2 * i7];
+ 660              		.loc 1 185 16 discriminator 1 view .LVU271
+ 661 034c 34EE634A 		vsub.f32	s8, s8, s7
+ 662              	.LVL66:
+ 186:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = pSrc[2 * i3] - pSrc[2 * i7];
+ 663              		.loc 1 186 13 is_stmt 1 discriminator 1 view .LVU272
+ 187:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r4 = pSrc[2 * i4] + pSrc[2 * i8];
+ 664              		.loc 1 187 13 discriminator 1 view .LVU273
+ 188:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = pSrc[2 * i4] - pSrc[2 * i8];
+ 665              		.loc 1 188 13 discriminator 1 view .LVU274
+ 189:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = r1 - r3;
+ 666              		.loc 1 189 13 discriminator 1 view .LVU275
+ 190:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = r1 + r3;
+ 667              		.loc 1 190 13 discriminator 1 view .LVU276
+ 190:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = r1 + r3;
+ 668              		.loc 1 190 16 is_stmt 0 discriminator 1 view .LVU277
+ 669 0350 32EE472A 		vsub.f32	s4, s4, s14
+ 670              	.LVL67:
+ 191:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r3 = r2 - r4;
+ 671              		.loc 1 191 13 is_stmt 1 discriminator 1 view .LVU278
+ 192:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = r2 + r4;
+ 672              		.loc 1 192 13 discriminator 1 view .LVU279
+ 194:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = r1 - r2;
+ 673              		.loc 1 194 31 is_stmt 0 discriminator 1 view .LVU280
+ 674 0354 7EEE836A 		vadd.f32	s13, s29, s6
+ 233:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = (s6 - s8) * C81;
+ 675              		.loc 1 233 22 discriminator 1 view .LVU281
+ 676 0358 34EE067A 		vadd.f32	s14, s8, s12
+ 677              	.LVL68:
+ 239:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = s5 - s1;
+ 678              		.loc 1 239 16 discriminator 1 view .LVU282
+ 679 035c B0EE45EA 		vmov.f32	s28, s10
+ 194:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = r1 - r2;
+ 680              		.loc 1 194 26 discriminator 1 view .LVU283
+ 681 0360 47ED016A 		vstr.32	s13, [r7, #-4]
+ 682              	.LVL69:
+ 232:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = (r6 + r8) * C81;
+ 683              		.loc 1 232 22 discriminator 1 view .LVU284
+ 684 0364 34EE464A 		vsub.f32	s8, s8, s12
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 22
+
+
+ 685              	.LVL70:
+ 198:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 686              		.loc 1 198 41 discriminator 1 view .LVU285
+ 687 0368 D0ED016A 		vldr.32	s13, [r0, #4]
+ 238:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = r7 + r6;
+ 688              		.loc 1 238 16 discriminator 1 view .LVU286
+ 689 036c A7EE685A 		vfms.f32	s10, s14, s17
+ 690              	.LVL71:
+ 198:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 691              		.loc 1 198 22 discriminator 1 view .LVU287
+ 692 0370 91ED016A 		vldr.32	s12, [r1, #4]
+ 693              	.LVL72:
+ 239:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = s5 - s1;
+ 694              		.loc 1 239 16 discriminator 1 view .LVU288
+ 695 0374 A7EE28EA 		vfma.f32	s28, s14, s17
+ 696              	.LVL73:
+ 202:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 697              		.loc 1 202 41 discriminator 1 view .LVU289
+ 698 0378 D6ED013A 		vldr.32	s7, [r6, #4]
+ 237:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = r7 - r6;
+ 699              		.loc 1 237 16 discriminator 1 view .LVU290
+ 700 037c F0EE64DA 		vmov.f32	s27, s9
+ 202:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 701              		.loc 1 202 22 discriminator 1 view .LVU291
+ 702 0380 95ED017A 		vldr.32	s14, [r5, #4]
+ 199:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s3 = pSrc[2 * i3 + 1] + pSrc[2 * i7 + 1];
+ 703              		.loc 1 199 16 discriminator 1 view .LVU292
+ 704 0384 76EE66FA 		vsub.f32	s31, s12, s13
+ 196:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 705              		.loc 1 196 41 discriminator 1 view .LVU293
+ 706 0388 92ED011A 		vldr.32	s2, [r2, #4]
+ 198:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 707              		.loc 1 198 16 discriminator 1 view .LVU294
+ 708 038c 76EE266A 		vadd.f32	s13, s12, s13
+ 203:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = s1 - s3;
+ 709              		.loc 1 203 16 discriminator 1 view .LVU295
+ 710 0390 37EE636A 		vsub.f32	s12, s14, s7
+ 197:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = pSrc[2 * i2 + 1] + pSrc[2 * i6 + 1];
+ 711              		.loc 1 197 16 discriminator 1 view .LVU296
+ 712 0394 7FEE415A 		vsub.f32	s11, s30, s2
+ 237:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = r7 - r6;
+ 713              		.loc 1 237 16 discriminator 1 view .LVU297
+ 714 0398 E4EE28DA 		vfma.f32	s27, s8, s17
+ 192:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = r2 + r4;
+ 715              		.loc 1 192 16 discriminator 1 view .LVU298
+ 716 039c 72EEE72A 		vsub.f32	s5, s5, s15
+ 717              	.LVL74:
+ 193:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i1] = r1 + r2;
+ 718              		.loc 1 193 13 is_stmt 1 discriminator 1 view .LVU299
+ 194:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r2 = r1 - r2;
+ 719              		.loc 1 194 13 discriminator 1 view .LVU300
+ 195:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = pSrc[2 * i1 + 1] + pSrc[2 * i5 + 1];
+ 720              		.loc 1 195 13 discriminator 1 view .LVU301
+ 200:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 721              		.loc 1 200 22 is_stmt 0 discriminator 1 view .LVU302
+ 722 03a0 DCED007A 		vldr.32	s15, [ip]
+ 723              	.LVL75:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 23
+
+
+ 236:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = r5 + r1;
+ 724              		.loc 1 236 16 discriminator 1 view .LVU303
+ 725 03a4 E4EE684A 		vfms.f32	s9, s8, s17
+ 726              	.LVL76:
+ 200:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 727              		.loc 1 200 41 discriminator 1 view .LVU304
+ 728 03a8 94ED014A 		vldr.32	s8, [r4, #4]
+ 202:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 729              		.loc 1 202 16 discriminator 1 view .LVU305
+ 730 03ac 37EE237A 		vadd.f32	s14, s14, s7
+ 201:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s4 = pSrc[2 * i4 + 1] + pSrc[2 * i8 + 1];
+ 731              		.loc 1 201 16 discriminator 1 view .LVU306
+ 732 03b0 77EEC41A 		vsub.f32	s3, s15, s8
+ 234:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = (s6 + s8) * C81;
+ 733              		.loc 1 234 22 discriminator 1 view .LVU307
+ 734 03b4 7FEEC63A 		vsub.f32	s7, s31, s12
+ 200:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 735              		.loc 1 200 16 discriminator 1 view .LVU308
+ 736 03b8 77EE847A 		vadd.f32	s15, s15, s8
+ 235:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = r5 - r1;
+ 737              		.loc 1 235 22 discriminator 1 view .LVU309
+ 738 03bc 3FEE866A 		vadd.f32	s12, s31, s12
+ 241:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = s7 - s6;
+ 739              		.loc 1 241 16 discriminator 1 view .LVU310
+ 740 03c0 B0EE654A 		vmov.f32	s8, s11
+ 240:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = s5 + s1;
+ 741              		.loc 1 240 16 discriminator 1 view .LVU311
+ 742 03c4 E3EEE85A 		vfms.f32	s11, s7, s17
+ 196:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 743              		.loc 1 196 16 discriminator 1 view .LVU312
+ 744 03c8 3FEE01FA 		vadd.f32	s30, s30, s2
+ 241:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = s7 - s6;
+ 745              		.loc 1 241 16 discriminator 1 view .LVU313
+ 746 03cc A3EEA84A 		vfma.f32	s8, s7, s17
+ 243:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = r5 + s7;
+ 747              		.loc 1 243 16 discriminator 1 view .LVU314
+ 748 03d0 F0EE613A 		vmov.f32	s7, s3
+ 242:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = s7 + s6;
+ 749              		.loc 1 242 16 discriminator 1 view .LVU315
+ 750 03d4 E6EE681A 		vfms.f32	s3, s12, s17
+ 207:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = t1 + s3;
+ 751              		.loc 1 207 16 discriminator 1 view .LVU316
+ 752 03d8 36EE871A 		vadd.f32	s2, s13, s14
+ 243:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = r5 + s7;
+ 753              		.loc 1 243 16 discriminator 1 view .LVU317
+ 754 03dc E6EE283A 		vfma.f32	s7, s12, s17
+ 206:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = s2 + s4;
+ 755              		.loc 1 206 16 discriminator 1 view .LVU318
+ 756 03e0 36EEC77A 		vsub.f32	s14, s13, s14
+ 195:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = pSrc[2 * i1 + 1] + pSrc[2 * i5 + 1];
+ 757              		.loc 1 195 16 discriminator 1 view .LVU319
+ 758 03e4 3EEEC33A 		vsub.f32	s6, s29, s6
+ 759              	.LVL77:
+ 248:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = s5 + r7;
+ 760              		.loc 1 248 16 discriminator 1 view .LVU320
+ 761 03e8 74EE4EEA 		vsub.f32	s29, s8, s28
+ 762              	.LVL78:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 24
+
+
+ 242:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = s7 + s6;
+ 763              		.loc 1 242 16 discriminator 1 view .LVU321
+ 764 03ec B0EE616A 		vmov.f32	s12, s3
+ 205:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s3 = s2 - s4;
+ 765              		.loc 1 205 16 discriminator 1 view .LVU322
+ 766 03f0 7FEE271A 		vadd.f32	s3, s30, s15
+ 767              	.LVL79:
+ 196:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = pSrc[2 * i1 + 1] - pSrc[2 * i5 + 1];
+ 768              		.loc 1 196 13 is_stmt 1 discriminator 1 view .LVU323
+ 197:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = pSrc[2 * i2 + 1] + pSrc[2 * i6 + 1];
+ 769              		.loc 1 197 13 discriminator 1 view .LVU324
+ 198:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = pSrc[2 * i2 + 1] - pSrc[2 * i6 + 1];
+ 770              		.loc 1 198 13 discriminator 1 view .LVU325
+ 199:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s3 = pSrc[2 * i3 + 1] + pSrc[2 * i7 + 1];
+ 771              		.loc 1 199 13 discriminator 1 view .LVU326
+ 200:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = pSrc[2 * i3 + 1] - pSrc[2 * i7 + 1];
+ 772              		.loc 1 200 13 discriminator 1 view .LVU327
+ 201:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s4 = pSrc[2 * i4 + 1] + pSrc[2 * i8 + 1];
+ 773              		.loc 1 201 13 discriminator 1 view .LVU328
+ 202:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = pSrc[2 * i4 + 1] - pSrc[2 * i8 + 1];
+ 774              		.loc 1 202 13 discriminator 1 view .LVU329
+ 203:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = s1 - s3;
+ 775              		.loc 1 203 13 discriminator 1 view .LVU330
+ 204:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = s1 + s3;
+ 776              		.loc 1 204 13 discriminator 1 view .LVU331
+ 204:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = s1 + s3;
+ 777              		.loc 1 204 16 is_stmt 0 discriminator 1 view .LVU332
+ 778 03f4 7FEE677A 		vsub.f32	s15, s30, s15
+ 779              	.LVL80:
+ 205:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s3 = s2 - s4;
+ 780              		.loc 1 205 13 is_stmt 1 discriminator 1 view .LVU333
+ 206:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = s2 + s4;
+ 781              		.loc 1 206 13 discriminator 1 view .LVU334
+ 207:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = t1 + s3;
+ 782              		.loc 1 207 13 discriminator 1 view .LVU335
+ 208:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = t1 - s3;
+ 783              		.loc 1 208 13 discriminator 1 view .LVU336
+ 208:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = t1 - s3;
+ 784              		.loc 1 208 16 is_stmt 0 discriminator 1 view .LVU337
+ 785 03f8 72EE076A 		vadd.f32	s13, s4, s14
+ 786              	.LVL81:
+ 209:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i1 + 1] = s1 + s2;
+ 787              		.loc 1 209 13 is_stmt 1 discriminator 1 view .LVU338
+ 211:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = t2 - r3;
+ 788              		.loc 1 211 16 is_stmt 0 discriminator 1 view .LVU339
+ 789 03fc 31EEC1FA 		vsub.f32	s30, s3, s2
+ 209:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i1 + 1] = s1 + s2;
+ 790              		.loc 1 209 16 discriminator 1 view .LVU340
+ 791 0400 32EE477A 		vsub.f32	s14, s4, s14
+ 792              	.LVL82:
+ 210:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = s1 - s2;
+ 793              		.loc 1 210 13 is_stmt 1 discriminator 1 view .LVU341
+ 212:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = t2 + r3;
+ 794              		.loc 1 212 16 is_stmt 0 discriminator 1 view .LVU342
+ 795 0404 37EEE22A 		vsub.f32	s4, s15, s5
+ 213:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co5 * r2;
+ 796              		.loc 1 213 16 discriminator 1 view .LVU343
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 25
+
+
+ 797 0408 72EEA77A 		vadd.f32	s15, s5, s15
+ 798              	.LVL83:
+ 244:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = r5 - s7;
+ 799              		.loc 1 244 16 discriminator 1 view .LVU344
+ 800 040c 7DEEA32A 		vadd.f32	s5, s27, s7
+ 801              	.LVL84:
+ 245:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = t1 + s8;
+ 802              		.loc 1 245 16 discriminator 1 view .LVU345
+ 803 0410 7DEEE33A 		vsub.f32	s7, s27, s7
+ 250:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = t2 + r8;
+ 804              		.loc 1 250 16 discriminator 1 view .LVU346
+ 805 0414 75EEC5DA 		vsub.f32	s27, s11, s10
+ 251:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co2 * r1;
+ 806              		.loc 1 251 16 discriminator 1 view .LVU347
+ 807 0418 35EE255A 		vadd.f32	s10, s10, s11
+ 215:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co5 * s2;
+ 808              		.loc 1 215 16 discriminator 1 view .LVU348
+ 809 041c 60EE0F5A 		vmul.f32	s11, s0, s30
+ 219:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co3 * r1;
+ 810              		.loc 1 219 35 discriminator 1 view .LVU349
+ 811 0420 63EE40FA 		vnmul.f32	s31, s6, s0
+ 812              	.LVL85:
+ 249:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = t2 - r8;
+ 813              		.loc 1 249 16 discriminator 1 view .LVU350
+ 814 0424 3EEE044A 		vadd.f32	s8, s28, s8
+ 218:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i5 + 1] = p3 - p4;
+ 815              		.loc 1 218 35 discriminator 1 view .LVU351
+ 816 0428 EBEE835A 		vfma.f32	s11, s23, s6
+ 246:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = t1 - s8;
+ 817              		.loc 1 246 16 discriminator 1 view .LVU352
+ 818 042c 34EE86EA 		vadd.f32	s28, s9, s12
+ 247:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = s5 - r7;
+ 819              		.loc 1 247 16 discriminator 1 view .LVU353
+ 820 0430 74EEC64A 		vsub.f32	s9, s9, s12
+ 225:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co7 * t1;
+ 821              		.loc 1 225 35 discriminator 1 view .LVU354
+ 822 0434 26EEC96A 		vnmul.f32	s12, s13, s18
+ 219:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co3 * r1;
+ 823              		.loc 1 219 35 discriminator 1 view .LVU355
+ 824 0438 EBEE8FFA 		vfma.f32	s31, s23, s30
+ 227:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co7 * t2;
+ 825              		.loc 1 227 16 discriminator 1 view .LVU356
+ 826 043c 9DED00FA 		vldr.32	s30, [sp]
+ 210:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = s1 - s2;
+ 827              		.loc 1 210 35 discriminator 1 view .LVU357
+ 828 0440 71EE811A 		vadd.f32	s3, s3, s2
+ 829              	.LVL86:
+ 218:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i5 + 1] = p3 - p4;
+ 830              		.loc 1 218 35 discriminator 1 view .LVU358
+ 831 0444 B0EE653A 		vmov.f32	s6, s11
+ 832              	.LVL87:
+ 221:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co3 * s1;
+ 833              		.loc 1 221 16 discriminator 1 view .LVU359
+ 834 0448 69EE025A 		vmul.f32	s11, s18, s4
+ 225:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co7 * t1;
+ 835              		.loc 1 225 35 discriminator 1 view .LVU360
+ 836 044c ACEE826A 		vfma.f32	s12, s25, s4
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 26
+
+
+ 231:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = (r6 - r8) * C81;
+ 837              		.loc 1 231 35 discriminator 1 view .LVU361
+ 838 0450 9DED002A 		vldr.32	s4, [sp]
+ 227:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co7 * t2;
+ 839              		.loc 1 227 16 discriminator 1 view .LVU362
+ 840 0454 2FEE27FA 		vmul.f32	s30, s30, s15
+ 210:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s2 = s1 - s2;
+ 841              		.loc 1 210 30 discriminator 1 view .LVU363
+ 842 0458 C7ED001A 		vstr.32	s3, [r7]
+ 843              	.LVL88:
+ 224:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i3 + 1] = p3 - p4;
+ 844              		.loc 1 224 35 discriminator 1 view .LVU364
+ 845 045c ECEEA65A 		vfma.f32	s11, s25, s13
+ 218:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i5 + 1] = p3 - p4;
+ 846              		.loc 1 218 30 discriminator 1 view .LVU365
+ 847 0460 82ED003A 		vstr.32	s6, [r2]
+ 231:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = (r6 - r8) * C81;
+ 848              		.loc 1 231 35 discriminator 1 view .LVU366
+ 849 0464 27EE422A 		vnmul.f32	s4, s14, s4
+ 219:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co3 * r1;
+ 850              		.loc 1 219 30 discriminator 1 view .LVU367
+ 851 0468 C2ED01FA 		vstr.32	s31, [r2, #4]
+ 253:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co2 * s1;
+ 852              		.loc 1 253 16 discriminator 1 view .LVU368
+ 853 046c 69EEAE6A 		vmul.f32	s13, s19, s29
+ 854              	.LVL89:
+ 253:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co2 * s1;
+ 855              		.loc 1 253 16 discriminator 1 view .LVU369
+ 856 0470 1F44     		add	r7, r7, r3
+ 230:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i7 + 1] = p3 - p4;
+ 857              		.loc 1 230 35 discriminator 1 view .LVU370
+ 858 0472 AAEE87FA 		vfma.f32	s30, s21, s14
+ 859 0476 1A44     		add	r2, r2, r3
+ 257:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co8 * r5;
+ 860              		.loc 1 257 35 discriminator 1 view .LVU371
+ 861 0478 22EEE97A 		vnmul.f32	s14, s5, s19
+ 862              	.LVL90:
+ 225:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co7 * t1;
+ 863              		.loc 1 225 30 discriminator 1 view .LVU372
+ 864 047c 8CED006A 		vstr.32	s12, [ip]
+ 231:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = (r6 - r8) * C81;
+ 865              		.loc 1 231 35 discriminator 1 view .LVU373
+ 866 0480 AAEEA72A 		vfma.f32	s4, s21, s15
+ 259:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co8 * s5;
+ 867              		.loc 1 259 16 discriminator 1 view .LVU374
+ 868 0484 DDED017A 		vldr.32	s15, [sp, #4]
+ 256:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i2 + 1] = p3 - p4;
+ 869              		.loc 1 256 35 discriminator 1 view .LVU375
+ 870 0488 EDEE226A 		vfma.f32	s13, s26, s5
+ 263:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co6 * r6;
+ 871              		.loc 1 263 35 discriminator 1 view .LVU376
+ 872 048c DDED012A 		vldr.32	s5, [sp, #4]
+ 257:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co8 * r5;
+ 873              		.loc 1 257 35 discriminator 1 view .LVU377
+ 874 0490 ADEE2E7A 		vfma.f32	s14, s26, s29
+ 224:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i3 + 1] = p3 - p4;
+ 875              		.loc 1 224 30 discriminator 1 view .LVU378
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 27
+
+
+ 876 0494 4CED015A 		vstr.32	s11, [ip, #-4]
+ 259:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co8 * s5;
+ 877              		.loc 1 259 16 discriminator 1 view .LVU379
+ 878 0498 67EE847A 		vmul.f32	s15, s15, s8
+ 879 049c 9C44     		add	ip, ip, r3
+ 263:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co6 * r6;
+ 880              		.loc 1 263 35 discriminator 1 view .LVU380
+ 881 049e 63EEE22A 		vnmul.f32	s5, s7, s5
+ 230:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i7 + 1] = p3 - p4;
+ 882              		.loc 1 230 30 discriminator 1 view .LVU381
+ 883 04a2 84ED00FA 		vstr.32	s30, [r4]
+ 269:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co4 * t1;
+ 884              		.loc 1 269 35 discriminator 1 view .LVU382
+ 885 04a6 6EEE60EA 		vnmul.f32	s29, s28, s1
+ 262:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i8 + 1] = p3 - p4;
+ 886              		.loc 1 262 35 discriminator 1 view .LVU383
+ 887 04aa EAEE237A 		vfma.f32	s15, s20, s7
+ 231:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = (r6 - r8) * C81;
+ 888              		.loc 1 231 30 discriminator 1 view .LVU384
+ 889 04ae 84ED012A 		vstr.32	s4, [r4, #4]
+ 263:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co6 * r6;
+ 890              		.loc 1 263 35 discriminator 1 view .LVU385
+ 891 04b2 EAEE042A 		vfma.f32	s5, s20, s8
+ 256:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i2 + 1] = p3 - p4;
+ 892              		.loc 1 256 30 discriminator 1 view .LVU386
+ 893 04b6 C1ED006A 		vstr.32	s13, [r1]
+ 269:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co4 * t1;
+ 894              		.loc 1 269 35 discriminator 1 view .LVU387
+ 895 04ba EBEE2DEA 		vfma.f32	s29, s22, s27
+ 257:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co8 * r5;
+ 896              		.loc 1 257 30 discriminator 1 view .LVU388
+ 897 04be 81ED017A 		vstr.32	s14, [r1, #4]
+ 265:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co6 * s6;
+ 898              		.loc 1 265 16 discriminator 1 view .LVU389
+ 899 04c2 60EEAD3A 		vmul.f32	s7, s1, s27
+ 900 04c6 1C44     		add	r4, r4, r3
+ 271:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co4 * t2;
+ 901              		.loc 1 271 16 discriminator 1 view .LVU390
+ 902 04c8 28EE054A 		vmul.f32	s8, s16, s10
+ 903 04cc 1944     		add	r1, r1, r3
+ 275:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 904              		.loc 1 275 35 discriminator 1 view .LVU391
+ 905 04ce 64EEC8DA 		vnmul.f32	s27, s9, s16
+ 268:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i6 + 1] = p3 - p4;
+ 906              		.loc 1 268 35 discriminator 1 view .LVU392
+ 907 04d2 EBEE0E3A 		vfma.f32	s7, s22, s28
+ 262:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i8 + 1] = p3 - p4;
+ 908              		.loc 1 262 30 discriminator 1 view .LVU393
+ 909 04d6 C6ED007A 		vstr.32	s15, [r6]
+ 274:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i4 + 1] = p3 - p4;
+ 910              		.loc 1 274 35 discriminator 1 view .LVU394
+ 911 04da ACEE244A 		vfma.f32	s8, s24, s9
+ 211:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = t2 - r3;
+ 912              		.loc 1 211 13 is_stmt 1 discriminator 1 view .LVU395
+ 913              	.LVL91:
+ 212:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = t2 + r3;
+ 914              		.loc 1 212 13 discriminator 1 view .LVU396
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 28
+
+
+ 213:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co5 * r2;
+ 915              		.loc 1 213 13 discriminator 1 view .LVU397
+ 214:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si5 * s2;
+ 916              		.loc 1 214 13 discriminator 1 view .LVU398
+ 215:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co5 * s2;
+ 917              		.loc 1 215 13 discriminator 1 view .LVU399
+ 216:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si5 * r2;
+ 918              		.loc 1 216 13 discriminator 1 view .LVU400
+ 217:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i5]     = p1 + p2;
+ 919              		.loc 1 217 13 discriminator 1 view .LVU401
+ 218:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i5 + 1] = p3 - p4;
+ 920              		.loc 1 218 13 discriminator 1 view .LVU402
+ 219:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co3 * r1;
+ 921              		.loc 1 219 13 discriminator 1 view .LVU403
+ 220:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si3 * s1;
+ 922              		.loc 1 220 13 discriminator 1 view .LVU404
+ 221:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co3 * s1;
+ 923              		.loc 1 221 13 discriminator 1 view .LVU405
+ 222:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si3 * r1;
+ 924              		.loc 1 222 13 discriminator 1 view .LVU406
+ 223:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i3]     = p1 + p2;
+ 925              		.loc 1 223 13 discriminator 1 view .LVU407
+ 224:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i3 + 1] = p3 - p4;
+ 926              		.loc 1 224 13 discriminator 1 view .LVU408
+ 225:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co7 * t1;
+ 927              		.loc 1 225 13 discriminator 1 view .LVU409
+ 226:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si7 * t2;
+ 928              		.loc 1 226 13 discriminator 1 view .LVU410
+ 227:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co7 * t2;
+ 929              		.loc 1 227 13 discriminator 1 view .LVU411
+ 228:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si7 * t1;
+ 930              		.loc 1 228 13 discriminator 1 view .LVU412
+ 229:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i7]     = p1 + p2;
+ 931              		.loc 1 229 13 discriminator 1 view .LVU413
+ 230:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i7 + 1] = p3 - p4;
+ 932              		.loc 1 230 13 discriminator 1 view .LVU414
+ 231:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = (r6 - r8) * C81;
+ 933              		.loc 1 231 13 discriminator 1 view .LVU415
+ 232:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = (r6 + r8) * C81;
+ 934              		.loc 1 232 13 discriminator 1 view .LVU416
+ 233:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = (s6 - s8) * C81;
+ 935              		.loc 1 233 13 discriminator 1 view .LVU417
+ 234:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = (s6 + s8) * C81;
+ 936              		.loc 1 234 13 discriminator 1 view .LVU418
+ 235:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = r5 - r1;
+ 937              		.loc 1 235 13 discriminator 1 view .LVU419
+ 236:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = r5 + r1;
+ 938              		.loc 1 236 13 discriminator 1 view .LVU420
+ 237:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r8 = r7 - r6;
+ 939              		.loc 1 237 13 discriminator 1 view .LVU421
+ 238:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r7 = r7 + r6;
+ 940              		.loc 1 238 13 discriminator 1 view .LVU422
+ 239:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = s5 - s1;
+ 941              		.loc 1 239 13 discriminator 1 view .LVU423
+ 240:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = s5 + s1;
+ 942              		.loc 1 240 13 discriminator 1 view .LVU424
+ 241:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s8 = s7 - s6;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 29
+
+
+ 943              		.loc 1 241 13 discriminator 1 view .LVU425
+ 242:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s7 = s7 + s6;
+ 944              		.loc 1 242 13 discriminator 1 view .LVU426
+ 243:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r1 = r5 + s7;
+ 945              		.loc 1 243 13 discriminator 1 view .LVU427
+ 244:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r5 = r5 - s7;
+ 946              		.loc 1 244 13 discriminator 1 view .LVU428
+ 245:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             r6 = t1 + s8;
+ 947              		.loc 1 245 13 discriminator 1 view .LVU429
+ 246:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t1 = t1 - s8;
+ 948              		.loc 1 246 13 discriminator 1 view .LVU430
+ 247:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s1 = s5 - r7;
+ 949              		.loc 1 247 13 discriminator 1 view .LVU431
+ 248:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s5 = s5 + r7;
+ 950              		.loc 1 248 13 discriminator 1 view .LVU432
+ 249:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             s6 = t2 - r8;
+ 951              		.loc 1 249 13 discriminator 1 view .LVU433
+ 250:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             t2 = t2 + r8;
+ 952              		.loc 1 250 13 discriminator 1 view .LVU434
+ 251:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co2 * r1;
+ 953              		.loc 1 251 13 discriminator 1 view .LVU435
+ 252:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si2 * s1;
+ 954              		.loc 1 252 13 discriminator 1 view .LVU436
+ 253:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co2 * s1;
+ 955              		.loc 1 253 13 discriminator 1 view .LVU437
+ 254:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si2 * r1;
+ 956              		.loc 1 254 13 discriminator 1 view .LVU438
+ 255:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i2]     = p1 + p2;
+ 957              		.loc 1 255 13 discriminator 1 view .LVU439
+ 256:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i2 + 1] = p3 - p4;
+ 958              		.loc 1 256 13 discriminator 1 view .LVU440
+ 257:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co8 * r5;
+ 959              		.loc 1 257 13 discriminator 1 view .LVU441
+ 258:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si8 * s5;
+ 960              		.loc 1 258 13 discriminator 1 view .LVU442
+ 259:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co8 * s5;
+ 961              		.loc 1 259 13 discriminator 1 view .LVU443
+ 260:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si8 * r5;
+ 962              		.loc 1 260 13 discriminator 1 view .LVU444
+ 261:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i8]     = p1 + p2;
+ 963              		.loc 1 261 13 discriminator 1 view .LVU445
+ 262:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i8 + 1] = p3 - p4;
+ 964              		.loc 1 262 13 discriminator 1 view .LVU446
+ 263:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co6 * r6;
+ 965              		.loc 1 263 13 discriminator 1 view .LVU447
+ 263:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co6 * r6;
+ 966              		.loc 1 263 30 is_stmt 0 discriminator 1 view .LVU448
+ 967 04de C6ED012A 		vstr.32	s5, [r6, #4]
+ 264:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si6 * s6;
+ 968              		.loc 1 264 13 is_stmt 1 discriminator 1 view .LVU449
+ 969              	.LVL92:
+ 265:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co6 * s6;
+ 970              		.loc 1 265 13 discriminator 1 view .LVU450
+ 266:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si6 * r6;
+ 971              		.loc 1 266 13 discriminator 1 view .LVU451
+ 267:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i6]     = p1 + p2;
+ 972              		.loc 1 267 13 discriminator 1 view .LVU452
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 30
+
+
+ 268:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i6 + 1] = p3 - p4;
+ 973              		.loc 1 268 13 discriminator 1 view .LVU453
+ 275:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 974              		.loc 1 275 35 is_stmt 0 discriminator 1 view .LVU454
+ 975 04e2 ECEE05DA 		vfma.f32	s27, s24, s10
+ 976 04e6 1E44     		add	r6, r6, r3
+ 268:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i6 + 1] = p3 - p4;
+ 977              		.loc 1 268 30 discriminator 1 view .LVU455
+ 978 04e8 C0ED003A 		vstr.32	s7, [r0]
+ 269:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co4 * t1;
+ 979              		.loc 1 269 13 is_stmt 1 discriminator 1 view .LVU456
+ 269:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p1 = co4 * t1;
+ 980              		.loc 1 269 30 is_stmt 0 discriminator 1 view .LVU457
+ 981 04ec C0ED01EA 		vstr.32	s29, [r0, #4]
+ 270:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p2 = si4 * t2;
+ 982              		.loc 1 270 13 is_stmt 1 discriminator 1 view .LVU458
+ 983              	.LVL93:
+ 271:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p3 = co4 * t2;
+ 984              		.loc 1 271 13 discriminator 1 view .LVU459
+ 272:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             p4 = si4 * t1;
+ 985              		.loc 1 272 13 discriminator 1 view .LVU460
+ 273:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i4]     = p1 + p2;
+ 986              		.loc 1 273 13 discriminator 1 view .LVU461
+ 274:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i4 + 1] = p3 - p4;
+ 987              		.loc 1 274 13 discriminator 1 view .LVU462
+ 988 04f0 1844     		add	r0, r0, r3
+ 274:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****             pSrc[2 * i4 + 1] = p3 - p4;
+ 989              		.loc 1 274 30 is_stmt 0 discriminator 1 view .LVU463
+ 990 04f2 85ED004A 		vstr.32	s8, [r5]
+ 275:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 991              		.loc 1 275 13 is_stmt 1 discriminator 1 view .LVU464
+ 275:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 992              		.loc 1 275 30 is_stmt 0 discriminator 1 view .LVU465
+ 993 04f6 C5ED01DA 		vstr.32	s27, [r5, #4]
+ 277:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          } while (i1 < fftLen);
+ 994              		.loc 1 277 13 is_stmt 1 discriminator 1 view .LVU466
+ 995              	.LVL94:
+ 996              		.loc 1 278 18 discriminator 1 view .LVU467
+ 997 04fa 1D44     		add	r5, r5, r3
+ 998              		.loc 1 278 10 is_stmt 0 discriminator 1 view .LVU468
+ 999 04fc 3FF600AF 		bhi	.L4
+ 279:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 280:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****          j++;
+ 1000              		.loc 1 280 10 is_stmt 1 view .LVU469
+ 1001 0500 0A99     		ldr	r1, [sp, #40]
+ 1002              		.loc 1 280 11 is_stmt 0 view .LVU470
+ 1003 0502 029A     		ldr	r2, [sp, #8]
+ 1004 0504 0831     		adds	r1, r1, #8
+ 1005 0506 0132     		adds	r2, r2, #1
+ 1006 0508 0A91     		str	r1, [sp, #40]
+ 1007 050a 0999     		ldr	r1, [sp, #36]
+ 1008 050c 0292     		str	r2, [sp, #8]
+ 1009              	.LVL95:
+ 281:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       } while (j < n2);
+ 1010              		.loc 1 281 15 is_stmt 1 view .LVU471
+ 1011 050e 0831     		adds	r1, r1, #8
+ 1012 0510 0991     		str	r1, [sp, #36]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 31
+
+
+ 1013 0512 0899     		ldr	r1, [sp, #32]
+ 1014 0514 0831     		adds	r1, r1, #8
+ 1015 0516 0891     		str	r1, [sp, #32]
+ 1016 0518 0799     		ldr	r1, [sp, #28]
+ 1017 051a 0831     		adds	r1, r1, #8
+ 1018 051c 0791     		str	r1, [sp, #28]
+ 1019 051e 0699     		ldr	r1, [sp, #24]
+ 1020 0520 0831     		adds	r1, r1, #8
+ 1021 0522 0691     		str	r1, [sp, #24]
+ 1022 0524 0599     		ldr	r1, [sp, #20]
+ 1023 0526 0831     		adds	r1, r1, #8
+ 1024 0528 0591     		str	r1, [sp, #20]
+ 1025 052a 0499     		ldr	r1, [sp, #16]
+ 1026 052c 0831     		adds	r1, r1, #8
+ 1027 052e 0491     		str	r1, [sp, #16]
+ 1028 0530 0399     		ldr	r1, [sp, #12]
+ 1029 0532 0831     		adds	r1, r1, #8
+ 1030 0534 0391     		str	r1, [sp, #12]
+ 1031              		.loc 1 281 7 is_stmt 0 view .LVU472
+ 1032 0536 0D99     		ldr	r1, [sp, #52]
+ 1033 0538 9142     		cmp	r1, r2
+ 1034 053a 7FF48EAE 		bne	.L5
+ 282:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** 
+ 283:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****       twidCoefModifier <<= 3;
+ 1035              		.loc 1 283 7 is_stmt 1 view .LVU473
+ 1036              		.loc 1 283 24 is_stmt 0 view .LVU474
+ 1037 053e 0E9B     		ldr	r3, [sp, #56]
+ 1038 0540 8A46     		mov	r10, r1
+ 1039              	.LVL96:
+ 1040              		.loc 1 283 24 view .LVU475
+ 1041 0542 DB00     		lsls	r3, r3, #3
+ 1042 0544 9BB2     		uxth	r3, r3
+ 1043 0546 0E93     		str	r3, [sp, #56]
+ 1044              	.LVL97:
+ 284:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c ****    } while (n2 > 7);
+ 1045              		.loc 1 284 12 is_stmt 1 view .LVU476
+ 1046 0548 69E5     		b	.L6
+ 1047              	.LVL98:
+ 1048              	.L1:
+ 285:.//Libraries/CMSIS/DSP/Source/TransformFunctions/arm_cfft_radix8_f32.c **** }
+ 1049              		.loc 1 285 1 is_stmt 0 view .LVU477
+ 1050 054a 13B0     		add	sp, sp, #76
+ 1051              	.LCFI3:
+ 1052              		.cfi_def_cfa_offset 100
+ 1053              		@ sp needed
+ 1054 054c BDEC108B 		vldm	sp!, {d8-d15}
+ 1055              	.LCFI4:
+ 1056              		.cfi_restore 94
+ 1057              		.cfi_restore 95
+ 1058              		.cfi_restore 92
+ 1059              		.cfi_restore 93
+ 1060              		.cfi_restore 90
+ 1061              		.cfi_restore 91
+ 1062              		.cfi_restore 88
+ 1063              		.cfi_restore 89
+ 1064              		.cfi_restore 86
+ 1065              		.cfi_restore 87
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 32
+
+
+ 1066              		.cfi_restore 84
+ 1067              		.cfi_restore 85
+ 1068              		.cfi_restore 82
+ 1069              		.cfi_restore 83
+ 1070              		.cfi_restore 80
+ 1071              		.cfi_restore 81
+ 1072              		.cfi_def_cfa_offset 36
+ 1073 0550 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 1074              		.loc 1 285 1 view .LVU478
+ 1075              		.cfi_endproc
+ 1076              	.LFE145:
+ 1078              		.text
+ 1079              	.Letext0:
+ 1080              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 1081              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 1082              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 1083              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 1084              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 1085              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 1086              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 1087              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s 			page 33
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_cfft_radix8_f32.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s:17     .text.arm_radix8_butterfly_f32:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s:26     .text.arm_radix8_butterfly_f32:0000000000000000 arm_radix8_butterfly_f32
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s:599    .text.arm_radix8_butterfly_f32:00000000000002fc $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc6UTVUD.s:614    .text.arm_radix8_butterfly_f32:0000000000000300 $t
+
+NO UNDEFINED SYMBOLS

@@ -1,0 +1,278 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_cmplx_mag_q31.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_cmplx_mag_q31,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_cmplx_mag_q31
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_cmplx_mag_q31:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c"
+   1:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * Title:        arm_cmplx_mag_q31.c
+   4:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * Description:  Q31 complex magnitude
+   5:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @ingroup groupCmplxMath
+  33:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @addtogroup cmplx_mag
+  37:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @brief         Q31 complex magnitude.
+  42:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @param[in]     pSrc        points to input vector
+  43:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @param[out]    pDst        points to output vector
+  44:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @param[in]     numSamples  number of samples in each vector
+  45:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @return        none
+  46:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  47:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   @par           Scaling and Overflow Behavior
+  48:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****                    The function implements 1.31 by 1.31 multiplications and finally output is conve
+  49:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****                    Input down scaling is not required.
+  50:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****  */
+  51:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  52:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** void arm_cmplx_mag_q31(
+  53:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   const q31_t * pSrc,
+  54:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****         q31_t * pDst,
+  55:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****         uint32_t numSamples)
+  56:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** {
+  30              		.loc 1 56 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  57:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
+  34              		.loc 1 57 9 view .LVU1
+  58:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****         q31_t real, imag;                              /* Temporary input variables */
+  35              		.loc 1 58 9 view .LVU2
+  59:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****         q31_t acc0, acc1;                              /* Accumulators */
+  36              		.loc 1 59 9 view .LVU3
+  60:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  61:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  62:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  63:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+  64:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   blkCnt = numSamples >> 2U;
+  65:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  66:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   while (blkCnt > 0U)
+  67:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   {
+  68:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     /* C[0] = sqrt(A[0] * A[0] + A[1] * A[1]) */
+  69:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  70:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     real = *pSrc++;
+  71:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     imag = *pSrc++;
+  72:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc0 = (q31_t) (((q63_t) real * real) >> 33);
+  73:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  74:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  75:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     /* store result in 2.30 format in destination buffer. */
+  76:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     arm_sqrt_q31(acc0 + acc1, pDst++);
+  77:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  78:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     real = *pSrc++;
+  79:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     imag = *pSrc++;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s 			page 3
+
+
+  80:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc0 = (q31_t) (((q63_t) real * real) >> 33);
+  81:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  82:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     arm_sqrt_q31(acc0 + acc1, pDst++);
+  83:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  84:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     real = *pSrc++;
+  85:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     imag = *pSrc++;
+  86:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc0 = (q31_t) (((q63_t) real * real) >> 33);
+  87:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  88:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     arm_sqrt_q31(acc0 + acc1, pDst++);
+  89:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  90:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     real = *pSrc++;
+  91:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     imag = *pSrc++;
+  92:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc0 = (q31_t) (((q63_t) real * real) >> 33);
+  93:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  94:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     arm_sqrt_q31(acc0 + acc1, pDst++);
+  95:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+  96:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     /* Decrement loop counter */
+  97:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     blkCnt--;
+  98:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   }
+  99:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 100:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   /* Loop unrolling: Compute remaining outputs */
+ 101:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   blkCnt = numSamples % 0x4U;
+ 102:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 103:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** #else
+ 104:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 105:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   /* Initialize blkCnt with number of samples */
+ 106:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   blkCnt = numSamples;
+  37              		.loc 1 106 3 view .LVU4
+ 107:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 108:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 109:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 110:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   while (blkCnt > 0U)
+  38              		.loc 1 110 3 view .LVU5
+  39              		.loc 1 110 9 view .LVU6
+  40 0000 E2B1     		cbz	r2, .L9
+  56:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
+  41              		.loc 1 56 1 is_stmt 0 view .LVU7
+  42 0002 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
+  43              	.LCFI0:
+  44              		.cfi_def_cfa_offset 32
+  45              		.cfi_offset 4, -32
+  46              		.cfi_offset 5, -28
+  47              		.cfi_offset 6, -24
+  48              		.cfi_offset 7, -20
+  49              		.cfi_offset 8, -16
+  50              		.cfi_offset 9, -12
+  51              		.cfi_offset 10, -8
+  52              		.cfi_offset 14, -4
+  53 0006 8A46     		mov	r10, r1
+  54 0008 9146     		mov	r9, r2
+  55 000a 00F10808 		add	r8, r0, #8
+  56              	.LVL1:
+  57              	.L3:
+ 111:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   {
+ 112:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     /* C[0] = sqrt(A[0] * A[0] + A[1] * A[1]) */
+ 113:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 114:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     real = *pSrc++;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s 			page 4
+
+
+  58              		.loc 1 114 5 is_stmt 1 view .LVU8
+ 115:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     imag = *pSrc++;
+  59              		.loc 1 115 10 is_stmt 0 view .LVU9
+  60 000e 58F8046C 		ldr	r6, [r8, #-4]
+  61 0012 5146     		mov	r1, r10
+ 114:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     imag = *pSrc++;
+  62              		.loc 1 114 10 view .LVU10
+  63 0014 58F8084C 		ldr	r4, [r8, #-8]
+  64              	.LVL2:
+  65              		.loc 1 115 5 is_stmt 1 view .LVU11
+ 116:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc0 = (q31_t) (((q63_t) real * real) >> 33);
+  66              		.loc 1 116 5 view .LVU12
+ 117:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  67              		.loc 1 117 5 view .LVU13
+ 118:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 119:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     /* store result in 2.30 format in destination buffer. */
+ 120:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     arm_sqrt_q31(acc0 + acc1, pDst++);
+  68              		.loc 1 120 5 view .LVU14
+  69              		.loc 1 120 5 is_stmt 0 view .LVU15
+  70 0018 0AF1040A 		add	r10, r10, #4
+  71              	.LVL3:
+ 117:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  72              		.loc 1 117 35 view .LVU16
+  73 001c 86FB0667 		smull	r6, r7, r6, r6
+  74              	.LVL4:
+ 117:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  75              		.loc 1 117 35 view .LVU17
+  76 0020 08F10808 		add	r8, r8, #8
+  77              	.LVL5:
+ 116:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  78              		.loc 1 116 35 view .LVU18
+  79 0024 84FB0445 		smull	r4, r5, r4, r4
+  80              	.LVL6:
+ 117:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     acc1 = (q31_t) (((q63_t) imag * imag) >> 33);
+  81              		.loc 1 117 43 view .LVU19
+  82 0028 7810     		asrs	r0, r7, #1
+  83              		.loc 1 120 5 view .LVU20
+  84 002a 00EB6500 		add	r0, r0, r5, asr #1
+  85 002e FFF7FEFF 		bl	arm_sqrt_q31
+  86              	.LVL7:
+ 121:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 122:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     /* Decrement loop counter */
+ 123:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****     blkCnt--;
+  87              		.loc 1 123 5 is_stmt 1 view .LVU21
+ 110:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   {
+  88              		.loc 1 110 9 view .LVU22
+  89 0032 B9F10109 		subs	r9, r9, #1
+  90              	.LVL8:
+ 110:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   {
+  91              		.loc 1 110 9 is_stmt 0 view .LVU23
+  92 0036 EAD1     		bne	.L3
+ 124:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c ****   }
+ 125:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** 
+ 126:.//Libraries/CMSIS/DSP/Source/ComplexMathFunctions/arm_cmplx_mag_q31.c **** }
+  93              		.loc 1 126 1 view .LVU24
+  94 0038 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
+  95              	.LVL9:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s 			page 5
+
+
+  96              	.L9:
+  97              	.LCFI1:
+  98              		.cfi_def_cfa_offset 0
+  99              		.cfi_restore 4
+ 100              		.cfi_restore 5
+ 101              		.cfi_restore 6
+ 102              		.cfi_restore 7
+ 103              		.cfi_restore 8
+ 104              		.cfi_restore 9
+ 105              		.cfi_restore 10
+ 106              		.cfi_restore 14
+ 107              		.loc 1 126 1 view .LVU25
+ 108 003c 7047     		bx	lr
+ 109              		.cfi_endproc
+ 110              	.LFE145:
+ 112 003e 00BF     		.text
+ 113              	.Letext0:
+ 114              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 115              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 116              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 117              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 118              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 119              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 120              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 121              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_cmplx_mag_q31.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s:17     .text.arm_cmplx_mag_q31:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccJxcbMA.s:26     .text.arm_cmplx_mag_q31:0000000000000000 arm_cmplx_mag_q31
+
+UNDEFINED SYMBOLS
+arm_sqrt_q31

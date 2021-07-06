@@ -1,0 +1,324 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_min_q7.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_min_q7,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_min_q7
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_min_q7:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c"
+   1:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * Title:        arm_min_q7.c
+   4:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * Description:  Minimum value of a Q7 vector
+   5:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @ingroup groupStats
+  33:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  36:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** /**
+  37:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @addtogroup Min
+  38:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @{
+  39:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  */
+  40:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  41:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** /**
+  42:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @brief         Minimum value of a Q7 vector.
+  43:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @param[in]     pSrc       points to the input vector
+  44:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @param[in]     blockSize  number of samples in input vector
+  45:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @param[out]    pResult    minimum value returned here
+  46:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @param[out]    pIndex     index of minimum value returned here
+  47:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   @return        none
+  48:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****  */
+  49:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  50:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** void arm_min_q7(
+  51:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   const q7_t * pSrc,
+  52:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****         uint32_t blockSize,
+  53:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****         q7_t * pResult,
+  54:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****         uint32_t * pIndex)
+  55:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** {
+  30              		.loc 1 55 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  56:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****         q7_t minVal, out;                              /* Temporary variables to store the output v
+  35              		.loc 1 56 9 view .LVU1
+  57:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****         uint32_t blkCnt, outIndex;                     /* Loop counter */
+  36              		.loc 1 57 9 view .LVU2
+  58:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  59:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  60:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****         uint32_t index;                                /* index of maximum value */
+  61:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** #endif
+  62:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  63:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Initialise index value to zero. */
+  64:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   outIndex = 0U;
+  37              		.loc 1 64 3 view .LVU3
+  65:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Load first input value that act as reference value for comparision */
+  66:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   out = *pSrc++;
+  38              		.loc 1 66 3 view .LVU4
+  55:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****         q7_t minVal, out;                              /* Temporary variables to store the output v
+  39              		.loc 1 55 1 is_stmt 0 view .LVU5
+  40 0000 F0B4     		push	{r4, r5, r6, r7}
+  41              	.LCFI0:
+  42              		.cfi_def_cfa_offset 16
+  43              		.cfi_offset 4, -16
+  44              		.cfi_offset 5, -12
+  45              		.cfi_offset 6, -8
+  46              		.cfi_offset 7, -4
+  67:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  68:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s 			page 3
+
+
+  69:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Initialise index of maximum value. */
+  70:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   index = 0U;
+  71:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  72:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+  73:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   blkCnt = (blockSize - 1U) >> 2U;
+  74:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  75:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   while (blkCnt > 0U)
+  76:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   {
+  77:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     /* Initialize minVal to next consecutive values one by one */
+  78:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     minVal = *pSrc++;
+  79:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  80:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     /* compare for the minimum value */
+  81:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     if (out > minVal)
+  82:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+  83:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       /* Update the minimum value and it's index */
+  84:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       out = minVal;
+  85:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       outIndex = index + 1U;
+  86:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     }
+  87:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  88:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     minVal = *pSrc++;
+  89:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     if (out > minVal)
+  90:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+  91:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       out = minVal;
+  92:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       outIndex = index + 2U;
+  93:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     }
+  94:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  95:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     minVal = *pSrc++;
+  96:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     if (out > minVal)
+  97:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       out = minVal;
+  99:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       outIndex = index + 3U;
+ 100:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     }
+ 101:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 102:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     minVal = *pSrc++;
+ 103:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     if (out > minVal)
+ 104:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+ 105:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       out = minVal;
+ 106:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       outIndex = index + 4U;
+ 107:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     }
+ 108:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 109:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     index += 4U;
+ 110:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 111:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     /* Decrement loop counter */
+ 112:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     blkCnt--;
+ 113:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   }
+ 114:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 115:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Loop unrolling: Compute remaining outputs */
+ 116:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   blkCnt = (blockSize - 1U) % 4U;
+ 117:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 118:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** #else
+ 119:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 120:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Initialize blkCnt with number of samples */
+ 121:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   blkCnt = (blockSize - 1U);
+ 122:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 123:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 124:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 125:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   while (blkCnt > 0U)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s 			page 4
+
+
+  47              		.loc 1 125 9 view .LVU6
+  48 0002 0129     		cmp	r1, #1
+  66:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  49              		.loc 1 66 14 view .LVU7
+  50 0004 0446     		mov	r4, r0
+  51              	.LVL1:
+  66:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  52              		.loc 1 66 7 view .LVU8
+  53 0006 14F9015B 		ldrsb	r5, [r4], #1
+  54              	.LVL2:
+ 121:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  55              		.loc 1 121 3 is_stmt 1 view .LVU9
+  56              		.loc 1 125 3 view .LVU10
+  57              		.loc 1 125 9 view .LVU11
+  58 000a 12D0     		beq	.L5
+  59 000c 4618     		adds	r6, r0, r1
+  64:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Load first input value that act as reference value for comparision */
+  60              		.loc 1 64 12 is_stmt 0 view .LVU12
+  61 000e 4FF0000C 		mov	ip, #0
+  62              	.LVL3:
+  63              	.L4:
+ 126:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   {
+ 127:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     /* Initialize minVal to the next consecutive values one by one */
+ 128:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     minVal = *pSrc++;
+  64              		.loc 1 128 5 is_stmt 1 view .LVU13
+ 129:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 130:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     /* compare for the minimum value */
+ 131:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     if (out > minVal)
+ 132:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+ 133:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       /* Update the minimum value and it's index */
+ 134:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       out = minVal;
+  65              		.loc 1 134 7 view .LVU14
+ 128:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+  66              		.loc 1 128 12 is_stmt 0 view .LVU15
+  67 0012 14F9011B 		ldrsb	r1, [r4], #1
+  68              	.LVL4:
+ 131:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+  69              		.loc 1 131 5 is_stmt 1 view .LVU16
+ 135:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****       outIndex = blockSize - blkCnt;
+  70              		.loc 1 135 7 view .LVU17
+ 131:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+  71              		.loc 1 131 8 is_stmt 0 view .LVU18
+  72 0016 A942     		cmp	r1, r5
+  73 0018 04F1FF37 		add	r7, r4, #-1
+  74 001c 02DA     		bge	.L3
+  75 001e A7EB000C 		sub	ip, r7, r0
+  76              	.LVL5:
+ 131:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     {
+  77              		.loc 1 131 8 view .LVU19
+  78 0022 0D46     		mov	r5, r1
+  79              	.LVL6:
+  80              	.L3:
+ 136:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     }
+ 137:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 138:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     /* Decrement loop counter */
+ 139:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****     blkCnt--;
+  81              		.loc 1 139 5 is_stmt 1 view .LVU20
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s 			page 5
+
+
+ 125:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   {
+  82              		.loc 1 125 9 view .LVU21
+  83 0024 B442     		cmp	r4, r6
+  84 0026 F4D1     		bne	.L4
+ 140:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   }
+ 141:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** 
+ 142:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Store the minimum value and it's index into destination pointers */
+ 143:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   *pResult = out;
+  85              		.loc 1 143 3 view .LVU22
+  86              		.loc 1 143 12 is_stmt 0 view .LVU23
+  87 0028 1570     		strb	r5, [r2]
+ 144:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   *pIndex = outIndex;
+  88              		.loc 1 144 3 is_stmt 1 view .LVU24
+  89              		.loc 1 144 11 is_stmt 0 view .LVU25
+  90 002a C3F800C0 		str	ip, [r3]
+ 145:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** }
+  91              		.loc 1 145 1 view .LVU26
+  92 002e F0BC     		pop	{r4, r5, r6, r7}
+  93              	.LCFI1:
+  94              		.cfi_remember_state
+  95              		.cfi_restore 7
+  96              		.cfi_restore 6
+  97              		.cfi_restore 5
+  98              		.cfi_restore 4
+  99              		.cfi_def_cfa_offset 0
+ 100              	.LVL7:
+ 101              		.loc 1 145 1 view .LVU27
+ 102 0030 7047     		bx	lr
+ 103              	.LVL8:
+ 104              	.L5:
+ 105              	.LCFI2:
+ 106              		.cfi_restore_state
+  64:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   /* Load first input value that act as reference value for comparision */
+ 107              		.loc 1 64 12 view .LVU28
+ 108 0032 4FF0000C 		mov	ip, #0
+ 143:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   *pIndex = outIndex;
+ 109              		.loc 1 143 3 is_stmt 1 view .LVU29
+ 143:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c ****   *pIndex = outIndex;
+ 110              		.loc 1 143 12 is_stmt 0 view .LVU30
+ 111 0036 1570     		strb	r5, [r2]
+ 144:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** }
+ 112              		.loc 1 144 3 is_stmt 1 view .LVU31
+ 113              		.loc 1 145 1 is_stmt 0 view .LVU32
+ 114 0038 F0BC     		pop	{r4, r5, r6, r7}
+ 115              	.LCFI3:
+ 116              		.cfi_restore 7
+ 117              		.cfi_restore 6
+ 118              		.cfi_restore 5
+ 119              		.cfi_restore 4
+ 120              		.cfi_def_cfa_offset 0
+ 121              	.LVL9:
+ 144:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_min_q7.c **** }
+ 122              		.loc 1 144 11 view .LVU33
+ 123 003a C3F800C0 		str	ip, [r3]
+ 124              	.LVL10:
+ 125              		.loc 1 145 1 view .LVU34
+ 126 003e 7047     		bx	lr
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s 			page 6
+
+
+ 127              		.cfi_endproc
+ 128              	.LFE145:
+ 130              		.text
+ 131              	.Letext0:
+ 132              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 133              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 134              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 135              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 136              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 137              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 138              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 139              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_min_q7.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s:17     .text.arm_min_q7:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccauw6G5.s:26     .text.arm_min_q7:0000000000000000 arm_min_q7
+
+NO UNDEFINED SYMBOLS

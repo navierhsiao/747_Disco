@@ -1,0 +1,470 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_softmax_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.global	__aeabi_ldivmod
+  17              		.section	.text.arm_softmax_q15,"ax",%progbits
+  18              		.align	1
+  19              		.p2align 2,,3
+  20              		.global	arm_softmax_q15
+  21              		.arch armv7e-m
+  22              		.syntax unified
+  23              		.thumb
+  24              		.thumb_func
+  25              		.fpu fpv5-d16
+  27              	arm_softmax_q15:
+  28              	.LVL0:
+  29              	.LFB149:
+  30              		.file 1 ".//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c"
+   1:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** /*
+   2:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.
+   3:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *
+   4:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+   5:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *
+   6:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+   7:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * not use this file except in compliance with the License.
+   8:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * You may obtain a copy of the License at
+   9:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *
+  10:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  11:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *
+  12:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  13:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  14:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  15:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * See the License for the specific language governing permissions and
+  16:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * limitations under the License.
+  17:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  */
+  18:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  19:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** /* ----------------------------------------------------------------------
+  20:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * Project:      CMSIS NN Library
+  21:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * Title:        arm_softmax_q15.c
+  22:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * Description:  Q15 softmax function
+  23:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *
+  24:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * $Date:        20. February 2018
+  25:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * $Revision:    V.1.0.0
+  26:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *
+  27:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * Target Processor:  Cortex-M cores
+  28:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 2
+
+
+  29:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * -------------------------------------------------------------------- */
+  30:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  31:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** #include "arm_math.h"
+  32:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** #include "arm_nnfunctions.h"
+  33:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  34:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** /**
+  35:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  *  @ingroup groupNN
+  36:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  */
+  37:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  38:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** /**
+  39:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * @addtogroup Softmax
+  40:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  * @{
+  41:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****  */
+  42:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  43:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****   /**
+  44:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    * @brief Q15 softmax function
+  45:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    * @param[in]       vec_in      pointer to input vector
+  46:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    * @param[in]       dim_vec     input vector dimention
+  47:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    * @param[out]      p_out       pointer to output vector
+  48:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    * @return none.
+  49:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *
+  50:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    * @details
+  51:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *
+  52:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *  Here, instead of typical e based softmax, we use
+  53:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *  2-based softmax, i.e.,:
+  54:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *
+  55:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *  y_i = 2^(x_i) / sum(2^x_j)
+  56:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *
+  57:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *  The relative output will be different here.
+  58:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *  But mathematically, the gradient will be the same
+  59:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *  with a log(2) scaling factor.
+  60:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    *
+  61:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****    */
+  62:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  63:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** void arm_softmax_q15(const q15_t * vec_in, const uint16_t dim_vec, q15_t * p_out)
+  64:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** {
+  31              		.loc 1 64 1 view -0
+  32              		.cfi_startproc
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  65:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     q31_t     sum;
+  35              		.loc 1 65 5 view .LVU1
+  66:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     int16_t   i;
+  36              		.loc 1 66 5 view .LVU2
+  67:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     uint8_t   shift;
+  37              		.loc 1 67 5 view .LVU3
+  68:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     q31_t     base;
+  38              		.loc 1 68 5 view .LVU4
+  69:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     base = -1 * 0x100000;
+  39              		.loc 1 69 5 view .LVU5
+  70:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     for (i = 0; i < dim_vec; i++)
+  40              		.loc 1 70 5 view .LVU6
+  41              		.loc 1 70 17 view .LVU7
+  42              		.loc 1 70 5 is_stmt 0 view .LVU8
+  43 0000 0029     		cmp	r1, #0
+  44 0002 49D0     		beq	.L2
+  45              		.loc 1 70 12 view .LVU9
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 3
+
+
+  46 0004 0023     		movs	r3, #0
+  64:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     q31_t     sum;
+  47              		.loc 1 64 1 view .LVU10
+  48 0006 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  49              	.LCFI0:
+  50              		.cfi_def_cfa_offset 24
+  51              		.cfi_offset 4, -24
+  52              		.cfi_offset 5, -20
+  53              		.cfi_offset 6, -16
+  54              		.cfi_offset 7, -12
+  55              		.cfi_offset 8, -8
+  56              		.cfi_offset 14, -4
+  57 000a 0546     		mov	r5, r0
+  58 000c 0C46     		mov	r4, r1
+  59 000e 1746     		mov	r7, r2
+  69:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     base = -1 * 0x100000;
+  60              		.loc 1 69 10 view .LVU11
+  61 0010 DFF88880 		ldr	r8, .L23
+  62              	.LVL1:
+  63              	.L3:
+  71:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+  72:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         if (vec_in[i] > base)
+  64              		.loc 1 72 9 is_stmt 1 view .LVU12
+  65              		.loc 1 72 19 is_stmt 0 view .LVU13
+  66 0014 35F91320 		ldrsh	r2, [r5, r3, lsl #1]
+  67 0018 591C     		adds	r1, r3, #1
+  68 001a 9045     		cmp	r8, r2
+  69 001c 0BB2     		sxth	r3, r1
+  70              	.LVL2:
+  71              		.loc 1 72 19 view .LVU14
+  72 001e B8BF     		it	lt
+  73 0020 9046     		movlt	r8, r2
+  74              	.LVL3:
+  70:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+  75              		.loc 1 70 30 is_stmt 1 view .LVU15
+  70:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+  76              		.loc 1 70 17 view .LVU16
+  70:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+  77              		.loc 1 70 5 is_stmt 0 view .LVU17
+  78 0022 A342     		cmp	r3, r4
+  79 0024 F6DB     		blt	.L3
+  73:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+  74:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             base = vec_in[i];
+  75:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         }
+  76:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     }
+  77:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  78:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     /* we ignore really small values  
+  79:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****      * anyway, they will be 0 after shrinking
+  80:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****      * to q15_t
+  81:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****      */
+  82:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     base = base - 16;
+  80              		.loc 1 82 5 is_stmt 1 view .LVU18
+  81              		.loc 1 82 10 is_stmt 0 view .LVU19
+  82 0026 0021     		movs	r1, #0
+  83 0028 A8F11006 		sub	r6, r8, #16
+  84              	.LVL4:
+  83:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 4
+
+
+  84:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     sum = 0;
+  85              		.loc 1 84 5 is_stmt 1 view .LVU20
+  85:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  86:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     for (i = 0; i < dim_vec; i++)
+  86              		.loc 1 86 5 view .LVU21
+  87              		.loc 1 86 17 view .LVU22
+  87:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+  88:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         if (vec_in[i] > base)
+  89:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+  90:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             shift = (uint8_t)__USAT(vec_in[i] - base, 5);
+  91:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             sum += 0x1 << shift;
+  88              		.loc 1 91 24 is_stmt 0 view .LVU23
+  89 002c 0120     		movs	r0, #1
+  90              	.LVL5:
+  82:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  91              		.loc 1 82 10 view .LVU24
+  92 002e 0A46     		mov	r2, r1
+  93              	.LVL6:
+  94              	.L6:
+  88:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+  95              		.loc 1 88 9 is_stmt 1 view .LVU25
+  88:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+  96              		.loc 1 88 19 is_stmt 0 view .LVU26
+  97 0030 35F91130 		ldrsh	r3, [r5, r1, lsl #1]
+  88:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+  98              		.loc 1 88 12 view .LVU27
+  99 0034 B342     		cmp	r3, r6
+ 100 0036 06DD     		ble	.L5
+  90:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             sum += 0x1 << shift;
+ 101              		.loc 1 90 13 is_stmt 1 view .LVU28
+ 102              	.LBB2:
+  90:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             sum += 0x1 << shift;
+ 103              		.loc 1 90 30 view .LVU29
+ 104              	.LVL7:
+  90:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             sum += 0x1 << shift;
+ 105              		.loc 1 90 30 view .LVU30
+ 106 0038 9B1B     		subs	r3, r3, r6
+ 107              	.LVL8:
+  90:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             sum += 0x1 << shift;
+ 108              		.loc 1 90 30 is_stmt 0 view .LVU31
+ 109              		.syntax unified
+ 110              	@ 90 ".//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c" 1
+ 111 003a 83F30503 		usat r3, #5, r3
+ 112              	@ 0 "" 2
+ 113              	.LVL9:
+  90:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             sum += 0x1 << shift;
+ 114              		.loc 1 90 30 is_stmt 1 view .LVU32
+  90:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             sum += 0x1 << shift;
+ 115              		.loc 1 90 30 is_stmt 0 view .LVU33
+ 116              		.thumb
+ 117              		.syntax unified
+ 118              	.LBE2:
+ 119              		.loc 1 91 13 is_stmt 1 view .LVU34
+ 120              		.loc 1 91 24 is_stmt 0 view .LVU35
+ 121 003e DBB2     		uxtb	r3, r3
+ 122              	.LVL10:
+ 123              		.loc 1 91 24 view .LVU36
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 5
+
+
+ 124 0040 00FA03F3 		lsl	r3, r0, r3
+ 125              	.LVL11:
+ 126              		.loc 1 91 17 view .LVU37
+ 127 0044 1A44     		add	r2, r2, r3
+ 128              	.LVL12:
+ 129              	.L5:
+  86:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 130              		.loc 1 86 30 is_stmt 1 discriminator 2 view .LVU38
+ 131 0046 0131     		adds	r1, r1, #1
+ 132              	.LVL13:
+  86:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 133              		.loc 1 86 30 is_stmt 0 discriminator 2 view .LVU39
+ 134 0048 09B2     		sxth	r1, r1
+ 135              	.LVL14:
+  86:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 136              		.loc 1 86 17 is_stmt 1 discriminator 2 view .LVU40
+  86:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 137              		.loc 1 86 5 is_stmt 0 discriminator 2 view .LVU41
+ 138 004a A142     		cmp	r1, r4
+ 139 004c F0DB     		blt	.L6
+  92:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         }
+  93:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     }
+  94:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  95:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     /* This is effectively (0x1 << 32) / sum */
+  96:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     int64_t div_base = 0x100000000LL;
+ 140              		.loc 1 96 5 is_stmt 1 view .LVU42
+ 141              	.LVL15:
+  97:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     int output_base = (int32_t)(div_base / sum);
+ 142              		.loc 1 97 5 view .LVU43
+ 143              		.loc 1 97 42 is_stmt 0 view .LVU44
+ 144 004e D317     		asrs	r3, r2, #31
+ 145 0050 0020     		movs	r0, #0
+ 146 0052 0121     		movs	r1, #1
+ 147              	.LVL16:
+ 148              	.LBB3:
+  98:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+  99:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     /* Final confidence will be output_base >> ( 17 - (vec_in[i] - base) )
+ 100:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****      * so 32768 (0x1<<15) -> 100% confidence when sum = 0x1 << 16, output_base = 0x1 << 16
+ 101:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****      * and vec_in[i]-base = 16
+ 102:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****      */
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     for (i = 0; i < dim_vec; i++)
+ 104:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 105:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         if (vec_in[i] > base) 
+ 106:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+ 107:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             /* Here minimum value of 17+base-vec[i] will be 1 */
+ 108:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             shift = (uint8_t)__USAT(17+base-vec_in[i], 5);
+ 149              		.loc 1 108 30 view .LVU45
+ 150 0054 08F10108 		add	r8, r8, #1
+ 151              	.LBE3:
+  97:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     int output_base = (int32_t)(div_base / sum);
+ 152              		.loc 1 97 42 view .LVU46
+ 153 0058 FFF7FEFF 		bl	__aeabi_ldivmod
+ 154              	.LVL17:
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 155              		.loc 1 103 5 is_stmt 1 view .LVU47
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 156              		.loc 1 103 17 view .LVU48
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 6
+
+
+  97:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     int output_base = (int32_t)(div_base / sum);
+ 157              		.loc 1 97 9 is_stmt 0 view .LVU49
+ 158 005c 0022     		movs	r2, #0
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 110:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         } else
+ 111:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+ 112:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = 0;
+ 159              		.loc 1 112 22 view .LVU50
+ 160 005e 1146     		mov	r1, r2
+ 161 0060 0EE0     		b	.L10
+ 162              	.LVL18:
+ 163              	.L22:
+ 108:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 164              		.loc 1 108 13 is_stmt 1 view .LVU51
+ 165              	.LBB4:
+ 108:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 166              		.loc 1 108 30 view .LVU52
+ 108:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 167              		.loc 1 108 30 view .LVU53
+ 168 0062 A8EB0303 		sub	r3, r8, r3
+ 169              		.syntax unified
+ 170              	@ 108 ".//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c" 1
+ 171 0066 83F30503 		usat r3, #5, r3
+ 172              	@ 0 "" 2
+ 173              	.LVL19:
+ 108:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 174              		.loc 1 108 30 view .LVU54
+ 108:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 175              		.loc 1 108 30 is_stmt 0 view .LVU55
+ 176              		.thumb
+ 177              		.syntax unified
+ 178              	.LBE4:
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 179              		.loc 1 109 13 is_stmt 1 view .LVU56
+ 180              	.LBB5:
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 181              		.loc 1 109 32 view .LVU57
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 182              		.loc 1 109 32 view .LVU58
+ 183 006a DBB2     		uxtb	r3, r3
+ 184              	.LVL20:
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 185              		.loc 1 109 32 is_stmt 0 view .LVU59
+ 186 006c 40FA03F3 		asr	r3, r0, r3
+ 187              	.LVL21:
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 188              		.loc 1 109 32 view .LVU60
+ 189              		.syntax unified
+ 190              	@ 109 ".//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c" 1
+ 191 0070 03F30F03 		ssat r3, #16, r3
+ 192              	@ 0 "" 2
+ 193              	.LVL22:
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 194              		.loc 1 109 32 is_stmt 1 view .LVU61
+ 195              		.thumb
+ 196              		.syntax unified
+ 197              	.LBE5:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 7
+
+
+ 109:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****             p_out[i] = (q15_t) __SSAT((output_base >> shift), 16);
+ 198              		.loc 1 109 24 is_stmt 0 view .LVU62
+ 199 0074 27F81230 		strh	r3, [r7, r2, lsl #1]	@ movhi
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 200              		.loc 1 103 30 is_stmt 1 view .LVU63
+ 201 0078 0132     		adds	r2, r2, #1
+ 202              	.LVL23:
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 203              		.loc 1 103 30 is_stmt 0 view .LVU64
+ 204 007a 12B2     		sxth	r2, r2
+ 205              	.LVL24:
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 206              		.loc 1 103 17 is_stmt 1 view .LVU65
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 207              		.loc 1 103 5 is_stmt 0 view .LVU66
+ 208 007c A242     		cmp	r2, r4
+ 209 007e 09DA     		bge	.L21
+ 210              	.LVL25:
+ 211              	.L10:
+ 105:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+ 212              		.loc 1 105 9 is_stmt 1 view .LVU67
+ 105:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+ 213              		.loc 1 105 19 is_stmt 0 view .LVU68
+ 214 0080 35F91230 		ldrsh	r3, [r5, r2, lsl #1]
+ 105:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         {
+ 215              		.loc 1 105 12 view .LVU69
+ 216 0084 9E42     		cmp	r6, r3
+ 217 0086 ECDB     		blt	.L22
+ 218              		.loc 1 112 13 is_stmt 1 view .LVU70
+ 219              		.loc 1 112 22 is_stmt 0 view .LVU71
+ 220 0088 27F81210 		strh	r1, [r7, r2, lsl #1]	@ movhi
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 221              		.loc 1 103 30 is_stmt 1 view .LVU72
+ 222 008c 0132     		adds	r2, r2, #1
+ 223              	.LVL26:
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 224              		.loc 1 103 30 is_stmt 0 view .LVU73
+ 225 008e 12B2     		sxth	r2, r2
+ 226              	.LVL27:
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 227              		.loc 1 103 17 is_stmt 1 view .LVU74
+ 103:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 228              		.loc 1 103 5 is_stmt 0 view .LVU75
+ 229 0090 A242     		cmp	r2, r4
+ 230 0092 F5DB     		blt	.L10
+ 231              	.L21:
+ 113:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****         }
+ 114:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     }
+ 115:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+ 116:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** }
+ 232              		.loc 1 116 1 view .LVU76
+ 233 0094 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 234              	.LVL28:
+ 235              	.L2:
+ 236              	.LCFI1:
+ 237              		.cfi_def_cfa_offset 0
+ 238              		.cfi_restore 4
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 8
+
+
+ 239              		.cfi_restore 5
+ 240              		.cfi_restore 6
+ 241              		.cfi_restore 7
+ 242              		.cfi_restore 8
+ 243              		.cfi_restore 14
+  82:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+ 244              		.loc 1 82 5 is_stmt 1 view .LVU77
+  84:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+ 245              		.loc 1 84 5 view .LVU78
+  86:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 246              		.loc 1 86 5 view .LVU79
+  86:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     {
+ 247              		.loc 1 86 17 view .LVU80
+  96:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c ****     int output_base = (int32_t)(div_base / sum);
+ 248              		.loc 1 96 5 view .LVU81
+  97:.//Libraries/CMSIS/NN/Source/SoftmaxFunctions/arm_softmax_q15.c **** 
+ 249              		.loc 1 97 5 view .LVU82
+ 250 0098 FFDE     		.inst	0xdeff
+ 251              	.L24:
+ 252 009a 00BF     		.align	2
+ 253              	.L23:
+ 254 009c 0000F0FF 		.word	-1048576
+ 255              		.cfi_endproc
+ 256              	.LFE149:
+ 258              		.text
+ 259              	.Letext0:
+ 260              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 261              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 262              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 263              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 264              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 265              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 266              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 267              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ 268              		.file 10 ".//Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ 269              		.file 11 ".//Libraries/CMSIS/NN/Include/arm_nn_tables.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s 			page 9
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_softmax_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s:18     .text.arm_softmax_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s:27     .text.arm_softmax_q15:0000000000000000 arm_softmax_q15
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccOjYa1j.s:254    .text.arm_softmax_q15:000000000000009c $d
+
+UNDEFINED SYMBOLS
+__aeabi_ldivmod

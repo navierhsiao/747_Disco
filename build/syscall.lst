@@ -1,0 +1,357 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"syscall.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.ff_cre_syncobj,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	ff_cre_syncobj
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	ff_cre_syncobj:
+  27              	.LVL0:
+  28              	.LFB148:
+  29              		.file 1 ".//Libraries/FatFs/option/syscall.c"
+   1:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+   2:.//Libraries/FatFs/option/syscall.c **** /* Sample code of OS dependent controls for FatFs                         */
+   3:.//Libraries/FatFs/option/syscall.c **** /* (C)ChaN, 2014                                                          */
+   4:.//Libraries/FatFs/option/syscall.c **** /*   Portions COPYRIGHT 2017 STMicroelectronics                           */
+   5:.//Libraries/FatFs/option/syscall.c **** /*   Portions Copyright (C) 2014, ChaN, all right reserved                */
+   6:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+   7:.//Libraries/FatFs/option/syscall.c **** 
+   8:.//Libraries/FatFs/option/syscall.c **** /**
+   9:.//Libraries/FatFs/option/syscall.c ****   ******************************************************************************
+  10:.//Libraries/FatFs/option/syscall.c ****   * @attention
+  11:.//Libraries/FatFs/option/syscall.c ****   *
+  12:.//Libraries/FatFs/option/syscall.c ****   * Copyright (c) 2017 STMicroelectronics. All rights reserved.
+  13:.//Libraries/FatFs/option/syscall.c ****   *
+  14:.//Libraries/FatFs/option/syscall.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  15:.//Libraries/FatFs/option/syscall.c ****   * the "License"; You may not use this file except in compliance with the
+  16:.//Libraries/FatFs/option/syscall.c ****   * License. You may obtain a copy of the License at:
+  17:.//Libraries/FatFs/option/syscall.c ****   *                       opensource.org/licenses/BSD-3-Clause
+  18:.//Libraries/FatFs/option/syscall.c ****   *
+  19:.//Libraries/FatFs/option/syscall.c ****   ******************************************************************************
+  20:.//Libraries/FatFs/option/syscall.c **** **/
+  21:.//Libraries/FatFs/option/syscall.c **** 
+  22:.//Libraries/FatFs/option/syscall.c **** 
+  23:.//Libraries/FatFs/option/syscall.c **** 
+  24:.//Libraries/FatFs/option/syscall.c **** #include "../Inc/ff.h"
+  25:.//Libraries/FatFs/option/syscall.c **** 
+  26:.//Libraries/FatFs/option/syscall.c **** 
+  27:.//Libraries/FatFs/option/syscall.c **** #if _FS_REENTRANT
+  28:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+  29:.//Libraries/FatFs/option/syscall.c **** /* Create a Synchronization Object                                        */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s 			page 2
+
+
+  30:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+  31:.//Libraries/FatFs/option/syscall.c **** /* This function is called in f_mount() function to create a new
+  32:.//Libraries/FatFs/option/syscall.c **** /  synchronization object, such as semaphore and mutex. When a 0 is returned,
+  33:.//Libraries/FatFs/option/syscall.c **** /  the f_mount() function fails with FR_INT_ERR.
+  34:.//Libraries/FatFs/option/syscall.c **** */
+  35:.//Libraries/FatFs/option/syscall.c **** 
+  36:.//Libraries/FatFs/option/syscall.c **** int ff_cre_syncobj (	/* 1:Function succeeded, 0:Could not create the sync object */
+  37:.//Libraries/FatFs/option/syscall.c **** 	BYTE vol,			/* Corresponding volume (logical drive number) */
+  38:.//Libraries/FatFs/option/syscall.c **** 	_SYNC_t *sobj		/* Pointer to return the created sync object */
+  39:.//Libraries/FatFs/option/syscall.c **** )
+  40:.//Libraries/FatFs/option/syscall.c **** {
+  30              		.loc 1 40 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  41:.//Libraries/FatFs/option/syscall.c **** 
+  42:.//Libraries/FatFs/option/syscall.c ****     int ret;
+  34              		.loc 1 42 5 view .LVU1
+  43:.//Libraries/FatFs/option/syscall.c **** #if _USE_MUTEX
+  44:.//Libraries/FatFs/option/syscall.c **** 
+  45:.//Libraries/FatFs/option/syscall.c **** #if (osCMSIS < 0x20000U)
+  46:.//Libraries/FatFs/option/syscall.c ****     osMutexDef(MTX);
+  47:.//Libraries/FatFs/option/syscall.c ****     *sobj = osMutexCreate(osMutex(MTX));
+  48:.//Libraries/FatFs/option/syscall.c **** #else
+  49:.//Libraries/FatFs/option/syscall.c ****     *sobj = osMutexNew(NULL);
+  50:.//Libraries/FatFs/option/syscall.c **** #endif
+  51:.//Libraries/FatFs/option/syscall.c **** 
+  52:.//Libraries/FatFs/option/syscall.c **** #else
+  53:.//Libraries/FatFs/option/syscall.c **** 
+  54:.//Libraries/FatFs/option/syscall.c **** #if (osCMSIS < 0x20000U)
+  55:.//Libraries/FatFs/option/syscall.c ****     osSemaphoreDef(SEM);
+  56:.//Libraries/FatFs/option/syscall.c ****     *sobj = osSemaphoreCreate(osSemaphore(SEM), 1);
+  57:.//Libraries/FatFs/option/syscall.c **** #else
+  58:.//Libraries/FatFs/option/syscall.c ****     *sobj = osSemaphoreNew(1, 1, NULL);
+  35              		.loc 1 58 5 view .LVU2
+  40:.//Libraries/FatFs/option/syscall.c **** 
+  36              		.loc 1 40 1 is_stmt 0 view .LVU3
+  37 0000 10B5     		push	{r4, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 4, -8
+  41              		.cfi_offset 14, -4
+  40:.//Libraries/FatFs/option/syscall.c **** 
+  42              		.loc 1 40 1 view .LVU4
+  43 0002 0C46     		mov	r4, r1
+  44              		.loc 1 58 13 view .LVU5
+  45 0004 0121     		movs	r1, #1
+  46              	.LVL1:
+  47              		.loc 1 58 13 view .LVU6
+  48 0006 0022     		movs	r2, #0
+  49 0008 0846     		mov	r0, r1
+  50              	.LVL2:
+  51              		.loc 1 58 13 view .LVU7
+  52 000a FFF7FEFF 		bl	osSemaphoreNew
+  53              	.LVL3:
+  54              		.loc 1 58 11 view .LVU8
+  55 000e 2060     		str	r0, [r4]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s 			page 3
+
+
+  59:.//Libraries/FatFs/option/syscall.c **** #endif
+  60:.//Libraries/FatFs/option/syscall.c **** 
+  61:.//Libraries/FatFs/option/syscall.c **** #endif
+  62:.//Libraries/FatFs/option/syscall.c ****     ret = (*sobj != NULL);
+  56              		.loc 1 62 5 is_stmt 1 view .LVU9
+  57              	.LVL4:
+  63:.//Libraries/FatFs/option/syscall.c **** 
+  64:.//Libraries/FatFs/option/syscall.c ****     return ret;
+  58              		.loc 1 64 5 view .LVU10
+  65:.//Libraries/FatFs/option/syscall.c **** }
+  59              		.loc 1 65 1 is_stmt 0 view .LVU11
+  60 0010 0038     		subs	r0, r0, #0
+  61              	.LVL5:
+  62              		.loc 1 65 1 view .LVU12
+  63 0012 18BF     		it	ne
+  64 0014 0120     		movne	r0, #1
+  65 0016 10BD     		pop	{r4, pc}
+  66              		.loc 1 65 1 view .LVU13
+  67              		.cfi_endproc
+  68              	.LFE148:
+  70              		.section	.text.ff_del_syncobj,"ax",%progbits
+  71              		.align	1
+  72              		.p2align 2,,3
+  73              		.global	ff_del_syncobj
+  74              		.syntax unified
+  75              		.thumb
+  76              		.thumb_func
+  77              		.fpu fpv5-d16
+  79              	ff_del_syncobj:
+  80              	.LVL6:
+  81              	.LFB149:
+  66:.//Libraries/FatFs/option/syscall.c **** 
+  67:.//Libraries/FatFs/option/syscall.c **** 
+  68:.//Libraries/FatFs/option/syscall.c **** 
+  69:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+  70:.//Libraries/FatFs/option/syscall.c **** /* Delete a Synchronization Object                                        */
+  71:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+  72:.//Libraries/FatFs/option/syscall.c **** /* This function is called in f_mount() function to delete a synchronization
+  73:.//Libraries/FatFs/option/syscall.c **** /  object that created with ff_cre_syncobj() function. When a 0 is returned,
+  74:.//Libraries/FatFs/option/syscall.c **** /  the f_mount() function fails with FR_INT_ERR.
+  75:.//Libraries/FatFs/option/syscall.c **** */
+  76:.//Libraries/FatFs/option/syscall.c **** 
+  77:.//Libraries/FatFs/option/syscall.c **** int ff_del_syncobj (	/* 1:Function succeeded, 0:Could not delete due to any error */
+  78:.//Libraries/FatFs/option/syscall.c **** 	_SYNC_t sobj		/* Sync object tied to the logical drive to be deleted */
+  79:.//Libraries/FatFs/option/syscall.c **** )
+  80:.//Libraries/FatFs/option/syscall.c **** {
+  82              		.loc 1 80 1 is_stmt 1 view -0
+  83              		.cfi_startproc
+  84              		@ args = 0, pretend = 0, frame = 0
+  85              		@ frame_needed = 0, uses_anonymous_args = 0
+  81:.//Libraries/FatFs/option/syscall.c **** #if _USE_MUTEX
+  82:.//Libraries/FatFs/option/syscall.c ****     osMutexDelete (sobj);
+  83:.//Libraries/FatFs/option/syscall.c **** #else
+  84:.//Libraries/FatFs/option/syscall.c ****     osSemaphoreDelete (sobj);
+  86              		.loc 1 84 5 view .LVU15
+  80:.//Libraries/FatFs/option/syscall.c **** #if _USE_MUTEX
+  87              		.loc 1 80 1 is_stmt 0 view .LVU16
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s 			page 4
+
+
+  88 0000 08B5     		push	{r3, lr}
+  89              	.LCFI1:
+  90              		.cfi_def_cfa_offset 8
+  91              		.cfi_offset 3, -8
+  92              		.cfi_offset 14, -4
+  93              		.loc 1 84 5 view .LVU17
+  94 0002 FFF7FEFF 		bl	osSemaphoreDelete
+  95              	.LVL7:
+  85:.//Libraries/FatFs/option/syscall.c **** #endif
+  86:.//Libraries/FatFs/option/syscall.c ****     return 1;
+  96              		.loc 1 86 5 is_stmt 1 view .LVU18
+  87:.//Libraries/FatFs/option/syscall.c **** }
+  97              		.loc 1 87 1 is_stmt 0 view .LVU19
+  98 0006 0120     		movs	r0, #1
+  99 0008 08BD     		pop	{r3, pc}
+ 100              		.cfi_endproc
+ 101              	.LFE149:
+ 103 000a 00BF     		.section	.text.ff_req_grant,"ax",%progbits
+ 104              		.align	1
+ 105              		.p2align 2,,3
+ 106              		.global	ff_req_grant
+ 107              		.syntax unified
+ 108              		.thumb
+ 109              		.thumb_func
+ 110              		.fpu fpv5-d16
+ 112              	ff_req_grant:
+ 113              	.LVL8:
+ 114              	.LFB150:
+  88:.//Libraries/FatFs/option/syscall.c **** 
+  89:.//Libraries/FatFs/option/syscall.c **** 
+  90:.//Libraries/FatFs/option/syscall.c **** 
+  91:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+  92:.//Libraries/FatFs/option/syscall.c **** /* Request Grant to Access the Volume                                     */
+  93:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+  94:.//Libraries/FatFs/option/syscall.c **** /* This function is called on entering file functions to lock the volume.
+  95:.//Libraries/FatFs/option/syscall.c **** /  When a 0 is returned, the file function fails with FR_TIMEOUT.
+  96:.//Libraries/FatFs/option/syscall.c **** */
+  97:.//Libraries/FatFs/option/syscall.c **** 
+  98:.//Libraries/FatFs/option/syscall.c **** int ff_req_grant (	/* 1:Got a grant to access the volume, 0:Could not get a grant */
+  99:.//Libraries/FatFs/option/syscall.c **** 	_SYNC_t sobj	/* Sync object to wait */
+ 100:.//Libraries/FatFs/option/syscall.c **** )
+ 101:.//Libraries/FatFs/option/syscall.c **** {
+ 115              		.loc 1 101 1 is_stmt 1 view -0
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 0
+ 118              		@ frame_needed = 0, uses_anonymous_args = 0
+ 102:.//Libraries/FatFs/option/syscall.c ****   int ret = 0;
+ 119              		.loc 1 102 3 view .LVU21
+ 103:.//Libraries/FatFs/option/syscall.c **** #if (osCMSIS < 0x20000U)
+ 104:.//Libraries/FatFs/option/syscall.c **** 
+ 105:.//Libraries/FatFs/option/syscall.c **** #if _USE_MUTEX
+ 106:.//Libraries/FatFs/option/syscall.c ****   if(osMutexWait(sobj, _FS_TIMEOUT) == osOK)
+ 107:.//Libraries/FatFs/option/syscall.c **** #else
+ 108:.//Libraries/FatFs/option/syscall.c ****   if(osSemaphoreWait(sobj, _FS_TIMEOUT) == osOK)
+ 109:.//Libraries/FatFs/option/syscall.c **** #endif
+ 110:.//Libraries/FatFs/option/syscall.c **** 
+ 111:.//Libraries/FatFs/option/syscall.c **** #else
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s 			page 5
+
+
+ 112:.//Libraries/FatFs/option/syscall.c **** 
+ 113:.//Libraries/FatFs/option/syscall.c **** #if _USE_MUTEX
+ 114:.//Libraries/FatFs/option/syscall.c ****    if(osMutexAcquire(sobj, _FS_TIMEOUT) == osOK)
+ 115:.//Libraries/FatFs/option/syscall.c **** #else
+ 116:.//Libraries/FatFs/option/syscall.c ****    if(osSemaphoreAcquire(sobj, _FS_TIMEOUT) == osOK)
+ 120              		.loc 1 116 4 view .LVU22
+ 121              		.loc 1 116 7 is_stmt 0 view .LVU23
+ 122 0000 4FF47A71 		mov	r1, #1000
+ 101:.//Libraries/FatFs/option/syscall.c ****   int ret = 0;
+ 123              		.loc 1 101 1 view .LVU24
+ 124 0004 08B5     		push	{r3, lr}
+ 125              	.LCFI2:
+ 126              		.cfi_def_cfa_offset 8
+ 127              		.cfi_offset 3, -8
+ 128              		.cfi_offset 14, -4
+ 129              		.loc 1 116 7 view .LVU25
+ 130 0006 FFF7FEFF 		bl	osSemaphoreAcquire
+ 131              	.LVL9:
+ 117:.//Libraries/FatFs/option/syscall.c **** #endif
+ 118:.//Libraries/FatFs/option/syscall.c **** 
+ 119:.//Libraries/FatFs/option/syscall.c **** #endif
+ 120:.//Libraries/FatFs/option/syscall.c ****   {
+ 121:.//Libraries/FatFs/option/syscall.c ****     ret = 1;
+ 122:.//Libraries/FatFs/option/syscall.c ****   }
+ 123:.//Libraries/FatFs/option/syscall.c **** 
+ 124:.//Libraries/FatFs/option/syscall.c ****   return ret;
+ 132              		.loc 1 124 3 is_stmt 1 view .LVU26
+ 125:.//Libraries/FatFs/option/syscall.c **** }
+ 133              		.loc 1 125 1 is_stmt 0 view .LVU27
+ 134 000a B0FA80F0 		clz	r0, r0
+ 135              	.LVL10:
+ 136              		.loc 1 125 1 view .LVU28
+ 137 000e 4009     		lsrs	r0, r0, #5
+ 138 0010 08BD     		pop	{r3, pc}
+ 139              		.cfi_endproc
+ 140              	.LFE150:
+ 142 0012 00BF     		.section	.text.ff_rel_grant,"ax",%progbits
+ 143              		.align	1
+ 144              		.p2align 2,,3
+ 145              		.global	ff_rel_grant
+ 146              		.syntax unified
+ 147              		.thumb
+ 148              		.thumb_func
+ 149              		.fpu fpv5-d16
+ 151              	ff_rel_grant:
+ 152              	.LVL11:
+ 153              	.LFB151:
+ 126:.//Libraries/FatFs/option/syscall.c **** 
+ 127:.//Libraries/FatFs/option/syscall.c **** 
+ 128:.//Libraries/FatFs/option/syscall.c **** 
+ 129:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+ 130:.//Libraries/FatFs/option/syscall.c **** /* Release Grant to Access the Volume                                     */
+ 131:.//Libraries/FatFs/option/syscall.c **** /*------------------------------------------------------------------------*/
+ 132:.//Libraries/FatFs/option/syscall.c **** /* This function is called on leaving file functions to unlock the volume.
+ 133:.//Libraries/FatFs/option/syscall.c **** */
+ 134:.//Libraries/FatFs/option/syscall.c **** 
+ 135:.//Libraries/FatFs/option/syscall.c **** void ff_rel_grant (
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s 			page 6
+
+
+ 136:.//Libraries/FatFs/option/syscall.c **** 	_SYNC_t sobj	/* Sync object to be signaled */
+ 137:.//Libraries/FatFs/option/syscall.c **** )
+ 138:.//Libraries/FatFs/option/syscall.c **** {
+ 154              		.loc 1 138 1 is_stmt 1 view -0
+ 155              		.cfi_startproc
+ 156              		@ args = 0, pretend = 0, frame = 0
+ 157              		@ frame_needed = 0, uses_anonymous_args = 0
+ 158              		@ link register save eliminated.
+ 139:.//Libraries/FatFs/option/syscall.c **** #if _USE_MUTEX
+ 140:.//Libraries/FatFs/option/syscall.c ****   osMutexRelease(sobj);
+ 141:.//Libraries/FatFs/option/syscall.c **** #else
+ 142:.//Libraries/FatFs/option/syscall.c ****   osSemaphoreRelease(sobj);
+ 159              		.loc 1 142 3 view .LVU30
+ 160 0000 FFF7FEBF 		b	osSemaphoreRelease
+ 161              	.LVL12:
+ 162              		.loc 1 142 3 is_stmt 0 view .LVU31
+ 163              		.cfi_endproc
+ 164              	.LFE151:
+ 166              		.text
+ 167              	.Letext0:
+ 168              		.file 2 ".//Libraries/FatFs/option/../Inc/integer.h"
+ 169              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 170              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 171              		.file 5 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
+ 172              		.file 6 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 173              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 174              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 175              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 176              		.file 10 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/ree
+ 177              		.file 11 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 178              		.file 12 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 179              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 180              		.file 14 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 181              		.file 15 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 182              		.file 16 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 syscall.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:17     .text.ff_cre_syncobj:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:26     .text.ff_cre_syncobj:0000000000000000 ff_cre_syncobj
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:71     .text.ff_del_syncobj:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:79     .text.ff_del_syncobj:0000000000000000 ff_del_syncobj
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:104    .text.ff_req_grant:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:112    .text.ff_req_grant:0000000000000000 ff_req_grant
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:143    .text.ff_rel_grant:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccQOxyRK.s:151    .text.ff_rel_grant:0000000000000000 ff_rel_grant
+
+UNDEFINED SYMBOLS
+osSemaphoreNew
+osSemaphoreDelete
+osSemaphoreAcquire
+osSemaphoreRelease

@@ -1,0 +1,732 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_fir_decimate_fast_q31.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_fir_decimate_fast_q31,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_fir_decimate_fast_q31
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_fir_decimate_fast_q31:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c"
+   1:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * Title:        arm_fir_decimate_fast_q31.c
+   4:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * Description:  Fast Q31 FIR Decimator
+   5:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @ingroup groupFilters
+  33:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @addtogroup FIR_decimate
+  37:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @brief         Processing function for the Q31 FIR decimator (fast variant).
+  42:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @param[in]     S          points to an instance of the Q31 FIR decimator structure
+  43:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @param[in]     pSrc       points to the block of input data
+  44:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @param[out]    pDst       points to the block of output data
+  45:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @param[in]     blockSize  number of samples to process
+  46:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @return        none
+  47:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  48:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @par           Scaling and Overflow Behavior
+  49:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    This function is optimized for speed at the expense of fixed-point precision and
+  50:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    The result of each 1.31 x 1.31 multiplication is truncated to 2.30 format.
+  51:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    These intermediate results are added to a 2.30 accumulator.
+  52:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    Finally, the accumulator is saturated and converted to a 1.31 result.
+  53:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    The fast version has the same overflow behavior as the standard version and prov
+  54:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    In order to avoid overflows completely the input signal must be scaled down by l
+  55:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  56:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   @remark
+  57:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    Refer to \ref arm_fir_decimate_q31() for a slower implementation of this functio
+  58:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    Both the slow and the fast versions use the same instance structure.
+  59:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****                    Use function \ref arm_fir_decimate_init_q31() to initialize the filter structure
+  60:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****  */
+  61:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  62:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** void arm_fir_decimate_fast_q31(
+  63:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const arm_fir_decimate_instance_q31 * S,
+  64:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t * pSrc,
+  65:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t * pDst,
+  66:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         uint32_t blockSize)
+  67:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** {
+  30              		.loc 1 67 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 24
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *pState = S->pState;                     /* State pointer */
+  34              		.loc 1 68 9 view .LVU1
+  67:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *pState = S->pState;                     /* State pointer */
+  35              		.loc 1 67 1 is_stmt 0 view .LVU2
+  36 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 36
+  39              		.cfi_offset 4, -36
+  40              		.cfi_offset 5, -32
+  41              		.cfi_offset 6, -28
+  42              		.cfi_offset 7, -24
+  43              		.cfi_offset 8, -20
+  44              		.cfi_offset 9, -16
+  45              		.cfi_offset 10, -12
+  46              		.cfi_offset 11, -8
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 3
+
+
+  47              		.cfi_offset 14, -4
+  48 0004 8846     		mov	r8, r1
+  69:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+  70:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *pStateCur;                              /* Points to the current sample of the state
+  71:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *px0;                                    /* Temporary pointer for state buffer */
+  72:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pb;                                     /* Temporary pointer for coefficient buffer 
+  73:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t x0, c0;                                  /* Temporary variables to hold state and coe
+  74:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q63_t acc0;                                    /* Accumulator */
+  75:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         uint32_t numTaps = S->numTaps;                 /* Number of filter coefficients in the filt
+  76:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         uint32_t i, tapCnt, blkCnt, outBlockSize = blockSize / S->M;  /* Loop counters */
+  49              		.loc 1 76 65 view .LVU3
+  50 0006 0178     		ldrb	r1, [r0]	@ zero_extendqisi2
+  51              	.LVL1:
+  75:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         uint32_t i, tapCnt, blkCnt, outBlockSize = blockSize / S->M;  /* Loop counters */
+  52              		.loc 1 75 18 view .LVU4
+  53 0008 4788     		ldrh	r7, [r0, #2]
+  77:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  78:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  79:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *px1, *px2, *px3;
+  80:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t x1, x2, x3;
+  81:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q63_t acc1, acc2, acc3;
+  82:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #endif
+  83:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  84:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* S->pState buffer contains previous frame (numTaps - 1) samples */
+  85:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* pStateCur points to the location where the new input data should be written */
+  86:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   pStateCur = S->pState + (numTaps - 1U);
+  54              		.loc 1 86 25 view .LVU5
+  55 000a 6FF0404E 		mvn	lr, #-1073741824
+  67:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *pState = S->pState;                     /* State pointer */
+  56              		.loc 1 67 1 view .LVU6
+  57 000e 87B0     		sub	sp, sp, #28
+  58              	.LCFI1:
+  59              		.cfi_def_cfa_offset 64
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+  60              		.loc 1 68 16 view .LVU7
+  61 0010 8468     		ldr	r4, [r0, #8]
+  62              		.loc 1 86 25 view .LVU8
+  63 0012 BE44     		add	lr, lr, r7
+  69:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *pStateCur;                              /* Points to the current sample of the state
+  64              		.loc 1 69 16 view .LVU9
+  65 0014 4068     		ldr	r0, [r0, #4]
+  66              	.LVL2:
+  87:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  88:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  89:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  90:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Loop unrolling: Compute 4 samples at a time */
+  91:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   blkCnt = outBlockSize >> 2U;
+  92:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  93:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Samples loop unrolled by 4 */
+  94:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   while (blkCnt > 0U)
+  95:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+  96:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Copy 4 * decimation factor number of new input samples into the state buffer */
+  97:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     i = S->M * 4;
+  98:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  99:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     do
+ 100:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 101:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       *pStateCur++ = *pSrc++;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 4
+
+
+ 102:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 103:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     } while (--i);
+ 104:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 105:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Set accumulators to zero */
+ 106:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     acc0 = 0;
+ 107:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     acc1 = 0;
+ 108:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     acc2 = 0;
+ 109:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     acc3 = 0;
+ 110:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 111:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Initialize state pointer for all the samples */
+ 112:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     px0 = pState;
+ 113:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     px1 = pState + S->M;
+ 114:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     px2 = pState + 2 * S->M;
+ 115:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     px3 = pState + 3 * S->M;
+ 116:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 117:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Initialize coeff pointer */
+ 118:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     pb = pCoeffs;
+ 119:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 120:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Loop unrolling: Compute 4 taps at a time */
+ 121:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     tapCnt = numTaps >> 2U;
+ 122:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 123:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     while (tapCnt > 0U)
+ 124:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 125:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-1] coefficient */
+ 126:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *(pb++);
+ 127:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 128:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-1] sample for acc0 */
+ 129:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *(px0++);
+ 130:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-1] sample for acc1 */
+ 131:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x1 = *(px1++);
+ 132:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-1] sample for acc2 */
+ 133:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x2 = *(px2++);
+ 134:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-1] sample for acc3 */
+ 135:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x3 = *(px3++);
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 137:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 138:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 139:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc1 = (q31_t) ((((q63_t) acc1 << 32) + ((q63_t) x1 * c0)) >> 32);
+ 140:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc2 = (q31_t) ((((q63_t) acc2 << 32) + ((q63_t) x2 * c0)) >> 32);
+ 141:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc3 = (q31_t) ((((q63_t) acc3 << 32) + ((q63_t) x3 * c0)) >> 32);
+ 142:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 143:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-2] coefficient */
+ 144:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *(pb++);
+ 145:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 146:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-2] sample for acc0, acc1, acc2, acc3 */
+ 147:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *(px0++);
+ 148:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x1 = *(px1++);
+ 149:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x2 = *(px2++);
+ 150:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x3 = *(px3++);
+ 151:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 152:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 153:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 154:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc1 = (q31_t) ((((q63_t) acc1 << 32) + ((q63_t) x1 * c0)) >> 32);
+ 155:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc2 = (q31_t) ((((q63_t) acc2 << 32) + ((q63_t) x2 * c0)) >> 32);
+ 156:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc3 = (q31_t) ((((q63_t) acc3 << 32) + ((q63_t) x3 * c0)) >> 32);
+ 157:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 158:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-3] coefficient */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 5
+
+
+ 159:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *(pb++);
+ 160:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 161:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-3] sample acc0, acc1, acc2, acc3 */
+ 162:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *(px0++);
+ 163:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x1 = *(px1++);
+ 164:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x2 = *(px2++);
+ 165:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x3 = *(px3++);
+ 166:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 167:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 168:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 169:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc1 = (q31_t) ((((q63_t) acc1 << 32) + ((q63_t) x1 * c0)) >> 32);
+ 170:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc2 = (q31_t) ((((q63_t) acc2 << 32) + ((q63_t) x2 * c0)) >> 32);
+ 171:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc3 = (q31_t) ((((q63_t) acc3 << 32) + ((q63_t) x3 * c0)) >> 32);
+ 172:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 173:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-4] coefficient */
+ 174:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *(pb++);
+ 175:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 176:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-4] sample acc0, acc1, acc2, acc3 */
+ 177:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *(px0++);
+ 178:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x1 = *(px1++);
+ 179:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x2 = *(px2++);
+ 180:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x3 = *(px3++);
+ 181:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 182:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 183:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 184:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc1 = (q31_t) ((((q63_t) acc1 << 32) + ((q63_t) x1 * c0)) >> 32);
+ 185:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc2 = (q31_t) ((((q63_t) acc2 << 32) + ((q63_t) x2 * c0)) >> 32);
+ 186:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc3 = (q31_t) ((((q63_t) acc3 << 32) + ((q63_t) x3 * c0)) >> 32);
+ 187:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 188:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Decrement loop counter */
+ 189:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       tapCnt--;
+ 190:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     }
+ 191:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 192:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Loop unrolling: Compute remaining taps */
+ 193:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     tapCnt = numTaps % 0x4U;
+ 194:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 195:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     while (tapCnt > 0U)
+ 196:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 197:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read coefficients */
+ 198:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *(pb++);
+ 199:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 200:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Fetch state variables for acc0, acc1, acc2, acc3 */
+ 201:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *(px0++);
+ 202:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x1 = *(px1++);
+ 203:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x2 = *(px2++);
+ 204:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x3 = *(px3++);
+ 205:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 206:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 207:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 208:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc1 = (q31_t) ((((q63_t) acc1 << 32) + ((q63_t) x1 * c0)) >> 32);
+ 209:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc2 = (q31_t) ((((q63_t) acc2 << 32) + ((q63_t) x2 * c0)) >> 32);
+ 210:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc3 = (q31_t) ((((q63_t) acc3 << 32) + ((q63_t) x3 * c0)) >> 32);
+ 211:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 212:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Decrement loop counter */
+ 213:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       tapCnt--;
+ 214:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     }
+ 215:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 6
+
+
+ 216:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Advance the state pointer by the decimation factor
+ 217:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****      * to process the next group of decimation factor number samples */
+ 218:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     pState = pState + S->M * 4;
+ 219:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 220:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* The result is in the accumulator, store in the destination buffer. */
+ 221:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pDst++ = (q31_t) (acc0 << 1);
+ 222:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pDst++ = (q31_t) (acc1 << 1);
+ 223:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pDst++ = (q31_t) (acc2 << 1);
+ 224:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pDst++ = (q31_t) (acc3 << 1);
+ 225:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 226:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Decrement loop counter */
+ 227:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     blkCnt--;
+ 228:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   }
+ 229:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 230:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Loop unrolling: Compute remaining samples */
+ 231:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   blkCnt = outBlockSize % 0x4U;
+ 232:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 233:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #else
+ 234:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 235:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Initialize blkCnt with number of samples */
+ 236:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   blkCnt = outBlockSize;
+ 237:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 238:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 239:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 240:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   while (blkCnt > 0U)
+  67              		.loc 1 240 9 view .LVU10
+  68 0016 9942     		cmp	r1, r3
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+  69              		.loc 1 68 16 view .LVU11
+  70 0018 0494     		str	r4, [sp, #16]
+  71              	.LVL3:
+  69:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *pStateCur;                              /* Points to the current sample of the state
+  72              		.loc 1 69 3 is_stmt 1 view .LVU12
+  86:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  73              		.loc 1 86 13 is_stmt 0 view .LVU13
+  74 001a 04EB8E0E 		add	lr, r4, lr, lsl #2
+  76:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  75              		.loc 1 76 65 view .LVU14
+  76 001e 0291     		str	r1, [sp, #8]
+  69:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *pStateCur;                              /* Points to the current sample of the state
+  77              		.loc 1 69 16 view .LVU15
+  78 0020 0390     		str	r0, [sp, #12]
+  79              	.LVL4:
+  70:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t *px0;                                    /* Temporary pointer for state buffer */
+  80              		.loc 1 70 9 is_stmt 1 view .LVU16
+  71:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pb;                                     /* Temporary pointer for coefficient buffer 
+  81              		.loc 1 71 9 view .LVU17
+  72:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q31_t x0, c0;                                  /* Temporary variables to hold state and coe
+  82              		.loc 1 72 3 view .LVU18
+  73:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         q63_t acc0;                                    /* Accumulator */
+  83              		.loc 1 73 9 view .LVU19
+  74:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         uint32_t numTaps = S->numTaps;                 /* Number of filter coefficients in the filt
+  84              		.loc 1 74 9 view .LVU20
+  75:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****         uint32_t i, tapCnt, blkCnt, outBlockSize = blockSize / S->M;  /* Loop counters */
+  85              		.loc 1 75 9 view .LVU21
+  76:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  86              		.loc 1 76 9 view .LVU22
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 7
+
+
+  76:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  87              		.loc 1 76 37 is_stmt 0 view .LVU23
+  88 0022 B3FBF1F5 		udiv	r5, r3, r1
+  89 0026 0595     		str	r5, [sp, #20]
+  90              	.LVL5:
+  86:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  91              		.loc 1 86 3 is_stmt 1 view .LVU24
+ 236:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+  92              		.loc 1 236 3 view .LVU25
+  93              		.loc 1 240 3 view .LVU26
+  94              		.loc 1 240 9 view .LVU27
+  95 0028 3AD8     		bhi	.L10
+ 241:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 242:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Copy decimation factor number of new input samples into the state buffer */
+ 243:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     i = S->M;
+ 244:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 245:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     do
+ 246:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 247:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       *pStateCur++ = *pSrc++;
+ 248:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 249:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     } while (--i);
+ 250:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 251:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Set accumulator to zero */
+ 252:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     acc0 = 0;
+ 253:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 254:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Initialize state pointer */
+ 255:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     px0 = pState;
+ 256:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 257:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Initialize coeff pointer */
+ 258:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     pb = pCoeffs;
+ 259:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 260:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ 261:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 262:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Loop unrolling: Compute 4 taps at a time */
+ 263:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     tapCnt = numTaps >> 2U;
+ 264:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 265:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     while (tapCnt > 0U)
+ 266:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 267:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-1] coefficient */
+ 268:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *pb++;
+ 269:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 270:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-1] sample */
+ 271:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *px0++;
+ 272:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 273:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 274:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 275:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 276:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-2] coefficient */
+ 277:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *pb++;
+ 278:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 279:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-2] sample */
+ 280:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *px0++;
+ 281:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 282:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 283:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 284:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 285:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-3] coefficient */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 8
+
+
+ 286:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *pb++;
+ 287:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 288:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-3] sample */
+ 289:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *px0++;
+ 290:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 291:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 292:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 293:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 294:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read the b[numTaps-4] coefficient */
+ 295:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *pb++;
+ 296:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 297:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read x[n-numTaps-4] sample */
+ 298:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *px0++;
+ 299:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 300:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 301:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 302:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 303:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Decrement loop counter */
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       tapCnt--;
+ 305:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     }
+ 306:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 307:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Loop unrolling: Compute remaining taps */
+ 308:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     tapCnt = numTaps % 0x4U;
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 310:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #else
+ 311:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 312:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Initialize tapCnt with number of taps */
+ 313:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     tapCnt = numTaps;
+ 314:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 315:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 316:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     while (tapCnt > 0U)
+ 318:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 319:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Read coefficients */
+ 320:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       c0 = *pb++;
+ 321:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 322:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Fetch 1 state variable */
+ 323:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       x0 = *px0++;
+ 324:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 325:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Perform the multiply-accumulate */
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       acc0 = (q31_t) ((((q63_t) acc0 << 32) + ((q63_t) x0 * c0)) >> 32);
+ 327:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 328:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       /* Decrement loop counter */
+ 329:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****       tapCnt--;
+ 330:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     }
+ 331:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Advance the state pointer by the decimation factor
+ 333:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****      * to process the next group of decimation factor number samples */
+ 334:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     pState = pState + S->M;
+  96              		.loc 1 334 21 is_stmt 0 view .LVU28
+  97 002a 4FEA810C 		lsl	ip, r1, #2
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+  98              		.loc 1 68 16 view .LVU29
+  99 002e A146     		mov	r9, r4
+ 236:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 100              		.loc 1 236 10 view .LVU30
+ 101 0030 0195     		str	r5, [sp, #4]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 9
+
+
+ 102              	.LVL6:
+ 103              	.L6:
+ 236:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 104              		.loc 1 236 10 view .LVU31
+ 105 0032 AEF10400 		sub	r0, lr, #4
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+ 106              		.loc 1 68 16 view .LVU32
+ 107 0036 029B     		ldr	r3, [sp, #8]
+ 108 0038 4146     		mov	r1, r8
+ 109              	.LVL7:
+ 110              	.L3:
+ 245:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 111              		.loc 1 245 5 is_stmt 1 discriminator 1 view .LVU33
+ 247:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 112              		.loc 1 247 7 discriminator 1 view .LVU34
+ 247:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 113              		.loc 1 247 22 is_stmt 0 discriminator 1 view .LVU35
+ 114 003a 51F8044B 		ldr	r4, [r1], #4
+ 115              	.LVL8:
+ 249:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 116              		.loc 1 249 5 discriminator 1 view .LVU36
+ 117 003e 013B     		subs	r3, r3, #1
+ 118              	.LVL9:
+ 247:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 119              		.loc 1 247 20 discriminator 1 view .LVU37
+ 120 0040 40F8044F 		str	r4, [r0, #4]!
+ 249:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 121              		.loc 1 249 13 is_stmt 1 discriminator 1 view .LVU38
+ 122              	.LVL10:
+ 249:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 123              		.loc 1 249 5 is_stmt 0 discriminator 1 view .LVU39
+ 124 0044 F9D1     		bne	.L3
+ 125 0046 E044     		add	r8, r8, ip
+ 126 0048 E644     		add	lr, lr, ip
+ 127              	.LVL11:
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 128              		.loc 1 317 11 is_stmt 1 view .LVU40
+ 129 004a 3FB3     		cbz	r7, .L11
+ 130 004c 3B46     		mov	r3, r7
+ 258:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 131              		.loc 1 258 8 is_stmt 0 view .LVU41
+ 132 004e 039E     		ldr	r6, [sp, #12]
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 133              		.loc 1 317 11 view .LVU42
+ 134 0050 4D46     		mov	r5, r9
+ 252:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 135              		.loc 1 252 10 view .LVU43
+ 136 0052 0024     		movs	r4, #0
+ 137              	.LVL12:
+ 138              	.L5:
+ 320:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 139              		.loc 1 320 7 is_stmt 1 view .LVU44
+ 323:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 140              		.loc 1 323 7 view .LVU45
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 141              		.loc 1 326 7 view .LVU46
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 10
+
+
+ 142              		.loc 1 326 38 is_stmt 0 view .LVU47
+ 143 0054 2146     		mov	r1, r4
+ 144 0056 0020     		movs	r0, #0
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 145              		.loc 1 326 45 view .LVU48
+ 146 0058 55F804BB 		ldr	fp, [r5], #4
+ 147              	.LVL13:
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 148              		.loc 1 317 11 view .LVU49
+ 149 005c 013B     		subs	r3, r3, #1
+ 150              	.LVL14:
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 151              		.loc 1 326 45 view .LVU50
+ 152 005e 56F804AB 		ldr	r10, [r6], #4
+ 153              	.LVL15:
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 154              		.loc 1 326 45 view .LVU51
+ 155 0062 CAFB0B01 		smlal	r0, r1, r10, fp
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 156              		.loc 1 326 66 view .LVU52
+ 157 0066 0C46     		mov	r4, r1
+ 158              	.LVL16:
+ 329:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     }
+ 159              		.loc 1 329 7 is_stmt 1 view .LVU53
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 160              		.loc 1 317 11 view .LVU54
+ 161 0068 F4D1     		bne	.L5
+ 162 006a 4C00     		lsls	r4, r1, #1
+ 163              	.LVL17:
+ 164              	.L4:
+ 165              		.loc 1 334 5 view .LVU55
+ 240:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 166              		.loc 1 240 9 is_stmt 0 view .LVU56
+ 167 006c 019B     		ldr	r3, [sp, #4]
+ 168              		.loc 1 334 12 view .LVU57
+ 169 006e E144     		add	r9, r9, ip
+ 170              	.LVL18:
+ 335:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 336:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* The result is in the accumulator, store in the destination buffer. */
+ 337:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pDst++ = (q31_t) (acc0 << 1);
+ 171              		.loc 1 337 5 is_stmt 1 view .LVU58
+ 172              		.loc 1 337 13 is_stmt 0 view .LVU59
+ 173 0070 42F8044B 		str	r4, [r2], #4
+ 174              	.LVL19:
+ 338:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 339:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Decrement loop counter */
+ 340:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     blkCnt--;
+ 175              		.loc 1 340 5 is_stmt 1 view .LVU60
+ 240:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 176              		.loc 1 240 9 view .LVU61
+ 177 0074 013B     		subs	r3, r3, #1
+ 178              	.LVL20:
+ 240:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 179              		.loc 1 240 9 is_stmt 0 view .LVU62
+ 180 0076 0193     		str	r3, [sp, #4]
+ 181 0078 DBD1     		bne	.L6
+ 182 007a DDE90423 		ldrd	r2, r3, [sp, #16]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 11
+
+
+ 183              	.LVL21:
+ 240:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 184              		.loc 1 240 9 view .LVU63
+ 185 007e 03FB0C2C 		mla	ip, r3, ip, r2
+ 186              	.LVL22:
+ 187              	.L2:
+ 341:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   }
+ 342:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 343:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Processing is complete.
+ 344:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****      Now copy the last numTaps - 1 samples to the satrt of the state buffer.
+ 345:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****      This prepares the state buffer for the next function call. */
+ 346:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 347:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Points to the start of the state buffer */
+ 348:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   pStateCur = S->pState;
+ 188              		.loc 1 348 3 is_stmt 1 view .LVU64
+ 349:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 350:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ 351:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 352:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Loop unrolling: Compute 4 taps at a time */
+ 353:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   tapCnt = (numTaps - 1U) >> 2U;
+ 354:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 355:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Copy data */
+ 356:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   while (tapCnt > 0U)
+ 357:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 358:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pStateCur++ = *pState++;
+ 359:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pStateCur++ = *pState++;
+ 360:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pStateCur++ = *pState++;
+ 361:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pStateCur++ = *pState++;
+ 362:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 363:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Decrement loop counter */
+ 364:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     tapCnt--;
+ 365:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   }
+ 366:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 367:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Loop unrolling: Compute remaining taps */
+ 368:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   tapCnt = (numTaps - 1U) % 0x04U;
+ 369:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 370:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #else
+ 371:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 372:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Initialize tapCnt with number of taps */
+ 373:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   tapCnt = (numTaps - 1U);
+ 189              		.loc 1 373 3 view .LVU65
+ 374:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 375:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 376:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 377:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   /* Copy data */
+ 378:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   while (tapCnt > 0U)
+ 190              		.loc 1 378 3 view .LVU66
+ 191              		.loc 1 378 9 view .LVU67
+ 192 0082 013F     		subs	r7, r7, #1
+ 193              	.LVL23:
+ 194              		.loc 1 378 9 is_stmt 0 view .LVU68
+ 195 0084 07D0     		beq	.L1
+ 196 0086 049B     		ldr	r3, [sp, #16]
+ 197 0088 043B     		subs	r3, r3, #4
+ 198              	.LVL24:
+ 199              	.L8:
+ 379:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 12
+
+
+ 380:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     *pStateCur++ = *pState++;
+ 200              		.loc 1 380 5 is_stmt 1 view .LVU69
+ 201              		.loc 1 380 20 is_stmt 0 view .LVU70
+ 202 008a 5CF8042B 		ldr	r2, [ip], #4
+ 203              	.LVL25:
+ 378:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 204              		.loc 1 378 9 view .LVU71
+ 205 008e 013F     		subs	r7, r7, #1
+ 206              	.LVL26:
+ 207              		.loc 1 380 18 view .LVU72
+ 208 0090 43F8042F 		str	r2, [r3, #4]!
+ 381:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 382:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     /* Decrement loop counter */
+ 383:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     tapCnt--;
+ 209              		.loc 1 383 5 is_stmt 1 view .LVU73
+ 210              	.LVL27:
+ 378:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   {
+ 211              		.loc 1 378 9 view .LVU74
+ 212 0094 F9D1     		bne	.L8
+ 213              	.LVL28:
+ 214              	.L1:
+ 384:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   }
+ 385:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** 
+ 386:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c **** }
+ 215              		.loc 1 386 1 is_stmt 0 view .LVU75
+ 216 0096 07B0     		add	sp, sp, #28
+ 217              	.LCFI2:
+ 218              		.cfi_remember_state
+ 219              		.cfi_def_cfa_offset 36
+ 220              		@ sp needed
+ 221 0098 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 222              	.LVL29:
+ 223              	.L11:
+ 224              	.LCFI3:
+ 225              		.cfi_restore_state
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****     {
+ 226              		.loc 1 317 11 view .LVU76
+ 227 009c 3C46     		mov	r4, r7
+ 228 009e E5E7     		b	.L4
+ 229              	.LVL30:
+ 230              	.L10:
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_decimate_fast_q31.c ****   const q31_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+ 231              		.loc 1 68 16 view .LVU77
+ 232 00a0 DDF810C0 		ldr	ip, [sp, #16]
+ 233 00a4 EDE7     		b	.L2
+ 234              		.cfi_endproc
+ 235              	.LFE145:
+ 237 00a6 00BF     		.text
+ 238              	.Letext0:
+ 239              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 240              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 241              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 242              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 243              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 244              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 245              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 246              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 13
+
+
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s 			page 14
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_fir_decimate_fast_q31.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s:17     .text.arm_fir_decimate_fast_q31:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWUxN4O.s:26     .text.arm_fir_decimate_fast_q31:0000000000000000 arm_fir_decimate_fast_q31
+
+NO UNDEFINED SYMBOLS

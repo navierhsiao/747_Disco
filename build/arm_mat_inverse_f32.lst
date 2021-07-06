@@ -1,0 +1,1883 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_mat_inverse_f32.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_mat_inverse_f32,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_mat_inverse_f32
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_mat_inverse_f32:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c"
+   1:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * Title:        arm_mat_inverse_f32.c
+   4:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * Description:  Floating-point matrix inverse
+   5:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @ingroup groupMatrix
+  33:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @defgroup MatrixInv Matrix Inverse
+  37:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  38:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   Computes the inverse of a matrix.
+  39:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   The inverse is defined only if the input matrix is square and non-singular (the determinant is no
+  41:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   The function checks that the input and output matrices are square and of the same size.
+  42:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  43:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   Matrix inversion is numerically sensitive and the CMSIS DSP library only supports matrix
+  44:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   inversion of floating-point matrices.
+  45:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  46:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @par Algorithm
+  47:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   The Gauss-Jordan method is used to find the inverse.
+  48:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   The algorithm performs a sequence of elementary row-operations until it
+  49:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   reduces the input matrix to an identity matrix. Applying the same sequence
+  50:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   of elementary row-operations to an identity matrix yields the inverse matrix.
+  51:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   If the input matrix is singular, then the algorithm terminates and returns error status
+  52:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   <code>ARM_MATH_SINGULAR</code>.
+  53:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   \image html MatrixInverse.gif "Matrix Inverse of a 3 x 3 matrix using Gauss-Jordan Method"
+  54:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  */
+  55:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  56:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** /**
+  57:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @addtogroup MatrixInv
+  58:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @{
+  59:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  */
+  60:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  61:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** /**
+  62:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @brief         Floating-point matrix inverse.
+  63:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @param[in]     pSrc      points to input matrix structure
+  64:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @param[out]    pDst      points to output matrix structure
+  65:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   @return        execution status
+  66:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                    - \ref ARM_MATH_SUCCESS       : Operation successful
+  67:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                    - \ref ARM_MATH_SIZE_MISMATCH : Matrix size check failed
+  68:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                    - \ref ARM_MATH_SINGULAR      : Input matrix is found to be singular (non-invert
+  69:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****  */
+  70:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #if defined(ARM_MATH_NEON)
+  71:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** arm_status arm_mat_inverse_f32(
+  72:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   const arm_matrix_instance_f32 * pSrc,
+  73:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   arm_matrix_instance_f32 * pDst)
+  74:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** {
+  75:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pIn = pSrc->pData;                  /* input data matrix pointer */
+  76:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pOut = pDst->pData;                 /* output data matrix pointer */
+  77:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pInT1, *pInT2;                      /* Temporary input data matrix pointer */
+  78:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pOutT1, *pOutT2;                    /* Temporary output data matrix pointer */
+  79:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pPivotRowIn, *pPRT_in, *pPivotRowDst, *pPRT_pDst;  /* Temporary input and output data 
+  80:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t numRows = pSrc->numRows;              /* Number of rows in the matrix  */
+  81:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t numCols = pSrc->numCols;              /* Number of Cols in the matrix  */
+  82:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  83:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t maxC;                                /* maximum value in the column */
+  84:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  85:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t Xchg, in = 0.0f, in1;                /* Temporary input values  */
+  86:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t i, rowCnt, flag = 0U, j, loopCnt, k, l;      /* loop counters */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 3
+
+
+  87:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   arm_status status;                             /* status of matrix inverse */
+  88:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32x4_t vec1;
+  89:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32x4_t vec2;
+  90:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32x4_t tmpV;
+  91:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  92:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #ifdef ARM_MATH_MATRIX_CHECK
+  93:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  94:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   /* Check for matrix mismatch condition */
+  95:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   if ((pSrc->numRows != pSrc->numCols) || (pDst->numRows != pDst->numCols)
+  96:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      || (pSrc->numRows != pDst->numRows))
+  97:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   {
+  98:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Set status as ARM_MATH_SIZE_MISMATCH */
+  99:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     status = ARM_MATH_SIZE_MISMATCH;
+ 100:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   }
+ 101:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   else
+ 102:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #endif /*    #ifdef ARM_MATH_MATRIX_CHECK    */
+ 103:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 104:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   {
+ 105:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    /*----------------------------------------------------------------------------------------------
+ 106:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    * Matrix Inverse can be solved using elementary row operations.
+ 107:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 108:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *  Gauss-Jordan Method:
+ 109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 110:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *     1. First combine the identity matrix and the input matrix separated by a bar to form an
+ 111:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *        augmented matrix as follows:
+ 112:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *              _                  _         _         _
+ 113:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *             |  a11  a12 | 1   0  |       |  X11 X12  |
+ 114:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *             |           |        |   =   |           |
+ 115:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *             |_ a21  a22 | 0   1 _|       |_ X21 X21 _|
+ 116:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 117:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *    2. In our implementation, pDst Matrix is used as identity matrix.
+ 118:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 119:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *    3. Begin with the first row. Let i = 1.
+ 120:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 121:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *      4. Check to see if the pivot for column i is the greatest of the column.
+ 122:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       The pivot is the element of the main diagonal that is on the current row.
+ 123:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       For instance, if working with row i, then the pivot element is aii.
+ 124:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       If the pivot is not the most significant of the columns, exchange that row with a row
+ 125:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       below it that does contain the most significant value in column i. If the most
+ 126:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *         significant value of the column is zero, then an inverse to that matrix does not exist
+ 127:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       The most significant value of the column is the absolute maximum.
+ 128:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 129:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *      5. Divide every element of row i by the pivot.
+ 130:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 131:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *      6. For every row below and  row i, replace that row with the sum of that row and
+ 132:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       a multiple of row i so that each new element in column i below row i is zero.
+ 133:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 134:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *      7. Move to the next row and column and repeat steps 2 through 5 until you have zeros
+ 135:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       for every element below and above the main diagonal.
+ 136:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *
+ 137:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *    8. Now an identical matrix is formed to the left of the bar(input matrix, pSrc).
+ 138:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *       Therefore, the matrix to the right of the bar is our solution(pDst matrix, pDst).
+ 139:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****    *-----------------------------------------------------------------------------------------------
+ 140:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 141:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Working pointer for destination matrix */
+ 142:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     pOutT1 = pOut;
+ 143:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 4
+
+
+ 144:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Loop over the number of rows */
+ 145:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     rowCnt = numRows;
+ 146:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 147:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Making the destination matrix as identity matrix */
+ 148:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     while (rowCnt > 0U)
+ 149:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 150:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all zeroes in lower triangle of the destination matrix */
+ 151:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = numRows - rowCnt;
+ 152:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 153:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 154:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pOutT1++ = 0.0f;
+ 155:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 156:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 157:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 158:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all ones in the diagonal of the destination matrix */
+ 159:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       *pOutT1++ = 1.0f;
+ 160:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 161:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all zeroes in upper triangle of the destination matrix */
+ 162:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = rowCnt - 1U;
+ 163:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 164:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 165:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 166:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pOutT1++ = 0.0f;
+ 167:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 168:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 169:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 170:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Decrement the loop counter */
+ 171:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       rowCnt--;
+ 172:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+ 173:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 174:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Loop over the number of columns of the input matrix.
+ 175:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        All the elements in each column are processed by the row operations */
+ 176:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     loopCnt = numCols;
+ 177:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 178:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Index modifier to navigate through the columns */
+ 179:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     l = 0U;
+ 180:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 181:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     while (loopCnt > 0U)
+ 182:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 183:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Check if the pivot element is zero..
+ 184:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * If it is zero then interchange the row with non zero row below.
+ 185:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * If there is no non zero element to replace in the rows below,
+ 186:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * then the matrix is Singular. */
+ 187:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 188:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Working pointer for the input matrix that points
+ 189:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the pivot element of the particular row  */
+ 190:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn + (l * numCols);
+ 191:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 192:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Working pointer for the destination matrix that points
+ 193:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the pivot element of the particular row  */
+ 194:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pOutT1 = pOut + (l * numCols);
+ 195:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 196:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary variable to hold the pivot value */
+ 197:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       in = *pInT1;
+ 198:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 199:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Grab the most significant value from column l */
+ 200:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       maxC = 0;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 5
+
+
+ 201:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 202:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (i = l; i < numRows; i++)
+ 203:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 204:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         maxC = *pInT1 > 0 ? (*pInT1 > maxC ? *pInT1 : maxC) : (-*pInT1 > maxC ? -*pInT1 : maxC);
+ 205:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 206:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 207:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 208:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Update the status if the matrix is singular */
+ 209:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if (maxC == 0.0f)
+ 210:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 211:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         return ARM_MATH_SINGULAR;
+ 212:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 213:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 214:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Restore pInT1 */
+ 215:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn;
+ 216:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 217:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Destination pointer modifier */
+ 218:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       k = 1U;
+ 219:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 220:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Check if the pivot element is the most significant of the column */
+ 221:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if ( (in > 0.0f ? in : -in) != maxC)
+ 222:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 223:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Loop over the number rows present below */
+ 224:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         i = numRows - (l + 1U);
+ 225:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 226:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         while (i > 0U)
+ 227:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 228:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Update the input and destination pointers */
+ 229:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT2 = pInT1 + (numCols * l);
+ 230:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pOutT2 = pOutT1 + (numCols * k);
+ 231:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 232:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Look for the most significant element to
+ 233:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****            * replace in the rows below */
+ 234:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           if ((*pInT2 > 0.0f ? *pInT2: -*pInT2) == maxC)
+ 235:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 236:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Loop over number of columns
+ 237:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              * to the right of the pilot element */
+ 238:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j = numCols - l;
+ 239:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 240:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             while (j > 0U)
+ 241:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             {
+ 242:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Exchange the row elements of the input matrix */
+ 243:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               Xchg = *pInT2;
+ 244:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pInT2++ = *pInT1;
+ 245:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pInT1++ = Xchg;
+ 246:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 247:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Decrement the loop counter */
+ 248:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               j--;
+ 249:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             }
+ 250:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 251:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Loop over number of columns of the destination matrix */
+ 252:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j = numCols;
+ 253:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 254:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             while (j > 0U)
+ 255:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             {
+ 256:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Exchange the row elements of the destination matrix */
+ 257:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               Xchg = *pOutT2;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 6
+
+
+ 258:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pOutT2++ = *pOutT1;
+ 259:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pOutT1++ = Xchg;
+ 260:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 261:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Decrement the loop counter */
+ 262:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               j--;
+ 263:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             }
+ 264:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 265:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Flag to indicate whether exchange is done or not */
+ 266:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             flag = 1U;
+ 267:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 268:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Break after exchange is done */
+ 269:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+ 270:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 271:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 272:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Update the destination pointer modifier */
+ 273:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           k++;
+ 274:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 275:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Decrement the loop counter */
+ 276:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           i--;
+ 277:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 278:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 279:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 280:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Update the status if the matrix is singular */
+ 281:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if ((flag != 1U) && (in == 0.0f))
+ 282:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 283:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         return ARM_MATH_SINGULAR;
+ 284:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 285:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 286:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Points to the pivot row of input and destination matrices */
+ 287:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pPivotRowIn = pIn + (l * numCols);
+ 288:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pPivotRowDst = pOut + (l * numCols);
+ 289:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 290:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary pointers to the pivot row pointers */
+ 291:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pPivotRowIn;
+ 292:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT2 = pPivotRowDst;
+ 293:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 294:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Pivot element of the row */
+ 295:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       in = *pPivotRowIn;
+ 296:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       tmpV = vdupq_n_f32(1.0/in);
+ 297:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 298:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Loop over number of columns
+ 299:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the right of the pilot element */
+ 300:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = (numCols - l) >> 2;
+ 301:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 302:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 303:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 304:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the input matrix
+ 305:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+ 306:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         vec1 = vld1q_f32(pInT1);
+ 307:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 308:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         vec1 = vmulq_f32(vec1, tmpV);
+ 309:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         vst1q_f32(pInT1, vec1);
+ 310:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += 4;
+ 311:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 312:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement the loop counter */
+ 313:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 314:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 7
+
+
+ 315:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 316:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Tail */
+ 317:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = (numCols - l) & 3;
+ 318:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 319:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 320:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 321:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the input matrix
+ 322:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+ 323:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         in1 = *pInT1;
+ 324:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pInT1++ = in1 / in;
+ 325:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 326:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement the loop counter */
+ 327:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 328:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 329:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 330:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Loop over number of columns of the destination matrix */
+ 331:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = numCols >> 2;
+ 332:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 333:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 334:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 335:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the destination matrix
+ 336:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+ 337:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         vec1 = vld1q_f32(pInT2);
+ 338:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 339:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         vec1 = vmulq_f32(vec1, tmpV);
+ 340:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         vst1q_f32(pInT2, vec1);
+ 341:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT2 += 4;
+ 342:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       
+ 343:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement the loop counter */
+ 344:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 345:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 346:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 347:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Tail */
+ 348:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = numCols & 3;
+ 349:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 350:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 351:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 352:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the destination matrix
+ 353:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+ 354:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         in1 = *pInT2;
+ 355:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pInT2++ = in1 / in;
+ 356:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 357:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement the loop counter */
+ 358:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 359:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 360:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 361:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Replace the rows with the sum of that row and a multiple of row i
+ 362:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * so that each new element in column i above row i is zero.*/
+ 363:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 364:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary pointers for input and destination matrices */
+ 365:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn;
+ 366:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT2 = pOut;
+ 367:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 368:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* index used to check for pivot element */
+ 369:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       i = 0U;
+ 370:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 371:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Loop over number of rows */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 8
+
+
+ 372:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /*  to be replaced by the sum of that row and a multiple of row i */
+ 373:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       k = numRows;
+ 374:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 375:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (k > 0U)
+ 376:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 377:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Check for the pivot element */
+ 378:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         if (i == l)
+ 379:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 380:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* If the processing element is the pivot element,
+ 381:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              only the columns to the right are to be processed */
+ 382:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT1 += numCols - l;
+ 383:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 384:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT2 += numCols;
+ 385:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 386:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         else
+ 387:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 388:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Element of the reference row */
+ 389:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           in = *pInT1;
+ 390:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           tmpV = vdupq_n_f32(in);
+ 391:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 392:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Working pointers for input and destination pivot rows */
+ 393:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pPRT_in = pPivotRowIn;
+ 394:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pPRT_pDst = pPivotRowDst;
+ 395:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 396:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Loop over the number of columns to the right of the pivot element,
+ 397:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              to replace the elements in the input matrix */
+ 398:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           j = (numCols - l) >> 2;
+ 399:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 	  
+ 400:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           while (j > 0U)
+ 401:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 402:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+ 403:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+ 404:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vec1 = vld1q_f32(pInT1);
+ 405:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vec2 = vld1q_f32(pPRT_in);
+ 406:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vec1 = vmlsq_f32(vec1, tmpV, vec2);
+ 407:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vst1q_f32(pInT1, vec1);
+ 408:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             pPRT_in += 4;
+ 409:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             pInT1 += 4;
+ 410:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 411:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Decrement the loop counter */
+ 412:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j--;
+ 413:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 414:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 415:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 	  /* Tail */
+ 416:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           j = (numCols - l) & 3;
+ 417:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 418:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           while (j > 0U)
+ 419:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 420:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+ 421:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+ 422:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             in1 = *pInT1;
+ 423:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             *pInT1++ = in1 - (in * *pPRT_in++);
+ 424:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 425:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Decrement the loop counter */
+ 426:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j--;
+ 427:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 428:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 9
+
+
+ 429:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Loop over the number of columns to
+ 430:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              replace the elements in the destination matrix */
+ 431:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           j = numCols >> 2;
+ 432:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 433:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           while (j > 0U)
+ 434:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 435:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+ 436:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+ 437:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vec1 = vld1q_f32(pInT2);
+ 438:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vec2 = vld1q_f32(pPRT_pDst);
+ 439:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vec1 = vmlsq_f32(vec1, tmpV, vec2);
+ 440:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             vst1q_f32(pInT2, vec1);
+ 441:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             pPRT_pDst += 4;
+ 442:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             pInT2 += 4;
+ 443:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 444:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Decrement the loop counter */
+ 445:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j--;
+ 446:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 447:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 448:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 	  /* Tail */
+ 449:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           j = numCols & 3;
+ 450:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 451:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           while (j > 0U)
+ 452:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 453:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+ 454:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+ 455:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             in1 = *pInT2;
+ 456:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             *pInT2++ = in1 - (in * *pPRT_pDst++);
+ 457:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 458:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Decrement the loop counter */
+ 459:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j--;
+ 460:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 461:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 462:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 463:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 464:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Increment the temporary input pointer */
+ 465:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 = pInT1 + l;
+ 466:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 467:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement the loop counter */
+ 468:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         k--;
+ 469:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 470:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Increment the pivot index */
+ 471:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         i++;
+ 472:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 473:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 474:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Increment the input pointer */
+ 475:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pIn++;
+ 476:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 477:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Decrement the loop counter */
+ 478:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       loopCnt--;
+ 479:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 480:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Increment the index modifier */
+ 481:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       l++;
+ 482:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+ 483:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 484:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Set status as ARM_MATH_SUCCESS */
+ 485:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     status = ARM_MATH_SUCCESS;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 10
+
+
+ 486:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 487:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     if ((flag != 1U) && (in == 0.0f))
+ 488:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 489:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pIn = pSrc->pData;
+ 490:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (i = 0; i < numRows * numCols; i++)
+ 491:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 492:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         if (pIn[i] != 0.0f)
+ 493:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+ 494:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 495:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 496:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if (i == numRows * numCols)
+ 497:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         status = ARM_MATH_SINGULAR;
+ 498:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+ 499:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   }
+ 500:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   /* Return to application */
+ 501:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   return (status);
+ 502:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** }
+ 503:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #else
+ 504:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** arm_status arm_mat_inverse_f32(
+ 505:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   const arm_matrix_instance_f32 * pSrc,
+ 506:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         arm_matrix_instance_f32 * pDst)
+ 507:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** {
+  30              		.loc 1 507 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 32
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+ 508:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pIn = pSrc->pData;                  /* input data matrix pointer */
+  34              		.loc 1 508 3 view .LVU1
+ 507:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pIn = pSrc->pData;                  /* input data matrix pointer */
+  35              		.loc 1 507 1 is_stmt 0 view .LVU2
+  36 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 36
+  39              		.cfi_offset 4, -36
+  40              		.cfi_offset 5, -32
+  41              		.cfi_offset 6, -28
+  42              		.cfi_offset 7, -24
+  43              		.cfi_offset 8, -20
+  44              		.cfi_offset 9, -16
+  45              		.cfi_offset 10, -12
+  46              		.cfi_offset 11, -8
+  47              		.cfi_offset 14, -4
+ 509:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pOut = pDst->pData;                 /* output data matrix pointer */
+  48              		.loc 1 509 14 view .LVU3
+  49 0004 4B68     		ldr	r3, [r1, #4]
+ 507:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pIn = pSrc->pData;                  /* input data matrix pointer */
+  50              		.loc 1 507 1 view .LVU4
+  51 0006 89B0     		sub	sp, sp, #36
+  52              	.LCFI1:
+  53              		.cfi_def_cfa_offset 72
+ 510:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pInT1, *pInT2;                      /* Temporary input data matrix pointer */
+ 511:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pOutT1, *pOutT2;                    /* Temporary output data matrix pointer */
+ 512:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pPivotRowIn, *pPRT_in, *pPivotRowDst, *pPRT_pDst;  /* Temporary input and output data 
+ 513:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t numRows = pSrc->numRows;              /* Number of rows in the matrix  */
+  54              		.loc 1 513 12 view .LVU5
+  55 0008 B0F80090 		ldrh	r9, [r0]
+ 509:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pOut = pDst->pData;                 /* output data matrix pointer */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 11
+
+
+  56              		.loc 1 509 14 view .LVU6
+  57 000c 0593     		str	r3, [sp, #20]
+ 508:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pOut = pDst->pData;                 /* output data matrix pointer */
+  58              		.loc 1 508 14 view .LVU7
+  59 000e 4368     		ldr	r3, [r0, #4]
+  60 0010 0793     		str	r3, [sp, #28]
+  61              	.LVL1:
+ 509:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pOut = pDst->pData;                 /* output data matrix pointer */
+  62              		.loc 1 509 3 is_stmt 1 view .LVU8
+ 510:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pInT1, *pInT2;                      /* Temporary input data matrix pointer */
+  63              		.loc 1 510 3 view .LVU9
+ 511:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t *pPivotRowIn, *pPRT_in, *pPivotRowDst, *pPRT_pDst;  /* Temporary input and output data 
+  64              		.loc 1 511 3 view .LVU10
+ 512:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t numRows = pSrc->numRows;              /* Number of rows in the matrix  */
+  65              		.loc 1 512 3 view .LVU11
+  66              		.loc 1 513 3 view .LVU12
+ 514:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t numCols = pSrc->numCols;              /* Number of Cols in the matrix  */
+  67              		.loc 1 514 3 view .LVU13
+  68              		.loc 1 514 12 is_stmt 0 view .LVU14
+  69 0012 4388     		ldrh	r3, [r0, #2]
+  70              	.LVL2:
+  71              		.loc 1 514 12 view .LVU15
+  72 0014 0193     		str	r3, [sp, #4]
+  73              	.LVL3:
+ 515:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 516:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #if defined (ARM_MATH_DSP)
+ 517:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t maxC;                                /* maximum value in the column */
+  74              		.loc 1 517 3 is_stmt 1 view .LVU16
+ 518:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 519:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t Xchg, in = 0.0f, in1;                /* Temporary input values  */
+  75              		.loc 1 519 3 view .LVU17
+ 520:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t i, rowCnt, flag = 0U, j, loopCnt, k, l;      /* loop counters */
+  76              		.loc 1 520 3 view .LVU18
+ 521:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   arm_status status;                             /* status of matrix inverse */
+  77              		.loc 1 521 3 view .LVU19
+ 522:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 523:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #ifdef ARM_MATH_MATRIX_CHECK
+ 524:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 525:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   /* Check for matrix mismatch condition */
+ 526:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   if ((pSrc->numRows != pSrc->numCols) ||
+ 527:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       (pDst->numRows != pDst->numCols) ||
+ 528:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       (pSrc->numRows != pDst->numRows)   )
+ 529:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   {
+ 530:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Set status as ARM_MATH_SIZE_MISMATCH */
+ 531:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     status = ARM_MATH_SIZE_MISMATCH;
+ 532:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   }
+ 533:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   else
+ 534:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 535:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #endif /* #ifdef ARM_MATH_MATRIX_CHECK */
+ 536:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 537:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   {
+ 538:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 539:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /*---------------------------------------------------------------------------------------------
+ 540:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      * Matrix Inverse can be solved using elementary row operations.
+ 541:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 542:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *  Gauss-Jordan Method:
+ 543:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 12
+
+
+ 544:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      1. First combine the identity matrix and the input matrix separated by a bar to form an
+ 545:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *        augmented matrix as follows:
+ 546:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                      _                  _         _         _
+ 547:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                     |  a11  a12 | 1   0  |       |  X11 X12  |
+ 548:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                     |           |        |   =   |           |
+ 549:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                     |_ a21  a22 | 0   1 _|       |_ X21 X21 _|
+ 550:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 551:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      2. In our implementation, pDst Matrix is used as identity matrix.
+ 552:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 553:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      3. Begin with the first row. Let i = 1.
+ 554:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 555:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      4. Check to see if the pivot for column i is the greatest of the column.
+ 556:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         The pivot is the element of the main diagonal that is on the current row.
+ 557:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         For instance, if working with row i, then the pivot element is aii.
+ 558:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         If the pivot is not the most significant of the columns, exchange that row with a ro
+ 559:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         below it that does contain the most significant value in column i. If the most
+ 560:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         significant value of the column is zero, then an inverse to that matrix does not exi
+ 561:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         The most significant value of the column is the absolute maximum.
+ 562:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 563:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      5. Divide every element of row i by the pivot.
+ 564:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 565:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      6. For every row below and  row i, replace that row with the sum of that row and
+ 566:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         a multiple of row i so that each new element in column i below row i is zero.
+ 567:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 568:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      7. Move to the next row and column and repeat steps 2 through 5 until you have zeros
+ 569:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         for every element below and above the main diagonal.
+ 570:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 571:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      8. Now an identical matrix is formed to the left of the bar(input matrix, pSrc).
+ 572:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         Therefore, the matrix to the right of the bar is our solution(pDst matrix, pDst).
+ 573:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *---------------------------------------------------------------------------------------------
+ 574:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 575:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Working pointer for destination matrix */
+ 576:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     pOutT1 = pOut;
+  78              		.loc 1 576 5 view .LVU20
+ 577:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 578:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Loop over the number of rows */
+ 579:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     rowCnt = numRows;
+  79              		.loc 1 579 5 view .LVU21
+ 580:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 581:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Making the destination matrix as identity matrix */
+ 582:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     while (rowCnt > 0U)
+  80              		.loc 1 582 5 view .LVU22
+  81              		.loc 1 582 11 view .LVU23
+  82 0016 B9F1000F 		cmp	r9, #0
+  83 001a 21D0     		beq	.L3
+  84              	.LVL4:
+ 583:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 584:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all zeroes in lower triangle of the destination matrix */
+ 585:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = numRows - rowCnt;
+ 586:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 587:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 588:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pOutT1++ = 0.0f;
+ 589:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 590:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 591:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 592:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all ones in the diagonal of the destination matrix */
+ 593:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       *pOutT1++ = 1.0f;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 13
+
+
+  85              		.loc 1 593 7 view .LVU24
+ 582:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+  86              		.loc 1 582 11 is_stmt 0 view .LVU25
+  87 001c 4C46     		mov	r4, r9
+  88              		.loc 1 593 17 view .LVU26
+  89 001e 4FF07E56 		mov	r6, #1065353216
+ 576:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+  90              		.loc 1 576 12 view .LVU27
+  91 0022 0598     		ldr	r0, [sp, #20]
+  92              	.LVL5:
+ 582:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+  93              		.loc 1 582 11 view .LVU28
+  94 0024 0125     		movs	r5, #1
+ 594:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 595:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all zeroes in upper triangle of the destination matrix */
+ 596:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = rowCnt - 1U;
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+  95              		.loc 1 597 13 view .LVU29
+  96 0026 013C     		subs	r4, r4, #1
+ 598:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 599:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pOutT1++ = 0.0f;
+  97              		.loc 1 599 19 view .LVU30
+  98 0028 4FF00001 		mov	r1, #0
+  99              	.LVL6:
+ 593:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 100              		.loc 1 593 17 view .LVU31
+ 101 002c 40F8046B 		str	r6, [r0], #4	@ float
+ 102              	.LVL7:
+ 596:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 103              		.loc 1 596 7 is_stmt 1 view .LVU32
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 104              		.loc 1 597 7 view .LVU33
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 105              		.loc 1 597 13 view .LVU34
+ 106 0030 16D0     		beq	.L3
+ 107              	.LVL8:
+ 108              	.L55:
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 109              		.loc 1 597 13 is_stmt 0 view .LVU35
+ 110 0032 2346     		mov	r3, r4
+ 593:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 111              		.loc 1 593 14 view .LVU36
+ 112 0034 0246     		mov	r2, r0
+ 113              	.LVL9:
+ 114              	.L5:
+ 115              		.loc 1 599 9 is_stmt 1 view .LVU37
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 116              		.loc 1 597 13 is_stmt 0 view .LVU38
+ 117 0036 013B     		subs	r3, r3, #1
+ 118              	.LVL10:
+ 119              		.loc 1 599 19 view .LVU39
+ 120 0038 42F8041B 		str	r1, [r2], #4	@ float
+ 121              	.LVL11:
+ 600:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 122              		.loc 1 600 9 is_stmt 1 view .LVU40
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 123              		.loc 1 597 13 view .LVU41
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 14
+
+
+ 124 003c FBD1     		bne	.L5
+ 125 003e 00EB8400 		add	r0, r0, r4, lsl #2
+ 126              	.LVL12:
+ 582:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 127              		.loc 1 582 11 view .LVU42
+ 585:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 128              		.loc 1 585 7 view .LVU43
+ 586:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 129              		.loc 1 586 7 view .LVU44
+ 586:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 130              		.loc 1 586 13 view .LVU45
+ 131 0042 3DB1     		cbz	r5, .L25
+ 132 0044 2B46     		mov	r3, r5
+ 599:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 133              		.loc 1 599 16 is_stmt 0 view .LVU46
+ 134 0046 0246     		mov	r2, r0
+ 135              	.LVL13:
+ 136              	.L4:
+ 588:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 137              		.loc 1 588 9 is_stmt 1 view .LVU47
+ 586:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 138              		.loc 1 586 13 is_stmt 0 view .LVU48
+ 139 0048 013B     		subs	r3, r3, #1
+ 140              	.LVL14:
+ 588:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 141              		.loc 1 588 19 view .LVU49
+ 142 004a 42F8041B 		str	r1, [r2], #4	@ float
+ 143              	.LVL15:
+ 589:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 144              		.loc 1 589 9 is_stmt 1 view .LVU50
+ 586:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 145              		.loc 1 586 13 view .LVU51
+ 146 004e FBD1     		bne	.L4
+ 147 0050 00EB8500 		add	r0, r0, r5, lsl #2
+ 148              	.LVL16:
+ 149              	.L25:
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 150              		.loc 1 597 13 is_stmt 0 view .LVU52
+ 151 0054 013C     		subs	r4, r4, #1
+ 152              	.LVL17:
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 153              		.loc 1 597 13 view .LVU53
+ 154 0056 05F10105 		add	r5, r5, #1
+ 155              	.LVL18:
+ 593:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 156              		.loc 1 593 7 is_stmt 1 view .LVU54
+ 593:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 157              		.loc 1 593 17 is_stmt 0 view .LVU55
+ 158 005a 40F8046B 		str	r6, [r0], #4	@ float
+ 159              	.LVL19:
+ 596:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 160              		.loc 1 596 7 is_stmt 1 view .LVU56
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 161              		.loc 1 597 7 view .LVU57
+ 597:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 162              		.loc 1 597 13 view .LVU58
+ 163 005e E8D1     		bne	.L55
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 15
+
+
+ 164              	.LVL20:
+ 165              	.L3:
+ 601:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 602:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 603:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Decrement loop counter */
+ 604:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       rowCnt--;
+ 605:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+ 606:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 607:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Loop over the number of columns of the input matrix.
+ 608:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        All the elements in each column are processed by the row operations */
+ 609:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     loopCnt = numCols;
+ 610:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 611:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Index modifier to navigate through the columns */
+ 612:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     l = 0U;
+ 613:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 614:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     while (loopCnt > 0U)
+ 166              		.loc 1 614 11 view .LVU59
+ 167 0060 019B     		ldr	r3, [sp, #4]
+ 168 0062 002B     		cmp	r3, #0
+ 169 0064 00F0B780 		beq	.L7
+ 170 0068 4FEA830C 		lsl	ip, r3, #2
+ 171 006c 059A     		ldr	r2, [sp, #20]
+ 172 006e 9B46     		mov	fp, r3
+ 612:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 173              		.loc 1 612 7 is_stmt 0 view .LVU60
+ 174 0070 4FF0000E 		mov	lr, #0
+ 175 0074 0CF10403 		add	r3, ip, #4
+ 176 0078 0092     		str	r2, [sp]
+ 177 007a 079A     		ldr	r2, [sp, #28]
+ 178              		.loc 1 614 11 view .LVU61
+ 179 007c E046     		mov	r8, ip
+ 180 007e 0693     		str	r3, [sp, #24]
+ 181 0080 111D     		adds	r1, r2, #4
+ 182 0082 02EB0C03 		add	r3, r2, ip
+ 183 0086 0291     		str	r1, [sp, #8]
+ 184 0088 0493     		str	r3, [sp, #16]
+ 185              	.LVL21:
+ 186              	.L22:
+ 187              		.loc 1 614 11 view .LVU62
+ 188 008a 049B     		ldr	r3, [sp, #16]
+ 615:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 616:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Check if the pivot element is zero..
+ 617:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * If it is zero then interchange the row with non zero row below.
+ 618:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * If there is no non zero element to replace in the rows below,
+ 619:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * then the matrix is Singular. */
+ 620:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 621:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Working pointer for the input matrix that points
+ 622:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the pivot element of the particular row  */
+ 623:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn + (l * numCols);
+ 624:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 625:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Working pointer for the destination matrix that points
+ 626:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the pivot element of the particular row  */
+ 627:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pOutT1 = pOut + (l * numCols);
+ 628:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 629:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary variable to hold the pivot value */
+ 630:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       in = *pInT1;
+ 631:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 16
+
+
+ 632:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Grab the most significant value from column l */
+ 633:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       maxC = 0;
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (i = l; i < numRows; i++)
+ 189              		.loc 1 634 7 view .LVU63
+ 190 008c F145     		cmp	r9, lr
+ 191 008e A3EB0805 		sub	r5, r3, r8
+ 192              	.LVL22:
+ 623:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 193              		.loc 1 623 7 is_stmt 1 view .LVU64
+ 194 0092 029B     		ldr	r3, [sp, #8]
+ 195 0094 A3F10402 		sub	r2, r3, #4
+ 630:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 196              		.loc 1 630 10 is_stmt 0 view .LVU65
+ 197 0098 13ED017A 		vldr.32	s14, [r3, #-4]
+ 198 009c 1046     		mov	r0, r2
+ 199              	.LVL23:
+ 627:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 200              		.loc 1 627 7 is_stmt 1 view .LVU66
+ 630:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 201              		.loc 1 630 7 view .LVU67
+ 633:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (i = l; i < numRows; i++)
+ 202              		.loc 1 633 7 view .LVU68
+ 203              		.loc 1 634 7 view .LVU69
+ 204              		.loc 1 634 19 view .LVU70
+ 205              		.loc 1 634 7 is_stmt 0 view .LVU71
+ 206 009e 00F09A80 		beq	.L7
+ 207 00a2 F0EE477A 		vmov.f32	s15, s14
+ 208 00a6 7646     		mov	r6, lr
+ 209 00a8 1346     		mov	r3, r2
+ 633:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (i = l; i < numRows; i++)
+ 210              		.loc 1 633 12 view .LVU72
+ 211 00aa DFED566A 		vldr.32	s13, .L62
+ 212 00ae 0CE0     		b	.L8
+ 213              	.LVL24:
+ 214              	.L56:
+ 635:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         maxC = *pInT1 > 0 ? (*pInT1 > maxC ? *pInT1 : maxC) : (-*pInT1 > maxC ? -*pInT1 : maxC);
+ 215              		.loc 1 636 53 discriminator 1 view .LVU73
+ 216 00b0 F4EE667A 		vcmp.f32	s15, s13
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 217              		.loc 1 634 33 discriminator 1 view .LVU74
+ 218 00b4 721C     		adds	r2, r6, #1
+ 637:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 219              		.loc 1 637 15 discriminator 1 view .LVU75
+ 220 00b6 6344     		add	r3, r3, ip
+ 221              	.LVL25:
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 222              		.loc 1 636 53 discriminator 1 view .LVU76
+ 223 00b8 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 224 00bc 77FEA66A 		vselgt.f32	s13, s15, s13
+ 225              	.LVL26:
+ 226              		.loc 1 637 9 is_stmt 1 discriminator 1 view .LVU77
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 227              		.loc 1 634 32 discriminator 1 view .LVU78
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 228              		.loc 1 634 19 discriminator 1 view .LVU79
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 17
+
+
+ 229              		.loc 1 634 7 is_stmt 0 discriminator 1 view .LVU80
+ 230 00c0 9145     		cmp	r9, r2
+ 231 00c2 13D0     		beq	.L13
+ 232              	.L57:
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 233              		.loc 1 634 7 view .LVU81
+ 234 00c4 1646     		mov	r6, r2
+ 235 00c6 D3ED007A 		vldr.32	s15, [r3]
+ 236              	.LVL27:
+ 237              	.L8:
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 238              		.loc 1 636 9 is_stmt 1 view .LVU82
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 239              		.loc 1 636 61 is_stmt 0 view .LVU83
+ 240 00ca F5EEC07A 		vcmpe.f32	s15, #0
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 241              		.loc 1 636 64 view .LVU84
+ 242 00ce B1EE676A 		vneg.f32	s12, s15
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 243              		.loc 1 636 61 view .LVU85
+ 244 00d2 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 245 00d6 EBDC     		bgt	.L56
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 246              		.loc 1 636 89 discriminator 2 view .LVU86
+ 247 00d8 B4EE666A 		vcmp.f32	s12, s13
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 248              		.loc 1 634 33 discriminator 2 view .LVU87
+ 249 00dc 721C     		adds	r2, r6, #1
+ 250              		.loc 1 637 15 discriminator 2 view .LVU88
+ 251 00de 6344     		add	r3, r3, ip
+ 252              	.LVL28:
+ 636:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 += numCols;
+ 253              		.loc 1 636 89 discriminator 2 view .LVU89
+ 254 00e0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 255 00e4 76FE266A 		vselgt.f32	s13, s12, s13
+ 256              	.LVL29:
+ 257              		.loc 1 637 9 is_stmt 1 discriminator 2 view .LVU90
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 258              		.loc 1 634 32 discriminator 2 view .LVU91
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 259              		.loc 1 634 19 discriminator 2 view .LVU92
+ 634:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 260              		.loc 1 634 7 is_stmt 0 discriminator 2 view .LVU93
+ 261 00e8 9145     		cmp	r9, r2
+ 262 00ea EBD1     		bne	.L57
+ 263              	.L13:
+ 638:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 639:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 640:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Update the status if the matrix is singular */
+ 641:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if (maxC == 0.0f)
+ 264              		.loc 1 641 7 is_stmt 1 view .LVU94
+ 642:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 643:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         return ARM_MATH_SINGULAR;
+ 644:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 645:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 646:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Restore pInT1  */
+ 647:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 18
+
+
+ 265              		.loc 1 647 7 view .LVU95
+ 266              	.LVL30:
+ 648:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 649:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Destination pointer modifier */
+ 650:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       k = 1U;
+ 267              		.loc 1 650 7 view .LVU96
+ 651:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 652:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Check if the pivot element is the most significant of the column */
+ 653:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if ( (in > 0.0f ? in : -in) != maxC)
+ 268              		.loc 1 653 7 view .LVU97
+ 654:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 655:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Loop over the number rows present below */
+ 656:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         i = numRows - (l + 1U);
+ 657:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 658:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         while (i > 0U)
+ 659:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 660:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Update the input and destination pointers */
+ 661:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT2 = pInT1 + (numCols * l);
+ 662:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pOutT2 = pOutT1 + (numCols * k);
+ 663:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 664:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Look for the most significant element to
+ 665:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****            * replace in the rows below */
+ 666:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           if ((*pInT2 > 0.0f ? *pInT2: -*pInT2) == maxC)
+ 667:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 668:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Loop over number of columns
+ 669:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              * to the right of the pilot element */
+ 670:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j = numCols - l;
+ 671:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 672:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             while (j > 0U)
+ 673:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             {
+ 674:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Exchange the row elements of the input matrix */
+ 675:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               Xchg = *pInT2;
+ 676:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pInT2++ = *pInT1;
+ 677:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pInT1++ = Xchg;
+ 678:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 679:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Decrement the loop counter */
+ 680:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               j--;
+ 681:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             }
+ 682:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 683:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Loop over number of columns of the destination matrix */
+ 684:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j = numCols;
+ 685:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 686:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             while (j > 0U)
+ 687:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             {
+ 688:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Exchange the row elements of the destination matrix */
+ 689:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               Xchg = *pOutT2;
+ 690:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pOutT2++ = *pOutT1;
+ 691:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pOutT1++ = Xchg;
+ 692:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 693:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Decrement loop counter */
+ 694:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               j--;
+ 695:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             }
+ 696:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 697:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Flag to indicate whether exchange is done or not */
+ 698:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             flag = 1U;
+ 699:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 700:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Break after exchange is done */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 19
+
+
+ 701:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+ 702:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 703:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 704:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Update the destination pointer modifier */
+ 705:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           k++;
+ 706:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 707:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Decrement loop counter */
+ 708:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           i--;
+ 709:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 710:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 711:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 712:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Update the status if the matrix is singular */
+ 713:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if ((flag != 1U) && (in == 0.0f))
+ 269              		.loc 1 713 7 view .LVU98
+ 270              		.loc 1 713 10 is_stmt 0 view .LVU99
+ 271 00ec B5EE407A 		vcmp.f32	s14, #0
+ 272 00f0 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 273 00f4 6FD0     		beq	.L7
+ 274 00f6 F5EE406A 		vcmp.f32	s13, #0
+ 275 00fa F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 276 00fe 6AD0     		beq	.L7
+ 277              		.loc 1 713 10 view .LVU100
+ 278 0100 F0EE477A 		vmov.f32	s15, s14
+ 279 0104 0299     		ldr	r1, [sp, #8]
+ 280 0106 5B46     		mov	r3, fp
+ 281 0108 0246     		mov	r2, r0
+ 282              	.LVL31:
+ 283              		.loc 1 713 10 view .LVU101
+ 284 010a 01E0     		b	.L15
+ 285              	.LVL32:
+ 286              	.L58:
+ 287              		.loc 1 713 10 view .LVU102
+ 288 010c F1EC017A 		vldmia.32	r1!, {s15}
+ 289              	.LVL33:
+ 290              	.L15:
+ 714:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 715:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         return ARM_MATH_SINGULAR;
+ 716:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 717:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 718:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Points to the pivot row of input and destination matrices */
+ 719:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pPivotRowIn = pIn + (l * numCols);
+ 720:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pPivotRowDst = pOut + (l * numCols);
+ 721:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 722:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary pointers to the pivot row pointers */
+ 723:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pPivotRowIn;
+ 724:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT2 = pPivotRowDst;
+ 725:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 726:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Pivot element of the row */
+ 727:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       in = *pPivotRowIn;
+ 728:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 729:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Loop over number of columns
+ 730:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the right of the pilot element */
+ 731:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = (numCols - l);
+ 732:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 733:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 734:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 735:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the input matrix
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 20
+
+
+ 736:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+ 737:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         in1 = *pInT1;
+ 291              		.loc 1 737 9 is_stmt 1 view .LVU103
+ 738:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pInT1++ = in1 / in;
+ 292              		.loc 1 738 9 view .LVU104
+ 293              		.loc 1 738 24 is_stmt 0 view .LVU105
+ 294 0110 C7EE876A 		vdiv.f32	s13, s15, s14
+ 733:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 295              		.loc 1 733 13 view .LVU106
+ 296 0114 013B     		subs	r3, r3, #1
+ 297              	.LVL34:
+ 298              		.loc 1 738 18 view .LVU107
+ 299 0116 E2EC016A 		vstmia.32	r2!, {s13}
+ 300              	.LVL35:
+ 739:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 740:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement the loop counter */
+ 741:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 301              		.loc 1 741 9 is_stmt 1 view .LVU108
+ 733:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 302              		.loc 1 733 13 view .LVU109
+ 303 011a F7D1     		bne	.L58
+ 724:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 304              		.loc 1 724 13 is_stmt 0 view .LVU110
+ 305 011c DDE90034 		ldrd	r3, r4, [sp]
+ 306              	.L14:
+ 307              	.LVL36:
+ 742:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 743:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 744:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Loop over number of columns of the destination matrix */
+ 745:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = numCols;
+ 746:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 747:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 748:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 749:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the destination matrix
+ 750:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+ 751:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         in1 = *pInT2;
+ 308              		.loc 1 751 9 is_stmt 1 view .LVU111
+ 309              		.loc 1 751 13 is_stmt 0 view .LVU112
+ 310 0120 D3ED006A 		vldr.32	s13, [r3]
+ 311              	.LVL37:
+ 752:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pInT2++ = in1 / in;
+ 312              		.loc 1 752 9 is_stmt 1 view .LVU113
+ 747:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 313              		.loc 1 747 13 is_stmt 0 view .LVU114
+ 314 0124 013C     		subs	r4, r4, #1
+ 315              	.LVL38:
+ 316              		.loc 1 752 24 view .LVU115
+ 317 0126 C6EE877A 		vdiv.f32	s15, s13, s14
+ 318              		.loc 1 752 18 view .LVU116
+ 319 012a E3EC017A 		vstmia.32	r3!, {s15}
+ 320              	.LVL39:
+ 753:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 754:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement the loop counter */
+ 755:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 321              		.loc 1 755 9 is_stmt 1 view .LVU117
+ 747:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 322              		.loc 1 747 13 view .LVU118
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 21
+
+
+ 323 012e F7D1     		bne	.L14
+ 324              	.LVL40:
+ 756:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 757:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 758:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Replace the rows with the sum of that row and a multiple of row i
+ 759:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * so that each new element in column i above row i is zero.*/
+ 760:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 761:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary pointers for input and destination matrices */
+ 762:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn;
+ 763:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT2 = pOut;
+ 764:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 765:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* index used to check for pivot element */
+ 766:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       i = 0U;
+ 767:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 768:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Loop over number of rows */
+ 769:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /*  to be replaced by the sum of that row and a multiple of row i */
+ 770:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       k = numRows;
+ 771:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 772:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (k > 0U)
+ 325              		.loc 1 772 13 view .LVU119
+ 773:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 774:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Check for the pivot element */
+ 775:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         if (i == l)
+ 326              		.loc 1 775 12 is_stmt 0 view .LVU120
+ 327 0130 7445     		cmp	r4, lr
+ 328 0132 CDF80C90 		str	r9, [sp, #12]
+ 329 0136 4FEA8E0A 		lsl	r10, lr, #2
+ 763:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 330              		.loc 1 763 13 view .LVU121
+ 331 013a 059F     		ldr	r7, [sp, #20]
+ 332 013c 8146     		mov	r9, r0
+ 333              	.LVL41:
+ 334              		.loc 1 775 9 is_stmt 1 view .LVU122
+ 335              		.loc 1 775 12 is_stmt 0 view .LVU123
+ 336 013e 29D0     		beq	.L59
+ 337              	.LVL42:
+ 338              	.L16:
+ 776:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 777:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* If the processing element is the pivot element,
+ 778:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              only the columns to the right are to be processed */
+ 779:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT1 += numCols - l;
+ 780:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 781:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT2 += numCols;
+ 782:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 783:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         else
+ 784:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 785:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Element of the reference row */
+ 786:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           in = *pInT1;
+ 339              		.loc 1 786 11 is_stmt 1 view .LVU124
+ 340              		.loc 1 786 14 is_stmt 0 view .LVU125
+ 341 0140 2A46     		mov	r2, r5
+ 342 0142 5B46     		mov	r3, fp
+ 343 0144 4846     		mov	r0, r9
+ 344 0146 2946     		mov	r1, r5
+ 345 0148 B2EC017A 		vldmia.32	r2!, {s14}
+ 346              	.LVL43:
+ 787:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 22
+
+
+ 788:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Working pointers for input and destination pivot rows */
+ 789:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pPRT_in = pPivotRowIn;
+ 347              		.loc 1 789 11 is_stmt 1 view .LVU126
+ 790:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pPRT_pDst = pPivotRowDst;
+ 348              		.loc 1 790 11 view .LVU127
+ 791:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 792:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Loop over the number of columns to the right of the pivot element,
+ 793:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              to replace the elements in the input matrix */
+ 794:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           j = (numCols - l);
+ 349              		.loc 1 794 11 view .LVU128
+ 795:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 796:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           while (j > 0U)
+ 350              		.loc 1 796 11 view .LVU129
+ 351              		.loc 1 796 17 view .LVU130
+ 786:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 352              		.loc 1 786 14 is_stmt 0 view .LVU131
+ 353 014c F0EE477A 		vmov.f32	s15, s14
+ 354 0150 01E0     		b	.L20
+ 355              	.LVL44:
+ 356              	.L18:
+ 786:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 357              		.loc 1 786 14 view .LVU132
+ 358 0152 F2EC017A 		vldmia.32	r2!, {s15}
+ 359              	.L20:
+ 360              	.LVL45:
+ 797:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 798:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+ 799:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+ 800:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             in1 = *pInT1;
+ 361              		.loc 1 800 13 is_stmt 1 view .LVU133
+ 801:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             *pInT1++ = in1 - (in * *pPRT_in++);
+ 362              		.loc 1 801 13 view .LVU134
+ 363              		.loc 1 801 28 is_stmt 0 view .LVU135
+ 364 0156 F0EC016A 		vldmia.32	r0!, {s13}
+ 365              	.LVL46:
+ 796:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 366              		.loc 1 796 17 view .LVU136
+ 367 015a 013B     		subs	r3, r3, #1
+ 368              	.LVL47:
+ 369              		.loc 1 801 28 view .LVU137
+ 370 015c E6EEC77A 		vfms.f32	s15, s13, s14
+ 371              		.loc 1 801 22 view .LVU138
+ 372 0160 E1EC017A 		vstmia.32	r1!, {s15}
+ 373              	.LVL48:
+ 802:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 803:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Decrement the loop counter */
+ 804:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j--;
+ 374              		.loc 1 804 13 is_stmt 1 view .LVU139
+ 796:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 375              		.loc 1 796 17 view .LVU140
+ 376 0164 F5D1     		bne	.L18
+ 377 0166 4544     		add	r5, r5, r8
+ 378              	.LVL49:
+ 805:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 806:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 807:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Loop over the number of columns to
+ 808:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              replace the elements in the destination matrix */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 23
+
+
+ 809:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           j = numCols;
+ 810:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 811:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           while (j > 0U)
+ 379              		.loc 1 811 17 view .LVU141
+ 380 0168 3A46     		mov	r2, r7
+ 790:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 381              		.loc 1 790 21 is_stmt 0 view .LVU142
+ 382 016a DDE90013 		ldrd	r1, r3, [sp]
+ 383              	.LVL50:
+ 384              	.L19:
+ 812:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 813:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+ 814:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+ 815:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             in1 = *pInT2;
+ 385              		.loc 1 815 13 is_stmt 1 view .LVU143
+ 386              		.loc 1 815 17 is_stmt 0 view .LVU144
+ 387 016e D2ED007A 		vldr.32	s15, [r2]
+ 388              	.LVL51:
+ 816:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             *pInT2++ = in1 - (in * *pPRT_pDst++);
+ 389              		.loc 1 816 13 is_stmt 1 view .LVU145
+ 811:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 390              		.loc 1 811 17 is_stmt 0 view .LVU146
+ 391 0172 013B     		subs	r3, r3, #1
+ 392              	.LVL52:
+ 393              		.loc 1 816 28 view .LVU147
+ 394 0174 F1EC016A 		vldmia.32	r1!, {s13}
+ 395              	.LVL53:
+ 396              		.loc 1 816 28 view .LVU148
+ 397 0178 E6EEC77A 		vfms.f32	s15, s13, s14
+ 398              	.LVL54:
+ 399              		.loc 1 816 22 view .LVU149
+ 400 017c E2EC017A 		vstmia.32	r2!, {s15}
+ 401              	.LVL55:
+ 817:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 818:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Decrement loop counter */
+ 819:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             j--;
+ 402              		.loc 1 819 13 is_stmt 1 view .LVU150
+ 811:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 403              		.loc 1 811 17 view .LVU151
+ 404 0180 F5D1     		bne	.L19
+ 772:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 405              		.loc 1 772 13 is_stmt 0 view .LVU152
+ 406 0182 A642     		cmp	r6, r4
+ 407 0184 6744     		add	r7, r7, ip
+ 408              	.LVL56:
+ 820:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 821:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 822:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 823:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 824:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Increment temporary input pointer */
+ 825:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 = pInT1 + l;
+ 409              		.loc 1 825 9 is_stmt 1 view .LVU153
+ 410              		.loc 1 825 15 is_stmt 0 view .LVU154
+ 411 0186 5544     		add	r5, r5, r10
+ 412              	.LVL57:
+ 826:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 827:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Decrement loop counter */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 24
+
+
+ 828:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         k--;
+ 413              		.loc 1 828 9 is_stmt 1 view .LVU155
+ 829:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 830:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Increment pivot index */
+ 831:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         i++;
+ 414              		.loc 1 831 9 view .LVU156
+ 415              		.loc 1 831 10 is_stmt 0 view .LVU157
+ 416 0188 04F10103 		add	r3, r4, #1
+ 417              	.LVL58:
+ 772:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 418              		.loc 1 772 13 is_stmt 1 view .LVU158
+ 419 018c 09D0     		beq	.L60
+ 420              	.LVL59:
+ 421              	.L31:
+ 772:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 422              		.loc 1 772 13 is_stmt 0 view .LVU159
+ 423 018e 1C46     		mov	r4, r3
+ 424              	.LVL60:
+ 775:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 425              		.loc 1 775 9 is_stmt 1 view .LVU160
+ 775:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 426              		.loc 1 775 12 is_stmt 0 view .LVU161
+ 427 0190 7445     		cmp	r4, lr
+ 428 0192 D5D1     		bne	.L16
+ 429              	.LVL61:
+ 430              	.L59:
+ 779:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 431              		.loc 1 779 11 is_stmt 1 view .LVU162
+ 779:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 432              		.loc 1 779 17 is_stmt 0 view .LVU163
+ 433 0194 4544     		add	r5, r5, r8
+ 434              	.LVL62:
+ 781:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 435              		.loc 1 781 11 is_stmt 1 view .LVU164
+ 772:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 436              		.loc 1 772 13 is_stmt 0 view .LVU165
+ 437 0196 A642     		cmp	r6, r4
+ 781:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+ 438              		.loc 1 781 17 view .LVU166
+ 439 0198 6744     		add	r7, r7, ip
+ 440              	.LVL63:
+ 825:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 441              		.loc 1 825 9 is_stmt 1 view .LVU167
+ 442              		.loc 1 831 10 is_stmt 0 view .LVU168
+ 443 019a 04F10103 		add	r3, r4, #1
+ 825:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 444              		.loc 1 825 15 view .LVU169
+ 445 019e 5544     		add	r5, r5, r10
+ 446              	.LVL64:
+ 828:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 447              		.loc 1 828 9 is_stmt 1 view .LVU170
+ 448              		.loc 1 831 9 view .LVU171
+ 772:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 449              		.loc 1 772 13 view .LVU172
+ 450 01a0 F5D1     		bne	.L31
+ 451              	.LVL65:
+ 452              	.L60:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 25
+
+
+ 832:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 833:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 834:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Increment the input pointer */
+ 835:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pIn++;
+ 453              		.loc 1 835 7 view .LVU173
+ 836:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 837:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Decrement the loop counter */
+ 838:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       loopCnt--;
+ 454              		.loc 1 838 7 view .LVU174
+ 839:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 840:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Increment the index modifier */
+ 841:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       l++;
+ 455              		.loc 1 841 7 view .LVU175
+ 456 01a2 009B     		ldr	r3, [sp]
+ 457              	.LVL66:
+ 614:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 458              		.loc 1 614 11 is_stmt 0 view .LVU176
+ 459 01a4 BBF1010B 		subs	fp, fp, #1
+ 460              	.LVL67:
+ 614:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 461              		.loc 1 614 11 view .LVU177
+ 462 01a8 069A     		ldr	r2, [sp, #24]
+ 463              		.loc 1 841 8 view .LVU178
+ 464 01aa 0EF1010E 		add	lr, lr, #1
+ 465              	.LVL68:
+ 614:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 466              		.loc 1 614 11 is_stmt 1 view .LVU179
+ 467 01ae 6344     		add	r3, r3, ip
+ 468 01b0 DDF80C90 		ldr	r9, [sp, #12]
+ 469 01b4 A8F10408 		sub	r8, r8, #4
+ 470 01b8 0093     		str	r3, [sp]
+ 471              	.LVL69:
+ 614:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 472              		.loc 1 614 11 is_stmt 0 view .LVU180
+ 473 01ba 029B     		ldr	r3, [sp, #8]
+ 474 01bc 1344     		add	r3, r3, r2
+ 475 01be 0293     		str	r3, [sp, #8]
+ 476 01c0 7FF463AF 		bne	.L22
+ 842:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+ 843:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 844:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 845:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #else
+ 846:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 847:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   float32_t Xchg, in = 0.0f;                     /* Temporary input values  */
+ 848:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   uint32_t i, rowCnt, flag = 0U, j, loopCnt, k, l;      /* loop counters */
+ 849:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   arm_status status;                             /* status of matrix inverse */
+ 850:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 851:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #ifdef ARM_MATH_MATRIX_CHECK
+ 852:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 853:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   /* Check for matrix mismatch condition */
+ 854:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   if ((pSrc->numRows != pSrc->numCols) ||
+ 855:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       (pDst->numRows != pDst->numCols) ||
+ 856:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       (pSrc->numRows != pDst->numRows)   )
+ 857:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   {
+ 858:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Set status as ARM_MATH_SIZE_MISMATCH */
+ 859:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     status = ARM_MATH_SIZE_MISMATCH;
+ 860:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   }
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 26
+
+
+ 861:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   else
+ 862:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 863:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #endif /* #ifdef ARM_MATH_MATRIX_CHECK */
+ 864:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 865:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   {
+ 866:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 867:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /*---------------------------------------------------------------------------------------------
+ 868:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      * Matrix Inverse can be solved using elementary row operations.
+ 869:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 870:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *  Gauss-Jordan Method:
+ 871:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 872:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      1. First combine the identity matrix and the input matrix separated by a bar to form an
+ 873:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *        augmented matrix as follows:
+ 874:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                      _  _          _     _      _   _         _         _
+ 875:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                     |  |  a11  a12  | | | 1   0  |   |       |  X11 X12  |
+ 876:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                     |  |            | | |        |   |   =   |           |
+ 877:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *                     |_ |_ a21  a22 _| | |_0   1 _|  _|       |_ X21 X21 _|
+ 878:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 879:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      2. In our implementation, pDst Matrix is used as identity matrix.
+ 880:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 881:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      3. Begin with the first row. Let i = 1.
+ 882:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 883:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      4. Check to see if the pivot for row i is zero.
+ 884:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         The pivot is the element of the main diagonal that is on the current row.
+ 885:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         For instance, if working with row i, then the pivot element is aii.
+ 886:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         If the pivot is zero, exchange that row with a row below it that does not
+ 887:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         contain a zero in column i. If this is not possible, then an inverse
+ 888:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         to that matrix does not exist.
+ 889:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 890:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      5. Divide every element of row i by the pivot.
+ 891:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 892:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      6. For every row below and  row i, replace that row with the sum of that row and
+ 893:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         a multiple of row i so that each new element in column i below row i is zero.
+ 894:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 895:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      7. Move to the next row and column and repeat steps 2 through 5 until you have zeros
+ 896:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         for every element below and above the main diagonal.
+ 897:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *
+ 898:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *      8. Now an identical matrix is formed to the left of the bar(input matrix, src).
+ 899:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *         Therefore, the matrix to the right of the bar is our solution(dst matrix, dst).
+ 900:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****      *---------------------------------------------------------------------------------------------
+ 901:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 902:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Working pointer for destination matrix */
+ 903:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     pOutT1 = pOut;
+ 904:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 905:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Loop over the number of rows */
+ 906:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     rowCnt = numRows;
+ 907:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 908:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Making the destination matrix as identity matrix */
+ 909:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     while (rowCnt > 0U)
+ 910:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 911:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all zeroes in lower triangle of the destination matrix */
+ 912:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = numRows - rowCnt;
+ 913:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 914:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 915:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pOutT1++ = 0.0f;
+ 916:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 917:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 27
+
+
+ 918:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 919:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all ones in the diagonal of the destination matrix */
+ 920:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       *pOutT1++ = 1.0f;
+ 921:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 922:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Writing all zeroes in upper triangle of the destination matrix */
+ 923:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       j = rowCnt - 1U;
+ 924:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       while (j > 0U)
+ 925:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 926:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pOutT1++ = 0.0f;
+ 927:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         j--;
+ 928:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 929:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 930:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Decrement loop counter */
+ 931:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       rowCnt--;
+ 932:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+ 933:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 934:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Loop over the number of columns of the input matrix.
+ 935:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        All the elements in each column are processed by the row operations */
+ 936:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     loopCnt = numCols;
+ 937:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 938:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Index modifier to navigate through the columns */
+ 939:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     l = 0U;
+ 940:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 941:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     while (loopCnt > 0U)
+ 942:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+ 943:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Check if the pivot element is zero..
+ 944:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * If it is zero then interchange the row with non zero row below.
+ 945:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * If there is no non zero element to replace in the rows below,
+ 946:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * then the matrix is Singular. */
+ 947:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 948:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Working pointer for the input matrix that points
+ 949:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the pivot element of the particular row  */
+ 950:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn + (l * numCols);
+ 951:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 952:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Working pointer for the destination matrix that points
+ 953:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the pivot element of the particular row  */
+ 954:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pOutT1 = pOut + (l * numCols);
+ 955:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 956:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary variable to hold the pivot value */
+ 957:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       in = *pInT1;
+ 958:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 959:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Destination pointer modifier */
+ 960:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       k = 1U;
+ 961:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 962:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Check if the pivot element is zero */
+ 963:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if (*pInT1 == 0.0f)
+ 964:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 965:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Loop over the number rows present below */
+ 966:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         for (i = (l + 1U); i < numRows; i++)
+ 967:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+ 968:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Update the input and destination pointers */
+ 969:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT2 = pInT1 + (numCols * l);
+ 970:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pOutT2 = pOutT1 + (numCols * k);
+ 971:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 972:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Check if there is a non zero pivot element to
+ 973:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****            * replace in the rows below */
+ 974:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           if (*pInT2 != 0.0f)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 28
+
+
+ 975:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+ 976:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Loop over number of columns
+ 977:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              * to the right of the pilot element */
+ 978:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             for (j = 0U; j < (numCols - l); j++)
+ 979:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             {
+ 980:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               /* Exchange the row elements of the input matrix */
+ 981:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               Xchg = *pInT2;
+ 982:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pInT2++ = *pInT1;
+ 983:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pInT1++ = Xchg;
+ 984:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             }
+ 985:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 986:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             for (j = 0U; j < numCols; j++)
+ 987:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             {
+ 988:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               Xchg = *pOutT2;
+ 989:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pOutT2++ = *pOutT1;
+ 990:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****               *pOutT1++ = Xchg;
+ 991:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             }
+ 992:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 993:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Flag to indicate whether exchange is done or not */
+ 994:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             flag = 1U;
+ 995:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 996:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Break after exchange is done */
+ 997:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+ 998:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+ 999:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1000:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Update the destination pointer modifier */
+1001:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           k++;
+1002:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+1003:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+1004:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1005:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Update the status if the matrix is singular */
+1006:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if ((flag != 1U) && (in == 0.0f))
+1007:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+1008:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         return ARM_MATH_SINGULAR;
+1009:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+1010:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1011:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Points to the pivot row of input and destination matrices */
+1012:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pPivotRowIn = pIn + (l * numCols);
+1013:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pPivotRowDst = pOut + (l * numCols);
+1014:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1015:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary pointers to the pivot row pointers */
+1016:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pPivotRowIn;
+1017:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pOutT1 = pPivotRowDst;
+1018:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1019:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Pivot element of the row */
+1020:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       in = *(pIn + (l * numCols));
+1021:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1022:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Loop over number of columns
+1023:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * to the right of the pilot element */
+1024:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (j = 0U; j < (numCols - l); j++)
+1025:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+1026:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the input matrix
+1027:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+1028:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pInT1 = *pInT1 / in;
+1029:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1++;
+1030:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+1031:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (j = 0U; j < numCols; j++)
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 29
+
+
+1032:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+1033:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Divide each element of the row of the destination matrix
+1034:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****          * by the pivot element */
+1035:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         *pOutT1 = *pOutT1 / in;
+1036:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pOutT1++;
+1037:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+1038:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1039:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Replace the rows with the sum of that row and a multiple of row i
+1040:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****        * so that each new element in column i above row i is zero.*/
+1041:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1042:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Temporary pointers for input and destination matrices */
+1043:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pInT1 = pIn;
+1044:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pOutT1 = pOut;
+1045:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1046:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (i = 0U; i < numRows; i++)
+1047:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+1048:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Check for the pivot element */
+1049:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         if (i == l)
+1050:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+1051:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* If the processing element is the pivot element,
+1052:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              only the columns to the right are to be processed */
+1053:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pInT1 += numCols - l;
+1054:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pOutT1 += numCols;
+1055:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+1056:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         else
+1057:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         {
+1058:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Element of the reference row */
+1059:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           in = *pInT1;
+1060:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1061:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Working pointers for input and destination pivot rows */
+1062:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pPRT_in = pPivotRowIn;
+1063:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           pPRT_pDst = pPivotRowDst;
+1064:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1065:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Loop over the number of columns to the right of the pivot element,
+1066:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              to replace the elements in the input matrix */
+1067:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           for (j = 0U; j < (numCols - l); j++)
+1068:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+1069:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+1070:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+1071:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             *pInT1 = *pInT1 - (in * *pPRT_in++);
+1072:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             pInT1++;
+1073:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+1074:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1075:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           /* Loop over the number of columns to
+1076:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****              replace the elements in the destination matrix */
+1077:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           for (j = 0U; j < numCols; j++)
+1078:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           {
+1079:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             /* Replace the element by the sum of that row
+1080:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****                and a multiple of the reference row  */
+1081:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             *pOutT1 = *pOutT1 - (in * *pPRT_pDst++);
+1082:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             pOutT1++;
+1083:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****           }
+1084:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1085:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         }
+1086:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1087:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         /* Increment temporary input pointer */
+1088:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         pInT1 = pInT1 + l;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 30
+
+
+1089:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+1090:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1091:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Increment the input pointer */
+1092:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pIn++;
+1093:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1094:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Decrement the loop counter */
+1095:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       loopCnt--;
+1096:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1097:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       /* Increment the index modifier */
+1098:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       l++;
+1099:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+1100:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1101:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** #endif /* #if defined (ARM_MATH_DSP) */
+1102:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1103:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     /* Set status as ARM_MATH_SUCCESS */
+1104:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     status = ARM_MATH_SUCCESS;
+ 477              		.loc 1 1104 5 is_stmt 1 view .LVU181
+ 478              	.LVL70:
+1105:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1106:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     if ((flag != 1U) && (in == 0.0f))
+ 479              		.loc 1 1106 5 view .LVU182
+ 480              		.loc 1 1106 8 is_stmt 0 view .LVU183
+ 481 01c4 B5EE407A 		vcmp.f32	s14, #0
+ 482 01c8 F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 483 01cc 08D0     		beq	.L23
+ 484              	.L32:
+1104:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+ 485              		.loc 1 1104 12 view .LVU184
+ 486 01ce 0020     		movs	r0, #0
+ 487              	.LVL71:
+1107:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     {
+1108:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       pIn = pSrc->pData;
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       for (i = 0; i < numRows * numCols; i++)
+1110:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+1111:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         if (pIn[i] != 0.0f)
+1112:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+1113:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+1114:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1115:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       if (i == numRows * numCols)
+1116:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****         status = ARM_MATH_SINGULAR;
+1117:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****     }
+1118:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   }
+1119:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** 
+1120:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   /* Return to application */
+1121:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****   return (status);
+1122:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c **** }
+ 488              		.loc 1 1122 1 view .LVU185
+ 489 01d0 09B0     		add	sp, sp, #36
+ 490              	.LCFI2:
+ 491              		.cfi_remember_state
+ 492              		.cfi_def_cfa_offset 36
+ 493              		@ sp needed
+ 494 01d2 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 495              	.LVL72:
+ 496              	.L7:
+ 497              	.LCFI3:
+ 498              		.cfi_restore_state
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 31
+
+
+ 715:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       }
+ 499              		.loc 1 715 16 view .LVU186
+ 500 01d6 6FF00400 		mvn	r0, #4
+ 501              		.loc 1 1122 1 view .LVU187
+ 502 01da 09B0     		add	sp, sp, #36
+ 503              	.LCFI4:
+ 504              		.cfi_remember_state
+ 505              		.cfi_def_cfa_offset 36
+ 506              		@ sp needed
+ 507 01dc BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 508              	.LVL73:
+ 509              	.L23:
+ 510              	.LCFI5:
+ 511              		.cfi_restore_state
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 512              		.loc 1 1109 19 is_stmt 1 view .LVU188
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 513              		.loc 1 1109 31 is_stmt 0 view .LVU189
+ 514 01e0 019B     		ldr	r3, [sp, #4]
+ 515 01e2 03FB09F9 		mul	r9, r3, r9
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 516              		.loc 1 1109 31 view .LVU190
+ 517 01e6 079B     		ldr	r3, [sp, #28]
+ 518 01e8 01E0     		b	.L24
+ 519              	.LVL74:
+ 520              	.L61:
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 521              		.loc 1 1109 7 discriminator 2 view .LVU191
+ 522 01ea CB45     		cmp	fp, r9
+ 523 01ec F3D0     		beq	.L7
+ 524              	.LVL75:
+ 525              	.L24:
+1111:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+ 526              		.loc 1 1111 9 is_stmt 1 view .LVU192
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 527              		.loc 1 1109 42 view .LVU193
+1111:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+ 528              		.loc 1 1111 16 is_stmt 0 view .LVU194
+ 529 01ee F3EC017A 		vldmia.32	r3!, {s15}
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 530              		.loc 1 1109 43 view .LVU195
+ 531 01f2 0BF1010B 		add	fp, fp, #1
+ 532              	.LVL76:
+1109:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****       {
+ 533              		.loc 1 1109 19 is_stmt 1 view .LVU196
+1111:.//Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_inverse_f32.c ****             break;
+ 534              		.loc 1 1111 12 is_stmt 0 view .LVU197
+ 535 01f6 F5EE407A 		vcmp.f32	s15, #0
+ 536 01fa F1EE10FA 		vmrs	APSR_nzcv, FPSCR
+ 537 01fe F4D0     		beq	.L61
+ 538 0200 E5E7     		b	.L32
+ 539              	.L63:
+ 540 0202 00BF     		.align	2
+ 541              	.L62:
+ 542 0204 00000000 		.word	0
+ 543              		.cfi_endproc
+ 544              	.LFE145:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 32
+
+
+ 546              		.text
+ 547              	.Letext0:
+ 548              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 549              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 550              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 551              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 552              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 553              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 554              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 555              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s 			page 33
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_mat_inverse_f32.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s:17     .text.arm_mat_inverse_f32:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s:26     .text.arm_mat_inverse_f32:0000000000000000 arm_mat_inverse_f32
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccWl6T2a.s:542    .text.arm_mat_inverse_f32:0000000000000204 $d
+
+NO UNDEFINED SYMBOLS

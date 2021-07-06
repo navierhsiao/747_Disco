@@ -1,0 +1,335 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_nn_activations_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_nn_activations_direct_q15,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_nn_activations_direct_q15
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_nn_activations_direct_q15:
+  27              	.LVL0:
+  28              	.LFB149:
+  29              		.file 1 ".//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c"
+   1:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** /*
+   2:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.
+   3:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *
+   4:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+   5:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *
+   6:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+   7:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * not use this file except in compliance with the License.
+   8:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * You may obtain a copy of the License at
+   9:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *
+  10:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  11:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *
+  12:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  13:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  14:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  15:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * See the License for the specific language governing permissions and
+  16:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * limitations under the License.
+  17:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  */
+  18:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  19:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** /* ----------------------------------------------------------------------
+  20:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * Project:      CMSIS NN Library
+  21:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * Title:        arm_nn_activations_q15.c
+  22:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * Description:  Q15 neural network activation function using direct table look-up
+  23:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *
+  24:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * $Date:        17. January 2018
+  25:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * $Revision:    V.1.0.0
+  26:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *
+  27:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * Target Processor:  Cortex-M cores
+  28:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *
+  29:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * -------------------------------------------------------------------- */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s 			page 2
+
+
+  30:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  31:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** #include "arm_math.h"
+  32:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** #include "arm_common_tables.h"
+  33:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** #include "arm_nnfunctions.h"
+  34:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  35:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** /**
+  36:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  *  @ingroup groupNN
+  37:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  */
+  38:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  39:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** /**
+  40:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * @addtogroup Acti
+  41:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  * @{
+  42:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****  */
+  43:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  44:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****   /**
+  45:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * @brief Q15 neural network activation function using direct table look-up
+  46:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * @param[in,out]   data        pointer to input
+  47:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * @param[in]       size        number of elements
+  48:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * @param[in]       int_width   bit-width of the integer part, assume to be smaller than 3
+  49:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * @param[in]       type        type of activation functions
+  50:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * @return none.
+  51:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    *
+  52:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * @details
+  53:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * 
+  54:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * This is the direct table look-up approach.
+  55:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    *
+  56:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * Assume here the integer part of the fixed-point is <= 3.
+  57:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * More than 3 just not making much sense, makes no difference with
+  58:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    * saturation followed by any of these activation functions. 
+  59:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****    */
+  60:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  61:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** void arm_nn_activations_direct_q15(q15_t * data, uint16_t size, uint16_t int_width, arm_nn_activati
+  62:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** {
+  30              		.loc 1 62 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  63:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint16_t  i = size;
+  34              		.loc 1 63 5 view .LVU1
+  62:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint16_t  i = size;
+  35              		.loc 1 62 1 is_stmt 0 view .LVU2
+  36 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  37              	.LCFI0:
+  38              		.cfi_def_cfa_offset 24
+  39              		.cfi_offset 4, -24
+  40              		.cfi_offset 5, -20
+  41              		.cfi_offset 6, -16
+  42              		.cfi_offset 7, -12
+  43              		.cfi_offset 8, -8
+  44              		.cfi_offset 14, -4
+  64:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     q15_t    *pIn = data;
+  65:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     q15_t    *pOut = data;
+  66:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint16_t  shift_size = 8 + 3 - int_width;
+  67:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint32_t  bit_mask = 0x7FF >> int_width;
+  45              		.loc 1 67 32 view .LVU3
+  46 0004 40F2FF76 		movw	r6, #2047
+  47              	.LVL1:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s 			page 3
+
+
+  64:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     q15_t    *pIn = data;
+  48              		.loc 1 64 5 is_stmt 1 view .LVU4
+  68:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint32_t  full_frac = bit_mask + 1;
+  69:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     const q15_t *lookup_table;
+  70:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  71:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     switch (type)
+  72:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     {
+  73:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     case ARM_SIGMOID:
+  74:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         lookup_table = sigmoidTable_q15;
+  75:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         break;
+  76:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     case ARM_TANH:
+  77:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     default:
+  78:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         lookup_table = tanhTable_q15;
+  49              		.loc 1 78 22 is_stmt 0 view .LVU5
+  50 0008 174D     		ldr	r5, .L10
+  51              	.LVL2:
+  65:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint16_t  shift_size = 8 + 3 - int_width;
+  52              		.loc 1 65 5 is_stmt 1 view .LVU6
+  66:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint32_t  bit_mask = 0x7FF >> int_width;
+  53              		.loc 1 66 5 view .LVU7
+  54              		.loc 1 78 22 is_stmt 0 view .LVU8
+  55 000a 184C     		ldr	r4, .L10+4
+  67:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint32_t  full_frac = bit_mask + 1;
+  56              		.loc 1 67 32 view .LVU9
+  57 000c 1641     		asrs	r6, r6, r2
+  58              		.loc 1 78 22 view .LVU10
+  59 000e 002B     		cmp	r3, #0
+  60 0010 0CBF     		ite	eq
+  61 0012 2B46     		moveq	r3, r5
+  62 0014 2346     		movne	r3, r4
+  63              	.LVL3:
+  67:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     uint32_t  full_frac = bit_mask + 1;
+  64              		.loc 1 67 5 is_stmt 1 view .LVU11
+  68:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     const q15_t *lookup_table;
+  65              		.loc 1 68 5 view .LVU12
+  69:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  66              		.loc 1 69 5 view .LVU13
+  71:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     {
+  67              		.loc 1 71 5 view .LVU14
+  79:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         break;
+  80:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     }
+  81:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  82:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     while (i)
+  68              		.loc 1 82 11 view .LVU15
+  69 0016 21B3     		cbz	r1, .L1
+  70 0018 4D1E     		subs	r5, r1, #1
+  71 001a C2F10B02 		rsb	r2, r2, #11
+  72              	.LVL4:
+  73              		.loc 1 82 11 is_stmt 0 view .LVU16
+  74 001e 771C     		adds	r7, r6, #1
+  75              	.LVL5:
+  76              		.loc 1 82 11 view .LVU17
+  77 0020 B6B2     		uxth	r6, r6
+  78              	.LVL6:
+  79              		.loc 1 82 11 view .LVU18
+  80 0022 ADB2     		uxth	r5, r5
+  81 0024 94B2     		uxth	r4, r2
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s 			page 4
+
+
+  82 0026 0135     		adds	r5, r5, #1
+  83 0028 00EB4505 		add	r5, r0, r5, lsl #1
+  84              	.LVL7:
+  85              	.L3:
+  86              	.LBB2:
+  83:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     {
+  84:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         q15_t     out;
+  87              		.loc 1 84 9 is_stmt 1 view .LVU19
+  85:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         q15_t     in = *pIn++;
+  88              		.loc 1 85 9 view .LVU20
+  89              		.loc 1 85 19 is_stmt 0 view .LVU21
+  90 002c 30F9022B 		ldrsh	r2, [r0], #2
+  91              	.LVL8:
+  86:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         q15_t     frac = (uint32_t) in & bit_mask;
+  92              		.loc 1 86 9 is_stmt 1 view .LVU22
+  93              	.LBB3:
+  87:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         q15_t     value = lookup_table[__USAT(in >> shift_size, 8)];
+  94              		.loc 1 87 40 is_stmt 0 view .LVU23
+  95 0030 42FA04F1 		asr	r1, r2, r4
+  96              	.LBE3:
+  86:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         q15_t     frac = (uint32_t) in & bit_mask;
+  97              		.loc 1 86 40 view .LVU24
+  98 0034 3240     		ands	r2, r2, r6
+  99              	.LVL9:
+ 100              	.LBB4:
+ 101              		.loc 1 87 40 view .LVU25
+ 102              		.syntax unified
+ 103              	@ 87 ".//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c" 1
+ 104 0036 81F30808 		usat r8, #8, r1
+ 105              	@ 0 "" 2
+ 106              		.thumb
+ 107              		.syntax unified
+ 108              	.LBE4:
+  86:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         q15_t     frac = (uint32_t) in & bit_mask;
+ 109              		.loc 1 86 19 view .LVU26
+ 110 003a 12B2     		sxth	r2, r2
+ 111              	.LVL10:
+ 112              		.loc 1 87 9 is_stmt 1 view .LVU27
+ 113              	.LBB5:
+ 114              		.loc 1 87 40 view .LVU28
+ 115              		.loc 1 87 40 view .LVU29
+ 116              		.loc 1 87 40 view .LVU30
+ 117              		.loc 1 87 40 is_stmt 0 view .LVU31
+ 118              	.LBE5:
+  88:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         q15_t     value2 = lookup_table[__USAT(1 + (in >> shift_size), 8)];
+ 119              		.loc 1 88 9 is_stmt 1 view .LVU32
+ 120              	.LBB6:
+ 121              		.loc 1 88 41 view .LVU33
+ 122              		.loc 1 88 41 view .LVU34
+ 123 003c 0131     		adds	r1, r1, #1
+ 124              	.LVL11:
+ 125              		.loc 1 88 41 is_stmt 0 view .LVU35
+ 126              		.syntax unified
+ 127              	@ 88 ".//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c" 1
+ 128 003e 81F30801 		usat r1, #8, r1
+ 129              	@ 0 "" 2
+ 130              	.LVL12:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s 			page 5
+
+
+ 131              		.loc 1 88 41 is_stmt 1 view .LVU36
+ 132              		.loc 1 88 41 is_stmt 0 view .LVU37
+ 133              		.thumb
+ 134              		.syntax unified
+ 135              	.LBE6:
+  89:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  90:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         /* doing the interpolation here for better accuracy */
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         out = ((q31_t) (full_frac - frac) * value + (q31_t) value2 * frac) >> shift_size;
+ 136              		.loc 1 91 9 is_stmt 1 view .LVU38
+  92:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  93:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         *pOut++ = out;
+ 137              		.loc 1 93 9 view .LVU39
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 138              		.loc 1 91 68 is_stmt 0 view .LVU40
+ 139 0042 33F811C0 		ldrh	ip, [r3, r1, lsl #1]
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 140              		.loc 1 91 35 view .LVU41
+ 141 0046 A7EB020E 		sub	lr, r7, r2
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 142              		.loc 1 91 43 view .LVU42
+ 143 004a 33F91810 		ldrsh	r1, [r3, r8, lsl #1]
+ 144              	.LVL13:
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 145              		.loc 1 91 43 view .LVU43
+ 146              	.LBE2:
+  82:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     {
+ 147              		.loc 1 82 11 view .LVU44
+ 148 004e A842     		cmp	r0, r5
+ 149              	.LBB7:
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 150              		.loc 1 91 68 view .LVU45
+ 151 0050 1CFB02F2 		smulbb	r2, ip, r2
+ 152              	.LVL14:
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 153              		.loc 1 91 51 view .LVU46
+ 154 0054 0EFB0122 		mla	r2, lr, r1, r2
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 155              		.loc 1 91 76 view .LVU47
+ 156 0058 42FA04F2 		asr	r2, r2, r4
+  91:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+ 157              		.loc 1 91 13 view .LVU48
+ 158 005c 20F8022C 		strh	r2, [r0, #-2]	@ movhi
+ 159              	.LVL15:
+  94:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****         i--;
+ 160              		.loc 1 94 9 is_stmt 1 view .LVU49
+ 161              		.loc 1 94 9 is_stmt 0 view .LVU50
+ 162              	.LBE7:
+  82:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     {
+ 163              		.loc 1 82 11 is_stmt 1 view .LVU51
+ 164 0060 E4D1     		bne	.L3
+ 165              	.LVL16:
+ 166              	.L1:
+  95:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c ****     }
+  96:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** 
+  97:.//Libraries/CMSIS/NN/Source/ActivationFunctions/arm_nn_activations_q15.c **** }
+ 167              		.loc 1 97 1 is_stmt 0 view .LVU52
+ 168 0062 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s 			page 6
+
+
+ 169              	.L11:
+ 170 0066 00BF     		.align	2
+ 171              	.L10:
+ 172 0068 00000000 		.word	sigmoidTable_q15
+ 173 006c 00000000 		.word	tanhTable_q15
+ 174              		.cfi_endproc
+ 175              	.LFE149:
+ 177              		.text
+ 178              	.Letext0:
+ 179              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 180              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 181              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 182              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 183              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 184              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 185              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 186              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ 187              		.file 10 ".//Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ 188              		.file 11 ".//Libraries/CMSIS/NN/Include/arm_nnsupportfunctions.h"
+ 189              		.file 12 ".//Libraries/CMSIS/NN/Include/arm_nn_tables.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s 			page 7
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_nn_activations_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s:17     .text.arm_nn_activations_direct_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s:26     .text.arm_nn_activations_direct_q15:0000000000000000 arm_nn_activations_direct_q15
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccjWOup1.s:172    .text.arm_nn_activations_direct_q15:0000000000000068 $d
+
+UNDEFINED SYMBOLS
+sigmoidTable_q15
+tanhTable_q15

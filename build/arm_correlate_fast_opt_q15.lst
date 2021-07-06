@@ -1,0 +1,808 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_correlate_fast_opt_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_correlate_fast_opt_q15,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_correlate_fast_opt_q15
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_correlate_fast_opt_q15:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c"
+   1:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * Title:        arm_correlate_fast_opt_q15.c
+   4:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * Description:  Fast Q15 Correlation
+   5:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @ingroup groupFilters
+  33:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @addtogroup Corr
+  37:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @brief         Correlation of Q15 sequences (fast version).
+  42:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @param[in]     pSrcA      points to the first input sequence
+  43:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @param[in]     srcALen    length of the first input sequence
+  44:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @param[in]     pSrcB      points to the second input sequence
+  45:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @param[in]     srcBLen    length of the second input sequence.
+  46:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @param[out]    pDst       points to the location where the output result is written.  Length 2 * 
+  47:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @param[in]     pScratch   points to scratch buffer of size max(srcALen, srcBLen) + 2*min(srcALen,
+  48:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @return        none
+  49:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  50:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @par           Scaling and Overflow Behavior
+  51:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    This fast version uses a 32-bit accumulator with 2.30 format.
+  52:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    The accumulator maintains full precision of the intermediate multiplication resu
+  53:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    There is no saturation on intermediate additions.
+  54:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    Thus, if the accumulator overflows it wraps around and distorts the result.
+  55:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    The input signals should be scaled down to avoid intermediate overflows.
+  56:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    Scale down one of the inputs by 1/min(srcALen, srcBLen) to avoid overflow since 
+  57:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    maximum of min(srcALen, srcBLen) number of additions is carried internally.
+  58:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    The 2.30 accumulator is right shifted by 15 bits and then saturated to 1.15 form
+  59:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  60:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   @remark
+  61:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****                    Refer to \ref arm_correlate_q15() for a slower implementation of this function w
+  62:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****  */
+  63:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  64:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** void arm_correlate_fast_opt_q15(
+  65:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t * pSrcA,
+  66:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t srcALen,
+  67:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t * pSrcB,
+  68:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t srcBLen,
+  69:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q15_t * pDst,
+  70:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q15_t * pScratch)
+  71:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** {
+  30              		.loc 1 71 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 8, pretend = 0, frame = 8
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 71 1 is_stmt 0 view .LVU1
+  35 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
+  36              	.LCFI0:
+  37              		.cfi_def_cfa_offset 36
+  38              		.cfi_offset 4, -36
+  39              		.cfi_offset 5, -32
+  40              		.cfi_offset 6, -28
+  41              		.cfi_offset 7, -24
+  42              		.cfi_offset 8, -20
+  43              		.cfi_offset 9, -16
+  44              		.cfi_offset 10, -12
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 3
+
+
+  45              		.cfi_offset 11, -8
+  46              		.cfi_offset 14, -4
+  72:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *pIn1;                                   /* InputA pointer */
+  73:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *pIn2;                                   /* InputB pointer */
+  74:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q31_t acc0;                                    /* Accumulators */
+  75:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q15_t *pOut = pDst;                            /* Output pointer */
+  76:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q15_t *pScr1 = pScratch;                       /* Temporary pointer for scratch */
+  77:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *py;                                     /* Intermediate inputB pointer */
+  78:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t j, blkCnt, outBlockSize;              /* Loop counter */
+  79:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         int32_t inc = 1;                               /* Destination address modifier */
+  80:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t tapCnt;                               /* Loop count */
+  81:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  82:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  83:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q31_t acc1, acc2, acc3;                        /* Accumulators */
+  84:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q31_t x1, x2, x3;                              /* Temporary variables for holding input and
+  85:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q31_t y1, y2;                                  /* State variables */
+  86:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #endif
+  87:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  88:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* The algorithm implementation is based on the lengths of the inputs. */
+  89:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* srcB is always made to slide across srcA. */
+  90:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* So srcBLen is always considered as shorter or equal to srcALen */
+  91:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* But CORR(x, y) is reverse of CORR(y, x) */
+  92:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* So, when srcBLen > srcALen, output pointer is made to point to the end of the output buffer */
+  93:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* and the destination pointer modifier, inc is set to -1 */
+  94:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* If srcALen > srcBLen, zero pad has to be done to srcB to make the two inputs of same length */
+  95:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* But to improve the performance,
+  96:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****    * we include zeroes in the output instead of zero padding either of the the inputs*/
+  97:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* If srcALen > srcBLen,
+  98:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****    * (srcALen - srcBLen) zeroes has to included in the starting of the output buffer */
+  99:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* If srcALen < srcBLen,
+ 100:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****    * (srcALen - srcBLen) zeroes has to included in the ending of the output buffer */
+ 101:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   if (srcALen >= srcBLen)
+  47              		.loc 1 101 6 view .LVU2
+  48 0004 9942     		cmp	r1, r3
+  71:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *pIn1;                                   /* InputA pointer */
+  49              		.loc 1 71 1 view .LVU3
+  50 0006 83B0     		sub	sp, sp, #12
+  51              	.LCFI1:
+  52              		.cfi_def_cfa_offset 48
+  71:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *pIn1;                                   /* InputA pointer */
+  53              		.loc 1 71 1 view .LVU4
+  54 0008 0C46     		mov	r4, r1
+  55 000a 9A46     		mov	r10, r3
+  56 000c 8346     		mov	fp, r0
+  57 000e 9046     		mov	r8, r2
+  72:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *pIn1;                                   /* InputA pointer */
+  58              		.loc 1 72 3 is_stmt 1 view .LVU5
+  73:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q31_t acc0;                                    /* Accumulators */
+  59              		.loc 1 73 3 view .LVU6
+  74:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q15_t *pOut = pDst;                            /* Output pointer */
+  60              		.loc 1 74 9 view .LVU7
+  75:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         q15_t *pScr1 = pScratch;                       /* Temporary pointer for scratch */
+  61              		.loc 1 75 9 view .LVU8
+  62              	.LVL1:
+  76:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *py;                                     /* Intermediate inputB pointer */
+  63              		.loc 1 76 9 view .LVU9
+  71:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   const q15_t *pIn1;                                   /* InputA pointer */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 4
+
+
+  64              		.loc 1 71 1 is_stmt 0 view .LVU10
+  65 0010 0D9E     		ldr	r6, [sp, #52]
+  66              	.LVL2:
+  77:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t j, blkCnt, outBlockSize;              /* Loop counter */
+  67              		.loc 1 77 3 is_stmt 1 view .LVU11
+  78:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         int32_t inc = 1;                               /* Destination address modifier */
+  68              		.loc 1 78 9 view .LVU12
+  79:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t tapCnt;                               /* Loop count */
+  69              		.loc 1 79 9 view .LVU13
+  80:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  70              		.loc 1 80 9 view .LVU14
+  71              		.loc 1 101 3 view .LVU15
+  72              		.loc 1 101 6 is_stmt 0 view .LVU16
+  73 0012 64D3     		bcc	.L2
+ 102:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   {
+ 103:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialization of inputA pointer */
+ 104:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pIn1 = pSrcA;
+  74              		.loc 1 104 5 is_stmt 1 view .LVU17
+  75              	.LVL3:
+ 105:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 106:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialization of inputB pointer */
+ 107:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pIn2 = pSrcB;
+  76              		.loc 1 107 5 view .LVU18
+ 108:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 109:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Number of output samples is calculated */
+ 110:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     outBlockSize = (2U * srcALen) - 1U;
+  77              		.loc 1 110 5 view .LVU19
+ 111:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 112:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* When srcALen > srcBLen, zero padding is done to srcB
+ 113:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****      * to make their lengths equal.
+ 114:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****      * Instead, (outBlockSize - (srcALen + srcBLen - 1))
+ 115:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****      * number of output samples are made zero */
+ 116:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     j = outBlockSize - (srcALen + (srcBLen - 1U));
+  78              		.loc 1 116 7 is_stmt 0 view .LVU20
+  79 0014 A1EB0309 		sub	r9, r1, r3
+  79:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t tapCnt;                               /* Loop count */
+  80              		.loc 1 79 17 view .LVU21
+  81 0018 0123     		movs	r3, #1
+  82              	.LVL4:
+ 110:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+  83              		.loc 1 110 24 view .LVU22
+  84 001a 4F00     		lsls	r7, r1, #1
+  85              	.LVL5:
+  86              		.loc 1 116 5 is_stmt 1 view .LVU23
+ 117:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 118:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Updating the pointer position to non zero value */
+ 119:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += j;
+  87              		.loc 1 119 5 view .LVU24
+  79:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****         uint32_t tapCnt;                               /* Loop count */
+  88              		.loc 1 79 17 is_stmt 0 view .LVU25
+  89 001c 0193     		str	r3, [sp, #4]
+  90              		.loc 1 119 10 view .LVU26
+  91 001e 0C9B     		ldr	r3, [sp, #48]
+  92 0020 03EB4909 		add	r9, r3, r9, lsl #1
+  93              	.LVL6:
+  94              	.L3:
+ 120:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 5
+
+
+ 121:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   else
+ 122:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   {
+ 123:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialization of inputA pointer */
+ 124:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pIn1 = pSrcB;
+ 125:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 126:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialization of inputB pointer */
+ 127:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pIn2 = pSrcA;
+ 128:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 129:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* srcBLen is always considered as shorter or equal to srcALen */
+ 130:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     j = srcBLen;
+ 131:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     srcBLen = srcALen;
+ 132:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     srcALen = j;
+ 133:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 134:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* CORR(x, y) = Reverse order(CORR(y, x)) */
+ 135:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Hence set the destination pointer to point to the last output sample */
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut = pDst + ((srcALen + srcBLen) - 2U);
+ 137:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 138:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Destination address modifier is set to -1 */
+ 139:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     inc = -1;
+ 140:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ 141:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 142:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   pScr1 = pScratch;
+  95              		.loc 1 142 3 is_stmt 1 view .LVU27
+ 143:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 144:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Fill (srcBLen - 1U) zeros in scratch buffer */
+ 145:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   arm_fill_q15(0, pScr1, (srcBLen - 1U));
+  96              		.loc 1 145 3 view .LVU28
+  97 0024 0AF1FF35 		add	r5, r10, #-1
+  98 0028 3146     		mov	r1, r6
+  99 002a 0020     		movs	r0, #0
+ 100              	.LVL7:
+ 101              		.loc 1 145 3 is_stmt 0 view .LVU29
+ 102 002c 2A46     		mov	r2, r5
+ 103 002e FFF7FEFF 		bl	arm_fill_q15
+ 104              	.LVL8:
+ 146:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 147:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Update temporary scratch pointer */
+ 148:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   pScr1 += (srcBLen - 1U);
+ 105              		.loc 1 148 3 is_stmt 1 view .LVU30
+ 106              		.loc 1 148 9 is_stmt 0 view .LVU31
+ 107 0032 6FF00041 		mvn	r1, #-2147483648
+ 149:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 150:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 151:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Copy (srcALen) samples in scratch buffer */
+ 152:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   arm_copy_q15(pIn1, pScr1, srcALen);
+ 108              		.loc 1 152 3 view .LVU32
+ 109 0036 2246     		mov	r2, r4
+ 110 0038 5846     		mov	r0, fp
+ 148:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 111              		.loc 1 148 9 view .LVU33
+ 112 003a 5144     		add	r1, r1, r10
+ 153:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 154:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Update pointers */
+ 155:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   pScr1 += srcALen;
+ 156:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 157:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 158:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Fill (srcBLen - 1U) zeros at end of scratch buffer */
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 6
+
+
+ 159:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   arm_fill_q15(0, pScr1, (srcBLen - 1U));
+ 160:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 161:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Update pointer */
+ 162:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   pScr1 += (srcBLen - 1U);
+ 163:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 164:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Temporary pointer for scratch2 */
+ 165:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   py = pIn2;
+ 166:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 167:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 168:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Actual correlation process starts here */
+ 169:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 170:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ 171:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 172:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+ 173:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   blkCnt = (srcALen + srcBLen - 1U) >> 2;
+ 174:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 175:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   while (blkCnt > 0)
+ 176:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   {
+ 177:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialze temporary scratch pointer as scratch1 */
+ 178:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pScr1 = pScratch;
+ 179:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 180:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Clear Accumlators */
+ 181:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     acc0 = 0;
+ 182:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     acc1 = 0;
+ 183:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     acc2 = 0;
+ 184:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     acc3 = 0;
+ 185:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 186:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Read two samples from scratch buffer */
+ 187:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     x1 = read_q15x2_ia (&pScr1);
+ 188:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 189:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Read next two samples from scratch buffer */
+ 190:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     x2 = read_q15x2_ia (&pScr1);
+ 191:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 192:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     tapCnt = (srcBLen) >> 2U;
+ 193:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 194:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     while (tapCnt > 0U)
+ 195:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 196:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* Read four samples from smaller buffer */
+ 197:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       y1 = read_q15x2_ia ((q15_t **) &pIn2);
+ 198:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       y2 = read_q15x2_ia ((q15_t **) &pIn2);
+ 199:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 200:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* multiply and accumlate */
+ 201:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 = __SMLAD(x1, y1, acc0);
+ 202:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc2 = __SMLAD(x2, y1, acc2);
+ 203:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 204:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* pack input data */
+ 205:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 206:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x3 = __PKHBT(x2, x1, 0);
+ 207:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #else
+ 208:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x3 = __PKHBT(x1, x2, 0);
+ 209:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #endif
+ 210:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 211:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* multiply and accumlate */
+ 212:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc1 = __SMLADX(x3, y1, acc1);
+ 213:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 214:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* Read next two samples from scratch buffer */
+ 215:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x1 = read_q15x2_ia (&pScr1);
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 7
+
+
+ 216:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 217:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* multiply and accumlate */
+ 218:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 = __SMLAD(x2, y2, acc0);
+ 219:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc2 = __SMLAD(x1, y2, acc2);
+ 220:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 221:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* pack input data */
+ 222:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 223:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x3 = __PKHBT(x1, x2, 0);
+ 224:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #else
+ 225:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x3 = __PKHBT(x2, x1, 0);
+ 226:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #endif
+ 227:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 228:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc3 = __SMLADX(x3, y1, acc3);
+ 229:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc1 = __SMLADX(x3, y2, acc1);
+ 230:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 231:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x2 = read_q15x2_ia (&pScr1);
+ 232:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 233:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 234:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x3 = __PKHBT(x2, x1, 0);
+ 235:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #else
+ 236:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       x3 = __PKHBT(x1, x2, 0);
+ 237:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #endif
+ 238:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 239:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc3 = __SMLADX(x3, y2, acc3);
+ 240:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 241:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* Decrement loop counter */
+ 242:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       tapCnt--;
+ 243:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     }
+ 244:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 245:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Update scratch pointer for remaining samples of smaller length sequence */
+ 246:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pScr1 -= 4U;
+ 247:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 248:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* apply same above for remaining samples of smaller length sequence */
+ 249:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     tapCnt = (srcBLen) & 3U;
+ 250:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 251:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     while (tapCnt > 0U)
+ 252:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 253:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* accumlate the results */
+ 254:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 += (*pScr1++ * *pIn2);
+ 255:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc1 += (*pScr1++ * *pIn2);
+ 256:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc2 += (*pScr1++ * *pIn2);
+ 257:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc3 += (*pScr1++ * *pIn2++);
+ 258:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 259:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       pScr1 -= 3U;
+ 260:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 261:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* Decrement loop counter */
+ 262:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       tapCnt--;
+ 263:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     }
+ 264:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 265:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     blkCnt--;
+ 266:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 267:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Store the results in the accumulators in the destination buffer. */
+ 268:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     *pOut = (__SSAT(acc0 >> 15U, 16));
+ 269:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 270:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     *pOut = (__SSAT(acc1 >> 15U, 16));
+ 271:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 272:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     *pOut = (__SSAT(acc2 >> 15U, 16));
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 8
+
+
+ 273:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 274:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     *pOut = (__SSAT(acc3 >> 15U, 16));
+ 275:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 276:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 277:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialization of inputB pointer */
+ 278:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pIn2 = py;
+ 279:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 280:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pScratch += 4U;
+ 281:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ 282:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 283:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Loop unrolling: Compute remaining outputs */
+ 284:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   blkCnt = (srcALen + srcBLen - 1U) & 0x3;
+ 285:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 286:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #else
+ 287:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 288:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Initialize blkCnt with number of samples */
+ 289:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   blkCnt = (srcALen + srcBLen - 1U);
+ 113              		.loc 1 289 21 view .LVU34
+ 114 003c 5444     		add	r4, r4, r10
+ 115              	.LVL9:
+ 148:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 116              		.loc 1 148 9 view .LVU35
+ 117 003e 06EB4101 		add	r1, r6, r1, lsl #1
+ 118              	.LVL10:
+ 152:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 119              		.loc 1 152 3 is_stmt 1 view .LVU36
+ 120 0042 0091     		str	r1, [sp]
+ 121 0044 FFF7FEFF 		bl	arm_copy_q15
+ 122              	.LVL11:
+ 155:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 123              		.loc 1 155 3 view .LVU37
+ 159:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 124              		.loc 1 159 3 view .LVU38
+ 125 0048 0099     		ldr	r1, [sp]
+ 126 004a 2A46     		mov	r2, r5
+ 127 004c 0020     		movs	r0, #0
+ 128 004e 3944     		add	r1, r1, r7
+ 129              	.LVL12:
+ 159:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 130              		.loc 1 159 3 is_stmt 0 view .LVU39
+ 131 0050 FFF7FEFF 		bl	arm_fill_q15
+ 132              	.LVL13:
+ 162:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 133              		.loc 1 162 3 is_stmt 1 view .LVU40
+ 165:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 134              		.loc 1 165 3 view .LVU41
+ 135              		.loc 1 289 3 view .LVU42
+ 290:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 291:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 292:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 293:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   /* Calculate correlation for remaining samples of Bigger length sequence */
+ 294:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   while (blkCnt > 0)
+ 136              		.loc 1 294 3 view .LVU43
+ 137              		.loc 1 294 9 view .LVU44
+ 138 0054 B4F1010E 		subs	lr, r4, #1
+ 139              	.LVL14:
+ 140              		.loc 1 294 9 is_stmt 0 view .LVU45
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 9
+
+
+ 141 0058 3BD0     		beq	.L1
+ 295:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   {
+ 296:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialze temporary scratch pointer as scratch1 */
+ 297:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pScr1 = pScratch;
+ 298:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 299:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Clear Accumlators */
+ 300:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     acc0 = 0;
+ 301:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 302:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     tapCnt = (srcBLen) >> 1U;
+ 303:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     while (tapCnt > 0U)
+ 305:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 306:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 307:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* Read next two samples from scratch buffer */
+ 308:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 += (*pScr1++ * *pIn2++);
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 += (*pScr1++ * *pIn2++);
+ 310:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 311:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* Decrement loop counter */
+ 312:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       tapCnt--;
+ 313:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     }
+ 314:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 315:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     tapCnt = (srcBLen) & 1U;
+ 316:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 317:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* apply same above for remaining samples of smaller length sequence */
+ 318:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     while (tapCnt > 0U)
+ 319:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 320:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 321:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* accumlate the results */
+ 322:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 += (*pScr1++ * *pIn2++);
+ 323:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 324:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       /* Decrement loop counter */
+ 325:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       tapCnt--;
+ 326:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     }
+ 327:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 328:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     blkCnt--;
+ 329:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 330:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* The result is in 2.30 format.  Convert to 1.15 with saturation.
+ 331:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****      ** Then store the output in the destination buffer. */
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     *pOut = (q15_t) (__SSAT((acc0 >> 15), 16));
+ 333:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 142              		.loc 1 333 10 view .LVU46
+ 143 005a 019B     		ldr	r3, [sp, #4]
+ 302:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 144              		.loc 1 302 12 view .LVU47
+ 145 005c 4FEA5A02 		lsr	r2, r10, #1
+ 146 0060 0AF00105 		and	r5, r10, #1
+ 147 0064 0236     		adds	r6, r6, #2
+ 148              	.LVL15:
+ 149              		.loc 1 333 10 view .LVU48
+ 150 0066 4FEA430B 		lsl	fp, r3, #1
+ 151              	.LVL16:
+ 152              		.loc 1 333 10 view .LVU49
+ 153 006a 08F1020C 		add	ip, r8, #2
+ 154 006e 9300     		lsls	r3, r2, #2
+ 155 0070 08EB820A 		add	r10, r8, r2, lsl #2
+ 156 0074 023B     		subs	r3, r3, #2
+ 157 0076 5746     		mov	r7, r10
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 10
+
+
+ 158              		.loc 1 333 10 view .LVU50
+ 159 0078 0193     		str	r3, [sp, #4]
+ 160              	.LVL17:
+ 161              	.L8:
+ 162              		.loc 1 333 10 view .LVU51
+ 163 007a A6F1020A 		sub	r10, r6, #2
+ 164              	.LVL18:
+ 297:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 165              		.loc 1 297 5 is_stmt 1 view .LVU52
+ 300:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 166              		.loc 1 300 5 view .LVU53
+ 302:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 167              		.loc 1 302 5 view .LVU54
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 168              		.loc 1 304 5 view .LVU55
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 169              		.loc 1 304 11 view .LVU56
+ 170 007e 5AB3     		cbz	r2, .L10
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 171              		.loc 1 304 11 is_stmt 0 view .LVU57
+ 172 0080 0023     		movs	r3, #0
+ 300:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 173              		.loc 1 300 10 view .LVU58
+ 174 0082 0095     		str	r5, [sp]
+ 175 0084 1946     		mov	r1, r3
+ 176              	.LVL19:
+ 177              	.L6:
+ 308:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 += (*pScr1++ * *pIn2++);
+ 178              		.loc 1 308 7 is_stmt 1 view .LVU59
+ 308:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 += (*pScr1++ * *pIn2++);
+ 179              		.loc 1 308 12 is_stmt 0 view .LVU60
+ 180 0086 3AF82300 		ldrh	r0, [r10, r3, lsl #2]
+ 181 008a 38F82350 		ldrh	r5, [r8, r3, lsl #2]
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 182              		.loc 1 309 12 view .LVU61
+ 183 008e 36F82340 		ldrh	r4, [r6, r3, lsl #2]
+ 308:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****       acc0 += (*pScr1++ * *pIn2++);
+ 184              		.loc 1 308 12 view .LVU62
+ 185 0092 10FB0511 		smlabb	r1, r0, r5, r1
+ 186              	.LVL20:
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 187              		.loc 1 309 7 is_stmt 1 view .LVU63
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 188              		.loc 1 309 12 is_stmt 0 view .LVU64
+ 189 0096 3CF82300 		ldrh	r0, [ip, r3, lsl #2]
+ 190 009a 0133     		adds	r3, r3, #1
+ 191              	.LVL21:
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 192              		.loc 1 309 12 view .LVU65
+ 193 009c 14FB0011 		smlabb	r1, r4, r0, r1
+ 194              	.LVL22:
+ 312:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     }
+ 195              		.loc 1 312 7 is_stmt 1 view .LVU66
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 196              		.loc 1 304 11 view .LVU67
+ 197 00a0 9A42     		cmp	r2, r3
+ 198 00a2 F0D1     		bne	.L6
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 11
+
+
+ 199 00a4 DDE90053 		ldrd	r5, r3, [sp]
+ 200              	.LVL23:
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 201              		.loc 1 304 11 is_stmt 0 view .LVU68
+ 202 00a8 03EB060A 		add	r10, r3, r6
+ 203              	.LVL24:
+ 309:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 204              		.loc 1 309 32 view .LVU69
+ 205 00ac 3B46     		mov	r3, r7
+ 206              	.LVL25:
+ 207              	.L5:
+ 315:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 208              		.loc 1 315 5 is_stmt 1 view .LVU70
+ 318:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 209              		.loc 1 318 5 view .LVU71
+ 318:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 210              		.loc 1 318 11 view .LVU72
+ 211 00ae 25B1     		cbz	r5, .L7
+ 322:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 212              		.loc 1 322 7 view .LVU73
+ 213              	.LVL26:
+ 322:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 214              		.loc 1 322 12 is_stmt 0 view .LVU74
+ 215 00b0 BAF80000 		ldrh	r0, [r10]
+ 216 00b4 1B88     		ldrh	r3, [r3]
+ 217              	.LVL27:
+ 322:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 218              		.loc 1 322 12 view .LVU75
+ 219 00b6 10FB0311 		smlabb	r1, r0, r3, r1
+ 220              	.LVL28:
+ 325:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     }
+ 221              		.loc 1 325 7 is_stmt 1 view .LVU76
+ 318:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 222              		.loc 1 318 11 view .LVU77
+ 223              	.L7:
+ 328:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 224              		.loc 1 328 5 view .LVU78
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 225              		.loc 1 332 5 view .LVU79
+ 226              	.LBB2:
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 227              		.loc 1 332 22 view .LVU80
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 228              		.loc 1 332 22 view .LVU81
+ 229              	.LBE2:
+ 294:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   {
+ 230              		.loc 1 294 9 is_stmt 0 view .LVU82
+ 231 00ba BEF1010E 		subs	lr, lr, #1
+ 232              	.LVL29:
+ 233              	.LBB3:
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 234              		.loc 1 332 22 view .LVU83
+ 235 00be 4FEAE131 		asr	r1, r1, #15
+ 236              	.LVL30:
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 237              		.loc 1 332 22 view .LVU84
+ 238 00c2 06F10206 		add	r6, r6, #2
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 12
+
+
+ 239              	.LVL31:
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 240              		.loc 1 332 22 view .LVU85
+ 241              		.syntax unified
+ 242              	@ 332 ".//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c" 1
+ 243 00c6 01F30F01 		ssat r1, #16, r1
+ 244              	@ 0 "" 2
+ 245              	.LVL32:
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 246              		.loc 1 332 22 is_stmt 1 view .LVU86
+ 247              		.thumb
+ 248              		.syntax unified
+ 249              	.LBE3:
+ 332:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pOut += inc;
+ 250              		.loc 1 332 13 is_stmt 0 view .LVU87
+ 251 00ca A9F80010 		strh	r1, [r9]	@ movhi
+ 252              		.loc 1 333 5 is_stmt 1 view .LVU88
+ 253              		.loc 1 333 10 is_stmt 0 view .LVU89
+ 254 00ce D944     		add	r9, r9, fp
+ 255              	.LVL33:
+ 334:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 335:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     /* Initialization of inputB pointer */
+ 336:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pIn2 = py;
+ 256              		.loc 1 336 5 is_stmt 1 view .LVU90
+ 337:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 338:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     pScratch += 1U;
+ 257              		.loc 1 338 5 view .LVU91
+ 294:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   {
+ 258              		.loc 1 294 9 view .LVU92
+ 259 00d0 D3D1     		bne	.L8
+ 260              	.LVL34:
+ 261              	.L1:
+ 339:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ 340:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 341:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** }
+ 262              		.loc 1 341 1 is_stmt 0 view .LVU93
+ 263 00d2 03B0     		add	sp, sp, #12
+ 264              	.LCFI2:
+ 265              		.cfi_remember_state
+ 266              		.cfi_def_cfa_offset 36
+ 267              		@ sp needed
+ 268 00d4 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
+ 269              	.LVL35:
+ 270              	.L10:
+ 271              	.LCFI3:
+ 272              		.cfi_restore_state
+ 304:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     {
+ 273              		.loc 1 304 11 view .LVU94
+ 274 00d8 4346     		mov	r3, r8
+ 300:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 275              		.loc 1 300 10 view .LVU95
+ 276 00da 1146     		mov	r1, r2
+ 277 00dc E7E7     		b	.L5
+ 278              	.LVL36:
+ 279              	.L2:
+ 124:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 280              		.loc 1 124 5 is_stmt 1 view .LVU96
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 13
+
+
+ 127:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 281              		.loc 1 127 5 view .LVU97
+ 130:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     srcBLen = srcALen;
+ 282              		.loc 1 130 5 view .LVU98
+ 131:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****     srcALen = j;
+ 283              		.loc 1 131 5 view .LVU99
+ 132:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 284              		.loc 1 132 5 view .LVU100
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 285              		.loc 1 136 5 view .LVU101
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 286              		.loc 1 136 17 is_stmt 0 view .LVU102
+ 287 00de 074A     		ldr	r2, .L18
+ 288              	.LVL37:
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 289              		.loc 1 136 17 view .LVU103
+ 290 00e0 5F00     		lsls	r7, r3, #1
+ 124:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 291              		.loc 1 124 10 view .LVU104
+ 292 00e2 C346     		mov	fp, r8
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 293              		.loc 1 136 10 view .LVU105
+ 294 00e4 5446     		mov	r4, r10
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 295              		.loc 1 136 17 view .LVU106
+ 296 00e6 1A44     		add	r2, r2, r3
+ 139:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ 297              		.loc 1 139 9 view .LVU107
+ 298 00e8 4FF0FF33 		mov	r3, #-1
+ 299              	.LVL38:
+ 127:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 300              		.loc 1 127 10 view .LVU108
+ 301 00ec 8046     		mov	r8, r0
+ 302              	.LVL39:
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 303              		.loc 1 136 10 view .LVU109
+ 304 00ee 8A46     		mov	r10, r1
+ 305              	.LVL40:
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 306              		.loc 1 136 17 view .LVU110
+ 307 00f0 0A44     		add	r2, r2, r1
+ 139:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ 308              		.loc 1 139 9 view .LVU111
+ 309 00f2 0193     		str	r3, [sp, #4]
+ 136:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c **** 
+ 310              		.loc 1 136 10 view .LVU112
+ 311 00f4 0C9B     		ldr	r3, [sp, #48]
+ 312 00f6 03EB4209 		add	r9, r3, r2, lsl #1
+ 313              	.LVL41:
+ 139:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ 314              		.loc 1 139 5 is_stmt 1 view .LVU113
+ 139:.//Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_correlate_fast_opt_q15.c ****   }
+ 315              		.loc 1 139 5 is_stmt 0 view .LVU114
+ 316 00fa 93E7     		b	.L3
+ 317              	.L19:
+ 318              		.align	2
+ 319              	.L18:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 14
+
+
+ 320 00fc FEFFFF7F 		.word	2147483646
+ 321              		.cfi_endproc
+ 322              	.LFE145:
+ 324              		.text
+ 325              	.Letext0:
+ 326              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 327              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 328              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 329              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 330              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 331              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+ 332              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 333              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_correlate_fast_opt_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s:17     .text.arm_correlate_fast_opt_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s:26     .text.arm_correlate_fast_opt_q15:0000000000000000 arm_correlate_fast_opt_q15
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccSNLazW.s:320    .text.arm_correlate_fast_opt_q15:00000000000000fc $d
+
+UNDEFINED SYMBOLS
+arm_fill_q15
+arm_copy_q15

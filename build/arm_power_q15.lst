@@ -1,0 +1,243 @@
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cclpZ3nr.s 			page 1
+
+
+   1              		.cpu cortex-m7
+   2              		.eabi_attribute 28, 1
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 1
+  11              		.eabi_attribute 18, 4
+  12              		.file	"arm_power_q15.c"
+  13              		.text
+  14              	.Ltext0:
+  15              		.cfi_sections	.debug_frame
+  16              		.section	.text.arm_power_q15,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.global	arm_power_q15
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_power_q15:
+  27              	.LVL0:
+  28              	.LFB145:
+  29              		.file 1 ".//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c"
+   1:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** /* ----------------------------------------------------------------------
+   2:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * Project:      CMSIS DSP Library
+   3:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * Title:        arm_power_q15.c
+   4:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * Description:  Sum of the squares of the elements of a Q15 vector
+   5:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  *
+   6:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * $Date:        18. March 2019
+   7:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * $Revision:    V1.6.0
+   8:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  *
+   9:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * Target Processor: Cortex-M cores
+  10:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * -------------------------------------------------------------------- */
+  11:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** /*
+  12:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * Copyright (C) 2010-2019 ARM Limited or its affiliates. All rights reserved.
+  13:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  *
+  14:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * SPDX-License-Identifier: Apache-2.0
+  15:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  *
+  16:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  17:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * not use this file except in compliance with the License.
+  18:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * You may obtain a copy of the License at
+  19:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  *
+  20:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * www.apache.org/licenses/LICENSE-2.0
+  21:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  *
+  22:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * Unless required by applicable law or agreed to in writing, software
+  23:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  24:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  25:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * See the License for the specific language governing permissions and
+  26:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  * limitations under the License.
+  27:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  */
+  28:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  29:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #include "arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cclpZ3nr.s 			page 2
+
+
+  30:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  31:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** /**
+  32:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @ingroup groupStats
+  33:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  */
+  34:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  35:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** /**
+  36:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @addtogroup power
+  37:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @{
+  38:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  */
+  39:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  40:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** /**
+  41:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @brief         Sum of the squares of the elements of a Q15 vector.
+  42:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @param[in]     pSrc       points to the input vector
+  43:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @param[in]     blockSize  number of samples in input vector
+  44:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @param[out]    pResult    sum of the squares value returned here
+  45:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @return        none
+  46:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  47:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   @par           Scaling and Overflow Behavior
+  48:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****                    The function is implemented using a 64-bit internal accumulator.
+  49:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****                    The input is represented in 1.15 format.
+  50:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****                    Intermediate multiplication yields a 2.30 format, and this
+  51:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****                    result is added without saturation to a 64-bit accumulator in 34.30 format.
+  52:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****                    With 33 guard bits in the accumulator, there is no risk of overflow, and the
+  53:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****                    full precision of the intermediate multiplication is preserved.
+  54:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****                    Finally, the return result is in 34.30 format.
+  55:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****  */
+  56:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  57:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** void arm_power_q15(
+  58:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   const q15_t * pSrc,
+  59:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         uint32_t blockSize,
+  60:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         q63_t * pResult)
+  61:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** {
+  30              		.loc 1 61 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  62:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
+  35              		.loc 1 62 9 view .LVU1
+  63:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         q63_t sum = 0;                                 /* Temporary result storage */
+  36              		.loc 1 63 9 view .LVU2
+  64:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         q15_t in;                                      /* Temporary variable to store input value *
+  37              		.loc 1 64 9 view .LVU3
+  65:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  66:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #if defined (ARM_MATH_LOOPUNROLL) && defined (ARM_MATH_DSP)
+  67:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         q31_t in32;                                    /* Temporary variable to store packed input 
+  68:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #endif
+  69:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  70:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
+  71:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  72:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   /* Loop unrolling: Compute 4 outputs at a time */
+  73:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   blkCnt = blockSize >> 2U;
+  74:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  75:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   while (blkCnt > 0U)
+  76:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   {
+  77:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     /* C = A[0] * A[0] + A[1] * A[1] + ... + A[blockSize-1] * A[blockSize-1] */
+  78:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cclpZ3nr.s 			page 3
+
+
+  79:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     /* Compute Power and store result in a temporary variable, sum. */
+  80:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #if defined (ARM_MATH_DSP)
+  81:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     in32 = read_q15x2_ia ((q15_t **) &pSrc);
+  82:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     sum = __SMLALD(in32, in32, sum);
+  83:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  84:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     in32 = read_q15x2_ia ((q15_t **) &pSrc);
+  85:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     sum = __SMLALD(in32, in32, sum);
+  86:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #else
+  87:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     in = *pSrc++;
+  88:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     sum += ((q31_t) in * in);
+  89:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  90:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     in = *pSrc++;
+  91:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     sum += ((q31_t) in * in);
+  92:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  93:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     in = *pSrc++;
+  94:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     sum += ((q31_t) in * in);
+  95:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+  96:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     in = *pSrc++;
+  97:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     sum += ((q31_t) in * in);
+  98:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #endif /* #if defined (ARM_MATH_DSP) */
+  99:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 100:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     /* Decrement loop counter */
+ 101:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     blkCnt--;
+ 102:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   }
+ 103:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 104:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   /* Loop unrolling: Compute remaining outputs */
+ 105:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   blkCnt = blockSize % 0x4U;
+ 106:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 107:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #else
+ 108:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 109:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   /* Initialize blkCnt with number of samples */
+ 110:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   blkCnt = blockSize;
+  38              		.loc 1 110 3 view .LVU4
+ 111:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 112:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
+ 113:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 114:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   while (blkCnt > 0U)
+  39              		.loc 1 114 3 view .LVU5
+  40              		.loc 1 114 9 view .LVU6
+  61:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
+  41              		.loc 1 61 1 is_stmt 0 view .LVU7
+  42 0000 30B4     		push	{r4, r5}
+  43              	.LCFI0:
+  44              		.cfi_def_cfa_offset 8
+  45              		.cfi_offset 4, -8
+  46              		.cfi_offset 5, -4
+  63:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****         q15_t in;                                      /* Temporary variable to store input value *
+  47              		.loc 1 63 15 view .LVU8
+  48 0002 0024     		movs	r4, #0
+  49 0004 0025     		movs	r5, #0
+  50              		.loc 1 114 9 view .LVU9
+  51 0006 29B1     		cbz	r1, .L2
+  52              	.LVL1:
+  53              	.L3:
+ 115:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   {
+ 116:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     /* C = A[0] * A[0] + A[1] * A[1] + ... + A[blockSize-1] * A[blockSize-1] */
+ 117:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cclpZ3nr.s 			page 4
+
+
+ 118:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     /* Compute Power and store result in a temporary variable, sum. */
+ 119:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     in = *pSrc++;
+  54              		.loc 1 119 5 is_stmt 1 view .LVU10
+  55              		.loc 1 119 8 is_stmt 0 view .LVU11
+  56 0008 30F9023B 		ldrsh	r3, [r0], #2
+  57              	.LVL2:
+ 120:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     sum += ((q31_t) in * in);
+  58              		.loc 1 120 5 is_stmt 1 view .LVU12
+ 114:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   {
+  59              		.loc 1 114 9 is_stmt 0 view .LVU13
+  60 000c 0139     		subs	r1, r1, #1
+  61              	.LVL3:
+  62              		.loc 1 120 9 view .LVU14
+  63 000e C3FB8345 		smlalbb	r4, r5, r3, r3
+  64              	.LVL4:
+ 121:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 122:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     /* Decrement loop counter */
+ 123:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****     blkCnt--;
+  65              		.loc 1 123 5 is_stmt 1 view .LVU15
+ 114:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   {
+  66              		.loc 1 114 9 view .LVU16
+  67 0012 F9D1     		bne	.L3
+  68              	.LVL5:
+  69              	.L2:
+ 124:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   }
+ 125:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** 
+ 126:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   /* Store result in 34.30 format */
+ 127:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c ****   *pResult = sum;
+  70              		.loc 1 127 3 view .LVU17
+  71              		.loc 1 127 12 is_stmt 0 view .LVU18
+  72 0014 C2E90045 		strd	r4, [r2]
+ 128:.//Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_q15.c **** }
+  73              		.loc 1 128 1 view .LVU19
+  74 0018 30BC     		pop	{r4, r5}
+  75              	.LCFI1:
+  76              		.cfi_restore 5
+  77              		.cfi_restore 4
+  78              		.cfi_def_cfa_offset 0
+  79 001a 7047     		bx	lr
+  80              		.cfi_endproc
+  81              	.LFE145:
+  83              		.text
+  84              	.Letext0:
+  85              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+  86              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+  87              		.file 4 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+  88              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+  89              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+  90              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
+  91              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+  92              		.file 9 ".//Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cclpZ3nr.s 			page 5
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 arm_power_q15.c
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cclpZ3nr.s:17     .text.arm_power_q15:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cclpZ3nr.s:26     .text.arm_power_q15:0000000000000000 arm_power_q15
+
+NO UNDEFINED SYMBOLS
