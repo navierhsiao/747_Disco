@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cciuQSJ2.s 			page 1
+ARM GAS  /tmp/ccSyewfR.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -16,24 +16,1873 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cciuQSJ2.s 			page 1
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              	.Letext0:
-  17              		.file 1 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
-  18              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
-  19              		.file 3 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
-  20              		.file 4 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
-  21              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
-  22              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
-  23              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
-  24              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
-  25              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
-  26              		.file 10 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
-  27              		.file 11 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
-  28              		.file 12 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
-  29              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cciuQSJ2.s 			page 2
+  16              		.section	.text.USARTEx_SetNbDataToProcess.part.0,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	USARTEx_SetNbDataToProcess.part.0:
+  26              	.LVL0:
+  27              	.LFB341:
+  28              		.file 1 "./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c"
+   1:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+   2:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   ******************************************************************************
+   3:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @file    stm32h7xx_hal_usart_ex.c
+   4:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @author  MCD Application Team
+   5:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief   Extended USART HAL module driver.
+   6:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *          This file provides firmware functions to manage the following extended
+   7:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *          functionalities of the Universal Synchronous Receiver Transmitter Peripheral (USART).
+   8:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *           + Peripheral Control functions
+   9:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *
+  10:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *
+  11:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   @verbatim
+  12:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   ==============================================================================
+  13:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                ##### USART peripheral extended features  #####
+  14:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   ==============================================================================
+  15:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  16:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     (#) FIFO mode enabling/disabling and RX/TX FIFO threshold programming.
+  17:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  18:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****         -@- When USART operates in FIFO mode, FIFO mode must be enabled prior
+  19:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****             starting RX/TX transfers. Also RX/TX FIFO thresholds must be
+  20:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****             configured prior starting RX/TX transfers.
+  21:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  22:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     (#) Slave mode enabling/disabling and NSS pin configuration.
+  23:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  24:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****         -@- When USART operates in Slave mode, Slave mode must be enabled prior
+  25:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****             starting RX/TX transfers.
+  26:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  27:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   @endverbatim
+  28:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   ******************************************************************************
+  29:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @attention
+  30:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *
+ARM GAS  /tmp/ccSyewfR.s 			page 2
+
+
+  31:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * <h2><center>&copy; Copyright (c) 2017 STMicroelectronics.
+  32:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * All rights reserved.</center></h2>
+  33:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *
+  34:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * This software component is licensed by ST under BSD 3-Clause license,
+  35:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * the "License"; You may not use this file except in compliance with the
+  36:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * License. You may obtain a copy of the License at:
+  37:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *                        opensource.org/licenses/BSD-3-Clause
+  38:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *
+  39:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   ******************************************************************************
+  40:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  41:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  42:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* Includes ------------------------------------------------------------------*/
+  43:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** #include "stm32h7xx_hal.h"
+  44:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  45:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @addtogroup STM32H7xx_HAL_Driver
+  46:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+  47:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  48:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  49:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @defgroup USARTEx USARTEx
+  50:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief USART Extended HAL module driver
+  51:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+  52:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  53:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  54:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** #ifdef HAL_USART_MODULE_ENABLED
+  55:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  56:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* Private typedef -----------------------------------------------------------*/
+  57:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @defgroup USARTEx_Private_Constants USARTEx Private Constants
+  58:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+  59:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  60:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* USART RX FIFO depth */
+  61:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** #define RX_FIFO_DEPTH 16U
+  62:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  63:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* USART TX FIFO depth */
+  64:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** #define TX_FIFO_DEPTH 16U
+  65:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+  66:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @}
+  67:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  68:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  69:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* Private define ------------------------------------------------------------*/
+  70:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* Private macros ------------------------------------------------------------*/
+  71:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* Private variables ---------------------------------------------------------*/
+  72:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* Private function prototypes -----------------------------------------------*/
+  73:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @defgroup USARTEx_Private_Functions USARTEx Private Functions
+  74:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+  75:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  76:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** static void USARTEx_SetNbDataToProcess(USART_HandleTypeDef *husart);
+  77:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+  78:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @}
+  79:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  80:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  81:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /* Exported functions --------------------------------------------------------*/
+  82:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  83:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @defgroup USARTEx_Exported_Functions  USARTEx Exported Functions
+  84:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+  85:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+  86:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  87:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @defgroup USARTEx_Exported_Functions_Group1 IO operation functions
+ARM GAS  /tmp/ccSyewfR.s 			page 3
+
+
+  88:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief Extended USART Transmit/Receive functions
+  89:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *
+  90:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** @verbatim
+  91:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****  ===============================================================================
+  92:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                       ##### IO operation functions #####
+  93:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****  ===============================================================================
+  94:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     This subsection provides a set of FIFO mode related callback functions.
+  95:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+  96:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     (#) TX/RX Fifos Callbacks:
+  97:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****         (+) HAL_USARTEx_RxFifoFullCallback()
+  98:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****         (+) HAL_USARTEx_TxFifoEmptyCallback()
+  99:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 100:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** @endverbatim
+ 101:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+ 102:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 103:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 104:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 105:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  USART RX Fifo full callback.
+ 106:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param  husart USART handle.
+ 107:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval None
+ 108:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 109:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** __weak void HAL_USARTEx_RxFifoFullCallback(USART_HandleTypeDef *husart)
+ 110:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 111:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 112:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   UNUSED(husart);
+ 113:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 114:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 115:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****             the HAL_USARTEx_RxFifoFullCallback can be implemented in the user file.
+ 116:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****    */
+ 117:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 118:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 119:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 120:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  USART TX Fifo empty callback.
+ 121:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param  husart USART handle.
+ 122:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval None
+ 123:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 124:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** __weak void HAL_USARTEx_TxFifoEmptyCallback(USART_HandleTypeDef *husart)
+ 125:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 126:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 127:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   UNUSED(husart);
+ 128:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 129:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* NOTE : This function should not be modified, when the callback is needed,
+ 130:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****             the HAL_USARTEx_TxFifoEmptyCallback can be implemented in the user file.
+ 131:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****    */
+ 132:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 133:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 134:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 135:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @}
+ 136:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 137:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 138:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @defgroup USARTEx_Exported_Functions_Group2 Peripheral Control functions
+ 139:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief    Extended Peripheral Control functions
+ 140:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *
+ 141:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** @verbatim
+ 142:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****  ===============================================================================
+ 143:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                       ##### Peripheral Control functions #####
+ 144:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****  ===============================================================================
+ARM GAS  /tmp/ccSyewfR.s 			page 4
+
+
+ 145:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     [..] This section provides the following functions:
+ 146:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****      (+) HAL_USARTEx_EnableSPISlaveMode() API enables the SPI slave mode
+ 147:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****      (+) HAL_USARTEx_DisableSPISlaveMode() API disables the SPI slave mode
+ 148:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****      (+) HAL_USARTEx_ConfigNSS API configures the Slave Select input pin (NSS)
+ 149:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****      (+) HAL_USARTEx_EnableFifoMode() API enables the FIFO mode
+ 150:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****      (+) HAL_USARTEx_DisableFifoMode() API disables the FIFO mode
+ 151:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****      (+) HAL_USARTEx_SetTxFifoThreshold() API sets the TX FIFO threshold
+ 152:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****      (+) HAL_USARTEx_SetRxFifoThreshold() API sets the RX FIFO threshold
+ 153:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 154:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 155:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** @endverbatim
+ 156:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+ 157:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 158:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 159:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 160:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  Enable the SPI slave mode.
+ 161:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @note When the USART operates in SPI slave mode, it handles data flow using
+ 162:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       the serial interface clock derived from the external SCLK signal
+ 163:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       provided by the external master SPI device.
+ 164:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @note In SPI slave mode, the USART must be enabled before starting the master
+ 165:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       communications (or between frames while the clock is stable). Otherwise,
+ 166:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       if the USART slave is enabled while the master is in the middle of a
+ 167:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       frame, it will become desynchronized with the master.
+ 168:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @note The data register of the slave needs to be ready before the first edge
+ 169:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       of the communication clock or before the end of the ongoing communication,
+ 170:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       otherwise the SPI slave will transmit zeros.
+ 171:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart      USART handle.
+ 172:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval HAL status
+ 173:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 174:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** HAL_StatusTypeDef HAL_USARTEx_EnableSlaveMode(USART_HandleTypeDef *husart)
+ 175:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 176:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 177:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 178:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Check parameters */
+ 179:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_UART_SPI_SLAVE_INSTANCE(husart->Instance));
+ 180:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 181:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Locked */
+ 182:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
+ 183:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 184:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_BUSY;
+ 185:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 186:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Save actual USART configuration */
+ 187:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   tmpcr1 = READ_REG(husart->Instance->CR1);
+ 188:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 189:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable USART */
+ 190:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_DISABLE(husart);
+ 191:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 192:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* In SPI slave mode mode, the following bits must be kept cleared:
+ 193:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   - LINEN and CLKEN bit in the USART_CR2 register
+ 194:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   - HDSEL, SCEN and IREN bits in the USART_CR3 register.*/
+ 195:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   CLEAR_BIT(husart->Instance->CR2, (USART_CR2_LINEN | USART_CR2_CLKEN));
+ 196:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   CLEAR_BIT(husart->Instance->CR3, (USART_CR3_SCEN | USART_CR3_HDSEL | USART_CR3_IREN));
+ 197:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 198:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Enable SPI slave mode */
+ 199:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   SET_BIT(husart->Instance->CR2, USART_CR2_SLVEN);
+ 200:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 201:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Restore USART configuration */
+ARM GAS  /tmp/ccSyewfR.s 			page 5
+
+
+ 202:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
+ 203:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 204:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->SlaveMode = USART_SLAVEMODE_ENABLE;
+ 205:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 206:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_READY;
+ 207:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 208:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Enable USART */
+ 209:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_ENABLE(husart);
+ 210:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 211:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Unlocked */
+ 212:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_UNLOCK(husart);
+ 213:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 214:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   return HAL_OK;
+ 215:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 216:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 217:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 218:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  Disable the SPI slave mode.
+ 219:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart      USART handle.
+ 220:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval HAL status
+ 221:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 222:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** HAL_StatusTypeDef HAL_USARTEx_DisableSlaveMode(USART_HandleTypeDef *husart)
+ 223:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 224:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 225:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 226:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Check parameters */
+ 227:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_UART_SPI_SLAVE_INSTANCE(husart->Instance));
+ 228:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 229:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Locked */
+ 230:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
+ 231:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 232:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_BUSY;
+ 233:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 234:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Save actual USART configuration */
+ 235:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   tmpcr1 = READ_REG(husart->Instance->CR1);
+ 236:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 237:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable USART */
+ 238:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_DISABLE(husart);
+ 239:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 240:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable SPI slave mode */
+ 241:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   CLEAR_BIT(husart->Instance->CR2, USART_CR2_SLVEN);
+ 242:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 243:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Restore USART configuration */
+ 244:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
+ 245:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 246:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->SlaveMode = USART_SLAVEMODE_DISABLE;
+ 247:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 248:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_READY;
+ 249:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 250:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Unlocked */
+ 251:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_UNLOCK(husart);
+ 252:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 253:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   return HAL_OK;
+ 254:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 255:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 256:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 257:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  Configure the Slave Select input pin (NSS).
+ 258:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @note Software NSS management: SPI slave will always be selected and NSS
+ARM GAS  /tmp/ccSyewfR.s 			page 6
+
+
+ 259:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       input pin will be ignored.
+ 260:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @note Hardware NSS management: the SPI slave selection depends on NSS
+ 261:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       input pin. The slave is selected when NSS is low and deselected when
+ 262:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       NSS is high.
+ 263:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart      USART handle.
+ 264:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param NSSConfig   NSS configuration.
+ 265:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *          This parameter can be one of the following values:
+ 266:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_NSS_HARD
+ 267:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_NSS_SOFT
+ 268:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval HAL status
+ 269:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 270:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** HAL_StatusTypeDef HAL_USARTEx_ConfigNSS(USART_HandleTypeDef *husart, uint32_t NSSConfig)
+ 271:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 272:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 273:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 274:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Check parameters */
+ 275:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_UART_SPI_SLAVE_INSTANCE(husart->Instance));
+ 276:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_USART_NSS(NSSConfig));
+ 277:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 278:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Locked */
+ 279:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
+ 280:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 281:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_BUSY;
+ 282:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 283:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Save actual USART configuration */
+ 284:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   tmpcr1 = READ_REG(husart->Instance->CR1);
+ 285:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 286:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable USART */
+ 287:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_DISABLE(husart);
+ 288:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 289:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Program DIS_NSS bit in the USART_CR2 register */
+ 290:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   MODIFY_REG(husart->Instance->CR2, USART_CR2_DIS_NSS, NSSConfig);
+ 291:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 292:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Restore USART configuration */
+ 293:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
+ 294:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 295:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_READY;
+ 296:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 297:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Unlocked */
+ 298:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_UNLOCK(husart);
+ 299:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 300:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   return HAL_OK;
+ 301:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 302:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 303:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 304:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  Enable the FIFO mode.
+ 305:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart      USART handle.
+ 306:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval HAL status
+ 307:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 308:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** HAL_StatusTypeDef HAL_USARTEx_EnableFifoMode(USART_HandleTypeDef *husart)
+ 309:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 310:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 311:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 312:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Check parameters */
+ 313:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_UART_FIFO_INSTANCE(husart->Instance));
+ 314:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 315:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Locked */
+ARM GAS  /tmp/ccSyewfR.s 			page 7
+
+
+ 316:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
+ 317:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 318:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_BUSY;
+ 319:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 320:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Save actual USART configuration */
+ 321:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   tmpcr1 = READ_REG(husart->Instance->CR1);
+ 322:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 323:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable USART */
+ 324:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_DISABLE(husart);
+ 325:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 326:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Enable FIFO mode */
+ 327:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   SET_BIT(tmpcr1, USART_CR1_FIFOEN);
+ 328:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->FifoMode = USART_FIFOMODE_ENABLE;
+ 329:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 330:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Restore USART configuration */
+ 331:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
+ 332:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 333:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Determine the number of data to process during RX/TX ISR execution */
+ 334:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   USARTEx_SetNbDataToProcess(husart);
+ 335:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 336:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_READY;
+ 337:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 338:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Unlocked */
+ 339:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_UNLOCK(husart);
+ 340:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 341:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   return HAL_OK;
+ 342:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 343:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 344:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 345:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  Disable the FIFO mode.
+ 346:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart      USART handle.
+ 347:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval HAL status
+ 348:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 349:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** HAL_StatusTypeDef HAL_USARTEx_DisableFifoMode(USART_HandleTypeDef *husart)
+ 350:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 351:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 352:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 353:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Check parameters */
+ 354:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_UART_FIFO_INSTANCE(husart->Instance));
+ 355:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 356:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Locked */
+ 357:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
+ 358:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 359:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_BUSY;
+ 360:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 361:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Save actual USART configuration */
+ 362:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   tmpcr1 = READ_REG(husart->Instance->CR1);
+ 363:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 364:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable USART */
+ 365:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_DISABLE(husart);
+ 366:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 367:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Enable FIFO mode */
+ 368:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   CLEAR_BIT(tmpcr1, USART_CR1_FIFOEN);
+ 369:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->FifoMode = USART_FIFOMODE_DISABLE;
+ 370:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 371:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Restore USART configuration */
+ 372:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
+ARM GAS  /tmp/ccSyewfR.s 			page 8
+
+
+ 373:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 374:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_READY;
+ 375:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 376:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Unlocked */
+ 377:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_UNLOCK(husart);
+ 378:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 379:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   return HAL_OK;
+ 380:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 381:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 382:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 383:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  Set the TXFIFO threshold.
+ 384:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart      USART handle.
+ 385:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param Threshold  TX FIFO threshold value
+ 386:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *          This parameter can be one of the following values:
+ 387:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_TXFIFO_THRESHOLD_1_8
+ 388:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_TXFIFO_THRESHOLD_1_4
+ 389:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_TXFIFO_THRESHOLD_1_2
+ 390:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_TXFIFO_THRESHOLD_3_4
+ 391:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_TXFIFO_THRESHOLD_7_8
+ 392:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_TXFIFO_THRESHOLD_8_8
+ 393:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval HAL status
+ 394:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 395:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** HAL_StatusTypeDef HAL_USARTEx_SetTxFifoThreshold(USART_HandleTypeDef *husart, uint32_t Threshold)
+ 396:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 397:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 398:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 399:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Check parameters */
+ 400:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_UART_FIFO_INSTANCE(husart->Instance));
+ 401:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_USART_TXFIFO_THRESHOLD(Threshold));
+ 402:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 403:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Locked */
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
+ 405:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 406:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_BUSY;
+ 407:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 408:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Save actual USART configuration */
+ 409:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   tmpcr1 = READ_REG(husart->Instance->CR1);
+ 410:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 411:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable USART */
+ 412:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_DISABLE(husart);
+ 413:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 414:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Update TX threshold configuration */
+ 415:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   MODIFY_REG(husart->Instance->CR3, USART_CR3_TXFTCFG, Threshold);
+ 416:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 417:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Determine the number of data to process during RX/TX ISR execution */
+ 418:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   USARTEx_SetNbDataToProcess(husart);
+ 419:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 420:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Restore USART configuration */
+ 421:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
+ 422:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 423:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_READY;
+ 424:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 425:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Unlocked */
+ 426:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_UNLOCK(husart);
+ 427:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 428:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   return HAL_OK;
+ 429:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ARM GAS  /tmp/ccSyewfR.s 			page 9
+
+
+ 430:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 431:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 432:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief  Set the RXFIFO threshold.
+ 433:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart      USART handle.
+ 434:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param Threshold  RX FIFO threshold value
+ 435:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *          This parameter can be one of the following values:
+ 436:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_RXFIFO_THRESHOLD_1_8
+ 437:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_RXFIFO_THRESHOLD_1_4
+ 438:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_RXFIFO_THRESHOLD_1_2
+ 439:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_RXFIFO_THRESHOLD_3_4
+ 440:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_RXFIFO_THRESHOLD_7_8
+ 441:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *            @arg @ref USART_RXFIFO_THRESHOLD_8_8
+ 442:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval HAL status
+ 443:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 444:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** HAL_StatusTypeDef HAL_USARTEx_SetRxFifoThreshold(USART_HandleTypeDef *husart, uint32_t Threshold)
+ 445:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 446:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 447:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 448:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Check the parameters */
+ 449:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_UART_FIFO_INSTANCE(husart->Instance));
+ 450:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_USART_RXFIFO_THRESHOLD(Threshold));
+ 451:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 452:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Locked */
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_LOCK(husart);
+ 454:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 455:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_BUSY;
+ 456:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 457:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Save actual USART configuration */
+ 458:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   tmpcr1 = READ_REG(husart->Instance->CR1);
+ 459:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 460:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Disable USART */
+ 461:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_USART_DISABLE(husart);
+ 462:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 463:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Update RX threshold configuration */
+ 464:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   MODIFY_REG(husart->Instance->CR3, USART_CR3_RXFTCFG, Threshold);
+ 465:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 466:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Determine the number of data to process during RX/TX ISR execution */
+ 467:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   USARTEx_SetNbDataToProcess(husart);
+ 468:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 469:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Restore USART configuration */
+ 470:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   WRITE_REG(husart->Instance->CR1, tmpcr1);
+ 471:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 472:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->State = HAL_USART_STATE_READY;
+ 473:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 474:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Process Unlocked */
+ 475:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   __HAL_UNLOCK(husart);
+ 476:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 477:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   return HAL_OK;
+ 478:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 479:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 480:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 481:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @}
+ 482:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 483:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 484:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 485:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @}
+ 486:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ARM GAS  /tmp/ccSyewfR.s 			page 10
+
+
+ 487:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 488:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /** @addtogroup USARTEx_Private_Functions
+ 489:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @{
+ 490:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 491:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 492:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** /**
+ 493:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @brief Calculate the number of data to process in RX/TX ISR.
+ 494:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @note The RX FIFO depth and the TX FIFO depth is extracted from
+ 495:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   *       the USART configuration registers.
+ 496:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @param husart USART handle.
+ 497:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   * @retval None
+ 498:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   */
+ 499:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** static void USARTEx_SetNbDataToProcess(USART_HandleTypeDef *husart)
+  29              		.loc 1 499 13 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 0
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+ 500:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 501:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t rx_fifo_depth;
+ 502:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_depth;
+ 503:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t rx_fifo_threshold;
+ 504:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_threshold;
+ 505:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* 2 0U/1U added for MISRAC2012-Rule-18.1_b and MISRAC2012-Rule-18.1_d */
+ 506:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   static const uint8_t numerator[]   = {1U, 1U, 1U, 3U, 7U, 1U, 0U, 0U};
+ 507:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   static const uint8_t denominator[] = {8U, 4U, 2U, 4U, 8U, 1U, 1U, 1U};
+ 508:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   if (husart->FifoMode == USART_FIFOMODE_DISABLE)
+ 510:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 511:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbTxDataToProcess = 1U;
+ 512:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = 1U;
+ 513:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 514:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   else
+ 515:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 516:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     rx_fifo_depth = RX_FIFO_DEPTH;
+  34              		.loc 1 516 5 view .LVU1
+ 517:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     tx_fifo_depth = TX_FIFO_DEPTH;
+  35              		.loc 1 517 5 view .LVU2
+ 518:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     rx_fifo_threshold = (uint8_t)((READ_BIT(husart->Instance->CR3,
+  36              		.loc 1 518 5 view .LVU3
+  37              		.loc 1 518 36 is_stmt 0 view .LVU4
+  38 0000 0368     		ldr	r3, [r0]
+ 519:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                             USART_CR3_RXFTCFG) >> USART_CR3_RXFTCFG_Pos) & 0xFFU);
+ 520:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     tx_fifo_threshold = (uint8_t)((READ_BIT(husart->Instance->CR3,
+ 521:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                             USART_CR3_TXFTCFG) >> USART_CR3_TXFTCFG_Pos) & 0xFFU);
+ 522:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbTxDataToProcess = ((uint16_t)tx_fifo_depth * numerator[tx_fifo_threshold]) /
+  39              		.loc 1 522 69 view .LVU5
+  40 0002 0B4A     		ldr	r2, .L4
+ 518:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     rx_fifo_threshold = (uint8_t)((READ_BIT(husart->Instance->CR3,
+  41              		.loc 1 518 36 view .LVU6
+  42 0004 9968     		ldr	r1, [r3, #8]
+  43              	.LVL1:
+ 520:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                             USART_CR3_TXFTCFG) >> USART_CR3_TXFTCFG_Pos) & 0xFFU);
+  44              		.loc 1 520 5 is_stmt 1 view .LVU7
+ 499:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+  45              		.loc 1 499 13 is_stmt 0 view .LVU8
+  46 0006 30B4     		push	{r4, r5}
+ARM GAS  /tmp/ccSyewfR.s 			page 11
+
+
+  47              	.LCFI0:
+  48              		.cfi_def_cfa_offset 8
+  49              		.cfi_offset 4, -8
+  50              		.cfi_offset 5, -4
+ 520:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                             USART_CR3_TXFTCFG) >> USART_CR3_TXFTCFG_Pos) & 0xFFU);
+  51              		.loc 1 520 36 view .LVU9
+  52 0008 9C68     		ldr	r4, [r3, #8]
+  53              	.LVL2:
+  54              		.loc 1 522 5 is_stmt 1 view .LVU10
+ 523:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[tx_fifo_threshold];
+ 524:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = ((uint16_t)rx_fifo_depth * numerator[rx_fifo_threshold]) /
+  55              		.loc 1 524 69 is_stmt 0 view .LVU11
+  56 000a C1F34261 		ubfx	r1, r1, #25, #3
+  57              	.LVL3:
+ 523:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[tx_fifo_threshold];
+  58              		.loc 1 523 54 view .LVU12
+  59 000e 094D     		ldr	r5, .L4+4
+ 521:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbTxDataToProcess = ((uint16_t)tx_fifo_depth * numerator[tx_fifo_threshold]) /
+  60              		.loc 1 521 64 view .LVU13
+  61 0010 640F     		lsrs	r4, r4, #29
+  62              	.LVL4:
+  63              		.loc 1 524 58 view .LVU14
+  64 0012 535C     		ldrb	r3, [r2, r1]	@ zero_extendqisi2
+ 525:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[rx_fifo_threshold];
+  65              		.loc 1 525 33 view .LVU15
+  66 0014 695C     		ldrb	r1, [r5, r1]	@ zero_extendqisi2
+ 522:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[tx_fifo_threshold];
+  67              		.loc 1 522 58 view .LVU16
+  68 0016 125D     		ldrb	r2, [r2, r4]	@ zero_extendqisi2
+ 524:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[rx_fifo_threshold];
+  69              		.loc 1 524 58 view .LVU17
+  70 0018 1B01     		lsls	r3, r3, #4
+ 523:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = ((uint16_t)rx_fifo_depth * numerator[rx_fifo_threshold]) /
+  71              		.loc 1 523 33 view .LVU18
+  72 001a 2C5D     		ldrb	r4, [r5, r4]	@ zero_extendqisi2
+ 522:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[tx_fifo_threshold];
+  73              		.loc 1 522 58 view .LVU19
+  74 001c 1201     		lsls	r2, r2, #4
+ 524:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[rx_fifo_threshold];
+  75              		.loc 1 524 90 view .LVU20
+  76 001e B3FBF1F3 		udiv	r3, r3, r1
+ 522:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[tx_fifo_threshold];
+  77              		.loc 1 522 90 view .LVU21
+  78 0022 B2FBF4F2 		udiv	r2, r2, r4
+ 524:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[rx_fifo_threshold];
+  79              		.loc 1 524 31 view .LVU22
+  80 0026 4387     		strh	r3, [r0, #58]	@ movhi
+ 522:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[tx_fifo_threshold];
+  81              		.loc 1 522 31 view .LVU23
+  82 0028 8287     		strh	r2, [r0, #60]	@ movhi
+ 524:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****                                 (uint16_t)denominator[rx_fifo_threshold];
+  83              		.loc 1 524 5 is_stmt 1 view .LVU24
+ 526:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 527:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+  84              		.loc 1 527 1 is_stmt 0 view .LVU25
+  85 002a 30BC     		pop	{r4, r5}
+  86              	.LCFI1:
+ARM GAS  /tmp/ccSyewfR.s 			page 12
+
+
+  87              		.cfi_restore 5
+  88              		.cfi_restore 4
+  89              		.cfi_def_cfa_offset 0
+  90 002c 7047     		bx	lr
+  91              	.L5:
+  92 002e 00BF     		.align	2
+  93              	.L4:
+  94 0030 00000000 		.word	.LANCHOR0
+  95 0034 00000000 		.word	.LANCHOR1
+  96              		.cfi_endproc
+  97              	.LFE341:
+  99              		.section	.text.HAL_USARTEx_RxFifoFullCallback,"ax",%progbits
+ 100              		.align	1
+ 101              		.p2align 2,,3
+ 102              		.weak	HAL_USARTEx_RxFifoFullCallback
+ 103              		.syntax unified
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.fpu fpv5-d16
+ 108              	HAL_USARTEx_RxFifoFullCallback:
+ 109              	.LVL5:
+ 110              	.LFB331:
+ 110:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* Prevent unused argument(s) compilation warning */
+ 111              		.loc 1 110 1 is_stmt 1 view -0
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 0
+ 114              		@ frame_needed = 0, uses_anonymous_args = 0
+ 115              		@ link register save eliminated.
+ 112:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 116              		.loc 1 112 3 view .LVU27
+ 117:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 117              		.loc 1 117 1 is_stmt 0 view .LVU28
+ 118 0000 7047     		bx	lr
+ 119              		.cfi_endproc
+ 120              	.LFE331:
+ 122 0002 00BF     		.section	.text.HAL_USARTEx_TxFifoEmptyCallback,"ax",%progbits
+ 123              		.align	1
+ 124              		.p2align 2,,3
+ 125              		.weak	HAL_USARTEx_TxFifoEmptyCallback
+ 126              		.syntax unified
+ 127              		.thumb
+ 128              		.thumb_func
+ 129              		.fpu fpv5-d16
+ 131              	HAL_USARTEx_TxFifoEmptyCallback:
+ 132              	.LFB343:
+ 133              		.cfi_startproc
+ 134              		@ args = 0, pretend = 0, frame = 0
+ 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 136              		@ link register save eliminated.
+ 137 0000 7047     		bx	lr
+ 138              		.cfi_endproc
+ 139              	.LFE343:
+ 141 0002 00BF     		.section	.text.HAL_USARTEx_EnableSlaveMode,"ax",%progbits
+ 142              		.align	1
+ 143              		.p2align 2,,3
+ 144              		.global	HAL_USARTEx_EnableSlaveMode
+ 145              		.syntax unified
+ARM GAS  /tmp/ccSyewfR.s 			page 13
+
+
+ 146              		.thumb
+ 147              		.thumb_func
+ 148              		.fpu fpv5-d16
+ 150              	HAL_USARTEx_EnableSlaveMode:
+ 151              	.LVL6:
+ 152              	.LFB333:
+ 175:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 153              		.loc 1 175 1 is_stmt 1 view -0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 0, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 176:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 158              		.loc 1 176 3 view .LVU30
+ 179:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 159              		.loc 1 179 3 view .LVU31
+ 182:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 160              		.loc 1 182 3 view .LVU32
+ 182:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 161              		.loc 1 182 3 view .LVU33
+ 162 0000 90F85830 		ldrb	r3, [r0, #88]	@ zero_extendqisi2
+ 163 0004 012B     		cmp	r3, #1
+ 164 0006 23D0     		beq	.L10
+ 187:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 165              		.loc 1 187 12 is_stmt 0 discriminator 2 view .LVU34
+ 166 0008 0368     		ldr	r3, [r0]
+ 184:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 167              		.loc 1 184 17 discriminator 2 view .LVU35
+ 168 000a 0221     		movs	r1, #2
+ 169 000c 0246     		mov	r2, r0
+ 182:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 170              		.loc 1 182 3 is_stmt 1 discriminator 2 view .LVU36
+ 182:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 171              		.loc 1 182 3 discriminator 2 view .LVU37
+ 184:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 172              		.loc 1 184 3 discriminator 2 view .LVU38
+ 175:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 173              		.loc 1 175 1 is_stmt 0 discriminator 2 view .LVU39
+ 174 000e 70B4     		push	{r4, r5, r6}
+ 175              	.LCFI2:
+ 176              		.cfi_def_cfa_offset 12
+ 177              		.cfi_offset 4, -12
+ 178              		.cfi_offset 5, -8
+ 179              		.cfi_offset 6, -4
+ 184:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 180              		.loc 1 184 17 discriminator 2 view .LVU40
+ 181 0010 80F85910 		strb	r1, [r0, #89]
+ 187:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 182              		.loc 1 187 3 is_stmt 1 discriminator 2 view .LVU41
+ 204:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 183              		.loc 1 204 21 is_stmt 0 discriminator 2 view .LVU42
+ 184 0014 0125     		movs	r5, #1
+ 187:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 185              		.loc 1 187 10 discriminator 2 view .LVU43
+ 186 0016 1E68     		ldr	r6, [r3]
+ 187              	.LVL7:
+ 190:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ARM GAS  /tmp/ccSyewfR.s 			page 14
+
+
+ 188              		.loc 1 190 3 is_stmt 1 discriminator 2 view .LVU44
+ 212:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 189              		.loc 1 212 3 is_stmt 0 discriminator 2 view .LVU45
+ 190 0018 0024     		movs	r4, #0
+ 190:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 191              		.loc 1 190 3 discriminator 2 view .LVU46
+ 192 001a 1968     		ldr	r1, [r3]
+ 214:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 193              		.loc 1 214 10 discriminator 2 view .LVU47
+ 194 001c 2046     		mov	r0, r4
+ 195              	.LVL8:
+ 190:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 196              		.loc 1 190 3 discriminator 2 view .LVU48
+ 197 001e 21F00101 		bic	r1, r1, #1
+ 198 0022 1960     		str	r1, [r3]
+ 195:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   CLEAR_BIT(husart->Instance->CR3, (USART_CR3_SCEN | USART_CR3_HDSEL | USART_CR3_IREN));
+ 199              		.loc 1 195 3 is_stmt 1 discriminator 2 view .LVU49
+ 200 0024 5968     		ldr	r1, [r3, #4]
+ 201 0026 21F49041 		bic	r1, r1, #18432
+ 202 002a 5960     		str	r1, [r3, #4]
+ 196:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 203              		.loc 1 196 3 discriminator 2 view .LVU50
+ 204 002c 9968     		ldr	r1, [r3, #8]
+ 205 002e 21F02A01 		bic	r1, r1, #42
+ 206 0032 9960     		str	r1, [r3, #8]
+ 199:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 207              		.loc 1 199 3 discriminator 2 view .LVU51
+ 208 0034 5968     		ldr	r1, [r3, #4]
+ 209 0036 2943     		orrs	r1, r1, r5
+ 210 0038 5960     		str	r1, [r3, #4]
+ 202:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 211              		.loc 1 202 3 discriminator 2 view .LVU52
+ 212 003a 1E60     		str	r6, [r3]
+ 204:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 213              		.loc 1 204 3 discriminator 2 view .LVU53
+ 206:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 214              		.loc 1 206 17 is_stmt 0 discriminator 2 view .LVU54
+ 215 003c 82F85950 		strb	r5, [r2, #89]
+ 209:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 216              		.loc 1 209 3 discriminator 2 view .LVU55
+ 217 0040 1968     		ldr	r1, [r3]
+ 204:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 218              		.loc 1 204 21 discriminator 2 view .LVU56
+ 219 0042 1564     		str	r5, [r2, #64]
+ 206:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 220              		.loc 1 206 3 is_stmt 1 discriminator 2 view .LVU57
+ 209:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 221              		.loc 1 209 3 discriminator 2 view .LVU58
+ 222 0044 2943     		orrs	r1, r1, r5
+ 223 0046 1960     		str	r1, [r3]
+ 212:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 224              		.loc 1 212 3 discriminator 2 view .LVU59
+ 212:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 225              		.loc 1 212 3 discriminator 2 view .LVU60
+ 226 0048 82F85840 		strb	r4, [r2, #88]
+ 212:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 227              		.loc 1 212 3 discriminator 2 view .LVU61
+ARM GAS  /tmp/ccSyewfR.s 			page 15
+
+
+ 214:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 228              		.loc 1 214 3 discriminator 2 view .LVU62
+ 215:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 229              		.loc 1 215 1 is_stmt 0 discriminator 2 view .LVU63
+ 230 004c 70BC     		pop	{r4, r5, r6}
+ 231              	.LCFI3:
+ 232              		.cfi_restore 6
+ 233              		.cfi_restore 5
+ 234              		.cfi_restore 4
+ 235              		.cfi_def_cfa_offset 0
+ 236              	.LVL9:
+ 215:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 237              		.loc 1 215 1 discriminator 2 view .LVU64
+ 238 004e 7047     		bx	lr
+ 239              	.LVL10:
+ 240              	.L10:
+ 182:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 241              		.loc 1 182 3 view .LVU65
+ 242 0050 0220     		movs	r0, #2
+ 243              	.LVL11:
+ 215:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 244              		.loc 1 215 1 view .LVU66
+ 245 0052 7047     		bx	lr
+ 246              		.cfi_endproc
+ 247              	.LFE333:
+ 249              		.section	.text.HAL_USARTEx_DisableSlaveMode,"ax",%progbits
+ 250              		.align	1
+ 251              		.p2align 2,,3
+ 252              		.global	HAL_USARTEx_DisableSlaveMode
+ 253              		.syntax unified
+ 254              		.thumb
+ 255              		.thumb_func
+ 256              		.fpu fpv5-d16
+ 258              	HAL_USARTEx_DisableSlaveMode:
+ 259              	.LVL12:
+ 260              	.LFB334:
+ 223:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 261              		.loc 1 223 1 is_stmt 1 view -0
+ 262              		.cfi_startproc
+ 263              		@ args = 0, pretend = 0, frame = 0
+ 264              		@ frame_needed = 0, uses_anonymous_args = 0
+ 265              		@ link register save eliminated.
+ 224:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 266              		.loc 1 224 3 view .LVU68
+ 227:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 267              		.loc 1 227 3 view .LVU69
+ 230:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 268              		.loc 1 230 3 view .LVU70
+ 230:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 269              		.loc 1 230 3 view .LVU71
+ 270 0000 90F85820 		ldrb	r2, [r0, #88]	@ zero_extendqisi2
+ 271 0004 012A     		cmp	r2, #1
+ 272 0006 19D0     		beq	.L17
+ 273 0008 0346     		mov	r3, r0
+ 230:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 274              		.loc 1 230 3 discriminator 2 view .LVU72
+ 230:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ARM GAS  /tmp/ccSyewfR.s 			page 16
+
+
+ 275              		.loc 1 230 3 discriminator 2 view .LVU73
+ 232:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 276              		.loc 1 232 3 discriminator 2 view .LVU74
+ 232:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 277              		.loc 1 232 17 is_stmt 0 discriminator 2 view .LVU75
+ 278 000a 0220     		movs	r0, #2
+ 279              	.LVL13:
+ 246:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 280              		.loc 1 246 21 discriminator 2 view .LVU76
+ 281 000c 0021     		movs	r1, #0
+ 235:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 282              		.loc 1 235 12 discriminator 2 view .LVU77
+ 283 000e 1A68     		ldr	r2, [r3]
+ 223:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 284              		.loc 1 223 1 discriminator 2 view .LVU78
+ 285 0010 70B4     		push	{r4, r5, r6}
+ 286              	.LCFI4:
+ 287              		.cfi_def_cfa_offset 12
+ 288              		.cfi_offset 4, -12
+ 289              		.cfi_offset 5, -8
+ 290              		.cfi_offset 6, -4
+ 232:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 291              		.loc 1 232 17 discriminator 2 view .LVU79
+ 292 0012 83F85900 		strb	r0, [r3, #89]
+ 235:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 293              		.loc 1 235 3 is_stmt 1 discriminator 2 view .LVU80
+ 248:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 294              		.loc 1 248 17 is_stmt 0 discriminator 2 view .LVU81
+ 295 0016 0125     		movs	r5, #1
+ 235:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 296              		.loc 1 235 10 discriminator 2 view .LVU82
+ 297 0018 1668     		ldr	r6, [r2]
+ 298              	.LVL14:
+ 238:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 299              		.loc 1 238 3 is_stmt 1 discriminator 2 view .LVU83
+ 253:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 300              		.loc 1 253 10 is_stmt 0 discriminator 2 view .LVU84
+ 301 001a 0846     		mov	r0, r1
+ 238:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 302              		.loc 1 238 3 discriminator 2 view .LVU85
+ 303 001c 1468     		ldr	r4, [r2]
+ 304 001e 24F00104 		bic	r4, r4, #1
+ 305 0022 1460     		str	r4, [r2]
+ 241:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 306              		.loc 1 241 3 is_stmt 1 discriminator 2 view .LVU86
+ 307 0024 5468     		ldr	r4, [r2, #4]
+ 308 0026 24F00104 		bic	r4, r4, #1
+ 309 002a 5460     		str	r4, [r2, #4]
+ 244:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 310              		.loc 1 244 3 discriminator 2 view .LVU87
+ 311 002c 1660     		str	r6, [r2]
+ 246:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 312              		.loc 1 246 3 discriminator 2 view .LVU88
+ 251:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 313              		.loc 1 251 3 is_stmt 0 discriminator 2 view .LVU89
+ 314 002e 83F85810 		strb	r1, [r3, #88]
+ 248:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ARM GAS  /tmp/ccSyewfR.s 			page 17
+
+
+ 315              		.loc 1 248 17 discriminator 2 view .LVU90
+ 316 0032 83F85950 		strb	r5, [r3, #89]
+ 246:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 317              		.loc 1 246 21 discriminator 2 view .LVU91
+ 318 0036 1964     		str	r1, [r3, #64]
+ 248:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 319              		.loc 1 248 3 is_stmt 1 discriminator 2 view .LVU92
+ 251:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 320              		.loc 1 251 3 discriminator 2 view .LVU93
+ 251:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 321              		.loc 1 251 3 discriminator 2 view .LVU94
+ 251:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 322              		.loc 1 251 3 discriminator 2 view .LVU95
+ 253:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 323              		.loc 1 253 3 discriminator 2 view .LVU96
+ 254:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 324              		.loc 1 254 1 is_stmt 0 discriminator 2 view .LVU97
+ 325 0038 70BC     		pop	{r4, r5, r6}
+ 326              	.LCFI5:
+ 327              		.cfi_restore 6
+ 328              		.cfi_restore 5
+ 329              		.cfi_restore 4
+ 330              		.cfi_def_cfa_offset 0
+ 331              	.LVL15:
+ 254:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 332              		.loc 1 254 1 discriminator 2 view .LVU98
+ 333 003a 7047     		bx	lr
+ 334              	.LVL16:
+ 335              	.L17:
+ 230:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 336              		.loc 1 230 3 view .LVU99
+ 337 003c 0220     		movs	r0, #2
+ 338              	.LVL17:
+ 254:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 339              		.loc 1 254 1 view .LVU100
+ 340 003e 7047     		bx	lr
+ 341              		.cfi_endproc
+ 342              	.LFE334:
+ 344              		.section	.text.HAL_USARTEx_ConfigNSS,"ax",%progbits
+ 345              		.align	1
+ 346              		.p2align 2,,3
+ 347              		.global	HAL_USARTEx_ConfigNSS
+ 348              		.syntax unified
+ 349              		.thumb
+ 350              		.thumb_func
+ 351              		.fpu fpv5-d16
+ 353              	HAL_USARTEx_ConfigNSS:
+ 354              	.LVL18:
+ 355              	.LFB335:
+ 271:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 356              		.loc 1 271 1 is_stmt 1 view -0
+ 357              		.cfi_startproc
+ 358              		@ args = 0, pretend = 0, frame = 0
+ 359              		@ frame_needed = 0, uses_anonymous_args = 0
+ 360              		@ link register save eliminated.
+ 272:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 361              		.loc 1 272 3 view .LVU102
+ARM GAS  /tmp/ccSyewfR.s 			page 18
+
+
+ 275:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_USART_NSS(NSSConfig));
+ 362              		.loc 1 275 3 view .LVU103
+ 276:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 363              		.loc 1 276 3 view .LVU104
+ 279:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 364              		.loc 1 279 3 view .LVU105
+ 279:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 365              		.loc 1 279 3 view .LVU106
+ 366 0000 90F85820 		ldrb	r2, [r0, #88]	@ zero_extendqisi2
+ 367 0004 012A     		cmp	r2, #1
+ 368 0006 19D0     		beq	.L24
+ 369 0008 0346     		mov	r3, r0
+ 279:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 370              		.loc 1 279 3 discriminator 2 view .LVU107
+ 279:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 371              		.loc 1 279 3 discriminator 2 view .LVU108
+ 281:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 372              		.loc 1 281 3 discriminator 2 view .LVU109
+ 281:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 373              		.loc 1 281 17 is_stmt 0 discriminator 2 view .LVU110
+ 374 000a 0220     		movs	r0, #2
+ 375              	.LVL19:
+ 284:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 376              		.loc 1 284 12 discriminator 2 view .LVU111
+ 377 000c 1A68     		ldr	r2, [r3]
+ 271:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 378              		.loc 1 271 1 discriminator 2 view .LVU112
+ 379 000e 70B4     		push	{r4, r5, r6}
+ 380              	.LCFI6:
+ 381              		.cfi_def_cfa_offset 12
+ 382              		.cfi_offset 4, -12
+ 383              		.cfi_offset 5, -8
+ 384              		.cfi_offset 6, -4
+ 281:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 385              		.loc 1 281 17 discriminator 2 view .LVU113
+ 386 0010 83F85900 		strb	r0, [r3, #89]
+ 284:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 387              		.loc 1 284 3 is_stmt 1 discriminator 2 view .LVU114
+ 298:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 388              		.loc 1 298 3 is_stmt 0 discriminator 2 view .LVU115
+ 389 0014 0024     		movs	r4, #0
+ 284:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 390              		.loc 1 284 10 discriminator 2 view .LVU116
+ 391 0016 1668     		ldr	r6, [r2]
+ 392              	.LVL20:
+ 287:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 393              		.loc 1 287 3 is_stmt 1 discriminator 2 view .LVU117
+ 295:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 394              		.loc 1 295 17 is_stmt 0 discriminator 2 view .LVU118
+ 395 0018 0125     		movs	r5, #1
+ 287:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 396              		.loc 1 287 3 discriminator 2 view .LVU119
+ 397 001a 1068     		ldr	r0, [r2]
+ 398 001c 20F00100 		bic	r0, r0, #1
+ 399 0020 1060     		str	r0, [r2]
+ 290:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 400              		.loc 1 290 3 is_stmt 1 discriminator 2 view .LVU120
+ARM GAS  /tmp/ccSyewfR.s 			page 19
+
+
+ 401 0022 5068     		ldr	r0, [r2, #4]
+ 402 0024 20F00800 		bic	r0, r0, #8
+ 403 0028 0143     		orrs	r1, r1, r0
+ 404              	.LVL21:
+ 300:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 405              		.loc 1 300 10 is_stmt 0 discriminator 2 view .LVU121
+ 406 002a 2046     		mov	r0, r4
+ 290:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 407              		.loc 1 290 3 discriminator 2 view .LVU122
+ 408 002c 5160     		str	r1, [r2, #4]
+ 293:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 409              		.loc 1 293 3 is_stmt 1 discriminator 2 view .LVU123
+ 410 002e 1660     		str	r6, [r2]
+ 295:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 411              		.loc 1 295 3 discriminator 2 view .LVU124
+ 295:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 412              		.loc 1 295 17 is_stmt 0 discriminator 2 view .LVU125
+ 413 0030 83F85950 		strb	r5, [r3, #89]
+ 298:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 414              		.loc 1 298 3 is_stmt 1 discriminator 2 view .LVU126
+ 298:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 415              		.loc 1 298 3 discriminator 2 view .LVU127
+ 416 0034 83F85840 		strb	r4, [r3, #88]
+ 298:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 417              		.loc 1 298 3 discriminator 2 view .LVU128
+ 300:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 418              		.loc 1 300 3 discriminator 2 view .LVU129
+ 301:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 419              		.loc 1 301 1 is_stmt 0 discriminator 2 view .LVU130
+ 420 0038 70BC     		pop	{r4, r5, r6}
+ 421              	.LCFI7:
+ 422              		.cfi_restore 6
+ 423              		.cfi_restore 5
+ 424              		.cfi_restore 4
+ 425              		.cfi_def_cfa_offset 0
+ 426              	.LVL22:
+ 301:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 427              		.loc 1 301 1 discriminator 2 view .LVU131
+ 428 003a 7047     		bx	lr
+ 429              	.LVL23:
+ 430              	.L24:
+ 279:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 431              		.loc 1 279 3 view .LVU132
+ 432 003c 0220     		movs	r0, #2
+ 433              	.LVL24:
+ 301:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 434              		.loc 1 301 1 view .LVU133
+ 435 003e 7047     		bx	lr
+ 436              		.cfi_endproc
+ 437              	.LFE335:
+ 439              		.section	.text.HAL_USARTEx_EnableFifoMode,"ax",%progbits
+ 440              		.align	1
+ 441              		.p2align 2,,3
+ 442              		.global	HAL_USARTEx_EnableFifoMode
+ 443              		.syntax unified
+ 444              		.thumb
+ 445              		.thumb_func
+ARM GAS  /tmp/ccSyewfR.s 			page 20
+
+
+ 446              		.fpu fpv5-d16
+ 448              	HAL_USARTEx_EnableFifoMode:
+ 449              	.LVL25:
+ 450              	.LFB336:
+ 309:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 451              		.loc 1 309 1 is_stmt 1 view -0
+ 452              		.cfi_startproc
+ 453              		@ args = 0, pretend = 0, frame = 0
+ 454              		@ frame_needed = 0, uses_anonymous_args = 0
+ 310:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 455              		.loc 1 310 3 view .LVU135
+ 313:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 456              		.loc 1 313 3 view .LVU136
+ 316:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 457              		.loc 1 316 3 view .LVU137
+ 316:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 458              		.loc 1 316 3 view .LVU138
+ 459 0000 90F85830 		ldrb	r3, [r0, #88]	@ zero_extendqisi2
+ 460 0004 012B     		cmp	r3, #1
+ 461 0006 1AD0     		beq	.L31
+ 321:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 462              		.loc 1 321 12 is_stmt 0 discriminator 2 view .LVU139
+ 463 0008 0368     		ldr	r3, [r0]
+ 318:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 464              		.loc 1 318 17 discriminator 2 view .LVU140
+ 465 000a 0222     		movs	r2, #2
+ 309:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 466              		.loc 1 309 1 discriminator 2 view .LVU141
+ 467 000c 70B5     		push	{r4, r5, r6, lr}
+ 468              	.LCFI8:
+ 469              		.cfi_def_cfa_offset 16
+ 470              		.cfi_offset 4, -16
+ 471              		.cfi_offset 5, -12
+ 472              		.cfi_offset 6, -8
+ 473              		.cfi_offset 14, -4
+ 316:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 474              		.loc 1 316 3 discriminator 2 view .LVU142
+ 475 000e 0125     		movs	r5, #1
+ 318:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 476              		.loc 1 318 17 discriminator 2 view .LVU143
+ 477 0010 80F85920 		strb	r2, [r0, #89]
+ 328:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 478              		.loc 1 328 20 discriminator 2 view .LVU144
+ 479 0014 4FF00056 		mov	r6, #536870912
+ 480 0018 0446     		mov	r4, r0
+ 316:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 481              		.loc 1 316 3 is_stmt 1 discriminator 2 view .LVU145
+ 482 001a 80F85850 		strb	r5, [r0, #88]
+ 316:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 483              		.loc 1 316 3 discriminator 2 view .LVU146
+ 318:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 484              		.loc 1 318 3 discriminator 2 view .LVU147
+ 321:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 485              		.loc 1 321 3 discriminator 2 view .LVU148
+ 321:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 486              		.loc 1 321 10 is_stmt 0 discriminator 2 view .LVU149
+ 487 001e 1A68     		ldr	r2, [r3]
+ARM GAS  /tmp/ccSyewfR.s 			page 21
+
+
+ 488              	.LVL26:
+ 324:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 489              		.loc 1 324 3 is_stmt 1 discriminator 2 view .LVU150
+ 490 0020 1968     		ldr	r1, [r3]
+ 327:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->FifoMode = USART_FIFOMODE_ENABLE;
+ 491              		.loc 1 327 3 is_stmt 0 discriminator 2 view .LVU151
+ 492 0022 3243     		orrs	r2, r2, r6
+ 493              	.LVL27:
+ 324:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 494              		.loc 1 324 3 discriminator 2 view .LVU152
+ 495 0024 21F00101 		bic	r1, r1, #1
+ 496 0028 1960     		str	r1, [r3]
+ 327:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->FifoMode = USART_FIFOMODE_ENABLE;
+ 497              		.loc 1 327 3 is_stmt 1 discriminator 2 view .LVU153
+ 498              	.LVL28:
+ 328:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 499              		.loc 1 328 3 discriminator 2 view .LVU154
+ 328:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 500              		.loc 1 328 20 is_stmt 0 discriminator 2 view .LVU155
+ 501 002a 4664     		str	r6, [r0, #68]
+ 331:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 502              		.loc 1 331 3 is_stmt 1 discriminator 2 view .LVU156
+ 503 002c 1A60     		str	r2, [r3]
+ 334:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 504              		.loc 1 334 3 discriminator 2 view .LVU157
+ 505              	.LVL29:
+ 506              	.LBB8:
+ 507              	.LBI8:
+ 499:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 508              		.loc 1 499 13 discriminator 2 view .LVU158
+ 509              	.LBB9:
+ 501:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_depth;
+ 510              		.loc 1 501 3 discriminator 2 view .LVU159
+ 502:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t rx_fifo_threshold;
+ 511              		.loc 1 502 3 discriminator 2 view .LVU160
+ 503:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_threshold;
+ 512              		.loc 1 503 3 discriminator 2 view .LVU161
+ 504:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* 2 0U/1U added for MISRAC2012-Rule-18.1_b and MISRAC2012-Rule-18.1_d */
+ 513              		.loc 1 504 3 discriminator 2 view .LVU162
+ 506:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   static const uint8_t denominator[] = {8U, 4U, 2U, 4U, 8U, 1U, 1U, 1U};
+ 514              		.loc 1 506 3 discriminator 2 view .LVU163
+ 507:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 515              		.loc 1 507 3 discriminator 2 view .LVU164
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 516              		.loc 1 509 3 discriminator 2 view .LVU165
+ 517 002e FFF7FEFF 		bl	USARTEx_SetNbDataToProcess.part.0
+ 518              	.LVL30:
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 519              		.loc 1 509 3 is_stmt 0 discriminator 2 view .LVU166
+ 520              	.LBE9:
+ 521              	.LBE8:
+ 336:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 522              		.loc 1 336 3 is_stmt 1 discriminator 2 view .LVU167
+ 339:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 523              		.loc 1 339 3 is_stmt 0 discriminator 2 view .LVU168
+ 524 0032 0020     		movs	r0, #0
+ 525              	.LVL31:
+ARM GAS  /tmp/ccSyewfR.s 			page 22
+
+
+ 336:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 526              		.loc 1 336 17 discriminator 2 view .LVU169
+ 527 0034 84F85950 		strb	r5, [r4, #89]
+ 339:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 528              		.loc 1 339 3 is_stmt 1 discriminator 2 view .LVU170
+ 339:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 529              		.loc 1 339 3 discriminator 2 view .LVU171
+ 530 0038 84F85800 		strb	r0, [r4, #88]
+ 339:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 531              		.loc 1 339 3 discriminator 2 view .LVU172
+ 341:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 532              		.loc 1 341 3 discriminator 2 view .LVU173
+ 342:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 533              		.loc 1 342 1 is_stmt 0 discriminator 2 view .LVU174
+ 534 003c 70BD     		pop	{r4, r5, r6, pc}
+ 535              	.LVL32:
+ 536              	.L31:
+ 537              	.LCFI9:
+ 538              		.cfi_def_cfa_offset 0
+ 539              		.cfi_restore 4
+ 540              		.cfi_restore 5
+ 541              		.cfi_restore 6
+ 542              		.cfi_restore 14
+ 316:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 543              		.loc 1 316 3 view .LVU175
+ 544 003e 0220     		movs	r0, #2
+ 545              	.LVL33:
+ 342:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 546              		.loc 1 342 1 view .LVU176
+ 547 0040 7047     		bx	lr
+ 548              		.cfi_endproc
+ 549              	.LFE336:
+ 551 0042 00BF     		.section	.text.HAL_USARTEx_DisableFifoMode,"ax",%progbits
+ 552              		.align	1
+ 553              		.p2align 2,,3
+ 554              		.global	HAL_USARTEx_DisableFifoMode
+ 555              		.syntax unified
+ 556              		.thumb
+ 557              		.thumb_func
+ 558              		.fpu fpv5-d16
+ 560              	HAL_USARTEx_DisableFifoMode:
+ 561              	.LVL34:
+ 562              	.LFB337:
+ 350:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 563              		.loc 1 350 1 is_stmt 1 view -0
+ 564              		.cfi_startproc
+ 565              		@ args = 0, pretend = 0, frame = 0
+ 566              		@ frame_needed = 0, uses_anonymous_args = 0
+ 567              		@ link register save eliminated.
+ 351:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 568              		.loc 1 351 3 view .LVU178
+ 354:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 569              		.loc 1 354 3 view .LVU179
+ 357:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 570              		.loc 1 357 3 view .LVU180
+ 357:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 571              		.loc 1 357 3 view .LVU181
+ARM GAS  /tmp/ccSyewfR.s 			page 23
+
+
+ 572 0000 90F85820 		ldrb	r2, [r0, #88]	@ zero_extendqisi2
+ 573 0004 012A     		cmp	r2, #1
+ 574 0006 17D0     		beq	.L38
+ 575 0008 0346     		mov	r3, r0
+ 357:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 576              		.loc 1 357 3 discriminator 2 view .LVU182
+ 357:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 577              		.loc 1 357 3 discriminator 2 view .LVU183
+ 359:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 578              		.loc 1 359 3 discriminator 2 view .LVU184
+ 359:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 579              		.loc 1 359 17 is_stmt 0 discriminator 2 view .LVU185
+ 580 000a 0220     		movs	r0, #2
+ 581              	.LVL35:
+ 369:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 582              		.loc 1 369 20 discriminator 2 view .LVU186
+ 583 000c 0021     		movs	r1, #0
+ 362:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 584              		.loc 1 362 12 discriminator 2 view .LVU187
+ 585 000e 1A68     		ldr	r2, [r3]
+ 350:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 586              		.loc 1 350 1 discriminator 2 view .LVU188
+ 587 0010 70B4     		push	{r4, r5, r6}
+ 588              	.LCFI10:
+ 589              		.cfi_def_cfa_offset 12
+ 590              		.cfi_offset 4, -12
+ 591              		.cfi_offset 5, -8
+ 592              		.cfi_offset 6, -4
+ 359:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 593              		.loc 1 359 17 discriminator 2 view .LVU189
+ 594 0012 83F85900 		strb	r0, [r3, #89]
+ 362:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 595              		.loc 1 362 3 is_stmt 1 discriminator 2 view .LVU190
+ 374:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 596              		.loc 1 374 17 is_stmt 0 discriminator 2 view .LVU191
+ 597 0016 0126     		movs	r6, #1
+ 362:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 598              		.loc 1 362 10 discriminator 2 view .LVU192
+ 599 0018 1468     		ldr	r4, [r2]
+ 600              	.LVL36:
+ 365:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 601              		.loc 1 365 3 is_stmt 1 discriminator 2 view .LVU193
+ 379:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 602              		.loc 1 379 10 is_stmt 0 discriminator 2 view .LVU194
+ 603 001a 0846     		mov	r0, r1
+ 365:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 604              		.loc 1 365 3 discriminator 2 view .LVU195
+ 605 001c 1568     		ldr	r5, [r2]
+ 368:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->FifoMode = USART_FIFOMODE_DISABLE;
+ 606              		.loc 1 368 3 discriminator 2 view .LVU196
+ 607 001e 24F00054 		bic	r4, r4, #536870912
+ 608              	.LVL37:
+ 365:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 609              		.loc 1 365 3 discriminator 2 view .LVU197
+ 610 0022 25F00105 		bic	r5, r5, #1
+ 611 0026 1560     		str	r5, [r2]
+ 368:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   husart->FifoMode = USART_FIFOMODE_DISABLE;
+ARM GAS  /tmp/ccSyewfR.s 			page 24
+
+
+ 612              		.loc 1 368 3 is_stmt 1 discriminator 2 view .LVU198
+ 613              	.LVL38:
+ 369:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 614              		.loc 1 369 3 discriminator 2 view .LVU199
+ 369:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 615              		.loc 1 369 20 is_stmt 0 discriminator 2 view .LVU200
+ 616 0028 5964     		str	r1, [r3, #68]
+ 372:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 617              		.loc 1 372 3 is_stmt 1 discriminator 2 view .LVU201
+ 618 002a 1460     		str	r4, [r2]
+ 374:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 619              		.loc 1 374 3 discriminator 2 view .LVU202
+ 377:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 620              		.loc 1 377 3 is_stmt 0 discriminator 2 view .LVU203
+ 621 002c 83F85810 		strb	r1, [r3, #88]
+ 374:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 622              		.loc 1 374 17 discriminator 2 view .LVU204
+ 623 0030 83F85960 		strb	r6, [r3, #89]
+ 377:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 624              		.loc 1 377 3 is_stmt 1 discriminator 2 view .LVU205
+ 377:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 625              		.loc 1 377 3 discriminator 2 view .LVU206
+ 377:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 626              		.loc 1 377 3 discriminator 2 view .LVU207
+ 379:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 627              		.loc 1 379 3 discriminator 2 view .LVU208
+ 380:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 628              		.loc 1 380 1 is_stmt 0 discriminator 2 view .LVU209
+ 629 0034 70BC     		pop	{r4, r5, r6}
+ 630              	.LCFI11:
+ 631              		.cfi_restore 6
+ 632              		.cfi_restore 5
+ 633              		.cfi_restore 4
+ 634              		.cfi_def_cfa_offset 0
+ 635              	.LVL39:
+ 380:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 636              		.loc 1 380 1 discriminator 2 view .LVU210
+ 637 0036 7047     		bx	lr
+ 638              	.LVL40:
+ 639              	.L38:
+ 357:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 640              		.loc 1 357 3 view .LVU211
+ 641 0038 0220     		movs	r0, #2
+ 642              	.LVL41:
+ 380:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 643              		.loc 1 380 1 view .LVU212
+ 644 003a 7047     		bx	lr
+ 645              		.cfi_endproc
+ 646              	.LFE337:
+ 648              		.section	.text.HAL_USARTEx_SetTxFifoThreshold,"ax",%progbits
+ 649              		.align	1
+ 650              		.p2align 2,,3
+ 651              		.global	HAL_USARTEx_SetTxFifoThreshold
+ 652              		.syntax unified
+ 653              		.thumb
+ 654              		.thumb_func
+ 655              		.fpu fpv5-d16
+ARM GAS  /tmp/ccSyewfR.s 			page 25
+
+
+ 657              	HAL_USARTEx_SetTxFifoThreshold:
+ 658              	.LVL42:
+ 659              	.LFB338:
+ 396:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 660              		.loc 1 396 1 is_stmt 1 view -0
+ 661              		.cfi_startproc
+ 662              		@ args = 0, pretend = 0, frame = 0
+ 663              		@ frame_needed = 0, uses_anonymous_args = 0
+ 397:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 664              		.loc 1 397 3 view .LVU214
+ 400:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_USART_TXFIFO_THRESHOLD(Threshold));
+ 665              		.loc 1 400 3 view .LVU215
+ 401:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 666              		.loc 1 401 3 view .LVU216
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 667              		.loc 1 404 3 view .LVU217
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 668              		.loc 1 404 3 view .LVU218
+ 396:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 669              		.loc 1 396 1 is_stmt 0 view .LVU219
+ 670 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 671              	.LCFI12:
+ 672              		.cfi_def_cfa_offset 24
+ 673              		.cfi_offset 3, -24
+ 674              		.cfi_offset 4, -20
+ 675              		.cfi_offset 5, -16
+ 676              		.cfi_offset 6, -12
+ 677              		.cfi_offset 7, -8
+ 678              		.cfi_offset 14, -4
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 679              		.loc 1 404 3 view .LVU220
+ 680 0002 90F85830 		ldrb	r3, [r0, #88]	@ zero_extendqisi2
+ 681 0006 012B     		cmp	r3, #1
+ 682 0008 22D0     		beq	.L47
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 683              		.loc 1 404 3 is_stmt 1 discriminator 2 view .LVU221
+ 409:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 684              		.loc 1 409 12 is_stmt 0 discriminator 2 view .LVU222
+ 685 000a 0368     		ldr	r3, [r0]
+ 406:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 686              		.loc 1 406 17 discriminator 2 view .LVU223
+ 687 000c 0222     		movs	r2, #2
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 688              		.loc 1 404 3 discriminator 2 view .LVU224
+ 689 000e 0125     		movs	r5, #1
+ 690              	.LBB10:
+ 691              	.LBB11:
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 692              		.loc 1 509 6 discriminator 2 view .LVU225
+ 693 0010 476C     		ldr	r7, [r0, #68]
+ 694              	.LBE11:
+ 695              	.LBE10:
+ 406:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 696              		.loc 1 406 17 discriminator 2 view .LVU226
+ 697 0012 80F85920 		strb	r2, [r0, #89]
+ 698 0016 0446     		mov	r4, r0
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ARM GAS  /tmp/ccSyewfR.s 			page 26
+
+
+ 699              		.loc 1 404 3 discriminator 2 view .LVU227
+ 700 0018 80F85850 		strb	r5, [r0, #88]
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 701              		.loc 1 404 3 is_stmt 1 discriminator 2 view .LVU228
+ 406:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 702              		.loc 1 406 3 discriminator 2 view .LVU229
+ 409:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 703              		.loc 1 409 3 discriminator 2 view .LVU230
+ 409:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 704              		.loc 1 409 10 is_stmt 0 discriminator 2 view .LVU231
+ 705 001c 1E68     		ldr	r6, [r3]
+ 706              	.LVL43:
+ 412:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 707              		.loc 1 412 3 is_stmt 1 discriminator 2 view .LVU232
+ 708 001e 1A68     		ldr	r2, [r3]
+ 709 0020 22F00102 		bic	r2, r2, #1
+ 710 0024 1A60     		str	r2, [r3]
+ 415:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 711              		.loc 1 415 3 discriminator 2 view .LVU233
+ 712 0026 9A68     		ldr	r2, [r3, #8]
+ 713 0028 22F06042 		bic	r2, r2, #-536870912
+ 714 002c 1143     		orrs	r1, r1, r2
+ 715              	.LVL44:
+ 415:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 716              		.loc 1 415 3 is_stmt 0 discriminator 2 view .LVU234
+ 717 002e 9960     		str	r1, [r3, #8]
+ 418:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 718              		.loc 1 418 3 is_stmt 1 discriminator 2 view .LVU235
+ 719              	.LVL45:
+ 720              	.LBB14:
+ 721              	.LBI10:
+ 499:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 722              		.loc 1 499 13 discriminator 2 view .LVU236
+ 723              	.LBB12:
+ 501:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_depth;
+ 724              		.loc 1 501 3 discriminator 2 view .LVU237
+ 502:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t rx_fifo_threshold;
+ 725              		.loc 1 502 3 discriminator 2 view .LVU238
+ 503:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_threshold;
+ 726              		.loc 1 503 3 discriminator 2 view .LVU239
+ 504:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* 2 0U/1U added for MISRAC2012-Rule-18.1_b and MISRAC2012-Rule-18.1_d */
+ 727              		.loc 1 504 3 discriminator 2 view .LVU240
+ 506:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   static const uint8_t denominator[] = {8U, 4U, 2U, 4U, 8U, 1U, 1U, 1U};
+ 728              		.loc 1 506 3 discriminator 2 view .LVU241
+ 507:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 729              		.loc 1 507 3 discriminator 2 view .LVU242
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 730              		.loc 1 509 3 discriminator 2 view .LVU243
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 731              		.loc 1 509 6 is_stmt 0 discriminator 2 view .LVU244
+ 732 0030 5FB1     		cbz	r7, .L49
+ 733 0032 FFF7FEFF 		bl	USARTEx_SetNbDataToProcess.part.0
+ 734              	.LVL46:
+ 735 0036 0368     		ldr	r3, [r0]
+ 736              	.L46:
+ 737              	.LVL47:
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ARM GAS  /tmp/ccSyewfR.s 			page 27
+
+
+ 738              		.loc 1 509 6 discriminator 2 view .LVU245
+ 739              	.LBE12:
+ 740              	.LBE14:
+ 421:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 741              		.loc 1 421 3 is_stmt 1 view .LVU246
+ 426:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 742              		.loc 1 426 3 is_stmt 0 view .LVU247
+ 743 0038 0022     		movs	r2, #0
+ 423:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 744              		.loc 1 423 17 view .LVU248
+ 745 003a 0121     		movs	r1, #1
+ 421:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 746              		.loc 1 421 3 view .LVU249
+ 747 003c 1E60     		str	r6, [r3]
+ 423:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 748              		.loc 1 423 3 is_stmt 1 view .LVU250
+ 428:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 749              		.loc 1 428 10 is_stmt 0 view .LVU251
+ 750 003e 1046     		mov	r0, r2
+ 751              	.LVL48:
+ 423:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 752              		.loc 1 423 17 view .LVU252
+ 753 0040 84F85910 		strb	r1, [r4, #89]
+ 426:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 754              		.loc 1 426 3 is_stmt 1 view .LVU253
+ 426:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 755              		.loc 1 426 3 view .LVU254
+ 756 0044 84F85820 		strb	r2, [r4, #88]
+ 426:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 757              		.loc 1 426 3 view .LVU255
+ 428:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 758              		.loc 1 428 3 view .LVU256
+ 429:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 759              		.loc 1 429 1 is_stmt 0 view .LVU257
+ 760 0048 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 761              	.LVL49:
+ 762              	.L49:
+ 763              	.LBB15:
+ 764              	.LBB13:
+ 511:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = 1U;
+ 765              		.loc 1 511 5 is_stmt 1 view .LVU258
+ 511:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = 1U;
+ 766              		.loc 1 511 31 is_stmt 0 view .LVU259
+ 767 004a 8587     		strh	r5, [r0, #60]	@ movhi
+ 512:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 768              		.loc 1 512 5 is_stmt 1 view .LVU260
+ 512:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 769              		.loc 1 512 31 is_stmt 0 view .LVU261
+ 770 004c 4587     		strh	r5, [r0, #58]	@ movhi
+ 771 004e F3E7     		b	.L46
+ 772              	.LVL50:
+ 773              	.L47:
+ 512:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 774              		.loc 1 512 31 view .LVU262
+ 775              	.LBE13:
+ 776              	.LBE15:
+ 404:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ARM GAS  /tmp/ccSyewfR.s 			page 28
+
+
+ 777              		.loc 1 404 3 view .LVU263
+ 778 0050 0220     		movs	r0, #2
+ 779              	.LVL51:
+ 429:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 780              		.loc 1 429 1 view .LVU264
+ 781 0052 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 782              		.cfi_endproc
+ 783              	.LFE338:
+ 785              		.section	.text.HAL_USARTEx_SetRxFifoThreshold,"ax",%progbits
+ 786              		.align	1
+ 787              		.p2align 2,,3
+ 788              		.global	HAL_USARTEx_SetRxFifoThreshold
+ 789              		.syntax unified
+ 790              		.thumb
+ 791              		.thumb_func
+ 792              		.fpu fpv5-d16
+ 794              	HAL_USARTEx_SetRxFifoThreshold:
+ 795              	.LVL52:
+ 796              	.LFB339:
+ 445:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 797              		.loc 1 445 1 is_stmt 1 view -0
+ 798              		.cfi_startproc
+ 799              		@ args = 0, pretend = 0, frame = 0
+ 800              		@ frame_needed = 0, uses_anonymous_args = 0
+ 446:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 801              		.loc 1 446 3 view .LVU266
+ 449:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   assert_param(IS_USART_RXFIFO_THRESHOLD(Threshold));
+ 802              		.loc 1 449 3 view .LVU267
+ 450:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 803              		.loc 1 450 3 view .LVU268
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 804              		.loc 1 453 3 view .LVU269
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 805              		.loc 1 453 3 view .LVU270
+ 445:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint32_t tmpcr1;
+ 806              		.loc 1 445 1 is_stmt 0 view .LVU271
+ 807 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 808              	.LCFI13:
+ 809              		.cfi_def_cfa_offset 24
+ 810              		.cfi_offset 3, -24
+ 811              		.cfi_offset 4, -20
+ 812              		.cfi_offset 5, -16
+ 813              		.cfi_offset 6, -12
+ 814              		.cfi_offset 7, -8
+ 815              		.cfi_offset 14, -4
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 816              		.loc 1 453 3 view .LVU272
+ 817 0002 90F85830 		ldrb	r3, [r0, #88]	@ zero_extendqisi2
+ 818 0006 012B     		cmp	r3, #1
+ 819 0008 22D0     		beq	.L54
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 820              		.loc 1 453 3 is_stmt 1 discriminator 2 view .LVU273
+ 458:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 821              		.loc 1 458 12 is_stmt 0 discriminator 2 view .LVU274
+ 822 000a 0368     		ldr	r3, [r0]
+ 455:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 823              		.loc 1 455 17 discriminator 2 view .LVU275
+ARM GAS  /tmp/ccSyewfR.s 			page 29
+
+
+ 824 000c 0222     		movs	r2, #2
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 825              		.loc 1 453 3 discriminator 2 view .LVU276
+ 826 000e 0125     		movs	r5, #1
+ 827              	.LBB16:
+ 828              	.LBB17:
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 829              		.loc 1 509 6 discriminator 2 view .LVU277
+ 830 0010 476C     		ldr	r7, [r0, #68]
+ 831              	.LBE17:
+ 832              	.LBE16:
+ 455:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 833              		.loc 1 455 17 discriminator 2 view .LVU278
+ 834 0012 80F85920 		strb	r2, [r0, #89]
+ 835 0016 0446     		mov	r4, r0
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 836              		.loc 1 453 3 discriminator 2 view .LVU279
+ 837 0018 80F85850 		strb	r5, [r0, #88]
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 838              		.loc 1 453 3 is_stmt 1 discriminator 2 view .LVU280
+ 455:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 839              		.loc 1 455 3 discriminator 2 view .LVU281
+ 458:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 840              		.loc 1 458 3 discriminator 2 view .LVU282
+ 458:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 841              		.loc 1 458 10 is_stmt 0 discriminator 2 view .LVU283
+ 842 001c 1E68     		ldr	r6, [r3]
+ 843              	.LVL53:
+ 461:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 844              		.loc 1 461 3 is_stmt 1 discriminator 2 view .LVU284
+ 845 001e 1A68     		ldr	r2, [r3]
+ 846 0020 22F00102 		bic	r2, r2, #1
+ 847 0024 1A60     		str	r2, [r3]
+ 464:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 848              		.loc 1 464 3 discriminator 2 view .LVU285
+ 849 0026 9A68     		ldr	r2, [r3, #8]
+ 850 0028 22F06062 		bic	r2, r2, #234881024
+ 851 002c 1143     		orrs	r1, r1, r2
+ 852              	.LVL54:
+ 464:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 853              		.loc 1 464 3 is_stmt 0 discriminator 2 view .LVU286
+ 854 002e 9960     		str	r1, [r3, #8]
+ 467:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 855              		.loc 1 467 3 is_stmt 1 discriminator 2 view .LVU287
+ 856              	.LVL55:
+ 857              	.LBB20:
+ 858              	.LBI16:
+ 499:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** {
+ 859              		.loc 1 499 13 discriminator 2 view .LVU288
+ 860              	.LBB18:
+ 501:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_depth;
+ 861              		.loc 1 501 3 discriminator 2 view .LVU289
+ 502:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t rx_fifo_threshold;
+ 862              		.loc 1 502 3 discriminator 2 view .LVU290
+ 503:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   uint8_t tx_fifo_threshold;
+ 863              		.loc 1 503 3 discriminator 2 view .LVU291
+ 504:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   /* 2 0U/1U added for MISRAC2012-Rule-18.1_b and MISRAC2012-Rule-18.1_d */
+ARM GAS  /tmp/ccSyewfR.s 			page 30
+
+
+ 864              		.loc 1 504 3 discriminator 2 view .LVU292
+ 506:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   static const uint8_t denominator[] = {8U, 4U, 2U, 4U, 8U, 1U, 1U, 1U};
+ 865              		.loc 1 506 3 discriminator 2 view .LVU293
+ 507:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 866              		.loc 1 507 3 discriminator 2 view .LVU294
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 867              		.loc 1 509 3 discriminator 2 view .LVU295
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 868              		.loc 1 509 6 is_stmt 0 discriminator 2 view .LVU296
+ 869 0030 5FB1     		cbz	r7, .L56
+ 870 0032 FFF7FEFF 		bl	USARTEx_SetNbDataToProcess.part.0
+ 871              	.LVL56:
+ 872 0036 0368     		ldr	r3, [r0]
+ 873              	.L53:
+ 874              	.LVL57:
+ 509:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   {
+ 875              		.loc 1 509 6 discriminator 2 view .LVU297
+ 876              	.LBE18:
+ 877              	.LBE20:
+ 470:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 878              		.loc 1 470 3 is_stmt 1 view .LVU298
+ 475:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 879              		.loc 1 475 3 is_stmt 0 view .LVU299
+ 880 0038 0022     		movs	r2, #0
+ 472:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 881              		.loc 1 472 17 view .LVU300
+ 882 003a 0121     		movs	r1, #1
+ 470:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 883              		.loc 1 470 3 view .LVU301
+ 884 003c 1E60     		str	r6, [r3]
+ 472:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 885              		.loc 1 472 3 is_stmt 1 view .LVU302
+ 477:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 886              		.loc 1 477 10 is_stmt 0 view .LVU303
+ 887 003e 1046     		mov	r0, r2
+ 888              	.LVL58:
+ 472:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 889              		.loc 1 472 17 view .LVU304
+ 890 0040 84F85910 		strb	r1, [r4, #89]
+ 475:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 891              		.loc 1 475 3 is_stmt 1 view .LVU305
+ 475:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 892              		.loc 1 475 3 view .LVU306
+ 893 0044 84F85820 		strb	r2, [r4, #88]
+ 475:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 894              		.loc 1 475 3 view .LVU307
+ 477:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** }
+ 895              		.loc 1 477 3 view .LVU308
+ 478:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 896              		.loc 1 478 1 is_stmt 0 view .LVU309
+ 897 0048 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 898              	.LVL59:
+ 899              	.L56:
+ 900              	.LBB21:
+ 901              	.LBB19:
+ 511:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = 1U;
+ 902              		.loc 1 511 5 is_stmt 1 view .LVU310
+ARM GAS  /tmp/ccSyewfR.s 			page 31
+
+
+ 511:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****     husart->NbRxDataToProcess = 1U;
+ 903              		.loc 1 511 31 is_stmt 0 view .LVU311
+ 904 004a 8587     		strh	r5, [r0, #60]	@ movhi
+ 512:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 905              		.loc 1 512 5 is_stmt 1 view .LVU312
+ 512:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 906              		.loc 1 512 31 is_stmt 0 view .LVU313
+ 907 004c 4587     		strh	r5, [r0, #58]	@ movhi
+ 908 004e F3E7     		b	.L53
+ 909              	.LVL60:
+ 910              	.L54:
+ 512:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c ****   }
+ 911              		.loc 1 512 31 view .LVU314
+ 912              	.LBE19:
+ 913              	.LBE21:
+ 453:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 914              		.loc 1 453 3 view .LVU315
+ 915 0050 0220     		movs	r0, #2
+ 916              	.LVL61:
+ 478:./Libraries/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_usart_ex.c **** 
+ 917              		.loc 1 478 1 view .LVU316
+ 918 0052 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 919              		.cfi_endproc
+ 920              	.LFE339:
+ 922              		.section	.rodata.denominator.14114,"a"
+ 923              		.align	2
+ 924              		.set	.LANCHOR1,. + 0
+ 927              	denominator.14114:
+ 928 0000 08040204 		.ascii	"\010\004\002\004\010\001\001\001"
+ 928      08010101 
+ 929              		.section	.rodata.numerator.14113,"a"
+ 930              		.align	2
+ 931              		.set	.LANCHOR0,. + 0
+ 934              	numerator.14113:
+ 935 0000 01010103 		.ascii	"\001\001\001\003\007\001\000\000"
+ 935      07010000 
+ 936              		.text
+ 937              	.Letext0:
+ 938              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 939              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 940              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 941              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
+ 942              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 943              		.file 7 "/usr/include/newlib/sys/_types.h"
+ 944              		.file 8 "/usr/include/newlib/sys/reent.h"
+ 945              		.file 9 "/usr/include/newlib/sys/lock.h"
+ 946              		.file 10 "/usr/include/newlib/math.h"
+ 947              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 948              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 949              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 950              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 951              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h"
+ 952              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ARM GAS  /tmp/ccSyewfR.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32h7xx_hal_usart_ex.c
+     /tmp/ccSyewfR.s:17     .text.USARTEx_SetNbDataToProcess.part.0:0000000000000000 $t
+     /tmp/ccSyewfR.s:25     .text.USARTEx_SetNbDataToProcess.part.0:0000000000000000 USARTEx_SetNbDataToProcess.part.0
+     /tmp/ccSyewfR.s:94     .text.USARTEx_SetNbDataToProcess.part.0:0000000000000030 $d
+     /tmp/ccSyewfR.s:100    .text.HAL_USARTEx_RxFifoFullCallback:0000000000000000 $t
+     /tmp/ccSyewfR.s:108    .text.HAL_USARTEx_RxFifoFullCallback:0000000000000000 HAL_USARTEx_RxFifoFullCallback
+     /tmp/ccSyewfR.s:123    .text.HAL_USARTEx_TxFifoEmptyCallback:0000000000000000 $t
+     /tmp/ccSyewfR.s:131    .text.HAL_USARTEx_TxFifoEmptyCallback:0000000000000000 HAL_USARTEx_TxFifoEmptyCallback
+     /tmp/ccSyewfR.s:142    .text.HAL_USARTEx_EnableSlaveMode:0000000000000000 $t
+     /tmp/ccSyewfR.s:150    .text.HAL_USARTEx_EnableSlaveMode:0000000000000000 HAL_USARTEx_EnableSlaveMode
+     /tmp/ccSyewfR.s:250    .text.HAL_USARTEx_DisableSlaveMode:0000000000000000 $t
+     /tmp/ccSyewfR.s:258    .text.HAL_USARTEx_DisableSlaveMode:0000000000000000 HAL_USARTEx_DisableSlaveMode
+     /tmp/ccSyewfR.s:345    .text.HAL_USARTEx_ConfigNSS:0000000000000000 $t
+     /tmp/ccSyewfR.s:353    .text.HAL_USARTEx_ConfigNSS:0000000000000000 HAL_USARTEx_ConfigNSS
+     /tmp/ccSyewfR.s:440    .text.HAL_USARTEx_EnableFifoMode:0000000000000000 $t
+     /tmp/ccSyewfR.s:448    .text.HAL_USARTEx_EnableFifoMode:0000000000000000 HAL_USARTEx_EnableFifoMode
+     /tmp/ccSyewfR.s:552    .text.HAL_USARTEx_DisableFifoMode:0000000000000000 $t
+     /tmp/ccSyewfR.s:560    .text.HAL_USARTEx_DisableFifoMode:0000000000000000 HAL_USARTEx_DisableFifoMode
+     /tmp/ccSyewfR.s:649    .text.HAL_USARTEx_SetTxFifoThreshold:0000000000000000 $t
+     /tmp/ccSyewfR.s:657    .text.HAL_USARTEx_SetTxFifoThreshold:0000000000000000 HAL_USARTEx_SetTxFifoThreshold
+     /tmp/ccSyewfR.s:786    .text.HAL_USARTEx_SetRxFifoThreshold:0000000000000000 $t
+     /tmp/ccSyewfR.s:794    .text.HAL_USARTEx_SetRxFifoThreshold:0000000000000000 HAL_USARTEx_SetRxFifoThreshold
+     /tmp/ccSyewfR.s:923    .rodata.denominator.14114:0000000000000000 $d
+     /tmp/ccSyewfR.s:927    .rodata.denominator.14114:0000000000000000 denominator.14114
+     /tmp/ccSyewfR.s:930    .rodata.numerator.14113:0000000000000000 $d
+     /tmp/ccSyewfR.s:934    .rodata.numerator.14113:0000000000000000 numerator.14113
 
 NO UNDEFINED SYMBOLS

@@ -7,7 +7,15 @@
 #include <string.h>
 
 #include "Components/Inc/lcd.h"
-#include "Hardware/Inc/ltdc_dsi.h"
+#include "Components/Inc/touch.h"
 
+#include "Hardware/Inc/ltdc_dsi.h"
+#include "Hardware/Inc/i2c.h"
+#include "Hardware/Inc/qspi.h"
+#include "Hardware/Inc/sdram.h"
+#include "Hardware/Inc/uart.h"
+
+void Hardware_Init(void);
+void Error_Handler(char *file, uint32_t line);
 
 #endif

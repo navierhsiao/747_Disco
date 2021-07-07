@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7QdcFe.s 			page 1
+ARM GAS  /tmp/ccxb6fpg.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -16,26 +16,1686 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7QdcFe.s 			page 1
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              	.Letext0:
-  17              		.file 1 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
-  18              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
-  19              		.file 3 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
-  20              		.file 4 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
-  21              		.file 5 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
-  22              		.file 6 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
-  23              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
-  24              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/reen
-  25              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
-  26              		.file 10 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
-  27              		.file 11 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
-  28              		.file 12 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
-  29              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
-  30              		.file 14 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/stdlib.
-  31              		.file 15 ".//BSP/Components/Inc/lcd.h"
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cc7QdcFe.s 			page 2
+  16              		.section	.text.SystemClock_Config,"ax",%progbits
+  17              		.align	1
+  18              		.p2align 2,,3
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	SystemClock_Config:
+  26              	.LFB336:
+  27              		.file 1 "./BSP/system.c"
+   1:./BSP/system.c **** #include "system.h"
+   2:./BSP/system.c **** 
+   3:./BSP/system.c **** #define DEVICE_IS_CUT_2_1()      (HAL_GetREVID() & 0x21ff) ? 1 : 0
+   4:./BSP/system.c **** #define DEVICE_IS_CUT_2_X()      (HAL_GetREVID() & 0x2fff) ? 1 : 0
+   5:./BSP/system.c **** #define DEVICE_IS_CUT_1_2()      (HAL_GetREVID() & 0x12ff) ? 1 : 0
+   6:./BSP/system.c **** 
+   7:./BSP/system.c **** static ADC_HandleTypeDef    AdcHandle;
+   8:./BSP/system.c **** 
+   9:./BSP/system.c **** static void SystemClock_Config(void);
+  10:./BSP/system.c **** static void MPU_Config(void);
+  11:./BSP/system.c **** static void BSP_Init(void);
+  12:./BSP/system.c **** static uint32_t TEMP_SENSOR_Init(void);
+  13:./BSP/system.c **** 
+  14:./BSP/system.c **** void Hardware_Init(void)
+  15:./BSP/system.c **** {
+  16:./BSP/system.c ****     if(!DEVICE_IS_CUT_2_X())
+  17:./BSP/system.c ****     {
+  18:./BSP/system.c ****         if(!DEVICE_IS_CUT_1_2())
+  19:./BSP/system.c ****         {
+  20:./BSP/system.c ****             *((uint32_t*)0x51046108) = 1; /* DMA2D issue with cut 1.1 - fixed in cut 1.2 */
+  21:./BSP/system.c ****         }
+  22:./BSP/system.c ****         *((uint32_t*)0x51008108) = 1; /* AXI SRAM issue with cut1.2 - fixed in cut 2.0 */
+  23:./BSP/system.c ****     }
+  24:./BSP/system.c **** 
+  25:./BSP/system.c ****     /* Enable RTC back-up registers access */
+  26:./BSP/system.c ****     HAL_PWR_EnableBkUpAccess();
+  27:./BSP/system.c **** 
+  28:./BSP/system.c ****     MPU_Config();
+  29:./BSP/system.c ****     HAL_Init();
+  30:./BSP/system.c **** 
+  31:./BSP/system.c ****     SystemClock_Config();
+ARM GAS  /tmp/ccxb6fpg.s 			page 2
+
+
+  32:./BSP/system.c ****     __HAL_RCC_CRC_CLK_ENABLE();
+  33:./BSP/system.c **** 
+  34:./BSP/system.c ****     BSP_Init();
+  35:./BSP/system.c **** }
+  36:./BSP/system.c **** 
+  37:./BSP/system.c **** static void BSP_Init(void)
+  38:./BSP/system.c **** {
+  39:./BSP/system.c ****     //QSPI init
+  40:./BSP/system.c ****     //SDRAM init
+  41:./BSP/system.c ****     //MCU internal temperature sensing init
+  42:./BSP/system.c ****     TEMP_SENSOR_Init();
+  43:./BSP/system.c ****     //RTC init
+  44:./BSP/system.c ****     //GPIO init
+  45:./BSP/system.c ****     //Enable L1 cache
+  46:./BSP/system.c ****     //LCD init
+  47:./BSP/system.c **** }
+  48:./BSP/system.c **** 
+  49:./BSP/system.c **** static void SystemClock_Config(void)
+  50:./BSP/system.c **** {
+  28              		.loc 1 50 1 view -0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 312
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  51:./BSP/system.c ****     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  32              		.loc 1 51 5 view .LVU1
+  50:./BSP/system.c ****     RCC_OscInitTypeDef RCC_OscInitStruct = {0};
+  33              		.loc 1 50 1 is_stmt 0 view .LVU2
+  34 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
+  35              	.LCFI0:
+  36              		.cfi_def_cfa_offset 24
+  37              		.cfi_offset 4, -24
+  38              		.cfi_offset 5, -20
+  39              		.cfi_offset 6, -16
+  40              		.cfi_offset 7, -12
+  41              		.cfi_offset 8, -8
+  42              		.cfi_offset 14, -4
+  43 0004 CEB0     		sub	sp, sp, #312
+  44              	.LCFI1:
+  45              		.cfi_def_cfa_offset 336
+  46              		.loc 1 51 24 view .LVU3
+  47 0006 4C22     		movs	r2, #76
+  48 0008 0021     		movs	r1, #0
+  49 000a 0BA8     		add	r0, sp, #44
+  50 000c FFF7FEFF 		bl	memset
+  51              	.LVL0:
+  52:./BSP/system.c ****     RCC_ClkInitTypeDef RCC_ClkInitStruct = {0};
+  52              		.loc 1 52 5 is_stmt 1 view .LVU4
+  53              		.loc 1 52 24 is_stmt 0 view .LVU5
+  54 0010 2022     		movs	r2, #32
+  55 0012 0021     		movs	r1, #0
+  56 0014 03A8     		add	r0, sp, #12
+  57 0016 FFF7FEFF 		bl	memset
+  58              	.LVL1:
+  53:./BSP/system.c ****     RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
+  59              		.loc 1 53 5 is_stmt 1 view .LVU6
+  54:./BSP/system.c ****     /** Supply configuration update enable
+  55:./BSP/system.c ****      */
+ARM GAS  /tmp/ccxb6fpg.s 			page 3
+
+
+  56:./BSP/system.c ****     HAL_PWREx_ConfigSupply(PWR_DIRECT_SMPS_SUPPLY);
+  60              		.loc 1 56 5 view .LVU7
+  61 001a 0420     		movs	r0, #4
+  62 001c FFF7FEFF 		bl	HAL_PWREx_ConfigSupply
+  63              	.LVL2:
+  57:./BSP/system.c ****     /** Configure the main internal regulator output voltage
+  58:./BSP/system.c ****      */
+  59:./BSP/system.c ****     __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
+  64              		.loc 1 59 5 view .LVU8
+  65              	.LBB11:
+  66              		.loc 1 59 5 view .LVU9
+  67 0020 3E4A     		ldr	r2, .L11
+  68 0022 0021     		movs	r1, #0
+  69 0024 3E4B     		ldr	r3, .L11+4
+  70 0026 0191     		str	r1, [sp, #4]
+  71              		.loc 1 59 5 view .LVU10
+  72              		.loc 1 59 5 view .LVU11
+  73              	.LBE11:
+  60:./BSP/system.c **** 
+  61:./BSP/system.c ****     while(!__HAL_PWR_GET_FLAG(PWR_FLAG_VOSRDY)) {}
+  74              		.loc 1 61 12 is_stmt 0 view .LVU12
+  75 0028 1846     		mov	r0, r3
+  76              	.LBB12:
+  59:./BSP/system.c **** 
+  77              		.loc 1 59 5 view .LVU13
+  78 002a D16A     		ldr	r1, [r2, #44]
+  79 002c 21F00101 		bic	r1, r1, #1
+  80 0030 D162     		str	r1, [r2, #44]
+  59:./BSP/system.c **** 
+  81              		.loc 1 59 5 is_stmt 1 view .LVU14
+  82 0032 D26A     		ldr	r2, [r2, #44]
+  83 0034 02F00102 		and	r2, r2, #1
+  84 0038 0192     		str	r2, [sp, #4]
+  59:./BSP/system.c **** 
+  85              		.loc 1 59 5 view .LVU15
+  86 003a 9A69     		ldr	r2, [r3, #24]
+  87 003c 42F44042 		orr	r2, r2, #49152
+  88 0040 9A61     		str	r2, [r3, #24]
+  59:./BSP/system.c **** 
+  89              		.loc 1 59 5 view .LVU16
+  90 0042 9B69     		ldr	r3, [r3, #24]
+  91 0044 03F44043 		and	r3, r3, #49152
+  92 0048 0193     		str	r3, [sp, #4]
+  59:./BSP/system.c **** 
+  93              		.loc 1 59 5 view .LVU17
+  94 004a 019B     		ldr	r3, [sp, #4]
+  95              	.LBE12:
+  59:./BSP/system.c **** 
+  96              		.loc 1 59 5 view .LVU18
+  97              		.loc 1 61 5 view .LVU19
+  98              	.L2:
+  99              		.loc 1 61 50 discriminator 1 view .LVU20
+ 100              		.loc 1 61 10 discriminator 1 view .LVU21
+ 101              		.loc 1 61 12 is_stmt 0 discriminator 1 view .LVU22
+ 102 004c 8369     		ldr	r3, [r0, #24]
+ 103              		.loc 1 61 10 discriminator 1 view .LVU23
+ 104 004e 9B04     		lsls	r3, r3, #18
+ARM GAS  /tmp/ccxb6fpg.s 			page 4
+
+
+ 105 0050 FCD5     		bpl	.L2
+  62:./BSP/system.c ****     /** Macro to configure the PLL clock source
+  63:./BSP/system.c ****      */
+  64:./BSP/system.c ****     __HAL_RCC_PLL_PLLSOURCE_CONFIG(RCC_PLLSOURCE_HSE);
+ 106              		.loc 1 64 5 is_stmt 1 view .LVU24
+ 107 0052 344D     		ldr	r5, .L11+8
+  65:./BSP/system.c ****     /** Initializes the RCC Oscillators according to the specified parameters
+  66:./BSP/system.c ****      * in the RCC_OscInitTypeDef structure.
+  67:./BSP/system.c ****      */
+  68:./BSP/system.c ****     RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI
+  69:./BSP/system.c ****                                 |RCC_OSCILLATORTYPE_HSE;
+  70:./BSP/system.c ****     RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+  71:./BSP/system.c ****     RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+  72:./BSP/system.c ****     RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+  73:./BSP/system.c ****     RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+  74:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 108              		.loc 1 74 36 is_stmt 0 view .LVU25
+ 109 0054 0224     		movs	r4, #2
+  68:./BSP/system.c ****                                 |RCC_OSCILLATORTYPE_HSE;
+ 110              		.loc 1 68 38 view .LVU26
+ 111 0056 0B21     		movs	r1, #11
+  75:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+  76:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLM = 2;
+  77:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLN = 64;
+  78:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLP = 2;
+  79:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLQ = 13;
+ 112              		.loc 1 79 32 view .LVU27
+ 113 0058 0D20     		movs	r0, #13
+  64:./BSP/system.c ****     /** Initializes the RCC Oscillators according to the specified parameters
+ 114              		.loc 1 64 5 view .LVU28
+ 115 005a AB6A     		ldr	r3, [r5, #40]
+  71:./BSP/system.c ****     RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+ 116              		.loc 1 71 32 view .LVU29
+ 117 005c 0122     		movs	r2, #1
+  70:./BSP/system.c ****     RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+ 118              		.loc 1 70 32 view .LVU30
+ 119 005e 4FF48037 		mov	r7, #65536
+  72:./BSP/system.c ****     RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 120              		.loc 1 72 43 view .LVU31
+ 121 0062 4026     		movs	r6, #64
+  64:./BSP/system.c ****     /** Initializes the RCC Oscillators according to the specified parameters
+ 122              		.loc 1 64 5 view .LVU32
+ 123 0064 23F00303 		bic	r3, r3, #3
+ 124 0068 2343     		orrs	r3, r3, r4
+ 125 006a AB62     		str	r3, [r5, #40]
+  68:./BSP/system.c ****                                 |RCC_OSCILLATORTYPE_HSE;
+ 126              		.loc 1 68 5 is_stmt 1 view .LVU33
+  80:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLR = 2;
+  81:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
+  82:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
+ 127              		.loc 1 82 37 is_stmt 0 view .LVU34
+ 128 006c 0023     		movs	r3, #0
+  68:./BSP/system.c ****                                 |RCC_OSCILLATORTYPE_HSE;
+ 129              		.loc 1 68 38 view .LVU35
+ 130 006e 0B91     		str	r1, [sp, #44]
+  70:./BSP/system.c ****     RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+ 131              		.loc 1 70 5 is_stmt 1 view .LVU36
+ARM GAS  /tmp/ccxb6fpg.s 			page 5
+
+
+  81:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
+ 132              		.loc 1 81 34 is_stmt 0 view .LVU37
+ 133 0070 0C21     		movs	r1, #12
+  70:./BSP/system.c ****     RCC_OscInitStruct.HSIState = RCC_HSI_DIV1;
+ 134              		.loc 1 70 32 view .LVU38
+ 135 0072 0C97     		str	r7, [sp, #48]
+  71:./BSP/system.c ****     RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+ 136              		.loc 1 71 5 is_stmt 1 view .LVU39
+  71:./BSP/system.c ****     RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
+ 137              		.loc 1 71 32 is_stmt 0 view .LVU40
+ 138 0074 0E92     		str	r2, [sp, #56]
+  72:./BSP/system.c ****     RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 139              		.loc 1 72 5 is_stmt 1 view .LVU41
+  77:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLP = 2;
+ 140              		.loc 1 77 32 is_stmt 0 view .LVU42
+ 141 0076 1796     		str	r6, [sp, #92]
+  76:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLN = 64;
+ 142              		.loc 1 76 32 view .LVU43
+ 143 0078 1694     		str	r4, [sp, #88]
+  78:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLQ = 13;
+ 144              		.loc 1 78 32 view .LVU44
+ 145 007a 1894     		str	r4, [sp, #96]
+  83:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLFRACN = 0;
+ 146              		.loc 1 83 36 view .LVU45
+ 147 007c 1D93     		str	r3, [sp, #116]
+  79:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLR = 2;
+ 148              		.loc 1 79 32 view .LVU46
+ 149 007e CDE91904 		strd	r0, r4, [sp, #100]
+  84:./BSP/system.c ****     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ 150              		.loc 1 84 9 view .LVU47
+ 151 0082 0BA8     		add	r0, sp, #44
+  72:./BSP/system.c ****     RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+ 152              		.loc 1 72 43 view .LVU48
+ 153 0084 CDE90F62 		strd	r6, r2, [sp, #60]
+  73:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+ 154              		.loc 1 73 5 is_stmt 1 view .LVU49
+  74:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+ 155              		.loc 1 74 5 view .LVU50
+  75:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLM = 2;
+ 156              		.loc 1 75 37 is_stmt 0 view .LVU51
+ 157 0088 CDE91444 		strd	r4, r4, [sp, #80]
+  76:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLN = 64;
+ 158              		.loc 1 76 5 is_stmt 1 view .LVU52
+  77:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLP = 2;
+ 159              		.loc 1 77 5 view .LVU53
+  78:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLQ = 13;
+ 160              		.loc 1 78 5 view .LVU54
+  79:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLR = 2;
+ 161              		.loc 1 79 5 view .LVU55
+  80:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLRGE = RCC_PLL1VCIRANGE_3;
+ 162              		.loc 1 80 5 view .LVU56
+  81:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLVCOSEL = RCC_PLL1VCOWIDE;
+ 163              		.loc 1 81 5 view .LVU57
+  82:./BSP/system.c ****     RCC_OscInitStruct.PLL.PLLFRACN = 0;
+ 164              		.loc 1 82 37 is_stmt 0 view .LVU58
+ 165 008c CDE91B13 		strd	r1, r3, [sp, #108]
+  83:./BSP/system.c ****     if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+ARM GAS  /tmp/ccxb6fpg.s 			page 6
+
+
+ 166              		.loc 1 83 5 is_stmt 1 view .LVU59
+ 167              		.loc 1 84 5 view .LVU60
+ 168              		.loc 1 84 9 is_stmt 0 view .LVU61
+ 169 0090 FFF7FEFF 		bl	HAL_RCC_OscConfig
+ 170              	.LVL3:
+ 171              		.loc 1 84 8 view .LVU62
+ 172 0094 0746     		mov	r7, r0
+ 173 0096 00B1     		cbz	r0, .L3
+ 174              	.L4:
+  85:./BSP/system.c ****     {
+  86:./BSP/system.c ****         Error_Handler(__FILE__, __LINE__);
+  87:./BSP/system.c ****     }
+  88:./BSP/system.c **** 
+  89:./BSP/system.c ****     /* PLL3 for USB Clock */
+  90:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3M = 25;
+  91:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3N = 336;
+  92:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3P = 2;
+  93:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3R = 2;
+  94:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3Q = 7;
+  95:./BSP/system.c **** 
+  96:./BSP/system.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_USB;
+  97:./BSP/system.c ****     PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;
+  98:./BSP/system.c ****     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+  99:./BSP/system.c **** 
+ 100:./BSP/system.c ****     /** Initializes the CPU, AHB and APB buses clocks
+ 101:./BSP/system.c ****      */
+ 102:./BSP/system.c ****     RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
+ 103:./BSP/system.c ****                                 |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
+ 104:./BSP/system.c ****                                 |RCC_CLOCKTYPE_D3PCLK1|RCC_CLOCKTYPE_D1PCLK1;
+ 105:./BSP/system.c ****     RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+ 106:./BSP/system.c ****     RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
+ 107:./BSP/system.c ****     RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
+ 108:./BSP/system.c ****     RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+ 109:./BSP/system.c ****     RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
+ 110:./BSP/system.c ****     RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+ 111:./BSP/system.c ****     RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
+ 112:./BSP/system.c **** 
+ 113:./BSP/system.c ****     if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+ 114:./BSP/system.c ****     {
+ 115:./BSP/system.c ****         Error_Handler(__FILE__, __LINE__);
+ 116:./BSP/system.c ****     }
+ 117:./BSP/system.c ****     HAL_RCC_MCOConfig(RCC_MCO1, RCC_MCO1SOURCE_HSI, RCC_MCODIV_1);\
+ 118:./BSP/system.c **** 
+ 119:./BSP/system.c ****     __HAL_RCC_CSI_ENABLE() ;
+ 120:./BSP/system.c **** 
+ 121:./BSP/system.c ****     /* Enable SYSCFG clock mondatory for I/O Compensation Cell */
+ 122:./BSP/system.c ****     __HAL_RCC_SYSCFG_CLK_ENABLE() ;
+ 123:./BSP/system.c **** 
+ 124:./BSP/system.c ****     /* Enables the I/O Compensation Cell */    
+ 125:./BSP/system.c ****     HAL_EnableCompensationCell();  
+ 126:./BSP/system.c **** }
+ 127:./BSP/system.c **** 
+ 128:./BSP/system.c **** static void MPU_Config(void)
+ 129:./BSP/system.c **** {
+ 130:./BSP/system.c ****     MPU_Region_InitTypeDef MPU_InitStruct;
+ 131:./BSP/system.c **** 
+ 132:./BSP/system.c ****     HAL_MPU_Disable();
+ARM GAS  /tmp/ccxb6fpg.s 			page 7
+
+
+ 133:./BSP/system.c **** 
+ 134:./BSP/system.c ****    /* Configure unused area of QSPI region as strongly ordered.
+ 135:./BSP/system.c ****     * This is *important* to avoid unintentional fetches from illegal
+ 136:./BSP/system.c ****     * addresses due to cache/speculation which would halt the MCU.
+ 137:./BSP/system.c ****     */
+ 138:./BSP/system.c ****     MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+ 139:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 140:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_256MB;
+ 141:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 142:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 143:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+ 144:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 145:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+ 146:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 147:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 148:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 149:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 150:./BSP/system.c **** 
+ 151:./BSP/system.c ****     /* Configure the MPU attributes as WT for QSPI */
+ 152:./BSP/system.c ****     MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+ 153:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 154:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_128MB;
+ 155:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 156:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 157:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 158:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 159:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+ 160:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 161:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 162:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 163:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 164:./BSP/system.c **** 
+ 165:./BSP/system.c ****     /* Setup SDRAM in Write-through (framebuffer) */
+ 166:./BSP/system.c ****     MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+ 167:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0xD0000000;
+ 168:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
+ 169:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 170:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 171:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 172:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 173:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+ 174:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 175:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 176:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 177:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 178:./BSP/system.c **** 
+ 179:./BSP/system.c ****     /* Setup AXI SRAM, SRAM1 and SRAM2 in Write-through */
+ 180:./BSP/system.c ****     MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+ 181:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x24000000;
+ 182:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+ 183:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 184:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE/*MPU_ACCESS_BUFFERABLE*/;
+ 185:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 186:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 187:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER3;
+ 188:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 189:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ARM GAS  /tmp/ccxb6fpg.s 			page 8
+
+
+ 190:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE/*MPU_INSTRUCTION_ACCESS_DISABLE*/;
+ 191:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 192:./BSP/system.c **** 
+ 193:./BSP/system.c ****     MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+ 194:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10000000;
+ 195:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
+ 196:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 197:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 198:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 199:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 200:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER4;
+ 201:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 202:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 203:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 204:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 205:./BSP/system.c **** 
+ 206:./BSP/system.c ****     /* Setup SRAM3 in Write-through */
+ 207:./BSP/system.c ****     MPU_InitStruct.Enable = MPU_REGION_ENABLE;
+ 208:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10040000;
+ 209:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_32KB;
+ 210:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 211:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 212:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 213:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 214:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER5;
+ 215:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 216:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 217:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 218:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 219:./BSP/system.c **** 
+ 220:./BSP/system.c ****     HAL_MPU_Enable(MPU_PRIVILEGED_DEFAULT);
+ 221:./BSP/system.c **** }
+ 222:./BSP/system.c **** 
+ 223:./BSP/system.c **** static uint32_t TEMP_SENSOR_Init(void)
+ 224:./BSP/system.c **** {
+ 225:./BSP/system.c ****   uint32_t ret = HAL_OK;
+ 226:./BSP/system.c **** 
+ 227:./BSP/system.c ****   ADC_ChannelConfTypeDef sConfig;
+ 228:./BSP/system.c **** 
+ 229:./BSP/system.c ****    /* ADCx Periph clock enable */
+ 230:./BSP/system.c ****    __HAL_RCC_ADC3_CLK_ENABLE();
+ 231:./BSP/system.c **** 
+ 232:./BSP/system.c ****   memset(&AdcHandle, 0, sizeof(AdcHandle));
+ 233:./BSP/system.c ****   memset(&sConfig, 0, sizeof(sConfig));
+ 234:./BSP/system.c **** 
+ 235:./BSP/system.c ****   /* Configure the ADC peripheral */
+ 236:./BSP/system.c ****   AdcHandle.Instance                      = ADC3;
+ 237:./BSP/system.c **** 
+ 238:./BSP/system.c ****   /* Clear all control registers */
+ 239:./BSP/system.c ****   ADC_CLEAR_COMMON_CONTROL_REGISTER(&AdcHandle);
+ 240:./BSP/system.c **** 
+ 241:./BSP/system.c ****   AdcHandle.Init.ClockPrescaler           = ADC_CLOCK_SYNC_PCLK_DIV4;
+ 242:./BSP/system.c ****   AdcHandle.Init.Resolution               = ADC_RESOLUTION_12B;
+ 243:./BSP/system.c ****   AdcHandle.Init.ScanConvMode             = ENABLE;
+ 244:./BSP/system.c ****   AdcHandle.Init.ContinuousConvMode       = ENABLE;
+ 245:./BSP/system.c ****   AdcHandle.Init.DiscontinuousConvMode    = DISABLE;
+ 246:./BSP/system.c ****   AdcHandle.Init.ExternalTrigConvEdge     = ADC_EXTERNALTRIGCONVEDGE_NONE;
+ARM GAS  /tmp/ccxb6fpg.s 			page 9
+
+
+ 247:./BSP/system.c ****   AdcHandle.Init.ExternalTrigConv         = ADC_EXTERNALTRIG_T1_CC1;
+ 248:./BSP/system.c ****   AdcHandle.Init.EOCSelection             = ADC_EOC_SEQ_CONV;
+ 249:./BSP/system.c ****   AdcHandle.Init.NbrOfConversion          = 1;
+ 250:./BSP/system.c ****   AdcHandle.Init.NbrOfDiscConversion      = 1;
+ 251:./BSP/system.c ****   AdcHandle.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+ 252:./BSP/system.c ****   AdcHandle.Init.LowPowerAutoWait         = DISABLE;
+ 253:./BSP/system.c ****   AdcHandle.Init.Overrun                  = ADC_OVR_DATA_OVERWRITTEN;
+ 254:./BSP/system.c **** 
+ 255:./BSP/system.c ****   *((uint32_t *) (ADC12_COMMON_BASE)) |= 0xC00000; // enable TSEN bit in  ADC CCR in common registe
+ 256:./BSP/system.c **** 
+ 257:./BSP/system.c ****   ret = HAL_ADC_Init(&AdcHandle);
+ 258:./BSP/system.c ****   if (ret == HAL_OK)
+ 259:./BSP/system.c ****   {
+ 260:./BSP/system.c ****     /* Configure ADC Temperature Sensor Channel */
+ 261:./BSP/system.c ****     sConfig.Channel      = ADC_CHANNEL_TEMPSENSOR;                /* Sampled channel number */
+ 262:./BSP/system.c ****     sConfig.Rank         = ADC_REGULAR_RANK_1;          /* Rank of sampled channel number ADCx_CHAN
+ 263:./BSP/system.c ****     sConfig.SamplingTime = ADC_SAMPLETIME_64CYCLES_5;   /* Sampling time (number of clock cycles un
+ 264:./BSP/system.c ****     sConfig.Offset       = 0;                           /* Parameter discarded because offset corre
+ 265:./BSP/system.c ****     sConfig.OffsetNumber = ADC_OFFSET_NONE;             /* No offset subtraction */
+ 266:./BSP/system.c **** 
+ 267:./BSP/system.c ****     ret = HAL_ADC_ConfigChannel(&AdcHandle, &sConfig);
+ 268:./BSP/system.c ****   }
+ 269:./BSP/system.c **** 
+ 270:./BSP/system.c ****   return ret;
+ 271:./BSP/system.c **** }
+ 272:./BSP/system.c **** 
+ 273:./BSP/system.c **** uint32_t TEMP_SENSOR_Start(void)
+ 274:./BSP/system.c **** {
+ 275:./BSP/system.c ****   return HAL_ADC_Start(&AdcHandle);
+ 276:./BSP/system.c **** }
+ 277:./BSP/system.c **** 
+ 278:./BSP/system.c **** uint32_t TEMP_SENSOR_Stop(void)
+ 279:./BSP/system.c **** {
+ 280:./BSP/system.c ****   return HAL_ADC_Stop(&AdcHandle);
+ 281:./BSP/system.c **** }
+ 282:./BSP/system.c **** 
+ 283:./BSP/system.c **** void Error_Handler(char *file, uint32_t line)
+ 284:./BSP/system.c **** {
+ 285:./BSP/system.c **** 	if (line == 0)
+ 286:./BSP/system.c **** 	{
+ 287:./BSP/system.c **** 		return;
+ 288:./BSP/system.c **** 	}
+ 289:./BSP/system.c **** 	
+ 290:./BSP/system.c **** 	while(1)
+ 175              		.loc 1 290 2 is_stmt 1 view .LVU63
+ 291:./BSP/system.c **** 	{
+ 292:./BSP/system.c **** 	}
+ 176              		.loc 1 292 2 view .LVU64
+ 290:./BSP/system.c **** 	{
+ 177              		.loc 1 290 7 view .LVU65
+ 290:./BSP/system.c **** 	{
+ 178              		.loc 1 290 2 view .LVU66
+ 179              		.loc 1 292 2 view .LVU67
+ 290:./BSP/system.c **** 	{
+ 180              		.loc 1 290 7 view .LVU68
+ 181 0098 FEE7     		b	.L4
+ 182              	.L3:
+ARM GAS  /tmp/ccxb6fpg.s 			page 10
+
+
+  90:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3N = 336;
+ 183              		.loc 1 90 5 view .LVU69
+  91:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3P = 2;
+ 184              		.loc 1 91 36 is_stmt 0 view .LVU70
+ 185 009a 4FF4A871 		mov	r1, #336
+  90:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3N = 336;
+ 186              		.loc 1 90 36 view .LVU71
+ 187 009e 1920     		movs	r0, #25
+  94:./BSP/system.c **** 
+ 188              		.loc 1 94 36 view .LVU72
+ 189 00a0 0722     		movs	r2, #7
+  97:./BSP/system.c ****     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+ 190              		.loc 1 97 43 view .LVU73
+ 191 00a2 4FF40013 		mov	r3, #2097152
+  96:./BSP/system.c ****     PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;
+ 192              		.loc 1 96 46 view .LVU74
+ 193 00a6 4FF48028 		mov	r8, #262144
+  92:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3R = 2;
+ 194              		.loc 1 92 36 view .LVU75
+ 195 00aa 2994     		str	r4, [sp, #164]
+  94:./BSP/system.c **** 
+ 196              		.loc 1 94 36 view .LVU76
+ 197 00ac 2A92     		str	r2, [sp, #168]
+  97:./BSP/system.c ****     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+ 198              		.loc 1 97 43 view .LVU77
+ 199 00ae 4093     		str	r3, [sp, #256]
+  93:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3Q = 7;
+ 200              		.loc 1 93 36 view .LVU78
+ 201 00b0 2B94     		str	r4, [sp, #172]
+  96:./BSP/system.c ****     PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;
+ 202              		.loc 1 96 46 view .LVU79
+ 203 00b2 CDF87880 		str	r8, [sp, #120]
+  91:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3P = 2;
+ 204              		.loc 1 91 36 view .LVU80
+ 205 00b6 CDE92701 		strd	r0, r1, [sp, #156]
+  92:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3R = 2;
+ 206              		.loc 1 92 5 is_stmt 1 view .LVU81
+  93:./BSP/system.c ****     PeriphClkInitStruct.PLL3.PLL3Q = 7;
+ 207              		.loc 1 93 5 view .LVU82
+  94:./BSP/system.c **** 
+ 208              		.loc 1 94 5 view .LVU83
+  96:./BSP/system.c ****     PeriphClkInitStruct.UsbClockSelection = RCC_USBCLKSOURCE_PLL3;
+ 209              		.loc 1 96 5 view .LVU84
+  97:./BSP/system.c ****     HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
+ 210              		.loc 1 97 5 view .LVU85
+  98:./BSP/system.c **** 
+ 211              		.loc 1 98 5 view .LVU86
+ 212 00ba 1EA8     		add	r0, sp, #120
+ 213 00bc FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 214              	.LVL4:
+ 102:./BSP/system.c ****                                 |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
+ 215              		.loc 1 102 5 view .LVU87
+ 102:./BSP/system.c ****                                 |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2
+ 216              		.loc 1 102 33 is_stmt 0 view .LVU88
+ 217 00c0 4FF03F0E 		mov	lr, #63
+ 105:./BSP/system.c ****     RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
+ 218              		.loc 1 105 36 view .LVU89
+ARM GAS  /tmp/ccxb6fpg.s 			page 11
+
+
+ 219 00c4 4FF0030C 		mov	ip, #3
+ 107:./BSP/system.c ****     RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+ 220              		.loc 1 107 37 view .LVU90
+ 221 00c8 0822     		movs	r2, #8
+ 110:./BSP/system.c ****     RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
+ 222              		.loc 1 110 38 view .LVU91
+ 223 00ca 4FF48063 		mov	r3, #1024
+ 113:./BSP/system.c ****     {
+ 224              		.loc 1 113 9 view .LVU92
+ 225 00ce 2146     		mov	r1, r4
+ 226 00d0 03A8     		add	r0, sp, #12
+ 106:./BSP/system.c ****     RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
+ 227              		.loc 1 106 37 view .LVU93
+ 228 00d2 0597     		str	r7, [sp, #20]
+ 111:./BSP/system.c **** 
+ 229              		.loc 1 111 38 view .LVU94
+ 230 00d4 0A96     		str	r6, [sp, #40]
+ 107:./BSP/system.c ****     RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+ 231              		.loc 1 107 37 view .LVU95
+ 232 00d6 0692     		str	r2, [sp, #24]
+ 110:./BSP/system.c ****     RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
+ 233              		.loc 1 110 38 view .LVU96
+ 234 00d8 0993     		str	r3, [sp, #36]
+ 109:./BSP/system.c ****     RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+ 235              		.loc 1 109 38 view .LVU97
+ 236 00da CDE90766 		strd	r6, r6, [sp, #28]
+ 105:./BSP/system.c ****     RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
+ 237              		.loc 1 105 36 view .LVU98
+ 238 00de CDE903EC 		strd	lr, ip, [sp, #12]
+ 106:./BSP/system.c ****     RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
+ 239              		.loc 1 106 5 is_stmt 1 view .LVU99
+ 107:./BSP/system.c ****     RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
+ 240              		.loc 1 107 5 view .LVU100
+ 108:./BSP/system.c ****     RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
+ 241              		.loc 1 108 5 view .LVU101
+ 109:./BSP/system.c ****     RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
+ 242              		.loc 1 109 5 view .LVU102
+ 110:./BSP/system.c ****     RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
+ 243              		.loc 1 110 5 view .LVU103
+ 111:./BSP/system.c **** 
+ 244              		.loc 1 111 5 view .LVU104
+ 113:./BSP/system.c ****     {
+ 245              		.loc 1 113 5 view .LVU105
+ 113:./BSP/system.c ****     {
+ 246              		.loc 1 113 9 is_stmt 0 view .LVU106
+ 247 00e2 FFF7FEFF 		bl	HAL_RCC_ClockConfig
+ 248              	.LVL5:
+ 113:./BSP/system.c ****     {
+ 249              		.loc 1 113 8 view .LVU107
+ 250 00e6 0146     		mov	r1, r0
+ 251 00e8 00B1     		cbz	r0, .L5
+ 252              	.L6:
+ 290:./BSP/system.c **** 	{
+ 253              		.loc 1 290 2 is_stmt 1 view .LVU108
+ 254              		.loc 1 292 2 view .LVU109
+ 290:./BSP/system.c **** 	{
+ 255              		.loc 1 290 7 view .LVU110
+ARM GAS  /tmp/ccxb6fpg.s 			page 12
+
+
+ 290:./BSP/system.c **** 	{
+ 256              		.loc 1 290 2 view .LVU111
+ 257              		.loc 1 292 2 view .LVU112
+ 290:./BSP/system.c **** 	{
+ 258              		.loc 1 290 7 view .LVU113
+ 259 00ea FEE7     		b	.L6
+ 260              	.L5:
+ 117:./BSP/system.c **** 
+ 261              		.loc 1 117 5 view .LVU114
+ 262 00ec 4246     		mov	r2, r8
+ 263 00ee FFF7FEFF 		bl	HAL_RCC_MCOConfig
+ 264              	.LVL6:
+ 119:./BSP/system.c **** 
+ 265              		.loc 1 119 5 view .LVU115
+ 266 00f2 2B68     		ldr	r3, [r5]
+ 267 00f4 43F08003 		orr	r3, r3, #128
+ 268 00f8 2B60     		str	r3, [r5]
+ 122:./BSP/system.c **** 
+ 269              		.loc 1 122 5 view .LVU116
+ 270              	.LBB13:
+ 122:./BSP/system.c **** 
+ 271              		.loc 1 122 5 view .LVU117
+ 122:./BSP/system.c **** 
+ 272              		.loc 1 122 5 view .LVU118
+ 273 00fa D5F8F430 		ldr	r3, [r5, #244]
+ 274 00fe 43F00203 		orr	r3, r3, #2
+ 275 0102 C5F8F430 		str	r3, [r5, #244]
+ 122:./BSP/system.c **** 
+ 276              		.loc 1 122 5 view .LVU119
+ 277 0106 D5F8F430 		ldr	r3, [r5, #244]
+ 278 010a 03F00203 		and	r3, r3, #2
+ 279 010e 0293     		str	r3, [sp, #8]
+ 122:./BSP/system.c **** 
+ 280              		.loc 1 122 5 view .LVU120
+ 281 0110 029B     		ldr	r3, [sp, #8]
+ 282              	.LBE13:
+ 122:./BSP/system.c **** 
+ 283              		.loc 1 122 5 view .LVU121
+ 125:./BSP/system.c **** }
+ 284              		.loc 1 125 5 view .LVU122
+ 285 0112 FFF7FEFF 		bl	HAL_EnableCompensationCell
+ 286              	.LVL7:
+ 126:./BSP/system.c **** 
+ 287              		.loc 1 126 1 is_stmt 0 view .LVU123
+ 288 0116 4EB0     		add	sp, sp, #312
+ 289              	.LCFI2:
+ 290              		.cfi_def_cfa_offset 24
+ 291              		@ sp needed
+ 292 0118 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
+ 293              	.L12:
+ 294              		.align	2
+ 295              	.L11:
+ 296 011c 00040058 		.word	1476396032
+ 297 0120 00480258 		.word	1476544512
+ 298 0124 00440258 		.word	1476543488
+ 299              		.cfi_endproc
+ 300              	.LFE336:
+ARM GAS  /tmp/ccxb6fpg.s 			page 13
+
+
+ 302              		.section	.text.Hardware_Init,"ax",%progbits
+ 303              		.align	1
+ 304              		.p2align 2,,3
+ 305              		.global	Hardware_Init
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 309              		.fpu fpv5-d16
+ 311              	Hardware_Init:
+ 312              	.LFB334:
+  15:./BSP/system.c ****     if(!DEVICE_IS_CUT_2_X())
+ 313              		.loc 1 15 1 is_stmt 1 view -0
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 40
+ 316              		@ frame_needed = 0, uses_anonymous_args = 0
+  16:./BSP/system.c ****     {
+ 317              		.loc 1 16 5 view .LVU125
+  15:./BSP/system.c ****     if(!DEVICE_IS_CUT_2_X())
+ 318              		.loc 1 15 1 is_stmt 0 view .LVU126
+ 319 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 320              	.LCFI3:
+ 321              		.cfi_def_cfa_offset 20
+ 322              		.cfi_offset 4, -20
+ 323              		.cfi_offset 5, -16
+ 324              		.cfi_offset 6, -12
+ 325              		.cfi_offset 7, -8
+ 326              		.cfi_offset 14, -4
+ 327 0002 8BB0     		sub	sp, sp, #44
+ 328              	.LCFI4:
+ 329              		.cfi_def_cfa_offset 64
+  16:./BSP/system.c ****     {
+ 330              		.loc 1 16 9 view .LVU127
+ 331 0004 FFF7FEFF 		bl	HAL_GetREVID
+ 332              	.LVL8:
+ 333 0008 42F6FF73 		movw	r3, #12287
+  16:./BSP/system.c ****     {
+ 334              		.loc 1 16 7 view .LVU128
+ 335 000c 1842     		tst	r0, r3
+ 336 000e 00F0AA80 		beq	.L18
+ 337              	.L14:
+  26:./BSP/system.c **** 
+ 338              		.loc 1 26 5 is_stmt 1 view .LVU129
+ 339 0012 FFF7FEFF 		bl	HAL_PWR_EnableBkUpAccess
+ 340              	.LVL9:
+  28:./BSP/system.c ****     HAL_Init();
+ 341              		.loc 1 28 5 view .LVU130
+ 342              	.LBB22:
+ 343              	.LBI22:
+ 128:./BSP/system.c **** {
+ 344              		.loc 1 128 13 view .LVU131
+ 345              	.LBB23:
+ 130:./BSP/system.c **** 
+ 346              		.loc 1 130 5 view .LVU132
+ 132:./BSP/system.c **** 
+ 347              		.loc 1 132 5 view .LVU133
+ 138:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 348              		.loc 1 138 27 is_stmt 0 view .LVU134
+ARM GAS  /tmp/ccxb6fpg.s 			page 14
+
+
+ 349 0016 0125     		movs	r5, #1
+ 132:./BSP/system.c **** 
+ 350              		.loc 1 132 5 view .LVU135
+ 351 0018 FFF7FEFF 		bl	HAL_MPU_Disable
+ 352              	.LVL10:
+ 138:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 353              		.loc 1 138 5 is_stmt 1 view .LVU136
+ 139:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_256MB;
+ 354              		.loc 1 139 5 view .LVU137
+ 140:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 355              		.loc 1 140 5 view .LVU138
+ 141:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 356              		.loc 1 141 5 view .LVU139
+ 142:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_NOT_CACHEABLE;
+ 357              		.loc 1 142 5 view .LVU140
+ 143:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 358              		.loc 1 143 5 view .LVU141
+ 144:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER0;
+ 359              		.loc 1 144 5 view .LVU142
+ 145:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 360              		.loc 1 145 5 view .LVU143
+ 139:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_256MB;
+ 361              		.loc 1 139 32 is_stmt 0 view .LVU144
+ 362 001c 4FF01046 		mov	r6, #-1879048192
+ 140:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 363              		.loc 1 140 25 view .LVU145
+ 364 0020 5F4B     		ldr	r3, .L20
+ 149:./BSP/system.c **** 
+ 365              		.loc 1 149 5 view .LVU146
+ 366 0022 03A8     		add	r0, sp, #12
+ 162:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 367              		.loc 1 162 32 view .LVU147
+ 368 0024 4FF00114 		mov	r4, #65537
+ 138:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 369              		.loc 1 138 27 view .LVU148
+ 370 0028 ADF80C50 		strh	r5, [sp, #12]	@ movhi
+ 146:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 371              		.loc 1 146 5 is_stmt 1 view .LVU149
+ 147:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 372              		.loc 1 147 5 view .LVU150
+ 148:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 373              		.loc 1 148 5 view .LVU151
+ 148:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 374              		.loc 1 148 32 is_stmt 0 view .LVU152
+ 375 002c 0695     		str	r5, [sp, #24]
+ 149:./BSP/system.c **** 
+ 376              		.loc 1 149 5 is_stmt 1 view .LVU153
+ 377              	.LBE23:
+ 378              	.LBE22:
+ 379              	.LBB26:
+ 380              	.LBB27:
+ 381              	.LBB28:
+ 252:./BSP/system.c ****   AdcHandle.Init.Overrun                  = ADC_OVR_DATA_OVERWRITTEN;
+ 382              		.loc 1 252 43 is_stmt 0 view .LVU154
+ 383 002e 4FF48077 		mov	r7, #256
+ 384              	.LBE28:
+ 385              	.LBE27:
+ARM GAS  /tmp/ccxb6fpg.s 			page 15
+
+
+ 386              	.LBE26:
+ 387              	.LBB41:
+ 388              	.LBB24:
+ 140:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 389              		.loc 1 140 25 view .LVU155
+ 390 0032 CDE90463 		strd	r6, r3, [sp, #16]
+ 149:./BSP/system.c **** 
+ 391              		.loc 1 149 5 view .LVU156
+ 392 0036 FFF7FEFF 		bl	HAL_MPU_ConfigRegion
+ 393              	.LVL11:
+ 152:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 394              		.loc 1 152 5 is_stmt 1 view .LVU157
+ 153:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_128MB;
+ 395              		.loc 1 153 5 view .LVU158
+ 154:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 396              		.loc 1 154 5 view .LVU159
+ 155:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 397              		.loc 1 155 5 view .LVU160
+ 156:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 398              		.loc 1 156 5 view .LVU161
+ 157:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 399              		.loc 1 157 5 view .LVU162
+ 158:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER1;
+ 400              		.loc 1 158 5 view .LVU163
+ 159:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 401              		.loc 1 159 5 view .LVU164
+ 152:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 402              		.loc 1 152 27 is_stmt 0 view .LVU165
+ 403 003a 40F20112 		movw	r2, #257
+ 154:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 404              		.loc 1 154 25 view .LVU166
+ 405 003e 594B     		ldr	r3, .L20+4
+ 163:./BSP/system.c **** 
+ 406              		.loc 1 163 5 view .LVU167
+ 407 0040 03A8     		add	r0, sp, #12
+ 153:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_128MB;
+ 408              		.loc 1 153 32 view .LVU168
+ 409 0042 0496     		str	r6, [sp, #16]
+ 152:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x90000000;
+ 410              		.loc 1 152 27 view .LVU169
+ 411 0044 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 160:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 412              		.loc 1 160 5 is_stmt 1 view .LVU170
+ 161:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 413              		.loc 1 161 5 view .LVU171
+ 162:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 414              		.loc 1 162 5 view .LVU172
+ 162:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 415              		.loc 1 162 32 is_stmt 0 view .LVU173
+ 416 0048 CDE90534 		strd	r3, r4, [sp, #20]
+ 163:./BSP/system.c **** 
+ 417              		.loc 1 163 5 is_stmt 1 view .LVU174
+ 418 004c FFF7FEFF 		bl	HAL_MPU_ConfigRegion
+ 419              	.LVL12:
+ 166:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0xD0000000;
+ 420              		.loc 1 166 5 view .LVU175
+ 167:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
+ARM GAS  /tmp/ccxb6fpg.s 			page 16
+
+
+ 421              		.loc 1 167 5 view .LVU176
+ 168:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 422              		.loc 1 168 5 view .LVU177
+ 169:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 423              		.loc 1 169 5 view .LVU178
+ 170:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 424              		.loc 1 170 5 view .LVU179
+ 171:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 425              		.loc 1 171 5 view .LVU180
+ 172:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER2;
+ 426              		.loc 1 172 5 view .LVU181
+ 173:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 427              		.loc 1 173 5 view .LVU182
+ 166:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0xD0000000;
+ 428              		.loc 1 166 27 is_stmt 0 view .LVU183
+ 429 0050 40F20121 		movw	r1, #513
+ 167:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_32MB;
+ 430              		.loc 1 167 32 view .LVU184
+ 431 0054 4FF05042 		mov	r2, #-805306368
+ 168:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 432              		.loc 1 168 25 view .LVU185
+ 433 0058 534B     		ldr	r3, .L20+8
+ 177:./BSP/system.c **** 
+ 434              		.loc 1 177 5 view .LVU186
+ 435 005a 03A8     		add	r0, sp, #12
+ 176:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 436              		.loc 1 176 32 view .LVU187
+ 437 005c 0694     		str	r4, [sp, #24]
+ 166:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0xD0000000;
+ 438              		.loc 1 166 27 view .LVU188
+ 439 005e ADF80C10 		strh	r1, [sp, #12]	@ movhi
+ 174:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 440              		.loc 1 174 5 is_stmt 1 view .LVU189
+ 175:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 441              		.loc 1 175 5 view .LVU190
+ 176:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 442              		.loc 1 176 5 view .LVU191
+ 177:./BSP/system.c **** 
+ 443              		.loc 1 177 5 view .LVU192
+ 168:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 444              		.loc 1 168 25 is_stmt 0 view .LVU193
+ 445 0062 CDE90423 		strd	r2, r3, [sp, #16]
+ 177:./BSP/system.c **** 
+ 446              		.loc 1 177 5 view .LVU194
+ 447 0066 FFF7FEFF 		bl	HAL_MPU_ConfigRegion
+ 448              	.LVL13:
+ 180:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x24000000;
+ 449              		.loc 1 180 5 is_stmt 1 view .LVU195
+ 181:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+ 450              		.loc 1 181 5 view .LVU196
+ 182:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 451              		.loc 1 182 5 view .LVU197
+ 183:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE/*MPU_ACCESS_BUFFERABLE*/;
+ 452              		.loc 1 183 5 view .LVU198
+ 184:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 453              		.loc 1 184 5 view .LVU199
+ 185:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ARM GAS  /tmp/ccxb6fpg.s 			page 17
+
+
+ 454              		.loc 1 185 5 view .LVU200
+ 186:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER3;
+ 455              		.loc 1 186 5 view .LVU201
+ 187:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 456              		.loc 1 187 5 view .LVU202
+ 180:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x24000000;
+ 457              		.loc 1 180 27 is_stmt 0 view .LVU203
+ 458 006a 40F20133 		movw	r3, #769
+ 181:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_512KB;
+ 459              		.loc 1 181 32 view .LVU204
+ 460 006e 4FF01051 		mov	r1, #603979776
+ 182:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 461              		.loc 1 182 25 view .LVU205
+ 462 0072 4E4A     		ldr	r2, .L20+12
+ 180:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x24000000;
+ 463              		.loc 1 180 27 view .LVU206
+ 464 0074 ADF80C30 		strh	r3, [sp, #12]	@ movhi
+ 188:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 465              		.loc 1 188 5 is_stmt 1 view .LVU207
+ 189:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_ENABLE/*MPU_INSTRUCTION_ACCESS_DISABLE*/;
+ 466              		.loc 1 189 5 view .LVU208
+ 190:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 467              		.loc 1 190 5 view .LVU209
+ 190:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 468              		.loc 1 190 32 is_stmt 0 view .LVU210
+ 469 0078 4FF48033 		mov	r3, #65536
+ 191:./BSP/system.c **** 
+ 470              		.loc 1 191 5 view .LVU211
+ 471 007c 03A8     		add	r0, sp, #12
+ 190:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 472              		.loc 1 190 32 view .LVU212
+ 473 007e 0693     		str	r3, [sp, #24]
+ 191:./BSP/system.c **** 
+ 474              		.loc 1 191 5 is_stmt 1 view .LVU213
+ 182:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 475              		.loc 1 182 25 is_stmt 0 view .LVU214
+ 476 0080 CDE90412 		strd	r1, r2, [sp, #16]
+ 191:./BSP/system.c **** 
+ 477              		.loc 1 191 5 view .LVU215
+ 478 0084 FFF7FEFF 		bl	HAL_MPU_ConfigRegion
+ 479              	.LVL14:
+ 193:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10000000;
+ 480              		.loc 1 193 5 is_stmt 1 view .LVU216
+ 194:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
+ 481              		.loc 1 194 5 view .LVU217
+ 195:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 482              		.loc 1 195 5 view .LVU218
+ 196:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 483              		.loc 1 196 5 view .LVU219
+ 197:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 484              		.loc 1 197 5 view .LVU220
+ 198:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 485              		.loc 1 198 5 view .LVU221
+ 199:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER4;
+ 486              		.loc 1 199 5 view .LVU222
+ 200:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 487              		.loc 1 200 5 view .LVU223
+ARM GAS  /tmp/ccxb6fpg.s 			page 18
+
+
+ 193:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10000000;
+ 488              		.loc 1 193 27 is_stmt 0 view .LVU224
+ 489 0088 40F20141 		movw	r1, #1025
+ 194:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_256KB;
+ 490              		.loc 1 194 32 view .LVU225
+ 491 008c 4FF08052 		mov	r2, #268435456
+ 195:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 492              		.loc 1 195 25 view .LVU226
+ 493 0090 474B     		ldr	r3, .L20+16
+ 204:./BSP/system.c **** 
+ 494              		.loc 1 204 5 view .LVU227
+ 495 0092 03A8     		add	r0, sp, #12
+ 203:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 496              		.loc 1 203 32 view .LVU228
+ 497 0094 0694     		str	r4, [sp, #24]
+ 193:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10000000;
+ 498              		.loc 1 193 27 view .LVU229
+ 499 0096 ADF80C10 		strh	r1, [sp, #12]	@ movhi
+ 201:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 500              		.loc 1 201 5 is_stmt 1 view .LVU230
+ 202:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 501              		.loc 1 202 5 view .LVU231
+ 203:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 502              		.loc 1 203 5 view .LVU232
+ 204:./BSP/system.c **** 
+ 503              		.loc 1 204 5 view .LVU233
+ 195:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 504              		.loc 1 195 25 is_stmt 0 view .LVU234
+ 505 009a CDE90423 		strd	r2, r3, [sp, #16]
+ 204:./BSP/system.c **** 
+ 506              		.loc 1 204 5 view .LVU235
+ 507 009e FFF7FEFF 		bl	HAL_MPU_ConfigRegion
+ 508              	.LVL15:
+ 207:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10040000;
+ 509              		.loc 1 207 5 is_stmt 1 view .LVU236
+ 208:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_32KB;
+ 510              		.loc 1 208 5 view .LVU237
+ 209:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 511              		.loc 1 209 5 view .LVU238
+ 210:./BSP/system.c ****     MPU_InitStruct.IsBufferable = MPU_ACCESS_NOT_BUFFERABLE;
+ 512              		.loc 1 210 5 view .LVU239
+ 211:./BSP/system.c ****     MPU_InitStruct.IsCacheable = MPU_ACCESS_CACHEABLE;
+ 513              		.loc 1 211 5 view .LVU240
+ 212:./BSP/system.c ****     MPU_InitStruct.IsShareable = MPU_ACCESS_NOT_SHAREABLE;
+ 514              		.loc 1 212 5 view .LVU241
+ 213:./BSP/system.c ****     MPU_InitStruct.Number = MPU_REGION_NUMBER5;
+ 515              		.loc 1 213 5 view .LVU242
+ 214:./BSP/system.c ****     MPU_InitStruct.TypeExtField = MPU_TEX_LEVEL0;
+ 516              		.loc 1 214 5 view .LVU243
+ 207:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10040000;
+ 517              		.loc 1 207 27 is_stmt 0 view .LVU244
+ 518 00a2 40F20151 		movw	r1, #1281
+ 208:./BSP/system.c ****     MPU_InitStruct.Size = MPU_REGION_SIZE_32KB;
+ 519              		.loc 1 208 32 view .LVU245
+ 520 00a6 434A     		ldr	r2, .L20+20
+ 218:./BSP/system.c **** 
+ 521              		.loc 1 218 5 view .LVU246
+ARM GAS  /tmp/ccxb6fpg.s 			page 19
+
+
+ 522 00a8 03A8     		add	r0, sp, #12
+ 209:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 523              		.loc 1 209 25 view .LVU247
+ 524 00aa 434B     		ldr	r3, .L20+24
+ 207:./BSP/system.c ****     MPU_InitStruct.BaseAddress = 0x10040000;
+ 525              		.loc 1 207 27 view .LVU248
+ 526 00ac ADF80C10 		strh	r1, [sp, #12]	@ movhi
+ 215:./BSP/system.c ****     MPU_InitStruct.SubRegionDisable = 0x00;
+ 527              		.loc 1 215 5 is_stmt 1 view .LVU249
+ 216:./BSP/system.c ****     MPU_InitStruct.DisableExec = MPU_INSTRUCTION_ACCESS_DISABLE;
+ 528              		.loc 1 216 5 view .LVU250
+ 217:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 529              		.loc 1 217 5 view .LVU251
+ 218:./BSP/system.c **** 
+ 530              		.loc 1 218 5 view .LVU252
+ 217:./BSP/system.c ****     HAL_MPU_ConfigRegion(&MPU_InitStruct);
+ 531              		.loc 1 217 32 is_stmt 0 view .LVU253
+ 532 00b0 0694     		str	r4, [sp, #24]
+ 533              	.LBE24:
+ 534              	.LBE41:
+ 535              	.LBB42:
+ 536              	.LBB36:
+ 537              	.LBB31:
+ 232:./BSP/system.c ****   memset(&sConfig, 0, sizeof(sConfig));
+ 538              		.loc 1 232 3 view .LVU254
+ 539 00b2 424C     		ldr	r4, .L20+28
+ 540              	.LBE31:
+ 541              	.LBE36:
+ 542              	.LBE42:
+ 543              	.LBB43:
+ 544              	.LBB25:
+ 209:./BSP/system.c ****     MPU_InitStruct.AccessPermission = MPU_REGION_FULL_ACCESS;
+ 545              		.loc 1 209 25 view .LVU255
+ 546 00b4 CDE90423 		strd	r2, r3, [sp, #16]
+ 218:./BSP/system.c **** 
+ 547              		.loc 1 218 5 view .LVU256
+ 548 00b8 FFF7FEFF 		bl	HAL_MPU_ConfigRegion
+ 549              	.LVL16:
+ 220:./BSP/system.c **** }
+ 550              		.loc 1 220 5 is_stmt 1 view .LVU257
+ 551 00bc 0420     		movs	r0, #4
+ 552 00be FFF7FEFF 		bl	HAL_MPU_Enable
+ 553              	.LVL17:
+ 554              	.LBE25:
+ 555              	.LBE43:
+  29:./BSP/system.c **** 
+ 556              		.loc 1 29 5 view .LVU258
+ 557 00c2 FFF7FEFF 		bl	HAL_Init
+ 558              	.LVL18:
+  31:./BSP/system.c ****     __HAL_RCC_CRC_CLK_ENABLE();
+ 559              		.loc 1 31 5 view .LVU259
+ 560 00c6 FFF7FEFF 		bl	SystemClock_Config
+ 561              	.LVL19:
+  32:./BSP/system.c **** 
+ 562              		.loc 1 32 5 view .LVU260
+ 563              	.LBB44:
+  32:./BSP/system.c **** 
+ARM GAS  /tmp/ccxb6fpg.s 			page 20
+
+
+ 564              		.loc 1 32 5 view .LVU261
+  32:./BSP/system.c **** 
+ 565              		.loc 1 32 5 view .LVU262
+ 566 00ca 3D4B     		ldr	r3, .L20+32
+ 567              	.LBE44:
+ 568              	.LBB45:
+ 569              	.LBB37:
+ 570              	.LBB32:
+ 232:./BSP/system.c ****   memset(&sConfig, 0, sizeof(sConfig));
+ 571              		.loc 1 232 3 is_stmt 0 view .LVU263
+ 572 00cc 6022     		movs	r2, #96
+ 573 00ce 0021     		movs	r1, #0
+ 574              	.LBE32:
+ 575              	.LBE37:
+ 576              	.LBE45:
+ 577              	.LBB46:
+  32:./BSP/system.c **** 
+ 578              		.loc 1 32 5 view .LVU264
+ 579 00d0 D3F8E060 		ldr	r6, [r3, #224]
+ 580              	.LBE46:
+ 581              	.LBB47:
+ 582              	.LBB38:
+ 583              	.LBB33:
+ 232:./BSP/system.c ****   memset(&sConfig, 0, sizeof(sConfig));
+ 584              		.loc 1 232 3 view .LVU265
+ 585 00d4 201D     		adds	r0, r4, #4
+ 586              	.LBE33:
+ 587              	.LBE38:
+ 588              	.LBE47:
+ 589              	.LBB48:
+  32:./BSP/system.c **** 
+ 590              		.loc 1 32 5 view .LVU266
+ 591 00d6 46F40026 		orr	r6, r6, #524288
+ 592 00da C3F8E060 		str	r6, [r3, #224]
+  32:./BSP/system.c **** 
+ 593              		.loc 1 32 5 is_stmt 1 view .LVU267
+ 594 00de D3F8E060 		ldr	r6, [r3, #224]
+ 595 00e2 06F40026 		and	r6, r6, #524288
+ 596 00e6 0196     		str	r6, [sp, #4]
+  32:./BSP/system.c **** 
+ 597              		.loc 1 32 5 view .LVU268
+ 598 00e8 019E     		ldr	r6, [sp, #4]
+ 599              	.LBE48:
+  32:./BSP/system.c **** 
+ 600              		.loc 1 32 5 view .LVU269
+  34:./BSP/system.c **** }
+ 601              		.loc 1 34 5 view .LVU270
+ 602              	.LBB49:
+ 603              	.LBI26:
+  37:./BSP/system.c **** {
+ 604              		.loc 1 37 13 view .LVU271
+ 605              	.LBE49:
+  42:./BSP/system.c ****     //RTC init
+ 606              		.loc 1 42 5 view .LVU272
+ 607              	.LBB50:
+ 608              	.LBB39:
+ 609              	.LBI27:
+ARM GAS  /tmp/ccxb6fpg.s 			page 21
+
+
+ 223:./BSP/system.c **** {
+ 610              		.loc 1 223 17 view .LVU273
+ 611              	.LBB34:
+ 225:./BSP/system.c **** 
+ 612              		.loc 1 225 3 view .LVU274
+ 613              	.LVL20:
+ 227:./BSP/system.c **** 
+ 614              		.loc 1 227 3 view .LVU275
+ 230:./BSP/system.c **** 
+ 615              		.loc 1 230 4 view .LVU276
+ 616              	.LBB29:
+ 230:./BSP/system.c **** 
+ 617              		.loc 1 230 4 view .LVU277
+ 230:./BSP/system.c **** 
+ 618              		.loc 1 230 4 view .LVU278
+ 619 00ea D3F8E060 		ldr	r6, [r3, #224]
+ 620 00ee 46F08076 		orr	r6, r6, #16777216
+ 621 00f2 C3F8E060 		str	r6, [r3, #224]
+ 230:./BSP/system.c **** 
+ 622              		.loc 1 230 4 view .LVU279
+ 623 00f6 D3F8E030 		ldr	r3, [r3, #224]
+ 624              	.LBE29:
+ 239:./BSP/system.c **** 
+ 625              		.loc 1 239 3 is_stmt 0 view .LVU280
+ 626 00fa 324E     		ldr	r6, .L20+36
+ 627              	.LBB30:
+ 230:./BSP/system.c **** 
+ 628              		.loc 1 230 4 view .LVU281
+ 629 00fc 03F08073 		and	r3, r3, #16777216
+ 630 0100 0293     		str	r3, [sp, #8]
+ 230:./BSP/system.c **** 
+ 631              		.loc 1 230 4 is_stmt 1 view .LVU282
+ 632 0102 029B     		ldr	r3, [sp, #8]
+ 633              	.LBE30:
+ 230:./BSP/system.c **** 
+ 634              		.loc 1 230 4 view .LVU283
+ 232:./BSP/system.c ****   memset(&sConfig, 0, sizeof(sConfig));
+ 635              		.loc 1 232 3 view .LVU284
+ 636 0104 FFF7FEFF 		bl	memset
+ 637              	.LVL21:
+ 233:./BSP/system.c **** 
+ 638              		.loc 1 233 3 view .LVU285
+ 639 0108 0023     		movs	r3, #0
+ 236:./BSP/system.c **** 
+ 640              		.loc 1 236 43 is_stmt 0 view .LVU286
+ 641 010a 2F4A     		ldr	r2, .L20+40
+ 255:./BSP/system.c **** 
+ 642              		.loc 1 255 39 view .LVU287
+ 643 010c 2F48     		ldr	r0, .L20+44
+ 247:./BSP/system.c ****   AdcHandle.Init.EOCSelection             = ADC_EOC_SEQ_CONV;
+ 644              		.loc 1 247 43 view .LVU288
+ 645 010e 4FF4806E 		mov	lr, #1024
+ 233:./BSP/system.c **** 
+ 646              		.loc 1 233 3 view .LVU289
+ 647 0112 0993     		str	r3, [sp, #36]
+ 236:./BSP/system.c **** 
+ 648              		.loc 1 236 3 is_stmt 1 view .LVU290
+ARM GAS  /tmp/ccxb6fpg.s 			page 22
+
+
+ 239:./BSP/system.c **** 
+ 649              		.loc 1 239 3 view .LVU291
+ 241:./BSP/system.c ****   AdcHandle.Init.Resolution               = ADC_RESOLUTION_12B;
+ 650              		.loc 1 241 43 is_stmt 0 view .LVU292
+ 651 0114 4FF4403C 		mov	ip, #196608
+ 236:./BSP/system.c **** 
+ 652              		.loc 1 236 43 view .LVU293
+ 653 0118 2260     		str	r2, [r4]
+ 239:./BSP/system.c **** 
+ 654              		.loc 1 239 3 view .LVU294
+ 655 011a 2D49     		ldr	r1, .L20+48
+ 233:./BSP/system.c **** 
+ 656              		.loc 1 233 3 view .LVU295
+ 657 011c CDE90333 		strd	r3, r3, [sp, #12]
+ 658 0120 CDE90533 		strd	r3, r3, [sp, #20]
+ 659 0124 CDE90733 		strd	r3, r3, [sp, #28]
+ 239:./BSP/system.c **** 
+ 660              		.loc 1 239 3 view .LVU296
+ 661 0128 B268     		ldr	r2, [r6, #8]
+ 249:./BSP/system.c ****   AdcHandle.Init.NbrOfDiscConversion      = 1;
+ 662              		.loc 1 249 43 view .LVU297
+ 663 012a A561     		str	r5, [r4, #24]
+ 250:./BSP/system.c ****   AdcHandle.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
+ 664              		.loc 1 250 43 view .LVU298
+ 665 012c 2562     		str	r5, [r4, #32]
+ 239:./BSP/system.c **** 
+ 666              		.loc 1 239 3 view .LVU299
+ 667 012e 1140     		ands	r1, r1, r2
+ 243:./BSP/system.c ****   AdcHandle.Init.ContinuousConvMode       = ENABLE;
+ 668              		.loc 1 243 43 view .LVU300
+ 669 0130 E560     		str	r5, [r4, #12]
+ 253:./BSP/system.c **** 
+ 670              		.loc 1 253 43 view .LVU301
+ 671 0132 4FF48055 		mov	r5, #4096
+ 247:./BSP/system.c ****   AdcHandle.Init.EOCSelection             = ADC_EOC_SEQ_CONV;
+ 672              		.loc 1 247 43 view .LVU302
+ 673 0136 C4F824E0 		str	lr, [r4, #36]
+ 255:./BSP/system.c **** 
+ 674              		.loc 1 255 39 view .LVU303
+ 675 013a 0268     		ldr	r2, [r0]
+ 241:./BSP/system.c ****   AdcHandle.Init.Resolution               = ADC_RESOLUTION_12B;
+ 676              		.loc 1 241 43 view .LVU304
+ 677 013c C4F804C0 		str	ip, [r4, #4]
+ 255:./BSP/system.c **** 
+ 678              		.loc 1 255 39 view .LVU305
+ 679 0140 42F44002 		orr	r2, r2, #12582912
+ 239:./BSP/system.c **** 
+ 680              		.loc 1 239 3 view .LVU306
+ 681 0144 B160     		str	r1, [r6, #8]
+ 241:./BSP/system.c ****   AdcHandle.Init.Resolution               = ADC_RESOLUTION_12B;
+ 682              		.loc 1 241 3 is_stmt 1 view .LVU307
+ 242:./BSP/system.c ****   AdcHandle.Init.ScanConvMode             = ENABLE;
+ 683              		.loc 1 242 3 view .LVU308
+ 243:./BSP/system.c ****   AdcHandle.Init.ContinuousConvMode       = ENABLE;
+ 684              		.loc 1 243 3 view .LVU309
+ 244:./BSP/system.c ****   AdcHandle.Init.DiscontinuousConvMode    = DISABLE;
+ 685              		.loc 1 244 3 view .LVU310
+ARM GAS  /tmp/ccxb6fpg.s 			page 23
+
+
+ 245:./BSP/system.c ****   AdcHandle.Init.ExternalTrigConvEdge     = ADC_EXTERNALTRIGCONVEDGE_NONE;
+ 686              		.loc 1 245 3 view .LVU311
+ 242:./BSP/system.c ****   AdcHandle.Init.ScanConvMode             = ENABLE;
+ 687              		.loc 1 242 43 is_stmt 0 view .LVU312
+ 688 0146 0821     		movs	r1, #8
+ 252:./BSP/system.c ****   AdcHandle.Init.Overrun                  = ADC_OVR_DATA_OVERWRITTEN;
+ 689              		.loc 1 252 43 view .LVU313
+ 690 0148 A782     		strh	r7, [r4, #20]	@ movhi
+ 255:./BSP/system.c **** 
+ 691              		.loc 1 255 39 view .LVU314
+ 692 014a 0260     		str	r2, [r0]
+ 257:./BSP/system.c ****   if (ret == HAL_OK)
+ 693              		.loc 1 257 9 view .LVU315
+ 694 014c 2046     		mov	r0, r4
+ 245:./BSP/system.c ****   AdcHandle.Init.ExternalTrigConvEdge     = ADC_EXTERNALTRIGCONVEDGE_NONE;
+ 695              		.loc 1 245 43 view .LVU316
+ 696 014e 2377     		strb	r3, [r4, #28]
+ 246:./BSP/system.c ****   AdcHandle.Init.ExternalTrigConv         = ADC_EXTERNALTRIG_T1_CC1;
+ 697              		.loc 1 246 3 is_stmt 1 view .LVU317
+ 253:./BSP/system.c **** 
+ 698              		.loc 1 253 43 is_stmt 0 view .LVU318
+ 699 0150 2563     		str	r5, [r4, #48]
+ 242:./BSP/system.c ****   AdcHandle.Init.ScanConvMode             = ENABLE;
+ 700              		.loc 1 242 43 view .LVU319
+ 701 0152 A160     		str	r1, [r4, #8]
+ 248:./BSP/system.c ****   AdcHandle.Init.NbrOfConversion          = 1;
+ 702              		.loc 1 248 43 view .LVU320
+ 703 0154 2161     		str	r1, [r4, #16]
+ 251:./BSP/system.c ****   AdcHandle.Init.LowPowerAutoWait         = DISABLE;
+ 704              		.loc 1 251 43 view .LVU321
+ 705 0156 C4E90A33 		strd	r3, r3, [r4, #40]
+ 252:./BSP/system.c ****   AdcHandle.Init.Overrun                  = ADC_OVR_DATA_OVERWRITTEN;
+ 706              		.loc 1 252 3 is_stmt 1 view .LVU322
+ 253:./BSP/system.c **** 
+ 707              		.loc 1 253 3 view .LVU323
+ 255:./BSP/system.c **** 
+ 708              		.loc 1 255 3 view .LVU324
+ 257:./BSP/system.c ****   if (ret == HAL_OK)
+ 709              		.loc 1 257 3 view .LVU325
+ 257:./BSP/system.c ****   if (ret == HAL_OK)
+ 710              		.loc 1 257 9 is_stmt 0 view .LVU326
+ 711 015a FFF7FEFF 		bl	HAL_ADC_Init
+ 712              	.LVL22:
+ 258:./BSP/system.c ****   {
+ 713              		.loc 1 258 3 is_stmt 1 view .LVU327
+ 258:./BSP/system.c ****   {
+ 714              		.loc 1 258 6 is_stmt 0 view .LVU328
+ 715 015e 0346     		mov	r3, r0
+ 716 0160 70B1     		cbz	r0, .L19
+ 717              	.LBE34:
+ 718              	.LBE39:
+ 719              	.LBE50:
+  35:./BSP/system.c **** 
+ 720              		.loc 1 35 1 view .LVU329
+ 721 0162 0BB0     		add	sp, sp, #44
+ 722              	.LCFI5:
+ 723              		.cfi_remember_state
+ARM GAS  /tmp/ccxb6fpg.s 			page 24
+
+
+ 724              		.cfi_def_cfa_offset 20
+ 725              		@ sp needed
+ 726 0164 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 727              	.LVL23:
+ 728              	.L18:
+ 729              	.LCFI6:
+ 730              		.cfi_restore_state
+  18:./BSP/system.c ****         {
+ 731              		.loc 1 18 9 is_stmt 1 view .LVU330
+  18:./BSP/system.c ****         {
+ 732              		.loc 1 18 13 is_stmt 0 view .LVU331
+ 733 0166 FFF7FEFF 		bl	HAL_GetREVID
+ 734              	.LVL24:
+ 735 016a 41F2FF23 		movw	r3, #4863
+  18:./BSP/system.c ****         {
+ 736              		.loc 1 18 11 view .LVU332
+ 737 016e 1842     		tst	r0, r3
+ 738 0170 02D1     		bne	.L15
+  20:./BSP/system.c ****         }
+ 739              		.loc 1 20 13 is_stmt 1 view .LVU333
+  20:./BSP/system.c ****         }
+ 740              		.loc 1 20 38 is_stmt 0 view .LVU334
+ 741 0172 184B     		ldr	r3, .L20+52
+ 742 0174 0122     		movs	r2, #1
+ 743 0176 1A60     		str	r2, [r3]
+ 744              	.L15:
+  22:./BSP/system.c ****     }
+ 745              		.loc 1 22 9 is_stmt 1 view .LVU335
+  22:./BSP/system.c ****     }
+ 746              		.loc 1 22 34 is_stmt 0 view .LVU336
+ 747 0178 174B     		ldr	r3, .L20+56
+ 748 017a 0122     		movs	r2, #1
+ 749 017c 1A60     		str	r2, [r3]
+ 750 017e 48E7     		b	.L14
+ 751              	.LVL25:
+ 752              	.L19:
+ 753              	.LBB51:
+ 754              	.LBB40:
+ 755              	.LBB35:
+ 261:./BSP/system.c ****     sConfig.Rank         = ADC_REGULAR_RANK_1;          /* Rank of sampled channel number ADCx_CHAN
+ 756              		.loc 1 261 5 is_stmt 1 view .LVU337
+ 263:./BSP/system.c ****     sConfig.Offset       = 0;                           /* Parameter discarded because offset corre
+ 757              		.loc 1 263 26 is_stmt 0 view .LVU338
+ 758 0180 0522     		movs	r2, #5
+ 264:./BSP/system.c ****     sConfig.OffsetNumber = ADC_OFFSET_NONE;             /* No offset subtraction */
+ 759              		.loc 1 264 26 view .LVU339
+ 760 0182 0893     		str	r3, [sp, #32]
+ 261:./BSP/system.c ****     sConfig.Rank         = ADC_REGULAR_RANK_1;          /* Rank of sampled channel number ADCx_CHAN
+ 761              		.loc 1 261 26 view .LVU340
+ 762 0184 154E     		ldr	r6, .L20+60
+ 265:./BSP/system.c **** 
+ 763              		.loc 1 265 26 view .LVU341
+ 764 0186 0423     		movs	r3, #4
+ 262:./BSP/system.c ****     sConfig.SamplingTime = ADC_SAMPLETIME_64CYCLES_5;   /* Sampling time (number of clock cycles un
+ 765              		.loc 1 262 26 view .LVU342
+ 766 0188 0625     		movs	r5, #6
+ 267:./BSP/system.c ****   }
+ARM GAS  /tmp/ccxb6fpg.s 			page 25
+
+
+ 767              		.loc 1 267 11 view .LVU343
+ 768 018a 03A9     		add	r1, sp, #12
+ 769 018c 2046     		mov	r0, r4
+ 770              	.LVL26:
+ 263:./BSP/system.c ****     sConfig.Offset       = 0;                           /* Parameter discarded because offset corre
+ 771              		.loc 1 263 26 view .LVU344
+ 772 018e 0592     		str	r2, [sp, #20]
+ 265:./BSP/system.c **** 
+ 773              		.loc 1 265 26 view .LVU345
+ 774 0190 0793     		str	r3, [sp, #28]
+ 262:./BSP/system.c ****     sConfig.SamplingTime = ADC_SAMPLETIME_64CYCLES_5;   /* Sampling time (number of clock cycles un
+ 775              		.loc 1 262 26 view .LVU346
+ 776 0192 CDE90365 		strd	r6, r5, [sp, #12]
+ 263:./BSP/system.c ****     sConfig.Offset       = 0;                           /* Parameter discarded because offset corre
+ 777              		.loc 1 263 5 is_stmt 1 view .LVU347
+ 264:./BSP/system.c ****     sConfig.OffsetNumber = ADC_OFFSET_NONE;             /* No offset subtraction */
+ 778              		.loc 1 264 5 view .LVU348
+ 265:./BSP/system.c **** 
+ 779              		.loc 1 265 5 view .LVU349
+ 267:./BSP/system.c ****   }
+ 780              		.loc 1 267 5 view .LVU350
+ 267:./BSP/system.c ****   }
+ 781              		.loc 1 267 11 is_stmt 0 view .LVU351
+ 782 0196 FFF7FEFF 		bl	HAL_ADC_ConfigChannel
+ 783              	.LVL27:
+ 270:./BSP/system.c **** }
+ 784              		.loc 1 270 3 is_stmt 1 view .LVU352
+ 785              	.LBE35:
+ 786              	.LBE40:
+ 787              	.LBE51:
+  35:./BSP/system.c **** 
+ 788              		.loc 1 35 1 is_stmt 0 view .LVU353
+ 789 019a 0BB0     		add	sp, sp, #44
+ 790              	.LCFI7:
+ 791              		.cfi_def_cfa_offset 20
+ 792              		@ sp needed
+ 793 019c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 794              	.L21:
+ 795 019e 00BF     		.align	2
+ 796              	.L20:
+ 797 01a0 1B000003 		.word	50331675
+ 798 01a4 1A000003 		.word	50331674
+ 799 01a8 18000003 		.word	50331672
+ 800 01ac 12000003 		.word	50331666
+ 801 01b0 11000003 		.word	50331665
+ 802 01b4 00000410 		.word	268697600
+ 803 01b8 0E000003 		.word	50331662
+ 804 01bc 00000000 		.word	.LANCHOR0
+ 805 01c0 00440258 		.word	1476543488
+ 806 01c4 00630258 		.word	1476551424
+ 807 01c8 00600258 		.word	1476550656
+ 808 01cc 00230240 		.word	1073881856
+ 809 01d0 E03000FE 		.word	-33541920
+ 810 01d4 08610451 		.word	1359241480
+ 811 01d8 08810051 		.word	1358987528
+ 812 01dc 000084CB 		.word	-880541696
+ 813              		.cfi_endproc
+ARM GAS  /tmp/ccxb6fpg.s 			page 26
+
+
+ 814              	.LFE334:
+ 816              		.section	.text.TEMP_SENSOR_Start,"ax",%progbits
+ 817              		.align	1
+ 818              		.p2align 2,,3
+ 819              		.global	TEMP_SENSOR_Start
+ 820              		.syntax unified
+ 821              		.thumb
+ 822              		.thumb_func
+ 823              		.fpu fpv5-d16
+ 825              	TEMP_SENSOR_Start:
+ 826              	.LFB339:
+ 274:./BSP/system.c ****   return HAL_ADC_Start(&AdcHandle);
+ 827              		.loc 1 274 1 is_stmt 1 view -0
+ 828              		.cfi_startproc
+ 829              		@ args = 0, pretend = 0, frame = 0
+ 830              		@ frame_needed = 0, uses_anonymous_args = 0
+ 275:./BSP/system.c **** }
+ 831              		.loc 1 275 3 view .LVU355
+ 274:./BSP/system.c ****   return HAL_ADC_Start(&AdcHandle);
+ 832              		.loc 1 274 1 is_stmt 0 view .LVU356
+ 833 0000 08B5     		push	{r3, lr}
+ 834              	.LCFI8:
+ 835              		.cfi_def_cfa_offset 8
+ 836              		.cfi_offset 3, -8
+ 837              		.cfi_offset 14, -4
+ 275:./BSP/system.c **** }
+ 838              		.loc 1 275 10 view .LVU357
+ 839 0002 0248     		ldr	r0, .L24
+ 840 0004 FFF7FEFF 		bl	HAL_ADC_Start
+ 841              	.LVL28:
+ 276:./BSP/system.c **** 
+ 842              		.loc 1 276 1 view .LVU358
+ 843 0008 08BD     		pop	{r3, pc}
+ 844              	.L25:
+ 845 000a 00BF     		.align	2
+ 846              	.L24:
+ 847 000c 00000000 		.word	.LANCHOR0
+ 848              		.cfi_endproc
+ 849              	.LFE339:
+ 851              		.section	.text.TEMP_SENSOR_Stop,"ax",%progbits
+ 852              		.align	1
+ 853              		.p2align 2,,3
+ 854              		.global	TEMP_SENSOR_Stop
+ 855              		.syntax unified
+ 856              		.thumb
+ 857              		.thumb_func
+ 858              		.fpu fpv5-d16
+ 860              	TEMP_SENSOR_Stop:
+ 861              	.LFB340:
+ 279:./BSP/system.c ****   return HAL_ADC_Stop(&AdcHandle);
+ 862              		.loc 1 279 1 is_stmt 1 view -0
+ 863              		.cfi_startproc
+ 864              		@ args = 0, pretend = 0, frame = 0
+ 865              		@ frame_needed = 0, uses_anonymous_args = 0
+ 280:./BSP/system.c **** }
+ 866              		.loc 1 280 3 view .LVU360
+ 279:./BSP/system.c ****   return HAL_ADC_Stop(&AdcHandle);
+ARM GAS  /tmp/ccxb6fpg.s 			page 27
+
+
+ 867              		.loc 1 279 1 is_stmt 0 view .LVU361
+ 868 0000 08B5     		push	{r3, lr}
+ 869              	.LCFI9:
+ 870              		.cfi_def_cfa_offset 8
+ 871              		.cfi_offset 3, -8
+ 872              		.cfi_offset 14, -4
+ 280:./BSP/system.c **** }
+ 873              		.loc 1 280 10 view .LVU362
+ 874 0002 0248     		ldr	r0, .L28
+ 875 0004 FFF7FEFF 		bl	HAL_ADC_Stop
+ 876              	.LVL29:
+ 281:./BSP/system.c **** 
+ 877              		.loc 1 281 1 view .LVU363
+ 878 0008 08BD     		pop	{r3, pc}
+ 879              	.L29:
+ 880 000a 00BF     		.align	2
+ 881              	.L28:
+ 882 000c 00000000 		.word	.LANCHOR0
+ 883              		.cfi_endproc
+ 884              	.LFE340:
+ 886              		.section	.text.Error_Handler,"ax",%progbits
+ 887              		.align	1
+ 888              		.p2align 2,,3
+ 889              		.global	Error_Handler
+ 890              		.syntax unified
+ 891              		.thumb
+ 892              		.thumb_func
+ 893              		.fpu fpv5-d16
+ 895              	Error_Handler:
+ 896              	.LVL30:
+ 897              	.LFB341:
+ 284:./BSP/system.c **** 	if (line == 0)
+ 898              		.loc 1 284 1 is_stmt 1 view -0
+ 899              		.cfi_startproc
+ 900              		@ args = 0, pretend = 0, frame = 0
+ 901              		@ frame_needed = 0, uses_anonymous_args = 0
+ 902              		@ link register save eliminated.
+ 285:./BSP/system.c **** 	{
+ 903              		.loc 1 285 2 view .LVU365
+ 285:./BSP/system.c **** 	{
+ 904              		.loc 1 285 5 is_stmt 0 view .LVU366
+ 905 0000 01B1     		cbz	r1, .L33
+ 906              	.L31:
+ 290:./BSP/system.c **** 	{
+ 907              		.loc 1 290 2 is_stmt 1 discriminator 1 view .LVU367
+ 908              		.loc 1 292 2 discriminator 1 view .LVU368
+ 290:./BSP/system.c **** 	{
+ 909              		.loc 1 290 7 discriminator 1 view .LVU369
+ 290:./BSP/system.c **** 	{
+ 910              		.loc 1 290 2 discriminator 1 view .LVU370
+ 911              		.loc 1 292 2 discriminator 1 view .LVU371
+ 290:./BSP/system.c **** 	{
+ 912              		.loc 1 290 7 discriminator 1 view .LVU372
+ 913 0002 FEE7     		b	.L31
+ 914              	.L33:
+ 293:./BSP/system.c **** }
+ 915              		.loc 1 293 1 is_stmt 0 view .LVU373
+ARM GAS  /tmp/ccxb6fpg.s 			page 28
+
+
+ 916 0004 7047     		bx	lr
+ 917              		.cfi_endproc
+ 918              	.LFE341:
+ 920 0006 00BF     		.section	.bss.AdcHandle,"aw",%nobits
+ 921              		.align	2
+ 922              		.set	.LANCHOR0,. + 0
+ 925              	AdcHandle:
+ 926 0000 00000000 		.space	100
+ 926      00000000 
+ 926      00000000 
+ 926      00000000 
+ 926      00000000 
+ 927              		.text
+ 928              	.Letext0:
+ 929              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 930              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 931              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 932              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
+ 933              		.file 6 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
+ 934              		.file 7 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 935              		.file 8 "/usr/include/newlib/sys/_types.h"
+ 936              		.file 9 "/usr/include/newlib/sys/reent.h"
+ 937              		.file 10 "/usr/include/newlib/sys/lock.h"
+ 938              		.file 11 "/usr/include/newlib/math.h"
+ 939              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 940              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h"
+ 941              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h"
+ 942              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 943              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h"
+ 944              		.file 17 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_adc.h"
+ 945              		.file 18 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 946              		.file 19 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 947              		.file 20 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 948              		.file 21 "/usr/include/newlib/stdlib.h"
+ 949              		.file 22 "./BSP/Components/Inc/lcd.h"
+ 950              		.file 23 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr_ex.h"
+ 951              		.file 24 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_pwr.h"
+ 952              		.file 25 "<built-in>"
+ARM GAS  /tmp/ccxb6fpg.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 system.c
+     /tmp/ccxb6fpg.s:17     .text.SystemClock_Config:0000000000000000 $t
+     /tmp/ccxb6fpg.s:25     .text.SystemClock_Config:0000000000000000 SystemClock_Config
+     /tmp/ccxb6fpg.s:296    .text.SystemClock_Config:000000000000011c $d
+     /tmp/ccxb6fpg.s:303    .text.Hardware_Init:0000000000000000 $t
+     /tmp/ccxb6fpg.s:311    .text.Hardware_Init:0000000000000000 Hardware_Init
+     /tmp/ccxb6fpg.s:797    .text.Hardware_Init:00000000000001a0 $d
+     /tmp/ccxb6fpg.s:817    .text.TEMP_SENSOR_Start:0000000000000000 $t
+     /tmp/ccxb6fpg.s:825    .text.TEMP_SENSOR_Start:0000000000000000 TEMP_SENSOR_Start
+     /tmp/ccxb6fpg.s:847    .text.TEMP_SENSOR_Start:000000000000000c $d
+     /tmp/ccxb6fpg.s:852    .text.TEMP_SENSOR_Stop:0000000000000000 $t
+     /tmp/ccxb6fpg.s:860    .text.TEMP_SENSOR_Stop:0000000000000000 TEMP_SENSOR_Stop
+     /tmp/ccxb6fpg.s:882    .text.TEMP_SENSOR_Stop:000000000000000c $d
+     /tmp/ccxb6fpg.s:887    .text.Error_Handler:0000000000000000 $t
+     /tmp/ccxb6fpg.s:895    .text.Error_Handler:0000000000000000 Error_Handler
+     /tmp/ccxb6fpg.s:921    .bss.AdcHandle:0000000000000000 $d
+     /tmp/ccxb6fpg.s:925    .bss.AdcHandle:0000000000000000 AdcHandle
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+memset
+HAL_PWREx_ConfigSupply
+HAL_RCC_OscConfig
+HAL_RCCEx_PeriphCLKConfig
+HAL_RCC_ClockConfig
+HAL_RCC_MCOConfig
+HAL_EnableCompensationCell
+HAL_GetREVID
+HAL_PWR_EnableBkUpAccess
+HAL_MPU_Disable
+HAL_MPU_ConfigRegion
+HAL_MPU_Enable
+HAL_Init
+HAL_ADC_Init
+HAL_ADC_ConfigChannel
+HAL_ADC_Start
+HAL_ADC_Stop
