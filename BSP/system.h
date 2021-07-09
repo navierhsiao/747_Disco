@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "cmsis_os.h"
 
 #include "Components/Inc/lcd.h"
 #include "Components/Inc/touch.h"
