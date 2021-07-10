@@ -58,6 +58,17 @@ build/ltdc_dsi.o: BSP/Hardware/Src/ltdc_dsi.c \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
+ Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
+ Libraries/FreeRTOS/Source/include/FreeRTOS.h \
+ User/code/Inc/FreeRTOSConfig.h \
+ Libraries/FreeRTOS/Source/include/projdefs.h \
+ Libraries/FreeRTOS/Source/include/portable.h \
+ Libraries/FreeRTOS/Source/include/deprecated_definitions.h \
+ Libraries/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
+ Libraries/FreeRTOS/Source/include/mpu_wrappers.h \
+ Libraries/FreeRTOS/Source/include/task.h \
+ Libraries/FreeRTOS/Source/include/list.h \
+ Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h \
  BSP/Hardware/Src/../../Components/Inc/lcd.h \
  BSP/Hardware/Src/../../Components/Inc/touch.h \
  BSP/Hardware/Src/../../Hardware/Inc/ltdc_dsi.h \
@@ -183,6 +194,28 @@ Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
 
 Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h:
+
+Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
+
+Libraries/FreeRTOS/Source/include/FreeRTOS.h:
+
+User/code/Inc/FreeRTOSConfig.h:
+
+Libraries/FreeRTOS/Source/include/projdefs.h:
+
+Libraries/FreeRTOS/Source/include/portable.h:
+
+Libraries/FreeRTOS/Source/include/deprecated_definitions.h:
+
+Libraries/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h:
+
+Libraries/FreeRTOS/Source/include/mpu_wrappers.h:
+
+Libraries/FreeRTOS/Source/include/task.h:
+
+Libraries/FreeRTOS/Source/include/list.h:
+
+Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h:
 
 BSP/Hardware/Src/../../Components/Inc/lcd.h:
 
