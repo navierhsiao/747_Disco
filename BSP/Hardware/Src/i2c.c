@@ -1,32 +1,57 @@
 #include "../../system.h"
 
-I2C_HandleTypeDef hi2c4;
-DMA_HandleTypeDef hdma_i2c4_rx;
-DMA_HandleTypeDef hdma_i2c4_tx;
-
+i2c_objectHandle *object_handle;
 static osSemaphoreId BspI2cSemaphore = 0;
 
-void I2C_Init(void)
+void I2C_Init(i2c_objectTypeDef* object);
+void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
+void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
+void I2C_IsReady(i2c_objectTypeDef* object,uint16_t deviceAddr, uint32_t trials);
+
+void I2C_Object_Init(i2c_objectTypeDef* object)
 {
-  hi2c4.Instance = I2C4;
-  hi2c4.Init.Timing = 0x10C0ECFF;
-  hi2c4.Init.OwnAddress1 = 0;
-  hi2c4.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  hi2c4.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  hi2c4.Init.OwnAddress2 = 0;
-  hi2c4.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-  hi2c4.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  hi2c4.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
-  if (HAL_I2C_Init(&hi2c4) != HAL_OK)
+  object->i2c_init=I2C_Init;
+  object->i2c_readReg=I2C_ReadReg;
+  object->i2c_writeReg=I2C_WriteReg;
+  object->i2c_isReady=I2C_IsReady;
+
+  object_handle=&object->handle;
+}
+
+void I2C_Init(i2c_objectTypeDef* object)
+{
+  __HAL_RCC_BDMA_CLK_ENABLE();
+
+  /* DMA interrupt init */
+  /* BDMA_Channel0_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(BDMA_Channel0_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(BDMA_Channel0_IRQn);
+  /* BDMA_Channel1_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(BDMA_Channel1_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(BDMA_Channel1_IRQn);
+
+  object->handle.hi2c.Instance = I2C4;
+  object->handle.hi2c.Init.Timing = 0x10C0ECFF;
+  object->handle.hi2c.Init.OwnAddress1 = 0;
+  object->handle.hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
+  object->handle.hi2c.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
+  object->handle.hi2c.Init.OwnAddress2 = 0;
+  object->handle.hi2c.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
+  object->handle.hi2c.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
+  object->handle.hi2c.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  if (HAL_I2C_Init(&object->handle.hi2c) != HAL_OK)
   {
+    object->i2c_status=I2C_ERROR;
     Error_Handler(__FILE__, __LINE__);
   }
-  if (HAL_I2CEx_ConfigAnalogFilter(&hi2c4, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
+  if (HAL_I2CEx_ConfigAnalogFilter(&object->handle.hi2c, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
   {
+    object->i2c_status=I2C_ERROR;
     Error_Handler(__FILE__, __LINE__);
   }
-  if (HAL_I2CEx_ConfigDigitalFilter(&hi2c4, 0) != HAL_OK)
+  if (HAL_I2CEx_ConfigDigitalFilter(&object->handle.hi2c, 0) != HAL_OK)
   {
+    object->i2c_status=I2C_ERROR;
     Error_Handler(__FILE__, __LINE__);
   }
 }
@@ -62,96 +87,109 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 
     /* I2C4 DMA Init */
     /* I2C4_RX Init */
-    hdma_i2c4_rx.Instance = BDMA_Channel0;
-    hdma_i2c4_rx.Init.Request = BDMA_REQUEST_I2C4_RX;
-    hdma_i2c4_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
-    hdma_i2c4_rx.Init.PeriphInc = DMA_PINC_DISABLE;
-    hdma_i2c4_rx.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_i2c4_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-    hdma_i2c4_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-    hdma_i2c4_rx.Init.Mode = DMA_NORMAL;
-    hdma_i2c4_rx.Init.Priority = DMA_PRIORITY_LOW;
-    if (HAL_DMA_Init(&hdma_i2c4_rx) != HAL_OK)
+    object_handle->hdma_i2c_rx.Instance = BDMA_Channel0;
+    object_handle->hdma_i2c_rx.Init.Request = BDMA_REQUEST_I2C4_RX;
+    object_handle->hdma_i2c_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
+    object_handle->hdma_i2c_rx.Init.PeriphInc = DMA_PINC_DISABLE;
+    object_handle->hdma_i2c_rx.Init.MemInc = DMA_MINC_ENABLE;
+    object_handle->hdma_i2c_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    object_handle->hdma_i2c_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    object_handle->hdma_i2c_rx.Init.Mode = DMA_NORMAL;
+    object_handle->hdma_i2c_rx.Init.Priority = DMA_PRIORITY_LOW;
+    if (HAL_DMA_Init(&object_handle->hdma_i2c_rx) != HAL_OK)
     {
       Error_Handler(__FILE__, __LINE__);
     }
 
-    __HAL_LINKDMA(hi2c,hdmarx,hdma_i2c4_rx);
+    __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
 
     /* I2C4_TX Init */
-    hdma_i2c4_tx.Instance = BDMA_Channel1;
-    hdma_i2c4_tx.Init.Request = BDMA_REQUEST_I2C4_TX;
-    hdma_i2c4_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
-    hdma_i2c4_tx.Init.PeriphInc = DMA_PINC_DISABLE;
-    hdma_i2c4_tx.Init.MemInc = DMA_MINC_ENABLE;
-    hdma_i2c4_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-    hdma_i2c4_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
-    hdma_i2c4_tx.Init.Mode = DMA_NORMAL;
-    hdma_i2c4_tx.Init.Priority = DMA_PRIORITY_LOW;
-    if (HAL_DMA_Init(&hdma_i2c4_tx) != HAL_OK)
+    object_handle->hdma_i2c_tx.Instance = BDMA_Channel1;
+    object_handle->hdma_i2c_tx.Init.Request = BDMA_REQUEST_I2C4_TX;
+    object_handle->hdma_i2c_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
+    object_handle->hdma_i2c_tx.Init.PeriphInc = DMA_PINC_DISABLE;
+    object_handle->hdma_i2c_tx.Init.MemInc = DMA_MINC_ENABLE;
+    object_handle->hdma_i2c_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
+    object_handle->hdma_i2c_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
+    object_handle->hdma_i2c_tx.Init.Mode = DMA_NORMAL;
+    object_handle->hdma_i2c_tx.Init.Priority = DMA_PRIORITY_LOW;
+    if (HAL_DMA_Init(&object_handle->hdma_i2c_tx) != HAL_OK)
     {
       Error_Handler(__FILE__, __LINE__);
     }
 
-    __HAL_LINKDMA(hi2c,hdmatx,hdma_i2c4_tx);
+    __HAL_LINKDMA(hi2c,hdmatx,object_handle->hdma_i2c_tx);
   }
 
 }
 
-void I2C_WriteReg(uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t length)
+void BDMA_Channel0_IRQHandler(void)
+{
+  HAL_DMA_IRQHandler(&object_handle->hdma_i2c_rx);
+}
+
+void BDMA_Channel1_IRQHandler(void)
+{
+  HAL_DMA_IRQHandler(&object_handle->hdma_i2c_tx);
+}
+
+void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length)
 {
     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
 
-    if(HAL_I2C_Mem_Write_DMA(&hi2c4, deviceAddr, reg, I2C_MEMADD_SIZE_8BIT, pData, length) != HAL_OK)
+    if(HAL_I2C_Mem_Write_DMA(&object->handle.hi2c, deviceAddr, reg, size, pData, length) != HAL_OK)
     {
-        Error_Handler(__FILE__, __LINE__);
+      if(HAL_I2C_GetError(&object->handle.hi2c)==HAL_I2C_ERROR_AF)
+      {
+        object->i2c_status=I2C_ERROR_ACKNOWLEDGE_FAILURE;
+      }
+      else
+      {
+        object->i2c_status=I2C_ERROR_PERIPH_FAILURE;
+      }
+      
+      Error_Handler(__FILE__, __LINE__);
+    }
+    else
+    {
+      object->i2c_status=I2C_ERROR_NONE;
     }
 
     osSemaphoreRelease(BspI2cSemaphore);
 }
 
-void I2C_ReadReg(uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t length)
+void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length)
 {
     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
 
-    if (HAL_I2C_Mem_Read_DMA(&hi2c4, deviceAddr, reg, I2C_MEMADD_SIZE_8BIT, pData, length) == HAL_OK)
+    if (HAL_I2C_Mem_Read_DMA(&object->handle.hi2c, deviceAddr, reg, size, pData, length) == HAL_OK)
     {
-        Error_Handler(__FILE__, __LINE__);
+      if(HAL_I2C_GetError(&object->handle.hi2c)==HAL_I2C_ERROR_AF)
+      {
+        object->i2c_status=I2C_ERROR_ACKNOWLEDGE_FAILURE;
+      }
+      else
+      {
+        object->i2c_status=I2C_ERROR_PERIPH_FAILURE;
+      }
+      
+      Error_Handler(__FILE__, __LINE__);
+    }
+    else
+    {
+      object->i2c_status=I2C_ERROR_NONE;
     }
 
     osSemaphoreRelease(BspI2cSemaphore);
 }
 
-void I2C_WriteReg16(uint16_t deviceAddr, uint16_t reg, uint8_t *pData, uint16_t length)
-{
-    osSemaphoreWait(BspI2cSemaphore, osWaitForever);
-
-    if(HAL_I2C_Mem_Write_DMA(&hi2c4, deviceAddr, reg, I2C_MEMADD_SIZE_16BIT, pData, length) != HAL_OK)
-    {
-        Error_Handler(__FILE__, __LINE__);
-    } 
-
-    osSemaphoreRelease(BspI2cSemaphore);
-}
-
-void I2C_ReadReg16(uint16_t deviceAddr, uint16_t reg, uint8_t *pData, uint16_t length)
-{
-    osSemaphoreWait(BspI2cSemaphore, osWaitForever);
-
-    if (HAL_I2C_Mem_Read_DMA(&hi2c4, deviceAddr, reg, I2C_MEMADD_SIZE_8BIT, pData, length) == HAL_OK)
-    {
-        Error_Handler(__FILE__, __LINE__);
-    }
-
-    osSemaphoreRelease(BspI2cSemaphore);
-}
-
-void I2C_IsReady(uint16_t deviceAddr, uint32_t trials)
+void I2C_IsReady(i2c_objectTypeDef* object,uint16_t deviceAddr, uint32_t trials)
 {
   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
 
-  if(HAL_I2C_IsDeviceReady(&hi2c4, deviceAddr, trials, 1000) != HAL_OK)
+  if(HAL_I2C_IsDeviceReady(&object->handle.hi2c, deviceAddr, trials, 1000) != HAL_OK)
   {
+    object->i2c_status=I2C_ERROR_BUSY;
     Error_Handler(__FILE__, __LINE__);
   }
 
