@@ -20,17 +20,13 @@ typedef struct
     int Hoffset_max;
 }touch_gestureTypeDef;
 
-struct touch_structDef
+typedef struct touch_structDef
 {
     uint8_t touch_state;
     int touch_horizontal_offset[MAX_TOUCH_NUMBER];
     int touch_vetical_offset[MAX_TOUCH_NUMBER];
 
     int (*get_touch_offset) (struct touch_structDef*);
-};
-
-typedef struct touch_structDef touch_objectTypeDef;
-
-
+}touch_objectTypeDef;
 
 #endif

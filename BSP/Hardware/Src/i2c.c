@@ -8,13 +8,14 @@ void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uin
 void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
 void I2C_IsReady(i2c_objectTypeDef* object,uint16_t deviceAddr, uint32_t trials);
 
-void I2C_Object_Init(i2c_objectTypeDef* object)
+void I2C_Object_Init(i2c_objectTypeDef* object,i2c_objectAttr attr)
 {
   object->i2c_init=I2C_Init;
   object->i2c_readReg=I2C_ReadReg;
   object->i2c_writeReg=I2C_WriteReg;
   object->i2c_isReady=I2C_IsReady;
 
+  object->object_attr=attr;
   object_handle=&object->handle;
 }
 
@@ -30,15 +31,15 @@ void I2C_Init(i2c_objectTypeDef* object)
   HAL_NVIC_SetPriority(BDMA_Channel1_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(BDMA_Channel1_IRQn);
 
-  object->handle.hi2c.Instance = I2C4;
-  object->handle.hi2c.Init.Timing = 0x10C0ECFF;
-  object->handle.hi2c.Init.OwnAddress1 = 0;
-  object->handle.hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  object->handle.hi2c.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  object->handle.hi2c.Init.OwnAddress2 = 0;
-  object->handle.hi2c.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-  object->handle.hi2c.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  object->handle.hi2c.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  object->handle.hi2c.Instance = object->object_attr.Instance;
+  object->handle.hi2c.Init.Timing = object->object_attr.Timing;
+  object->handle.hi2c.Init.OwnAddress1 = object->object_attr.OwnAddress1;
+  object->handle.hi2c.Init.AddressingMode = object->object_attr.AddressingMode;
+  object->handle.hi2c.Init.DualAddressMode = object->object_attr.DualAddressMode;
+  object->handle.hi2c.Init.OwnAddress2 = object->object_attr.OwnAddress2;
+  object->handle.hi2c.Init.OwnAddress2Masks = object->object_attr.OwnAddress2Masks;
+  object->handle.hi2c.Init.GeneralCallMode = object->object_attr.GeneralCallMode;
+  object->handle.hi2c.Init.NoStretchMode = object->object_attr.NoStretchMode;
   if (HAL_I2C_Init(&object->handle.hi2c) != HAL_OK)
   {
     object->i2c_status=I2C_ERROR;
