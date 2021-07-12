@@ -75,7 +75,8 @@ build/touch.o: BSP/Components/Src/touch.c \
  BSP/Components/Src/../../Hardware/Inc/i2c.h \
  BSP/Components/Src/../../Hardware/Inc/qspi.h \
  BSP/Components/Src/../../Hardware/Inc/sdram.h \
- BSP/Components/Src/../../Hardware/Inc/uart.h
+ BSP/Components/Src/../../Hardware/Inc/uart.h \
+ BSP/Components/Inc/ft6x06_reg.h
 
 BSP/Components/Src/../../system.h:
 
@@ -230,3 +231,5 @@ BSP/Components/Src/../../Hardware/Inc/qspi.h:
 BSP/Components/Src/../../Hardware/Inc/sdram.h:
 
 BSP/Components/Src/../../Hardware/Inc/uart.h:
+
+BSP/Components/Inc/ft6x06_reg.h:

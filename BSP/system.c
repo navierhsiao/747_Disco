@@ -280,6 +280,13 @@ uint32_t TEMP_SENSOR_Stop(void)
   return HAL_ADC_Stop(&AdcHandle);
 }
 
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim->Instance == TIM2) {
+    HAL_IncTick();
+  }
+}
+
 void Error_Handler(char *file, uint32_t line)
 {
 	if (line == 0)

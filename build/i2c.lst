@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -43,22 +43,22 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
    4:.//BSP/Hardware/Src/i2c.c **** static osSemaphoreId BspI2cSemaphore = 0;
    5:.//BSP/Hardware/Src/i2c.c **** 
    6:.//BSP/Hardware/Src/i2c.c **** void I2C_Init(i2c_objectTypeDef* object);
-   7:.//BSP/Hardware/Src/i2c.c **** void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c);
-   8:.//BSP/Hardware/Src/i2c.c **** void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_
-   9:.//BSP/Hardware/Src/i2c.c **** void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t
-  10:.//BSP/Hardware/Src/i2c.c **** void I2C_IsReady(i2c_objectTypeDef* object,uint16_t deviceAddr, uint32_t trials);
-  11:.//BSP/Hardware/Src/i2c.c **** 
-  12:.//BSP/Hardware/Src/i2c.c **** void I2C_Object_Init(i2c_objectTypeDef* object)
-  13:.//BSP/Hardware/Src/i2c.c **** {
-  14:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
-  15:.//BSP/Hardware/Src/i2c.c ****   object->i2c_readReg=I2C_ReadReg;
-  16:.//BSP/Hardware/Src/i2c.c ****   object->i2c_writeReg=I2C_WriteReg;
-  17:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
-  18:.//BSP/Hardware/Src/i2c.c **** 
+   7:.//BSP/Hardware/Src/i2c.c **** void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_
+   8:.//BSP/Hardware/Src/i2c.c **** void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t
+   9:.//BSP/Hardware/Src/i2c.c **** void I2C_IsReady(i2c_objectTypeDef* object,uint16_t deviceAddr, uint32_t trials);
+  10:.//BSP/Hardware/Src/i2c.c **** 
+  11:.//BSP/Hardware/Src/i2c.c **** void I2C_Object_Init(i2c_objectTypeDef* object,i2c_objectAttr attr)
+  12:.//BSP/Hardware/Src/i2c.c **** {
+  13:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
+  14:.//BSP/Hardware/Src/i2c.c ****   object->i2c_readReg=I2C_ReadReg;
+  15:.//BSP/Hardware/Src/i2c.c ****   object->i2c_writeReg=I2C_WriteReg;
+  16:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
+  17:.//BSP/Hardware/Src/i2c.c **** 
+  18:.//BSP/Hardware/Src/i2c.c ****   object->object_attr=attr;
   19:.//BSP/Hardware/Src/i2c.c ****   object_handle=&object->handle;
   20:.//BSP/Hardware/Src/i2c.c **** }
   21:.//BSP/Hardware/Src/i2c.c **** 
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 2
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 2
 
 
   22:.//BSP/Hardware/Src/i2c.c **** void I2C_Init(i2c_objectTypeDef* object)
@@ -72,7 +72,7 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
   39              	.LBB2:
   40              		.loc 1 24 3 view .LVU2
   41              		.loc 1 24 3 view .LVU3
-  42 0000 2F4B     		ldr	r3, .L16
+  42 0000 354B     		ldr	r3, .L16
   43              	.LBE2:
   25:.//BSP/Hardware/Src/i2c.c **** 
   26:.//BSP/Hardware/Src/i2c.c ****   /* DMA interrupt init */
@@ -83,303 +83,304 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
   46 0004 0521     		movs	r1, #5
   23:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
   47              		.loc 1 23 1 view .LVU5
-  48 0006 70B5     		push	{r4, r5, r6, lr}
+  48 0006 30B5     		push	{r4, r5, lr}
   49              	.LCFI0:
-  50              		.cfi_def_cfa_offset 16
-  51              		.cfi_offset 4, -16
-  52              		.cfi_offset 5, -12
-  53              		.cfi_offset 6, -8
-  54              		.cfi_offset 14, -4
-  55              	.LBB3:
+  50              		.cfi_def_cfa_offset 12
+  51              		.cfi_offset 4, -12
+  52              		.cfi_offset 5, -8
+  53              		.cfi_offset 14, -4
+  54              	.LBB3:
   24:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
-  56              		.loc 1 24 3 view .LVU6
-  57 0008 D3F8E050 		ldr	r5, [r3, #224]
-  58              	.LBE3:
+  55              		.loc 1 24 3 view .LVU6
+  56 0008 D3F8E050 		ldr	r5, [r3, #224]
+  57              	.LBE3:
   23:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
-  59              		.loc 1 23 1 view .LVU7
-  60 000c 82B0     		sub	sp, sp, #8
-  61              	.LCFI1:
-  62              		.cfi_def_cfa_offset 24
+  58              		.loc 1 23 1 view .LVU7
+  59 000c 83B0     		sub	sp, sp, #12
+  60              	.LCFI1:
+  61              		.cfi_def_cfa_offset 24
   23:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
-  63              		.loc 1 23 1 view .LVU8
-  64 000e 0446     		mov	r4, r0
-  65              		.loc 1 28 3 view .LVU9
-  66 0010 8120     		movs	r0, #129
-  67              	.LVL1:
-  68              	.LBB4:
+  62              		.loc 1 23 1 view .LVU8
+  63 000e 0446     		mov	r4, r0
+  64              		.loc 1 28 3 view .LVU9
+  65 0010 8120     		movs	r0, #129
+  66              	.LVL1:
+  67              	.LBB4:
   24:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
-  69              		.loc 1 24 3 view .LVU10
-  70 0012 45F40015 		orr	r5, r5, #2097152
-  71              	.LBE4:
+  68              		.loc 1 24 3 view .LVU10
+  69 0012 45F40015 		orr	r5, r5, #2097152
+  70 0016 C3F8E050 		str	r5, [r3, #224]
+  24:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
+  71              		.loc 1 24 3 is_stmt 1 view .LVU11
+  72 001a D3F8E030 		ldr	r3, [r3, #224]
+  73 001e 03F40013 		and	r3, r3, #2097152
+  74 0022 0193     		str	r3, [sp, #4]
+  24:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
+  75              		.loc 1 24 3 view .LVU12
+  76 0024 019B     		ldr	r3, [sp, #4]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 3
+
+
+  77              	.LBE4:
+  24:.//BSP/Hardware/Src/i2c.c ****   __HAL_RCC_BDMA_CLK_ENABLE();
+  78              		.loc 1 24 3 view .LVU13
+  79              		.loc 1 28 3 view .LVU14
+  80 0026 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  81              	.LVL2:
   29:.//BSP/Hardware/Src/i2c.c ****   HAL_NVIC_EnableIRQ(BDMA_Channel0_IRQn);
+  82              		.loc 1 29 3 view .LVU15
+  83 002a 8120     		movs	r0, #129
+  84 002c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  85              	.LVL3:
   30:.//BSP/Hardware/Src/i2c.c ****   /* BDMA_Channel1_IRQn interrupt configuration */
   31:.//BSP/Hardware/Src/i2c.c ****   HAL_NVIC_SetPriority(BDMA_Channel1_IRQn, 5, 0);
+  86              		.loc 1 31 3 view .LVU16
+  87 0030 0022     		movs	r2, #0
+  88 0032 0521     		movs	r1, #5
+  89 0034 8220     		movs	r0, #130
+  90 0036 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+  91              	.LVL4:
   32:.//BSP/Hardware/Src/i2c.c ****   HAL_NVIC_EnableIRQ(BDMA_Channel1_IRQn);
+  92              		.loc 1 32 3 view .LVU17
+  93 003a 8220     		movs	r0, #130
+  94 003c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+  95              	.LVL5:
   33:.//BSP/Hardware/Src/i2c.c **** 
-  34:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Instance = I2C4;
-  35:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = 0x10C0ECFF;
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 3
-
-
-  36:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress1 = 0;
-  37:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
-  72              		.loc 1 37 43 view .LVU11
-  73 0016 0126     		movs	r6, #1
-  74              	.LBB5:
-  24:.//BSP/Hardware/Src/i2c.c **** 
-  75              		.loc 1 24 3 view .LVU12
-  76 0018 C3F8E050 		str	r5, [r3, #224]
-  24:.//BSP/Hardware/Src/i2c.c **** 
-  77              		.loc 1 24 3 is_stmt 1 view .LVU13
-  78 001c D3F8E030 		ldr	r3, [r3, #224]
-  79 0020 03F40013 		and	r3, r3, #2097152
-  80 0024 0193     		str	r3, [sp, #4]
-  24:.//BSP/Hardware/Src/i2c.c **** 
-  81              		.loc 1 24 3 view .LVU14
-  82 0026 019B     		ldr	r3, [sp, #4]
-  83              	.LBE5:
-  24:.//BSP/Hardware/Src/i2c.c **** 
-  84              		.loc 1 24 3 view .LVU15
-  28:.//BSP/Hardware/Src/i2c.c ****   HAL_NVIC_EnableIRQ(BDMA_Channel0_IRQn);
-  85              		.loc 1 28 3 view .LVU16
-  86 0028 FFF7FEFF 		bl	HAL_NVIC_SetPriority
-  87              	.LVL2:
-  29:.//BSP/Hardware/Src/i2c.c ****   HAL_NVIC_EnableIRQ(BDMA_Channel0_IRQn);
-  88              		.loc 1 29 3 view .LVU17
-  89 002c 8120     		movs	r0, #129
-  90 002e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
-  91              	.LVL3:
-  31:.//BSP/Hardware/Src/i2c.c ****   HAL_NVIC_EnableIRQ(BDMA_Channel1_IRQn);
-  92              		.loc 1 31 3 view .LVU18
-  93 0032 0022     		movs	r2, #0
-  94 0034 0521     		movs	r1, #5
-  95 0036 8220     		movs	r0, #130
-  96 0038 FFF7FEFF 		bl	HAL_NVIC_SetPriority
-  97              	.LVL4:
-  32:.//BSP/Hardware/Src/i2c.c **** 
-  98              		.loc 1 32 3 view .LVU19
-  99 003c 8220     		movs	r0, #130
- 100 003e FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
- 101              	.LVL5:
-  34:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = 0x10C0ECFF;
- 102              		.loc 1 34 3 view .LVU20
-  36:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
- 103              		.loc 1 36 40 is_stmt 0 view .LVU21
- 104 0042 0023     		movs	r3, #0
-  34:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = 0x10C0ECFF;
- 105              		.loc 1 34 32 view .LVU22
- 106 0044 1F49     		ldr	r1, .L16+4
-  38:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
-  39:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2 = 0;
-  40:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
-  41:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
-  42:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
+  34:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Instance = object->object_attr.Instance;
+  96              		.loc 1 34 3 view .LVU18
+  35:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = object->object_attr.Timing;
+  36:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress1 = object->object_attr.OwnAddress1;
+  37:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.AddressingMode = object->object_attr.AddressingMode;
+  38:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.DualAddressMode = object->object_attr.DualAddressMode;
+  39:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2 = object->object_attr.OwnAddress2;
+  40:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2Masks = object->object_attr.OwnAddress2Masks;
+  41:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.GeneralCallMode = object->object_attr.GeneralCallMode;
+  42:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.NoStretchMode = object->object_attr.NoStretchMode;
   43:.//BSP/Hardware/Src/i2c.c ****   if (HAL_I2C_Init(&object->handle.hi2c) != HAL_OK)
- 107              		.loc 1 43 7 view .LVU23
- 108 0046 2046     		mov	r0, r4
-  35:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress1 = 0;
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 4
+  97              		.loc 1 43 7 is_stmt 0 view .LVU19
+  98 0040 2046     		mov	r0, r4
+  35:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = object->object_attr.Timing;
+  99              		.loc 1 35 35 view .LVU20
+ 100 0042 D4E94F35 		ldrd	r3, r5, [r4, #316]
+  37:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.DualAddressMode = object->object_attr.DualAddressMode;
+ 101              		.loc 1 37 43 view .LVU21
+ 102 0046 D4E95112 		ldrd	r1, r2, [r4, #324]
+  34:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = object->object_attr.Timing;
+ 103              		.loc 1 34 32 view .LVU22
+ 104 004a 2360     		str	r3, [r4]
+  35:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = object->object_attr.Timing;
+ 105              		.loc 1 35 3 is_stmt 1 view .LVU23
+  38:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2 = object->object_attr.OwnAddress2;
+ 106              		.loc 1 38 44 is_stmt 0 view .LVU24
+ 107 004c D4F84C31 		ldr	r3, [r4, #332]
+  35:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress1 = object->object_attr.OwnAddress1;
+ 108              		.loc 1 35 35 view .LVU25
+ 109 0050 6560     		str	r5, [r4, #4]
+  36:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.AddressingMode = object->object_attr.AddressingMode;
+ 110              		.loc 1 36 3 is_stmt 1 view .LVU26
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 4
 
 
- 109              		.loc 1 35 35 view .LVU24
- 110 0048 1F4A     		ldr	r2, .L16+8
-  34:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.Timing = 0x10C0ECFF;
- 111              		.loc 1 34 32 view .LVU25
- 112 004a 2160     		str	r1, [r4]
-  35:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress1 = 0;
- 113              		.loc 1 35 3 is_stmt 1 view .LVU26
+  36:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.AddressingMode = object->object_attr.AddressingMode;
+ 111              		.loc 1 36 40 is_stmt 0 view .LVU27
+ 112 0052 A160     		str	r1, [r4, #8]
+  37:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.DualAddressMode = object->object_attr.DualAddressMode;
+ 113              		.loc 1 37 3 is_stmt 1 view .LVU28
+  39:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2Masks = object->object_attr.OwnAddress2Masks;
+ 114              		.loc 1 39 40 is_stmt 0 view .LVU29
+ 115 0054 D4F85051 		ldr	r5, [r4, #336]
+  40:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.GeneralCallMode = object->object_attr.GeneralCallMode;
+ 116              		.loc 1 40 45 view .LVU30
+ 117 0058 D4F85411 		ldr	r1, [r4, #340]
+  37:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.DualAddressMode = object->object_attr.DualAddressMode;
+ 118              		.loc 1 37 43 view .LVU31
+ 119 005c E260     		str	r2, [r4, #12]
+  38:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2 = object->object_attr.OwnAddress2;
+ 120              		.loc 1 38 3 is_stmt 1 view .LVU32
+  38:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2 = object->object_attr.OwnAddress2;
+ 121              		.loc 1 38 44 is_stmt 0 view .LVU33
+ 122 005e 2361     		str	r3, [r4, #16]
+  39:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2Masks = object->object_attr.OwnAddress2Masks;
+ 123              		.loc 1 39 3 is_stmt 1 view .LVU34
+  41:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.NoStretchMode = object->object_attr.NoStretchMode;
+ 124              		.loc 1 41 44 is_stmt 0 view .LVU35
+ 125 0060 D4F85821 		ldr	r2, [r4, #344]
   42:.//BSP/Hardware/Src/i2c.c ****   if (HAL_I2C_Init(&object->handle.hi2c) != HAL_OK)
- 114              		.loc 1 42 42 is_stmt 0 view .LVU27
- 115 004c 2362     		str	r3, [r4, #32]
-  37:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
- 116              		.loc 1 37 43 view .LVU28
- 117 004e E660     		str	r6, [r4, #12]
-  36:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.AddressingMode = I2C_ADDRESSINGMODE_7BIT;
- 118              		.loc 1 36 40 view .LVU29
- 119 0050 C4E90123 		strd	r2, r3, [r4, #4]
-  37:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.DualAddressMode = I2C_DUALADDRESS_DISABLE;
- 120              		.loc 1 37 3 is_stmt 1 view .LVU30
-  38:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2 = 0;
- 121              		.loc 1 38 3 view .LVU31
-  39:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
- 122              		.loc 1 39 3 view .LVU32
-  40:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.GeneralCallMode = I2C_GENERALCALL_DISABLE;
- 123              		.loc 1 40 3 view .LVU33
-  41:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
- 124              		.loc 1 41 3 view .LVU34
+ 126              		.loc 1 42 42 view .LVU36
+ 127 0064 D4F85C31 		ldr	r3, [r4, #348]
+  40:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.GeneralCallMode = object->object_attr.GeneralCallMode;
+ 128              		.loc 1 40 45 view .LVU37
+ 129 0068 C4E90551 		strd	r5, r1, [r4, #20]
+  41:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.NoStretchMode = object->object_attr.NoStretchMode;
+ 130              		.loc 1 41 3 is_stmt 1 view .LVU38
   42:.//BSP/Hardware/Src/i2c.c ****   if (HAL_I2C_Init(&object->handle.hi2c) != HAL_OK)
- 125              		.loc 1 42 3 view .LVU35
- 126              		.loc 1 43 3 view .LVU36
-  39:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.OwnAddress2Masks = I2C_OA2_NOMASK;
- 127              		.loc 1 39 40 is_stmt 0 view .LVU37
- 128 0054 C4E90433 		strd	r3, r3, [r4, #16]
-  41:.//BSP/Hardware/Src/i2c.c ****   object->handle.hi2c.Init.NoStretchMode = I2C_NOSTRETCH_DISABLE;
- 129              		.loc 1 41 44 view .LVU38
- 130 0058 C4E90633 		strd	r3, r3, [r4, #24]
- 131              		.loc 1 43 7 view .LVU39
- 132 005c FFF7FEFF 		bl	HAL_I2C_Init
- 133              	.LVL6:
- 134              		.loc 1 43 6 view .LVU40
- 135 0060 58B9     		cbnz	r0, .L13
+ 131              		.loc 1 42 42 is_stmt 0 view .LVU39
+ 132 006c C4E90723 		strd	r2, r3, [r4, #28]
+ 133              		.loc 1 43 3 is_stmt 1 view .LVU40
+ 134              		.loc 1 43 7 is_stmt 0 view .LVU41
+ 135 0070 FFF7FEFF 		bl	HAL_I2C_Init
+ 136              	.LVL6:
+ 137              		.loc 1 43 6 view .LVU42
+ 138 0074 58B9     		cbnz	r0, .L13
   44:.//BSP/Hardware/Src/i2c.c ****   {
   45:.//BSP/Hardware/Src/i2c.c ****     object->i2c_status=I2C_ERROR;
   46:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
   47:.//BSP/Hardware/Src/i2c.c ****   }
   48:.//BSP/Hardware/Src/i2c.c ****   if (HAL_I2CEx_ConfigAnalogFilter(&object->handle.hi2c, I2C_ANALOGFILTER_ENABLE) != HAL_OK)
- 136              		.loc 1 48 3 is_stmt 1 view .LVU41
- 137              		.loc 1 48 7 is_stmt 0 view .LVU42
- 138 0062 0021     		movs	r1, #0
- 139 0064 2046     		mov	r0, r4
- 140 0066 FFF7FEFF 		bl	HAL_I2CEx_ConfigAnalogFilter
- 141              	.LVL7:
- 142              		.loc 1 48 6 view .LVU43
- 143 006a 90B9     		cbnz	r0, .L14
- 144              	.L3:
+ 139              		.loc 1 48 3 is_stmt 1 view .LVU43
+ 140              		.loc 1 48 7 is_stmt 0 view .LVU44
+ 141 0076 0021     		movs	r1, #0
+ 142 0078 2046     		mov	r0, r4
+ 143 007a FFF7FEFF 		bl	HAL_I2CEx_ConfigAnalogFilter
+ 144              	.LVL7:
+ 145              		.loc 1 48 6 view .LVU45
+ 146 007e 98B9     		cbnz	r0, .L14
+ 147              	.L3:
   49:.//BSP/Hardware/Src/i2c.c ****   {
   50:.//BSP/Hardware/Src/i2c.c ****     object->i2c_status=I2C_ERROR;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 5
+
+
   51:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 5
-
-
   52:.//BSP/Hardware/Src/i2c.c ****   }
   53:.//BSP/Hardware/Src/i2c.c ****   if (HAL_I2CEx_ConfigDigitalFilter(&object->handle.hi2c, 0) != HAL_OK)
- 145              		.loc 1 53 3 is_stmt 1 view .LVU44
- 146              		.loc 1 53 7 is_stmt 0 view .LVU45
- 147 006c 0021     		movs	r1, #0
- 148 006e 2046     		mov	r0, r4
- 149 0070 FFF7FEFF 		bl	HAL_I2CEx_ConfigDigitalFilter
- 150              	.LVL8:
- 151              		.loc 1 53 6 view .LVU46
- 152 0074 D0B9     		cbnz	r0, .L15
- 153              	.L1:
+ 148              		.loc 1 53 3 is_stmt 1 view .LVU46
+ 149              		.loc 1 53 7 is_stmt 0 view .LVU47
+ 150 0080 0021     		movs	r1, #0
+ 151 0082 2046     		mov	r0, r4
+ 152 0084 FFF7FEFF 		bl	HAL_I2CEx_ConfigDigitalFilter
+ 153              	.LVL8:
+ 154              		.loc 1 53 6 view .LVU48
+ 155 0088 D8B9     		cbnz	r0, .L15
+ 156              	.L1:
   54:.//BSP/Hardware/Src/i2c.c ****   {
   55:.//BSP/Hardware/Src/i2c.c ****     object->i2c_status=I2C_ERROR;
   56:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
   57:.//BSP/Hardware/Src/i2c.c ****   }
   58:.//BSP/Hardware/Src/i2c.c **** }
- 154              		.loc 1 58 1 view .LVU47
- 155 0076 02B0     		add	sp, sp, #8
- 156              	.LCFI2:
- 157              		.cfi_remember_state
- 158              		.cfi_def_cfa_offset 16
- 159              		@ sp needed
- 160 0078 70BD     		pop	{r4, r5, r6, pc}
- 161              	.LVL9:
- 162              	.L13:
- 163              	.LCFI3:
- 164              		.cfi_restore_state
+ 157              		.loc 1 58 1 view .LVU49
+ 158 008a 03B0     		add	sp, sp, #12
+ 159              	.LCFI2:
+ 160              		.cfi_remember_state
+ 161              		.cfi_def_cfa_offset 12
+ 162              		@ sp needed
+ 163 008c 30BD     		pop	{r4, r5, pc}
+ 164              	.LVL9:
+ 165              	.L13:
+ 166              	.LCFI3:
+ 167              		.cfi_restore_state
   45:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 165              		.loc 1 45 5 is_stmt 1 view .LVU48
-  46:.//BSP/Hardware/Src/i2c.c ****   }
- 166              		.loc 1 46 5 is_stmt 0 view .LVU49
- 167 007a 2E21     		movs	r1, #46
- 168 007c 1348     		ldr	r0, .L16+12
+ 168              		.loc 1 45 5 is_stmt 1 view .LVU50
   45:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 169              		.loc 1 45 23 view .LVU50
- 170 007e 84F83C61 		strb	r6, [r4, #316]
+ 169              		.loc 1 45 23 is_stmt 0 view .LVU51
+ 170 008e 0123     		movs	r3, #1
   46:.//BSP/Hardware/Src/i2c.c ****   }
- 171              		.loc 1 46 5 is_stmt 1 view .LVU51
- 172 0082 FFF7FEFF 		bl	Error_Handler
- 173              	.LVL10:
+ 171              		.loc 1 46 5 view .LVU52
+ 172 0090 2E21     		movs	r1, #46
+ 173 0092 1248     		ldr	r0, .L16+4
+  45:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
+ 174              		.loc 1 45 23 view .LVU53
+ 175 0094 84F86031 		strb	r3, [r4, #352]
+  46:.//BSP/Hardware/Src/i2c.c ****   }
+ 176              		.loc 1 46 5 is_stmt 1 view .LVU54
+ 177 0098 FFF7FEFF 		bl	Error_Handler
+ 178              	.LVL10:
   48:.//BSP/Hardware/Src/i2c.c ****   {
- 174              		.loc 1 48 3 view .LVU52
+ 179              		.loc 1 48 3 view .LVU55
   48:.//BSP/Hardware/Src/i2c.c ****   {
- 175              		.loc 1 48 7 is_stmt 0 view .LVU53
- 176 0086 0021     		movs	r1, #0
- 177 0088 2046     		mov	r0, r4
- 178 008a FFF7FEFF 		bl	HAL_I2CEx_ConfigAnalogFilter
- 179              	.LVL11:
+ 180              		.loc 1 48 7 is_stmt 0 view .LVU56
+ 181 009c 0021     		movs	r1, #0
+ 182 009e 2046     		mov	r0, r4
+ 183 00a0 FFF7FEFF 		bl	HAL_I2CEx_ConfigAnalogFilter
+ 184              	.LVL11:
   48:.//BSP/Hardware/Src/i2c.c ****   {
- 180              		.loc 1 48 6 view .LVU54
- 181 008e 0028     		cmp	r0, #0
- 182 0090 ECD0     		beq	.L3
- 183              	.L14:
-  50:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 184              		.loc 1 50 5 is_stmt 1 view .LVU55
-  50:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 185              		.loc 1 50 23 is_stmt 0 view .LVU56
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 6
+ 185              		.loc 1 48 6 view .LVU57
+ 186 00a4 0028     		cmp	r0, #0
+ 187 00a6 EBD0     		beq	.L3
+ 188              	.L14:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 6
 
 
- 186 0092 0123     		movs	r3, #1
+  50:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
+ 189              		.loc 1 50 5 is_stmt 1 view .LVU58
+  50:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
+ 190              		.loc 1 50 23 is_stmt 0 view .LVU59
+ 191 00a8 0123     		movs	r3, #1
   51:.//BSP/Hardware/Src/i2c.c ****   }
- 187              		.loc 1 51 5 view .LVU57
- 188 0094 3321     		movs	r1, #51
- 189 0096 0D48     		ldr	r0, .L16+12
+ 192              		.loc 1 51 5 view .LVU60
+ 193 00aa 3321     		movs	r1, #51
+ 194 00ac 0B48     		ldr	r0, .L16+4
   50:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 190              		.loc 1 50 23 view .LVU58
- 191 0098 84F83C31 		strb	r3, [r4, #316]
+ 195              		.loc 1 50 23 view .LVU61
+ 196 00ae 84F86031 		strb	r3, [r4, #352]
   51:.//BSP/Hardware/Src/i2c.c ****   }
- 192              		.loc 1 51 5 is_stmt 1 view .LVU59
- 193 009c FFF7FEFF 		bl	Error_Handler
- 194              	.LVL12:
+ 197              		.loc 1 51 5 is_stmt 1 view .LVU62
+ 198 00b2 FFF7FEFF 		bl	Error_Handler
+ 199              	.LVL12:
   53:.//BSP/Hardware/Src/i2c.c ****   {
- 195              		.loc 1 53 3 view .LVU60
+ 200              		.loc 1 53 3 view .LVU63
   53:.//BSP/Hardware/Src/i2c.c ****   {
- 196              		.loc 1 53 7 is_stmt 0 view .LVU61
- 197 00a0 0021     		movs	r1, #0
- 198 00a2 2046     		mov	r0, r4
- 199 00a4 FFF7FEFF 		bl	HAL_I2CEx_ConfigDigitalFilter
- 200              	.LVL13:
+ 201              		.loc 1 53 7 is_stmt 0 view .LVU64
+ 202 00b6 0021     		movs	r1, #0
+ 203 00b8 2046     		mov	r0, r4
+ 204 00ba FFF7FEFF 		bl	HAL_I2CEx_ConfigDigitalFilter
+ 205              	.LVL13:
   53:.//BSP/Hardware/Src/i2c.c ****   {
- 201              		.loc 1 53 6 view .LVU62
- 202 00a8 0028     		cmp	r0, #0
- 203 00aa E4D0     		beq	.L1
- 204              	.L15:
+ 206              		.loc 1 53 6 view .LVU65
+ 207 00be 0028     		cmp	r0, #0
+ 208 00c0 E3D0     		beq	.L1
+ 209              	.L15:
   55:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 205              		.loc 1 55 5 is_stmt 1 view .LVU63
+ 210              		.loc 1 55 5 is_stmt 1 view .LVU66
   55:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 206              		.loc 1 55 23 is_stmt 0 view .LVU64
- 207 00ac 0123     		movs	r3, #1
+ 211              		.loc 1 55 23 is_stmt 0 view .LVU67
+ 212 00c2 0123     		movs	r3, #1
   56:.//BSP/Hardware/Src/i2c.c ****   }
- 208              		.loc 1 56 5 view .LVU65
- 209 00ae 3821     		movs	r1, #56
- 210 00b0 0648     		ldr	r0, .L16+12
+ 213              		.loc 1 56 5 view .LVU68
+ 214 00c4 3821     		movs	r1, #56
+ 215 00c6 0548     		ldr	r0, .L16+4
   55:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 211              		.loc 1 55 23 view .LVU66
- 212 00b2 84F83C31 		strb	r3, [r4, #316]
+ 216              		.loc 1 55 23 view .LVU69
+ 217 00c8 84F86031 		strb	r3, [r4, #352]
   56:.//BSP/Hardware/Src/i2c.c ****   }
- 213              		.loc 1 56 5 is_stmt 1 view .LVU67
- 214              		.loc 1 58 1 is_stmt 0 view .LVU68
- 215 00b6 02B0     		add	sp, sp, #8
- 216              	.LCFI4:
- 217              		.cfi_def_cfa_offset 16
- 218              		@ sp needed
- 219 00b8 BDE87040 		pop	{r4, r5, r6, lr}
- 220              	.LCFI5:
- 221              		.cfi_restore 14
- 222              		.cfi_restore 6
- 223              		.cfi_restore 5
- 224              		.cfi_restore 4
- 225              		.cfi_def_cfa_offset 0
- 226              	.LVL14:
+ 218              		.loc 1 56 5 is_stmt 1 view .LVU70
+ 219              		.loc 1 58 1 is_stmt 0 view .LVU71
+ 220 00cc 03B0     		add	sp, sp, #12
+ 221              	.LCFI4:
+ 222              		.cfi_def_cfa_offset 12
+ 223              		@ sp needed
+ 224 00ce BDE83040 		pop	{r4, r5, lr}
+ 225              	.LCFI5:
+ 226              		.cfi_restore 14
+ 227              		.cfi_restore 5
+ 228              		.cfi_restore 4
+ 229              		.cfi_def_cfa_offset 0
+ 230              	.LVL14:
   56:.//BSP/Hardware/Src/i2c.c ****   }
- 227              		.loc 1 56 5 view .LVU69
- 228 00bc FFF7FEBF 		b	Error_Handler
- 229              	.LVL15:
- 230              	.L17:
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 7
+ 231              		.loc 1 56 5 view .LVU72
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 7
 
 
- 231              		.align	2
- 232              	.L16:
- 233 00c0 00440258 		.word	1476543488
- 234 00c4 001C0058 		.word	1476402176
- 235 00c8 FFECC010 		.word	281079039
- 236 00cc 00000000 		.word	.LC0
- 237              		.cfi_endproc
- 238              	.LFE339:
- 240              		.section	.text.I2C_WriteReg,"ax",%progbits
- 241              		.align	1
- 242              		.p2align 2,,3
- 243              		.global	I2C_WriteReg
- 244              		.syntax unified
- 245              		.thumb
- 246              		.thumb_func
- 247              		.fpu fpv5-d16
- 249              	I2C_WriteReg:
- 250              	.LVL16:
- 251              	.LFB343:
+ 232 00d2 FFF7FEBF 		b	Error_Handler
+ 233              	.LVL15:
+ 234              	.L17:
+ 235 00d6 00BF     		.align	2
+ 236              	.L16:
+ 237 00d8 00440258 		.word	1476543488
+ 238 00dc 00000000 		.word	.LC0
+ 239              		.cfi_endproc
+ 240              	.LFE339:
+ 242              		.section	.text.I2C_WriteReg,"ax",%progbits
+ 243              		.align	1
+ 244              		.p2align 2,,3
+ 245              		.global	I2C_WriteReg
+ 246              		.syntax unified
+ 247              		.thumb
+ 248              		.thumb_func
+ 249              		.fpu fpv5-d16
+ 251              	I2C_WriteReg:
+ 252              	.LVL16:
+ 253              	.LFB343:
   59:.//BSP/Hardware/Src/i2c.c **** 
   60:.//BSP/Hardware/Src/i2c.c **** void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
   61:.//BSP/Hardware/Src/i2c.c **** {
@@ -417,10 +418,10 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
   93:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
   94:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.PeriphInc = DMA_PINC_DISABLE;
   95:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.MemInc = DMA_MINC_ENABLE;
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 8
+
+
   96:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 8
-
-
   97:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
   98:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Mode = DMA_NORMAL;
   99:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Priority = DMA_PRIORITY_LOW;
@@ -463,65 +464,65 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
  136:.//BSP/Hardware/Src/i2c.c **** 
  137:.//BSP/Hardware/Src/i2c.c **** void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_
  138:.//BSP/Hardware/Src/i2c.c **** {
- 252              		.loc 1 138 1 is_stmt 1 view -0
- 253              		.cfi_startproc
- 254              		@ args = 8, pretend = 0, frame = 8
- 255              		@ frame_needed = 0, uses_anonymous_args = 0
+ 254              		.loc 1 138 1 is_stmt 1 view -0
+ 255              		.cfi_startproc
+ 256              		@ args = 8, pretend = 0, frame = 8
+ 257              		@ frame_needed = 0, uses_anonymous_args = 0
  139:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 256              		.loc 1 139 5 view .LVU71
+ 258              		.loc 1 139 5 view .LVU74
  138:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 257              		.loc 1 138 1 is_stmt 0 view .LVU72
- 258 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 259              	.LCFI6:
- 260              		.cfi_def_cfa_offset 20
- 261              		.cfi_offset 4, -20
- 262              		.cfi_offset 5, -16
- 263              		.cfi_offset 6, -12
- 264              		.cfi_offset 7, -8
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 9
+ 259              		.loc 1 138 1 is_stmt 0 view .LVU75
+ 260 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 261              	.LCFI6:
+ 262              		.cfi_def_cfa_offset 20
+ 263              		.cfi_offset 4, -20
+ 264              		.cfi_offset 5, -16
+ 265              		.cfi_offset 6, -12
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 9
 
 
- 265              		.cfi_offset 14, -4
- 266 0002 85B0     		sub	sp, sp, #20
- 267              	.LCFI7:
- 268              		.cfi_def_cfa_offset 40
+ 266              		.cfi_offset 7, -8
+ 267              		.cfi_offset 14, -4
+ 268 0002 85B0     		sub	sp, sp, #20
+ 269              	.LCFI7:
+ 270              		.cfi_def_cfa_offset 40
  138:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 269              		.loc 1 138 1 view .LVU73
- 270 0004 0446     		mov	r4, r0
- 271 0006 0D46     		mov	r5, r1
- 272 0008 1E46     		mov	r6, r3
- 273 000a BDF82C70 		ldrh	r7, [sp, #44]
- 274              		.loc 1 139 5 view .LVU74
- 275 000e 4FF0FF31 		mov	r1, #-1
- 276              	.LVL17:
+ 271              		.loc 1 138 1 view .LVU76
+ 272 0004 0446     		mov	r4, r0
+ 273 0006 0D46     		mov	r5, r1
+ 274 0008 1E46     		mov	r6, r3
+ 275 000a BDF82C70 		ldrh	r7, [sp, #44]
+ 276              		.loc 1 139 5 view .LVU77
+ 277 000e 4FF0FF31 		mov	r1, #-1
+ 278              	.LVL17:
  138:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 277              		.loc 1 138 1 view .LVU75
- 278 0012 BDF82830 		ldrh	r3, [sp, #40]
- 279              	.LVL18:
- 280              		.loc 1 139 5 view .LVU76
- 281 0016 0020     		movs	r0, #0
- 282              	.LVL19:
+ 279              		.loc 1 138 1 view .LVU78
+ 280 0012 BDF82830 		ldrh	r3, [sp, #40]
+ 281              	.LVL18:
+ 282              		.loc 1 139 5 view .LVU79
+ 283 0016 0020     		movs	r0, #0
+ 284              	.LVL19:
  138:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 283              		.loc 1 138 1 view .LVU77
- 284 0018 0392     		str	r2, [sp, #12]
- 285 001a 0293     		str	r3, [sp, #8]
- 286              		.loc 1 139 5 view .LVU78
- 287 001c FFF7FEFF 		bl	osSemaphoreWait
- 288              	.LVL20:
+ 285              		.loc 1 138 1 view .LVU80
+ 286 0018 0392     		str	r2, [sp, #12]
+ 287 001a 0293     		str	r3, [sp, #8]
+ 288              		.loc 1 139 5 view .LVU81
+ 289 001c FFF7FEFF 		bl	osSemaphoreWait
+ 290              	.LVL20:
  140:.//BSP/Hardware/Src/i2c.c **** 
  141:.//BSP/Hardware/Src/i2c.c ****     if(HAL_I2C_Mem_Write_DMA(&object->handle.hi2c, deviceAddr, reg, size, pData, length) != HAL_OK)
- 289              		.loc 1 141 5 is_stmt 1 view .LVU79
- 290              		.loc 1 141 8 is_stmt 0 view .LVU80
- 291 0020 039A     		ldr	r2, [sp, #12]
- 292 0022 2946     		mov	r1, r5
- 293 0024 029B     		ldr	r3, [sp, #8]
- 294 0026 2046     		mov	r0, r4
- 295 0028 0096     		str	r6, [sp]
- 296 002a 0197     		str	r7, [sp, #4]
- 297 002c FFF7FEFF 		bl	HAL_I2C_Mem_Write_DMA
- 298              	.LVL21:
- 299              		.loc 1 141 7 view .LVU81
- 300 0030 38B9     		cbnz	r0, .L24
+ 291              		.loc 1 141 5 is_stmt 1 view .LVU82
+ 292              		.loc 1 141 8 is_stmt 0 view .LVU83
+ 293 0020 039A     		ldr	r2, [sp, #12]
+ 294 0022 2946     		mov	r1, r5
+ 295 0024 029B     		ldr	r3, [sp, #8]
+ 296 0026 2046     		mov	r0, r4
+ 297 0028 0096     		str	r6, [sp]
+ 298 002a 0197     		str	r7, [sp, #4]
+ 299 002c FFF7FEFF 		bl	HAL_I2C_Mem_Write_DMA
+ 300              	.LVL21:
+ 301              		.loc 1 141 7 view .LVU84
+ 302 0030 38B9     		cbnz	r0, .L24
  142:.//BSP/Hardware/Src/i2c.c ****     {
  143:.//BSP/Hardware/Src/i2c.c ****       if(HAL_I2C_GetError(&object->handle.hi2c)==HAL_I2C_ERROR_AF)
  144:.//BSP/Hardware/Src/i2c.c ****       {
@@ -537,168 +538,168 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
  154:.//BSP/Hardware/Src/i2c.c ****     else
  155:.//BSP/Hardware/Src/i2c.c ****     {
  156:.//BSP/Hardware/Src/i2c.c ****       object->i2c_status=I2C_ERROR_NONE;
- 301              		.loc 1 156 7 is_stmt 1 view .LVU82
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 10
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 10
 
 
- 302              		.loc 1 156 25 is_stmt 0 view .LVU83
- 303 0032 84F83C01 		strb	r0, [r4, #316]
+ 303              		.loc 1 156 7 is_stmt 1 view .LVU85
+ 304              		.loc 1 156 25 is_stmt 0 view .LVU86
+ 305 0032 84F86001 		strb	r0, [r4, #352]
  157:.//BSP/Hardware/Src/i2c.c ****     }
  158:.//BSP/Hardware/Src/i2c.c **** 
  159:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreRelease(BspI2cSemaphore);
- 304              		.loc 1 159 5 is_stmt 1 view .LVU84
- 305 0036 0020     		movs	r0, #0
+ 306              		.loc 1 159 5 is_stmt 1 view .LVU87
+ 307 0036 0020     		movs	r0, #0
  160:.//BSP/Hardware/Src/i2c.c **** }
- 306              		.loc 1 160 1 is_stmt 0 view .LVU85
- 307 0038 05B0     		add	sp, sp, #20
- 308              	.LCFI8:
- 309              		.cfi_remember_state
- 310              		.cfi_def_cfa_offset 20
- 311              		@ sp needed
- 312 003a BDE8F040 		pop	{r4, r5, r6, r7, lr}
- 313              	.LCFI9:
- 314              		.cfi_restore 14
- 315              		.cfi_restore 7
- 316              		.cfi_restore 6
- 317              		.cfi_restore 5
- 318              		.cfi_restore 4
- 319              		.cfi_def_cfa_offset 0
- 320              	.LVL22:
+ 308              		.loc 1 160 1 is_stmt 0 view .LVU88
+ 309 0038 05B0     		add	sp, sp, #20
+ 310              	.LCFI8:
+ 311              		.cfi_remember_state
+ 312              		.cfi_def_cfa_offset 20
+ 313              		@ sp needed
+ 314 003a BDE8F040 		pop	{r4, r5, r6, r7, lr}
+ 315              	.LCFI9:
+ 316              		.cfi_restore 14
+ 317              		.cfi_restore 7
+ 318              		.cfi_restore 6
+ 319              		.cfi_restore 5
+ 320              		.cfi_restore 4
+ 321              		.cfi_def_cfa_offset 0
+ 322              	.LVL22:
  159:.//BSP/Hardware/Src/i2c.c **** }
- 321              		.loc 1 159 5 view .LVU86
- 322 003e FFF7FEBF 		b	osSemaphoreRelease
- 323              	.LVL23:
- 324              	.L24:
- 325              	.LCFI10:
- 326              		.cfi_restore_state
+ 323              		.loc 1 159 5 view .LVU89
+ 324 003e FFF7FEBF 		b	osSemaphoreRelease
+ 325              	.LVL23:
+ 326              	.L24:
+ 327              	.LCFI10:
+ 328              		.cfi_restore_state
  143:.//BSP/Hardware/Src/i2c.c ****       {
- 327              		.loc 1 143 7 is_stmt 1 view .LVU87
+ 329              		.loc 1 143 7 is_stmt 1 view .LVU90
  143:.//BSP/Hardware/Src/i2c.c ****       {
- 328              		.loc 1 143 10 is_stmt 0 view .LVU88
- 329 0042 2046     		mov	r0, r4
- 330 0044 FFF7FEFF 		bl	HAL_I2C_GetError
- 331              	.LVL24:
- 332 0048 0346     		mov	r3, r0
+ 330              		.loc 1 143 10 is_stmt 0 view .LVU91
+ 331 0042 2046     		mov	r0, r4
+ 332 0044 FFF7FEFF 		bl	HAL_I2C_GetError
+ 333              	.LVL24:
+ 334 0048 0346     		mov	r3, r0
  152:.//BSP/Hardware/Src/i2c.c ****     }
- 333              		.loc 1 152 7 view .LVU89
- 334 004a 9821     		movs	r1, #152
- 335 004c 0748     		ldr	r0, .L25
+ 335              		.loc 1 152 7 view .LVU92
+ 336 004a 9821     		movs	r1, #152
+ 337 004c 0748     		ldr	r0, .L25
  143:.//BSP/Hardware/Src/i2c.c ****       {
- 336              		.loc 1 143 9 view .LVU90
- 337 004e 042B     		cmp	r3, #4
+ 338              		.loc 1 143 9 view .LVU93
+ 339 004e 042B     		cmp	r3, #4
  149:.//BSP/Hardware/Src/i2c.c ****       }
- 338              		.loc 1 149 27 view .LVU91
- 339 0050 0CBF     		ite	eq
- 340 0052 0223     		moveq	r3, #2
- 341 0054 0323     		movne	r3, #3
- 342 0056 84F83C31 		strb	r3, [r4, #316]
+ 340              		.loc 1 149 27 view .LVU94
+ 341 0050 0CBF     		ite	eq
+ 342 0052 0223     		moveq	r3, #2
+ 343 0054 0323     		movne	r3, #3
+ 344 0056 84F86031 		strb	r3, [r4, #352]
  152:.//BSP/Hardware/Src/i2c.c ****     }
- 343              		.loc 1 152 7 is_stmt 1 view .LVU92
- 344 005a FFF7FEFF 		bl	Error_Handler
- 345              	.LVL25:
+ 345              		.loc 1 152 7 is_stmt 1 view .LVU95
+ 346 005a FFF7FEFF 		bl	Error_Handler
+ 347              	.LVL25:
  159:.//BSP/Hardware/Src/i2c.c **** }
- 346              		.loc 1 159 5 view .LVU93
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 11
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 11
 
 
- 347 005e 0020     		movs	r0, #0
- 348              		.loc 1 160 1 is_stmt 0 view .LVU94
- 349 0060 05B0     		add	sp, sp, #20
- 350              	.LCFI11:
- 351              		.cfi_def_cfa_offset 20
- 352              		@ sp needed
- 353 0062 BDE8F040 		pop	{r4, r5, r6, r7, lr}
- 354              	.LCFI12:
- 355              		.cfi_restore 14
- 356              		.cfi_restore 7
- 357              		.cfi_restore 6
- 358              		.cfi_restore 5
- 359              		.cfi_restore 4
- 360              		.cfi_def_cfa_offset 0
- 361              	.LVL26:
+ 348              		.loc 1 159 5 view .LVU96
+ 349 005e 0020     		movs	r0, #0
+ 350              		.loc 1 160 1 is_stmt 0 view .LVU97
+ 351 0060 05B0     		add	sp, sp, #20
+ 352              	.LCFI11:
+ 353              		.cfi_def_cfa_offset 20
+ 354              		@ sp needed
+ 355 0062 BDE8F040 		pop	{r4, r5, r6, r7, lr}
+ 356              	.LCFI12:
+ 357              		.cfi_restore 14
+ 358              		.cfi_restore 7
+ 359              		.cfi_restore 6
+ 360              		.cfi_restore 5
+ 361              		.cfi_restore 4
+ 362              		.cfi_def_cfa_offset 0
+ 363              	.LVL26:
  159:.//BSP/Hardware/Src/i2c.c **** }
- 362              		.loc 1 159 5 view .LVU95
- 363 0066 FFF7FEBF 		b	osSemaphoreRelease
- 364              	.LVL27:
- 365              	.L26:
- 366 006a 00BF     		.align	2
- 367              	.L25:
- 368 006c 00000000 		.word	.LC0
- 369              		.cfi_endproc
- 370              	.LFE343:
- 372              		.section	.text.I2C_ReadReg,"ax",%progbits
- 373              		.align	1
- 374              		.p2align 2,,3
- 375              		.global	I2C_ReadReg
- 376              		.syntax unified
- 377              		.thumb
- 378              		.thumb_func
- 379              		.fpu fpv5-d16
- 381              	I2C_ReadReg:
- 382              	.LVL28:
- 383              	.LFB344:
+ 364              		.loc 1 159 5 view .LVU98
+ 365 0066 FFF7FEBF 		b	osSemaphoreRelease
+ 366              	.LVL27:
+ 367              	.L26:
+ 368 006a 00BF     		.align	2
+ 369              	.L25:
+ 370 006c 00000000 		.word	.LC0
+ 371              		.cfi_endproc
+ 372              	.LFE343:
+ 374              		.section	.text.I2C_ReadReg,"ax",%progbits
+ 375              		.align	1
+ 376              		.p2align 2,,3
+ 377              		.global	I2C_ReadReg
+ 378              		.syntax unified
+ 379              		.thumb
+ 380              		.thumb_func
+ 381              		.fpu fpv5-d16
+ 383              	I2C_ReadReg:
+ 384              	.LVL28:
+ 385              	.LFB344:
  161:.//BSP/Hardware/Src/i2c.c **** 
  162:.//BSP/Hardware/Src/i2c.c **** void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t
  163:.//BSP/Hardware/Src/i2c.c **** {
- 384              		.loc 1 163 1 is_stmt 1 view -0
- 385              		.cfi_startproc
- 386              		@ args = 8, pretend = 0, frame = 8
- 387              		@ frame_needed = 0, uses_anonymous_args = 0
+ 386              		.loc 1 163 1 is_stmt 1 view -0
+ 387              		.cfi_startproc
+ 388              		@ args = 8, pretend = 0, frame = 8
+ 389              		@ frame_needed = 0, uses_anonymous_args = 0
  164:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 388              		.loc 1 164 5 view .LVU97
+ 390              		.loc 1 164 5 view .LVU100
  163:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 389              		.loc 1 163 1 is_stmt 0 view .LVU98
- 390 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 391              	.LCFI13:
- 392              		.cfi_def_cfa_offset 20
- 393              		.cfi_offset 4, -20
- 394              		.cfi_offset 5, -16
- 395              		.cfi_offset 6, -12
- 396              		.cfi_offset 7, -8
- 397              		.cfi_offset 14, -4
- 398 0002 85B0     		sub	sp, sp, #20
- 399              	.LCFI14:
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 12
+ 391              		.loc 1 163 1 is_stmt 0 view .LVU101
+ 392 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 393              	.LCFI13:
+ 394              		.cfi_def_cfa_offset 20
+ 395              		.cfi_offset 4, -20
+ 396              		.cfi_offset 5, -16
+ 397              		.cfi_offset 6, -12
+ 398              		.cfi_offset 7, -8
+ 399              		.cfi_offset 14, -4
+ 400 0002 85B0     		sub	sp, sp, #20
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 12
 
 
- 400              		.cfi_def_cfa_offset 40
+ 401              	.LCFI14:
+ 402              		.cfi_def_cfa_offset 40
  163:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 401              		.loc 1 163 1 view .LVU99
- 402 0004 0446     		mov	r4, r0
- 403 0006 0D46     		mov	r5, r1
- 404 0008 1E46     		mov	r6, r3
- 405 000a BDF82C70 		ldrh	r7, [sp, #44]
- 406              		.loc 1 164 5 view .LVU100
- 407 000e 4FF0FF31 		mov	r1, #-1
- 408              	.LVL29:
+ 403              		.loc 1 163 1 view .LVU102
+ 404 0004 0446     		mov	r4, r0
+ 405 0006 0D46     		mov	r5, r1
+ 406 0008 1E46     		mov	r6, r3
+ 407 000a BDF82C70 		ldrh	r7, [sp, #44]
+ 408              		.loc 1 164 5 view .LVU103
+ 409 000e 4FF0FF31 		mov	r1, #-1
+ 410              	.LVL29:
  163:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 409              		.loc 1 163 1 view .LVU101
- 410 0012 BDF82830 		ldrh	r3, [sp, #40]
- 411              	.LVL30:
- 412              		.loc 1 164 5 view .LVU102
- 413 0016 0020     		movs	r0, #0
- 414              	.LVL31:
+ 411              		.loc 1 163 1 view .LVU104
+ 412 0012 BDF82830 		ldrh	r3, [sp, #40]
+ 413              	.LVL30:
+ 414              		.loc 1 164 5 view .LVU105
+ 415 0016 0020     		movs	r0, #0
+ 416              	.LVL31:
  163:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 415              		.loc 1 163 1 view .LVU103
- 416 0018 0392     		str	r2, [sp, #12]
- 417 001a 0293     		str	r3, [sp, #8]
- 418              		.loc 1 164 5 view .LVU104
- 419 001c FFF7FEFF 		bl	osSemaphoreWait
- 420              	.LVL32:
+ 417              		.loc 1 163 1 view .LVU106
+ 418 0018 0392     		str	r2, [sp, #12]
+ 419 001a 0293     		str	r3, [sp, #8]
+ 420              		.loc 1 164 5 view .LVU107
+ 421 001c FFF7FEFF 		bl	osSemaphoreWait
+ 422              	.LVL32:
  165:.//BSP/Hardware/Src/i2c.c **** 
  166:.//BSP/Hardware/Src/i2c.c ****     if (HAL_I2C_Mem_Read_DMA(&object->handle.hi2c, deviceAddr, reg, size, pData, length) == HAL_OK)
- 421              		.loc 1 166 5 is_stmt 1 view .LVU105
- 422              		.loc 1 166 9 is_stmt 0 view .LVU106
- 423 0020 039A     		ldr	r2, [sp, #12]
- 424 0022 2946     		mov	r1, r5
- 425 0024 029B     		ldr	r3, [sp, #8]
- 426 0026 2046     		mov	r0, r4
- 427 0028 0096     		str	r6, [sp]
- 428 002a 0197     		str	r7, [sp, #4]
- 429 002c FFF7FEFF 		bl	HAL_I2C_Mem_Read_DMA
- 430              	.LVL33:
- 431              		.loc 1 166 8 view .LVU107
- 432 0030 40B1     		cbz	r0, .L33
+ 423              		.loc 1 166 5 is_stmt 1 view .LVU108
+ 424              		.loc 1 166 9 is_stmt 0 view .LVU109
+ 425 0020 039A     		ldr	r2, [sp, #12]
+ 426 0022 2946     		mov	r1, r5
+ 427 0024 029B     		ldr	r3, [sp, #8]
+ 428 0026 2046     		mov	r0, r4
+ 429 0028 0096     		str	r6, [sp]
+ 430 002a 0197     		str	r7, [sp, #4]
+ 431 002c FFF7FEFF 		bl	HAL_I2C_Mem_Read_DMA
+ 432              	.LVL33:
+ 433              		.loc 1 166 8 view .LVU110
+ 434 0030 40B1     		cbz	r0, .L33
  167:.//BSP/Hardware/Src/i2c.c ****     {
  168:.//BSP/Hardware/Src/i2c.c ****       if(HAL_I2C_GetError(&object->handle.hi2c)==HAL_I2C_ERROR_AF)
  169:.//BSP/Hardware/Src/i2c.c ****       {
@@ -714,893 +715,934 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 1
  179:.//BSP/Hardware/Src/i2c.c ****     else
  180:.//BSP/Hardware/Src/i2c.c ****     {
  181:.//BSP/Hardware/Src/i2c.c ****       object->i2c_status=I2C_ERROR_NONE;
- 433              		.loc 1 181 7 is_stmt 1 view .LVU108
- 434              		.loc 1 181 25 is_stmt 0 view .LVU109
- 435 0032 0023     		movs	r3, #0
+ 435              		.loc 1 181 7 is_stmt 1 view .LVU111
+ 436              		.loc 1 181 25 is_stmt 0 view .LVU112
+ 437 0032 0023     		movs	r3, #0
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 13
+
+
  182:.//BSP/Hardware/Src/i2c.c ****     }
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 13
-
-
  183:.//BSP/Hardware/Src/i2c.c **** 
  184:.//BSP/Hardware/Src/i2c.c ****     osSemaphoreRelease(BspI2cSemaphore);
- 436              		.loc 1 184 5 view .LVU110
- 437 0034 0020     		movs	r0, #0
+ 438              		.loc 1 184 5 view .LVU113
+ 439 0034 0020     		movs	r0, #0
  181:.//BSP/Hardware/Src/i2c.c ****     }
- 438              		.loc 1 181 25 view .LVU111
- 439 0036 84F83C31 		strb	r3, [r4, #316]
- 440              		.loc 1 184 5 is_stmt 1 view .LVU112
+ 440              		.loc 1 181 25 view .LVU114
+ 441 0036 84F86031 		strb	r3, [r4, #352]
+ 442              		.loc 1 184 5 is_stmt 1 view .LVU115
  185:.//BSP/Hardware/Src/i2c.c **** }
- 441              		.loc 1 185 1 is_stmt 0 view .LVU113
- 442 003a 05B0     		add	sp, sp, #20
- 443              	.LCFI15:
- 444              		.cfi_remember_state
- 445              		.cfi_def_cfa_offset 20
- 446              		@ sp needed
- 447 003c BDE8F040 		pop	{r4, r5, r6, r7, lr}
- 448              	.LCFI16:
- 449              		.cfi_restore 14
- 450              		.cfi_restore 7
- 451              		.cfi_restore 6
- 452              		.cfi_restore 5
- 453              		.cfi_restore 4
- 454              		.cfi_def_cfa_offset 0
- 455              	.LVL34:
+ 443              		.loc 1 185 1 is_stmt 0 view .LVU116
+ 444 003a 05B0     		add	sp, sp, #20
+ 445              	.LCFI15:
+ 446              		.cfi_remember_state
+ 447              		.cfi_def_cfa_offset 20
+ 448              		@ sp needed
+ 449 003c BDE8F040 		pop	{r4, r5, r6, r7, lr}
+ 450              	.LCFI16:
+ 451              		.cfi_restore 14
+ 452              		.cfi_restore 7
+ 453              		.cfi_restore 6
+ 454              		.cfi_restore 5
+ 455              		.cfi_restore 4
+ 456              		.cfi_def_cfa_offset 0
+ 457              	.LVL34:
  184:.//BSP/Hardware/Src/i2c.c **** }
- 456              		.loc 1 184 5 view .LVU114
- 457 0040 FFF7FEBF 		b	osSemaphoreRelease
- 458              	.LVL35:
- 459              	.L33:
- 460              	.LCFI17:
- 461              		.cfi_restore_state
+ 458              		.loc 1 184 5 view .LVU117
+ 459 0040 FFF7FEBF 		b	osSemaphoreRelease
+ 460              	.LVL35:
+ 461              	.L33:
+ 462              	.LCFI17:
+ 463              		.cfi_restore_state
  168:.//BSP/Hardware/Src/i2c.c ****       {
- 462              		.loc 1 168 7 is_stmt 1 view .LVU115
+ 464              		.loc 1 168 7 is_stmt 1 view .LVU118
  168:.//BSP/Hardware/Src/i2c.c ****       {
- 463              		.loc 1 168 10 is_stmt 0 view .LVU116
- 464 0044 2046     		mov	r0, r4
- 465 0046 FFF7FEFF 		bl	HAL_I2C_GetError
- 466              	.LVL36:
- 467 004a 0346     		mov	r3, r0
+ 465              		.loc 1 168 10 is_stmt 0 view .LVU119
+ 466 0044 2046     		mov	r0, r4
+ 467 0046 FFF7FEFF 		bl	HAL_I2C_GetError
+ 468              	.LVL36:
+ 469 004a 0346     		mov	r3, r0
  177:.//BSP/Hardware/Src/i2c.c ****     }
- 468              		.loc 1 177 7 view .LVU117
- 469 004c B121     		movs	r1, #177
- 470 004e 0748     		ldr	r0, .L34
+ 470              		.loc 1 177 7 view .LVU120
+ 471 004c B121     		movs	r1, #177
+ 472 004e 0748     		ldr	r0, .L34
  168:.//BSP/Hardware/Src/i2c.c ****       {
- 471              		.loc 1 168 9 view .LVU118
- 472 0050 042B     		cmp	r3, #4
+ 473              		.loc 1 168 9 view .LVU121
+ 474 0050 042B     		cmp	r3, #4
  174:.//BSP/Hardware/Src/i2c.c ****       }
- 473              		.loc 1 174 27 view .LVU119
- 474 0052 0CBF     		ite	eq
- 475 0054 0223     		moveq	r3, #2
- 476 0056 0323     		movne	r3, #3
- 477 0058 84F83C31 		strb	r3, [r4, #316]
+ 475              		.loc 1 174 27 view .LVU122
+ 476 0052 0CBF     		ite	eq
+ 477 0054 0223     		moveq	r3, #2
+ 478 0056 0323     		movne	r3, #3
+ 479 0058 84F86031 		strb	r3, [r4, #352]
  177:.//BSP/Hardware/Src/i2c.c ****     }
- 478              		.loc 1 177 7 is_stmt 1 view .LVU120
- 479 005c FFF7FEFF 		bl	Error_Handler
- 480              	.LVL37:
- 184:.//BSP/Hardware/Src/i2c.c **** }
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 14
+ 480              		.loc 1 177 7 is_stmt 1 view .LVU123
+ 481 005c FFF7FEFF 		bl	Error_Handler
+ 482              	.LVL37:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 14
 
 
- 481              		.loc 1 184 5 view .LVU121
- 482 0060 0020     		movs	r0, #0
- 483              		.loc 1 185 1 is_stmt 0 view .LVU122
- 484 0062 05B0     		add	sp, sp, #20
- 485              	.LCFI18:
- 486              		.cfi_def_cfa_offset 20
- 487              		@ sp needed
- 488 0064 BDE8F040 		pop	{r4, r5, r6, r7, lr}
- 489              	.LCFI19:
- 490              		.cfi_restore 14
- 491              		.cfi_restore 7
- 492              		.cfi_restore 6
- 493              		.cfi_restore 5
- 494              		.cfi_restore 4
- 495              		.cfi_def_cfa_offset 0
- 496              	.LVL38:
  184:.//BSP/Hardware/Src/i2c.c **** }
- 497              		.loc 1 184 5 view .LVU123
- 498 0068 FFF7FEBF 		b	osSemaphoreRelease
- 499              	.LVL39:
- 500              	.L35:
- 501              		.align	2
- 502              	.L34:
- 503 006c 00000000 		.word	.LC0
- 504              		.cfi_endproc
- 505              	.LFE344:
- 507              		.section	.text.I2C_IsReady,"ax",%progbits
- 508              		.align	1
- 509              		.p2align 2,,3
- 510              		.global	I2C_IsReady
- 511              		.syntax unified
- 512              		.thumb
- 513              		.thumb_func
- 514              		.fpu fpv5-d16
- 516              	I2C_IsReady:
- 517              	.LVL40:
- 518              	.LFB345:
+ 483              		.loc 1 184 5 view .LVU124
+ 484 0060 0020     		movs	r0, #0
+ 485              		.loc 1 185 1 is_stmt 0 view .LVU125
+ 486 0062 05B0     		add	sp, sp, #20
+ 487              	.LCFI18:
+ 488              		.cfi_def_cfa_offset 20
+ 489              		@ sp needed
+ 490 0064 BDE8F040 		pop	{r4, r5, r6, r7, lr}
+ 491              	.LCFI19:
+ 492              		.cfi_restore 14
+ 493              		.cfi_restore 7
+ 494              		.cfi_restore 6
+ 495              		.cfi_restore 5
+ 496              		.cfi_restore 4
+ 497              		.cfi_def_cfa_offset 0
+ 498              	.LVL38:
+ 184:.//BSP/Hardware/Src/i2c.c **** }
+ 499              		.loc 1 184 5 view .LVU126
+ 500 0068 FFF7FEBF 		b	osSemaphoreRelease
+ 501              	.LVL39:
+ 502              	.L35:
+ 503              		.align	2
+ 504              	.L34:
+ 505 006c 00000000 		.word	.LC0
+ 506              		.cfi_endproc
+ 507              	.LFE344:
+ 509              		.section	.text.I2C_IsReady,"ax",%progbits
+ 510              		.align	1
+ 511              		.p2align 2,,3
+ 512              		.global	I2C_IsReady
+ 513              		.syntax unified
+ 514              		.thumb
+ 515              		.thumb_func
+ 516              		.fpu fpv5-d16
+ 518              	I2C_IsReady:
+ 519              	.LVL40:
+ 520              	.LFB345:
  186:.//BSP/Hardware/Src/i2c.c **** 
  187:.//BSP/Hardware/Src/i2c.c **** void I2C_IsReady(i2c_objectTypeDef* object,uint16_t deviceAddr, uint32_t trials)
  188:.//BSP/Hardware/Src/i2c.c **** {
- 519              		.loc 1 188 1 is_stmt 1 view -0
- 520              		.cfi_startproc
- 521              		@ args = 0, pretend = 0, frame = 8
- 522              		@ frame_needed = 0, uses_anonymous_args = 0
+ 521              		.loc 1 188 1 is_stmt 1 view -0
+ 522              		.cfi_startproc
+ 523              		@ args = 0, pretend = 0, frame = 8
+ 524              		@ frame_needed = 0, uses_anonymous_args = 0
  189:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 523              		.loc 1 189 3 view .LVU125
+ 525              		.loc 1 189 3 view .LVU128
  188:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 524              		.loc 1 188 1 is_stmt 0 view .LVU126
- 525 0000 30B5     		push	{r4, r5, lr}
- 526              	.LCFI20:
- 527              		.cfi_def_cfa_offset 12
- 528              		.cfi_offset 4, -12
- 529              		.cfi_offset 5, -8
- 530              		.cfi_offset 14, -4
- 531 0002 0D46     		mov	r5, r1
- 532 0004 83B0     		sub	sp, sp, #12
- 533              	.LCFI21:
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 15
+ 526              		.loc 1 188 1 is_stmt 0 view .LVU129
+ 527 0000 30B5     		push	{r4, r5, lr}
+ 528              	.LCFI20:
+ 529              		.cfi_def_cfa_offset 12
+ 530              		.cfi_offset 4, -12
+ 531              		.cfi_offset 5, -8
+ 532              		.cfi_offset 14, -4
+ 533 0002 0D46     		mov	r5, r1
+ 534 0004 83B0     		sub	sp, sp, #12
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 15
 
 
- 534              		.cfi_def_cfa_offset 24
+ 535              	.LCFI21:
+ 536              		.cfi_def_cfa_offset 24
  188:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 535              		.loc 1 188 1 view .LVU127
- 536 0006 0446     		mov	r4, r0
- 537              		.loc 1 189 3 view .LVU128
- 538 0008 4FF0FF31 		mov	r1, #-1
- 539              	.LVL41:
- 540              		.loc 1 189 3 view .LVU129
- 541 000c 0020     		movs	r0, #0
- 542              	.LVL42:
+ 537              		.loc 1 188 1 view .LVU130
+ 538 0006 0446     		mov	r4, r0
+ 539              		.loc 1 189 3 view .LVU131
+ 540 0008 4FF0FF31 		mov	r1, #-1
+ 541              	.LVL41:
+ 542              		.loc 1 189 3 view .LVU132
+ 543 000c 0020     		movs	r0, #0
+ 544              	.LVL42:
  188:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreWait(BspI2cSemaphore, osWaitForever);
- 543              		.loc 1 188 1 view .LVU130
- 544 000e 0192     		str	r2, [sp, #4]
- 545              		.loc 1 189 3 view .LVU131
- 546 0010 FFF7FEFF 		bl	osSemaphoreWait
- 547              	.LVL43:
+ 545              		.loc 1 188 1 view .LVU133
+ 546 000e 0192     		str	r2, [sp, #4]
+ 547              		.loc 1 189 3 view .LVU134
+ 548 0010 FFF7FEFF 		bl	osSemaphoreWait
+ 549              	.LVL43:
  190:.//BSP/Hardware/Src/i2c.c **** 
  191:.//BSP/Hardware/Src/i2c.c ****   if(HAL_I2C_IsDeviceReady(&object->handle.hi2c, deviceAddr, trials, 1000) != HAL_OK)
- 548              		.loc 1 191 3 is_stmt 1 view .LVU132
- 549              		.loc 1 191 6 is_stmt 0 view .LVU133
- 550 0014 2946     		mov	r1, r5
- 551 0016 019A     		ldr	r2, [sp, #4]
- 552 0018 2046     		mov	r0, r4
- 553 001a 4FF47A73 		mov	r3, #1000
- 554 001e FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
- 555              	.LVL44:
- 556              		.loc 1 191 5 view .LVU134
- 557 0022 28B9     		cbnz	r0, .L42
+ 550              		.loc 1 191 3 is_stmt 1 view .LVU135
+ 551              		.loc 1 191 6 is_stmt 0 view .LVU136
+ 552 0014 2946     		mov	r1, r5
+ 553 0016 019A     		ldr	r2, [sp, #4]
+ 554 0018 2046     		mov	r0, r4
+ 555 001a 4FF47A73 		mov	r3, #1000
+ 556 001e FFF7FEFF 		bl	HAL_I2C_IsDeviceReady
+ 557              	.LVL44:
+ 558              		.loc 1 191 5 view .LVU137
+ 559 0022 28B9     		cbnz	r0, .L42
  192:.//BSP/Hardware/Src/i2c.c ****   {
  193:.//BSP/Hardware/Src/i2c.c ****     object->i2c_status=I2C_ERROR_BUSY;
  194:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
  195:.//BSP/Hardware/Src/i2c.c ****   }
  196:.//BSP/Hardware/Src/i2c.c **** 
  197:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreRelease(BspI2cSemaphore);
- 558              		.loc 1 197 3 is_stmt 1 view .LVU135
- 559 0024 0020     		movs	r0, #0
+ 560              		.loc 1 197 3 is_stmt 1 view .LVU138
+ 561 0024 0020     		movs	r0, #0
  198:.//BSP/Hardware/Src/i2c.c **** }...
- 560              		.loc 1 198 1 is_stmt 0 view .LVU136
- 561 0026 03B0     		add	sp, sp, #12
- 562              	.LCFI22:
- 563              		.cfi_remember_state
- 564              		.cfi_def_cfa_offset 12
- 565              		@ sp needed
- 566 0028 BDE83040 		pop	{r4, r5, lr}
- 567              	.LCFI23:
- 568              		.cfi_restore 14
- 569              		.cfi_restore 5
- 570              		.cfi_restore 4
- 571              		.cfi_def_cfa_offset 0
- 572              	.LVL45:
+ 562              		.loc 1 198 1 is_stmt 0 view .LVU139
+ 563 0026 03B0     		add	sp, sp, #12
+ 564              	.LCFI22:
+ 565              		.cfi_remember_state
+ 566              		.cfi_def_cfa_offset 12
+ 567              		@ sp needed
+ 568 0028 BDE83040 		pop	{r4, r5, lr}
+ 569              	.LCFI23:
+ 570              		.cfi_restore 14
+ 571              		.cfi_restore 5
+ 572              		.cfi_restore 4
+ 573              		.cfi_def_cfa_offset 0
+ 574              	.LVL45:
  197:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreRelease(BspI2cSemaphore);
- 573              		.loc 1 197 3 view .LVU137
- 574 002c FFF7FEBF 		b	osSemaphoreRelease
- 575              	.LVL46:
- 576              	.L42:
- 577              	.LCFI24:
- 578              		.cfi_restore_state
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 16
+ 575              		.loc 1 197 3 view .LVU140
+ 576 002c FFF7FEBF 		b	osSemaphoreRelease
+ 577              	.LVL46:
+ 578              	.L42:
+ 579              	.LCFI24:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 16
 
 
+ 580              		.cfi_restore_state
  193:.//BSP/Hardware/Src/i2c.c ****     object->i2c_status=I2C_ERROR_BUSY;
- 579              		.loc 1 193 5 is_stmt 1 view .LVU138
+ 581              		.loc 1 193 5 is_stmt 1 view .LVU141
  193:.//BSP/Hardware/Src/i2c.c ****     object->i2c_status=I2C_ERROR_BUSY;
- 580              		.loc 1 193 23 is_stmt 0 view .LVU139
- 581 0030 0423     		movs	r3, #4
+ 582              		.loc 1 193 23 is_stmt 0 view .LVU142
+ 583 0030 0423     		movs	r3, #4
  194:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 582              		.loc 1 194 5 view .LVU140
- 583 0032 C221     		movs	r1, #194
- 584 0034 0548     		ldr	r0, .L43
+ 584              		.loc 1 194 5 view .LVU143
+ 585 0032 C221     		movs	r1, #194
+ 586 0034 0548     		ldr	r0, .L43
  193:.//BSP/Hardware/Src/i2c.c ****     object->i2c_status=I2C_ERROR_BUSY;
- 585              		.loc 1 193 23 view .LVU141
- 586 0036 84F83C31 		strb	r3, [r4, #316]
+ 587              		.loc 1 193 23 view .LVU144
+ 588 0036 84F86031 		strb	r3, [r4, #352]
  194:.//BSP/Hardware/Src/i2c.c ****     Error_Handler(__FILE__, __LINE__);
- 587              		.loc 1 194 5 is_stmt 1 view .LVU142
- 588 003a FFF7FEFF 		bl	Error_Handler
- 589              	.LVL47:
+ 589              		.loc 1 194 5 is_stmt 1 view .LVU145
+ 590 003a FFF7FEFF 		bl	Error_Handler
+ 591              	.LVL47:
  197:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreRelease(BspI2cSemaphore);
- 590              		.loc 1 197 3 view .LVU143
- 591 003e 0020     		movs	r0, #0
- 592              		.loc 1 198 1 is_stmt 0 view .LVU144
- 593 0040 03B0     		add	sp, sp, #12
- 594              	.LCFI25:
- 595              		.cfi_def_cfa_offset 12
- 596              		@ sp needed
- 597 0042 BDE83040 		pop	{r4, r5, lr}
- 598              	.LCFI26:
- 599              		.cfi_restore 14
- 600              		.cfi_restore 5
- 601              		.cfi_restore 4
- 602              		.cfi_def_cfa_offset 0
- 603              	.LVL48:
+ 592              		.loc 1 197 3 view .LVU146
+ 593 003e 0020     		movs	r0, #0
+ 594              		.loc 1 198 1 is_stmt 0 view .LVU147
+ 595 0040 03B0     		add	sp, sp, #12
+ 596              	.LCFI25:
+ 597              		.cfi_def_cfa_offset 12
+ 598              		@ sp needed
+ 599 0042 BDE83040 		pop	{r4, r5, lr}
+ 600              	.LCFI26:
+ 601              		.cfi_restore 14
+ 602              		.cfi_restore 5
+ 603              		.cfi_restore 4
+ 604              		.cfi_def_cfa_offset 0
+ 605              	.LVL48:
  197:.//BSP/Hardware/Src/i2c.c ****   osSemaphoreRelease(BspI2cSemaphore);
- 604              		.loc 1 197 3 view .LVU145
- 605 0046 FFF7FEBF 		b	osSemaphoreRelease
- 606              	.LVL49:
- 607              	.L44:
- 608 004a 00BF     		.align	2
- 609              	.L43:
- 610 004c 00000000 		.word	.LC0
- 611              		.cfi_endproc
- 612              	.LFE345:
- 614              		.section	.text.I2C_Object_Init,"ax",%progbits
- 615              		.align	1
- 616              		.p2align 2,,3
- 617              		.global	I2C_Object_Init
- 618              		.syntax unified
- 619              		.thumb
- 620              		.thumb_func
- 621              		.fpu fpv5-d16
- 623              	I2C_Object_Init:
- 624              	.LVL50:
- 625              	.LFB338:
-  13:.//BSP/Hardware/Src/i2c.c **** {
- 626              		.loc 1 13 1 is_stmt 1 view -0
- 627              		.cfi_startproc
- 628              		@ args = 0, pretend = 0, frame = 0
- 629              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 17
+ 606              		.loc 1 197 3 view .LVU148
+ 607 0046 FFF7FEBF 		b	osSemaphoreRelease
+ 608              	.LVL49:
+ 609              	.L44:
+ 610 004a 00BF     		.align	2
+ 611              	.L43:
+ 612 004c 00000000 		.word	.LC0
+ 613              		.cfi_endproc
+ 614              	.LFE345:
+ 616              		.section	.text.I2C_Object_Init,"ax",%progbits
+ 617              		.align	1
+ 618              		.p2align 2,,3
+ 619              		.global	I2C_Object_Init
+ 620              		.syntax unified
+ 621              		.thumb
+ 622              		.thumb_func
+ 623              		.fpu fpv5-d16
+ 625              	I2C_Object_Init:
+ 626              	.LVL50:
+ 627              	.LFB338:
+  12:.//BSP/Hardware/Src/i2c.c **** {
+ 628              		.loc 1 12 1 is_stmt 1 view -0
+ 629              		.cfi_startproc
+ 630              		@ args = 40, pretend = 16, frame = 0
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 17
 
 
- 630              		@ link register save eliminated.
-  14:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
- 631              		.loc 1 14 3 view .LVU147
-  13:.//BSP/Hardware/Src/i2c.c **** {
- 632              		.loc 1 13 1 is_stmt 0 view .LVU148
- 633 0000 30B4     		push	{r4, r5}
- 634              	.LCFI27:
- 635              		.cfi_def_cfa_offset 8
- 636              		.cfi_offset 4, -8
- 637              		.cfi_offset 5, -4
-  16:.//BSP/Hardware/Src/i2c.c ****   object->i2c_writeReg=I2C_WriteReg;
- 638              		.loc 1 16 23 view .LVU149
- 639 0002 0749     		ldr	r1, .L47
-  14:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
- 640              		.loc 1 14 19 view .LVU150
- 641 0004 074D     		ldr	r5, .L47+4
-  15:.//BSP/Hardware/Src/i2c.c ****   object->i2c_readReg=I2C_ReadReg;
- 642              		.loc 1 15 22 view .LVU151
- 643 0006 084C     		ldr	r4, .L47+8
-  17:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
- 644              		.loc 1 17 22 view .LVU152
- 645 0008 084A     		ldr	r2, .L47+12
+ 631              		@ frame_needed = 0, uses_anonymous_args = 0
+ 632              		@ link register save eliminated.
+  13:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
+ 633              		.loc 1 13 3 view .LVU150
+  12:.//BSP/Hardware/Src/i2c.c **** {
+ 634              		.loc 1 12 1 is_stmt 0 view .LVU151
+ 635 0000 84B0     		sub	sp, sp, #16
+ 636              	.LCFI27:
+ 637              		.cfi_def_cfa_offset 16
+ 638 0002 F0B4     		push	{r4, r5, r6, r7}
+ 639              	.LCFI28:
+ 640              		.cfi_def_cfa_offset 32
+ 641              		.cfi_offset 4, -32
+ 642              		.cfi_offset 5, -28
+ 643              		.cfi_offset 6, -24
+ 644              		.cfi_offset 7, -20
+  12:.//BSP/Hardware/Src/i2c.c **** {
+ 645              		.loc 1 12 1 view .LVU152
+ 646 0004 05AC     		add	r4, sp, #20
+  13:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
+ 647              		.loc 1 13 19 view .LVU153
+ 648 0006 0D4F     		ldr	r7, .L47
+  12:.//BSP/Hardware/Src/i2c.c **** {
+ 649              		.loc 1 12 1 view .LVU154
+ 650 0008 0646     		mov	r6, r0
+  18:.//BSP/Hardware/Src/i2c.c ****   object->object_attr=attr;
+ 651              		.loc 1 18 22 view .LVU155
+ 652 000a 2546     		mov	r5, r4
+  13:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
+ 653              		.loc 1 13 19 view .LVU156
+ 654 000c C0F86471 		str	r7, [r0, #356]
+  14:.//BSP/Hardware/Src/i2c.c ****   object->i2c_readReg=I2C_ReadReg;
+ 655              		.loc 1 14 3 is_stmt 1 view .LVU157
   19:.//BSP/Hardware/Src/i2c.c ****   object_handle=&object->handle;
- 646              		.loc 1 19 16 view .LVU153
- 647 000a 094B     		ldr	r3, .L47+16
-  14:.//BSP/Hardware/Src/i2c.c ****   object->i2c_init=I2C_Init;
- 648              		.loc 1 14 19 view .LVU154
- 649 000c C0F84051 		str	r5, [r0, #320]
-  15:.//BSP/Hardware/Src/i2c.c ****   object->i2c_readReg=I2C_ReadReg;
- 650              		.loc 1 15 3 is_stmt 1 view .LVU155
-  17:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
- 651              		.loc 1 17 22 is_stmt 0 view .LVU156
- 652 0010 C0F84C21 		str	r2, [r0, #332]
+ 656              		.loc 1 19 16 is_stmt 0 view .LVU158
+ 657 0010 0B4F     		ldr	r7, .L47+4
+  12:.//BSP/Hardware/Src/i2c.c **** {
+ 658              		.loc 1 12 1 view .LVU159
+ 659 0012 84E80E00 		stm	r4, {r1, r2, r3}
+  14:.//BSP/Hardware/Src/i2c.c ****   object->i2c_readReg=I2C_ReadReg;
+ 660              		.loc 1 14 22 view .LVU160
+ 661 0016 0B49     		ldr	r1, .L47+8
+  18:.//BSP/Hardware/Src/i2c.c ****   object->object_attr=attr;
+ 662              		.loc 1 18 22 view .LVU161
+ 663 0018 00F59E74 		add	r4, r0, #316
+  15:.//BSP/Hardware/Src/i2c.c ****   object->i2c_writeReg=I2C_WriteReg;
+ 664              		.loc 1 15 23 view .LVU162
+ 665 001c 0A4A     		ldr	r2, .L47+12
+  16:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
+ 666              		.loc 1 16 22 view .LVU163
+ 667 001e 0B4B     		ldr	r3, .L47+16
   19:.//BSP/Hardware/Src/i2c.c ****   object_handle=&object->handle;
- 653              		.loc 1 19 16 view .LVU157
- 654 0014 1860     		str	r0, [r3]
-  16:.//BSP/Hardware/Src/i2c.c ****   object->i2c_writeReg=I2C_WriteReg;
- 655              		.loc 1 16 23 view .LVU158
- 656 0016 C0E95114 		strd	r1, r4, [r0, #324]
-  17:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
- 657              		.loc 1 17 3 is_stmt 1 view .LVU159
+ 668              		.loc 1 19 16 view .LVU164
+ 669 0020 3E60     		str	r6, [r7]
+  16:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
+ 670              		.loc 1 16 22 view .LVU165
+ 671 0022 C0F87031 		str	r3, [r0, #368]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 18
+
+
+  15:.//BSP/Hardware/Src/i2c.c ****   object->i2c_writeReg=I2C_WriteReg;
+ 672              		.loc 1 15 23 view .LVU166
+ 673 0026 C0E95A21 		strd	r2, r1, [r0, #360]
+  16:.//BSP/Hardware/Src/i2c.c ****   object->i2c_isReady=I2C_IsReady;
+ 674              		.loc 1 16 3 is_stmt 1 view .LVU167
+  18:.//BSP/Hardware/Src/i2c.c ****   object->object_attr=attr;
+ 675              		.loc 1 18 3 view .LVU168
+  18:.//BSP/Hardware/Src/i2c.c ****   object->object_attr=attr;
+ 676              		.loc 1 18 22 is_stmt 0 view .LVU169
+ 677 002a 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 678              	.LVL51:
+  18:.//BSP/Hardware/Src/i2c.c ****   object->object_attr=attr;
+ 679              		.loc 1 18 22 view .LVU170
+ 680 002c 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 681 002e 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+ 682 0030 2D68     		ldr	r5, [r5]
+ 683 0032 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+ 684 0034 2560     		str	r5, [r4]
   19:.//BSP/Hardware/Src/i2c.c ****   object_handle=&object->handle;
- 658              		.loc 1 19 3 view .LVU160
+ 685              		.loc 1 19 3 is_stmt 1 view .LVU171
   20:.//BSP/Hardware/Src/i2c.c **** }
- 659              		.loc 1 20 1 is_stmt 0 view .LVU161
- 660 001a 30BC     		pop	{r4, r5}
- 661              	.LCFI28:
- 662              		.cfi_restore 5
- 663              		.cfi_restore 4
- 664              		.cfi_def_cfa_offset 0
- 665 001c 7047     		bx	lr
- 666              	.L48:
- 667 001e 00BF     		.align	2
- 668              	.L47:
- 669 0020 00000000 		.word	I2C_WriteReg
- 670 0024 00000000 		.word	I2C_Init
- 671 0028 00000000 		.word	I2C_ReadReg
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 18
+ 686              		.loc 1 20 1 is_stmt 0 view .LVU172
+ 687 0036 F0BC     		pop	{r4, r5, r6, r7}
+ 688              	.LCFI29:
+ 689              		.cfi_restore 7
+ 690              		.cfi_restore 6
+ 691              		.cfi_restore 5
+ 692              		.cfi_restore 4
+ 693              		.cfi_def_cfa_offset 16
+ 694              	.LVL52:
+  20:.//BSP/Hardware/Src/i2c.c **** }
+ 695              		.loc 1 20 1 view .LVU173
+ 696 0038 04B0     		add	sp, sp, #16
+ 697              	.LCFI30:
+ 698              		.cfi_def_cfa_offset 0
+ 699 003a 7047     		bx	lr
+ 700              	.L48:
+ 701              		.align	2
+ 702              	.L47:
+ 703 003c 00000000 		.word	I2C_Init
+ 704 0040 00000000 		.word	object_handle
+ 705 0044 00000000 		.word	I2C_ReadReg
+ 706 0048 00000000 		.word	I2C_WriteReg
+ 707 004c 00000000 		.word	I2C_IsReady
+ 708              		.cfi_endproc
+ 709              	.LFE338:
+ 711              		.section	.text.HAL_I2C_MspInit,"ax",%progbits
+ 712              		.align	1
+ 713              		.p2align 2,,3
+ 714              		.global	HAL_I2C_MspInit
+ 715              		.syntax unified
+ 716              		.thumb
+ 717              		.thumb_func
+ 718              		.fpu fpv5-d16
+ 720              	HAL_I2C_MspInit:
+ 721              	.LVL53:
+ 722              	.LFB340:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 19
 
 
- 672 002c 00000000 		.word	I2C_IsReady
- 673 0030 00000000 		.word	object_handle
- 674              		.cfi_endproc
- 675              	.LFE338:
- 677              		.section	.text.HAL_I2C_MspInit,"ax",%progbits
- 678              		.align	1
- 679              		.p2align 2,,3
- 680              		.global	HAL_I2C_MspInit
- 681              		.syntax unified
- 682              		.thumb
- 683              		.thumb_func
- 684              		.fpu fpv5-d16
- 686              	HAL_I2C_MspInit:
- 687              	.LVL51:
- 688              	.LFB340:
   61:.//BSP/Hardware/Src/i2c.c **** {
- 689              		.loc 1 61 1 is_stmt 1 view -0
- 690              		.cfi_startproc
- 691              		@ args = 0, pretend = 0, frame = 224
- 692              		@ frame_needed = 0, uses_anonymous_args = 0
+ 723              		.loc 1 61 1 is_stmt 1 view -0
+ 724              		.cfi_startproc
+ 725              		@ args = 0, pretend = 0, frame = 224
+ 726              		@ frame_needed = 0, uses_anonymous_args = 0
   62:.//BSP/Hardware/Src/i2c.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 693              		.loc 1 62 3 view .LVU163
+ 727              		.loc 1 62 3 view .LVU175
   61:.//BSP/Hardware/Src/i2c.c **** {
- 694              		.loc 1 61 1 is_stmt 0 view .LVU164
- 695 0000 F0B5     		push	{r4, r5, r6, r7, lr}
- 696              	.LCFI29:
- 697              		.cfi_def_cfa_offset 20
- 698              		.cfi_offset 4, -20
- 699              		.cfi_offset 5, -16
- 700              		.cfi_offset 6, -12
- 701              		.cfi_offset 7, -8
- 702              		.cfi_offset 14, -4
+ 728              		.loc 1 61 1 is_stmt 0 view .LVU176
+ 729 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 730              	.LCFI31:
+ 731              		.cfi_def_cfa_offset 20
+ 732              		.cfi_offset 4, -20
+ 733              		.cfi_offset 5, -16
+ 734              		.cfi_offset 6, -12
+ 735              		.cfi_offset 7, -8
+ 736              		.cfi_offset 14, -4
   62:.//BSP/Hardware/Src/i2c.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 703              		.loc 1 62 20 view .LVU165
- 704 0002 0024     		movs	r4, #0
+ 737              		.loc 1 62 20 view .LVU177
+ 738 0002 0024     		movs	r4, #0
   61:.//BSP/Hardware/Src/i2c.c **** {
- 705              		.loc 1 61 1 view .LVU166
- 706 0004 B9B0     		sub	sp, sp, #228
- 707              	.LCFI30:
- 708              		.cfi_def_cfa_offset 248
+ 739              		.loc 1 61 1 view .LVU178
+ 740 0004 B9B0     		sub	sp, sp, #228
+ 741              	.LCFI32:
+ 742              		.cfi_def_cfa_offset 248
   61:.//BSP/Hardware/Src/i2c.c **** {
- 709              		.loc 1 61 1 view .LVU167
- 710 0006 0546     		mov	r5, r0
+ 743              		.loc 1 61 1 view .LVU179
+ 744 0006 0546     		mov	r5, r0
   63:.//BSP/Hardware/Src/i2c.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
- 711              		.loc 1 63 28 view .LVU168
- 712 0008 C022     		movs	r2, #192
- 713 000a 2146     		mov	r1, r4
- 714 000c 08A8     		add	r0, sp, #32
- 715              	.LVL52:
+ 745              		.loc 1 63 28 view .LVU180
+ 746 0008 C022     		movs	r2, #192
+ 747 000a 2146     		mov	r1, r4
+ 748 000c 08A8     		add	r0, sp, #32
+ 749              	.LVL54:
   62:.//BSP/Hardware/Src/i2c.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 716              		.loc 1 62 20 view .LVU169
- 717 000e 0794     		str	r4, [sp, #28]
+ 750              		.loc 1 62 20 view .LVU181
+ 751 000e 0794     		str	r4, [sp, #28]
   63:.//BSP/Hardware/Src/i2c.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
- 718              		.loc 1 63 3 is_stmt 1 view .LVU170
+ 752              		.loc 1 63 3 is_stmt 1 view .LVU182
   62:.//BSP/Hardware/Src/i2c.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 719              		.loc 1 62 20 is_stmt 0 view .LVU171
- 720 0010 CDE90344 		strd	r4, r4, [sp, #12]
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 19
-
-
- 721 0014 CDE90544 		strd	r4, r4, [sp, #20]
+ 753              		.loc 1 62 20 is_stmt 0 view .LVU183
+ 754 0010 CDE90344 		strd	r4, r4, [sp, #12]
+ 755 0014 CDE90544 		strd	r4, r4, [sp, #20]
   63:.//BSP/Hardware/Src/i2c.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
- 722              		.loc 1 63 28 view .LVU172
- 723 0018 FFF7FEFF 		bl	memset
- 724              	.LVL53:
+ 756              		.loc 1 63 28 view .LVU184
+ 757 0018 FFF7FEFF 		bl	memset
+ 758              	.LVL55:
   65:.//BSP/Hardware/Src/i2c.c ****   if(hi2c->Instance==I2C4)
- 725              		.loc 1 65 3 is_stmt 1 view .LVU173
+ 759              		.loc 1 65 3 is_stmt 1 view .LVU185
   65:.//BSP/Hardware/Src/i2c.c ****   if(hi2c->Instance==I2C4)
- 726              		.loc 1 65 5 is_stmt 0 view .LVU174
- 727 001c 2A68     		ldr	r2, [r5]
- 728 001e 3E4B     		ldr	r3, .L68
- 729 0020 9A42     		cmp	r2, r3
- 730 0022 01D0     		beq	.L64
+ 760              		.loc 1 65 5 is_stmt 0 view .LVU186
+ 761 001c 2A68     		ldr	r2, [r5]
+ 762 001e 3E4B     		ldr	r3, .L68
+ 763 0020 9A42     		cmp	r2, r3
+ 764 0022 01D0     		beq	.L64
  125:.//BSP/Hardware/Src/i2c.c **** }
- 731              		.loc 1 125 1 view .LVU175
- 732 0024 39B0     		add	sp, sp, #228
- 733              	.LCFI31:
- 734              		.cfi_remember_state
- 735              		.cfi_def_cfa_offset 20
- 736              		@ sp needed
- 737 0026 F0BD     		pop	{r4, r5, r6, r7, pc}
- 738              	.LVL54:
- 739              	.L64:
- 740              	.LCFI32:
- 741              		.cfi_restore_state
-  67:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2C4;
- 742              		.loc 1 67 5 is_stmt 1 view .LVU176
-  67:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2C4;
- 743              		.loc 1 67 46 is_stmt 0 view .LVU177
- 744 0028 1023     		movs	r3, #16
-  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
- 745              		.loc 1 69 9 view .LVU178
- 746 002a 08A8     		add	r0, sp, #32
-  68:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.I2c4ClockSelection = RCC_I2C4CLKSOURCE_D3PCLK1;
- 747              		.loc 1 68 44 view .LVU179
- 748 002c 2E94     		str	r4, [sp, #184]
-  67:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2C4;
- 749              		.loc 1 67 46 view .LVU180
- 750 002e 0893     		str	r3, [sp, #32]
-  68:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.I2c4ClockSelection = RCC_I2C4CLKSOURCE_D3PCLK1;
- 751              		.loc 1 68 5 is_stmt 1 view .LVU181
-  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
- 752              		.loc 1 69 5 view .LVU182
-  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
- 753              		.loc 1 69 9 is_stmt 0 view .LVU183
- 754 0030 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
- 755              	.LVL55:
-  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
- 756              		.loc 1 69 8 view .LVU184
- 757 0034 0028     		cmp	r0, #0
- 758 0036 5FD1     		bne	.L65
- 759              	.L51:
-  74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 760              		.loc 1 74 5 is_stmt 1 view .LVU185
- 761              	.LBB6:
-  74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 762              		.loc 1 74 5 view .LVU186
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 20
+ 765              		.loc 1 125 1 view .LVU187
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 20
 
 
+ 766 0024 39B0     		add	sp, sp, #228
+ 767              	.LCFI33:
+ 768              		.cfi_remember_state
+ 769              		.cfi_def_cfa_offset 20
+ 770              		@ sp needed
+ 771 0026 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 772              	.LVL56:
+ 773              	.L64:
+ 774              	.LCFI34:
+ 775              		.cfi_restore_state
+  67:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2C4;
+ 776              		.loc 1 67 5 is_stmt 1 view .LVU188
+  67:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2C4;
+ 777              		.loc 1 67 46 is_stmt 0 view .LVU189
+ 778 0028 1023     		movs	r3, #16
+  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 779              		.loc 1 69 9 view .LVU190
+ 780 002a 08A8     		add	r0, sp, #32
+  68:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.I2c4ClockSelection = RCC_I2C4CLKSOURCE_D3PCLK1;
+ 781              		.loc 1 68 44 view .LVU191
+ 782 002c 2E94     		str	r4, [sp, #184]
+  67:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_I2C4;
+ 783              		.loc 1 67 46 view .LVU192
+ 784 002e 0893     		str	r3, [sp, #32]
+  68:.//BSP/Hardware/Src/i2c.c ****     PeriphClkInitStruct.I2c4ClockSelection = RCC_I2C4CLKSOURCE_D3PCLK1;
+ 785              		.loc 1 68 5 is_stmt 1 view .LVU193
+  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 786              		.loc 1 69 5 view .LVU194
+  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 787              		.loc 1 69 9 is_stmt 0 view .LVU195
+ 788 0030 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 789              	.LVL57:
+  69:.//BSP/Hardware/Src/i2c.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 790              		.loc 1 69 8 view .LVU196
+ 791 0034 0028     		cmp	r0, #0
+ 792 0036 5FD1     		bne	.L65
+ 793              	.L51:
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 763              		.loc 1 74 5 view .LVU187
- 764 0038 384E     		ldr	r6, .L68+4
- 765              	.LBE6:
+ 794              		.loc 1 74 5 is_stmt 1 view .LVU197
+ 795              	.LBB5:
+  74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
+ 796              		.loc 1 74 5 view .LVU198
+  74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
+ 797              		.loc 1 74 5 view .LVU199
+ 798 0038 384E     		ldr	r6, .L68+4
+ 799              	.LBE5:
   80:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
- 766              		.loc 1 80 26 is_stmt 0 view .LVU188
- 767 003a 1222     		movs	r2, #18
+ 800              		.loc 1 80 26 is_stmt 0 view .LVU200
+ 801 003a 1222     		movs	r2, #18
   79:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
- 768              		.loc 1 79 25 view .LVU189
- 769 003c 4FF44050 		mov	r0, #12288
+ 802              		.loc 1 79 25 view .LVU201
+ 803 003c 4FF44050 		mov	r0, #12288
   81:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
- 770              		.loc 1 81 26 view .LVU190
- 771 0040 0024     		movs	r4, #0
- 772              	.LBB7:
+ 804              		.loc 1 81 26 view .LVU202
+ 805 0040 0024     		movs	r4, #0
+ 806              	.LBB6:
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 773              		.loc 1 74 5 view .LVU191
- 774 0042 D6F8E030 		ldr	r3, [r6, #224]
- 775              	.LBE7:
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 21
+
+
+ 807              		.loc 1 74 5 view .LVU203
+ 808 0042 D6F8E030 		ldr	r3, [r6, #224]
+ 809              	.LBE6:
   84:.//BSP/Hardware/Src/i2c.c ****     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
- 776              		.loc 1 84 5 view .LVU192
- 777 0046 03A9     		add	r1, sp, #12
+ 810              		.loc 1 84 5 view .LVU204
+ 811 0046 03A9     		add	r1, sp, #12
   91:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Instance = BDMA_Channel0;
- 778              		.loc 1 91 18 view .LVU193
- 779 0048 354F     		ldr	r7, .L68+8
- 780              	.LBB8:
+ 812              		.loc 1 91 18 view .LVU205
+ 813 0048 354F     		ldr	r7, .L68+8
+ 814              	.LBB7:
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 781              		.loc 1 74 5 view .LVU194
- 782 004a 43F00803 		orr	r3, r3, #8
- 783 004e C6F8E030 		str	r3, [r6, #224]
+ 815              		.loc 1 74 5 view .LVU206
+ 816 004a 43F00803 		orr	r3, r3, #8
+ 817 004e C6F8E030 		str	r3, [r6, #224]
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 784              		.loc 1 74 5 is_stmt 1 view .LVU195
- 785 0052 D6F8E030 		ldr	r3, [r6, #224]
- 786              	.LBE8:
+ 818              		.loc 1 74 5 is_stmt 1 view .LVU207
+ 819 0052 D6F8E030 		ldr	r3, [r6, #224]
+ 820              	.LBE7:
   80:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
- 787              		.loc 1 80 26 is_stmt 0 view .LVU196
- 788 0056 0492     		str	r2, [sp, #16]
+ 821              		.loc 1 80 26 is_stmt 0 view .LVU208
+ 822 0056 0492     		str	r2, [sp, #16]
   83:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C4;
- 789              		.loc 1 83 31 view .LVU197
- 790 0058 0422     		movs	r2, #4
- 791              	.LBB9:
+ 823              		.loc 1 83 31 view .LVU209
+ 824 0058 0422     		movs	r2, #4
+ 825              	.LBB8:
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 792              		.loc 1 74 5 view .LVU198
- 793 005a 03F00803 		and	r3, r3, #8
- 794              	.LBE9:
+ 826              		.loc 1 74 5 view .LVU210
+ 827 005a 03F00803 		and	r3, r3, #8
+ 828              	.LBE8:
   79:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
- 795              		.loc 1 79 25 view .LVU199
- 796 005e 0390     		str	r0, [sp, #12]
+ 829              		.loc 1 79 25 view .LVU211
+ 830 005e 0390     		str	r0, [sp, #12]
   84:.//BSP/Hardware/Src/i2c.c ****     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
- 797              		.loc 1 84 5 view .LVU200
- 798 0060 3048     		ldr	r0, .L68+12
- 799              	.LBB10:
+ 831              		.loc 1 84 5 view .LVU212
+ 832 0060 3048     		ldr	r0, .L68+12
+ 833              	.LBB9:
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 800              		.loc 1 74 5 view .LVU201
- 801 0062 0193     		str	r3, [sp, #4]
+ 834              		.loc 1 74 5 view .LVU213
+ 835 0062 0193     		str	r3, [sp, #4]
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 802              		.loc 1 74 5 is_stmt 1 view .LVU202
- 803 0064 019B     		ldr	r3, [sp, #4]
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 21
-
-
- 804              	.LBE10:
+ 836              		.loc 1 74 5 is_stmt 1 view .LVU214
+ 837 0064 019B     		ldr	r3, [sp, #4]
+ 838              	.LBE9:
   74:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
- 805              		.loc 1 74 5 view .LVU203
+ 839              		.loc 1 74 5 view .LVU215
   79:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Pin = GPIO_PIN_12|GPIO_PIN_13;
- 806              		.loc 1 79 5 view .LVU204
+ 840              		.loc 1 79 5 view .LVU216
   80:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_OD;
- 807              		.loc 1 80 5 view .LVU205
+ 841              		.loc 1 80 5 view .LVU217
   81:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
- 808              		.loc 1 81 5 view .LVU206
+ 842              		.loc 1 81 5 view .LVU218
   82:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 809              		.loc 1 82 5 view .LVU207
+ 843              		.loc 1 82 5 view .LVU219
   81:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
- 810              		.loc 1 81 26 is_stmt 0 view .LVU208
- 811 0066 0594     		str	r4, [sp, #20]
+ 844              		.loc 1 81 26 is_stmt 0 view .LVU220
+ 845 0066 0594     		str	r4, [sp, #20]
   83:.//BSP/Hardware/Src/i2c.c ****     GPIO_InitStruct.Alternate = GPIO_AF4_I2C4;
- 812              		.loc 1 83 31 view .LVU209
- 813 0068 CDE90642 		strd	r4, r2, [sp, #24]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 22
+
+
+ 846              		.loc 1 83 31 view .LVU221
+ 847 0068 CDE90642 		strd	r4, r2, [sp, #24]
   84:.//BSP/Hardware/Src/i2c.c ****     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
- 814              		.loc 1 84 5 is_stmt 1 view .LVU210
- 815 006c FFF7FEFF 		bl	HAL_GPIO_Init
- 816              	.LVL56:
+ 848              		.loc 1 84 5 is_stmt 1 view .LVU222
+ 849 006c FFF7FEFF 		bl	HAL_GPIO_Init
+ 850              	.LVL58:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 817              		.loc 1 87 5 view .LVU211
- 818              	.LBB11:
+ 851              		.loc 1 87 5 view .LVU223
+ 852              	.LBB10:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 819              		.loc 1 87 5 view .LVU212
+ 853              		.loc 1 87 5 view .LVU224
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 820              		.loc 1 87 5 view .LVU213
- 821 0070 D6F8F430 		ldr	r3, [r6, #244]
- 822              	.LBE11:
+ 854              		.loc 1 87 5 view .LVU225
+ 855 0070 D6F8F430 		ldr	r3, [r6, #244]
+ 856              	.LBE10:
   91:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Instance = BDMA_Channel0;
- 823              		.loc 1 91 41 is_stmt 0 view .LVU214
- 824 0074 2C48     		ldr	r0, .L68+16
+ 857              		.loc 1 91 41 is_stmt 0 view .LVU226
+ 858 0074 2C48     		ldr	r0, .L68+16
   92:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Request = BDMA_REQUEST_I2C4_RX;
- 825              		.loc 1 92 45 view .LVU215
- 826 0076 4FF00D0C 		mov	ip, #13
- 827              	.LBB12:
+ 859              		.loc 1 92 45 view .LVU227
+ 860 0076 4FF00D0C 		mov	ip, #13
+ 861              	.LBB11:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 828              		.loc 1 87 5 view .LVU216
- 829 007a 43F08003 		orr	r3, r3, #128
- 830              	.LBE12:
+ 862              		.loc 1 87 5 view .LVU228
+ 863 007a 43F08003 		orr	r3, r3, #128
+ 864              	.LBE11:
   95:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.MemInc = DMA_MINC_ENABLE;
- 831              		.loc 1 95 44 view .LVU217
- 832 007e 4FF48061 		mov	r1, #1024
- 833              	.LBB13:
+ 865              		.loc 1 95 44 view .LVU229
+ 866 007e 4FF48061 		mov	r1, #1024
+ 867              	.LBB12:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 834              		.loc 1 87 5 view .LVU218
- 835 0082 C6F8F430 		str	r3, [r6, #244]
+ 868              		.loc 1 87 5 view .LVU230
+ 869 0082 C6F8F430 		str	r3, [r6, #244]
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 836              		.loc 1 87 5 is_stmt 1 view .LVU219
- 837 0086 D6F8F420 		ldr	r2, [r6, #244]
- 838              	.LBE13:
+ 870              		.loc 1 87 5 is_stmt 1 view .LVU231
+ 871 0086 D6F8F420 		ldr	r2, [r6, #244]
+ 872              	.LBE12:
   91:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Instance = BDMA_Channel0;
- 839              		.loc 1 91 18 is_stmt 0 view .LVU220
- 840 008a 3B68     		ldr	r3, [r7]
- 841              	.LBB14:
+ 873              		.loc 1 91 18 is_stmt 0 view .LVU232
+ 874 008a 3B68     		ldr	r3, [r7]
+ 875              	.LBB13:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 22
-
-
- 842              		.loc 1 87 5 view .LVU221
- 843 008c 02F08002 		and	r2, r2, #128
- 844              	.LBE14:
+ 876              		.loc 1 87 5 view .LVU233
+ 877 008c 02F08002 		and	r2, r2, #128
+ 878              	.LBE13:
   91:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Instance = BDMA_Channel0;
- 845              		.loc 1 91 41 view .LVU222
- 846 0090 D864     		str	r0, [r3, #76]
+ 879              		.loc 1 91 41 view .LVU234
+ 880 0090 D864     		str	r0, [r3, #76]
  100:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_rx) != HAL_OK)
- 847              		.loc 1 100 9 view .LVU223
- 848 0092 03F14C00 		add	r0, r3, #76
- 849              	.LBB15:
+ 881              		.loc 1 100 9 view .LVU235
+ 882 0092 03F14C00 		add	r0, r3, #76
+ 883              	.LBB14:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 850              		.loc 1 87 5 view .LVU224
- 851 0096 0292     		str	r2, [sp, #8]
+ 884              		.loc 1 87 5 view .LVU236
+ 885 0096 0292     		str	r2, [sp, #8]
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 852              		.loc 1 87 5 is_stmt 1 view .LVU225
- 853              	.LBE15:
+ 886              		.loc 1 87 5 is_stmt 1 view .LVU237
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 23
+
+
+ 887              	.LBE14:
   92:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Request = BDMA_REQUEST_I2C4_RX;
- 854              		.loc 1 92 45 is_stmt 0 view .LVU226
- 855 0098 C3F850C0 		str	ip, [r3, #80]
+ 888              		.loc 1 92 45 is_stmt 0 view .LVU238
+ 889 0098 C3F850C0 		str	ip, [r3, #80]
   95:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.MemInc = DMA_MINC_ENABLE;
- 856              		.loc 1 95 44 view .LVU227
- 857 009c D965     		str	r1, [r3, #92]
+ 890              		.loc 1 95 44 view .LVU239
+ 891 009c D965     		str	r1, [r3, #92]
   94:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.PeriphInc = DMA_PINC_DISABLE;
- 858              		.loc 1 94 47 view .LVU228
- 859 009e C3E91544 		strd	r4, r4, [r3, #84]
+ 892              		.loc 1 94 47 view .LVU240
+ 893 009e C3E91544 		strd	r4, r4, [r3, #84]
   97:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
- 860              		.loc 1 97 54 view .LVU229
- 861 00a2 C3E91844 		strd	r4, r4, [r3, #96]
+ 894              		.loc 1 97 54 view .LVU241
+ 895 00a2 C3E91844 		strd	r4, r4, [r3, #96]
   99:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Priority = DMA_PRIORITY_LOW;
- 862              		.loc 1 99 46 view .LVU230
- 863 00a6 C3E91A44 		strd	r4, r4, [r3, #104]
- 864              	.LBB16:
+ 896              		.loc 1 99 46 view .LVU242
+ 897 00a6 C3E91A44 		strd	r4, r4, [r3, #104]
+ 898              	.LBB15:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 865              		.loc 1 87 5 view .LVU231
- 866 00aa 029B     		ldr	r3, [sp, #8]
- 867              	.LBE16:
+ 899              		.loc 1 87 5 view .LVU243
+ 900 00aa 029B     		ldr	r3, [sp, #8]
+ 901              	.LBE15:
   87:.//BSP/Hardware/Src/i2c.c ****     __HAL_RCC_I2C4_CLK_ENABLE();
- 868              		.loc 1 87 5 is_stmt 1 view .LVU232
+ 902              		.loc 1 87 5 is_stmt 1 view .LVU244
   91:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Instance = BDMA_Channel0;
- 869              		.loc 1 91 5 view .LVU233
+ 903              		.loc 1 91 5 view .LVU245
   92:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Request = BDMA_REQUEST_I2C4_RX;
- 870              		.loc 1 92 5 view .LVU234
+ 904              		.loc 1 92 5 view .LVU246
   93:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Direction = DMA_PERIPH_TO_MEMORY;
- 871              		.loc 1 93 5 view .LVU235
+ 905              		.loc 1 93 5 view .LVU247
   94:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.PeriphInc = DMA_PINC_DISABLE;
- 872              		.loc 1 94 5 view .LVU236
+ 906              		.loc 1 94 5 view .LVU248
   95:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.MemInc = DMA_MINC_ENABLE;
- 873              		.loc 1 95 5 view .LVU237
+ 907              		.loc 1 95 5 view .LVU249
   96:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
- 874              		.loc 1 96 5 view .LVU238
+ 908              		.loc 1 96 5 view .LVU250
   97:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
- 875              		.loc 1 97 5 view .LVU239
+ 909              		.loc 1 97 5 view .LVU251
   98:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Mode = DMA_NORMAL;
- 876              		.loc 1 98 5 view .LVU240
+ 910              		.loc 1 98 5 view .LVU252
   99:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_rx.Init.Priority = DMA_PRIORITY_LOW;
- 877              		.loc 1 99 5 view .LVU241
+ 911              		.loc 1 99 5 view .LVU253
  100:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_rx) != HAL_OK)
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 23
-
-
- 878              		.loc 1 100 5 view .LVU242
+ 912              		.loc 1 100 5 view .LVU254
  100:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_rx) != HAL_OK)
- 879              		.loc 1 100 9 is_stmt 0 view .LVU243
- 880 00ac FFF7FEFF 		bl	HAL_DMA_Init
- 881              	.LVL57:
+ 913              		.loc 1 100 9 is_stmt 0 view .LVU255
+ 914 00ac FFF7FEFF 		bl	HAL_DMA_Init
+ 915              	.LVL59:
  100:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_rx) != HAL_OK)
- 882              		.loc 1 100 8 view .LVU244
- 883 00b0 60BB     		cbnz	r0, .L66
- 884              	.L52:
+ 916              		.loc 1 100 8 view .LVU256
+ 917 00b0 60BB     		cbnz	r0, .L66
+ 918              	.L52:
  105:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
- 885              		.loc 1 105 5 is_stmt 1 view .LVU245
+ 919              		.loc 1 105 5 is_stmt 1 view .LVU257
  105:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
- 886              		.loc 1 105 5 view .LVU246
- 887 00b2 3B68     		ldr	r3, [r7]
+ 920              		.loc 1 105 5 view .LVU258
+ 921 00b2 3B68     		ldr	r3, [r7]
  110:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
- 888              		.loc 1 110 47 is_stmt 0 view .LVU247
- 889 00b4 4020     		movs	r0, #64
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 24
+
+
+ 922              		.loc 1 110 47 is_stmt 0 view .LVU259
+ 923 00b4 4020     		movs	r0, #64
  109:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.Request = BDMA_REQUEST_I2C4_TX;
- 890              		.loc 1 109 45 view .LVU248
- 891 00b6 0E24     		movs	r4, #14
+ 924              		.loc 1 109 45 view .LVU260
+ 925 00b6 0E24     		movs	r4, #14
  108:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Instance = BDMA_Channel1;
- 892              		.loc 1 108 41 view .LVU249
- 893 00b8 1C4E     		ldr	r6, .L68+20
+ 926              		.loc 1 108 41 view .LVU261
+ 927 00b8 1C4E     		ldr	r6, .L68+20
  105:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
- 894              		.loc 1 105 5 view .LVU250
- 895 00ba 03F14C02 		add	r2, r3, #76
+ 928              		.loc 1 105 5 view .LVU262
+ 929 00ba 03F14C02 		add	r2, r3, #76
  112:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.MemInc = DMA_MINC_ENABLE;
- 896              		.loc 1 112 44 view .LVU251
- 897 00be 4FF48061 		mov	r1, #1024
+ 930              		.loc 1 112 44 view .LVU263
+ 931 00be 4FF48061 		mov	r1, #1024
  105:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
- 898              		.loc 1 105 5 view .LVU252
- 899 00c2 EA63     		str	r2, [r5, #60]
+ 932              		.loc 1 105 5 view .LVU264
+ 933 00c2 EA63     		str	r2, [r5, #60]
  105:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
- 900              		.loc 1 105 5 is_stmt 1 view .LVU253
+ 934              		.loc 1 105 5 is_stmt 1 view .LVU265
  111:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.PeriphInc = DMA_PINC_DISABLE;
- 901              		.loc 1 111 47 is_stmt 0 view .LVU254
- 902 00c4 0022     		movs	r2, #0
+ 935              		.loc 1 111 47 is_stmt 0 view .LVU266
+ 936 00c4 0022     		movs	r2, #0
  110:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
- 903              		.loc 1 110 47 view .LVU255
- 904 00c6 C3F8CC00 		str	r0, [r3, #204]
+ 937              		.loc 1 110 47 view .LVU267
+ 938 00c6 C3F8CC00 		str	r0, [r3, #204]
  117:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_tx) != HAL_OK)
- 905              		.loc 1 117 9 view .LVU256
- 906 00ca 03F1C400 		add	r0, r3, #196
+ 939              		.loc 1 117 9 view .LVU268
+ 940 00ca 03F1C400 		add	r0, r3, #196
  105:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
- 907              		.loc 1 105 5 view .LVU257
- 908 00ce C3F88450 		str	r5, [r3, #132]
+ 941              		.loc 1 105 5 view .LVU269
+ 942 00ce C3F88450 		str	r5, [r3, #132]
  105:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmarx,object_handle->hdma_i2c_rx);
- 909              		.loc 1 105 5 is_stmt 1 view .LVU258
+ 943              		.loc 1 105 5 is_stmt 1 view .LVU270
  108:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Instance = BDMA_Channel1;
- 910              		.loc 1 108 5 view .LVU259
+ 944              		.loc 1 108 5 view .LVU271
  109:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.Request = BDMA_REQUEST_I2C4_TX;
- 911              		.loc 1 109 45 is_stmt 0 view .LVU260
- 912 00d2 C3E93164 		strd	r6, r4, [r3, #196]
+ 945              		.loc 1 109 45 is_stmt 0 view .LVU272
+ 946 00d2 C3E93164 		strd	r6, r4, [r3, #196]
  110:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.Direction = DMA_MEMORY_TO_PERIPH;
- 913              		.loc 1 110 5 is_stmt 1 view .LVU261
+ 947              		.loc 1 110 5 is_stmt 1 view .LVU273
  111:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.PeriphInc = DMA_PINC_DISABLE;
- 914              		.loc 1 111 5 view .LVU262
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 24
-
-
+ 948              		.loc 1 111 5 view .LVU274
  111:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.PeriphInc = DMA_PINC_DISABLE;
- 915              		.loc 1 111 47 is_stmt 0 view .LVU263
- 916 00d6 C3E93421 		strd	r2, r1, [r3, #208]
+ 949              		.loc 1 111 47 is_stmt 0 view .LVU275
+ 950 00d6 C3E93421 		strd	r2, r1, [r3, #208]
  112:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.MemInc = DMA_MINC_ENABLE;
- 917              		.loc 1 112 5 is_stmt 1 view .LVU264
+ 951              		.loc 1 112 5 is_stmt 1 view .LVU276
  113:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.PeriphDataAlignment = DMA_PDATAALIGN_BYTE;
- 918              		.loc 1 113 5 view .LVU265
+ 952              		.loc 1 113 5 view .LVU277
  114:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.MemDataAlignment = DMA_MDATAALIGN_BYTE;
- 919              		.loc 1 114 54 is_stmt 0 view .LVU266
- 920 00da C3E93622 		strd	r2, r2, [r3, #216]
+ 953              		.loc 1 114 54 is_stmt 0 view .LVU278
+ 954 00da C3E93622 		strd	r2, r2, [r3, #216]
  115:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.Mode = DMA_NORMAL;
- 921              		.loc 1 115 5 is_stmt 1 view .LVU267
+ 955              		.loc 1 115 5 is_stmt 1 view .LVU279
  116:.//BSP/Hardware/Src/i2c.c ****     object_handle->hdma_i2c_tx.Init.Priority = DMA_PRIORITY_LOW;
- 922              		.loc 1 116 46 is_stmt 0 view .LVU268
- 923 00de C3E93822 		strd	r2, r2, [r3, #224]
+ 956              		.loc 1 116 46 is_stmt 0 view .LVU280
+ 957 00de C3E93822 		strd	r2, r2, [r3, #224]
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 25
+
+
  117:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_tx) != HAL_OK)
- 924              		.loc 1 117 5 is_stmt 1 view .LVU269
+ 958              		.loc 1 117 5 is_stmt 1 view .LVU281
  117:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_tx) != HAL_OK)
- 925              		.loc 1 117 9 is_stmt 0 view .LVU270
- 926 00e2 FFF7FEFF 		bl	HAL_DMA_Init
- 927              	.LVL58:
+ 959              		.loc 1 117 9 is_stmt 0 view .LVU282
+ 960 00e2 FFF7FEFF 		bl	HAL_DMA_Init
+ 961              	.LVL60:
  117:.//BSP/Hardware/Src/i2c.c ****     if (HAL_DMA_Init(&object_handle->hdma_i2c_tx) != HAL_OK)
- 928              		.loc 1 117 8 view .LVU271
- 929 00e6 60B9     		cbnz	r0, .L67
- 930              	.L53:
+ 962              		.loc 1 117 8 view .LVU283
+ 963 00e6 60B9     		cbnz	r0, .L67
+ 964              	.L53:
  122:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmatx,object_handle->hdma_i2c_tx);
- 931              		.loc 1 122 5 is_stmt 1 view .LVU272
+ 965              		.loc 1 122 5 is_stmt 1 view .LVU284
  122:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmatx,object_handle->hdma_i2c_tx);
- 932              		.loc 1 122 5 view .LVU273
- 933 00e8 3B68     		ldr	r3, [r7]
- 934 00ea 03F1C402 		add	r2, r3, #196
- 935 00ee AA63     		str	r2, [r5, #56]
+ 966              		.loc 1 122 5 view .LVU285
+ 967 00e8 3B68     		ldr	r3, [r7]
+ 968 00ea 03F1C402 		add	r2, r3, #196
+ 969 00ee AA63     		str	r2, [r5, #56]
  122:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmatx,object_handle->hdma_i2c_tx);
- 936              		.loc 1 122 5 view .LVU274
- 937 00f0 C3F8FC50 		str	r5, [r3, #252]
+ 970              		.loc 1 122 5 view .LVU286
+ 971 00f0 C3F8FC50 		str	r5, [r3, #252]
  122:.//BSP/Hardware/Src/i2c.c ****     __HAL_LINKDMA(hi2c,hdmatx,object_handle->hdma_i2c_tx);
- 938              		.loc 1 122 5 view .LVU275
+ 972              		.loc 1 122 5 view .LVU287
  125:.//BSP/Hardware/Src/i2c.c **** }
- 939              		.loc 1 125 1 is_stmt 0 view .LVU276
- 940 00f4 39B0     		add	sp, sp, #228
- 941              	.LCFI33:
- 942              		.cfi_remember_state
- 943              		.cfi_def_cfa_offset 20
- 944              		@ sp needed
- 945 00f6 F0BD     		pop	{r4, r5, r6, r7, pc}
- 946              	.LVL59:
- 947              	.L65:
- 948              	.LCFI34:
- 949              		.cfi_restore_state
+ 973              		.loc 1 125 1 is_stmt 0 view .LVU288
+ 974 00f4 39B0     		add	sp, sp, #228
+ 975              	.LCFI35:
+ 976              		.cfi_remember_state
+ 977              		.cfi_def_cfa_offset 20
+ 978              		@ sp needed
+ 979 00f6 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 980              	.LVL61:
+ 981              	.L65:
+ 982              	.LCFI36:
+ 983              		.cfi_restore_state
   71:.//BSP/Hardware/Src/i2c.c ****       Error_Handler(__FILE__, __LINE__);
- 950              		.loc 1 71 7 is_stmt 1 view .LVU277
- 951 00f8 4721     		movs	r1, #71
- 952 00fa 0D48     		ldr	r0, .L68+24
- 953 00fc FFF7FEFF 		bl	Error_Handler
- 954              	.LVL60:
- 955 0100 9AE7     		b	.L51
- 956              	.L67:
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 25
-
-
+ 984              		.loc 1 71 7 is_stmt 1 view .LVU289
+ 985 00f8 4721     		movs	r1, #71
+ 986 00fa 0D48     		ldr	r0, .L68+24
+ 987 00fc FFF7FEFF 		bl	Error_Handler
+ 988              	.LVL62:
+ 989 0100 9AE7     		b	.L51
+ 990              	.L67:
  119:.//BSP/Hardware/Src/i2c.c ****       Error_Handler(__FILE__, __LINE__);
- 957              		.loc 1 119 7 view .LVU278
- 958 0102 7721     		movs	r1, #119
- 959 0104 0A48     		ldr	r0, .L68+24
- 960 0106 FFF7FEFF 		bl	Error_Handler
- 961              	.LVL61:
- 962 010a EDE7     		b	.L53
- 963              	.L66:
+ 991              		.loc 1 119 7 view .LVU290
+ 992 0102 7721     		movs	r1, #119
+ 993 0104 0A48     		ldr	r0, .L68+24
+ 994 0106 FFF7FEFF 		bl	Error_Handler
+ 995              	.LVL63:
+ 996 010a EDE7     		b	.L53
+ 997              	.L66:
  102:.//BSP/Hardware/Src/i2c.c ****       Error_Handler(__FILE__, __LINE__);
- 964              		.loc 1 102 7 view .LVU279
- 965 010c 6621     		movs	r1, #102
- 966 010e 0848     		ldr	r0, .L68+24
- 967 0110 FFF7FEFF 		bl	Error_Handler
- 968              	.LVL62:
- 969 0114 CDE7     		b	.L52
- 970              	.L69:
- 971 0116 00BF     		.align	2
- 972              	.L68:
- 973 0118 001C0058 		.word	1476402176
- 974 011c 00440258 		.word	1476543488
- 975 0120 00000000 		.word	object_handle
- 976 0124 000C0258 		.word	1476529152
- 977 0128 08540258 		.word	1476547592
- 978 012c 1C540258 		.word	1476547612
- 979 0130 00000000 		.word	.LC0
- 980              		.cfi_endproc
- 981              	.LFE340:
- 983              		.section	.text.BDMA_Channel0_IRQHandler,"ax",%progbits
- 984              		.align	1
- 985              		.p2align 2,,3
- 986              		.global	BDMA_Channel0_IRQHandler
- 987              		.syntax unified
- 988              		.thumb
- 989              		.thumb_func
- 990              		.fpu fpv5-d16
- 992              	BDMA_Channel0_IRQHandler:
- 993              	.LFB341:
+ 998              		.loc 1 102 7 view .LVU291
+ 999 010c 6621     		movs	r1, #102
+ 1000 010e 0848     		ldr	r0, .L68+24
+ 1001 0110 FFF7FEFF 		bl	Error_Handler
+ 1002              	.LVL64:
+ 1003 0114 CDE7     		b	.L52
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 26
+
+
+ 1004              	.L69:
+ 1005 0116 00BF     		.align	2
+ 1006              	.L68:
+ 1007 0118 001C0058 		.word	1476402176
+ 1008 011c 00440258 		.word	1476543488
+ 1009 0120 00000000 		.word	object_handle
+ 1010 0124 000C0258 		.word	1476529152
+ 1011 0128 08540258 		.word	1476547592
+ 1012 012c 1C540258 		.word	1476547612
+ 1013 0130 00000000 		.word	.LC0
+ 1014              		.cfi_endproc
+ 1015              	.LFE340:
+ 1017              		.section	.text.BDMA_Channel0_IRQHandler,"ax",%progbits
+ 1018              		.align	1
+ 1019              		.p2align 2,,3
+ 1020              		.global	BDMA_Channel0_IRQHandler
+ 1021              		.syntax unified
+ 1022              		.thumb
+ 1023              		.thumb_func
+ 1024              		.fpu fpv5-d16
+ 1026              	BDMA_Channel0_IRQHandler:
+ 1027              	.LFB341:
  128:.//BSP/Hardware/Src/i2c.c **** {
- 994              		.loc 1 128 1 view -0
- 995              		.cfi_startproc
- 996              		@ args = 0, pretend = 0, frame = 0
- 997              		@ frame_needed = 0, uses_anonymous_args = 0
- 998              		@ link register save eliminated.
+ 1028              		.loc 1 128 1 view -0
+ 1029              		.cfi_startproc
+ 1030              		@ args = 0, pretend = 0, frame = 0
+ 1031              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1032              		@ link register save eliminated.
  129:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_rx);
- 999              		.loc 1 129 3 view .LVU281
+ 1033              		.loc 1 129 3 view .LVU293
  129:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_rx);
- 1000              		.loc 1 129 36 is_stmt 0 view .LVU282
- 1001 0000 024B     		ldr	r3, .L71
+ 1034              		.loc 1 129 36 is_stmt 0 view .LVU294
+ 1035 0000 024B     		ldr	r3, .L71
  129:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_rx);
- 1002              		.loc 1 129 3 view .LVU283
- 1003 0002 1868     		ldr	r0, [r3]
- 1004 0004 4C30     		adds	r0, r0, #76
- 1005 0006 FFF7FEBF 		b	HAL_DMA_IRQHandler
- 1006              	.LVL63:
- 1007              	.L72:
- 1008 000a 00BF     		.align	2
- 1009              	.L71:
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 26
-
-
- 1010 000c 00000000 		.word	object_handle
- 1011              		.cfi_endproc
- 1012              	.LFE341:
- 1014              		.section	.text.BDMA_Channel1_IRQHandler,"ax",%progbits
- 1015              		.align	1
- 1016              		.p2align 2,,3
- 1017              		.global	BDMA_Channel1_IRQHandler
- 1018              		.syntax unified
- 1019              		.thumb
- 1020              		.thumb_func
- 1021              		.fpu fpv5-d16
- 1023              	BDMA_Channel1_IRQHandler:
- 1024              	.LFB342:
+ 1036              		.loc 1 129 3 view .LVU295
+ 1037 0002 1868     		ldr	r0, [r3]
+ 1038 0004 4C30     		adds	r0, r0, #76
+ 1039 0006 FFF7FEBF 		b	HAL_DMA_IRQHandler
+ 1040              	.LVL65:
+ 1041              	.L72:
+ 1042 000a 00BF     		.align	2
+ 1043              	.L71:
+ 1044 000c 00000000 		.word	object_handle
+ 1045              		.cfi_endproc
+ 1046              	.LFE341:
+ 1048              		.section	.text.BDMA_Channel1_IRQHandler,"ax",%progbits
+ 1049              		.align	1
+ 1050              		.p2align 2,,3
+ 1051              		.global	BDMA_Channel1_IRQHandler
+ 1052              		.syntax unified
+ 1053              		.thumb
+ 1054              		.thumb_func
+ 1055              		.fpu fpv5-d16
+ 1057              	BDMA_Channel1_IRQHandler:
+ 1058              	.LFB342:
  133:.//BSP/Hardware/Src/i2c.c **** {
- 1025              		.loc 1 133 1 is_stmt 1 view -0
- 1026              		.cfi_startproc
- 1027              		@ args = 0, pretend = 0, frame = 0
- 1028              		@ frame_needed = 0, uses_anonymous_args = 0
- 1029              		@ link register save eliminated.
- 134:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_tx);
- 1030              		.loc 1 134 3 view .LVU285
- 134:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_tx);
- 1031              		.loc 1 134 36 is_stmt 0 view .LVU286
- 1032 0000 024B     		ldr	r3, .L74
- 134:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_tx);
- 1033              		.loc 1 134 3 view .LVU287
- 1034 0002 1868     		ldr	r0, [r3]
- 1035 0004 C430     		adds	r0, r0, #196
- 1036 0006 FFF7FEBF 		b	HAL_DMA_IRQHandler
- 1037              	.LVL64:
- 1038              	.L75:
- 1039 000a 00BF     		.align	2
- 1040              	.L74:
- 1041 000c 00000000 		.word	object_handle
- 1042              		.cfi_endproc
- 1043              	.LFE342:
- 1045              		.comm	object_handle,4,4
- 1046              		.text
- 1047              	.Letext0:
- 1048              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
- 1049              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
- 1050              		.file 4 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
- 1051              		.file 5 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 1052              		.file 6 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
- 1053              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
- 1054              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
- 1055              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
- 1056              		.file 10 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/ree
- 1057              		.file 11 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
- 1058              		.file 12 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 1059              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h"
- 1060              		.file 14 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
- 1061              		.file 15 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
- 1062              		.file 16 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 1063              		.file 17 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h"
- 1064              		.file 18 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
- 1065              		.file 19 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 27
+ 1059              		.loc 1 133 1 is_stmt 1 view -0
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 27
 
 
- 1066              		.file 20 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/stdlib.
- 1067              		.file 21 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
- 1068              		.file 22 ".//BSP/Hardware/Src/../../Components/Inc/lcd.h"
- 1069              		.file 23 ".//BSP/Hardware/Src/../../Hardware/Inc/i2c.h"
- 1070              		.file 24 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
- 1071              		.file 25 ".//BSP/Hardware/Src/../../system.h"
- 1072              		.file 26 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h"
- 1073              		.file 27 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h"
- 1074              		.file 28 "<built-in>"
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s 			page 28
+ 1060              		.cfi_startproc
+ 1061              		@ args = 0, pretend = 0, frame = 0
+ 1062              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1063              		@ link register save eliminated.
+ 134:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_tx);
+ 1064              		.loc 1 134 3 view .LVU297
+ 134:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_tx);
+ 1065              		.loc 1 134 36 is_stmt 0 view .LVU298
+ 1066 0000 024B     		ldr	r3, .L74
+ 134:.//BSP/Hardware/Src/i2c.c ****   HAL_DMA_IRQHandler(&object_handle->hdma_i2c_tx);
+ 1067              		.loc 1 134 3 view .LVU299
+ 1068 0002 1868     		ldr	r0, [r3]
+ 1069 0004 C430     		adds	r0, r0, #196
+ 1070 0006 FFF7FEBF 		b	HAL_DMA_IRQHandler
+ 1071              	.LVL66:
+ 1072              	.L75:
+ 1073 000a 00BF     		.align	2
+ 1074              	.L74:
+ 1075 000c 00000000 		.word	object_handle
+ 1076              		.cfi_endproc
+ 1077              	.LFE342:
+ 1079              		.comm	object_handle,4,4
+ 1080              		.text
+ 1081              	.Letext0:
+ 1082              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
+ 1083              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
+ 1084              		.file 4 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
+ 1085              		.file 5 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 1086              		.file 6 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
+ 1087              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
+ 1088              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
+ 1089              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
+ 1090              		.file 10 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/ree
+ 1091              		.file 11 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
+ 1092              		.file 12 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 1093              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h"
+ 1094              		.file 14 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
+ 1095              		.file 15 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 1096              		.file 16 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 1097              		.file 17 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h"
+ 1098              		.file 18 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 1099              		.file 19 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 1100              		.file 20 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/stdlib.
+ 1101              		.file 21 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ 1102              		.file 22 ".//BSP/Hardware/Src/../../Components/Inc/lcd.h"
+ 1103              		.file 23 ".//BSP/Hardware/Src/../../Hardware/Inc/i2c.h"
+ 1104              		.file 24 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h"
+ 1105              		.file 25 ".//BSP/Hardware/Src/../../system.h"
+ 1106              		.file 26 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_cortex.h"
+ 1107              		.file 27 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c_ex.h"
+ 1108              		.file 28 "<built-in>"
+ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s 			page 28
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 i2c.c
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:17     .rodata.I2C_Init.str1.4:0000000000000000 $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:21     .text.I2C_Init:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:30     .text.I2C_Init:0000000000000000 I2C_Init
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:233    .text.I2C_Init:00000000000000c0 $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:241    .text.I2C_WriteReg:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:249    .text.I2C_WriteReg:0000000000000000 I2C_WriteReg
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:368    .text.I2C_WriteReg:000000000000006c $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:373    .text.I2C_ReadReg:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:381    .text.I2C_ReadReg:0000000000000000 I2C_ReadReg
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:503    .text.I2C_ReadReg:000000000000006c $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:508    .text.I2C_IsReady:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:516    .text.I2C_IsReady:0000000000000000 I2C_IsReady
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:610    .text.I2C_IsReady:000000000000004c $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:615    .text.I2C_Object_Init:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:623    .text.I2C_Object_Init:0000000000000000 I2C_Object_Init
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:669    .text.I2C_Object_Init:0000000000000020 $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:17     .rodata.I2C_Init.str1.4:0000000000000000 $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:21     .text.I2C_Init:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:30     .text.I2C_Init:0000000000000000 I2C_Init
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:237    .text.I2C_Init:00000000000000d8 $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:243    .text.I2C_WriteReg:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:251    .text.I2C_WriteReg:0000000000000000 I2C_WriteReg
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:370    .text.I2C_WriteReg:000000000000006c $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:375    .text.I2C_ReadReg:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:383    .text.I2C_ReadReg:0000000000000000 I2C_ReadReg
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:505    .text.I2C_ReadReg:000000000000006c $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:510    .text.I2C_IsReady:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:518    .text.I2C_IsReady:0000000000000000 I2C_IsReady
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:612    .text.I2C_IsReady:000000000000004c $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:617    .text.I2C_Object_Init:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:625    .text.I2C_Object_Init:0000000000000000 I2C_Object_Init
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:703    .text.I2C_Object_Init:000000000000003c $d
                             *COM*:0000000000000004 object_handle
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:678    .text.HAL_I2C_MspInit:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:686    .text.HAL_I2C_MspInit:0000000000000000 HAL_I2C_MspInit
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:973    .text.HAL_I2C_MspInit:0000000000000118 $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:984    .text.BDMA_Channel0_IRQHandler:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:992    .text.BDMA_Channel0_IRQHandler:0000000000000000 BDMA_Channel0_IRQHandler
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:1010   .text.BDMA_Channel0_IRQHandler:000000000000000c $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:1015   .text.BDMA_Channel1_IRQHandler:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:1023   .text.BDMA_Channel1_IRQHandler:0000000000000000 BDMA_Channel1_IRQHandler
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccHcnNNN.s:1041   .text.BDMA_Channel1_IRQHandler:000000000000000c $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:712    .text.HAL_I2C_MspInit:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:720    .text.HAL_I2C_MspInit:0000000000000000 HAL_I2C_MspInit
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:1007   .text.HAL_I2C_MspInit:0000000000000118 $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:1018   .text.BDMA_Channel0_IRQHandler:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:1026   .text.BDMA_Channel0_IRQHandler:0000000000000000 BDMA_Channel0_IRQHandler
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:1044   .text.BDMA_Channel0_IRQHandler:000000000000000c $d
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:1049   .text.BDMA_Channel1_IRQHandler:0000000000000000 $t
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:1057   .text.BDMA_Channel1_IRQHandler:0000000000000000 BDMA_Channel1_IRQHandler
+/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//ccatP3gO.s:1075   .text.BDMA_Channel1_IRQHandler:000000000000000c $d
 
 UNDEFINED SYMBOLS
 HAL_NVIC_SetPriority
