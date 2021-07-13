@@ -57,17 +57,7 @@ extern "C" {
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define OSC32_OUT_Pin GPIO_PIN_15
-#define OSC32_OUT_GPIO_Port GPIOC
-#define OSC32_IN_Pin GPIO_PIN_14
-#define OSC32_IN_GPIO_Port GPIOC
 
-#define CEC_CK_MCO1_Pin GPIO_PIN_8
-#define CEC_CK_MCO1_GPIO_Port GPIOA
-#define OSC_OUT_Pin GPIO_PIN_1
-#define OSC_OUT_GPIO_Port GPIOH
-#define OSC_IN_Pin GPIO_PIN_0
-#define OSC_IN_GPIO_Port GPIOH
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

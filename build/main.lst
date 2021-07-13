@@ -1,4 +1,4 @@
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 1
+ARM GAS  /tmp/ccwb5fXg.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -26,663 +26,236 @@ ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 1
   23              		.thumb_func
   24              		.fpu fpv5-d16
   26              	StartDefaultTask:
-  27              	.LFB342:
-  28              		.file 1 ".//User/code/Src/main.c"
-   1:.//User/code/Src/main.c **** #include "main.h"
-   2:.//User/code/Src/main.c **** #include "cmsis_os.h"
-   3:.//User/code/Src/main.c **** #include "fatfs.h"
-   4:.//User/code/Src/main.c **** #include "../../../BSP/system.h"
-   5:.//User/code/Src/main.c **** 
-   6:.//User/code/Src/main.c **** #ifndef HSEM_ID_0
-   7:.//User/code/Src/main.c **** #define HSEM_ID_0 (0U) /* HW semaphore 0*/
-   8:.//User/code/Src/main.c **** #endif
-   9:.//User/code/Src/main.c **** 
-  10:.//User/code/Src/main.c **** osThreadId_t defaultTaskHandle;
-  11:.//User/code/Src/main.c **** const osThreadAttr_t defaultTask_attributes = {
-  12:.//User/code/Src/main.c ****   .name = "defaultTask",
-  13:.//User/code/Src/main.c ****   .stack_size = 128 * 4,
-  14:.//User/code/Src/main.c ****   .priority = (osPriority_t) osPriorityNormal,
-  15:.//User/code/Src/main.c **** };
-  16:.//User/code/Src/main.c **** 
-  17:.//User/code/Src/main.c **** void PeriphCommonClock_Config(void);
-  18:.//User/code/Src/main.c **** 
-  19:.//User/code/Src/main.c **** void StartDefaultTask(void *argument);
-  20:.//User/code/Src/main.c **** 
-  21:.//User/code/Src/main.c **** int main(void)
-  22:.//User/code/Src/main.c **** {
-  23:.//User/code/Src/main.c **** 
-  24:.//User/code/Src/main.c ****   int32_t timeout;
-  25:.//User/code/Src/main.c ****   timeout = 0xFFFF;
-  26:.//User/code/Src/main.c ****   while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
-  27:.//User/code/Src/main.c ****   if ( timeout < 0 )
-  28:.//User/code/Src/main.c ****   {
-  29:.//User/code/Src/main.c ****   Error_Handler(__FILE__, __LINE__);
-  30:.//User/code/Src/main.c ****   }
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 2
+  27              	.LVL0:
+  28              	.LFB339:
+  29              		.file 1 "./User/code/Src/main.c"
+   1:./User/code/Src/main.c **** #include "main.h"
+   2:./User/code/Src/main.c **** #include "cmsis_os.h"
+   3:./User/code/Src/main.c **** #include "fatfs.h"
+   4:./User/code/Src/main.c **** #include "../../../BSP/system.h"
+   5:./User/code/Src/main.c **** 
+   6:./User/code/Src/main.c **** osThreadId_t defaultTaskHandle;
+   7:./User/code/Src/main.c **** const osThreadAttr_t defaultTask_attributes = {
+   8:./User/code/Src/main.c ****   .name = "defaultTask",
+   9:./User/code/Src/main.c ****   .stack_size = 128 * 4,
+  10:./User/code/Src/main.c ****   .priority = (osPriority_t) osPriorityNormal,
+  11:./User/code/Src/main.c **** };
+  12:./User/code/Src/main.c **** 
+  13:./User/code/Src/main.c **** uint32_t test=0;
+  14:./User/code/Src/main.c **** 
+  15:./User/code/Src/main.c **** void PeriphCommonClock_Config(void);
+  16:./User/code/Src/main.c **** 
+  17:./User/code/Src/main.c **** void StartDefaultTask(void *argument);
+  18:./User/code/Src/main.c **** 
+  19:./User/code/Src/main.c **** int main(void)
+  20:./User/code/Src/main.c **** {
+  21:./User/code/Src/main.c ****   Hardware_Init();
+  22:./User/code/Src/main.c ****   osKernelInitialize();
+  23:./User/code/Src/main.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  24:./User/code/Src/main.c ****   osKernelStart();
+  25:./User/code/Src/main.c **** 
+  26:./User/code/Src/main.c ****   while (1)
+  27:./User/code/Src/main.c ****   {
+  28:./User/code/Src/main.c ****   }
+  29:./User/code/Src/main.c **** }
+ARM GAS  /tmp/ccwb5fXg.s 			page 2
 
 
-  31:.//User/code/Src/main.c **** 
-  32:.//User/code/Src/main.c ****   HAL_Init();
-  33:.//User/code/Src/main.c **** 
-  34:.//User/code/Src/main.c ****   SystemClock_Config();
-  35:.//User/code/Src/main.c **** 
-  36:.//User/code/Src/main.c **** 
-  37:.//User/code/Src/main.c ****   PeriphCommonClock_Config();
-  38:.//User/code/Src/main.c **** 
-  39:.//User/code/Src/main.c ****   __HAL_RCC_HSEM_CLK_ENABLE();
-  40:.//User/code/Src/main.c **** 
-  41:.//User/code/Src/main.c ****   HAL_HSEM_FastTake(HSEM_ID_0);
-  42:.//User/code/Src/main.c **** 
-  43:.//User/code/Src/main.c ****   HAL_HSEM_Release(HSEM_ID_0,0);
-  44:.//User/code/Src/main.c **** 
-  45:.//User/code/Src/main.c ****   timeout = 0xFFFF;
-  46:.//User/code/Src/main.c ****   while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
-  47:.//User/code/Src/main.c ****   if ( timeout < 0 )
-  48:.//User/code/Src/main.c ****   {
-  49:.//User/code/Src/main.c ****     Error_Handler(__FILE__, __LINE__);
-  50:.//User/code/Src/main.c ****   }
-  51:.//User/code/Src/main.c **** 
-  52:.//User/code/Src/main.c ****   osKernelInitialize();
-  53:.//User/code/Src/main.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
-  54:.//User/code/Src/main.c ****   osKernelStart();
-  55:.//User/code/Src/main.c **** 
-  56:.//User/code/Src/main.c ****   while (1)
-  57:.//User/code/Src/main.c ****   {
-  58:.//User/code/Src/main.c ****   }
-  59:.//User/code/Src/main.c **** }
-  60:.//User/code/Src/main.c **** 
-  61:.//User/code/Src/main.c **** 
-  62:.//User/code/Src/main.c **** /**
-  63:.//User/code/Src/main.c ****   * @brief Peripherals Common Clock Configuration
-  64:.//User/code/Src/main.c ****   * @retval None
-  65:.//User/code/Src/main.c ****   */
-  66:.//User/code/Src/main.c **** void PeriphCommonClock_Config(void)
-  67:.//User/code/Src/main.c **** {
-  68:.//User/code/Src/main.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
-  69:.//User/code/Src/main.c **** 
-  70:.//User/code/Src/main.c ****   /** Initializes the peripherals clock
-  71:.//User/code/Src/main.c ****   */
-  72:.//User/code/Src/main.c ****   PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_ADC;
-  73:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2M = 2;
-  74:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2N = 12;
-  75:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2P = 2;
-  76:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2Q = 2;
-  77:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2R = 2;
-  78:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
-  79:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOMEDIUM;
-  80:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
-  81:.//User/code/Src/main.c ****   PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL2;
-  82:.//User/code/Src/main.c ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
-  83:.//User/code/Src/main.c ****   {
-  84:.//User/code/Src/main.c ****     Error_Handler(__FILE__, __LINE__);
-  85:.//User/code/Src/main.c ****   }
-  86:.//User/code/Src/main.c **** }
-  87:.//User/code/Src/main.c **** 
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 3
+  30:./User/code/Src/main.c **** 
+  31:./User/code/Src/main.c **** void StartDefaultTask(void *argument)
+  32:./User/code/Src/main.c **** {
+  30              		.loc 1 32 1 view -0
+  31              		.cfi_startproc
+  32              		@ Volatile: function does not return.
+  33              		@ args = 0, pretend = 0, frame = 0
+  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  35              		.loc 1 32 1 is_stmt 0 view .LVU1
+  36 0000 044C     		ldr	r4, .L5
+  37 0002 08B5     		push	{r3, lr}
+  38              	.LCFI0:
+  39              		.cfi_def_cfa_offset 8
+  40              		.cfi_offset 3, -8
+  41              		.cfi_offset 14, -4
+  42              	.LVL1:
+  43              	.L2:
+  33:./User/code/Src/main.c ****   /* USER CODE BEGIN 5 */
+  34:./User/code/Src/main.c ****   /* Infinite loop */
+  35:./User/code/Src/main.c ****   for(;;)
+  44              		.loc 1 35 3 is_stmt 1 discriminator 1 view .LVU2
+  36:./User/code/Src/main.c ****   {
+  37:./User/code/Src/main.c ****     test++;
+  45              		.loc 1 37 5 discriminator 1 view .LVU3
+  46              		.loc 1 37 9 is_stmt 0 discriminator 1 view .LVU4
+  47 0004 2368     		ldr	r3, [r4]
+  38:./User/code/Src/main.c ****     osDelay(1);
+  48              		.loc 1 38 5 discriminator 1 view .LVU5
+  49 0006 0120     		movs	r0, #1
+  37:./User/code/Src/main.c ****     osDelay(1);
+  50              		.loc 1 37 9 discriminator 1 view .LVU6
+  51 0008 0344     		add	r3, r3, r0
+  52 000a 2360     		str	r3, [r4]
+  53              		.loc 1 38 5 is_stmt 1 discriminator 1 view .LVU7
+  54 000c FFF7FEFF 		bl	osDelay
+  55              	.LVL2:
+  35:./User/code/Src/main.c ****   {
+  56              		.loc 1 35 8 discriminator 1 view .LVU8
+  57 0010 F8E7     		b	.L2
+  58              	.L6:
+  59 0012 00BF     		.align	2
+  60              	.L5:
+  61 0014 00000000 		.word	.LANCHOR0
+  62              		.cfi_endproc
+  63              	.LFE339:
+  65              		.section	.text.startup.main,"ax",%progbits
+  66              		.align	1
+  67              		.p2align 2,,3
+  68              		.global	main
+  69              		.syntax unified
+  70              		.thumb
+  71              		.thumb_func
+  72              		.fpu fpv5-d16
+  74              	main:
+  75              	.LFB338:
+  20:./User/code/Src/main.c ****   Hardware_Init();
+  76              		.loc 1 20 1 view -0
+ARM GAS  /tmp/ccwb5fXg.s 			page 3
 
 
-  88:.//User/code/Src/main.c **** /**
-  89:.//User/code/Src/main.c ****   * @brief CRC Initialization Function
-  90:.//User/code/Src/main.c ****   * @param None
-  91:.//User/code/Src/main.c ****   * @retval None
-  92:.//User/code/Src/main.c ****   */
-  93:.//User/code/Src/main.c **** static void MX_CRC_Init(void)
-  94:.//User/code/Src/main.c **** {
-  95:.//User/code/Src/main.c **** 
-  96:.//User/code/Src/main.c ****   // hcrc.Instance = CRC;
-  97:.//User/code/Src/main.c ****   // hcrc.Init.DefaultPolynomialUse = DEFAULT_POLYNOMIAL_ENABLE;
-  98:.//User/code/Src/main.c ****   // hcrc.Init.DefaultInitValueUse = DEFAULT_INIT_VALUE_ENABLE;
-  99:.//User/code/Src/main.c ****   // hcrc.Init.InputDataInversionMode = CRC_INPUTDATA_INVERSION_NONE;
- 100:.//User/code/Src/main.c ****   // hcrc.Init.OutputDataInversionMode = CRC_OUTPUTDATA_INVERSION_DISABLE;
- 101:.//User/code/Src/main.c ****   // hcrc.InputDataFormat = CRC_INPUTDATA_FORMAT_BYTES;
- 102:.//User/code/Src/main.c ****   // if (HAL_CRC_Init(&hcrc) != HAL_OK)
- 103:.//User/code/Src/main.c ****   // {
- 104:.//User/code/Src/main.c ****   //   Error_Handler(__FILE__, __LINE__);
- 105:.//User/code/Src/main.c ****   // }
- 106:.//User/code/Src/main.c **** 
- 107:.//User/code/Src/main.c **** 
- 108:.//User/code/Src/main.c **** }
- 109:.//User/code/Src/main.c **** 
- 110:.//User/code/Src/main.c **** 
- 111:.//User/code/Src/main.c **** 
- 112:.//User/code/Src/main.c **** 
- 113:.//User/code/Src/main.c **** 
- 114:.//User/code/Src/main.c **** 
- 115:.//User/code/Src/main.c **** /**
- 116:.//User/code/Src/main.c ****   * @brief GPIO Initialization Function
- 117:.//User/code/Src/main.c ****   * @param None
- 118:.//User/code/Src/main.c ****   * @retval None
- 119:.//User/code/Src/main.c ****   */
- 120:.//User/code/Src/main.c **** static void MX_GPIO_Init(void)
- 121:.//User/code/Src/main.c **** {
- 122:.//User/code/Src/main.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 123:.//User/code/Src/main.c **** 
- 124:.//User/code/Src/main.c ****   /* GPIO Ports Clock Enable */
- 125:.//User/code/Src/main.c ****   __HAL_RCC_GPIOA_CLK_ENABLE();
- 126:.//User/code/Src/main.c ****   __HAL_RCC_GPIOC_CLK_ENABLE();
- 127:.//User/code/Src/main.c ****   __HAL_RCC_GPIOH_CLK_ENABLE();
- 128:.//User/code/Src/main.c ****   __HAL_RCC_GPIOD_CLK_ENABLE();
- 129:.//User/code/Src/main.c **** 
- 130:.//User/code/Src/main.c ****   /*Configure GPIO pin : CEC_CK_MCO1_Pin */
- 131:.//User/code/Src/main.c ****   GPIO_InitStruct.Pin = CEC_CK_MCO1_Pin;
- 132:.//User/code/Src/main.c ****   GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
- 133:.//User/code/Src/main.c ****   GPIO_InitStruct.Pull = GPIO_NOPULL;
- 134:.//User/code/Src/main.c ****   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 135:.//User/code/Src/main.c ****   GPIO_InitStruct.Alternate = GPIO_AF0_MCO;
- 136:.//User/code/Src/main.c ****   HAL_GPIO_Init(CEC_CK_MCO1_GPIO_Port, &GPIO_InitStruct);
- 137:.//User/code/Src/main.c **** 
- 138:.//User/code/Src/main.c **** }
- 139:.//User/code/Src/main.c **** 
- 140:.//User/code/Src/main.c **** void StartDefaultTask(void *argument)
- 141:.//User/code/Src/main.c **** {
-  29              		.loc 1 141 1 view -0
-  30              		.cfi_startproc
-  31              		@ Volatile: function does not return.
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 4
+  77              		.cfi_startproc
+  78              		@ Volatile: function does not return.
+  79              		@ args = 0, pretend = 0, frame = 0
+  80              		@ frame_needed = 0, uses_anonymous_args = 0
+  21:./User/code/Src/main.c ****   osKernelInitialize();
+  81              		.loc 1 21 3 view .LVU10
+  20:./User/code/Src/main.c ****   Hardware_Init();
+  82              		.loc 1 20 1 is_stmt 0 view .LVU11
+  83 0000 08B5     		push	{r3, lr}
+  84              	.LCFI1:
+  85              		.cfi_def_cfa_offset 8
+  86              		.cfi_offset 3, -8
+  87              		.cfi_offset 14, -4
+  21:./User/code/Src/main.c ****   osKernelInitialize();
+  88              		.loc 1 21 3 view .LVU12
+  89 0002 FFF7FEFF 		bl	Hardware_Init
+  90              	.LVL3:
+  22:./User/code/Src/main.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  91              		.loc 1 22 3 is_stmt 1 view .LVU13
+  92 0006 FFF7FEFF 		bl	osKernelInitialize
+  93              	.LVL4:
+  23:./User/code/Src/main.c ****   osKernelStart();
+  94              		.loc 1 23 3 view .LVU14
+  23:./User/code/Src/main.c ****   osKernelStart();
+  95              		.loc 1 23 23 is_stmt 0 view .LVU15
+  96 000a 054A     		ldr	r2, .L10
+  97 000c 0021     		movs	r1, #0
+  98 000e 0548     		ldr	r0, .L10+4
+  99 0010 FFF7FEFF 		bl	osThreadNew
+ 100              	.LVL5:
+  23:./User/code/Src/main.c ****   osKernelStart();
+ 101              		.loc 1 23 21 view .LVU16
+ 102 0014 044B     		ldr	r3, .L10+8
+ 103 0016 1860     		str	r0, [r3]
+  24:./User/code/Src/main.c **** 
+ 104              		.loc 1 24 3 is_stmt 1 view .LVU17
+ 105 0018 FFF7FEFF 		bl	osKernelStart
+ 106              	.LVL6:
+ 107              	.L8:
+  26:./User/code/Src/main.c ****   {
+ 108              		.loc 1 26 3 discriminator 1 view .LVU18
+  28:./User/code/Src/main.c **** }
+ 109              		.loc 1 28 3 discriminator 1 view .LVU19
+  26:./User/code/Src/main.c ****   {
+ 110              		.loc 1 26 9 discriminator 1 view .LVU20
+  26:./User/code/Src/main.c ****   {
+ 111              		.loc 1 26 3 discriminator 1 view .LVU21
+  28:./User/code/Src/main.c **** }
+ 112              		.loc 1 28 3 discriminator 1 view .LVU22
+  26:./User/code/Src/main.c ****   {
+ 113              		.loc 1 26 9 discriminator 1 view .LVU23
+ 114 001c FEE7     		b	.L8
+ 115              	.L11:
+ 116 001e 00BF     		.align	2
+ 117              	.L10:
+ 118 0020 00000000 		.word	.LANCHOR1
+ 119 0024 00000000 		.word	StartDefaultTask
+ARM GAS  /tmp/ccwb5fXg.s 			page 4
 
 
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              	.LVL0:
-  35              		.loc 1 141 1 is_stmt 0 view .LVU1
-  36 0000 08B5     		push	{r3, lr}
-  37              	.LCFI0:
-  38              		.cfi_def_cfa_offset 8
-  39              		.cfi_offset 3, -8
-  40              		.cfi_offset 14, -4
-  41              	.LVL1:
-  42              	.L2:
- 142:.//User/code/Src/main.c ****   /* USER CODE BEGIN 5 */
- 143:.//User/code/Src/main.c ****   /* Infinite loop */
- 144:.//User/code/Src/main.c ****   for(;;)
-  43              		.loc 1 144 3 is_stmt 1 discriminator 1 view .LVU2
- 145:.//User/code/Src/main.c ****   {
- 146:.//User/code/Src/main.c ****     osDelay(1);
-  44              		.loc 1 146 5 discriminator 1 view .LVU3
-  45 0002 0120     		movs	r0, #1
-  46 0004 FFF7FEFF 		bl	osDelay
-  47              	.LVL2:
- 144:.//User/code/Src/main.c ****   {
-  48              		.loc 1 144 8 discriminator 1 view .LVU4
-  49 0008 FBE7     		b	.L2
-  50              		.cfi_endproc
-  51              	.LFE342:
-  53 000a 00BF     		.section	.rodata.PeriphCommonClock_Config.str1.4,"aMS",%progbits,1
-  54              		.align	2
-  55              	.LC0:
-  56 0000 2E2F2F55 		.ascii	".//User/code/Src/main.c\000"
-  56      7365722F 
-  56      636F6465 
-  56      2F537263 
-  56      2F6D6169 
-  57              		.section	.text.PeriphCommonClock_Config,"ax",%progbits
-  58              		.align	1
-  59              		.p2align 2,,3
-  60              		.global	PeriphCommonClock_Config
-  61              		.syntax unified
-  62              		.thumb
-  63              		.thumb_func
-  64              		.fpu fpv5-d16
-  66              	PeriphCommonClock_Config:
-  67              	.LFB339:
-  67:.//User/code/Src/main.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
-  68              		.loc 1 67 1 view -0
-  69              		.cfi_startproc
-  70              		@ args = 0, pretend = 0, frame = 192
-  71              		@ frame_needed = 0, uses_anonymous_args = 0
-  68:.//User/code/Src/main.c **** 
-  72              		.loc 1 68 3 view .LVU6
-  67:.//User/code/Src/main.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
-  73              		.loc 1 67 1 is_stmt 0 view .LVU7
-  74 0000 30B5     		push	{r4, r5, lr}
-  75              	.LCFI1:
-  76              		.cfi_def_cfa_offset 12
-  77              		.cfi_offset 4, -12
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 5
-
-
-  78              		.cfi_offset 5, -8
-  79              		.cfi_offset 14, -4
-  80 0002 B1B0     		sub	sp, sp, #196
-  81              	.LCFI2:
-  82              		.cfi_def_cfa_offset 208
-  68:.//User/code/Src/main.c **** 
-  83              		.loc 1 68 28 view .LVU8
-  84 0004 9C22     		movs	r2, #156
-  85 0006 0021     		movs	r1, #0
-  74:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2P = 2;
-  86              		.loc 1 74 34 view .LVU9
-  87 0008 0C25     		movs	r5, #12
-  68:.//User/code/Src/main.c **** 
-  88              		.loc 1 68 28 view .LVU10
-  89 000a 09A8     		add	r0, sp, #36
-  78:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOMEDIUM;
-  90              		.loc 1 78 36 view .LVU11
-  91 000c C024     		movs	r4, #192
-  68:.//User/code/Src/main.c **** 
-  92              		.loc 1 68 28 view .LVU12
-  93 000e FFF7FEFF 		bl	memset
-  94              	.LVL3:
-  72:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2M = 2;
-  95              		.loc 1 72 3 is_stmt 1 view .LVU13
-  72:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2M = 2;
-  96              		.loc 1 72 44 is_stmt 0 view .LVU14
-  97 0012 4FF40020 		mov	r0, #524288
-  73:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2N = 12;
-  98              		.loc 1 73 34 view .LVU15
-  99 0016 0223     		movs	r3, #2
-  79:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
- 100              		.loc 1 79 39 view .LVU16
- 101 0018 2021     		movs	r1, #32
-  80:.//User/code/Src/main.c ****   PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL2;
- 102              		.loc 1 80 38 view .LVU17
- 103 001a 0022     		movs	r2, #0
-  72:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2M = 2;
- 104              		.loc 1 72 44 view .LVU18
- 105 001c 0090     		str	r0, [sp]
-  73:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2N = 12;
- 106              		.loc 1 73 3 is_stmt 1 view .LVU19
-  82:.//User/code/Src/main.c ****   {
- 107              		.loc 1 82 7 is_stmt 0 view .LVU20
- 108 001e 6846     		mov	r0, sp
-  73:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2N = 12;
- 109              		.loc 1 73 34 view .LVU21
- 110 0020 0193     		str	r3, [sp, #4]
-  74:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2P = 2;
- 111              		.loc 1 74 3 is_stmt 1 view .LVU22
-  77:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
- 112              		.loc 1 77 34 is_stmt 0 view .LVU23
- 113 0022 0593     		str	r3, [sp, #20]
-  74:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2P = 2;
- 114              		.loc 1 74 34 view .LVU24
- 115 0024 0295     		str	r5, [sp, #8]
-  75:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2Q = 2;
- 116              		.loc 1 75 3 is_stmt 1 view .LVU25
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 6
-
-
-  76:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2R = 2;
- 117              		.loc 1 76 3 view .LVU26
-  77:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2RGE = RCC_PLL2VCIRANGE_3;
- 118              		.loc 1 77 3 view .LVU27
-  78:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2VCOSEL = RCC_PLL2VCOMEDIUM;
- 119              		.loc 1 78 3 view .LVU28
-  80:.//User/code/Src/main.c ****   PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL2;
- 120              		.loc 1 80 38 is_stmt 0 view .LVU29
- 121 0026 0892     		str	r2, [sp, #32]
-  76:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2R = 2;
- 122              		.loc 1 76 34 view .LVU30
- 123 0028 CDE90333 		strd	r3, r3, [sp, #12]
-  79:.//User/code/Src/main.c ****   PeriphClkInitStruct.PLL2.PLL2FRACN = 0;
- 124              		.loc 1 79 39 view .LVU31
- 125 002c CDE90641 		strd	r4, r1, [sp, #24]
-  80:.//User/code/Src/main.c ****   PeriphClkInitStruct.AdcClockSelection = RCC_ADCCLKSOURCE_PLL2;
- 126              		.loc 1 80 3 is_stmt 1 view .LVU32
-  81:.//User/code/Src/main.c ****   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
- 127              		.loc 1 81 3 view .LVU33
-  82:.//User/code/Src/main.c ****   {
- 128              		.loc 1 82 3 view .LVU34
-  82:.//User/code/Src/main.c ****   {
- 129              		.loc 1 82 7 is_stmt 0 view .LVU35
- 130 0030 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
- 131              	.LVL4:
-  82:.//User/code/Src/main.c ****   {
- 132              		.loc 1 82 6 view .LVU36
- 133 0034 08B9     		cbnz	r0, .L11
-  86:.//User/code/Src/main.c **** 
- 134              		.loc 1 86 1 view .LVU37
- 135 0036 31B0     		add	sp, sp, #196
- 136              	.LCFI3:
- 137              		.cfi_remember_state
- 138              		.cfi_def_cfa_offset 12
- 139              		@ sp needed
- 140 0038 30BD     		pop	{r4, r5, pc}
- 141              	.L11:
- 142              	.LCFI4:
- 143              		.cfi_restore_state
- 144              	.LBB4:
- 145              	.LBI4:
-  66:.//User/code/Src/main.c **** {
- 146              		.loc 1 66 6 is_stmt 1 view .LVU38
- 147              	.LBB5:
-  84:.//User/code/Src/main.c ****   }
- 148              		.loc 1 84 5 view .LVU39
- 149 003a 5421     		movs	r1, #84
- 150 003c 0248     		ldr	r0, .L12
- 151 003e FFF7FEFF 		bl	Error_Handler
- 152              	.LVL5:
- 153              	.LBE5:
- 154              	.LBE4:
-  86:.//User/code/Src/main.c **** 
- 155              		.loc 1 86 1 is_stmt 0 view .LVU40
- 156 0042 31B0     		add	sp, sp, #196
- 157              	.LCFI5:
- 158              		.cfi_def_cfa_offset 12
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 7
-
-
- 159              		@ sp needed
- 160 0044 30BD     		pop	{r4, r5, pc}
- 161              	.L13:
- 162 0046 00BF     		.align	2
- 163              	.L12:
- 164 0048 00000000 		.word	.LC0
- 165              		.cfi_endproc
- 166              	.LFE339:
- 168              		.section	.text.startup.main,"ax",%progbits
- 169              		.align	1
- 170              		.p2align 2,,3
- 171              		.global	main
- 172              		.syntax unified
- 173              		.thumb
- 174              		.thumb_func
- 175              		.fpu fpv5-d16
- 177              	main:
- 178              	.LFB338:
-  22:.//User/code/Src/main.c **** 
- 179              		.loc 1 22 1 is_stmt 1 view -0
- 180              		.cfi_startproc
- 181              		@ args = 0, pretend = 0, frame = 8
- 182              		@ frame_needed = 0, uses_anonymous_args = 0
-  24:.//User/code/Src/main.c ****   timeout = 0xFFFF;
- 183              		.loc 1 24 3 view .LVU42
-  25:.//User/code/Src/main.c ****   while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) != RESET) && (timeout-- > 0));
- 184              		.loc 1 25 3 view .LVU43
- 185              	.LVL6:
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 186              		.loc 1 26 3 view .LVU44
-  22:.//User/code/Src/main.c **** 
- 187              		.loc 1 22 1 is_stmt 0 view .LVU45
- 188 0000 10B5     		push	{r4, lr}
- 189              	.LCFI6:
- 190              		.cfi_def_cfa_offset 8
- 191              		.cfi_offset 4, -8
- 192              		.cfi_offset 14, -4
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 193              		.loc 1 26 8 view .LVU46
- 194 0002 4FF48033 		mov	r3, #65536
-  22:.//User/code/Src/main.c **** 
- 195              		.loc 1 22 1 view .LVU47
- 196 0006 82B0     		sub	sp, sp, #8
- 197              	.LCFI7:
- 198              		.cfi_def_cfa_offset 16
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 199              		.loc 1 26 10 view .LVU48
- 200 0008 1F4A     		ldr	r2, .L34
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 201              		.loc 1 26 8 view .LVU49
- 202 000a 01E0     		b	.L16
- 203              	.LVL7:
- 204              	.L31:
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 205              		.loc 1 26 57 discriminator 1 view .LVU50
- 206 000c 013B     		subs	r3, r3, #1
- 207              	.LVL8:
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 8
-
-
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 208              		.loc 1 26 57 discriminator 1 view .LVU51
- 209 000e 30D0     		beq	.L30
- 210              	.LVL9:
- 211              	.L16:
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 212              		.loc 1 26 76 is_stmt 1 discriminator 2 view .LVU52
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 213              		.loc 1 26 8 discriminator 2 view .LVU53
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 214              		.loc 1 26 10 is_stmt 0 discriminator 2 view .LVU54
- 215 0010 1168     		ldr	r1, [r2]
-  26:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 216              		.loc 1 26 8 discriminator 2 view .LVU55
- 217 0012 0904     		lsls	r1, r1, #16
- 218 0014 FAD4     		bmi	.L31
- 219              	.LVL10:
- 220              	.L15:
-  32:.//User/code/Src/main.c **** 
- 221              		.loc 1 32 3 is_stmt 1 view .LVU56
- 222              	.LBB6:
-  39:.//User/code/Src/main.c **** 
- 223              		.loc 1 39 3 is_stmt 0 view .LVU57
- 224 0016 1C4C     		ldr	r4, .L34
- 225              	.LBE6:
-  32:.//User/code/Src/main.c **** 
- 226              		.loc 1 32 3 view .LVU58
- 227 0018 FFF7FEFF 		bl	HAL_Init
- 228              	.LVL11:
-  34:.//User/code/Src/main.c **** 
- 229              		.loc 1 34 3 is_stmt 1 view .LVU59
- 230 001c FFF7FEFF 		bl	SystemClock_Config
- 231              	.LVL12:
-  37:.//User/code/Src/main.c **** 
- 232              		.loc 1 37 3 view .LVU60
- 233 0020 FFF7FEFF 		bl	PeriphCommonClock_Config
- 234              	.LVL13:
-  39:.//User/code/Src/main.c **** 
- 235              		.loc 1 39 3 view .LVU61
- 236              	.LBB7:
-  39:.//User/code/Src/main.c **** 
- 237              		.loc 1 39 3 view .LVU62
-  39:.//User/code/Src/main.c **** 
- 238              		.loc 1 39 3 view .LVU63
- 239 0024 D4F8E030 		ldr	r3, [r4, #224]
- 240              	.LBE7:
-  41:.//User/code/Src/main.c **** 
- 241              		.loc 1 41 3 is_stmt 0 view .LVU64
- 242 0028 0020     		movs	r0, #0
- 243              	.LBB8:
-  39:.//User/code/Src/main.c **** 
- 244              		.loc 1 39 3 view .LVU65
- 245 002a 43F00073 		orr	r3, r3, #33554432
- 246 002e C4F8E030 		str	r3, [r4, #224]
-  39:.//User/code/Src/main.c **** 
- 247              		.loc 1 39 3 is_stmt 1 view .LVU66
- 248 0032 D4F8E030 		ldr	r3, [r4, #224]
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 9
-
-
- 249 0036 03F00073 		and	r3, r3, #33554432
- 250 003a 0193     		str	r3, [sp, #4]
-  39:.//User/code/Src/main.c **** 
- 251              		.loc 1 39 3 view .LVU67
- 252 003c 019B     		ldr	r3, [sp, #4]
- 253              	.LBE8:
-  39:.//User/code/Src/main.c **** 
- 254              		.loc 1 39 3 view .LVU68
-  41:.//User/code/Src/main.c **** 
- 255              		.loc 1 41 3 view .LVU69
- 256 003e FFF7FEFF 		bl	HAL_HSEM_FastTake
- 257              	.LVL14:
-  43:.//User/code/Src/main.c **** 
- 258              		.loc 1 43 3 view .LVU70
- 259 0042 0021     		movs	r1, #0
- 260 0044 0846     		mov	r0, r1
- 261 0046 FFF7FEFF 		bl	HAL_HSEM_Release
- 262              	.LVL15:
-  45:.//User/code/Src/main.c ****   while((__HAL_RCC_GET_FLAG(RCC_FLAG_D2CKRDY) == RESET) && (timeout-- > 0));
- 263              		.loc 1 45 3 view .LVU71
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 264              		.loc 1 46 3 view .LVU72
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 265              		.loc 1 46 8 is_stmt 0 view .LVU73
- 266 004a 4FF48033 		mov	r3, #65536
- 267 004e 01E0     		b	.L19
- 268              	.LVL16:
- 269              	.L33:
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 270              		.loc 1 46 57 discriminator 1 view .LVU74
- 271 0050 013B     		subs	r3, r3, #1
- 272              	.LVL17:
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 273              		.loc 1 46 57 discriminator 1 view .LVU75
- 274 0052 13D0     		beq	.L32
- 275              	.LVL18:
- 276              	.L19:
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 277              		.loc 1 46 76 is_stmt 1 discriminator 2 view .LVU76
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 278              		.loc 1 46 8 discriminator 2 view .LVU77
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 279              		.loc 1 46 10 is_stmt 0 discriminator 2 view .LVU78
- 280 0054 2268     		ldr	r2, [r4]
-  46:.//User/code/Src/main.c ****   if ( timeout < 0 )
- 281              		.loc 1 46 8 discriminator 2 view .LVU79
- 282 0056 1204     		lsls	r2, r2, #16
- 283 0058 FAD5     		bpl	.L33
- 284              	.LVL19:
- 285              	.L18:
-  52:.//User/code/Src/main.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
- 286              		.loc 1 52 3 is_stmt 1 view .LVU80
- 287 005a FFF7FEFF 		bl	osKernelInitialize
- 288              	.LVL20:
-  53:.//User/code/Src/main.c ****   osKernelStart();
- 289              		.loc 1 53 3 view .LVU81
-  53:.//User/code/Src/main.c ****   osKernelStart();
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 10
-
-
- 290              		.loc 1 53 23 is_stmt 0 view .LVU82
- 291 005e 0B4A     		ldr	r2, .L34+4
- 292 0060 0021     		movs	r1, #0
- 293 0062 0B48     		ldr	r0, .L34+8
- 294 0064 FFF7FEFF 		bl	osThreadNew
- 295              	.LVL21:
-  53:.//User/code/Src/main.c ****   osKernelStart();
- 296              		.loc 1 53 21 view .LVU83
- 297 0068 0A4B     		ldr	r3, .L34+12
- 298 006a 1860     		str	r0, [r3]
-  54:.//User/code/Src/main.c **** 
- 299              		.loc 1 54 3 is_stmt 1 view .LVU84
- 300 006c FFF7FEFF 		bl	osKernelStart
- 301              	.LVL22:
- 302              	.L21:
-  56:.//User/code/Src/main.c ****   {
- 303              		.loc 1 56 3 discriminator 1 view .LVU85
-  58:.//User/code/Src/main.c **** }
- 304              		.loc 1 58 3 discriminator 1 view .LVU86
-  56:.//User/code/Src/main.c ****   {
- 305              		.loc 1 56 9 discriminator 1 view .LVU87
-  56:.//User/code/Src/main.c ****   {
- 306              		.loc 1 56 3 discriminator 1 view .LVU88
-  58:.//User/code/Src/main.c **** }
- 307              		.loc 1 58 3 discriminator 1 view .LVU89
-  56:.//User/code/Src/main.c ****   {
- 308              		.loc 1 56 9 discriminator 1 view .LVU90
- 309 0070 FEE7     		b	.L21
- 310              	.LVL23:
- 311              	.L30:
-  27:.//User/code/Src/main.c ****   {
- 312              		.loc 1 27 3 view .LVU91
-  29:.//User/code/Src/main.c ****   }
- 313              		.loc 1 29 3 view .LVU92
- 314 0072 1D21     		movs	r1, #29
- 315 0074 0848     		ldr	r0, .L34+16
- 316 0076 FFF7FEFF 		bl	Error_Handler
- 317              	.LVL24:
- 318 007a CCE7     		b	.L15
- 319              	.LVL25:
- 320              	.L32:
-  47:.//User/code/Src/main.c ****   {
- 321              		.loc 1 47 3 view .LVU93
-  49:.//User/code/Src/main.c ****   }
- 322              		.loc 1 49 5 view .LVU94
- 323 007c 3121     		movs	r1, #49
- 324 007e 0648     		ldr	r0, .L34+16
- 325 0080 FFF7FEFF 		bl	Error_Handler
- 326              	.LVL26:
- 327 0084 E9E7     		b	.L18
- 328              	.L35:
- 329 0086 00BF     		.align	2
- 330              	.L34:
- 331 0088 00440258 		.word	1476543488
- 332 008c 00000000 		.word	.LANCHOR0
- 333 0090 00000000 		.word	StartDefaultTask
- 334 0094 00000000 		.word	defaultTaskHandle
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 11
-
-
- 335 0098 00000000 		.word	.LC0
- 336              		.cfi_endproc
- 337              	.LFE338:
- 339              		.global	defaultTask_attributes
- 340              		.section	.rodata.str1.4,"aMS",%progbits,1
- 341              		.align	2
- 342              	.LC1:
- 343 0000 64656661 		.ascii	"defaultTask\000"
- 343      756C7454 
- 343      61736B00 
- 344              		.comm	defaultTaskHandle,4,4
- 345              		.section	.rodata.defaultTask_attributes,"a"
- 346              		.align	2
- 347              		.set	.LANCHOR0,. + 0
- 350              	defaultTask_attributes:
- 351 0000 00000000 		.word	.LC1
- 352 0004 00000000 		.space	16
- 352      00000000 
- 352      00000000 
- 352      00000000 
- 353 0014 00020000 		.word	512
- 354 0018 18000000 		.word	24
- 355 001c 00000000 		.space	8
- 355      00000000 
- 356              		.text
- 357              	.Letext0:
- 358              		.file 2 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/machine/
- 359              		.file 3 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_std
- 360              		.file 4 ".//Libraries/CMSIS/Core/Include/core_cm7.h"
- 361              		.file 5 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 362              		.file 6 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
- 363              		.file 7 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/lock
- 364              		.file 8 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/_typ
- 365              		.file 9 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/lib/gcc/arm-none-eabi/9.2.1/in
- 366              		.file 10 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/sys/ree
- 367              		.file 11 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/math.h"
- 368              		.file 12 ".//Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h7xx.h"
- 369              		.file 13 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 370              		.file 14 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h"
- 371              		.file 15 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 372              		.file 16 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
- 373              		.file 17 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 374              		.file 18 ".//Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
- 375              		.file 19 ".//Libraries/FatFs/Inc/integer.h"
- 376              		.file 20 ".//Libraries/FatFs/Inc/ff.h"
- 377              		.file 21 ".//Libraries/FatFs/Inc/diskio.h"
- 378              		.file 22 ".//Libraries/FatFs/Inc/ff_gen_drv.h"
- 379              		.file 23 ".//User/code/Inc/user_diskio.h"
- 380              		.file 24 ".//User/code/Inc/fatfs.h"
- 381              		.file 25 "/opt/homebrew/Cellar/arm-none-eabi-gcc/9-2019-q4-major/gcc/arm-none-eabi/include/stdlib.
- 382              		.file 26 ".//User/code/Src/../../../BSP/Components/Inc/lcd.h"
- 383              		.file 27 ".//Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_hsem.h"
- 384              		.file 28 ".//User/code/Src/../../../BSP/system.h"
- 385              		.file 29 "<built-in>"
-ARM GAS  /var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s 			page 12
+ 120 0028 00000000 		.word	defaultTaskHandle
+ 121              		.cfi_endproc
+ 122              	.LFE338:
+ 124              		.global	test
+ 125              		.global	defaultTask_attributes
+ 126              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 127              		.align	2
+ 128              	.LC0:
+ 129 0000 64656661 		.ascii	"defaultTask\000"
+ 129      756C7454 
+ 129      61736B00 
+ 130              		.comm	defaultTaskHandle,4,4
+ 131              		.section	.bss.test,"aw",%nobits
+ 132              		.align	2
+ 133              		.set	.LANCHOR0,. + 0
+ 136              	test:
+ 137 0000 00000000 		.space	4
+ 138              		.section	.rodata.defaultTask_attributes,"a"
+ 139              		.align	2
+ 140              		.set	.LANCHOR1,. + 0
+ 143              	defaultTask_attributes:
+ 144 0000 00000000 		.word	.LC0
+ 145 0004 00000000 		.space	16
+ 145      00000000 
+ 145      00000000 
+ 145      00000000 
+ 146 0014 00020000 		.word	512
+ 147 0018 18000000 		.word	24
+ 148 001c 00000000 		.space	8
+ 148      00000000 
+ 149              		.text
+ 150              	.Letext0:
+ 151              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 152              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 153              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 154              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 155              		.file 6 "/usr/include/newlib/sys/_types.h"
+ 156              		.file 7 "/usr/include/newlib/sys/reent.h"
+ 157              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 158              		.file 9 "/usr/include/newlib/math.h"
+ 159              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 160              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 161              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 162              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 163              		.file 14 "./Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ 164              		.file 15 "./Libraries/FatFs/Inc/integer.h"
+ 165              		.file 16 "./Libraries/FatFs/Inc/ff.h"
+ 166              		.file 17 "./Libraries/FatFs/Inc/diskio.h"
+ 167              		.file 18 "./Libraries/FatFs/Inc/ff_gen_drv.h"
+ 168              		.file 19 "./User/code/Inc/user_diskio.h"
+ 169              		.file 20 "./User/code/Inc/fatfs.h"
+ 170              		.file 21 "/usr/include/newlib/stdlib.h"
+ 171              		.file 22 "./User/code/Src/../../../BSP/Components/Inc/lcd.h"
+ 172              		.file 23 "./User/code/Src/../../../BSP/system.h"
+ARM GAS  /tmp/ccwb5fXg.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:17     .text.StartDefaultTask:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:26     .text.StartDefaultTask:0000000000000000 StartDefaultTask
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:54     .rodata.PeriphCommonClock_Config.str1.4:0000000000000000 $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:58     .text.PeriphCommonClock_Config:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:66     .text.PeriphCommonClock_Config:0000000000000000 PeriphCommonClock_Config
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:164    .text.PeriphCommonClock_Config:0000000000000048 $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:169    .text.startup.main:0000000000000000 $t
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:177    .text.startup.main:0000000000000000 main
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:331    .text.startup.main:0000000000000088 $d
+     /tmp/ccwb5fXg.s:17     .text.StartDefaultTask:0000000000000000 $t
+     /tmp/ccwb5fXg.s:26     .text.StartDefaultTask:0000000000000000 StartDefaultTask
+     /tmp/ccwb5fXg.s:61     .text.StartDefaultTask:0000000000000014 $d
+     /tmp/ccwb5fXg.s:66     .text.startup.main:0000000000000000 $t
+     /tmp/ccwb5fXg.s:74     .text.startup.main:0000000000000000 main
+     /tmp/ccwb5fXg.s:118    .text.startup.main:0000000000000020 $d
                             *COM*:0000000000000004 defaultTaskHandle
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:350    .rodata.defaultTask_attributes:0000000000000000 defaultTask_attributes
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:341    .rodata.str1.4:0000000000000000 $d
-/var/folders/wl/rshn8xbx1dsfj1zgryf4g1240000gn/T//cce9yaYG.s:346    .rodata.defaultTask_attributes:0000000000000000 $d
+     /tmp/ccwb5fXg.s:136    .bss.test:0000000000000000 test
+     /tmp/ccwb5fXg.s:143    .rodata.defaultTask_attributes:0000000000000000 defaultTask_attributes
+     /tmp/ccwb5fXg.s:127    .rodata.str1.4:0000000000000000 $d
+     /tmp/ccwb5fXg.s:132    .bss.test:0000000000000000 $d
+     /tmp/ccwb5fXg.s:139    .rodata.defaultTask_attributes:0000000000000000 $d
 
 UNDEFINED SYMBOLS
 osDelay
-memset
-HAL_RCCEx_PeriphCLKConfig
-Error_Handler
-HAL_Init
-SystemClock_Config
-HAL_HSEM_FastTake
-HAL_HSEM_Release
+Hardware_Init
 osKernelInitialize
 osThreadNew
 osKernelStart

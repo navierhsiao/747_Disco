@@ -56,9 +56,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern DMA_HandleTypeDef hdma_i2c4_rx;
-extern DMA_HandleTypeDef hdma_i2c4_tx;
-extern TIM_HandleTypeDef htim2;
+// extern TIM_HandleTypeDef htim2;
 
 /* USER CODE BEGIN EV */
 
@@ -165,44 +163,16 @@ void DebugMon_Handler(void)
 /**
   * @brief This function handles TIM2 global interrupt.
   */
-void TIM2_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM2_IRQn 0 */
+// void TIM2_IRQHandler(void)
+// {
+//   /* USER CODE BEGIN TIM2_IRQn 0 */
 
-  /* USER CODE END TIM2_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim2);
-  /* USER CODE BEGIN TIM2_IRQn 1 */
+//   /* USER CODE END TIM2_IRQn 0 */
+//   HAL_TIM_IRQHandler(&htim2);
+//   /* USER CODE BEGIN TIM2_IRQn 1 */
 
-  /* USER CODE END TIM2_IRQn 1 */
-}
-
-/**
-  * @brief This function handles BDMA channel0 global interrupt.
-  */
-void BDMA_Channel0_IRQHandler(void)
-{
-  /* USER CODE BEGIN BDMA_Channel0_IRQn 0 */
-
-  /* USER CODE END BDMA_Channel0_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_i2c4_rx);
-  /* USER CODE BEGIN BDMA_Channel0_IRQn 1 */
-
-  /* USER CODE END BDMA_Channel0_IRQn 1 */
-}
-
-/**
-  * @brief This function handles BDMA channel1 global interrupt.
-  */
-void BDMA_Channel1_IRQHandler(void)
-{
-  /* USER CODE BEGIN BDMA_Channel1_IRQn 0 */
-
-  /* USER CODE END BDMA_Channel1_IRQn 0 */
-  HAL_DMA_IRQHandler(&hdma_i2c4_tx);
-  /* USER CODE BEGIN BDMA_Channel1_IRQn 1 */
-
-  /* USER CODE END BDMA_Channel1_IRQn 1 */
-}
+//   /* USER CODE END TIM2_IRQn 1 */
+// }
 
 /* USER CODE BEGIN 1 */
 

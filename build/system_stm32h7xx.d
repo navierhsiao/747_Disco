@@ -1,4 +1,5 @@
-build/system_stm32h7xx.o: User/code/Src/system_stm32h7xx.c \
+build/system_stm32h7xx.o: \
+ Libraries/CMSIS/Device/ST/STM32H7xx/Source/system_stm32h7xx.c \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  User/code/Inc/stm32h7xx_hal_conf.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
