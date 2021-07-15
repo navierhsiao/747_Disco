@@ -70,6 +70,8 @@ build/lcd.o: BSP/Components/Src/lcd.c BSP/Components/Src/../../system.h \
  Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h \
  BSP/Components/Src/../../Components/Inc/lcd.h \
  BSP/Components/Src/../../Components/Inc/touch.h \
+ BSP/Components/Src/../../Components/Inc/is42s32800j.h \
+ BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
  BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h \
  BSP/Components/Src/../../Hardware/Inc/i2c.h \
  BSP/Components/Src/../../Hardware/Inc/qspi.h \
@@ -219,6 +221,10 @@ Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h:
 BSP/Components/Src/../../Components/Inc/lcd.h:
 
 BSP/Components/Src/../../Components/Inc/touch.h:
+
+BSP/Components/Src/../../Components/Inc/is42s32800j.h:
+
+BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h:
 
 BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h:
 

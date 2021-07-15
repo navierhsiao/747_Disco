@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccbNU8dk.s 			page 1
+ARM GAS  /tmp/ccRfz64X.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccbNU8dk.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_negate_f32.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccbNU8dk.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_negate_f32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_negate_f32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_negate_f32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c"
+  18              		.global	arm_negate_f32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_negate_f32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c"
    1:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****  * Title:        arm_negate_f32.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccbNU8dk.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****  */
   28:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
   29:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccbNU8dk.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
   31:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** /**
+ARM GAS  /tmp/ccRfz64X.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   @ingroup groupMath
   33:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****  */
   34:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
@@ -98,16 +96,31 @@ ARM GAS  /tmp/ccbNU8dk.s 			page 1
   64:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****         float32_t * pDst,
   65:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****         uint32_t blockSize)
   66:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** {
-  30              		.loc 1 66 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 66 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
   67:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 67 9 view .LVU1
   68:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
   69:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** #if defined(ARM_MATH_NEON_EXPERIMENTAL)
   70:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     float32x4_t vec1;
+ARM GAS  /tmp/ccRfz64X.s 			page 3
+
+
   71:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     float32x4_t res;
   72:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
   73:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     /* Compute 4 outputs at a time */
@@ -118,9 +131,6 @@ ARM GAS  /tmp/ccbNU8dk.s 			page 1
   78:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****         /* C = -A */
   79:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
   80:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     	/* Negate and then store the results in the destination buffer. */
-ARM GAS  /tmp/ccbNU8dk.s 			page 3
-
-
   81:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****         vec1 = vld1q_f32(pSrc);
   82:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****         res = vnegq_f32(vec1);
   83:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****         vst1q_f32(pDst, res);
@@ -166,68 +176,90 @@ ARM GAS  /tmp/ccbNU8dk.s 			page 1
  123:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
  124:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   /* Initialize blkCnt with number of samples */
  125:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   blkCnt = blockSize;
-  36              		.loc 1 125 3 view .LVU2
+  46              		.loc 1 125 10
+  47 000c 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccRfz64X.s 			page 4
+
+
+  48 000e 7B61     		str	r3, [r7, #20]
  126:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
  127:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  128:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** #endif /* #if defined(ARM_MATH_NEON_EXPERIMENTAL) */
  129:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
  130:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   while (blkCnt > 0U)
-  37              		.loc 1 130 3 view .LVU3
-  38              		.loc 1 130 9 view .LVU4
-  39 0000 3AB1     		cbz	r2, .L1
-  40              	.LVL1:
-  41              	.L3:
+  49              		.loc 1 130 9
+  50 0010 0EE0     		b	.L2
+  51              	.L3:
  131:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   {
-ARM GAS  /tmp/ccbNU8dk.s 			page 4
-
-
  132:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     /* C = -A */
  133:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
  134:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     /* Negate and store result in destination buffer. */
  135:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     *pDst++ = -*pSrc++;
-  42              		.loc 1 135 5 view .LVU5
-  43              		.loc 1 135 15 is_stmt 0 view .LVU6
-  44 0002 F0EC017A 		vldmia.32	r0!, {s15}
-  45              	.LVL2:
- 130:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   {
-  46              		.loc 1 130 9 view .LVU7
-  47 0006 013A     		subs	r2, r2, #1
-  48              	.LVL3:
-  49              		.loc 1 135 15 view .LVU8
-  50 0008 F1EE677A 		vneg.f32	s15, s15
-  51              		.loc 1 135 13 view .LVU9
-  52 000c E1EC017A 		vstmia.32	r1!, {s15}
-  53              	.LVL4:
+  52              		.loc 1 135 21
+  53 0012 FB68     		ldr	r3, [r7, #12]
+  54 0014 1A1D     		adds	r2, r3, #4
+  55 0016 FA60     		str	r2, [r7, #12]
+  56              		.loc 1 135 16
+  57 0018 D3ED007A 		vldr.32	s15, [r3]
+  58              		.loc 1 135 10
+  59 001c BB68     		ldr	r3, [r7, #8]
+  60 001e 1A1D     		adds	r2, r3, #4
+  61 0020 BA60     		str	r2, [r7, #8]
+  62              		.loc 1 135 15
+  63 0022 F1EE677A 		vneg.f32	s15, s15
+  64              		.loc 1 135 13
+  65 0026 C3ED007A 		vstr.32	s15, [r3]
  136:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
  137:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     /* Decrement loop counter */
  138:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****     blkCnt--;
-  54              		.loc 1 138 5 is_stmt 1 view .LVU10
+  66              		.loc 1 138 11
+  67 002a 7B69     		ldr	r3, [r7, #20]
+  68 002c 013B     		subs	r3, r3, #1
+  69 002e 7B61     		str	r3, [r7, #20]
+  70              	.L2:
  130:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   {
-  55              		.loc 1 130 9 view .LVU11
-  56 0010 F7D1     		bne	.L3
-  57              	.L1:
+  71              		.loc 1 130 9
+  72 0030 7B69     		ldr	r3, [r7, #20]
+  73 0032 002B     		cmp	r3, #0
+  74 0034 EDD1     		bne	.L3
  139:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c ****   }
  140:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** 
  141:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_negate_f32.c **** }
-  58              		.loc 1 141 1 is_stmt 0 view .LVU12
-  59 0012 7047     		bx	lr
-  60              		.cfi_endproc
-  61              	.LFE145:
-  63              		.text
-  64              	.Letext0:
-  65              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  66              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  67              		.file 4 "/usr/include/newlib/sys/_types.h"
-  68              		.file 5 "/usr/include/newlib/sys/reent.h"
-  69              		.file 6 "/usr/include/newlib/sys/lock.h"
-  70              		.file 7 "/usr/include/newlib/math.h"
-  71              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccbNU8dk.s 			page 5
+  75              		.loc 1 141 1
+  76 0036 00BF     		nop
+  77 0038 00BF     		nop
+  78 003a 1C37     		adds	r7, r7, #28
+  79              	.LCFI3:
+  80              		.cfi_def_cfa_offset 4
+  81 003c BD46     		mov	sp, r7
+  82              	.LCFI4:
+  83              		.cfi_def_cfa_register 13
+  84              		@ sp needed
+  85 003e 5DF8047B 		ldr	r7, [sp], #4
+  86              	.LCFI5:
+  87              		.cfi_restore 7
+ARM GAS  /tmp/ccRfz64X.s 			page 5
+
+
+  88              		.cfi_def_cfa_offset 0
+  89 0042 7047     		bx	lr
+  90              		.cfi_endproc
+  91              	.LFE145:
+  93              		.text
+  94              	.Letext0:
+  95              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+  96              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+  97              		.file 4 "/usr/include/newlib/sys/_types.h"
+  98              		.file 5 "/usr/include/newlib/sys/reent.h"
+  99              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 100              		.file 7 "/usr/include/newlib/math.h"
+ 101              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccRfz64X.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_negate_f32.c
-     /tmp/ccbNU8dk.s:17     .text.arm_negate_f32:0000000000000000 $t
-     /tmp/ccbNU8dk.s:26     .text.arm_negate_f32:0000000000000000 arm_negate_f32
+     /tmp/ccRfz64X.s:17     .text.arm_negate_f32:0000000000000000 $t
+     /tmp/ccRfz64X.s:25     .text.arm_negate_f32:0000000000000000 arm_negate_f32
 
 NO UNDEFINED SYMBOLS

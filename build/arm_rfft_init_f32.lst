@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cclejh7g.s 			page 1
+ARM GAS  /tmp/cc5moB11.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cclejh7g.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_rfft_init_f32.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cclejh7g.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_rfft_init_f32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_rfft_init_f32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_rfft_init_f32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c"
+  18              		.global	arm_rfft_init_f32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_rfft_init_f32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c"
    1:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****  * Title:        arm_rfft_init_f32.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cclejh7g.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****  */
   28:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   29:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** #include "arm_math.h"
-ARM GAS  /tmp/cclejh7g.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** #include "arm_common_tables.h"
   31:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
+ARM GAS  /tmp/cc5moB11.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   33:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** /**
   34:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   @addtogroup RealFFT
@@ -105,297 +103,255 @@ ARM GAS  /tmp/cclejh7g.s 			page 1
   71:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   uint32_t ifftFlagR,
   72:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   uint32_t bitReverseFlag)
   73:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** {
-  30              		.loc 1 73 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 4, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 73 1
+  29              		.cfi_startproc
+  30              		@ args = 4, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 86B0     		sub	sp, sp, #24
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/cc5moB11.s 			page 3
+
+
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
+  46 000c 3B60     		str	r3, [r7]
   74:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   75:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initialise the default arm status */
   76:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   arm_status status = ARM_MATH_SUCCESS;
-  34              		.loc 1 76 3 view .LVU1
+  47              		.loc 1 76 14
+  48 000e 0023     		movs	r3, #0
+  49 0010 FB75     		strb	r3, [r7, #23]
   77:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   78:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initialize the Real FFT length */
   79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   S->fftLenReal = (uint16_t) fftLenReal;
-  35              		.loc 1 79 3 view .LVU2
-  73:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-ARM GAS  /tmp/cclejh7g.s 			page 3
-
-
-  36              		.loc 1 73 1 is_stmt 0 view .LVU3
-  37 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
-  38              	.LCFI0:
-  39              		.cfi_def_cfa_offset 24
-  40              		.cfi_offset 3, -24
-  41              		.cfi_offset 4, -20
-  42              		.cfi_offset 5, -16
-  43              		.cfi_offset 6, -12
-  44              		.cfi_offset 7, -8
-  45              		.cfi_offset 14, -4
-  46 0002 95B2     		uxth	r5, r2
-  73:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  47              		.loc 1 73 1 view .LVU4
-  48 0004 0446     		mov	r4, r0
+  50              		.loc 1 79 19
+  51 0012 7B68     		ldr	r3, [r7, #4]
+  52 0014 9BB2     		uxth	r3, r3
+  53 0016 1A46     		mov	r2, r3
+  54              		.loc 1 79 17
+  55 0018 FB68     		ldr	r3, [r7, #12]
+  56 001a 1A60     		str	r2, [r3]
   80:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   81:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initialize the Complex FFT length */
   82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   S->fftLenBy2 = (uint16_t) fftLenReal / 2U;
+  57              		.loc 1 82 18
+  58 001c 7B68     		ldr	r3, [r7, #4]
+  59 001e 9BB2     		uxth	r3, r3
+  60              		.loc 1 82 16
+  61 0020 5B08     		lsrs	r3, r3, #1
+  62 0022 9AB2     		uxth	r2, r3
+  63 0024 FB68     		ldr	r3, [r7, #12]
+  64 0026 9A80     		strh	r2, [r3, #4]	@ movhi
   83:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   84:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initialize the Twiddle coefficientA pointer */
   85:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   S->pTwiddleAReal = (float32_t *) realCoefA;
+  65              		.loc 1 85 20
+  66 0028 FB68     		ldr	r3, [r7, #12]
+  67 002a 294A     		ldr	r2, .L11
+  68 002c DA60     		str	r2, [r3, #12]
   86:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   87:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initialize the Twiddle coefficientB pointer */
   88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   S->pTwiddleBReal = (float32_t *) realCoefB;
+  69              		.loc 1 88 20
+  70 002e FB68     		ldr	r3, [r7, #12]
+  71 0030 284A     		ldr	r2, .L11+4
+  72 0032 1A61     		str	r2, [r3, #16]
   89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   90:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initialize the Flag for selection of RFFT or RIFFT */
   91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   S->ifftFlagR = (uint8_t) ifftFlagR;
-  49              		.loc 1 91 18 view .LVU5
-  50 0006 DBB2     		uxtb	r3, r3
-  51              	.LVL1:
-  85:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  52              		.loc 1 85 20 view .LVU6
-  53 0008 1D4F     		ldr	r7, .L13
-  88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  54              		.loc 1 88 20 view .LVU7
-  55 000a 1E4E     		ldr	r6, .L13+4
-  82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  56              		.loc 1 82 16 view .LVU8
-  57 000c C2F34E02 		ubfx	r2, r2, #1, #15
-  58              	.LVL2:
-  59              		.loc 1 91 16 view .LVU9
-  60 0010 8371     		strb	r3, [r0, #6]
+  73              		.loc 1 91 18
+  74 0034 3B68     		ldr	r3, [r7]
+  75 0036 DAB2     		uxtb	r2, r3
+  76              		.loc 1 91 16
+  77 0038 FB68     		ldr	r3, [r7, #12]
+  78 003a 9A71     		strb	r2, [r3, #6]
   92:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initialize the Flag for calculation Bit reversal or not */
   94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   S->bitReverseFlagR = (uint8_t) bitReverseFlag;
+ARM GAS  /tmp/cc5moB11.s 			page 4
+
+
+  79              		.loc 1 94 24
+  80 003c 3B6A     		ldr	r3, [r7, #32]
+  81 003e DAB2     		uxtb	r2, r3
+  82              		.loc 1 94 22
+  83 0040 FB68     		ldr	r3, [r7, #12]
+  84 0042 DA71     		strb	r2, [r3, #7]
   95:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
   96:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /*  Initializations of structure parameters depending on the FFT length */
   97:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   switch (S->fftLenReal)
-  61              		.loc 1 97 3 view .LVU10
-  62 0012 B5F5006F 		cmp	r5, #2048
-  73:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  63              		.loc 1 73 1 view .LVU11
-  64 0016 0846     		mov	r0, r1
-  65              	.LVL3:
-  73:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  66              		.loc 1 73 1 view .LVU12
-  67 0018 0699     		ldr	r1, [sp, #24]
-  68              	.LVL4:
-ARM GAS  /tmp/cclejh7g.s 			page 4
-
-
-  79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  69              		.loc 1 79 17 view .LVU13
-  70 001a 2560     		str	r5, [r4]
-  82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  71              		.loc 1 82 3 is_stmt 1 view .LVU14
-  94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  72              		.loc 1 94 24 is_stmt 0 view .LVU15
-  73 001c E171     		strb	r1, [r4, #7]
-  82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  74              		.loc 1 82 16 view .LVU16
-  75 001e A280     		strh	r2, [r4, #4]	@ movhi
-  85:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  76              		.loc 1 85 3 is_stmt 1 view .LVU17
-  88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  77              		.loc 1 88 3 view .LVU18
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  78              		.loc 1 91 3 view .LVU19
-  94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  79              		.loc 1 94 3 view .LVU20
-  80              		.loc 1 97 3 view .LVU21
-  88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  81              		.loc 1 88 20 is_stmt 0 view .LVU22
-  82 0020 C4E90376 		strd	r7, r6, [r4, #12]
-  83              		.loc 1 97 3 view .LVU23
-  84 0024 27D0     		beq	.L2
-  85 0026 10D8     		bhi	.L3
-  86 0028 802D     		cmp	r5, #128
-  87 002a 20D0     		beq	.L4
-  88 002c B5F5007F 		cmp	r5, #512
-  89 0030 1AD1     		bne	.L9
+  85              		.loc 1 97 12
+  86 0044 FB68     		ldr	r3, [r7, #12]
+  87 0046 1B68     		ldr	r3, [r3]
+  88              		.loc 1 97 3
+  89 0048 B3F5005F 		cmp	r3, #8192
+  90 004c 0ED0     		beq	.L2
+  91 004e B3F5005F 		cmp	r3, #8192
+  92 0052 1BD8     		bhi	.L3
+  93 0054 B3F5006F 		cmp	r3, #2048
+  94 0058 0CD0     		beq	.L4
+  95 005a B3F5006F 		cmp	r3, #2048
+  96 005e 15D8     		bhi	.L3
+  97 0060 802B     		cmp	r3, #128
+  98 0062 0FD0     		beq	.L5
+  99 0064 B3F5007F 		cmp	r3, #512
+ 100 0068 08D0     		beq	.L6
+ 101 006a 0FE0     		b	.L3
+ 102              	.L2:
   98:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
   99:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     /* Init table modifier value */
  100:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   case 8192U:
  101:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     S->twidCoefRModifier = 1U;
+ 103              		.loc 1 101 26
+ 104 006c FB68     		ldr	r3, [r7, #12]
+ 105 006e 0122     		movs	r2, #1
+ 106 0070 9A60     		str	r2, [r3, #8]
  102:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
+ 107              		.loc 1 102 5
+ 108 0072 0EE0     		b	.L7
+ 109              	.L4:
  103:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   case 2048U:
  104:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     S->twidCoefRModifier = 4U;
+ 110              		.loc 1 104 26
+ 111 0074 FB68     		ldr	r3, [r7, #12]
+ 112 0076 0422     		movs	r2, #4
+ 113 0078 9A60     		str	r2, [r3, #8]
  105:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
+ 114              		.loc 1 105 5
+ 115 007a 0AE0     		b	.L7
+ 116              	.L6:
  106:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   case 512U:
  107:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     S->twidCoefRModifier = 16U;
-  90              		.loc 1 107 5 is_stmt 1 view .LVU24
-  91              		.loc 1 107 26 is_stmt 0 view .LVU25
-  92 0032 1021     		movs	r1, #16
-  76:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
-  93              		.loc 1 76 14 view .LVU26
-  94 0034 0025     		movs	r5, #0
-  95              		.loc 1 107 26 view .LVU27
-  96 0036 A160     		str	r1, [r4, #8]
+ 117              		.loc 1 107 26
+ 118 007c FB68     		ldr	r3, [r7, #12]
+ 119 007e 1022     		movs	r2, #16
+ 120 0080 9A60     		str	r2, [r3, #8]
  108:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
-  97              		.loc 1 108 5 is_stmt 1 view .LVU28
-  98              	.L6:
-  99              	.LVL5:
+ 121              		.loc 1 108 5
+ARM GAS  /tmp/cc5moB11.s 			page 5
+
+
+ 122 0082 06E0     		b	.L7
+ 123              	.L5:
  109:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   case 128U:
  110:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     S->twidCoefRModifier = 64U;
+ 124              		.loc 1 110 26
+ 125 0084 FB68     		ldr	r3, [r7, #12]
+ 126 0086 4022     		movs	r2, #64
+ 127 0088 9A60     		str	r2, [r3, #8]
  111:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
+ 128              		.loc 1 111 5
+ 129 008a 02E0     		b	.L7
+ 130              	.L3:
  112:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   default:
  113:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     /*  Reporting argument error if rfftSize is not valid value */
-ARM GAS  /tmp/cclejh7g.s 			page 5
-
-
  114:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     status = ARM_MATH_ARGUMENT_ERROR;
+ 131              		.loc 1 114 12
+ 132 008c FF23     		movs	r3, #255
+ 133 008e FB75     		strb	r3, [r7, #23]
  115:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
+ 134              		.loc 1 115 5
+ 135 0090 00BF     		nop
+ 136              	.L7:
  116:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   }
  117:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
  118:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /* Init Complex FFT Instance */
  119:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   S->pCfft = S_CFFT;
- 100              		.loc 1 119 3 view .LVU29
+ 137              		.loc 1 119 12
+ 138 0092 FB68     		ldr	r3, [r7, #12]
+ 139 0094 BA68     		ldr	r2, [r7, #8]
+ 140 0096 5A61     		str	r2, [r3, #20]
  120:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
  121:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   if (S->ifftFlagR)
+ 141              		.loc 1 121 8
+ 142 0098 FB68     		ldr	r3, [r7, #12]
+ 143 009a 9B79     		ldrb	r3, [r3, #6]	@ zero_extendqisi2
+ 144              		.loc 1 121 6
+ 145 009c 002B     		cmp	r3, #0
+ 146 009e 08D0     		beq	.L8
  122:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
  123:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     /* Initializes the CIFFT Module for fftLenreal/2 length */
  124:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     arm_cfft_radix4_init_f32(S->pCfft, S->fftLenBy2, 1U, 0U);
- 101              		.loc 1 124 5 is_stmt 0 view .LVU30
- 102 0038 1146     		mov	r1, r2
- 119:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
- 103              		.loc 1 119 12 view .LVU31
- 104 003a 6061     		str	r0, [r4, #20]
- 121:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
- 105              		.loc 1 121 3 is_stmt 1 view .LVU32
- 121:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
- 106              		.loc 1 121 6 is_stmt 0 view .LVU33
- 107 003c 7BB1     		cbz	r3, .L7
- 108              	.L12:
- 109              		.loc 1 124 5 is_stmt 1 view .LVU34
- 110 003e 0023     		movs	r3, #0
- 111 0040 0122     		movs	r2, #1
- 112 0042 FFF7FEFF 		bl	arm_cfft_radix4_init_f32
- 113              	.LVL6:
+ 147              		.loc 1 124 5
+ 148 00a0 FB68     		ldr	r3, [r7, #12]
+ 149 00a2 5869     		ldr	r0, [r3, #20]
+ 150 00a4 FB68     		ldr	r3, [r7, #12]
+ 151 00a6 9988     		ldrh	r1, [r3, #4]
+ 152 00a8 0023     		movs	r3, #0
+ 153 00aa 0122     		movs	r2, #1
+ 154 00ac FFF7FEFF 		bl	arm_cfft_radix4_init_f32
+ 155 00b0 07E0     		b	.L9
+ 156              	.L8:
  125:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   }
  126:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   else
  127:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
  128:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     /* Initializes the CFFT Module for fftLenreal/2 length */
  129:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     arm_cfft_radix4_init_f32(S->pCfft, S->fftLenBy2, 0U, 0U);
+ 157              		.loc 1 129 5
+ARM GAS  /tmp/cc5moB11.s 			page 6
+
+
+ 158 00b2 FB68     		ldr	r3, [r7, #12]
+ 159 00b4 5869     		ldr	r0, [r3, #20]
+ 160 00b6 FB68     		ldr	r3, [r7, #12]
+ 161 00b8 9988     		ldrh	r1, [r3, #4]
+ 162 00ba 0023     		movs	r3, #0
+ 163 00bc 0022     		movs	r2, #0
+ 164 00be FFF7FEFF 		bl	arm_cfft_radix4_init_f32
+ 165              	.L9:
  130:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   }
  131:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
  132:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   /* return the status of RFFT Init function */
  133:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   return (status);
- 114              		.loc 1 133 3 view .LVU35
+ 166              		.loc 1 133 10
+ 167 00c2 97F91730 		ldrsb	r3, [r7, #23]
  134:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
  135:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** }
- 115              		.loc 1 135 1 is_stmt 0 view .LVU36
- 116 0046 2846     		mov	r0, r5
- 117 0048 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 118              	.LVL7:
- 119              	.L3:
-  97:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
- 120              		.loc 1 97 3 view .LVU37
- 121 004a B5F5005F 		cmp	r5, #8192
- 122 004e 0BD1     		bne	.L9
- 101:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 123              		.loc 1 101 5 is_stmt 1 view .LVU38
- 101:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 124              		.loc 1 101 26 is_stmt 0 view .LVU39
- 125 0050 0121     		movs	r1, #1
-  76:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
- 126              		.loc 1 76 14 view .LVU40
- 127 0052 0025     		movs	r5, #0
-ARM GAS  /tmp/cclejh7g.s 			page 6
-
-
- 119:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
- 128              		.loc 1 119 12 view .LVU41
- 129 0054 6061     		str	r0, [r4, #20]
- 101:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 130              		.loc 1 101 26 view .LVU42
- 131 0056 A160     		str	r1, [r4, #8]
- 102:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   case 2048U:
- 132              		.loc 1 102 5 is_stmt 1 view .LVU43
- 133              	.LVL8:
- 119:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
- 134              		.loc 1 119 3 view .LVU44
- 121:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
- 135              		.loc 1 121 3 view .LVU45
- 124:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   }
- 136              		.loc 1 124 5 is_stmt 0 view .LVU46
- 137 0058 1146     		mov	r1, r2
- 121:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
- 138              		.loc 1 121 6 view .LVU47
- 139 005a 002B     		cmp	r3, #0
- 140 005c EFD1     		bne	.L12
- 141              	.L7:
- 129:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   }
- 142              		.loc 1 129 5 is_stmt 1 view .LVU48
- 143 005e 1A46     		mov	r2, r3
- 144 0060 FFF7FEFF 		bl	arm_cfft_radix4_init_f32
- 145              	.LVL9:
- 133:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
- 146              		.loc 1 133 3 view .LVU49
- 147              		.loc 1 135 1 is_stmt 0 view .LVU50
- 148 0064 2846     		mov	r0, r5
- 149 0066 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 150              	.LVL10:
- 151              	.L9:
-  97:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   {
- 152              		.loc 1 97 3 view .LVU51
- 153 0068 4FF0FF35 		mov	r5, #-1
- 154 006c E4E7     		b	.L6
- 155              	.L4:
- 110:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 156              		.loc 1 110 5 is_stmt 1 view .LVU52
- 110:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 157              		.loc 1 110 26 is_stmt 0 view .LVU53
- 158 006e 4021     		movs	r1, #64
-  76:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
- 159              		.loc 1 76 14 view .LVU54
- 160 0070 0025     		movs	r5, #0
- 110:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 161              		.loc 1 110 26 view .LVU55
- 162 0072 A160     		str	r1, [r4, #8]
- 111:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   default:
- 163              		.loc 1 111 5 is_stmt 1 view .LVU56
- 164 0074 E0E7     		b	.L6
- 165              	.L2:
- 104:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 166              		.loc 1 104 5 view .LVU57
- 104:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 167              		.loc 1 104 26 is_stmt 0 view .LVU58
-ARM GAS  /tmp/cclejh7g.s 			page 7
-
-
- 168 0076 0421     		movs	r1, #4
-  76:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c **** 
- 169              		.loc 1 76 14 view .LVU59
- 170 0078 0025     		movs	r5, #0
- 104:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****     break;
- 171              		.loc 1 104 26 view .LVU60
- 172 007a A160     		str	r1, [r4, #8]
- 105:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_init_f32.c ****   case 512U:
- 173              		.loc 1 105 5 is_stmt 1 view .LVU61
- 174 007c DCE7     		b	.L6
- 175              	.L14:
- 176 007e 00BF     		.align	2
- 177              	.L13:
- 178 0080 00000000 		.word	realCoefA
- 179 0084 00000000 		.word	realCoefB
- 180              		.cfi_endproc
- 181              	.LFE145:
- 183              		.text
- 184              	.Letext0:
- 185              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 186              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 187              		.file 4 "/usr/include/newlib/sys/_types.h"
- 188              		.file 5 "/usr/include/newlib/sys/reent.h"
- 189              		.file 6 "/usr/include/newlib/sys/lock.h"
- 190              		.file 7 "/usr/include/newlib/math.h"
- 191              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 192              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
-ARM GAS  /tmp/cclejh7g.s 			page 8
+ 168              		.loc 1 135 1
+ 169 00c6 1846     		mov	r0, r3
+ 170 00c8 1837     		adds	r7, r7, #24
+ 171              	.LCFI3:
+ 172              		.cfi_def_cfa_offset 8
+ 173 00ca BD46     		mov	sp, r7
+ 174              	.LCFI4:
+ 175              		.cfi_def_cfa_register 13
+ 176              		@ sp needed
+ 177 00cc 80BD     		pop	{r7, pc}
+ 178              	.L12:
+ 179 00ce 00BF     		.align	2
+ 180              	.L11:
+ 181 00d0 00000000 		.word	realCoefA
+ 182 00d4 00000000 		.word	realCoefB
+ 183              		.cfi_endproc
+ 184              	.LFE145:
+ 186              		.text
+ 187              	.Letext0:
+ 188              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 189              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 190              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 191              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 192              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 193              		.file 7 "/usr/include/newlib/math.h"
+ 194              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 195              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ARM GAS  /tmp/cc5moB11.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_rfft_init_f32.c
-     /tmp/cclejh7g.s:17     .text.arm_rfft_init_f32:0000000000000000 $t
-     /tmp/cclejh7g.s:26     .text.arm_rfft_init_f32:0000000000000000 arm_rfft_init_f32
-     /tmp/cclejh7g.s:178    .text.arm_rfft_init_f32:0000000000000080 $d
+     /tmp/cc5moB11.s:17     .text.arm_rfft_init_f32:0000000000000000 $t
+     /tmp/cc5moB11.s:25     .text.arm_rfft_init_f32:0000000000000000 arm_rfft_init_f32
+     /tmp/cc5moB11.s:181    .text.arm_rfft_init_f32:00000000000000d0 $d
 
 UNDEFINED SYMBOLS
 arm_cfft_radix4_init_f32

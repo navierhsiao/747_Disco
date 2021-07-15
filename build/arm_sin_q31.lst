@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccxOEBA5.s 			page 1
+ARM GAS  /tmp/ccswYDQD.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccxOEBA5.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_sin_q31.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccxOEBA5.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_sin_q31,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_sin_q31
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_sin_q31:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c"
+  18              		.global	arm_sin_q31
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_sin_q31:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c"
    1:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****  * Title:        arm_sin_q31.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccxOEBA5.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****  */
   28:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
   29:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccxOEBA5.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** #include "arm_common_tables.h"
   31:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
+ARM GAS  /tmp/ccswYDQD.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** /**
   33:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   @ingroup groupFastMath
   34:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****  */
@@ -83,138 +81,189 @@ ARM GAS  /tmp/ccxOEBA5.s 			page 1
   49:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** q31_t arm_sin_q31(
   50:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   q31_t x)
   51:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** {
-  30              		.loc 1 51 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 51 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 2DE9F003 		push	{r4, r5, r6, r7, r8, r9}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 24
+  36              		.cfi_offset 4, -24
+  37              		.cfi_offset 5, -20
+  38              		.cfi_offset 6, -16
+  39              		.cfi_offset 7, -12
+  40              		.cfi_offset 8, -8
+  41              		.cfi_offset 9, -4
+  42 0004 88B0     		sub	sp, sp, #32
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 56
+  45 0006 00AF     		add	r7, sp, #0
+  46              	.LCFI2:
+  47              		.cfi_def_cfa_register 7
+  48 0008 7860     		str	r0, [r7, #4]
   52:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   q31_t sinVal;                                  /* Temporary variables for input, output */
-  35              		.loc 1 52 3 view .LVU1
   53:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   int32_t index;                                 /* Index variable */
-  36              		.loc 1 53 3 view .LVU2
   54:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   q31_t a, b;                                    /* Two nearest output values */
-  37              		.loc 1 54 3 view .LVU3
   55:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   q31_t fract;                                   /* Temporary values for fractional values */
-  38              		.loc 1 55 3 view .LVU4
   56:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
   57:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   /* Calculate the nearest index */
   58:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   index = (uint32_t)x >> FAST_MATH_Q31_SHIFT;
-  39              		.loc 1 58 3 view .LVU5
+  49              		.loc 1 58 11
+  50 000a 7B68     		ldr	r3, [r7, #4]
+  51              		.loc 1 58 23
+  52 000c 9B0D     		lsrs	r3, r3, #22
+  53              		.loc 1 58 9
+  54 000e FB61     		str	r3, [r7, #28]
   59:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
   60:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   /* Calculation of fractional value */
   61:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   fract = (x - (index << FAST_MATH_Q31_SHIFT)) << 9;
-  40              		.loc 1 61 14 is_stmt 0 view .LVU6
-  41 0000 C0F31501 		ubfx	r1, r0, #0, #22
-  58:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  42              		.loc 1 58 23 view .LVU7
-  43 0004 800D     		lsrs	r0, r0, #22
-  44              	.LVL1:
-  45              		.loc 1 61 3 is_stmt 1 view .LVU8
+ARM GAS  /tmp/ccswYDQD.s 			page 3
+
+
+  55              		.loc 1 61 23
+  56 0010 FB69     		ldr	r3, [r7, #28]
+  57 0012 9B05     		lsls	r3, r3, #22
+  58              		.loc 1 61 14
+  59 0014 7A68     		ldr	r2, [r7, #4]
+  60 0016 D31A     		subs	r3, r2, r3
+  61              		.loc 1 61 9
+  62 0018 5B02     		lsls	r3, r3, #9
+  63 001a BB61     		str	r3, [r7, #24]
   62:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
   63:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   /* Read two nearest values of input value from the sin table */
   64:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   a = sinTable_q31[index];
+  64              		.loc 1 64 5
+  65 001c 294A     		ldr	r2, .L3
+  66 001e FB69     		ldr	r3, [r7, #28]
+  67 0020 52F82330 		ldr	r3, [r2, r3, lsl #2]
+  68 0024 7B61     		str	r3, [r7, #20]
   65:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   b = sinTable_q31[index+1];
+  69              		.loc 1 65 25
+  70 0026 FB69     		ldr	r3, [r7, #28]
+  71 0028 0133     		adds	r3, r3, #1
+  72              		.loc 1 65 5
+  73 002a 264A     		ldr	r2, .L3
+  74 002c 52F82330 		ldr	r3, [r2, r3, lsl #2]
+  75 0030 3B61     		str	r3, [r7, #16]
   66:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
   67:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   /* Linear interpolation process */
   68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   sinVal = (q63_t) (0x80000000 - fract) * a >> 32;
+  76              		.loc 1 68 32
+  77 0032 BB69     		ldr	r3, [r7, #24]
+  78 0034 C3F10043 		rsb	r3, r3, #-2147483648
+  79              		.loc 1 68 12
+  80 0038 1846     		mov	r0, r3
+  81 003a 4FF00001 		mov	r1, #0
+  82              		.loc 1 68 41
+  83 003e 7B69     		ldr	r3, [r7, #20]
+  84 0040 1A46     		mov	r2, r3
+  85 0042 4FEAE273 		asr	r3, r2, #31
+  86 0046 02FB01FC 		mul	ip, r2, r1
+  87 004a 00FB03F6 		mul	r6, r0, r3
+  88 004e 6644     		add	r6, r6, ip
+  89 0050 A0FB0223 		umull	r2, r3, r0, r2
+  90 0054 F118     		adds	r1, r6, r3
+  91 0056 0B46     		mov	r3, r1
+  92              		.loc 1 68 45
+  93 0058 4FF00000 		mov	r0, #0
+  94 005c 4FF00001 		mov	r1, #0
+  95 0060 1800     		movs	r0, r3
+  96 0062 D917     		asrs	r1, r3, #31
+  97              		.loc 1 68 10
+  98 0064 0346     		mov	r3, r0
+  99 0066 FB60     		str	r3, [r7, #12]
   69:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   sinVal = (q31_t) ((((q63_t) sinVal << 32) + ((q63_t) fract * b)) >> 32);
-ARM GAS  /tmp/ccxOEBA5.s 			page 3
+ 100              		.loc 1 69 23
+ 101 0068 FB68     		ldr	r3, [r7, #12]
+ 102 006a 1A46     		mov	r2, r3
+ 103 006c 4FEAE273 		asr	r3, r2, #31
+ARM GAS  /tmp/ccswYDQD.s 			page 4
 
 
-  46              		.loc 1 69 38 is_stmt 0 view .LVU9
-  47 0006 0022     		movs	r2, #0
-  61:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  48              		.loc 1 61 9 view .LVU10
-  49 0008 4902     		lsls	r1, r1, #9
-  50              	.LVL2:
-  64:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   b = sinTable_q31[index+1];
-  51              		.loc 1 64 3 is_stmt 1 view .LVU11
-  65:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  52              		.loc 1 65 3 view .LVU12
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   sinVal = (q31_t) ((((q63_t) sinVal << 32) + ((q63_t) fract * b)) >> 32);
-  53              		.loc 1 68 3 view .LVU13
-  54              		.loc 1 69 3 view .LVU14
+ 104              		.loc 1 69 38
+ 105 0070 4FF00000 		mov	r0, #0
+ 106 0074 4FF00001 		mov	r1, #0
+ 107 0078 1100     		movs	r1, r2
+ 108 007a 0020     		movs	r0, #0
+ 109              		.loc 1 69 48
+ 110 007c BB69     		ldr	r3, [r7, #24]
+ 111 007e 9846     		mov	r8, r3
+ 112 0080 4FEAE879 		asr	r9, r8, #31
+ 113              		.loc 1 69 62
+ 114 0084 3B69     		ldr	r3, [r7, #16]
+ 115 0086 1A46     		mov	r2, r3
+ 116 0088 4FEAE273 		asr	r3, r2, #31
+ 117 008c 02FB09FC 		mul	ip, r2, r9
+ 118 0090 08FB03F6 		mul	r6, r8, r3
+ 119 0094 6644     		add	r6, r6, ip
+ 120 0096 A8FB0223 		umull	r2, r3, r8, r2
+ 121 009a 1E44     		add	r6, r6, r3
+ 122 009c 3346     		mov	r3, r6
+ 123              		.loc 1 69 45
+ 124 009e 8418     		adds	r4, r0, r2
+ 125 00a0 41EB0305 		adc	r5, r1, r3
+ 126              		.loc 1 69 68
+ 127 00a4 4FF00002 		mov	r2, #0
+ 128 00a8 4FF00003 		mov	r3, #0
+ 129 00ac 2A00     		movs	r2, r5
+ 130 00ae EB17     		asrs	r3, r5, #31
+ 131              		.loc 1 69 10
+ 132 00b0 1346     		mov	r3, r2
+ 133 00b2 FB60     		str	r3, [r7, #12]
   70:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
   71:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   /* Return output value */
   72:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   return (sinVal << 1);
-  55              		.loc 1 72 3 view .LVU15
-  51:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   q31_t sinVal;                                  /* Temporary variables for input, output */
-  56              		.loc 1 51 1 is_stmt 0 view .LVU16
-  57 000a F0B4     		push	{r4, r5, r6, r7}
-  58              	.LCFI0:
-  59              		.cfi_def_cfa_offset 16
-  60              		.cfi_offset 4, -16
-  61              		.cfi_offset 5, -12
-  62              		.cfi_offset 6, -8
-  63              		.cfi_offset 7, -4
-  65:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  64              		.loc 1 65 5 view .LVU17
-  65 000c 084D     		ldr	r5, .L4
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   sinVal = (q31_t) ((((q63_t) sinVal << 32) + ((q63_t) fract * b)) >> 32);
-  66              		.loc 1 68 32 view .LVU18
-  67 000e C1F1004C 		rsb	ip, r1, #-2147483648
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   sinVal = (q31_t) ((((q63_t) sinVal << 32) + ((q63_t) fract * b)) >> 32);
-  68              		.loc 1 68 41 view .LVU19
-  69 0012 55F82040 		ldr	r4, [r5, r0, lsl #2]
-  65:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  70              		.loc 1 65 5 view .LVU20
-  71 0016 0130     		adds	r0, r0, #1
-  72              	.LVL3:
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   sinVal = (q31_t) ((((q63_t) sinVal << 32) + ((q63_t) fract * b)) >> 32);
-  73              		.loc 1 68 41 view .LVU21
-  74 0018 E717     		asrs	r7, r4, #31
-  69:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  75              		.loc 1 69 45 view .LVU22
-  76 001a 55F82000 		ldr	r0, [r5, r0, lsl #2]
-  77              	.LVL4:
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c ****   sinVal = (q31_t) ((((q63_t) sinVal << 32) + ((q63_t) fract * b)) >> 32);
-  78              		.loc 1 68 41 view .LVU23
-  79 001e ACFB0445 		umull	r4, r5, ip, r4
-  69:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  80              		.loc 1 69 38 view .LVU24
-  81 0022 0CFB0753 		mla	r3, ip, r7, r5
+ 134              		.loc 1 72 18
+ 135 00b4 FB68     		ldr	r3, [r7, #12]
+ 136 00b6 5B00     		lsls	r3, r3, #1
   73:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** }
-  82              		.loc 1 73 1 view .LVU25
-  83 0026 F0BC     		pop	{r4, r5, r6, r7}
-  84              	.LCFI1:
-  85              		.cfi_restore 7
-ARM GAS  /tmp/ccxOEBA5.s 			page 4
+ 137              		.loc 1 73 1
+ 138 00b8 1846     		mov	r0, r3
+ 139 00ba 2037     		adds	r7, r7, #32
+ 140              	.LCFI3:
+ 141              		.cfi_def_cfa_offset 24
+ 142 00bc BD46     		mov	sp, r7
+ 143              	.LCFI4:
+ 144              		.cfi_def_cfa_register 13
+ 145              		@ sp needed
+ 146 00be BDE8F003 		pop	{r4, r5, r6, r7, r8, r9}
+ 147              	.LCFI5:
+ 148              		.cfi_restore 9
+ 149              		.cfi_restore 8
+ 150              		.cfi_restore 7
+ 151              		.cfi_restore 6
+ 152              		.cfi_restore 5
+ 153              		.cfi_restore 4
+ 154              		.cfi_def_cfa_offset 0
+ 155 00c2 7047     		bx	lr
+ 156              	.L4:
+ARM GAS  /tmp/ccswYDQD.s 			page 5
 
 
-  86              		.cfi_restore 6
-  87              		.cfi_restore 5
-  88              		.cfi_restore 4
-  89              		.cfi_def_cfa_offset 0
-  69:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sin_q31.c **** 
-  90              		.loc 1 69 45 view .LVU26
-  91 0028 C0FB0123 		smlal	r2, r3, r0, r1
-  92              		.loc 1 73 1 view .LVU27
-  93 002c 5800     		lsls	r0, r3, #1
-  94 002e 7047     		bx	lr
-  95              	.L5:
-  96              		.align	2
-  97              	.L4:
-  98 0030 00000000 		.word	sinTable_q31
-  99              		.cfi_endproc
- 100              	.LFE145:
- 102              		.text
- 103              	.Letext0:
- 104              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 105              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 106              		.file 4 "/usr/include/newlib/sys/_types.h"
- 107              		.file 5 "/usr/include/newlib/sys/reent.h"
- 108              		.file 6 "/usr/include/newlib/sys/lock.h"
- 109              		.file 7 "/usr/include/newlib/math.h"
- 110              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 111              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
-ARM GAS  /tmp/ccxOEBA5.s 			page 5
+ 157              		.align	2
+ 158              	.L3:
+ 159 00c4 00000000 		.word	sinTable_q31
+ 160              		.cfi_endproc
+ 161              	.LFE145:
+ 163              		.text
+ 164              	.Letext0:
+ 165              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 166              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 167              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 168              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 169              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 170              		.file 7 "/usr/include/newlib/math.h"
+ 171              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 172              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ARM GAS  /tmp/ccswYDQD.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_sin_q31.c
-     /tmp/ccxOEBA5.s:17     .text.arm_sin_q31:0000000000000000 $t
-     /tmp/ccxOEBA5.s:26     .text.arm_sin_q31:0000000000000000 arm_sin_q31
-     /tmp/ccxOEBA5.s:98     .text.arm_sin_q31:0000000000000030 $d
+     /tmp/ccswYDQD.s:17     .text.arm_sin_q31:0000000000000000 $t
+     /tmp/ccswYDQD.s:25     .text.arm_sin_q31:0000000000000000 arm_sin_q31
+     /tmp/ccswYDQD.s:159    .text.arm_sin_q31:00000000000000c4 $d
 
 UNDEFINED SYMBOLS
 sinTable_q31

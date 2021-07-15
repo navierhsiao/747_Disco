@@ -9,7 +9,6 @@
 #endif
 
 static ADC_HandleTypeDef    AdcHandle;
-
 static void SystemClock_Config(void);
 static void MPU_Config(void);
 static void BSP_Init(void);
@@ -69,6 +68,7 @@ static void BSP_Init(void)
 {
   //QSPI init
   //SDRAM init
+  IS42S32800J_Init();
   //MCU internal temperature sensing init
   TEMP_SENSOR_Init();
   //RTC init

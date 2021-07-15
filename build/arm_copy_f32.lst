@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccDjuJs3.s 			page 1
+ARM GAS  /tmp/ccnfhKFI.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccDjuJs3.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_copy_f32.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccDjuJs3.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_copy_f32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_copy_f32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_copy_f32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c"
+  18              		.global	arm_copy_f32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_copy_f32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c"
    1:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****  * Title:        arm_copy_f32.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccDjuJs3.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****  */
   28:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
   29:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccDjuJs3.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
   31:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** /**
+ARM GAS  /tmp/ccnfhKFI.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   @ingroup groupSupport
   33:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****  */
   34:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
@@ -118,11 +116,11 @@ ARM GAS  /tmp/ccDjuJs3.s 			page 1
   84:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****     blkCnt--;
   85:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   }
   86:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
-ARM GAS  /tmp/ccDjuJs3.s 			page 3
-
-
   87:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   /* If the blockSize is not a multiple of 4, compute any remaining output samples here.
   88:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****    ** No loop unrolling is used. */
+ARM GAS  /tmp/ccnfhKFI.s 			page 3
+
+
   89:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   blkCnt = blockSize & 3;
   90:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
   91:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   while (blkCnt > 0U)
@@ -141,13 +139,25 @@ ARM GAS  /tmp/ccDjuJs3.s 			page 1
  104:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****         float32_t * pDst,
  105:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****         uint32_t blockSize)
  106:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** {
-  30              		.loc 1 106 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 106 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
  107:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 107 3 view .LVU1
  108:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
  109:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** #if defined (ARM_MATH_LOOPUNROLL)
  110:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
@@ -168,6 +178,9 @@ ARM GAS  /tmp/ccDjuJs3.s 			page 1
  125:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****     blkCnt--;
  126:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   }
  127:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
+ARM GAS  /tmp/ccnfhKFI.s 			page 4
+
+
  128:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   /* Loop unrolling: Compute remaining outputs */
  129:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   blkCnt = blockSize % 0x4U;
  130:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
@@ -175,65 +188,83 @@ ARM GAS  /tmp/ccDjuJs3.s 			page 1
  132:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
  133:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   /* Initialize blkCnt with number of samples */
  134:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   blkCnt = blockSize;
-  36              		.loc 1 134 3 view .LVU2
+  46              		.loc 1 134 10
+  47 000c 7B68     		ldr	r3, [r7, #4]
+  48 000e 7B61     		str	r3, [r7, #20]
  135:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
  136:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
-ARM GAS  /tmp/ccDjuJs3.s 			page 4
-
-
  137:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
  138:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   while (blkCnt > 0U)
-  37              		.loc 1 138 3 view .LVU3
-  38              		.loc 1 138 9 view .LVU4
-  39 0000 2AB1     		cbz	r2, .L1
-  40              	.LVL1:
-  41              	.L3:
+  49              		.loc 1 138 9
+  50 0010 0AE0     		b	.L2
+  51              	.L3:
  139:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   {
  140:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****     /* C = A */
  141:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
  142:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****     /* Copy and store result in destination buffer */
  143:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****     *pDst++ = *pSrc++;
-  42              		.loc 1 143 5 view .LVU5
-  43              		.loc 1 143 15 is_stmt 0 view .LVU6
-  44 0002 50F8043B 		ldr	r3, [r0], #4	@ float
-  45              	.LVL2:
- 138:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   {
-  46              		.loc 1 138 9 view .LVU7
-  47 0006 013A     		subs	r2, r2, #1
-  48              	.LVL3:
-  49              		.loc 1 143 13 view .LVU8
-  50 0008 41F8043B 		str	r3, [r1], #4	@ float
+  52              		.loc 1 143 20
+  53 0012 FA68     		ldr	r2, [r7, #12]
+  54 0014 131D     		adds	r3, r2, #4
+  55 0016 FB60     		str	r3, [r7, #12]
+  56              		.loc 1 143 10
+  57 0018 BB68     		ldr	r3, [r7, #8]
+  58 001a 191D     		adds	r1, r3, #4
+  59 001c B960     		str	r1, [r7, #8]
+  60              		.loc 1 143 15
+  61 001e 1268     		ldr	r2, [r2]	@ float
+  62              		.loc 1 143 13
+  63 0020 1A60     		str	r2, [r3]	@ float
  144:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** 
  145:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****     /* Decrement loop counter */
  146:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****     blkCnt--;
-  51              		.loc 1 146 5 is_stmt 1 view .LVU9
-  52              	.LVL4:
+  64              		.loc 1 146 11
+  65 0022 7B69     		ldr	r3, [r7, #20]
+  66 0024 013B     		subs	r3, r3, #1
+  67 0026 7B61     		str	r3, [r7, #20]
+  68              	.L2:
  138:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   {
-  53              		.loc 1 138 9 view .LVU10
-  54 000c F9D1     		bne	.L3
-  55              	.LVL5:
-  56              	.L1:
+  69              		.loc 1 138 9
+  70 0028 7B69     		ldr	r3, [r7, #20]
+  71 002a 002B     		cmp	r3, #0
+  72 002c F1D1     		bne	.L3
  147:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c ****   }
  148:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_copy_f32.c **** }
-  57              		.loc 1 148 1 is_stmt 0 view .LVU11
-  58 000e 7047     		bx	lr
-  59              		.cfi_endproc
-  60              	.LFE145:
-  62              		.text
-  63              	.Letext0:
-  64              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  65              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  66              		.file 4 "/usr/include/newlib/sys/_types.h"
-  67              		.file 5 "/usr/include/newlib/sys/reent.h"
-  68              		.file 6 "/usr/include/newlib/sys/lock.h"
-  69              		.file 7 "/usr/include/newlib/math.h"
-  70              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccDjuJs3.s 			page 5
+  73              		.loc 1 148 1
+  74 002e 00BF     		nop
+  75 0030 00BF     		nop
+  76 0032 1C37     		adds	r7, r7, #28
+  77              	.LCFI3:
+  78              		.cfi_def_cfa_offset 4
+  79 0034 BD46     		mov	sp, r7
+  80              	.LCFI4:
+ARM GAS  /tmp/ccnfhKFI.s 			page 5
+
+
+  81              		.cfi_def_cfa_register 13
+  82              		@ sp needed
+  83 0036 5DF8047B 		ldr	r7, [sp], #4
+  84              	.LCFI5:
+  85              		.cfi_restore 7
+  86              		.cfi_def_cfa_offset 0
+  87 003a 7047     		bx	lr
+  88              		.cfi_endproc
+  89              	.LFE145:
+  91              		.text
+  92              	.Letext0:
+  93              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+  94              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+  95              		.file 4 "/usr/include/newlib/sys/_types.h"
+  96              		.file 5 "/usr/include/newlib/sys/reent.h"
+  97              		.file 6 "/usr/include/newlib/sys/lock.h"
+  98              		.file 7 "/usr/include/newlib/math.h"
+  99              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccnfhKFI.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_copy_f32.c
-     /tmp/ccDjuJs3.s:17     .text.arm_copy_f32:0000000000000000 $t
-     /tmp/ccDjuJs3.s:26     .text.arm_copy_f32:0000000000000000 arm_copy_f32
+     /tmp/ccnfhKFI.s:17     .text.arm_copy_f32:0000000000000000 $t
+     /tmp/ccnfhKFI.s:25     .text.arm_copy_f32:0000000000000000 arm_copy_f32
 
 NO UNDEFINED SYMBOLS

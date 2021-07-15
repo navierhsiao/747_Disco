@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccSeFoIQ.s 			page 1
+ARM GAS  /tmp/cceWb1jN.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_offset_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_offset_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_offset_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_offset_q15:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c"
+  18              		.global	arm_offset_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_offset_q15:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c"
    1:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****  * Title:        arm_offset_q15.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****  */
   28:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
   29:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccSeFoIQ.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
   31:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** /**
+ARM GAS  /tmp/cceWb1jN.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   @ingroup groupMath
   33:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****  */
   34:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
@@ -90,13 +88,27 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   56:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****         q15_t * pDst,
   57:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****         uint32_t blockSize)
   58:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** {
-  30              		.loc 1 58 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 58 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 89B0     		sub	sp, sp, #36
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 7A60     		str	r2, [r7, #4]
+  45 000a 3B60     		str	r3, [r7]
+  46 000c 0B46     		mov	r3, r1	@ movhi
+  47 000e 7B81     		strh	r3, [r7, #10]	@ movhi
   59:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 59 9 view .LVU1
   60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
   61:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
   62:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
@@ -106,6 +118,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   66:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   /* Offset is packed to 32 bit in order to use SIMD32 for addition */
   67:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   offset_packed = __PKHBT(offset, offset, 16);
   68:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #endif
+ARM GAS  /tmp/cceWb1jN.s 			page 3
+
+
   69:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
   70:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   /* Loop unrolling: Compute 4 outputs at a time */
   71:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   blkCnt = blockSize >> 2U;
@@ -118,9 +133,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   78:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     /* Add offset and store result in destination buffer (2 samples at a time). */
   79:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     write_q15x2_ia (&pDst, __QADD16(read_q15x2_ia ((q15_t **) &pSrc), offset_packed));
   80:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     write_q15x2_ia (&pDst, __QADD16(read_q15x2_ia ((q15_t **) &pSrc), offset_packed));
-ARM GAS  /tmp/ccSeFoIQ.s 			page 3
-
-
   81:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #else
   82:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     *pDst++ = (q15_t) __SSAT(((q31_t) *pSrc++ + offset), 16);
   83:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     *pDst++ = (q15_t) __SSAT(((q31_t) *pSrc++ + offset), 16);
@@ -139,32 +151,39 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   96:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
   97:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   /* Initialize blkCnt with number of samples */
   98:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   blkCnt = blockSize;
-  36              		.loc 1 98 3 view .LVU2
+  48              		.loc 1 98 10
+  49 0010 3B68     		ldr	r3, [r7]
+  50 0012 FB61     		str	r3, [r7, #28]
   99:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
  100:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  101:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
  102:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   while (blkCnt > 0U)
-  37              		.loc 1 102 3 view .LVU3
-  38              		.loc 1 102 9 view .LVU4
-  39 0000 5BB1     		cbz	r3, .L7
-  58:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
-  40              		.loc 1 58 1 is_stmt 0 view .LVU5
-  41 0002 10B4     		push	{r4}
-  42              	.LCFI0:
-  43              		.cfi_def_cfa_offset 4
-  44              		.cfi_offset 4, -4
-  45              	.LVL1:
-  46              	.L3:
+  51              		.loc 1 102 9
+  52 0014 17E0     		b	.L2
+  53              	.L4:
  103:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   {
  104:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     /* C = A + offset */
  105:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
  106:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     /* Add offset and store result in destination buffer. */
  107:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #if defined (ARM_MATH_DSP)
  108:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     *pDst++ = (q15_t) __QADD16(*pSrc++, offset);
-  47              		.loc 1 108 5 is_stmt 1 view .LVU6
-  48              	.LBB4:
-  49              	.LBI4:
-  50              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
+  54              		.loc 1 108 37
+  55 0016 FB68     		ldr	r3, [r7, #12]
+  56 0018 9A1C     		adds	r2, r3, #2
+  57 001a FA60     		str	r2, [r7, #12]
+  58              		.loc 1 108 32
+  59 001c B3F90030 		ldrsh	r3, [r3]
+  60              		.loc 1 108 23
+  61 0020 1A46     		mov	r2, r3
+  62 0022 B7F90A30 		ldrsh	r3, [r7, #10]
+  63 0026 BA61     		str	r2, [r7, #24]
+  64 0028 7B61     		str	r3, [r7, #20]
+ARM GAS  /tmp/cceWb1jN.s 			page 4
+
+
+  65              	.LBB4:
+  66              	.LBB5:
+  67              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
    1:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -178,9 +197,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   11:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  *
   12:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
   13:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
-ARM GAS  /tmp/ccSeFoIQ.s 			page 4
-
-
   14:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
   15:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  *
   16:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
@@ -222,6 +238,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   52:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
   53:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
   54:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/cceWb1jN.s 			page 5
+
+
   55:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __USED
   56:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
   57:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -238,9 +257,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
   68:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
   69:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   70:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
-ARM GAS  /tmp/ccSeFoIQ.s 			page 5
-
-
   71:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   72:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   73:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
@@ -282,6 +298,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  109:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  110:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
  111:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ARM GAS  /tmp/cceWb1jN.s 			page 6
+
+
  112:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  113:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
  114:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
@@ -298,9 +317,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  125:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Initializes data and bss sections
  126:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details This default implementations initialized all data and additional bss
  127:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            sections relying on .copy.table and .zero.table specified properly
-ARM GAS  /tmp/ccSeFoIQ.s 			page 6
-
-
  128:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            in the used linker script.
  129:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
  130:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -342,6 +358,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  166:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
  167:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  168:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/cceWb1jN.s 			page 7
+
+
  169:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __INITIAL_SP
  170:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __INITIAL_SP              __StackTop
  171:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -358,9 +377,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  182:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __VECTOR_TABLE_ATTRIBUTE  __attribute((used, section(".vectors")))
  183:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  184:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccSeFoIQ.s 			page 7
-
-
  185:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
  186:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
  187:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
@@ -402,6 +418,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  223:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  224:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  225:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/cceWb1jN.s 			page 8
+
+
  226:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  227:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  228:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -418,9 +437,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  239:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  240:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  241:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccSeFoIQ.s 			page 8
-
-
  242:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  243:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  244:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Control Register
@@ -462,6 +478,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  280:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  281:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  282:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get APSR Register
+ARM GAS  /tmp/cceWb1jN.s 			page 9
+
+
  283:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
  284:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               APSR Register value
  285:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -478,9 +497,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  296:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get xPSR Register
  297:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the content of the xPSR Register.
  298:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               xPSR Register value
-ARM GAS  /tmp/ccSeFoIQ.s 			page 9
-
-
  299:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  300:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_xPSR(void)
  301:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -522,6 +538,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  337:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  338:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  339:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/cceWb1jN.s 			page 10
+
+
  340:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer
  341:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
  342:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
@@ -538,9 +557,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  353:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Process Stack Pointer (PSP) when in secure sta
  354:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
  355:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccSeFoIQ.s 			page 10
-
-
  356:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PSP_NS(uint32_t topOfProcStack)
  357:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  358:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psp_ns, %0" : : "r" (topOfProcStack) : );
@@ -582,6 +598,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  394:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer
  395:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer (MSP).
  396:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
+ARM GAS  /tmp/cceWb1jN.s 			page 11
+
+
  397:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  398:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
  399:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -598,9 +617,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  410:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_MSP_NS(uint32_t topOfMainStack)
  411:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  412:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp_ns, %0" : : "r" (topOfMainStack) : );
-ARM GAS  /tmp/ccSeFoIQ.s 			page 11
-
-
  413:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  414:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  415:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -642,6 +658,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  451:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  452:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  453:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) :: "memory");
+ARM GAS  /tmp/cceWb1jN.s 			page 12
+
+
  454:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  455:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  456:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -658,9 +677,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  467:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  468:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask_ns" : "=r" (result) :: "memory");
  469:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/ccSeFoIQ.s 			page 12
-
-
  470:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  471:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  472:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -702,6 +718,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  508:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie f" : : : "memory");
  509:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  510:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/cceWb1jN.s 			page 13
+
+
  511:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  512:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  513:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Disable FIQ
@@ -718,9 +737,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  524:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Base Priority
  525:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Base Priority register.
  526:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Base Priority register value
-ARM GAS  /tmp/ccSeFoIQ.s 			page 13
-
-
  527:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  528:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_BASEPRI(void)
  529:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -762,6 +778,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  565:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  566:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Base Priority (non-secure)
  567:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Base Priority register when in secure state.
+ARM GAS  /tmp/cceWb1jN.s 			page 14
+
+
  568:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
  569:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  570:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri)
@@ -778,9 +797,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  581:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
  582:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  583:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_BASEPRI_MAX(uint32_t basePri)
-ARM GAS  /tmp/ccSeFoIQ.s 			page 14
-
-
  584:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  585:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri_max, %0" : : "r" (basePri) : "memory");
  586:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -822,6 +838,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  622:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    faultMask  Fault Mask value to set
  623:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  624:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_FAULTMASK(uint32_t faultMask)
+ARM GAS  /tmp/cceWb1jN.s 			page 15
+
+
  625:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  626:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
  627:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -838,9 +857,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  638:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask_ns, %0" : : "r" (faultMask) : "memory");
  639:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  640:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccSeFoIQ.s 			page 15
-
-
  641:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  642:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
  643:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
@@ -882,6 +898,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  679:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               PSPLIM Register value
  680:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  681:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PSPLIM_NS(void)
+ARM GAS  /tmp/cceWb1jN.s 			page 16
+
+
  682:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  683:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
  684:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
@@ -898,9 +917,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  695:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  696:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer Limit
  697:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
-ARM GAS  /tmp/ccSeFoIQ.s 			page 16
-
-
  698:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence the write is silently ignored in non-secure
  699:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   mode.
  700:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
@@ -942,6 +958,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  736:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  737:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  738:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer Limit
+ARM GAS  /tmp/cceWb1jN.s 			page 17
+
+
  739:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  740:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
  741:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   mode.
@@ -958,9 +977,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  752:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  753:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  754:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msplim" : "=r" (result) );
-ARM GAS  /tmp/ccSeFoIQ.s 			page 17
-
-
  755:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return result;
  756:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  757:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -1002,6 +1018,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  793:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  794:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
  795:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
+ARM GAS  /tmp/cceWb1jN.s 			page 18
+
+
  796:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
  797:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   (void)MainStackPtrLimit;
  798:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -1018,9 +1037,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  809:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  810:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Main Stack Pointer Limit (MSPLIM) when in secu
  811:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    MainStackPtrLimit  Main Stack Pointer value to set
-ARM GAS  /tmp/ccSeFoIQ.s 			page 18
-
-
  812:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  813:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_MSPLIM_NS(uint32_t MainStackPtrLimit)
  814:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1062,6 +1078,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  850:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  851:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  852:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/cceWb1jN.s 			page 19
+
+
  853:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  854:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  855:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set FPSCR
@@ -1078,9 +1097,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  866:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   /* see https://gcc.gnu.org/ml/gcc-patches/2017-04/msg00443.html */
  867:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __builtin_arm_set_fpscr(fpscr);
  868:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
-ARM GAS  /tmp/ccSeFoIQ.s 			page 19
-
-
  869:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("VMSR fpscr, %0" : : "r" (fpscr) : "vfpcc", "memory");
  870:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  871:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -1122,6 +1138,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  907:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Wait For Interrupt is a hint instruction that suspends execution until one of a number o
  908:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  909:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __WFI()                             __ASM volatile ("wfi")
+ARM GAS  /tmp/cceWb1jN.s 			page 20
+
+
  910:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  911:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  912:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1138,9 +1157,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  923:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  924:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __SEV()                             __ASM volatile ("sev")
  925:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccSeFoIQ.s 			page 20
-
-
  926:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  927:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  928:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Instruction Synchronization Barrier
@@ -1182,6 +1198,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  964:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    value  Value to reverse
  965:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Reversed value
  966:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/cceWb1jN.s 			page 21
+
+
  967:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __REV(uint32_t value)
  968:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  969:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5)
@@ -1198,9 +1217,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
  980:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  981:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Reverse byte order (16 bit)
  982:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Reverses the byte order within each halfword of a word. For example, 0x12345678 becomes 
-ARM GAS  /tmp/ccSeFoIQ.s 			page 21
-
-
  983:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    value  Value to reverse
  984:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Reversed value
  985:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -1242,6 +1258,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1021:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2)
 1022:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1023:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   op2 %= 32U;
+ARM GAS  /tmp/cceWb1jN.s 			page 22
+
+
 1024:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if (op2 == 0U)
 1025:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
 1026:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     return op1;
@@ -1258,9 +1277,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1037:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****                  If required, a debugger can use it to store additional information about the break
 1038:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1039:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __BKPT(value)                       __ASM volatile ("bkpt "#value)
-ARM GAS  /tmp/ccSeFoIQ.s 			page 22
-
-
 1040:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1041:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1042:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1302,6 +1318,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1078:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __CLZ(uint32_t value)
 1079:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1080:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   /* Even though __builtin_clz produces a CLZ instruction on ARM, formally
+ARM GAS  /tmp/cceWb1jN.s 			page 23
+
+
 1081:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      __builtin_clz(0) is undefined behaviour, so handle this case specially.
 1082:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      This guarantees ARM-compatible results if happening to compile on a non-ARM
 1083:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      target, and ensures the compiler doesn't decide to activate any
@@ -1318,9 +1337,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1094:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1095:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1096:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccSeFoIQ.s 			page 23
-
-
 1097:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
 1098:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
 1099:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
@@ -1362,6 +1378,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1135:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
 1136:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     /* Prior to GCC 4.8, "Q" will be expanded to [rx, #0] which is not
 1137:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****        accepted by assembler. So has to use following less efficient pattern.
+ARM GAS  /tmp/cceWb1jN.s 			page 24
+
+
 1138:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     */
 1139:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrexh %0, [%1]" : "=r" (result) : "r" (addr) : "memory" );
 1140:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -1378,9 +1397,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1151:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __LDREXW(volatile uint32_t *addr)
 1152:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1153:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
-ARM GAS  /tmp/ccSeFoIQ.s 			page 24
-
-
 1154:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1155:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrex %0, %1" : "=r" (result) : "Q" (*addr) );
 1156:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
@@ -1422,6 +1438,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1192:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1193:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1194:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/cceWb1jN.s 			page 25
+
+
 1195:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   STR Exclusive (32 bit)
 1196:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a exclusive STR instruction for 32 bit values.
 1197:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
@@ -1438,9 +1457,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1208:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1209:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1210:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccSeFoIQ.s 			page 25
-
-
 1211:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1212:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Remove the exclusive lock
 1213:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Removes the exclusive lock which is created by LDREX.
@@ -1482,6 +1498,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1249:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  ARG2  Bit position to saturate to (0..31)
 1250:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             Saturated value
 1251:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/cceWb1jN.s 			page 26
+
+
 1252:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __USAT(ARG1,ARG2) \
 1253:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  __extension__ \
 1254:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** ({                          \
@@ -1498,9 +1517,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1265:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    value  Value to rotate
 1266:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Rotated value
 1267:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccSeFoIQ.s 			page 26
-
-
 1268:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __RRX(uint32_t value)
 1269:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1270:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -1542,6 +1558,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1306:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1307:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1308:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/cceWb1jN.s 			page 27
+
+
 1309:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
 1310:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrht %0, %1" : "=r" (result) : "Q" (*ptr) );
 1311:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -1558,9 +1577,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1322:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   LDRT Unprivileged (32 bit)
 1323:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a Unprivileged LDRT instruction for 32 bit values.
 1324:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
-ARM GAS  /tmp/ccSeFoIQ.s 			page 27
-
-
 1325:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint32_t at (*ptr)
 1326:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1327:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __LDRT(volatile uint32_t *ptr)
@@ -1602,6 +1618,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1363:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1364:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
 1365:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/cceWb1jN.s 			page 28
+
+
 1366:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STRT(uint32_t value, volatile uint32_t *ptr)
 1367:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1368:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("strt %1, %0" : "=Q" (*ptr) : "r" (value) );
@@ -1618,9 +1637,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1379:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    sat  Bit position to saturate to (1..32)
 1380:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             Saturated value
 1381:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccSeFoIQ.s 			page 28
-
-
 1382:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE int32_t __SSAT(int32_t val, uint32_t sat)
 1383:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1384:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if ((sat >= 1U) && (sat <= 32U))
@@ -1662,6 +1678,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1420:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
 1421:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return (uint32_t)val;
 1422:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/cceWb1jN.s 			page 29
+
+
 1423:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1424:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
 1425:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
@@ -1678,9 +1697,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1436:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1437:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __LDAB(volatile uint8_t *ptr)
 1438:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccSeFoIQ.s 			page 29
-
-
 1439:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1440:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1441:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldab %0, %1" : "=r" (result) : "Q" (*ptr) );
@@ -1722,6 +1738,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1477:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Store-Release (8 bit)
 1478:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STLB instruction for 8 bit values.
 1479:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
+ARM GAS  /tmp/cceWb1jN.s 			page 30
+
+
 1480:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
 1481:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1482:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STLB(uint8_t value, volatile uint8_t *ptr)
@@ -1738,9 +1757,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1493:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1494:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STLH(uint16_t value, volatile uint16_t *ptr)
 1495:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccSeFoIQ.s 			page 30
-
-
 1496:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("stlh %1, %0" : "=Q" (*ptr) : "r" ((uint32_t)value) );
 1497:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1498:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1782,6 +1798,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1534:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1535:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1536:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/cceWb1jN.s 			page 31
+
+
 1537:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldaexh %0, %1" : "=r" (result) : "Q" (*ptr) );
 1538:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return ((uint16_t) result);
 1539:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -1798,9 +1817,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1550:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1551:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1552:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldaex %0, %1" : "=r" (result) : "Q" (*ptr) );
-ARM GAS  /tmp/ccSeFoIQ.s 			page 31
-
-
 1553:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1554:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1555:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1842,6 +1858,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1591:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1592:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Store-Release Exclusive (32 bit)
 1593:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STL exclusive instruction for 32 bit values.
+ARM GAS  /tmp/cceWb1jN.s 			page 32
+
+
 1594:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1595:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
 1596:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return          0  Function succeeded
@@ -1858,9 +1877,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1607:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
 1608:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    ) */
 1609:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccSeFoIQ.s 			page 32
-
-
 1610:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /*@}*/ /* end of group CMSIS_Core_InstructionInterface */
 1611:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1612:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1902,6 +1918,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1648:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1649:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uadd8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1650:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/cceWb1jN.s 			page 33
+
+
 1651:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1652:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1653:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UQADD8(uint32_t op1, uint32_t op2)
@@ -1918,9 +1937,6 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1664:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1665:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uhadd8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1666:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/ccSeFoIQ.s 			page 33
-
-
 1667:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1668:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1669:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1962,6 +1978,9 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1705:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1706:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uqsub8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1707:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/cceWb1jN.s 			page 34
+
+
 1708:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1709:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1710:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UHSUB8(uint32_t op1, uint32_t op2)
@@ -1978,91 +1997,91 @@ ARM GAS  /tmp/ccSeFoIQ.s 			page 1
 1721:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1722:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1723:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("sadd16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
-ARM GAS  /tmp/ccSeFoIQ.s 			page 34
-
-
 1724:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1725:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1726:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1727:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __QADD16(uint32_t op1, uint32_t op2)
-  51              		.loc 2 1727 31 view .LVU7
-  52              	.LBB5:
 1728:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1729:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
-  53              		.loc 2 1729 3 view .LVU8
 1730:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1731:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("qadd16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
-  54              		.loc 2 1731 3 view .LVU9
-  55              	.LBE5:
-  56              	.LBE4:
-  57              		.loc 1 108 23 is_stmt 0 view .LVU10
-  58 0004 30F9024B 		ldrsh	r4, [r0], #2
-  59              	.LVL2:
-  60              	.LBB7:
-  61              	.LBB6:
-  62              		.loc 2 1731 3 view .LVU11
-  63              		.syntax unified
-  64              	@ 1731 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
-  65 0008 94FA11F4 		qadd16 r4, r4, r1
-  66              	@ 0 "" 2
-  67              	.LVL3:
-1732:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-  68              		.loc 2 1732 3 is_stmt 1 view .LVU12
-  69              		.loc 2 1732 3 is_stmt 0 view .LVU13
-  70              		.thumb
+  68              		.loc 2 1731 3
+  69 002a BB69     		ldr	r3, [r7, #24]
+  70 002c 7A69     		ldr	r2, [r7, #20]
   71              		.syntax unified
-  72              	.LBE6:
-  73              	.LBE7:
- 102:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   {
-  74              		.loc 1 102 9 view .LVU14
-  75 000c 013B     		subs	r3, r3, #1
-  76              	.LVL4:
-  77              		.loc 1 108 15 view .LVU15
-  78 000e 22F8024B 		strh	r4, [r2], #2	@ movhi
-  79              	.LVL5:
+  72              	@ 1731 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+  73 002e 93FA12F3 		qadd16 r3, r3, r2
+  74              	@ 0 "" 2
+  75              		.thumb
+  76              		.syntax unified
+  77 0032 3B61     		str	r3, [r7, #16]
+1732:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+  78              		.loc 2 1732 9
+  79 0034 3969     		ldr	r1, [r7, #16]
+  80              	.LBE5:
+  81              	.LBE4:
+  82              		.loc 1 108 10
+  83 0036 7B68     		ldr	r3, [r7, #4]
+  84 0038 9A1C     		adds	r2, r3, #2
+  85 003a 7A60     		str	r2, [r7, #4]
+  86              		.loc 1 108 15
+  87 003c 0AB2     		sxth	r2, r1
+  88              		.loc 1 108 13
+  89 003e 1A80     		strh	r2, [r3]	@ movhi
  109:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #else
  110:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     *pDst++ = (q15_t) __SSAT(((q31_t) *pSrc++ + offset), 16);
  111:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** #endif
  112:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
  113:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     /* Decrement loop counter */
  114:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****     blkCnt--;
-  80              		.loc 1 114 5 is_stmt 1 view .LVU16
+  90              		.loc 1 114 11
+  91 0040 FB69     		ldr	r3, [r7, #28]
+  92 0042 013B     		subs	r3, r3, #1
+  93 0044 FB61     		str	r3, [r7, #28]
+ARM GAS  /tmp/cceWb1jN.s 			page 35
+
+
+  94              	.L2:
  102:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   {
-  81              		.loc 1 102 9 view .LVU17
-  82 0012 F7D1     		bne	.L3
+  95              		.loc 1 102 9
+  96 0046 FB69     		ldr	r3, [r7, #28]
+  97 0048 002B     		cmp	r3, #0
+  98 004a E4D1     		bne	.L4
  115:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c ****   }
  116:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** 
  117:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_offset_q15.c **** }
-  83              		.loc 1 117 1 is_stmt 0 view .LVU18
-  84 0014 5DF8044B 		ldr	r4, [sp], #4
-  85              	.LCFI1:
-  86              		.cfi_restore 4
-  87              		.cfi_def_cfa_offset 0
-ARM GAS  /tmp/ccSeFoIQ.s 			page 35
-
-
-  88 0018 7047     		bx	lr
-  89              	.LVL6:
-  90              	.L7:
-  91              		.loc 1 117 1 view .LVU19
-  92 001a 7047     		bx	lr
-  93              		.cfi_endproc
-  94              	.LFE145:
-  96              		.text
-  97              	.Letext0:
-  98              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  99              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 100              		.file 5 "/usr/include/newlib/sys/_types.h"
- 101              		.file 6 "/usr/include/newlib/sys/reent.h"
- 102              		.file 7 "/usr/include/newlib/sys/lock.h"
- 103              		.file 8 "/usr/include/newlib/math.h"
- 104              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccSeFoIQ.s 			page 36
+  99              		.loc 1 117 1
+ 100 004c 00BF     		nop
+ 101 004e 00BF     		nop
+ 102 0050 2437     		adds	r7, r7, #36
+ 103              	.LCFI3:
+ 104              		.cfi_def_cfa_offset 4
+ 105 0052 BD46     		mov	sp, r7
+ 106              	.LCFI4:
+ 107              		.cfi_def_cfa_register 13
+ 108              		@ sp needed
+ 109 0054 5DF8047B 		ldr	r7, [sp], #4
+ 110              	.LCFI5:
+ 111              		.cfi_restore 7
+ 112              		.cfi_def_cfa_offset 0
+ 113 0058 7047     		bx	lr
+ 114              		.cfi_endproc
+ 115              	.LFE145:
+ 117              		.text
+ 118              	.Letext0:
+ 119              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 120              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 121              		.file 5 "/usr/include/newlib/sys/_types.h"
+ 122              		.file 6 "/usr/include/newlib/sys/reent.h"
+ 123              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 124              		.file 8 "/usr/include/newlib/math.h"
+ 125              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/cceWb1jN.s 			page 36
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_offset_q15.c
-     /tmp/ccSeFoIQ.s:17     .text.arm_offset_q15:0000000000000000 $t
-     /tmp/ccSeFoIQ.s:26     .text.arm_offset_q15:0000000000000000 arm_offset_q15
+     /tmp/cceWb1jN.s:17     .text.arm_offset_q15:0000000000000000 $t
+     /tmp/cceWb1jN.s:25     .text.arm_offset_q15:0000000000000000 arm_offset_q15
 
 NO UNDEFINED SYMBOLS

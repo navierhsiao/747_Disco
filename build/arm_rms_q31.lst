@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cceL2q0S.s 			page 1
+ARM GAS  /tmp/cciaV9pu.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_rms_q31.c"
@@ -19,17 +19,15 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
   16              		.global	__aeabi_uldivmod
   17              		.section	.text.arm_rms_q31,"ax",%progbits
   18              		.align	1
-  19              		.p2align 2,,3
-  20              		.global	arm_rms_q31
-  21              		.arch armv7e-m
-  22              		.syntax unified
-  23              		.thumb
-  24              		.thumb_func
-  25              		.fpu fpv5-d16
-  27              	arm_rms_q31:
-  28              	.LVL0:
-  29              	.LFB145:
-  30              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c"
+  19              		.global	arm_rms_q31
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_rms_q31:
+  27              	.LFB145:
+  28              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c"
    1:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****  * Title:        arm_rms_q31.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
   26:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****  * limitations under the License.
   27:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****  */
   28:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
-ARM GAS  /tmp/cceL2q0S.s 			page 2
-
-
   29:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** #include "arm_math.h"
   30:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
+ARM GAS  /tmp/cciaV9pu.s 			page 2
+
+
   31:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** /**
   32:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   @ingroup groupStats
   33:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****  */
@@ -97,16 +95,37 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
   62:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         uint32_t blockSize,
   63:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         q31_t * pResult)
   64:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** {
-  31              		.loc 1 64 1 view -0
-  32              		.cfi_startproc
-  33              		@ args = 0, pretend = 0, frame = 0
-  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  29              		.loc 1 64 1
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 48
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 20
+  36              		.cfi_offset 4, -20
+  37              		.cfi_offset 5, -16
+  38              		.cfi_offset 6, -12
+  39              		.cfi_offset 7, -8
+  40              		.cfi_offset 14, -4
+  41 0002 8DB0     		sub	sp, sp, #52
+  42              	.LCFI1:
+  43              		.cfi_def_cfa_offset 72
+  44 0004 00AF     		add	r7, sp, #0
+  45              	.LCFI2:
+  46              		.cfi_def_cfa_register 7
+  47 0006 F860     		str	r0, [r7, #12]
+  48 0008 B960     		str	r1, [r7, #8]
+  49 000a 7A60     		str	r2, [r7, #4]
   65:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 65 9 view .LVU1
   66:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         uint64_t sum = 0;                              /* Temporary result storage (can get never n
-  36              		.loc 1 66 9 view .LVU2
+ARM GAS  /tmp/cciaV9pu.s 			page 3
+
+
+  50              		.loc 1 66 18
+  51 000c 4FF00002 		mov	r2, #0
+  52 0010 4FF00003 		mov	r3, #0
+  53 0014 C7E90823 		strd	r2, [r7, #32]
   67:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         q31_t in;                                      /* Temporary variable to store input value *
-  37              		.loc 1 67 9 view .LVU3
   68:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
   69:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
   70:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
@@ -118,9 +137,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
   76:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     /* C = A[0] * A[0] + A[1] * A[1] + ... + A[blockSize-1] * A[blockSize-1] */
   77:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
   78:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     in = *pSrc++;
-ARM GAS  /tmp/cceL2q0S.s 			page 3
-
-
   79:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     /* Compute sum of squares and store result in a temporary variable, sum. */
   80:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     sum += ((q63_t) in * in);
   81:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
@@ -144,89 +160,96 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
   99:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
  100:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   /* Initialize blkCnt with number of samples */
  101:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   blkCnt = blockSize;
-  38              		.loc 1 101 3 view .LVU4
+  54              		.loc 1 101 10
+  55 0018 BB68     		ldr	r3, [r7, #8]
+  56 001a FB62     		str	r3, [r7, #44]
  102:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
  103:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  104:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
  105:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   while (blkCnt > 0U)
-  39              		.loc 1 105 3 view .LVU5
-  40              		.loc 1 105 9 view .LVU6
-  64:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  41              		.loc 1 64 1 is_stmt 0 view .LVU7
-  42 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
-  43              	.LCFI0:
-  44              		.cfi_def_cfa_offset 24
-  45              		.cfi_offset 3, -24
-  46              		.cfi_offset 4, -20
-  47              		.cfi_offset 5, -16
-  48              		.cfi_offset 6, -12
-  49              		.cfi_offset 7, -8
-  50              		.cfi_offset 14, -4
-  64:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  51              		.loc 1 64 1 view .LVU8
-  52 0002 1546     		mov	r5, r2
-  53              		.loc 1 105 9 view .LVU9
-  54 0004 D9B1     		cbz	r1, .L4
-  55 0006 0B46     		mov	r3, r1
-  66:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****         q31_t in;                                      /* Temporary variable to store input value *
-  56              		.loc 1 66 18 view .LVU10
-  57 0008 0026     		movs	r6, #0
-  58 000a 0027     		movs	r7, #0
-  59              	.LVL1:
-  60              	.L3:
+  57              		.loc 1 105 9
+  58 001c 21E0     		b	.L2
+  59              	.L3:
  106:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   {
  107:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     /* C = A[0] * A[0] + A[1] * A[1] + ... + A[blockSize-1] * A[blockSize-1] */
  108:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
  109:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     in = *pSrc++;
-ARM GAS  /tmp/cceL2q0S.s 			page 4
+  60              		.loc 1 109 15
+  61 001e FB68     		ldr	r3, [r7, #12]
+  62 0020 1A1D     		adds	r2, r3, #4
+  63 0022 FA60     		str	r2, [r7, #12]
+ARM GAS  /tmp/cciaV9pu.s 			page 4
 
 
-  61              		.loc 1 109 5 is_stmt 1 view .LVU11
-  62              		.loc 1 109 8 is_stmt 0 view .LVU12
-  63 000c 50F8044B 		ldr	r4, [r0], #4
-  64              	.LVL2:
+  64              		.loc 1 109 8
+  65 0024 1B68     		ldr	r3, [r3]
+  66 0026 FB61     		str	r3, [r7, #28]
  110:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     /* Compute sum of squares and store result in a temporary variable. */
  111:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     sum += ((q63_t) in * in);
-  65              		.loc 1 111 5 is_stmt 1 view .LVU13
- 105:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   {
-  66              		.loc 1 105 9 is_stmt 0 view .LVU14
-  67 0010 013B     		subs	r3, r3, #1
-  68              	.LVL3:
-  69              		.loc 1 111 9 view .LVU15
-  70 0012 C4FB0467 		smlal	r6, r7, r4, r4
-  71              	.LVL4:
+  67              		.loc 1 111 13
+  68 0028 FB69     		ldr	r3, [r7, #28]
+  69 002a 1846     		mov	r0, r3
+  70 002c 4FEAE071 		asr	r1, r0, #31
+  71              		.loc 1 111 24
+  72 0030 FB69     		ldr	r3, [r7, #28]
+  73 0032 1A46     		mov	r2, r3
+  74 0034 4FEAE273 		asr	r3, r2, #31
+  75 0038 02FB01FC 		mul	ip, r2, r1
+  76 003c 00FB03F6 		mul	r6, r0, r3
+  77 0040 6644     		add	r6, r6, ip
+  78 0042 A0FB0223 		umull	r2, r3, r0, r2
+  79 0046 F118     		adds	r1, r6, r3
+  80 0048 0B46     		mov	r3, r1
+  81 004a 1046     		mov	r0, r2
+  82 004c 1946     		mov	r1, r3
+  83              		.loc 1 111 9
+  84 004e D7E90823 		ldrd	r2, [r7, #32]
+  85 0052 1418     		adds	r4, r2, r0
+  86 0054 43EB0105 		adc	r5, r3, r1
+  87 0058 C7E90845 		strd	r4, [r7, #32]
  112:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
  113:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     /* Decrement loop counter */
  114:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****     blkCnt--;
-  72              		.loc 1 114 5 is_stmt 1 view .LVU16
+  88              		.loc 1 114 11
+  89 005c FB6A     		ldr	r3, [r7, #44]
+  90 005e 013B     		subs	r3, r3, #1
+  91 0060 FB62     		str	r3, [r7, #44]
+  92              	.L2:
  105:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   {
-  73              		.loc 1 105 9 view .LVU17
-  74 0016 F9D1     		bne	.L3
+  93              		.loc 1 105 9
+  94 0062 FB6A     		ldr	r3, [r7, #44]
+  95 0064 002B     		cmp	r3, #0
+  96 0066 DAD1     		bne	.L3
  115:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   }
  116:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** 
  117:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   /* Convert data in 2.62 to 1.31 by 31 right shifts and saturate */
  118:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   /* Compute Rms and store result in destination vector */
  119:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c ****   arm_sqrt_q31(clip_q63_to_q31((sum / (q63_t) blockSize) >> 31), pResult);
-  75              		.loc 1 119 3 view .LVU18
-  76              		.loc 1 119 37 is_stmt 0 view .LVU19
-  77 0018 0A46     		mov	r2, r1
-  78              	.LVL5:
-  79              		.loc 1 119 37 view .LVU20
-  80 001a 3046     		mov	r0, r6
-  81              	.LVL6:
-  82              		.loc 1 119 37 view .LVU21
-  83 001c 3946     		mov	r1, r7
-  84              	.LVL7:
-  85              		.loc 1 119 37 view .LVU22
-  86 001e FFF7FEFF 		bl	__aeabi_uldivmod
-  87              	.LVL8:
-  88              		.loc 1 119 58 view .LVU23
-  89 0022 C00F     		lsrs	r0, r0, #31
-  90 0024 40EA4100 		orr	r0, r0, r1, lsl #1
-  91              	.LVL9:
-  92              	.LBB4:
-  93              	.LBI4:
-  94              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+  97              		.loc 1 119 39
+  98 0068 BB68     		ldr	r3, [r7, #8]
+  99 006a 1A46     		mov	r2, r3
+ 100 006c 4FF00003 		mov	r3, #0
+ 101              		.loc 1 119 37
+ 102 0070 D7E90801 		ldrd	r0, [r7, #32]
+ 103 0074 FFF7FEFF 		bl	__aeabi_uldivmod
+ 104              	.LVL0:
+ 105 0078 0246     		mov	r2, r0
+ 106 007a 0B46     		mov	r3, r1
+ 107 007c 1046     		mov	r0, r2
+ 108 007e 1946     		mov	r1, r3
+ 109              		.loc 1 119 58
+ARM GAS  /tmp/cciaV9pu.s 			page 5
+
+
+ 110 0080 4FF00002 		mov	r2, #0
+ 111 0084 4FF00003 		mov	r3, #0
+ 112 0088 C20F     		lsrs	r2, r0, #31
+ 113 008a 42EA4102 		orr	r2, r2, r1, lsl #1
+ 114 008e CB0F     		lsrs	r3, r1, #31
+ 115 0090 C7E90423 		strd	r2, [r7, #16]
+ 116              	.LBB4:
+ 117              	.LBB5:
+ 118              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
    1:./Libraries/CMSIS/DSP/Include/arm_math.h **** /******************************************************************************
    2:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @file     arm_math.h
    3:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @brief    Public header file for CMSIS DSP Library
@@ -238,9 +261,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
    9:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
   10:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * SPDX-License-Identifier: Apache-2.0
   11:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
-ARM GAS  /tmp/cceL2q0S.s 			page 5
-
-
   12:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
   13:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * not use this file except in compliance with the License.
   14:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * You may obtain a copy of the License at
@@ -278,6 +298,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
   46:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The library has separate functions for operating on 8-bit integers, 16-bit integers,
   47:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * 32-bit integer and 32-bit floating-point values.
   48:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
+ARM GAS  /tmp/cciaV9pu.s 			page 6
+
+
   49:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Using the Library
   50:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * ------------
   51:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
@@ -298,9 +321,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
   66:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_cortexM0b_math.lib (Cortex-M0 / Cortex-M0+, Big endian)
   67:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MBLl_math.lib (Armv8-M Baseline, Little endian)
   68:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLl_math.lib (Armv8-M Mainline, Little endian)
-ARM GAS  /tmp/cceL2q0S.s 			page 6
-
-
   69:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLlfsp_math.lib (Armv8-M Mainline, Little endian, Single Precision Floating Point 
   70:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLld_math.lib (Armv8-M Mainline, Little endian, DSP instructions)
   71:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLldfsp_math.lib (Armv8-M Mainline, Little endian, DSP instructions, Single Precis
@@ -338,6 +358,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  103:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_BIG_ENDIAN:
  104:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  105:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Define macro ARM_MATH_BIG_ENDIAN to build the library for big endian targets. By default libra
+ARM GAS  /tmp/cciaV9pu.s 			page 7
+
+
  106:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  107:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_MATRIX_CHECK:
  108:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
@@ -358,9 +381,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  123:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * dependent on the compiler and target architecture.
  124:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  125:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_NEON_EXPERIMENTAL:
-ARM GAS  /tmp/cceL2q0S.s 			page 7
-
-
  126:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  127:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Define macro ARM_MATH_NEON_EXPERIMENTAL to enable experimental Neon versions of 
  128:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * of some DSP functions. Experimental Neon versions currently do not have better
@@ -398,6 +418,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  160:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * As compared to most of the other functions in the CMSIS math library, the fast math functions
  161:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * operate on individual values and not arrays.
  162:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * There are separate functions for Q15, Q31, and floating-point data.
+ARM GAS  /tmp/cciaV9pu.s 			page 8
+
+
  163:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
  164:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  165:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -418,9 +441,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  180:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  181:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupMatrix Matrix Functions
  182:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
-ARM GAS  /tmp/cceL2q0S.s 			page 8
-
-
  183:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * This set of functions provides basic matrix math operations.
  184:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The functions operate on matrix data structures.  For example,
  185:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * the type
@@ -458,6 +478,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  217:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * section, manually initialize the data structure.  For example:
  218:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <pre>
  219:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_f32 S = {nRows, nColumns, pData};</code>
+ARM GAS  /tmp/cciaV9pu.s 			page 9
+
+
  220:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_q31 S = {nRows, nColumns, pData};</code>
  221:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_q15 S = {nRows, nColumns, pData};</code>
  222:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * </pre>
@@ -478,9 +501,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  237:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *     ARM_MATH_SUCCESS
  238:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * </pre>
  239:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * There is some overhead associated with this matrix size checking.
-ARM GAS  /tmp/cceL2q0S.s 			page 9
-
-
  240:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The matrix size checking is enabled via the \#define
  241:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <pre>
  242:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *     ARM_MATH_MATRIX_CHECK
@@ -518,6 +538,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  274:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  275:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupExamples Examples
  276:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
+ARM GAS  /tmp/cciaV9pu.s 			page 10
+
+
  277:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  278:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  279:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifndef _ARM_MATH_H
@@ -538,9 +561,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  294:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  295:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( __TI_ARM__ )
  296:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/cceL2q0S.s 			page 10
-
-
  297:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( __CSMC__ )
  298:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  299:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( __TASKING__ )
@@ -578,6 +598,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  331:./Libraries/CMSIS/DSP/Include/arm_math.h **** #include <arm_neon.h>
  332:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
  333:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ARM GAS  /tmp/cciaV9pu.s 			page 11
+
+
  334:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  335:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifdef   __cplusplus
  336:./Libraries/CMSIS/DSP/Include/arm_math.h **** extern "C"
@@ -598,9 +621,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  351:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  352:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  353:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief Macros required for SINE and COSINE Fast math approximations
-ARM GAS  /tmp/cceL2q0S.s 			page 11
-
-
  354:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  355:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  356:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define FAST_MATH_TABLE_SIZE  512
@@ -638,6 +658,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  388:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  389:./Libraries/CMSIS/DSP/Include/arm_math.h ****   typedef int8_t q7_t;
  390:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ARM GAS  /tmp/cciaV9pu.s 			page 12
+
+
  391:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  392:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief 16-bit fractional data type in 1.15 format.
  393:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
@@ -658,9 +681,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  408:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  409:./Libraries/CMSIS/DSP/Include/arm_math.h ****   typedef float float32_t;
  410:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/cceL2q0S.s 			page 12
-
-
  411:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  412:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief 64-bit floating-point type definition.
  413:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
@@ -698,6 +718,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  445:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  446:./Libraries/CMSIS/DSP/Include/arm_math.h **** /* SIMD replacement */
  447:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ARM GAS  /tmp/cciaV9pu.s 			page 13
+
+
  448:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  449:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  450:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Read 2 Q15 from Q15 pointer.
@@ -718,9 +741,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  465:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Read 2 Q15 from Q15 pointer and increment pointer afterwards.
  466:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     pQ15      points to input value
  467:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        Q31 value
-ARM GAS  /tmp/cceL2q0S.s 			page 13
-
-
  468:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  469:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE q31_t read_q15x2_ia (
  470:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
@@ -758,6 +778,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  502:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE void write_q15x2_ia (
  503:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15,
  504:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t    value)
+ARM GAS  /tmp/cciaV9pu.s 			page 14
+
+
  505:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  506:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val = value;
  507:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -778,9 +801,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  522:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val = value;
  523:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  524:./Libraries/CMSIS/DSP/Include/arm_math.h ****   memcpy (pQ15, &val, 4);
-ARM GAS  /tmp/cceL2q0S.s 			page 14
-
-
  525:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
  526:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  527:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -818,6 +838,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  559:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  560:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  561:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Write 4 Q7 to Q7 pointer and increment pointer afterwards.
+ARM GAS  /tmp/cciaV9pu.s 			page 15
+
+
  562:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     pQ7       points to input value
  563:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     value     Q31 value
  564:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        none
@@ -838,9 +861,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  579:./Libraries/CMSIS/DSP/Include/arm_math.h **** in Core or Core_A.
  580:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  581:./Libraries/CMSIS/DSP/Include/arm_math.h **** But for MSVC compiler it is a bit special. The goal is very specific
-ARM GAS  /tmp/cceL2q0S.s 			page 15
-
-
  582:./Libraries/CMSIS/DSP/Include/arm_math.h **** to CMSIS-DSP and only to allow the use of this library from other
  583:./Libraries/CMSIS/DSP/Include/arm_math.h **** systems like Python or Matlab.
  584:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -878,6 +898,9 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  616:./Libraries/CMSIS/DSP/Include/arm_math.h ****       {
  617:./Libraries/CMSIS/DSP/Include/arm_math.h ****         return min;
  618:./Libraries/CMSIS/DSP/Include/arm_math.h ****       }
+ARM GAS  /tmp/cciaV9pu.s 			page 16
+
+
  619:./Libraries/CMSIS/DSP/Include/arm_math.h ****     }
  620:./Libraries/CMSIS/DSP/Include/arm_math.h ****     return val;
  621:./Libraries/CMSIS/DSP/Include/arm_math.h ****   }
@@ -898,9 +921,6 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  636:./Libraries/CMSIS/DSP/Include/arm_math.h ****     }
  637:./Libraries/CMSIS/DSP/Include/arm_math.h ****     return (uint32_t)val;
  638:./Libraries/CMSIS/DSP/Include/arm_math.h ****   }
-ARM GAS  /tmp/cceL2q0S.s 			page 16
-
-
  639:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
  640:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  641:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifndef ARM_MATH_DSP
@@ -933,103 +953,73 @@ ARM GAS  /tmp/cceL2q0S.s 			page 1
  668:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief Clips Q63 to Q31 values.
  669:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  670:./Libraries/CMSIS/DSP/Include/arm_math.h ****   __STATIC_FORCEINLINE q31_t clip_q63_to_q31(
-  95              		.loc 2 670 30 is_stmt 1 view .LVU24
-  96              	.LBB5:
  671:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q63_t x)
  672:./Libraries/CMSIS/DSP/Include/arm_math.h ****   {
  673:./Libraries/CMSIS/DSP/Include/arm_math.h ****     return ((q31_t) (x >> 32) != ((q31_t) x >> 31)) ?
-  97              		.loc 2 673 5 view .LVU25
-  98              		.loc 2 673 45 is_stmt 0 view .LVU26
-  99 0028 C317     		asrs	r3, r0, #31
+ 119              		.loc 2 673 24
+ 120 0094 D7E90401 		ldrd	r0, [r7, #16]
+ARM GAS  /tmp/cciaV9pu.s 			page 17
+
+
+ 121 0098 4FF00002 		mov	r2, #0
+ 122 009c 4FF00003 		mov	r3, #0
+ 123 00a0 0A00     		movs	r2, r1
+ 124 00a2 CB17     		asrs	r3, r1, #31
+ 125              		.loc 2 673 35
+ 126 00a4 3B69     		ldr	r3, [r7, #16]
+ 127              		.loc 2 673 45
+ 128 00a6 DB17     		asrs	r3, r3, #31
  674:./Libraries/CMSIS/DSP/Include/arm_math.h ****       ((0x7FFFFFFF ^ ((q31_t) (x >> 63)))) : (q31_t) x;
- 100              		.loc 2 674 44 view .LVU27
- 101 002a B3EBD17F 		cmp	r3, r1, lsr #31
- 102              	.LBE5:
- 103              	.LBE4:
- 104              		.loc 1 119 3 view .LVU28
- 105 002e 2946     		mov	r1, r5
- 106              	.LVL10:
- 107              	.LBB8:
- 108              	.LBB6:
- 109              		.loc 2 674 44 view .LVU29
- 110 0030 18BF     		it	ne
- 111 0032 6FF00040 		mvnne	r0, #-2147483648
- 112              		.loc 2 674 44 view .LVU30
- 113              	.LBE6:
- 114              	.LBE8:
+ 129              		.loc 2 674 44
+ 130 00a8 9A42     		cmp	r2, r3
+ 131 00aa 0BD0     		beq	.L4
+ 132              		.loc 2 674 34
+ 133 00ac D7E90401 		ldrd	r0, [r7, #16]
+ 134 00b0 4FF00002 		mov	r2, #0
+ 135 00b4 4FF00003 		mov	r3, #0
+ 136 00b8 CA17     		asrs	r2, r1, #31
+ 137 00ba CB17     		asrs	r3, r1, #31
+ 138              		.loc 2 674 44
+ 139 00bc 6FF00043 		mvn	r3, #-2147483648
+ 140 00c0 5340     		eors	r3, r3, r2
+ 141 00c2 00E0     		b	.L7
+ 142              	.L4:
+ 143 00c4 3B69     		ldr	r3, [r7, #16]
+ 144              	.L7:
+ 145              	.LBE5:
+ 146              	.LBE4:
+ 147              		.loc 1 119 3
+ 148 00c6 7968     		ldr	r1, [r7, #4]
+ 149 00c8 1846     		mov	r0, r3
+ 150 00ca FFF7FEFF 		bl	arm_sqrt_q31
  120:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** }
-ARM GAS  /tmp/cceL2q0S.s 			page 17
-
-
- 115              		.loc 1 120 1 view .LVU31
- 116 0036 BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
- 117              	.LCFI1:
- 118              		.cfi_remember_state
- 119              		.cfi_restore 14
- 120              		.cfi_restore 7
- 121              		.cfi_restore 6
- 122              		.cfi_restore 5
- 123              		.cfi_restore 4
- 124              		.cfi_restore 3
- 125              		.cfi_def_cfa_offset 0
- 126              	.LVL11:
- 119:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** }
- 127              		.loc 1 119 3 view .LVU32
- 128 003a FFF7FEBF 		b	arm_sqrt_q31
- 129              	.LVL12:
- 130              	.L4:
- 131              	.LCFI2:
- 132              		.cfi_restore_state
- 133              	.LBB9:
- 134              	.LBB7:
- 673:./Libraries/CMSIS/DSP/Include/arm_math.h ****       ((0x7FFFFFFF ^ ((q31_t) (x >> 63)))) : (q31_t) x;
- 135              		.loc 2 673 35 view .LVU33
- 136 003e 0846     		mov	r0, r1
- 137              	.LVL13:
- 673:./Libraries/CMSIS/DSP/Include/arm_math.h ****       ((0x7FFFFFFF ^ ((q31_t) (x >> 63)))) : (q31_t) x;
- 138              		.loc 2 673 35 view .LVU34
- 139              	.LBE7:
- 140              	.LBE9:
- 119:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** }
- 141              		.loc 1 119 3 view .LVU35
- 142 0040 2946     		mov	r1, r5
- 143              	.LVL14:
- 144              		.loc 1 120 1 view .LVU36
- 145 0042 BDE8F840 		pop	{r3, r4, r5, r6, r7, lr}
- 146              	.LCFI3:
- 147              		.cfi_restore 14
- 148              		.cfi_restore 7
- 149              		.cfi_restore 6
- 150              		.cfi_restore 5
- 151              		.cfi_restore 4
- 152              		.cfi_restore 3
- 153              		.cfi_def_cfa_offset 0
- 119:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** }
- 154              		.loc 1 119 3 view .LVU37
- 155 0046 FFF7FEBF 		b	arm_sqrt_q31
- 156              	.LVL15:
- 119:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_rms_q31.c **** }
- 157              		.loc 1 119 3 view .LVU38
- 158              		.cfi_endproc
- 159              	.LFE145:
- 161 004a 00BF     		.text
- 162              	.Letext0:
- 163              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 164              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 165              		.file 5 "/usr/include/newlib/sys/_types.h"
- 166              		.file 6 "/usr/include/newlib/sys/reent.h"
-ARM GAS  /tmp/cceL2q0S.s 			page 18
-
-
- 167              		.file 7 "/usr/include/newlib/sys/lock.h"
- 168              		.file 8 "/usr/include/newlib/math.h"
-ARM GAS  /tmp/cceL2q0S.s 			page 19
+ 151              		.loc 1 120 1
+ 152 00ce 00BF     		nop
+ 153 00d0 3437     		adds	r7, r7, #52
+ 154              	.LCFI3:
+ 155              		.cfi_def_cfa_offset 20
+ 156 00d2 BD46     		mov	sp, r7
+ 157              	.LCFI4:
+ 158              		.cfi_def_cfa_register 13
+ 159              		@ sp needed
+ 160 00d4 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 161              		.cfi_endproc
+ 162              	.LFE145:
+ 164              		.text
+ 165              	.Letext0:
+ 166              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 167              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 168              		.file 5 "/usr/include/newlib/sys/_types.h"
+ 169              		.file 6 "/usr/include/newlib/sys/reent.h"
+ 170              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 171              		.file 8 "/usr/include/newlib/math.h"
+ARM GAS  /tmp/cciaV9pu.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_rms_q31.c
-     /tmp/cceL2q0S.s:18     .text.arm_rms_q31:0000000000000000 $t
-     /tmp/cceL2q0S.s:27     .text.arm_rms_q31:0000000000000000 arm_rms_q31
+     /tmp/cciaV9pu.s:18     .text.arm_rms_q31:0000000000000000 $t
+     /tmp/cciaV9pu.s:26     .text.arm_rms_q31:0000000000000000 arm_rms_q31
 
 UNDEFINED SYMBOLS
 __aeabi_uldivmod

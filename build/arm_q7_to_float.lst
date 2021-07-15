@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccam0Au8.s 			page 1
+ARM GAS  /tmp/cczoMPGQ.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccam0Au8.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_q7_to_float.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccam0Au8.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_q7_to_float,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_q7_to_float
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_q7_to_float:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c"
+  18              		.global	arm_q7_to_float
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_q7_to_float:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c"
    1:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****  * Title:        arm_q7_to_float.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccam0Au8.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****  */
   28:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
   29:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccam0Au8.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
   31:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** /**
+ARM GAS  /tmp/cczoMPGQ.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   @ingroup groupSupport
   33:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****  */
   34:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
@@ -118,11 +116,11 @@ ARM GAS  /tmp/ccam0Au8.s 			page 1
   84:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     inVHI = vmovl_s8(vget_high_s8(inV));
   85:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
   86:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     inVLL = vmovl_s16(vget_low_s16(inVLO));
-ARM GAS  /tmp/ccam0Au8.s 			page 3
-
-
   87:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     inVLH = vmovl_s16(vget_high_s16(inVLO));
   88:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     inVHL = vmovl_s16(vget_low_s16(inVHI));
+ARM GAS  /tmp/cczoMPGQ.s 			page 3
+
+
   89:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     inVHH = vmovl_s16(vget_high_s16(inVHI));
   90:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
   91:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     outV = vcvtq_n_f32_s32(inVLL,7);
@@ -165,22 +163,36 @@ ARM GAS  /tmp/ccam0Au8.s 			page 1
  128:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****         float32_t * pDst,
  129:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****         uint32_t blockSize)
  130:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** {
-  30              		.loc 1 130 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 130 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/cczoMPGQ.s 			page 4
+
+
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
  131:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 131 9 view .LVU1
  132:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   const q7_t *pIn = pSrc;                              /* Source pointer */
-  36              		.loc 1 132 3 view .LVU2
+  46              		.loc 1 132 15
+  47 000c FB68     		ldr	r3, [r7, #12]
+  48 000e 3B61     		str	r3, [r7, #16]
  133:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  134:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** #if defined (ARM_MATH_LOOPUNROLL)
  135:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  136:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   /* Loop unrolling: Compute 4 outputs at a time */
-ARM GAS  /tmp/ccam0Au8.s 			page 4
-
-
  137:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   blkCnt = blockSize >> 2U;
  138:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  139:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   while (blkCnt > 0U)
@@ -204,79 +216,98 @@ ARM GAS  /tmp/ccam0Au8.s 			page 1
  157:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  158:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   /* Initialize blkCnt with number of samples */
  159:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   blkCnt = blockSize;
-  37              		.loc 1 159 3 view .LVU3
+  49              		.loc 1 159 10
+  50 0010 7B68     		ldr	r3, [r7, #4]
+  51 0012 7B61     		str	r3, [r7, #20]
  160:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  161:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  162:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  163:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   while (blkCnt > 0U)
-  38              		.loc 1 163 3 view .LVU4
-  39              		.loc 1 163 9 view .LVU5
-  40 0000 72B1     		cbz	r2, .L1
-  41 0002 0244     		add	r2, r2, r0
-  42              	.LVL1:
+  52              		.loc 1 163 9
+  53 0014 14E0     		b	.L2
+  54              	.L3:
  164:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   {
  165:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     /* C = (float32_t) A / 128 */
  166:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  167:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     /* Convert from q7 to float and store result in destination buffer */
  168:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     *pDst++ = ((float32_t) * pIn++ / 128.0f);
-  43              		.loc 1 168 36 is_stmt 0 view .LVU6
-  44 0004 9FED077A 		vldr.32	s14, .L9
-  45              	.LVL2:
-  46              	.L3:
-  47              		.loc 1 168 5 is_stmt 1 view .LVU7
-  48              		.loc 1 168 16 is_stmt 0 view .LVU8
-  49 0008 10F9013B 		ldrsb	r3, [r0], #1
-  50              	.LVL3:
-  51              		.loc 1 168 16 view .LVU9
-  52 000c 07EE903A 		vmov	s15, r3	@ int
- 163:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   {
-  53              		.loc 1 163 9 view .LVU10
-  54 0010 9042     		cmp	r0, r2
-  55              		.loc 1 168 16 view .LVU11
-  56 0012 F8EEE77A 		vcvt.f32.s32	s15, s15
-  57              		.loc 1 168 36 view .LVU12
-  58 0016 67EE877A 		vmul.f32	s15, s15, s14
-  59              		.loc 1 168 13 view .LVU13
-  60 001a E1EC017A 		vstmia.32	r1!, {s15}
-ARM GAS  /tmp/ccam0Au8.s 			page 5
+  55              		.loc 1 168 33
+  56 0016 3B69     		ldr	r3, [r7, #16]
+  57 0018 5A1C     		adds	r2, r3, #1
+  58 001a 3A61     		str	r2, [r7, #16]
+  59              		.loc 1 168 28
+  60 001c 93F90030 		ldrsb	r3, [r3]
+  61              		.loc 1 168 16
+ARM GAS  /tmp/cczoMPGQ.s 			page 5
 
 
-  61              	.LVL4:
+  62 0020 07EE903A 		vmov	s15, r3	@ int
+  63 0024 B8EEE77A 		vcvt.f32.s32	s14, s15
+  64              		.loc 1 168 10
+  65 0028 BB68     		ldr	r3, [r7, #8]
+  66 002a 1A1D     		adds	r2, r3, #4
+  67 002c BA60     		str	r2, [r7, #8]
+  68              		.loc 1 168 36
+  69 002e DFED096A 		vldr.32	s13, .L4
+  70 0032 C7EE267A 		vdiv.f32	s15, s14, s13
+  71              		.loc 1 168 13
+  72 0036 C3ED007A 		vstr.32	s15, [r3]
  169:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  170:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     /* Decrement loop counter */
  171:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****     blkCnt--;
-  62              		.loc 1 171 5 is_stmt 1 view .LVU14
+  73              		.loc 1 171 11
+  74 003a 7B69     		ldr	r3, [r7, #20]
+  75 003c 013B     		subs	r3, r3, #1
+  76 003e 7B61     		str	r3, [r7, #20]
+  77              	.L2:
  163:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   {
-  63              		.loc 1 163 9 view .LVU15
-  64 001e F3D1     		bne	.L3
-  65              	.L1:
+  78              		.loc 1 163 9
+  79 0040 7B69     		ldr	r3, [r7, #20]
+  80 0042 002B     		cmp	r3, #0
+  81 0044 E7D1     		bne	.L3
  172:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c ****   }
  173:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** 
  174:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q7_to_float.c **** }
-  66              		.loc 1 174 1 is_stmt 0 view .LVU16
-  67 0020 7047     		bx	lr
-  68              	.L10:
-  69 0022 00BF     		.align	2
-  70              	.L9:
-  71 0024 0000003C 		.word	1006632960
-  72              		.cfi_endproc
-  73              	.LFE145:
-  75              		.text
-  76              	.Letext0:
-  77              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  78              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  79              		.file 4 "/usr/include/newlib/sys/_types.h"
-  80              		.file 5 "/usr/include/newlib/sys/reent.h"
-  81              		.file 6 "/usr/include/newlib/sys/lock.h"
-  82              		.file 7 "/usr/include/newlib/math.h"
-  83              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccam0Au8.s 			page 6
+  82              		.loc 1 174 1
+  83 0046 00BF     		nop
+  84 0048 00BF     		nop
+  85 004a 1C37     		adds	r7, r7, #28
+  86              	.LCFI3:
+  87              		.cfi_def_cfa_offset 4
+  88 004c BD46     		mov	sp, r7
+  89              	.LCFI4:
+  90              		.cfi_def_cfa_register 13
+  91              		@ sp needed
+  92 004e 5DF8047B 		ldr	r7, [sp], #4
+  93              	.LCFI5:
+  94              		.cfi_restore 7
+  95              		.cfi_def_cfa_offset 0
+  96 0052 7047     		bx	lr
+  97              	.L5:
+  98              		.align	2
+  99              	.L4:
+ 100 0054 00000043 		.word	1124073472
+ 101              		.cfi_endproc
+ 102              	.LFE145:
+ 104              		.text
+ 105              	.Letext0:
+ 106              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 107              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 108              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 109              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 110              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 111              		.file 7 "/usr/include/newlib/math.h"
+ 112              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/cczoMPGQ.s 			page 6
+
+
+ARM GAS  /tmp/cczoMPGQ.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_q7_to_float.c
-     /tmp/ccam0Au8.s:17     .text.arm_q7_to_float:0000000000000000 $t
-     /tmp/ccam0Au8.s:26     .text.arm_q7_to_float:0000000000000000 arm_q7_to_float
-     /tmp/ccam0Au8.s:71     .text.arm_q7_to_float:0000000000000024 $d
+     /tmp/cczoMPGQ.s:17     .text.arm_q7_to_float:0000000000000000 $t
+     /tmp/cczoMPGQ.s:25     .text.arm_q7_to_float:0000000000000000 arm_q7_to_float
+     /tmp/cczoMPGQ.s:100    .text.arm_q7_to_float:0000000000000054 $d
 
 NO UNDEFINED SYMBOLS

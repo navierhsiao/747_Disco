@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccV5hWwk.s 			page 1
+ARM GAS  /tmp/ccNkosfY.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_shift_q31.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_shift_q31,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_shift_q31
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_shift_q31:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c"
+  18              		.global	arm_shift_q31
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_shift_q31:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c"
    1:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****  * Title:        arm_shift_q31.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****  */
   28:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
   29:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccV5hWwk.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
   31:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** /**
+ARM GAS  /tmp/ccNkosfY.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   @ingroup groupMath
   33:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****  */
   34:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** /**
@@ -107,20 +105,42 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
   73:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****         q31_t * pDst,
   74:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****         uint32_t blockSize)
   75:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** {
-  30              		.loc 1 75 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 75 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 F0B4     		push	{r4, r5, r6, r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 7, -4
+  40 0002 88B0     		sub	sp, sp, #32
+ARM GAS  /tmp/ccNkosfY.s 			page 3
+
+
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 48
+  43 0004 00AF     		add	r7, sp, #0
+  44              	.LCFI2:
+  45              		.cfi_def_cfa_register 7
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 7A60     		str	r2, [r7, #4]
+  48 000a 3B60     		str	r3, [r7]
+  49 000c 0B46     		mov	r3, r1
+  50 000e FB72     		strb	r3, [r7, #11]
   76:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  34              		.loc 1 76 9 view .LVU1
   77:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****         uint8_t sign = (shiftBits & 0x80);             /* Sign of shiftBits */
-  35              		.loc 1 77 9 view .LVU2
+  51              		.loc 1 77 35
+  52 0010 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+  53              		.loc 1 77 17
+  54 0012 23F07F03 		bic	r3, r3, #127
+  55 0016 FB76     		strb	r3, [r7, #27]
   78:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
   79:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
   80:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
-ARM GAS  /tmp/ccV5hWwk.s 			page 3
-
-
   81:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   q31_t in, out;                                 /* Temporary variables */
   82:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
   83:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   /* Loop unrolling: Compute 4 outputs at a time */
@@ -158,6 +178,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  115:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****         out = 0x7FFFFFFF ^ (in >> 31);
  116:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       *pDst++ = out;
  117:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
+ARM GAS  /tmp/ccNkosfY.s 			page 4
+
+
  118:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       /* Decrement loop counter */
  119:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       blkCnt--;
  120:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     }
@@ -178,9 +201,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  135:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       blkCnt--;
  136:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     }
  137:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   }
-ARM GAS  /tmp/ccV5hWwk.s 			page 4
-
-
  138:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
  139:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   /* Loop unrolling: Compute remaining outputs */
  140:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   blkCnt = blockSize % 0x4U;
@@ -189,42 +209,58 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  143:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
  144:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   /* Initialize blkCnt with number of samples */
  145:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   blkCnt = blockSize;
-  36              		.loc 1 145 3 view .LVU3
+  56              		.loc 1 145 10
+  57 0018 3B68     		ldr	r3, [r7]
+  58 001a FB61     		str	r3, [r7, #28]
  146:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
  147:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  148:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
  149:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   /* If the shift value is positive then do right shift else left shift */
  150:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   if (sign == 0U)
-  37              		.loc 1 150 3 view .LVU4
-  38              		.loc 1 150 6 is_stmt 0 view .LVU5
-  39 0000 0029     		cmp	r1, #0
-  40              	.LVL1:
-  75:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  41              		.loc 1 75 1 view .LVU6
-  42 0002 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-  43              	.LCFI0:
-  44              		.cfi_def_cfa_offset 36
-  45              		.cfi_offset 4, -36
-  46              		.cfi_offset 5, -32
-  47              		.cfi_offset 6, -28
-  48              		.cfi_offset 7, -24
-  49              		.cfi_offset 8, -20
-  50              		.cfi_offset 9, -16
-  51              		.cfi_offset 10, -12
-  52              		.cfi_offset 11, -8
-  53              		.cfi_offset 14, -4
-  54              		.loc 1 150 6 view .LVU7
-  55 0006 20DB     		blt	.L15
+  59              		.loc 1 150 6
+  60 001c FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+  61 001e 002B     		cmp	r3, #0
+  62 0020 4DD1     		bne	.L9
  151:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   {
  152:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     while (blkCnt > 0U)
-  56              		.loc 1 152 11 is_stmt 1 view .LVU8
-  57 0008 EBB1     		cbz	r3, .L1
-  58 000a 151F     		subs	r5, r2, #4
-  59 000c A1F12008 		sub	r8, r1, #32
-  60 0010 C1F1200E 		rsb	lr, r1, #32
-  61              	.LBB4:
-  62              	.LBB5:
-  63              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+  63              		.loc 1 152 11
+  64 0022 38E0     		b	.L3
+  65              	.L7:
+ 153:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
+ 154:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       /* C = A << shiftBits */
+ 155:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
+ 156:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       /* Shift input and store result in destination buffer. */
+ 157:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       *pDst++ = clip_q63_to_q31((q63_t) *pSrc++ << shiftBits);
+  66              		.loc 1 157 46
+  67 0024 FB68     		ldr	r3, [r7, #12]
+  68 0026 1A1D     		adds	r2, r3, #4
+  69 0028 FA60     		str	r2, [r7, #12]
+  70              		.loc 1 157 41
+  71 002a 1B68     		ldr	r3, [r3]
+  72              		.loc 1 157 33
+ARM GAS  /tmp/ccNkosfY.s 			page 5
+
+
+  73 002c 1A46     		mov	r2, r3
+  74 002e 4FEAE273 		asr	r3, r2, #31
+  75              		.loc 1 157 17
+  76 0032 97F90B10 		ldrsb	r1, [r7, #11]
+  77 0036 A1F12006 		sub	r6, r1, #32
+  78 003a C1F12000 		rsb	r0, r1, #32
+  79 003e 03FA01F5 		lsl	r5, r3, r1
+  80 0042 02FA06F6 		lsl	r6, r2, r6
+  81 0046 3543     		orrs	r5, r5, r6
+  82 0048 22FA00F0 		lsr	r0, r2, r0
+  83 004c 0543     		orrs	r5, r5, r0
+  84 004e 02FA01F4 		lsl	r4, r2, r1
+  85              		.loc 1 157 12
+  86 0052 7E68     		ldr	r6, [r7, #4]
+  87 0054 331D     		adds	r3, r6, #4
+  88 0056 7B60     		str	r3, [r7, #4]
+  89 0058 C7E90445 		strd	r4, [r7, #16]
+  90              	.LBB4:
+  91              	.LBB5:
+  92              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
    1:./Libraries/CMSIS/DSP/Include/arm_math.h **** /******************************************************************************
    2:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @file     arm_math.h
    3:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @brief    Public header file for CMSIS DSP Library
@@ -238,9 +274,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
   11:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
   12:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
   13:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * not use this file except in compliance with the License.
-ARM GAS  /tmp/ccV5hWwk.s 			page 5
-
-
   14:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * You may obtain a copy of the License at
   15:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
   16:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * www.apache.org/licenses/LICENSE-2.0
@@ -265,6 +298,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
   35:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Basic math functions
   36:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Fast math functions
   37:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Complex math functions
+ARM GAS  /tmp/ccNkosfY.s 			page 6
+
+
   38:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Filters
   39:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Matrix functions
   40:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Transform functions
@@ -298,9 +334,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
   68:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLl_math.lib (Armv8-M Mainline, Little endian)
   69:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLlfsp_math.lib (Armv8-M Mainline, Little endian, Single Precision Floating Point 
   70:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLld_math.lib (Armv8-M Mainline, Little endian, DSP instructions)
-ARM GAS  /tmp/ccV5hWwk.s 			page 6
-
-
   71:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLldfsp_math.lib (Armv8-M Mainline, Little endian, DSP instructions, Single Precis
   72:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
   73:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The library functions are declared in the public file <code>arm_math.h</code> which is placed 
@@ -325,6 +358,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
   92:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The library installer contains a project file to rebuild libraries on MDK toolchain in the <co
   93:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_cortexM_math.uvprojx
   94:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
+ARM GAS  /tmp/ccNkosfY.s 			page 7
+
+
   95:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
   96:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The libraries can be built by opening the arm_cortexM_math.uvprojx project in MDK-ARM, selecti
   97:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
@@ -358,9 +394,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  125:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_NEON_EXPERIMENTAL:
  126:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  127:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Define macro ARM_MATH_NEON_EXPERIMENTAL to enable experimental Neon versions of 
-ARM GAS  /tmp/ccV5hWwk.s 			page 7
-
-
  128:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * of some DSP functions. Experimental Neon versions currently do not have better
  129:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * performances than the scalar versions.
  130:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
@@ -385,6 +418,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  149:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Please refer to \ref ChangeLog_pg.
  150:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  151:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ARM GAS  /tmp/ccNkosfY.s 			page 8
+
+
  152:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  153:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  154:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupMath Basic Math Functions
@@ -418,9 +454,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  182:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
  183:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * This set of functions provides basic matrix math operations.
  184:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The functions operate on matrix data structures.  For example,
-ARM GAS  /tmp/ccV5hWwk.s 			page 8
-
-
  185:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * the type
  186:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * definition for the floating-point matrix structure is shown
  187:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * below:
@@ -445,6 +478,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  206:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * \par Init Functions
  207:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * There is an associated initialization function for each type of matrix
  208:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * data structure.
+ARM GAS  /tmp/ccNkosfY.s 			page 9
+
+
  209:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The initialization function sets the values of the internal structure fields.
  210:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * Refer to \ref arm_mat_init_f32(), \ref arm_mat_init_q31() and \ref arm_mat_init_q15()
  211:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * for floating-point, Q31 and Q15 types,  respectively.
@@ -478,9 +514,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  239:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * There is some overhead associated with this matrix size checking.
  240:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The matrix size checking is enabled via the \#define
  241:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <pre>
-ARM GAS  /tmp/ccV5hWwk.s 			page 9
-
-
  242:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *     ARM_MATH_MATRIX_CHECK
  243:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * </pre>
  244:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * within the library project settings.  By default this macro is defined
@@ -505,6 +538,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  263:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  264:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupSupport Support Functions
  265:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
+ARM GAS  /tmp/ccNkosfY.s 			page 10
+
+
  266:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  267:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  268:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupInterpolation Interpolation Functions
@@ -538,9 +574,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  296:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  297:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( __CSMC__ )
  298:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/ccV5hWwk.s 			page 10
-
-
  299:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( __TASKING__ )
  300:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  301:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( _MSC_VER )
@@ -565,6 +598,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  320:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  321:./Libraries/CMSIS/DSP/Include/arm_math.h **** #include "string.h"
  322:./Libraries/CMSIS/DSP/Include/arm_math.h **** #include "math.h"
+ARM GAS  /tmp/ccNkosfY.s 			page 11
+
+
  323:./Libraries/CMSIS/DSP/Include/arm_math.h **** #include "float.h"
  324:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  325:./Libraries/CMSIS/DSP/Include/arm_math.h **** /* evaluate ARM DSP feature */
@@ -598,9 +634,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  353:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief Macros required for SINE and COSINE Fast math approximations
  354:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  355:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/ccV5hWwk.s 			page 11
-
-
  356:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define FAST_MATH_TABLE_SIZE  512
  357:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define FAST_MATH_Q31_SHIFT   (32 - 10)
  358:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define FAST_MATH_Q15_SHIFT   (16 - 10)
@@ -625,6 +658,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  377:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_SUCCESS        =  0,        /**< No error */
  378:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_ARGUMENT_ERROR = -1,        /**< One or more arguments are incorrect */
  379:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_LENGTH_ERROR   = -2,        /**< Length of data buffer is incorrect */
+ARM GAS  /tmp/ccNkosfY.s 			page 12
+
+
  380:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_SIZE_MISMATCH  = -3,        /**< Size of matrices is not compatible with the operation
  381:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_NANINF         = -4,        /**< Not-a-number (NaN) or infinity is generated */
  382:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_SINGULAR       = -5,        /**< Input matrix is singular and cannot be inverted */
@@ -658,9 +694,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  410:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  411:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  412:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief 64-bit floating-point type definition.
-ARM GAS  /tmp/ccV5hWwk.s 			page 12
-
-
  413:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  414:./Libraries/CMSIS/DSP/Include/arm_math.h ****   typedef double float64_t;
  415:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -685,6 +718,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  434:./Libraries/CMSIS/DSP/Include/arm_math.h ****   #define __SIMD32_TYPE __un(aligned) int32_t
  435:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined(_MSC_VER )
  436:./Libraries/CMSIS/DSP/Include/arm_math.h ****   #define __SIMD32_TYPE int32_t
+ARM GAS  /tmp/ccNkosfY.s 			page 13
+
+
  437:./Libraries/CMSIS/DSP/Include/arm_math.h **** #else
  438:./Libraries/CMSIS/DSP/Include/arm_math.h ****   #error Unknown compiler
  439:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
@@ -718,9 +754,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  467:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        Q31 value
  468:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  469:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE q31_t read_q15x2_ia (
-ARM GAS  /tmp/ccV5hWwk.s 			page 13
-
-
  470:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
  471:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  472:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val;
@@ -745,6 +778,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  491:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 -= 2;
  492:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  493:./Libraries/CMSIS/DSP/Include/arm_math.h ****   return (val);
+ARM GAS  /tmp/ccNkosfY.s 			page 14
+
+
  494:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
  495:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  496:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
@@ -778,9 +814,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  524:./Libraries/CMSIS/DSP/Include/arm_math.h ****   memcpy (pQ15, &val, 4);
  525:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
  526:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/ccV5hWwk.s 			page 14
-
-
  527:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  528:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  529:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Read 4 Q7 from Q7 pointer and increment pointer afterwards.
@@ -805,6 +838,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  548:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  549:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE q31_t read_q7x4_da (
  550:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q7_t ** pQ7)
+ARM GAS  /tmp/ccNkosfY.s 			page 15
+
+
  551:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  552:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val;
  553:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -838,9 +874,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  581:./Libraries/CMSIS/DSP/Include/arm_math.h **** But for MSVC compiler it is a bit special. The goal is very specific
  582:./Libraries/CMSIS/DSP/Include/arm_math.h **** to CMSIS-DSP and only to allow the use of this library from other
  583:./Libraries/CMSIS/DSP/Include/arm_math.h **** systems like Python or Matlab.
-ARM GAS  /tmp/ccV5hWwk.s 			page 15
-
-
  584:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  585:./Libraries/CMSIS/DSP/Include/arm_math.h **** MSVC is not going to be used to cross-compile to ARM. So, having a MSVC
  586:./Libraries/CMSIS/DSP/Include/arm_math.h **** compiler file in Core or Core_A would not make sense.
@@ -865,6 +898,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  605:./Libraries/CMSIS/DSP/Include/arm_math.h ****   __STATIC_FORCEINLINE int32_t __SSAT(int32_t val, uint32_t sat)
  606:./Libraries/CMSIS/DSP/Include/arm_math.h ****   {
  607:./Libraries/CMSIS/DSP/Include/arm_math.h ****     if ((sat >= 1U) && (sat <= 32U))
+ARM GAS  /tmp/ccNkosfY.s 			page 16
+
+
  608:./Libraries/CMSIS/DSP/Include/arm_math.h ****     {
  609:./Libraries/CMSIS/DSP/Include/arm_math.h ****       const int32_t max = (int32_t)((1U << (sat - 1U)) - 1U);
  610:./Libraries/CMSIS/DSP/Include/arm_math.h ****       const int32_t min = -1 - max ;
@@ -898,9 +934,6 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  638:./Libraries/CMSIS/DSP/Include/arm_math.h ****   }
  639:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
  640:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/ccV5hWwk.s 			page 16
-
-
  641:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifndef ARM_MATH_DSP
  642:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  643:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief definition to pack two 16 bit values.
@@ -925,6 +958,9 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  662:./Libraries/CMSIS/DSP/Include/arm_math.h ****                                   (((int32_t)(v1) << 16) & (int32_t)0x00FF0000) | \
  663:./Libraries/CMSIS/DSP/Include/arm_math.h ****                                   (((int32_t)(v0) << 24) & (int32_t)0xFF000000)  )
  664:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
+ARM GAS  /tmp/ccNkosfY.s 			page 17
+
+
  665:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  666:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  667:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
@@ -934,73 +970,57 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  671:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q63_t x)
  672:./Libraries/CMSIS/DSP/Include/arm_math.h ****   {
  673:./Libraries/CMSIS/DSP/Include/arm_math.h ****     return ((q31_t) (x >> 32) != ((q31_t) x >> 31)) ?
+  93              		.loc 2 673 24
+  94 005c D7E90401 		ldrd	r0, [r7, #16]
+  95 0060 4FF00002 		mov	r2, #0
+  96 0064 4FF00003 		mov	r3, #0
+  97 0068 0A00     		movs	r2, r1
+  98 006a CB17     		asrs	r3, r1, #31
+  99              		.loc 2 673 35
+ 100 006c 3B69     		ldr	r3, [r7, #16]
+ 101              		.loc 2 673 45
+ 102 006e DB17     		asrs	r3, r3, #31
  674:./Libraries/CMSIS/DSP/Include/arm_math.h ****       ((0x7FFFFFFF ^ ((q31_t) (x >> 63)))) : (q31_t) x;
-  64              		.loc 2 674 44 is_stmt 0 view .LVU9
-  65 0014 6FF00049 		mvn	r9, #-2147483648
-  66              	.LVL2:
-  67              	.L6:
-  68              		.loc 2 674 44 view .LVU10
-  69              	.LBE5:
-  70              	.LBE4:
- 153:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
- 154:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       /* C = A << shiftBits */
- 155:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
- 156:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       /* Shift input and store result in destination buffer. */
- 157:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       *pDst++ = clip_q63_to_q31((q63_t) *pSrc++ << shiftBits);
-  71              		.loc 1 157 7 is_stmt 1 view .LVU11
-  72              		.loc 1 157 33 is_stmt 0 view .LVU12
-  73 0018 50F8042B 		ldr	r2, [r0], #4
-  74              	.LVL3:
-  75              		.loc 1 157 33 view .LVU13
-  76 001c 4FEAE27B 		asr	fp, r2, #31
-  77              		.loc 1 157 17 view .LVU14
-  78 0020 02FA08FC 		lsl	ip, r2, r8
-  79 0024 22FA0EF6 		lsr	r6, r2, lr
-  80 0028 8A40     		lsls	r2, r2, r1
-  81              	.LBB8:
-ARM GAS  /tmp/ccV5hWwk.s 			page 17
-
-
-  82              	.LBI4:
- 670:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q63_t x)
-  83              		.loc 2 670 30 is_stmt 1 view .LVU15
-  84              	.LBB6:
- 673:./Libraries/CMSIS/DSP/Include/arm_math.h ****       ((0x7FFFFFFF ^ ((q31_t) (x >> 63)))) : (q31_t) x;
-  85              		.loc 2 673 5 view .LVU16
-  86              	.LBE6:
-  87              	.LBE8:
-  88              		.loc 1 157 17 is_stmt 0 view .LVU17
-  89 002a 0BFA01F4 		lsl	r4, fp, r1
-  90 002e 44EA0C04 		orr	r4, r4, ip
-  91 0032 3443     		orrs	r4, r4, r6
-  92              	.LBB9:
-  93              	.LBB7:
-  94              		.loc 2 674 44 view .LVU18
-  95 0034 B4EBE27F 		cmp	r4, r2, asr #31
-  96 0038 18BF     		it	ne
-  97 003a 89EAE472 		eorne	r2, r9, r4, asr #31
-  98              	.LBE7:
-  99              	.LBE9:
- 152:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
- 100              		.loc 1 152 11 view .LVU19
- 101 003e 013B     		subs	r3, r3, #1
- 102              	.LVL4:
- 103              		.loc 1 157 15 view .LVU20
- 104 0040 45F8042F 		str	r2, [r5, #4]!
+ 103              		.loc 2 674 44
+ 104 0070 9A42     		cmp	r2, r3
+ 105 0072 0BD0     		beq	.L4
+ 106              		.loc 2 674 34
+ 107 0074 D7E90401 		ldrd	r0, [r7, #16]
+ 108 0078 4FF00002 		mov	r2, #0
+ 109 007c 4FF00003 		mov	r3, #0
+ 110 0080 CA17     		asrs	r2, r1, #31
+ 111 0082 CB17     		asrs	r3, r1, #31
+ 112              		.loc 2 674 44
+ 113 0084 6FF00043 		mvn	r3, #-2147483648
+ 114 0088 5340     		eors	r3, r3, r2
+ 115 008a 00E0     		b	.L11
+ 116              	.L4:
+ 117 008c 3B69     		ldr	r3, [r7, #16]
+ 118              	.L11:
+ 119              	.LBE5:
+ 120              	.LBE4:
+ 121              		.loc 1 157 15
+ 122 008e 3360     		str	r3, [r6]
  158:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
  159:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       /* Decrement loop counter */
  160:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       blkCnt--;
- 105              		.loc 1 160 7 is_stmt 1 view .LVU21
- 106              	.LVL5:
+ 123              		.loc 1 160 13
+ 124 0090 FB69     		ldr	r3, [r7, #28]
+ 125 0092 013B     		subs	r3, r3, #1
+ 126 0094 FB61     		str	r3, [r7, #28]
+ 127              	.L3:
  152:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
- 107              		.loc 1 152 11 view .LVU22
- 108 0044 E8D1     		bne	.L6
- 109              	.LVL6:
- 110              	.L1:
+ 128              		.loc 1 152 11
+ 129 0096 FB69     		ldr	r3, [r7, #28]
+ 130 0098 002B     		cmp	r3, #0
+ 131 009a C3D1     		bne	.L7
  161:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     }
  162:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   }
  163:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   else
  164:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   {
+ARM GAS  /tmp/ccNkosfY.s 			page 18
+
+
  165:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     while (blkCnt > 0U)
  166:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
  167:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****       /* C = A >> shiftBits */
@@ -1014,60 +1034,80 @@ ARM GAS  /tmp/ccV5hWwk.s 			page 1
  175:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****   }
  176:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
  177:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** }
- 111              		.loc 1 177 1 is_stmt 0 view .LVU23
- 112 0046 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 113              	.LVL7:
- 114              	.L15:
-ARM GAS  /tmp/ccV5hWwk.s 			page 18
-
-
- 165:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
- 115              		.loc 1 165 11 is_stmt 1 view .LVU24
- 116 004a 002B     		cmp	r3, #0
- 117 004c FBD0     		beq	.L1
- 118 004e 4942     		rsbs	r1, r1, #0
- 119              	.LVL8:
- 120              	.L7:
+ 132              		.loc 1 177 1
+ 133 009c 12E0     		b	.L12
+ 134              	.L10:
  170:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
- 121              		.loc 1 170 7 view .LVU25
+ 135              		.loc 1 170 23
+ 136 009e FB68     		ldr	r3, [r7, #12]
+ 137 00a0 1A1D     		adds	r2, r3, #4
+ 138 00a2 FA60     		str	r2, [r7, #12]
  170:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
- 122              		.loc 1 170 26 is_stmt 0 view .LVU26
- 123 0050 50F8044B 		ldr	r4, [r0], #4
- 124              	.LVL9:
- 165:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
- 125              		.loc 1 165 11 view .LVU27
- 126 0054 013B     		subs	r3, r3, #1
- 127              	.LVL10:
+ 139              		.loc 1 170 18
+ 140 00a4 1968     		ldr	r1, [r3]
  170:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
- 128              		.loc 1 170 26 view .LVU28
- 129 0056 44FA01F4 		asr	r4, r4, r1
+ 141              		.loc 1 170 29
+ 142 00a6 97F90B30 		ldrsb	r3, [r7, #11]
+ 143 00aa 5A42     		rsbs	r2, r3, #0
  170:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
- 130              		.loc 1 170 15 view .LVU29
- 131 005a 42F8044B 		str	r4, [r2], #4
- 132              	.LVL11:
+ 144              		.loc 1 170 12
+ 145 00ac 7B68     		ldr	r3, [r7, #4]
+ 146 00ae 181D     		adds	r0, r3, #4
+ 147 00b0 7860     		str	r0, [r7, #4]
+ 170:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
+ 148              		.loc 1 170 26
+ 149 00b2 41FA02F2 		asr	r2, r1, r2
+ 170:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c **** 
+ 150              		.loc 1 170 15
+ 151 00b6 1A60     		str	r2, [r3]
  173:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     }
- 133              		.loc 1 173 7 is_stmt 1 view .LVU30
+ 152              		.loc 1 173 13
+ 153 00b8 FB69     		ldr	r3, [r7, #28]
+ 154 00ba 013B     		subs	r3, r3, #1
+ 155 00bc FB61     		str	r3, [r7, #28]
+ 156              	.L9:
  165:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q31.c ****     {
- 134              		.loc 1 165 11 view .LVU31
- 135 005e F7D1     		bne	.L7
- 136              		.loc 1 177 1 is_stmt 0 view .LVU32
- 137 0060 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 138              		.cfi_endproc
- 139              	.LFE145:
- 141              		.text
- 142              	.Letext0:
- 143              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 144              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 145              		.file 5 "/usr/include/newlib/sys/_types.h"
- 146              		.file 6 "/usr/include/newlib/sys/reent.h"
- 147              		.file 7 "/usr/include/newlib/sys/lock.h"
- 148              		.file 8 "/usr/include/newlib/math.h"
-ARM GAS  /tmp/ccV5hWwk.s 			page 19
+ 157              		.loc 1 165 11
+ 158 00be FB69     		ldr	r3, [r7, #28]
+ 159 00c0 002B     		cmp	r3, #0
+ 160 00c2 ECD1     		bne	.L10
+ 161              	.L12:
+ 162              		.loc 1 177 1
+ 163 00c4 00BF     		nop
+ 164 00c6 2037     		adds	r7, r7, #32
+ 165              	.LCFI3:
+ 166              		.cfi_def_cfa_offset 16
+ 167 00c8 BD46     		mov	sp, r7
+ARM GAS  /tmp/ccNkosfY.s 			page 19
+
+
+ 168              	.LCFI4:
+ 169              		.cfi_def_cfa_register 13
+ 170              		@ sp needed
+ 171 00ca F0BC     		pop	{r4, r5, r6, r7}
+ 172              	.LCFI5:
+ 173              		.cfi_restore 7
+ 174              		.cfi_restore 6
+ 175              		.cfi_restore 5
+ 176              		.cfi_restore 4
+ 177              		.cfi_def_cfa_offset 0
+ 178 00cc 7047     		bx	lr
+ 179              		.cfi_endproc
+ 180              	.LFE145:
+ 182              		.text
+ 183              	.Letext0:
+ 184              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 185              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 186              		.file 5 "/usr/include/newlib/sys/_types.h"
+ 187              		.file 6 "/usr/include/newlib/sys/reent.h"
+ 188              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 189              		.file 8 "/usr/include/newlib/math.h"
+ARM GAS  /tmp/ccNkosfY.s 			page 20
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_shift_q31.c
-     /tmp/ccV5hWwk.s:17     .text.arm_shift_q31:0000000000000000 $t
-     /tmp/ccV5hWwk.s:26     .text.arm_shift_q31:0000000000000000 arm_shift_q31
+     /tmp/ccNkosfY.s:17     .text.arm_shift_q31:0000000000000000 $t
+     /tmp/ccNkosfY.s:25     .text.arm_shift_q31:0000000000000000 arm_shift_q31
 
 NO UNDEFINED SYMBOLS

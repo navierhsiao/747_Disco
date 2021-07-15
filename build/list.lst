@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccFsJLaw.s 			page 1
+ARM GAS  /tmp/ccpQnWe9.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"list.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.vListInitialise,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	vListInitialise
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	vListInitialise:
-  27              	.LVL0:
-  28              	.LFB4:
-  29              		.file 1 "./Libraries/FreeRTOS/Source/list.c"
+  18              		.global	vListInitialise
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	vListInitialise:
+  26              	.LFB4:
+  27              		.file 1 "./Libraries/FreeRTOS/Source/list.c"
    1:./Libraries/FreeRTOS/Source/list.c **** /*
    2:./Libraries/FreeRTOS/Source/list.c ****  * FreeRTOS Kernel V10.3.1
    3:./Libraries/FreeRTOS/Source/list.c ****  * Copyright (C) 2020 Amazon.com, Inc. or its affiliates.  All Rights Reserved.
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
   27:./Libraries/FreeRTOS/Source/list.c **** 
   28:./Libraries/FreeRTOS/Source/list.c **** 
   29:./Libraries/FreeRTOS/Source/list.c **** #include <stdlib.h>
-ARM GAS  /tmp/ccFsJLaw.s 			page 2
-
-
   30:./Libraries/FreeRTOS/Source/list.c **** #include "FreeRTOS.h"
   31:./Libraries/FreeRTOS/Source/list.c **** #include "list.h"
+ARM GAS  /tmp/ccpQnWe9.s 			page 2
+
+
   32:./Libraries/FreeRTOS/Source/list.c **** 
   33:./Libraries/FreeRTOS/Source/list.c **** /*-----------------------------------------------------------
   34:./Libraries/FreeRTOS/Source/list.c ****  * PUBLIC LIST API documented in list.h
@@ -70,253 +68,305 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
   36:./Libraries/FreeRTOS/Source/list.c **** 
   37:./Libraries/FreeRTOS/Source/list.c **** void vListInitialise( List_t * const pxList )
   38:./Libraries/FreeRTOS/Source/list.c **** {
-  30              		.loc 1 38 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 38 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 83B0     		sub	sp, sp, #12
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
   39:./Libraries/FreeRTOS/Source/list.c **** 	/* The list structure contains a list item which is used to mark the
   40:./Libraries/FreeRTOS/Source/list.c **** 	end of the list.  To initialise the list the list end is inserted
   41:./Libraries/FreeRTOS/Source/list.c **** 	as the only list entry. */
   42:./Libraries/FreeRTOS/Source/list.c **** 	pxList->pxIndex = ( ListItem_t * ) &( pxList->xListEnd );			/*lint !e826 !e740 !e9087 The mini lis
-  35              		.loc 1 42 2 view .LVU1
-  36              		.loc 1 42 37 is_stmt 0 view .LVU2
-  37 0000 00F10803 		add	r3, r0, #8
+  44              		.loc 1 42 37
+  45 0008 7B68     		ldr	r3, [r7, #4]
+  46 000a 03F10802 		add	r2, r3, #8
+  47              		.loc 1 42 18
+  48 000e 7B68     		ldr	r3, [r7, #4]
+  49 0010 5A60     		str	r2, [r3, #4]
   43:./Libraries/FreeRTOS/Source/list.c **** 
   44:./Libraries/FreeRTOS/Source/list.c **** 	/* The list end value is the highest possible value in the list to
   45:./Libraries/FreeRTOS/Source/list.c **** 	ensure it remains at the end of the list. */
   46:./Libraries/FreeRTOS/Source/list.c **** 	pxList->xListEnd.xItemValue = portMAX_DELAY;
-  38              		.loc 1 46 30 view .LVU3
-  39 0004 4FF0FF31 		mov	r1, #-1
+  50              		.loc 1 46 30
+  51 0012 7B68     		ldr	r3, [r7, #4]
+  52 0014 4FF0FF32 		mov	r2, #-1
+  53 0018 9A60     		str	r2, [r3, #8]
   47:./Libraries/FreeRTOS/Source/list.c **** 
   48:./Libraries/FreeRTOS/Source/list.c **** 	/* The list end next and previous pointers point to itself so we know
   49:./Libraries/FreeRTOS/Source/list.c **** 	when the list is empty. */
   50:./Libraries/FreeRTOS/Source/list.c **** 	pxList->xListEnd.pxNext = ( ListItem_t * ) &( pxList->xListEnd );	/*lint !e826 !e740 !e9087 The mi
+  54              		.loc 1 50 45
+  55 001a 7B68     		ldr	r3, [r7, #4]
+  56 001c 03F10802 		add	r2, r3, #8
+  57              		.loc 1 50 26
+  58 0020 7B68     		ldr	r3, [r7, #4]
+  59 0022 DA60     		str	r2, [r3, #12]
   51:./Libraries/FreeRTOS/Source/list.c **** 	pxList->xListEnd.pxPrevious = ( ListItem_t * ) &( pxList->xListEnd );/*lint !e826 !e740 !e9087 The
+  60              		.loc 1 51 49
+  61 0024 7B68     		ldr	r3, [r7, #4]
+  62 0026 03F10802 		add	r2, r3, #8
+  63              		.loc 1 51 30
+  64 002a 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccpQnWe9.s 			page 3
+
+
+  65 002c 1A61     		str	r2, [r3, #16]
   52:./Libraries/FreeRTOS/Source/list.c **** 
   53:./Libraries/FreeRTOS/Source/list.c **** 	pxList->uxNumberOfItems = ( UBaseType_t ) 0U;
-  40              		.loc 1 53 26 view .LVU4
-  41 0008 0022     		movs	r2, #0
-  46:./Libraries/FreeRTOS/Source/list.c **** 
-  42              		.loc 1 46 30 view .LVU5
-  43 000a 8160     		str	r1, [r0, #8]
-  44              		.loc 1 53 26 view .LVU6
-  45 000c 0260     		str	r2, [r0]
-  42:./Libraries/FreeRTOS/Source/list.c **** 
-  46              		.loc 1 42 18 view .LVU7
-  47 000e 4360     		str	r3, [r0, #4]
-  46:./Libraries/FreeRTOS/Source/list.c **** 
-  48              		.loc 1 46 2 is_stmt 1 view .LVU8
-  50:./Libraries/FreeRTOS/Source/list.c **** 	pxList->xListEnd.pxPrevious = ( ListItem_t * ) &( pxList->xListEnd );/*lint !e826 !e740 !e9087 The
-  49              		.loc 1 50 2 view .LVU9
-  51:./Libraries/FreeRTOS/Source/list.c **** 
-  50              		.loc 1 51 30 is_stmt 0 view .LVU10
-  51 0010 C0E90333 		strd	r3, r3, [r0, #12]
-  52              		.loc 1 53 2 is_stmt 1 view .LVU11
+  66              		.loc 1 53 26
+  67 002e 7B68     		ldr	r3, [r7, #4]
+  68 0030 0022     		movs	r2, #0
+  69 0032 1A60     		str	r2, [r3]
   54:./Libraries/FreeRTOS/Source/list.c **** 
   55:./Libraries/FreeRTOS/Source/list.c **** 	/* Write known values into the list if
   56:./Libraries/FreeRTOS/Source/list.c **** 	configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES is set to 1. */
   57:./Libraries/FreeRTOS/Source/list.c **** 	listSET_LIST_INTEGRITY_CHECK_1_VALUE( pxList );
-  53              		.loc 1 57 48 view .LVU12
-ARM GAS  /tmp/ccFsJLaw.s 			page 3
-
-
   58:./Libraries/FreeRTOS/Source/list.c **** 	listSET_LIST_INTEGRITY_CHECK_2_VALUE( pxList );
-  54              		.loc 1 58 48 view .LVU13
   59:./Libraries/FreeRTOS/Source/list.c **** }
-  55              		.loc 1 59 1 is_stmt 0 view .LVU14
-  56 0014 7047     		bx	lr
-  57              		.cfi_endproc
-  58              	.LFE4:
-  60 0016 00BF     		.section	.text.vListInitialiseItem,"ax",%progbits
-  61              		.align	1
-  62              		.p2align 2,,3
-  63              		.global	vListInitialiseItem
-  64              		.syntax unified
-  65              		.thumb
-  66              		.thumb_func
-  67              		.fpu fpv5-d16
-  69              	vListInitialiseItem:
-  70              	.LVL1:
-  71              	.LFB5:
+  70              		.loc 1 59 1
+  71 0034 00BF     		nop
+  72 0036 0C37     		adds	r7, r7, #12
+  73              	.LCFI3:
+  74              		.cfi_def_cfa_offset 4
+  75 0038 BD46     		mov	sp, r7
+  76              	.LCFI4:
+  77              		.cfi_def_cfa_register 13
+  78              		@ sp needed
+  79 003a 5DF8047B 		ldr	r7, [sp], #4
+  80              	.LCFI5:
+  81              		.cfi_restore 7
+  82              		.cfi_def_cfa_offset 0
+  83 003e 7047     		bx	lr
+  84              		.cfi_endproc
+  85              	.LFE4:
+  87              		.section	.text.vListInitialiseItem,"ax",%progbits
+  88              		.align	1
+  89              		.global	vListInitialiseItem
+  90              		.syntax unified
+  91              		.thumb
+  92              		.thumb_func
+  93              		.fpu fpv5-d16
+  95              	vListInitialiseItem:
+  96              	.LFB5:
   60:./Libraries/FreeRTOS/Source/list.c **** /*-----------------------------------------------------------*/
   61:./Libraries/FreeRTOS/Source/list.c **** 
   62:./Libraries/FreeRTOS/Source/list.c **** void vListInitialiseItem( ListItem_t * const pxItem )
   63:./Libraries/FreeRTOS/Source/list.c **** {
-  72              		.loc 1 63 1 is_stmt 1 view -0
-  73              		.cfi_startproc
-  74              		@ args = 0, pretend = 0, frame = 0
-  75              		@ frame_needed = 0, uses_anonymous_args = 0
-  76              		@ link register save eliminated.
+  97              		.loc 1 63 1
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 8
+ 100              		@ frame_needed = 1, uses_anonymous_args = 0
+ 101              		@ link register save eliminated.
+ 102 0000 80B4     		push	{r7}
+ 103              	.LCFI6:
+ 104              		.cfi_def_cfa_offset 4
+ 105              		.cfi_offset 7, -4
+ 106 0002 83B0     		sub	sp, sp, #12
+ 107              	.LCFI7:
+ 108              		.cfi_def_cfa_offset 16
+ 109 0004 00AF     		add	r7, sp, #0
+ 110              	.LCFI8:
+ 111              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/ccpQnWe9.s 			page 4
+
+
+ 112 0006 7860     		str	r0, [r7, #4]
   64:./Libraries/FreeRTOS/Source/list.c **** 	/* Make sure the list item is not recorded as being on a list. */
   65:./Libraries/FreeRTOS/Source/list.c **** 	pxItem->pxContainer = NULL;
-  77              		.loc 1 65 2 view .LVU16
-  78              		.loc 1 65 22 is_stmt 0 view .LVU17
-  79 0000 0023     		movs	r3, #0
-  80 0002 0361     		str	r3, [r0, #16]
+ 113              		.loc 1 65 22
+ 114 0008 7B68     		ldr	r3, [r7, #4]
+ 115 000a 0022     		movs	r2, #0
+ 116 000c 1A61     		str	r2, [r3, #16]
   66:./Libraries/FreeRTOS/Source/list.c **** 
   67:./Libraries/FreeRTOS/Source/list.c **** 	/* Write known values into the list item if
   68:./Libraries/FreeRTOS/Source/list.c **** 	configUSE_LIST_DATA_INTEGRITY_CHECK_BYTES is set to 1. */
   69:./Libraries/FreeRTOS/Source/list.c **** 	listSET_FIRST_LIST_ITEM_INTEGRITY_CHECK_VALUE( pxItem );
-  81              		.loc 1 69 57 is_stmt 1 view .LVU18
   70:./Libraries/FreeRTOS/Source/list.c **** 	listSET_SECOND_LIST_ITEM_INTEGRITY_CHECK_VALUE( pxItem );
-  82              		.loc 1 70 58 view .LVU19
   71:./Libraries/FreeRTOS/Source/list.c **** }
-  83              		.loc 1 71 1 is_stmt 0 view .LVU20
-  84 0004 7047     		bx	lr
-  85              		.cfi_endproc
-  86              	.LFE5:
-  88 0006 00BF     		.section	.text.vListInsertEnd,"ax",%progbits
-  89              		.align	1
-  90              		.p2align 2,,3
-  91              		.global	vListInsertEnd
-  92              		.syntax unified
-  93              		.thumb
-  94              		.thumb_func
-  95              		.fpu fpv5-d16
-  97              	vListInsertEnd:
-  98              	.LVL2:
-  99              	.LFB6:
+ 117              		.loc 1 71 1
+ 118 000e 00BF     		nop
+ 119 0010 0C37     		adds	r7, r7, #12
+ 120              	.LCFI9:
+ 121              		.cfi_def_cfa_offset 4
+ 122 0012 BD46     		mov	sp, r7
+ 123              	.LCFI10:
+ 124              		.cfi_def_cfa_register 13
+ 125              		@ sp needed
+ 126 0014 5DF8047B 		ldr	r7, [sp], #4
+ 127              	.LCFI11:
+ 128              		.cfi_restore 7
+ 129              		.cfi_def_cfa_offset 0
+ 130 0018 7047     		bx	lr
+ 131              		.cfi_endproc
+ 132              	.LFE5:
+ 134              		.section	.text.vListInsertEnd,"ax",%progbits
+ 135              		.align	1
+ 136              		.global	vListInsertEnd
+ 137              		.syntax unified
+ 138              		.thumb
+ 139              		.thumb_func
+ 140              		.fpu fpv5-d16
+ 142              	vListInsertEnd:
+ 143              	.LFB6:
   72:./Libraries/FreeRTOS/Source/list.c **** /*-----------------------------------------------------------*/
-ARM GAS  /tmp/ccFsJLaw.s 			page 4
-
-
   73:./Libraries/FreeRTOS/Source/list.c **** 
   74:./Libraries/FreeRTOS/Source/list.c **** void vListInsertEnd( List_t * const pxList, ListItem_t * const pxNewListItem )
   75:./Libraries/FreeRTOS/Source/list.c **** {
- 100              		.loc 1 75 1 is_stmt 1 view -0
- 101              		.cfi_startproc
- 102              		@ args = 0, pretend = 0, frame = 0
- 103              		@ frame_needed = 0, uses_anonymous_args = 0
- 104              		@ link register save eliminated.
+ 144              		.loc 1 75 1
+ 145              		.cfi_startproc
+ 146              		@ args = 0, pretend = 0, frame = 16
+ 147              		@ frame_needed = 1, uses_anonymous_args = 0
+ 148              		@ link register save eliminated.
+ 149 0000 80B4     		push	{r7}
+ 150              	.LCFI12:
+ 151              		.cfi_def_cfa_offset 4
+ 152              		.cfi_offset 7, -4
+ 153 0002 85B0     		sub	sp, sp, #20
+ 154              	.LCFI13:
+ 155              		.cfi_def_cfa_offset 24
+ 156 0004 00AF     		add	r7, sp, #0
+ 157              	.LCFI14:
+ 158              		.cfi_def_cfa_register 7
+ARM GAS  /tmp/ccpQnWe9.s 			page 5
+
+
+ 159 0006 7860     		str	r0, [r7, #4]
+ 160 0008 3960     		str	r1, [r7]
   76:./Libraries/FreeRTOS/Source/list.c **** ListItem_t * const pxIndex = pxList->pxIndex;
- 105              		.loc 1 76 1 view .LVU22
- 106              		.loc 1 76 20 is_stmt 0 view .LVU23
- 107 0000 4368     		ldr	r3, [r0, #4]
- 108              	.LVL3:
+ 161              		.loc 1 76 20
+ 162 000a 7B68     		ldr	r3, [r7, #4]
+ 163 000c 5B68     		ldr	r3, [r3, #4]
+ 164 000e FB60     		str	r3, [r7, #12]
   77:./Libraries/FreeRTOS/Source/list.c **** 
   78:./Libraries/FreeRTOS/Source/list.c **** 	/* Only effective when configASSERT() is also defined, these tests may catch
   79:./Libraries/FreeRTOS/Source/list.c **** 	the list data structures being overwritten in memory.  They will not catch
   80:./Libraries/FreeRTOS/Source/list.c **** 	data errors caused by incorrect configuration or use of FreeRTOS. */
   81:./Libraries/FreeRTOS/Source/list.c **** 	listTEST_LIST_INTEGRITY( pxList );
- 109              		.loc 1 81 35 is_stmt 1 view .LVU24
   82:./Libraries/FreeRTOS/Source/list.c **** 	listTEST_LIST_ITEM_INTEGRITY( pxNewListItem );
- 110              		.loc 1 82 47 view .LVU25
   83:./Libraries/FreeRTOS/Source/list.c **** 
   84:./Libraries/FreeRTOS/Source/list.c **** 	/* Insert a new list item into pxList, but rather than sort the list,
   85:./Libraries/FreeRTOS/Source/list.c **** 	makes the new list item the last item to be removed by a call to
   86:./Libraries/FreeRTOS/Source/list.c **** 	listGET_OWNER_OF_NEXT_ENTRY(). */
   87:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxNext = pxIndex;
- 111              		.loc 1 87 2 view .LVU26
+ 165              		.loc 1 87 24
+ 166 0010 3B68     		ldr	r3, [r7]
+ 167 0012 FA68     		ldr	r2, [r7, #12]
+ 168 0014 5A60     		str	r2, [r3, #4]
   88:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxPrevious = pxIndex->pxPrevious;
+ 169              		.loc 1 88 37
+ 170 0016 FB68     		ldr	r3, [r7, #12]
+ 171 0018 9A68     		ldr	r2, [r3, #8]
+ 172              		.loc 1 88 28
+ 173 001a 3B68     		ldr	r3, [r7]
+ 174 001c 9A60     		str	r2, [r3, #8]
   89:./Libraries/FreeRTOS/Source/list.c **** 
   90:./Libraries/FreeRTOS/Source/list.c **** 	/* Only used during decision coverage testing. */
   91:./Libraries/FreeRTOS/Source/list.c **** 	mtCOVERAGE_TEST_DELAY();
   92:./Libraries/FreeRTOS/Source/list.c **** 
   93:./Libraries/FreeRTOS/Source/list.c **** 	pxIndex->pxPrevious->pxNext = pxNewListItem;
+ 175              		.loc 1 93 9
+ 176 001e FB68     		ldr	r3, [r7, #12]
+ 177 0020 9B68     		ldr	r3, [r3, #8]
+ 178              		.loc 1 93 30
+ 179 0022 3A68     		ldr	r2, [r7]
+ 180 0024 5A60     		str	r2, [r3, #4]
   94:./Libraries/FreeRTOS/Source/list.c **** 	pxIndex->pxPrevious = pxNewListItem;
+ 181              		.loc 1 94 22
+ 182 0026 FB68     		ldr	r3, [r7, #12]
+ 183 0028 3A68     		ldr	r2, [r7]
+ 184 002a 9A60     		str	r2, [r3, #8]
   95:./Libraries/FreeRTOS/Source/list.c **** 
   96:./Libraries/FreeRTOS/Source/list.c **** 	/* Remember which list the item is in. */
   97:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxContainer = pxList;
+ 185              		.loc 1 97 29
+ 186 002c 3B68     		ldr	r3, [r7]
+ 187 002e 7A68     		ldr	r2, [r7, #4]
+ 188 0030 1A61     		str	r2, [r3, #16]
   98:./Libraries/FreeRTOS/Source/list.c **** 
   99:./Libraries/FreeRTOS/Source/list.c **** 	( pxList->uxNumberOfItems )++;
- 112              		.loc 1 99 10 is_stmt 0 view .LVU27
- 113 0002 0268     		ldr	r2, [r0]
-  75:./Libraries/FreeRTOS/Source/list.c **** ListItem_t * const pxIndex = pxList->pxIndex;
- 114              		.loc 1 75 1 view .LVU28
- 115 0004 10B4     		push	{r4}
- 116              	.LCFI0:
- 117              		.cfi_def_cfa_offset 4
- 118              		.cfi_offset 4, -4
-  88:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxPrevious = pxIndex->pxPrevious;
- 119              		.loc 1 88 37 view .LVU29
- 120 0006 9C68     		ldr	r4, [r3, #8]
- 121              		.loc 1 99 29 view .LVU30
- 122 0008 0132     		adds	r2, r2, #1
-  88:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxPrevious = pxIndex->pxPrevious;
- 123              		.loc 1 88 28 view .LVU31
- 124 000a C1E90134 		strd	r3, r4, [r1, #4]
-  91:./Libraries/FreeRTOS/Source/list.c **** 
- 125              		.loc 1 91 25 is_stmt 1 view .LVU32
-ARM GAS  /tmp/ccFsJLaw.s 			page 5
+ 189              		.loc 1 99 10
+ 190 0032 7B68     		ldr	r3, [r7, #4]
+ 191 0034 1B68     		ldr	r3, [r3]
+ARM GAS  /tmp/ccpQnWe9.s 			page 6
 
 
-  93:./Libraries/FreeRTOS/Source/list.c **** 	pxIndex->pxPrevious = pxNewListItem;
- 126              		.loc 1 93 2 view .LVU33
-  93:./Libraries/FreeRTOS/Source/list.c **** 	pxIndex->pxPrevious = pxNewListItem;
- 127              		.loc 1 93 30 is_stmt 0 view .LVU34
- 128 000e 9C68     		ldr	r4, [r3, #8]
- 129 0010 6160     		str	r1, [r4, #4]
-  94:./Libraries/FreeRTOS/Source/list.c **** 
- 130              		.loc 1 94 2 is_stmt 1 view .LVU35
-  94:./Libraries/FreeRTOS/Source/list.c **** 
- 131              		.loc 1 94 22 is_stmt 0 view .LVU36
- 132 0012 9960     		str	r1, [r3, #8]
-  97:./Libraries/FreeRTOS/Source/list.c **** 
- 133              		.loc 1 97 2 is_stmt 1 view .LVU37
+ 192              		.loc 1 99 29
+ 193 0036 5A1C     		adds	r2, r3, #1
+ 194 0038 7B68     		ldr	r3, [r7, #4]
+ 195 003a 1A60     		str	r2, [r3]
  100:./Libraries/FreeRTOS/Source/list.c **** }
- 134              		.loc 1 100 1 is_stmt 0 view .LVU38
- 135 0014 5DF8044B 		ldr	r4, [sp], #4
- 136              	.LCFI1:
- 137              		.cfi_restore 4
- 138              		.cfi_def_cfa_offset 0
-  97:./Libraries/FreeRTOS/Source/list.c **** 
- 139              		.loc 1 97 29 view .LVU39
- 140 0018 0861     		str	r0, [r1, #16]
-  99:./Libraries/FreeRTOS/Source/list.c **** }
- 141              		.loc 1 99 2 is_stmt 1 view .LVU40
-  99:./Libraries/FreeRTOS/Source/list.c **** }
- 142              		.loc 1 99 29 is_stmt 0 view .LVU41
- 143 001a 0260     		str	r2, [r0]
- 144              		.loc 1 100 1 view .LVU42
- 145 001c 7047     		bx	lr
- 146              		.cfi_endproc
- 147              	.LFE6:
- 149 001e 00BF     		.section	.text.vListInsert,"ax",%progbits
- 150              		.align	1
- 151              		.p2align 2,,3
- 152              		.global	vListInsert
- 153              		.syntax unified
- 154              		.thumb
- 155              		.thumb_func
- 156              		.fpu fpv5-d16
- 158              	vListInsert:
- 159              	.LVL4:
- 160              	.LFB7:
+ 196              		.loc 1 100 1
+ 197 003c 00BF     		nop
+ 198 003e 1437     		adds	r7, r7, #20
+ 199              	.LCFI15:
+ 200              		.cfi_def_cfa_offset 4
+ 201 0040 BD46     		mov	sp, r7
+ 202              	.LCFI16:
+ 203              		.cfi_def_cfa_register 13
+ 204              		@ sp needed
+ 205 0042 5DF8047B 		ldr	r7, [sp], #4
+ 206              	.LCFI17:
+ 207              		.cfi_restore 7
+ 208              		.cfi_def_cfa_offset 0
+ 209 0046 7047     		bx	lr
+ 210              		.cfi_endproc
+ 211              	.LFE6:
+ 213              		.section	.text.vListInsert,"ax",%progbits
+ 214              		.align	1
+ 215              		.global	vListInsert
+ 216              		.syntax unified
+ 217              		.thumb
+ 218              		.thumb_func
+ 219              		.fpu fpv5-d16
+ 221              	vListInsert:
+ 222              	.LFB7:
  101:./Libraries/FreeRTOS/Source/list.c **** /*-----------------------------------------------------------*/
  102:./Libraries/FreeRTOS/Source/list.c **** 
  103:./Libraries/FreeRTOS/Source/list.c **** void vListInsert( List_t * const pxList, ListItem_t * const pxNewListItem )
  104:./Libraries/FreeRTOS/Source/list.c **** {
- 161              		.loc 1 104 1 is_stmt 1 view -0
- 162              		.cfi_startproc
- 163              		@ args = 0, pretend = 0, frame = 0
- 164              		@ frame_needed = 0, uses_anonymous_args = 0
- 165              		@ link register save eliminated.
+ 223              		.loc 1 104 1
+ 224              		.cfi_startproc
+ 225              		@ args = 0, pretend = 0, frame = 16
+ 226              		@ frame_needed = 1, uses_anonymous_args = 0
+ 227              		@ link register save eliminated.
+ 228 0000 80B4     		push	{r7}
+ 229              	.LCFI18:
+ 230              		.cfi_def_cfa_offset 4
+ 231              		.cfi_offset 7, -4
+ 232 0002 85B0     		sub	sp, sp, #20
+ 233              	.LCFI19:
+ 234              		.cfi_def_cfa_offset 24
+ 235 0004 00AF     		add	r7, sp, #0
+ 236              	.LCFI20:
+ 237              		.cfi_def_cfa_register 7
+ 238 0006 7860     		str	r0, [r7, #4]
+ 239 0008 3960     		str	r1, [r7]
  105:./Libraries/FreeRTOS/Source/list.c **** ListItem_t *pxIterator;
- 166              		.loc 1 105 1 view .LVU44
  106:./Libraries/FreeRTOS/Source/list.c **** const TickType_t xValueOfInsertion = pxNewListItem->xItemValue;
- 167              		.loc 1 106 1 view .LVU45
- 104:./Libraries/FreeRTOS/Source/list.c **** ListItem_t *pxIterator;
- 168              		.loc 1 104 1 is_stmt 0 view .LVU46
-ARM GAS  /tmp/ccFsJLaw.s 			page 6
+ 240              		.loc 1 106 18
+ 241 000a 3B68     		ldr	r3, [r7]
+ 242 000c 1B68     		ldr	r3, [r3]
+ 243 000e BB60     		str	r3, [r7, #8]
+ARM GAS  /tmp/ccpQnWe9.s 			page 7
 
 
- 169 0000 30B4     		push	{r4, r5}
- 170              	.LCFI2:
- 171              		.cfi_def_cfa_offset 8
- 172              		.cfi_offset 4, -8
- 173              		.cfi_offset 5, -4
- 174              		.loc 1 106 18 view .LVU47
- 175 0002 0D68     		ldr	r5, [r1]
- 176              	.LVL5:
  107:./Libraries/FreeRTOS/Source/list.c **** 
  108:./Libraries/FreeRTOS/Source/list.c **** 	/* Only effective when configASSERT() is also defined, these tests may catch
  109:./Libraries/FreeRTOS/Source/list.c **** 	the list data structures being overwritten in memory.  They will not catch
  110:./Libraries/FreeRTOS/Source/list.c **** 	data errors caused by incorrect configuration or use of FreeRTOS. */
  111:./Libraries/FreeRTOS/Source/list.c **** 	listTEST_LIST_INTEGRITY( pxList );
- 177              		.loc 1 111 35 is_stmt 1 view .LVU48
  112:./Libraries/FreeRTOS/Source/list.c **** 	listTEST_LIST_ITEM_INTEGRITY( pxNewListItem );
- 178              		.loc 1 112 47 view .LVU49
  113:./Libraries/FreeRTOS/Source/list.c **** 
  114:./Libraries/FreeRTOS/Source/list.c **** 	/* Insert the new list item into the list, sorted in xItemValue order.
  115:./Libraries/FreeRTOS/Source/list.c **** 
@@ -327,12 +377,18 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
  120:./Libraries/FreeRTOS/Source/list.c **** 	the iteration loop below will not end.  Therefore the value is checked
  121:./Libraries/FreeRTOS/Source/list.c **** 	first, and the algorithm slightly modified if necessary. */
  122:./Libraries/FreeRTOS/Source/list.c **** 	if( xValueOfInsertion == portMAX_DELAY )
- 179              		.loc 1 122 2 view .LVU50
- 180              		.loc 1 122 4 is_stmt 0 view .LVU51
- 181 0004 6B1C     		adds	r3, r5, #1
- 182 0006 10D0     		beq	.L12
+ 244              		.loc 1 122 4
+ 245 0010 BB68     		ldr	r3, [r7, #8]
+ 246 0012 B3F1FF3F 		cmp	r3, #-1
+ 247 0016 03D1     		bne	.L5
  123:./Libraries/FreeRTOS/Source/list.c **** 	{
  124:./Libraries/FreeRTOS/Source/list.c **** 		pxIterator = pxList->xListEnd.pxPrevious;
+ 248              		.loc 1 124 14
+ 249 0018 7B68     		ldr	r3, [r7, #4]
+ 250 001a 1B69     		ldr	r3, [r3, #16]
+ 251 001c FB60     		str	r3, [r7, #12]
+ 252 001e 0CE0     		b	.L6
+ 253              	.L5:
  125:./Libraries/FreeRTOS/Source/list.c **** 	}
  126:./Libraries/FreeRTOS/Source/list.c **** 	else
  127:./Libraries/FreeRTOS/Source/list.c **** 	{
@@ -358,25 +414,32 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
  147:./Libraries/FreeRTOS/Source/list.c **** 			   before vTaskStartScheduler() has been called?).
  148:./Libraries/FreeRTOS/Source/list.c **** 		**********************************************************************/
  149:./Libraries/FreeRTOS/Source/list.c **** 
-ARM GAS  /tmp/ccFsJLaw.s 			page 7
-
-
  150:./Libraries/FreeRTOS/Source/list.c **** 		for( pxIterator = ( ListItem_t * ) &( pxList->xListEnd ); pxIterator->pxNext->xItemValue <= xValu
- 183              		.loc 1 150 3 is_stmt 1 view .LVU52
- 184              		.loc 1 150 19 is_stmt 0 view .LVU53
- 185 0008 00F10803 		add	r3, r0, #8
- 186              	.LVL6:
- 187              	.L9:
- 188              		.loc 1 150 61 is_stmt 1 discriminator 1 view .LVU54
- 189 000c 1C46     		mov	r4, r3
- 190              		.loc 1 150 71 is_stmt 0 discriminator 1 view .LVU55
- 191 000e 5B68     		ldr	r3, [r3, #4]
- 192              	.LVL7:
- 193              		.loc 1 150 3 discriminator 1 view .LVU56
- 194 0010 1A68     		ldr	r2, [r3]
- 195 0012 AA42     		cmp	r2, r5
- 196 0014 FAD9     		bls	.L9
- 197              	.L8:
+ 254              		.loc 1 150 19
+ 255 0020 7B68     		ldr	r3, [r7, #4]
+ 256 0022 0833     		adds	r3, r3, #8
+ARM GAS  /tmp/ccpQnWe9.s 			page 8
+
+
+ 257 0024 FB60     		str	r3, [r7, #12]
+ 258              		.loc 1 150 3
+ 259 0026 02E0     		b	.L7
+ 260              	.L8:
+ 261              		.loc 1 150 125 discriminator 3
+ 262 0028 FB68     		ldr	r3, [r7, #12]
+ 263 002a 5B68     		ldr	r3, [r3, #4]
+ 264 002c FB60     		str	r3, [r7, #12]
+ 265              	.L7:
+ 266              		.loc 1 150 71 discriminator 1
+ 267 002e FB68     		ldr	r3, [r7, #12]
+ 268 0030 5B68     		ldr	r3, [r3, #4]
+ 269              		.loc 1 150 79 discriminator 1
+ 270 0032 1B68     		ldr	r3, [r3]
+ 271              		.loc 1 150 3 discriminator 1
+ 272 0034 BA68     		ldr	r2, [r7, #8]
+ 273 0036 9A42     		cmp	r2, r3
+ 274 0038 F6D2     		bcs	.L8
+ 275              	.L6:
  151:./Libraries/FreeRTOS/Source/list.c **** 		{
  152:./Libraries/FreeRTOS/Source/list.c **** 			/* There is nothing to do here, just iterating to the wanted
  153:./Libraries/FreeRTOS/Source/list.c **** 			insertion position. */
@@ -384,131 +447,146 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
  155:./Libraries/FreeRTOS/Source/list.c **** 	}
  156:./Libraries/FreeRTOS/Source/list.c **** 
  157:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxNext = pxIterator->pxNext;
- 198              		.loc 1 157 2 is_stmt 1 view .LVU57
+ 276              		.loc 1 157 36
+ 277 003a FB68     		ldr	r3, [r7, #12]
+ 278 003c 5A68     		ldr	r2, [r3, #4]
+ 279              		.loc 1 157 24
+ 280 003e 3B68     		ldr	r3, [r7]
+ 281 0040 5A60     		str	r2, [r3, #4]
  158:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxNext->pxPrevious = pxNewListItem;
+ 282              		.loc 1 158 15
+ 283 0042 3B68     		ldr	r3, [r7]
+ 284 0044 5B68     		ldr	r3, [r3, #4]
+ 285              		.loc 1 158 36
+ 286 0046 3A68     		ldr	r2, [r7]
+ 287 0048 9A60     		str	r2, [r3, #8]
  159:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxPrevious = pxIterator;
+ 288              		.loc 1 159 28
+ 289 004a 3B68     		ldr	r3, [r7]
+ 290 004c FA68     		ldr	r2, [r7, #12]
+ 291 004e 9A60     		str	r2, [r3, #8]
  160:./Libraries/FreeRTOS/Source/list.c **** 	pxIterator->pxNext = pxNewListItem;
+ 292              		.loc 1 160 21
+ 293 0050 FB68     		ldr	r3, [r7, #12]
+ 294 0052 3A68     		ldr	r2, [r7]
+ 295 0054 5A60     		str	r2, [r3, #4]
  161:./Libraries/FreeRTOS/Source/list.c **** 
  162:./Libraries/FreeRTOS/Source/list.c **** 	/* Remember which list the item is in.  This allows fast removal of the
  163:./Libraries/FreeRTOS/Source/list.c **** 	item later. */
  164:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxContainer = pxList;
+ 296              		.loc 1 164 29
+ 297 0056 3B68     		ldr	r3, [r7]
+ 298 0058 7A68     		ldr	r2, [r7, #4]
+ 299 005a 1A61     		str	r2, [r3, #16]
+ARM GAS  /tmp/ccpQnWe9.s 			page 9
+
+
  165:./Libraries/FreeRTOS/Source/list.c **** 
  166:./Libraries/FreeRTOS/Source/list.c **** 	( pxList->uxNumberOfItems )++;
- 199              		.loc 1 166 10 is_stmt 0 view .LVU58
- 200 0016 0268     		ldr	r2, [r0]
- 157:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxNext->pxPrevious = pxNewListItem;
- 201              		.loc 1 157 24 view .LVU59
- 202 0018 4B60     		str	r3, [r1, #4]
- 158:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxNext->pxPrevious = pxNewListItem;
- 203              		.loc 1 158 2 is_stmt 1 view .LVU60
- 204              		.loc 1 166 29 is_stmt 0 view .LVU61
- 205 001a 0132     		adds	r2, r2, #1
- 158:./Libraries/FreeRTOS/Source/list.c **** 	pxNewListItem->pxNext->pxPrevious = pxNewListItem;
- 206              		.loc 1 158 36 view .LVU62
- 207 001c 9960     		str	r1, [r3, #8]
- 159:./Libraries/FreeRTOS/Source/list.c **** 	pxIterator->pxNext = pxNewListItem;
- 208              		.loc 1 159 2 is_stmt 1 view .LVU63
- 159:./Libraries/FreeRTOS/Source/list.c **** 	pxIterator->pxNext = pxNewListItem;
- 209              		.loc 1 159 28 is_stmt 0 view .LVU64
- 210 001e 8C60     		str	r4, [r1, #8]
- 160:./Libraries/FreeRTOS/Source/list.c **** 
- 211              		.loc 1 160 2 is_stmt 1 view .LVU65
- 160:./Libraries/FreeRTOS/Source/list.c **** 
- 212              		.loc 1 160 21 is_stmt 0 view .LVU66
- 213 0020 6160     		str	r1, [r4, #4]
- 164:./Libraries/FreeRTOS/Source/list.c **** 
- 214              		.loc 1 164 2 is_stmt 1 view .LVU67
-ARM GAS  /tmp/ccFsJLaw.s 			page 8
-
-
- 164:./Libraries/FreeRTOS/Source/list.c **** 
- 215              		.loc 1 164 29 is_stmt 0 view .LVU68
- 216 0022 0861     		str	r0, [r1, #16]
- 217              		.loc 1 166 2 is_stmt 1 view .LVU69
- 218              		.loc 1 166 29 is_stmt 0 view .LVU70
- 219 0024 0260     		str	r2, [r0]
+ 300              		.loc 1 166 10
+ 301 005c 7B68     		ldr	r3, [r7, #4]
+ 302 005e 1B68     		ldr	r3, [r3]
+ 303              		.loc 1 166 29
+ 304 0060 5A1C     		adds	r2, r3, #1
+ 305 0062 7B68     		ldr	r3, [r7, #4]
+ 306 0064 1A60     		str	r2, [r3]
  167:./Libraries/FreeRTOS/Source/list.c **** }
- 220              		.loc 1 167 1 view .LVU71
- 221 0026 30BC     		pop	{r4, r5}
- 222              	.LCFI3:
- 223              		.cfi_remember_state
- 224              		.cfi_restore 5
- 225              		.cfi_restore 4
- 226              		.cfi_def_cfa_offset 0
- 227              	.LVL8:
- 228              		.loc 1 167 1 view .LVU72
- 229 0028 7047     		bx	lr
- 230              	.LVL9:
- 231              	.L12:
- 232              	.LCFI4:
- 233              		.cfi_restore_state
- 124:./Libraries/FreeRTOS/Source/list.c **** 	}
- 234              		.loc 1 124 3 is_stmt 1 view .LVU73
- 124:./Libraries/FreeRTOS/Source/list.c **** 	}
- 235              		.loc 1 124 14 is_stmt 0 view .LVU74
- 236 002a 0469     		ldr	r4, [r0, #16]
- 237              	.LVL10:
- 124:./Libraries/FreeRTOS/Source/list.c **** 	}
- 238              		.loc 1 124 14 view .LVU75
- 239 002c 6368     		ldr	r3, [r4, #4]
- 240 002e F2E7     		b	.L8
- 241              		.cfi_endproc
- 242              	.LFE7:
- 244              		.section	.text.uxListRemove,"ax",%progbits
- 245              		.align	1
- 246              		.p2align 2,,3
- 247              		.global	uxListRemove
- 248              		.syntax unified
- 249              		.thumb
- 250              		.thumb_func
- 251              		.fpu fpv5-d16
- 253              	uxListRemove:
- 254              	.LVL11:
- 255              	.LFB8:
+ 307              		.loc 1 167 1
+ 308 0066 00BF     		nop
+ 309 0068 1437     		adds	r7, r7, #20
+ 310              	.LCFI21:
+ 311              		.cfi_def_cfa_offset 4
+ 312 006a BD46     		mov	sp, r7
+ 313              	.LCFI22:
+ 314              		.cfi_def_cfa_register 13
+ 315              		@ sp needed
+ 316 006c 5DF8047B 		ldr	r7, [sp], #4
+ 317              	.LCFI23:
+ 318              		.cfi_restore 7
+ 319              		.cfi_def_cfa_offset 0
+ 320 0070 7047     		bx	lr
+ 321              		.cfi_endproc
+ 322              	.LFE7:
+ 324              		.section	.text.uxListRemove,"ax",%progbits
+ 325              		.align	1
+ 326              		.global	uxListRemove
+ 327              		.syntax unified
+ 328              		.thumb
+ 329              		.thumb_func
+ 330              		.fpu fpv5-d16
+ 332              	uxListRemove:
+ 333              	.LFB8:
  168:./Libraries/FreeRTOS/Source/list.c **** /*-----------------------------------------------------------*/
  169:./Libraries/FreeRTOS/Source/list.c **** 
  170:./Libraries/FreeRTOS/Source/list.c **** UBaseType_t uxListRemove( ListItem_t * const pxItemToRemove )
  171:./Libraries/FreeRTOS/Source/list.c **** {
- 256              		.loc 1 171 1 is_stmt 1 view -0
- 257              		.cfi_startproc
- 258              		@ args = 0, pretend = 0, frame = 0
- 259              		@ frame_needed = 0, uses_anonymous_args = 0
- 260              		@ link register save eliminated.
+ 334              		.loc 1 171 1
+ 335              		.cfi_startproc
+ 336              		@ args = 0, pretend = 0, frame = 16
+ 337              		@ frame_needed = 1, uses_anonymous_args = 0
+ 338              		@ link register save eliminated.
+ 339 0000 80B4     		push	{r7}
+ 340              	.LCFI24:
+ 341              		.cfi_def_cfa_offset 4
+ 342              		.cfi_offset 7, -4
+ 343 0002 85B0     		sub	sp, sp, #20
+ 344              	.LCFI25:
+ 345              		.cfi_def_cfa_offset 24
+ 346 0004 00AF     		add	r7, sp, #0
+ 347              	.LCFI26:
+ 348              		.cfi_def_cfa_register 7
+ 349 0006 7860     		str	r0, [r7, #4]
  172:./Libraries/FreeRTOS/Source/list.c **** /* The list item knows which list it is in.  Obtain the list from the list
  173:./Libraries/FreeRTOS/Source/list.c **** item. */
+ARM GAS  /tmp/ccpQnWe9.s 			page 10
+
+
  174:./Libraries/FreeRTOS/Source/list.c **** List_t * const pxList = pxItemToRemove->pxContainer;
- 261              		.loc 1 174 1 view .LVU77
-ARM GAS  /tmp/ccFsJLaw.s 			page 9
-
-
- 262              		.loc 1 174 16 is_stmt 0 view .LVU78
- 263 0000 0369     		ldr	r3, [r0, #16]
- 264              	.LVL12:
+ 350              		.loc 1 174 16
+ 351 0008 7B68     		ldr	r3, [r7, #4]
+ 352 000a 1B69     		ldr	r3, [r3, #16]
+ 353 000c FB60     		str	r3, [r7, #12]
  175:./Libraries/FreeRTOS/Source/list.c **** 
  176:./Libraries/FreeRTOS/Source/list.c **** 	pxItemToRemove->pxNext->pxPrevious = pxItemToRemove->pxPrevious;
- 265              		.loc 1 176 2 is_stmt 1 view .LVU79
- 171:./Libraries/FreeRTOS/Source/list.c **** /* The list item knows which list it is in.  Obtain the list from the list
- 266              		.loc 1 171 1 is_stmt 0 view .LVU80
- 267 0002 10B4     		push	{r4}
- 268              	.LCFI5:
- 269              		.cfi_def_cfa_offset 4
- 270              		.cfi_offset 4, -4
+ 354              		.loc 1 176 16
+ 355 000e 7B68     		ldr	r3, [r7, #4]
+ 356 0010 5B68     		ldr	r3, [r3, #4]
+ 357              		.loc 1 176 53
+ 358 0012 7A68     		ldr	r2, [r7, #4]
+ 359 0014 9268     		ldr	r2, [r2, #8]
+ 360              		.loc 1 176 37
+ 361 0016 9A60     		str	r2, [r3, #8]
  177:./Libraries/FreeRTOS/Source/list.c **** 	pxItemToRemove->pxPrevious->pxNext = pxItemToRemove->pxNext;
+ 362              		.loc 1 177 16
+ 363 0018 7B68     		ldr	r3, [r7, #4]
+ 364 001a 9B68     		ldr	r3, [r3, #8]
+ 365              		.loc 1 177 53
+ 366 001c 7A68     		ldr	r2, [r7, #4]
+ 367 001e 5268     		ldr	r2, [r2, #4]
+ 368              		.loc 1 177 37
+ 369 0020 5A60     		str	r2, [r3, #4]
  178:./Libraries/FreeRTOS/Source/list.c **** 
  179:./Libraries/FreeRTOS/Source/list.c **** 	/* Only used during decision coverage testing. */
  180:./Libraries/FreeRTOS/Source/list.c **** 	mtCOVERAGE_TEST_DELAY();
  181:./Libraries/FreeRTOS/Source/list.c **** 
  182:./Libraries/FreeRTOS/Source/list.c **** 	/* Make sure the index is left pointing to a valid item. */
  183:./Libraries/FreeRTOS/Source/list.c **** 	if( pxList->pxIndex == pxItemToRemove )
- 271              		.loc 1 183 4 view .LVU81
- 272 0004 5C68     		ldr	r4, [r3, #4]
- 176:./Libraries/FreeRTOS/Source/list.c **** 	pxItemToRemove->pxPrevious->pxNext = pxItemToRemove->pxNext;
- 273              		.loc 1 176 53 view .LVU82
- 274 0006 D0E90112 		ldrd	r1, r2, [r0, #4]
- 275              		.loc 1 183 4 view .LVU83
- 276 000a 8442     		cmp	r4, r0
+ 370              		.loc 1 183 12
+ 371 0022 FB68     		ldr	r3, [r7, #12]
+ 372 0024 5B68     		ldr	r3, [r3, #4]
+ 373              		.loc 1 183 4
+ 374 0026 7A68     		ldr	r2, [r7, #4]
+ 375 0028 9A42     		cmp	r2, r3
+ 376 002a 03D1     		bne	.L10
  184:./Libraries/FreeRTOS/Source/list.c **** 	{
  185:./Libraries/FreeRTOS/Source/list.c **** 		pxList->pxIndex = pxItemToRemove->pxPrevious;
+ 377              		.loc 1 185 35
+ 378 002c 7B68     		ldr	r3, [r7, #4]
+ 379 002e 9A68     		ldr	r2, [r3, #8]
+ 380              		.loc 1 185 19
+ 381 0030 FB68     		ldr	r3, [r7, #12]
+ 382 0032 5A60     		str	r2, [r3, #4]
+ 383              	.L10:
  186:./Libraries/FreeRTOS/Source/list.c **** 	}
  187:./Libraries/FreeRTOS/Source/list.c **** 	else
  188:./Libraries/FreeRTOS/Source/list.c **** 	{
@@ -516,90 +594,68 @@ ARM GAS  /tmp/ccFsJLaw.s 			page 1
  190:./Libraries/FreeRTOS/Source/list.c **** 	}
  191:./Libraries/FreeRTOS/Source/list.c **** 
  192:./Libraries/FreeRTOS/Source/list.c **** 	pxItemToRemove->pxContainer = NULL;
+ 384              		.loc 1 192 30
+ 385 0034 7B68     		ldr	r3, [r7, #4]
+ 386 0036 0022     		movs	r2, #0
+ 387 0038 1A61     		str	r2, [r3, #16]
+ARM GAS  /tmp/ccpQnWe9.s 			page 11
+
+
  193:./Libraries/FreeRTOS/Source/list.c **** 	( pxList->uxNumberOfItems )--;
+ 388              		.loc 1 193 10
+ 389 003a FB68     		ldr	r3, [r7, #12]
+ 390 003c 1B68     		ldr	r3, [r3]
+ 391              		.loc 1 193 29
+ 392 003e 5A1E     		subs	r2, r3, #1
+ 393 0040 FB68     		ldr	r3, [r7, #12]
+ 394 0042 1A60     		str	r2, [r3]
  194:./Libraries/FreeRTOS/Source/list.c **** 
  195:./Libraries/FreeRTOS/Source/list.c **** 	return pxList->uxNumberOfItems;
+ 395              		.loc 1 195 15
+ 396 0044 FB68     		ldr	r3, [r7, #12]
+ 397 0046 1B68     		ldr	r3, [r3]
  196:./Libraries/FreeRTOS/Source/list.c **** }
- 277              		.loc 1 196 1 view .LVU84
- 278 000c 5DF8044B 		ldr	r4, [sp], #4
- 279              	.LCFI6:
- 280              		.cfi_restore 4
- 281              		.cfi_def_cfa_offset 0
- 176:./Libraries/FreeRTOS/Source/list.c **** 	pxItemToRemove->pxPrevious->pxNext = pxItemToRemove->pxNext;
- 282              		.loc 1 176 37 view .LVU85
- 283 0010 8A60     		str	r2, [r1, #8]
- 177:./Libraries/FreeRTOS/Source/list.c **** 
- 284              		.loc 1 177 2 is_stmt 1 view .LVU86
- 177:./Libraries/FreeRTOS/Source/list.c **** 
- 285              		.loc 1 177 37 is_stmt 0 view .LVU87
- 286 0012 5160     		str	r1, [r2, #4]
- 180:./Libraries/FreeRTOS/Source/list.c **** 
- 287              		.loc 1 180 25 is_stmt 1 view .LVU88
- 183:./Libraries/FreeRTOS/Source/list.c **** 	{
- 288              		.loc 1 183 2 view .LVU89
- 185:./Libraries/FreeRTOS/Source/list.c **** 	}
-ARM GAS  /tmp/ccFsJLaw.s 			page 10
-
-
- 289              		.loc 1 185 3 view .LVU90
- 192:./Libraries/FreeRTOS/Source/list.c **** 	( pxList->uxNumberOfItems )--;
- 290              		.loc 1 192 30 is_stmt 0 view .LVU91
- 291 0014 4FF00001 		mov	r1, #0
- 185:./Libraries/FreeRTOS/Source/list.c **** 	}
- 292              		.loc 1 185 19 view .LVU92
- 293 0018 08BF     		it	eq
- 294 001a 5A60     		streq	r2, [r3, #4]
- 189:./Libraries/FreeRTOS/Source/list.c **** 	}
- 295              		.loc 1 189 27 is_stmt 1 view .LVU93
- 192:./Libraries/FreeRTOS/Source/list.c **** 	( pxList->uxNumberOfItems )--;
- 296              		.loc 1 192 2 view .LVU94
- 193:./Libraries/FreeRTOS/Source/list.c **** 
- 297              		.loc 1 193 10 is_stmt 0 view .LVU95
- 298 001c 1A68     		ldr	r2, [r3]
- 192:./Libraries/FreeRTOS/Source/list.c **** 	( pxList->uxNumberOfItems )--;
- 299              		.loc 1 192 30 view .LVU96
- 300 001e 0161     		str	r1, [r0, #16]
- 193:./Libraries/FreeRTOS/Source/list.c **** 
- 301              		.loc 1 193 2 is_stmt 1 view .LVU97
- 193:./Libraries/FreeRTOS/Source/list.c **** 
- 302              		.loc 1 193 29 is_stmt 0 view .LVU98
- 303 0020 013A     		subs	r2, r2, #1
- 304 0022 1A60     		str	r2, [r3]
- 195:./Libraries/FreeRTOS/Source/list.c **** }
- 305              		.loc 1 195 2 is_stmt 1 view .LVU99
- 195:./Libraries/FreeRTOS/Source/list.c **** }
- 306              		.loc 1 195 15 is_stmt 0 view .LVU100
- 307 0024 1868     		ldr	r0, [r3]
- 308              	.LVL13:
- 309              		.loc 1 196 1 view .LVU101
- 310 0026 7047     		bx	lr
- 311              		.cfi_endproc
- 312              	.LFE8:
- 314              		.text
- 315              	.Letext0:
- 316              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 317              		.file 3 "/usr/include/newlib/sys/_types.h"
- 318              		.file 4 "/usr/include/newlib/sys/reent.h"
- 319              		.file 5 "/usr/include/newlib/sys/lock.h"
- 320              		.file 6 "/usr/include/newlib/stdlib.h"
- 321              		.file 7 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 322              		.file 8 "./User/code/Inc/FreeRTOSConfig.h"
- 323              		.file 9 "./Libraries/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
- 324              		.file 10 "./Libraries/FreeRTOS/Source/include/list.h"
-ARM GAS  /tmp/ccFsJLaw.s 			page 11
+ 398              		.loc 1 196 1
+ 399 0048 1846     		mov	r0, r3
+ 400 004a 1437     		adds	r7, r7, #20
+ 401              	.LCFI27:
+ 402              		.cfi_def_cfa_offset 4
+ 403 004c BD46     		mov	sp, r7
+ 404              	.LCFI28:
+ 405              		.cfi_def_cfa_register 13
+ 406              		@ sp needed
+ 407 004e 5DF8047B 		ldr	r7, [sp], #4
+ 408              	.LCFI29:
+ 409              		.cfi_restore 7
+ 410              		.cfi_def_cfa_offset 0
+ 411 0052 7047     		bx	lr
+ 412              		.cfi_endproc
+ 413              	.LFE8:
+ 415              		.text
+ 416              	.Letext0:
+ 417              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 418              		.file 3 "/usr/include/newlib/sys/_types.h"
+ 419              		.file 4 "/usr/include/newlib/sys/reent.h"
+ 420              		.file 5 "/usr/include/newlib/sys/lock.h"
+ 421              		.file 6 "/usr/include/newlib/stdlib.h"
+ 422              		.file 7 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 423              		.file 8 "./User/code/Inc/FreeRTOSConfig.h"
+ 424              		.file 9 "./Libraries/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h"
+ 425              		.file 10 "./Libraries/FreeRTOS/Source/include/list.h"
+ARM GAS  /tmp/ccpQnWe9.s 			page 12
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 list.c
-     /tmp/ccFsJLaw.s:17     .text.vListInitialise:0000000000000000 $t
-     /tmp/ccFsJLaw.s:26     .text.vListInitialise:0000000000000000 vListInitialise
-     /tmp/ccFsJLaw.s:61     .text.vListInitialiseItem:0000000000000000 $t
-     /tmp/ccFsJLaw.s:69     .text.vListInitialiseItem:0000000000000000 vListInitialiseItem
-     /tmp/ccFsJLaw.s:89     .text.vListInsertEnd:0000000000000000 $t
-     /tmp/ccFsJLaw.s:97     .text.vListInsertEnd:0000000000000000 vListInsertEnd
-     /tmp/ccFsJLaw.s:150    .text.vListInsert:0000000000000000 $t
-     /tmp/ccFsJLaw.s:158    .text.vListInsert:0000000000000000 vListInsert
-     /tmp/ccFsJLaw.s:245    .text.uxListRemove:0000000000000000 $t
-     /tmp/ccFsJLaw.s:253    .text.uxListRemove:0000000000000000 uxListRemove
+     /tmp/ccpQnWe9.s:17     .text.vListInitialise:0000000000000000 $t
+     /tmp/ccpQnWe9.s:25     .text.vListInitialise:0000000000000000 vListInitialise
+     /tmp/ccpQnWe9.s:88     .text.vListInitialiseItem:0000000000000000 $t
+     /tmp/ccpQnWe9.s:95     .text.vListInitialiseItem:0000000000000000 vListInitialiseItem
+     /tmp/ccpQnWe9.s:135    .text.vListInsertEnd:0000000000000000 $t
+     /tmp/ccpQnWe9.s:142    .text.vListInsertEnd:0000000000000000 vListInsertEnd
+     /tmp/ccpQnWe9.s:214    .text.vListInsert:0000000000000000 $t
+     /tmp/ccpQnWe9.s:221    .text.vListInsert:0000000000000000 vListInsert
+     /tmp/ccpQnWe9.s:325    .text.uxListRemove:0000000000000000 $t
+     /tmp/ccpQnWe9.s:332    .text.uxListRemove:0000000000000000 uxListRemove
 
 NO UNDEFINED SYMBOLS

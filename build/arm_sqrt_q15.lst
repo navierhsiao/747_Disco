@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccIIsoPe.s 			page 1
+ARM GAS  /tmp/ccamIjIX.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_sqrt_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_sqrt_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_sqrt_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_sqrt_q15:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c"
+  18              		.global	arm_sqrt_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_sqrt_q15:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c"
    1:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****  * Title:        arm_sqrt_q15.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****  */
   28:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
   29:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccIIsoPe.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** #include "arm_common_tables.h"
   31:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
+ARM GAS  /tmp/ccamIjIX.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** /**
   33:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   @ingroup groupFastMath
   34:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****  */
@@ -85,45 +83,55 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
   51:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   q15_t in,
   52:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   q15_t * pOut)
   53:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** {
-  30              		.loc 1 53 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 53 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 40
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 8BB0     		sub	sp, sp, #44
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 48
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 0346     		mov	r3, r0
+  44 0008 3960     		str	r1, [r7]
+  45 000a FB80     		strh	r3, [r7, #6]	@ movhi
   54:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   q31_t bits_val1;
-  35              		.loc 1 54 3 view .LVU1
   55:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   q15_t number, temp1, var1, signBits1, half;
-  36              		.loc 1 55 3 view .LVU2
   56:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   float32_t temp_float1;
-  37              		.loc 1 56 3 view .LVU3
   57:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   union
-  38              		.loc 1 57 3 view .LVU4
   58:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   {
   59:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     q31_t fracval;
   60:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     float32_t floatval;
   61:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   } tempconv;
   62:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
   63:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   number = in;
-  39              		.loc 1 63 3 view .LVU5
+  46              		.loc 1 63 10
+  47 000c FB88     		ldrh	r3, [r7, #6]	@ movhi
+  48 000e FB84     		strh	r3, [r7, #38]	@ movhi
   64:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
   65:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   /* If the input is a positive number then compute the signBits. */
   66:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   if (number > 0)
-  40              		.loc 1 66 3 view .LVU6
-  41              		.loc 1 66 6 is_stmt 0 view .LVU7
-  42 0000 0028     		cmp	r0, #0
-  43              	.LVL1:
-  44              		.loc 1 66 6 view .LVU8
-  45 0002 5DDD     		ble	.L2
+  49              		.loc 1 66 6
+ARM GAS  /tmp/ccamIjIX.s 			page 3
+
+
+  50 0010 B7F92630 		ldrsh	r3, [r7, #38]
+  51 0014 002B     		cmp	r3, #0
+  52 0016 40F3C980 		ble	.L2
   67:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   {
   68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     signBits1 = __CLZ(number) - 17;
-  46              		.loc 1 68 5 is_stmt 1 view .LVU9
-  47              	.LVL2:
-ARM GAS  /tmp/ccIIsoPe.s 			page 3
-
-
-  48              	.LBB4:
-  49              	.LBI4:
-  50              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
+  53              		.loc 1 68 17
+  54 001a B7F92630 		ldrsh	r3, [r7, #38]
+  55 001e 3B61     		str	r3, [r7, #16]
+  56              	.LBB4:
+  57              	.LBB5:
+  58              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
    1:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -170,6 +178,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
   44:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __INLINE                               inline
   45:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   46:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+ARM GAS  /tmp/ccamIjIX.s 			page 4
+
+
   47:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
   48:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   49:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
@@ -178,9 +189,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
   52:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
   53:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
   54:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccIIsoPe.s 			page 4
-
-
   55:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __USED
   56:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
   57:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -230,6 +238,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  101:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  102:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
  103:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+ARM GAS  /tmp/ccamIjIX.s 			page 5
+
+
  104:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
  105:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
  106:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
@@ -238,9 +249,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  109:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  110:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
  111:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
-ARM GAS  /tmp/ccIIsoPe.s 			page 5
-
-
  112:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  113:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
  114:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
@@ -290,6 +298,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  158:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  159:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****       pTable->dest[i] = 0u;
  160:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     }
+ARM GAS  /tmp/ccamIjIX.s 			page 6
+
+
  161:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
  162:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  
  163:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   _start();
@@ -298,9 +309,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  166:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
  167:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  168:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccIIsoPe.s 			page 6
-
-
  169:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __INITIAL_SP
  170:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __INITIAL_SP              __StackTop
  171:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -350,6 +358,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  215:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the content of the Control Register.
  216:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Control Register value
  217:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccamIjIX.s 			page 7
+
+
  218:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_CONTROL(void)
  219:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  220:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -358,9 +369,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  223:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  224:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  225:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccIIsoPe.s 			page 7
-
-
  226:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  227:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  228:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -410,6 +418,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  272:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_IPSR(void)
  273:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  274:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
+ARM GAS  /tmp/ccamIjIX.s 			page 8
+
+
  275:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  276:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
  277:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
@@ -418,9 +429,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  280:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  281:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  282:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get APSR Register
-ARM GAS  /tmp/ccIIsoPe.s 			page 8
-
-
  283:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
  284:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               APSR Register value
  285:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -470,6 +478,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  329:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PSP_NS(void)
  330:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  331:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
+ARM GAS  /tmp/ccamIjIX.s 			page 9
+
+
  332:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  333:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp_ns"  : "=r" (result) );
  334:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
@@ -478,9 +489,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  337:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  338:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  339:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccIIsoPe.s 			page 9
-
-
  340:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer
  341:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
  342:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
@@ -530,6 +538,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  386:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  387:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp_ns" : "=r" (result) );
  388:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/ccamIjIX.s 			page 10
+
+
  389:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  390:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  391:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -538,9 +549,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  394:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer
  395:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer (MSP).
  396:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
-ARM GAS  /tmp/ccIIsoPe.s 			page 10
-
-
  397:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  398:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
  399:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -590,6 +598,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  443:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  444:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  445:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Priority Mask
+ARM GAS  /tmp/ccamIjIX.s 			page 11
+
+
  446:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current state of the priority mask bit from the Priority Mask Register.
  447:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Priority Mask value
  448:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -598,9 +609,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  451:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  452:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  453:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) :: "memory");
-ARM GAS  /tmp/ccIIsoPe.s 			page 11
-
-
  454:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  455:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  456:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -650,6 +658,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  500:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    )
  501:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  502:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Enable FIQ
+ARM GAS  /tmp/ccamIjIX.s 			page 12
+
+
  503:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
  504:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
  505:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -658,9 +669,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  508:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie f" : : : "memory");
  509:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  510:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccIIsoPe.s 			page 12
-
-
  511:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  512:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  513:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Disable FIQ
@@ -710,6 +718,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  557:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  558:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_BASEPRI(uint32_t basePri)
  559:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccamIjIX.s 			page 13
+
+
  560:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri, %0" : : "r" (basePri) : "memory");
  561:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  562:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -718,9 +729,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  565:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  566:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Base Priority (non-secure)
  567:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Base Priority register when in secure state.
-ARM GAS  /tmp/ccIIsoPe.s 			page 13
-
-
  568:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
  569:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  570:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri)
@@ -770,6 +778,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  614:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  615:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  616:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccamIjIX.s 			page 14
+
+
  617:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  618:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  619:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -778,9 +789,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  622:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    faultMask  Fault Mask value to set
  623:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  624:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_FAULTMASK(uint32_t faultMask)
-ARM GAS  /tmp/ccIIsoPe.s 			page 14
-
-
  625:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  626:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
  627:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -830,6 +838,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  671:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  672:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE) && (__ARM_FEATURE_CMSE == 3))
  673:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccamIjIX.s 			page 15
+
+
  674:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer Limit (non-secure)
  675:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  676:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always.
@@ -838,9 +849,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  679:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               PSPLIM Register value
  680:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  681:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PSPLIM_NS(void)
-ARM GAS  /tmp/ccIIsoPe.s 			page 15
-
-
  682:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  683:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
  684:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
@@ -890,6 +898,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  728:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
  729:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   (void)ProcStackPtrLimit;
  730:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
+ARM GAS  /tmp/ccamIjIX.s 			page 16
+
+
  731:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psplim_ns, %0\n" : : "r" (ProcStackPtrLimit));
  732:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  733:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -898,9 +909,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  736:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  737:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  738:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer Limit
-ARM GAS  /tmp/ccIIsoPe.s 			page 16
-
-
  739:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  740:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
  741:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   mode.
@@ -950,6 +958,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  785:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  786:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence the write is silently ignored in non-secure
  787:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   mode.
+ARM GAS  /tmp/ccamIjIX.s 			page 17
+
+
  788:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  789:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer Limit (MSPLIM).
  790:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    MainStackPtrLimit  Main Stack Pointer Limit value to set
@@ -958,9 +969,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  793:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  794:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
  795:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
-ARM GAS  /tmp/ccIIsoPe.s 			page 17
-
-
  796:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
  797:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   (void)MainStackPtrLimit;
  798:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -1010,6 +1018,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  842:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  843:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  844:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccamIjIX.s 			page 18
+
+
  845:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("VMRS %0, fpscr" : "=r" (result) );
  846:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  847:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -1018,9 +1029,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  850:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  851:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  852:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccIIsoPe.s 			page 18
-
-
  853:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  854:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  855:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set FPSCR
@@ -1070,6 +1078,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  899:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  900:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   No Operation
  901:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details No Operation does nothing. This instruction can be used for code alignment purposes.
+ARM GAS  /tmp/ccamIjIX.s 			page 19
+
+
  902:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  903:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __NOP()                             __ASM volatile ("nop")
  904:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1078,9 +1089,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  907:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Wait For Interrupt is a hint instruction that suspends execution until one of a number o
  908:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  909:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __WFI()                             __ASM volatile ("wfi")
-ARM GAS  /tmp/ccIIsoPe.s 			page 19
-
-
  910:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  911:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  912:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1130,6 +1138,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  956:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  957:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("dmb 0xF":::"memory");
  958:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccamIjIX.s 			page 20
+
+
  959:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  960:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  961:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1138,9 +1149,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
  964:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    value  Value to reverse
  965:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Reversed value
  966:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccIIsoPe.s 			page 20
-
-
  967:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __REV(uint32_t value)
  968:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  969:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5)
@@ -1190,6 +1198,9 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
 1013:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1014:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1015:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Rotate Right in unsigned value (32 bit)
+ARM GAS  /tmp/ccamIjIX.s 			page 21
+
+
 1016:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Rotate Right (immediate) provides the value of the contents of a register rotated by a v
 1017:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    op1  Value to rotate
 1018:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    op2  Number of Bits to rotate
@@ -1198,9 +1209,6 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
 1021:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2)
 1022:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1023:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   op2 %= 32U;
-ARM GAS  /tmp/ccIIsoPe.s 			page 21
-
-
 1024:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if (op2 == 0U)
 1025:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
 1026:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     return op1;
@@ -1250,17 +1258,15 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
 1070:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1071:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1072:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccamIjIX.s 			page 22
+
+
 1073:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Count leading zeros
 1074:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Counts the number of leading zeros of a data value.
 1075:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to count the leading zeros
 1076:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             number of leading zeros in value
 1077:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1078:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __CLZ(uint32_t value)
-  51              		.loc 2 1078 30 view .LVU10
-  52              	.LBB5:
-ARM GAS  /tmp/ccIIsoPe.s 			page 22
-
-
 1079:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1080:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   /* Even though __builtin_clz produces a CLZ instruction on ARM, formally
 1081:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      __builtin_clz(0) is undefined behaviour, so handle this case specially.
@@ -1272,380 +1278,416 @@ ARM GAS  /tmp/ccIIsoPe.s 			page 1
 1087:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      single CLZ instruction.
 1088:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    */
 1089:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if (value == 0U)
-  53              		.loc 2 1089 3 view .LVU11
+  59              		.loc 2 1089 6
+  60 0020 3B69     		ldr	r3, [r7, #16]
+  61 0022 002B     		cmp	r3, #0
+  62 0024 01D1     		bne	.L3
 1090:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
 1091:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     return 32U;
+  63              		.loc 2 1091 12
+  64 0026 2023     		movs	r3, #32
+  65 0028 03E0     		b	.L4
+  66              	.L3:
 1092:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
 1093:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return __builtin_clz(value);
-  54              		.loc 2 1093 3 view .LVU12
-  55              		.loc 2 1093 10 is_stmt 0 view .LVU13
-  56 0004 B0FA80F2 		clz	r2, r0
-  57              	.LVL3:
-  58              		.loc 2 1093 10 view .LVU14
-  59              	.LBE5:
-  60              	.LBE4:
-  61              		.loc 1 68 31 view .LVU15
-  62 0008 113A     		subs	r2, r2, #17
-  53:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   q31_t bits_val1;
-  63              		.loc 1 53 1 view .LVU16
-  64 000a 70B4     		push	{r4, r5, r6}
-  65              	.LCFI0:
-  66              		.cfi_def_cfa_offset 12
-  67              		.cfi_offset 4, -12
-  68              		.cfi_offset 5, -8
-  69              		.cfi_offset 6, -4
-  70              		.loc 1 68 31 view .LVU17
-  71 000c 94B2     		uxth	r4, r2
-  72              	.LVL4:
+  67              		.loc 2 1093 10
+  68 002a 3B69     		ldr	r3, [r7, #16]
+  69 002c B3FA83F3 		clz	r3, r3
+  70 0030 DBB2     		uxtb	r3, r3
+  71              	.L4:
+  72              	.LBE5:
+  73              	.LBE4:
+  74              		.loc 1 68 17
+  75 0032 9BB2     		uxth	r3, r3
+  76              		.loc 1 68 31
+  77 0034 113B     		subs	r3, r3, #17
+  78 0036 9BB2     		uxth	r3, r3
+  79              		.loc 1 68 15
+  80 0038 7B84     		strh	r3, [r7, #34]	@ movhi
   69:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
   70:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Shift by the number of signBits1 */
   71:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     if ((signBits1 % 2) == 0)
-  73              		.loc 1 71 5 is_stmt 1 view .LVU18
-  74              		.loc 1 71 8 is_stmt 0 view .LVU19
-  75 000e 12F00102 		ands	r2, r2, #1
-  76 0012 4AD0     		beq	.L13
+  81              		.loc 1 71 25
+  82 003a 7B8C     		ldrh	r3, [r7, #34]
+  83 003c 03F00103 		and	r3, r3, #1
+  84 0040 9BB2     		uxth	r3, r3
+  85              		.loc 1 71 8
+  86 0042 002B     		cmp	r3, #0
+  87 0044 07D1     		bne	.L5
   72:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     {
   73:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****       number = number << signBits1;
+  88              		.loc 1 73 23
+  89 0046 B7F92620 		ldrsh	r2, [r7, #38]
+ARM GAS  /tmp/ccamIjIX.s 			page 23
+
+
+  90 004a B7F92230 		ldrsh	r3, [r7, #34]
+  91 004e 02FA03F3 		lsl	r3, r2, r3
+  92              		.loc 1 73 14
+  93 0052 FB84     		strh	r3, [r7, #38]	@ movhi
+  94 0054 07E0     		b	.L6
+  95              	.L5:
   74:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
   75:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     else
   76:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     {
   77:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****       number = number << (signBits1 - 1);
-  77              		.loc 1 77 7 is_stmt 1 view .LVU20
-  78              		.loc 1 77 37 is_stmt 0 view .LVU21
-  79 0014 631E     		subs	r3, r4, #1
-  80              		.loc 1 77 23 view .LVU22
-  81 0016 9840     		lsls	r0, r0, r3
-  82              		.loc 1 77 14 view .LVU23
-  83 0018 00B2     		sxth	r0, r0
-  84              	.LVL5:
-ARM GAS  /tmp/ccIIsoPe.s 			page 23
-
-
-  85              	.L4:
+  96              		.loc 1 77 23
+  97 0056 B7F92620 		ldrsh	r2, [r7, #38]
+  98              		.loc 1 77 37
+  99 005a B7F92230 		ldrsh	r3, [r7, #34]
+ 100 005e 013B     		subs	r3, r3, #1
+ 101              		.loc 1 77 23
+ 102 0060 02FA03F3 		lsl	r3, r2, r3
+ 103              		.loc 1 77 14
+ 104 0064 FB84     		strh	r3, [r7, #38]	@ movhi
+ 105              	.L6:
   78:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
   79:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
   80:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Calculate half value of the number */
   81:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     half = number >> 1;
-  86              		.loc 1 81 5 is_stmt 1 view .LVU24
+ 106              		.loc 1 81 10
+ 107 0066 B7F92630 		ldrsh	r3, [r7, #38]
+ 108 006a 5B10     		asrs	r3, r3, #1
+ 109 006c 3B84     		strh	r3, [r7, #32]	@ movhi
   82:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Store the number for later use */
   83:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     temp1 = number;
+ 110              		.loc 1 83 11
+ 111 006e FB8C     		ldrh	r3, [r7, #38]	@ movhi
+ 112 0070 FB83     		strh	r3, [r7, #30]	@ movhi
   84:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
   85:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Convert to float */
   86:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     temp_float1 = number * 3.051757812500000e-005f;
-  87              		.loc 1 86 17 is_stmt 0 view .LVU25
-  88 001a 07EE900A 		vmov	s15, r0	@ int
+ 113              		.loc 1 86 26
+ 114 0072 B7F92630 		ldrsh	r3, [r7, #38]
+ 115 0076 07EE903A 		vmov	s15, r3	@ int
+ 116 007a F8EEE77A 		vcvt.f32.s32	s15, s15
+ 117              		.loc 1 86 17
+ 118 007e 9FED517A 		vldr.32	s14, .L13
+ 119 0082 67EE877A 		vmul.f32	s15, s15, s14
+ 120 0086 C7ED067A 		vstr.32	s15, [r7, #24]
   87:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Store as integer */
   88:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     tempconv.floatval = temp_float1;
+ 121              		.loc 1 88 23
+ 122 008a BB69     		ldr	r3, [r7, #24]	@ float
+ 123 008c FB60     		str	r3, [r7, #12]	@ float
   89:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     bits_val1 = tempconv.fracval;
+ 124              		.loc 1 89 15
+ 125 008e FB68     		ldr	r3, [r7, #12]
+ 126 0090 7B61     		str	r3, [r7, #20]
   90:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Subtract the shifted value from the magic number to give intial guess */
   91:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     bits_val1 = 0x5f3759df - (bits_val1 >> 1);  /* gives initial guess */
-  89              		.loc 1 91 15 view .LVU26
-  90 001e 2B4B     		ldr	r3, .L14
-  81:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Store the number for later use */
-  91              		.loc 1 81 10 view .LVU27
-  92 0020 4610     		asrs	r6, r0, #1
-  93              	.LVL6:
-  83:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
-  94              		.loc 1 83 5 is_stmt 1 view .LVU28
-  86:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Store as integer */
-  95              		.loc 1 86 5 view .LVU29
-  88:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     bits_val1 = tempconv.fracval;
-  96              		.loc 1 88 5 view .LVU30
-  89:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Subtract the shifted value from the magic number to give intial guess */
-  97              		.loc 1 89 5 view .LVU31
-  98              		.loc 1 91 5 view .LVU32
-  86:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Store as integer */
-  99              		.loc 1 86 17 is_stmt 0 view .LVU33
- 100 0022 FAEEE87A 		vcvt.f32.s32	s15, s15, #15
- 101              		.loc 1 91 15 view .LVU34
- 102 0026 17EE905A 		vmov	r5, s15	@ int
- 103 002a A3EB6503 		sub	r3, r3, r5, asr #1
- 104 002e 07EE903A 		vmov	s15, r3	@ int
- 105              	.LVL7:
+ 127              		.loc 1 91 41
+ 128 0092 7B69     		ldr	r3, [r7, #20]
+ARM GAS  /tmp/ccamIjIX.s 			page 24
+
+
+ 129 0094 5A10     		asrs	r2, r3, #1
+ 130              		.loc 1 91 15
+ 131 0096 4C4B     		ldr	r3, .L13+4
+ 132 0098 9B1A     		subs	r3, r3, r2
+ 133 009a 7B61     		str	r3, [r7, #20]
   92:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Store as float */
   93:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     tempconv.fracval = bits_val1;
- 106              		.loc 1 93 5 is_stmt 1 view .LVU35
+ 134              		.loc 1 93 22
+ 135 009c 7B69     		ldr	r3, [r7, #20]
+ 136 009e FB60     		str	r3, [r7, #12]
   94:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     temp_float1 = tempconv.floatval;
- 107              		.loc 1 94 5 view .LVU36
+ 137              		.loc 1 94 17
+ 138 00a0 FB68     		ldr	r3, [r7, #12]	@ float
+ 139 00a2 BB61     		str	r3, [r7, #24]	@ float
   95:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Convert to integer format */
   96:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     var1 = (q31_t) (temp_float1 * 16384);
- 108              		.loc 1 96 5 view .LVU37
- 109              		.loc 1 96 12 is_stmt 0 view .LVU38
- 110 0032 FEEEC97A 		vcvt.s32.f32	s15, s15, #14
- 111              	.LVL8:
- 112              		.loc 1 96 10 view .LVU39
- 113 0036 17EE903A 		vmov	r3, s15	@ int
- 114              	.LVL9:
- 115              		.loc 1 96 10 view .LVU40
- 116 003a 1BB2     		sxth	r3, r3
-ARM GAS  /tmp/ccIIsoPe.s 			page 24
-
-
- 117              	.LVL10:
+ 140              		.loc 1 96 33
+ 141 00a4 D7ED067A 		vldr.32	s15, [r7, #24]
+ 142 00a8 9FED487A 		vldr.32	s14, .L13+8
+ 143 00ac 67EE877A 		vmul.f32	s15, s15, s14
+ 144              		.loc 1 96 12
+ 145 00b0 FDEEE77A 		vcvt.s32.f32	s15, s15
+ 146              		.loc 1 96 10
+ 147 00b4 17EE903A 		vmov	r3, s15	@ int
+ 148 00b8 BB84     		strh	r3, [r7, #36]	@ movhi
   97:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
   98:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* 1st iteration */
   99:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     var1 = ((q15_t) ((q31_t) var1 * (0x3000 -
- 118              		.loc 1 99 5 is_stmt 1 view .LVU41
+ 149              		.loc 1 99 22
+ 150 00ba B7F92430 		ldrsh	r3, [r7, #36]
  100:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
  101:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                       ((((q15_t)
  102:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                          (((q31_t) var1 * var1) >> 15)) *
- 119              		.loc 1 102 57 is_stmt 0 view .LVU42
- 120 003c 03FB03F5 		mul	r5, r3, r3
- 121              	.LVL11:
- 122              		.loc 1 102 65 view .LVU43
- 123 0040 ED13     		asrs	r5, r5, #15
- 124              		.loc 1 102 73 view .LVU44
- 125 0042 15FB06F5 		smulbb	r5, r5, r6
+ 151              		.loc 1 102 44
+ 152 00be B7F92420 		ldrsh	r2, [r7, #36]
+ 153              		.loc 1 102 57
+ 154 00c2 B7F92410 		ldrsh	r1, [r7, #36]
+ 155 00c6 01FB02F2 		mul	r2, r1, r2
+ 156              		.loc 1 102 65
+ 157 00ca D213     		asrs	r2, r2, #15
+ 101:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                          (((q31_t) var1 * var1) >> 15)) *
+ 158              		.loc 1 101 42
+ 159 00cc 12B2     		sxth	r2, r2
+ 160 00ce 1146     		mov	r1, r2
  103:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                         (q31_t) half) >> 15))) >> 15)) << 2;
- 126              		.loc 1 103 55 view .LVU45
- 127 0046 ED13     		asrs	r5, r5, #15
+ 161              		.loc 1 103 41
+ 162 00d0 B7F92020 		ldrsh	r2, [r7, #32]
+ 102:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                         (q31_t) half) >> 15))) >> 15)) << 2;
+ 163              		.loc 1 102 73
+ 164 00d4 02FB01F2 		mul	r2, r2, r1
+ 165              		.loc 1 103 55
+ 166 00d8 D213     		asrs	r2, r2, #15
+ 100:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                       ((((q15_t)
+ 167              		.loc 1 100 39
+ 168 00da 12B2     		sxth	r2, r2
   99:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 128              		.loc 1 99 45 view .LVU46
- 129 0048 C5F54055 		rsb	r5, r5, #12288
+ 169              		.loc 1 99 45
+ARM GAS  /tmp/ccamIjIX.s 			page 25
+
+
+ 170 00dc C2F54052 		rsb	r2, r2, #12288
   99:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 130              		.loc 1 99 35 view .LVU47
- 131 004c 03FB05F3 		mul	r3, r3, r5
- 132              	.LVL12:
- 133              		.loc 1 103 72 view .LVU48
- 134 0050 43F34F33 		sbfx	r3, r3, #13, #16
+ 171              		.loc 1 99 35
+ 172 00e0 02FB03F3 		mul	r3, r2, r3
+ 173              		.loc 1 103 64
+ 174 00e4 DB13     		asrs	r3, r3, #15
   99:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 135              		.loc 1 99 10 view .LVU49
- 136 0054 23F00303 		bic	r3, r3, #3
- 137              	.LVL13:
+ 175              		.loc 1 99 13
+ 176 00e6 1BB2     		sxth	r3, r3
+ 177              		.loc 1 103 72
+ 178 00e8 9B00     		lsls	r3, r3, #2
+  99:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
+ 179              		.loc 1 99 10
+ 180 00ea BB84     		strh	r3, [r7, #36]	@ movhi
  104:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* 2nd iteration */
  105:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     var1 = ((q15_t) ((q31_t) var1 * (0x3000 -
- 138              		.loc 1 105 5 is_stmt 1 view .LVU50
+ 181              		.loc 1 105 22
+ 182 00ec B7F92430 		ldrsh	r3, [r7, #36]
  106:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
  107:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                       ((((q15_t)
  108:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                          (((q31_t) var1 * var1) >> 15)) *
- 139              		.loc 1 108 57 is_stmt 0 view .LVU51
- 140 0058 03FB03F5 		mul	r5, r3, r3
- 141              		.loc 1 108 65 view .LVU52
- 142 005c ED13     		asrs	r5, r5, #15
- 143              		.loc 1 108 73 view .LVU53
- 144 005e 15FB06F5 		smulbb	r5, r5, r6
+ 183              		.loc 1 108 44
+ 184 00f0 B7F92420 		ldrsh	r2, [r7, #36]
+ 185              		.loc 1 108 57
+ 186 00f4 B7F92410 		ldrsh	r1, [r7, #36]
+ 187 00f8 01FB02F2 		mul	r2, r1, r2
+ 188              		.loc 1 108 65
+ 189 00fc D213     		asrs	r2, r2, #15
+ 107:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                          (((q31_t) var1 * var1) >> 15)) *
+ 190              		.loc 1 107 42
+ 191 00fe 12B2     		sxth	r2, r2
+ 192 0100 1146     		mov	r1, r2
  109:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                         (q31_t) half) >> 15))) >> 15)) << 2;
- 145              		.loc 1 109 55 view .LVU54
- 146 0062 ED13     		asrs	r5, r5, #15
+ 193              		.loc 1 109 41
+ 194 0102 B7F92020 		ldrsh	r2, [r7, #32]
+ 108:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                         (q31_t) half) >> 15))) >> 15)) << 2;
+ 195              		.loc 1 108 73
+ 196 0106 02FB01F2 		mul	r2, r2, r1
+ 197              		.loc 1 109 55
+ 198 010a D213     		asrs	r2, r2, #15
+ 106:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                       ((((q15_t)
+ 199              		.loc 1 106 39
+ 200 010c 12B2     		sxth	r2, r2
  105:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 147              		.loc 1 105 45 view .LVU55
- 148 0064 C5F54055 		rsb	r5, r5, #12288
+ 201              		.loc 1 105 45
+ 202 010e C2F54052 		rsb	r2, r2, #12288
  105:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 149              		.loc 1 105 35 view .LVU56
- 150 0068 03FB05F3 		mul	r3, r3, r5
- 151              	.LVL14:
- 152              		.loc 1 109 72 view .LVU57
- 153 006c 43F34F33 		sbfx	r3, r3, #13, #16
+ 203              		.loc 1 105 35
+ 204 0112 02FB03F3 		mul	r3, r2, r3
+ 205              		.loc 1 109 64
+ 206 0116 DB13     		asrs	r3, r3, #15
  105:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 154              		.loc 1 105 10 view .LVU58
-ARM GAS  /tmp/ccIIsoPe.s 			page 25
+ 207              		.loc 1 105 13
+ 208 0118 1BB2     		sxth	r3, r3
+ 209              		.loc 1 109 72
+ 210 011a 9B00     		lsls	r3, r3, #2
+ 105:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
+ARM GAS  /tmp/ccamIjIX.s 			page 26
 
 
- 155 0070 23F00303 		bic	r3, r3, #3
- 156              	.LVL15:
+ 211              		.loc 1 105 10
+ 212 011c BB84     		strh	r3, [r7, #36]	@ movhi
  110:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* 3rd iteration */
  111:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     var1 = ((q15_t) ((q31_t) var1 * (0x3000 -
- 157              		.loc 1 111 5 is_stmt 1 view .LVU59
+ 213              		.loc 1 111 22
+ 214 011e B7F92430 		ldrsh	r3, [r7, #36]
  112:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
  113:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                       ((((q15_t)
  114:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                          (((q31_t) var1 * var1) >> 15)) *
- 158              		.loc 1 114 57 is_stmt 0 view .LVU60
- 159 0074 03FB03F5 		mul	r5, r3, r3
- 160              		.loc 1 114 65 view .LVU61
- 161 0078 ED13     		asrs	r5, r5, #15
- 162              		.loc 1 114 73 view .LVU62
- 163 007a 15FB06F5 		smulbb	r5, r5, r6
+ 215              		.loc 1 114 44
+ 216 0122 B7F92420 		ldrsh	r2, [r7, #36]
+ 217              		.loc 1 114 57
+ 218 0126 B7F92410 		ldrsh	r1, [r7, #36]
+ 219 012a 01FB02F2 		mul	r2, r1, r2
+ 220              		.loc 1 114 65
+ 221 012e D213     		asrs	r2, r2, #15
+ 113:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                          (((q31_t) var1 * var1) >> 15)) *
+ 222              		.loc 1 113 42
+ 223 0130 12B2     		sxth	r2, r2
+ 224 0132 1146     		mov	r1, r2
  115:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                         (q31_t) half) >> 15))) >> 15)) << 2;
- 164              		.loc 1 115 55 view .LVU63
- 165 007e ED13     		asrs	r5, r5, #15
+ 225              		.loc 1 115 41
+ 226 0134 B7F92020 		ldrsh	r2, [r7, #32]
+ 114:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                         (q31_t) half) >> 15))) >> 15)) << 2;
+ 227              		.loc 1 114 73
+ 228 0138 02FB01F2 		mul	r2, r2, r1
+ 229              		.loc 1 115 55
+ 230 013c D213     		asrs	r2, r2, #15
+ 112:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                       ((((q15_t)
+ 231              		.loc 1 112 39
+ 232 013e 12B2     		sxth	r2, r2
  111:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 166              		.loc 1 111 45 view .LVU64
- 167 0080 C5F54055 		rsb	r5, r5, #12288
+ 233              		.loc 1 111 45
+ 234 0140 C2F54052 		rsb	r2, r2, #12288
  111:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
- 168              		.loc 1 111 35 view .LVU65
- 169 0084 03FB05F3 		mul	r3, r3, r5
- 170              	.LVL16:
- 171              		.loc 1 115 64 view .LVU66
- 172 0088 DB13     		asrs	r3, r3, #15
- 173              		.loc 1 115 72 view .LVU67
- 174 008a 9B00     		lsls	r3, r3, #2
- 175              	.LVL17:
+ 235              		.loc 1 111 35
+ 236 0144 02FB03F3 		mul	r3, r2, r3
+ 237              		.loc 1 115 64
+ 238 0148 DB13     		asrs	r3, r3, #15
+ 111:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
+ 239              		.loc 1 111 13
+ 240 014a 1BB2     		sxth	r3, r3
+ 241              		.loc 1 115 72
+ 242 014c 9B00     		lsls	r3, r3, #2
+ 111:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****                                      ((q15_t)
+ 243              		.loc 1 111 10
+ 244 014e BB84     		strh	r3, [r7, #36]	@ movhi
  116:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
  117:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Multiply the inverse square root with the original value */
  118:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     var1 = ((q15_t) (((q31_t) temp1 * var1) >> 15)) << 1;
- 176              		.loc 1 118 5 is_stmt 1 view .LVU68
- 177              		.loc 1 118 37 is_stmt 0 view .LVU69
- 178 008c 13FB00F3 		smulbb	r3, r3, r0
- 179              	.LVL18:
- 180              		.loc 1 118 53 view .LVU70
- 181 0090 43F38F33 		sbfx	r3, r3, #14, #16
- 182              		.loc 1 118 10 view .LVU71
- 183 0094 23F00103 		bic	r3, r3, #1
- 184              	.LVL19:
+ 245              		.loc 1 118 23
+ 246 0150 B7F91E30 		ldrsh	r3, [r7, #30]
+ 247              		.loc 1 118 37
+ 248 0154 B7F92420 		ldrsh	r2, [r7, #36]
+ 249 0158 02FB03F3 		mul	r3, r2, r3
+ 250              		.loc 1 118 45
+ 251 015c DB13     		asrs	r3, r3, #15
+ARM GAS  /tmp/ccamIjIX.s 			page 27
+
+
+ 252              		.loc 1 118 13
+ 253 015e 1BB2     		sxth	r3, r3
+ 254              		.loc 1 118 53
+ 255 0160 5B00     		lsls	r3, r3, #1
+ 256              		.loc 1 118 10
+ 257 0162 BB84     		strh	r3, [r7, #36]	@ movhi
  119:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
  120:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     /* Shift the output down accordingly */
  121:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     if ((signBits1 % 2) == 0)
- 185              		.loc 1 121 5 is_stmt 1 view .LVU72
- 186              		.loc 1 121 8 is_stmt 0 view .LVU73
- 187 0098 52B9     		cbnz	r2, .L5
+ 258              		.loc 1 121 25
+ 259 0164 7B8C     		ldrh	r3, [r7, #34]
+ 260 0166 03F00103 		and	r3, r3, #1
+ 261 016a 9BB2     		uxth	r3, r3
+ 262              		.loc 1 121 8
+ 263 016c 002B     		cmp	r3, #0
+ 264 016e 0CD1     		bne	.L7
  122:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     {
  123:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****       var1 = var1 >> (signBits1 / 2);
- 188              		.loc 1 123 7 is_stmt 1 view .LVU74
- 189              		.loc 1 123 33 is_stmt 0 view .LVU75
- 190 009a 44F34E04 		sbfx	r4, r4, #1, #15
- 191              	.LVL20:
+ 265              		.loc 1 123 19
+ 266 0170 B7F92420 		ldrsh	r2, [r7, #36]
+ 267              		.loc 1 123 33
+ 268 0174 B7F92230 		ldrsh	r3, [r7, #34]
+ 269 0178 002B     		cmp	r3, #0
+ 270 017a 00DA     		bge	.L8
+ 271 017c 0133     		adds	r3, r3, #1
+ 272              	.L8:
+ 273 017e 5B10     		asrs	r3, r3, #1
+ 274 0180 1BB2     		sxth	r3, r3
+ 275              		.loc 1 123 19
+ 276 0182 42FA03F3 		asr	r3, r2, r3
+ 277              		.loc 1 123 12
+ 278 0186 BB84     		strh	r3, [r7, #36]	@ movhi
+ 279 0188 0BE0     		b	.L9
+ 280              	.L7:
  124:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
  125:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     else
  126:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     {
  127:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****       var1 = var1 >> ((signBits1 - 1) / 2);
-ARM GAS  /tmp/ccIIsoPe.s 			page 26
-
-
+ 281              		.loc 1 127 19
+ 282 018a B7F92420 		ldrsh	r2, [r7, #36]
+ 283              		.loc 1 127 34
+ 284 018e B7F92230 		ldrsh	r3, [r7, #34]
+ 285 0192 013B     		subs	r3, r3, #1
+ 286              		.loc 1 127 39
+ 287 0194 002B     		cmp	r3, #0
+ 288 0196 00DA     		bge	.L10
+ 289 0198 0133     		adds	r3, r3, #1
+ 290              	.L10:
+ 291 019a 5B10     		asrs	r3, r3, #1
+ 292              		.loc 1 127 19
+ 293 019c 42FA03F3 		asr	r3, r2, r3
+ 294              		.loc 1 127 12
+ 295 01a0 BB84     		strh	r3, [r7, #36]	@ movhi
+ 296              	.L9:
  128:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
  129:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     *pOut = var1;
+ 297              		.loc 1 129 11
+ARM GAS  /tmp/ccamIjIX.s 			page 28
+
+
+ 298 01a2 3B68     		ldr	r3, [r7]
+ 299 01a4 BA8C     		ldrh	r2, [r7, #36]	@ movhi
+ 300 01a6 1A80     		strh	r2, [r3]	@ movhi
  130:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
  131:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     return (ARM_MATH_SUCCESS);
- 192              		.loc 1 131 12 view .LVU76
- 193 009e 0020     		movs	r0, #0
- 194              	.LVL21:
- 123:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 195              		.loc 1 123 19 view .LVU77
- 196 00a0 2341     		asrs	r3, r3, r4
- 197              	.LVL22:
- 123:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 198              		.loc 1 123 12 view .LVU78
- 199 00a2 1BB2     		sxth	r3, r3
- 200              	.LVL23:
- 129:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
- 201              		.loc 1 129 5 is_stmt 1 view .LVU79
+ 301              		.loc 1 131 12
+ 302 01a8 0023     		movs	r3, #0
+ 303 01aa 04E0     		b	.L12
+ 304              	.L2:
  132:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   }
  133:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   /* If the number is a negative number then store zero as its square root value */
  134:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   else
  135:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   {
  136:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     *pOut = 0;
+ 305              		.loc 1 136 11
+ 306 01ac 3B68     		ldr	r3, [r7]
+ 307 01ae 0022     		movs	r2, #0
+ 308 01b0 1A80     		strh	r2, [r3]	@ movhi
  137:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
  138:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     return (ARM_MATH_ARGUMENT_ERROR);
+ 309              		.loc 1 138 12
+ 310 01b2 4FF0FF33 		mov	r3, #-1
+ 311              	.L12:
  139:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   }
  140:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** }
- 202              		.loc 1 140 1 is_stmt 0 view .LVU80
- 203 00a4 70BC     		pop	{r4, r5, r6}
- 204              	.LCFI1:
- 205              		.cfi_remember_state
- 206              		.cfi_restore 6
- 207              		.cfi_restore 5
- 208              		.cfi_restore 4
- 209              		.cfi_def_cfa_offset 0
- 210              	.LVL24:
- 129:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
- 211              		.loc 1 129 11 view .LVU81
- 212 00a6 0B80     		strh	r3, [r1]	@ movhi
- 131:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   }
- 213              		.loc 1 131 5 is_stmt 1 view .LVU82
- 214              		.loc 1 140 1 is_stmt 0 view .LVU83
- 215 00a8 7047     		bx	lr
- 216              	.LVL25:
- 217              	.L13:
- 218              	.LCFI2:
- 219              		.cfi_restore_state
-  73:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 220              		.loc 1 73 7 is_stmt 1 view .LVU84
-  73:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 221              		.loc 1 73 23 is_stmt 0 view .LVU85
- 222 00aa A040     		lsls	r0, r0, r4
-  73:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 223              		.loc 1 73 14 view .LVU86
- 224 00ac 00B2     		sxth	r0, r0
- 225              	.LVL26:
-  73:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 226              		.loc 1 73 14 view .LVU87
-ARM GAS  /tmp/ccIIsoPe.s 			page 27
+ 312              		.loc 1 140 1 discriminator 1
+ 313 01b6 1846     		mov	r0, r3
+ 314 01b8 2C37     		adds	r7, r7, #44
+ 315              	.LCFI3:
+ 316              		.cfi_def_cfa_offset 4
+ 317 01ba BD46     		mov	sp, r7
+ 318              	.LCFI4:
+ 319              		.cfi_def_cfa_register 13
+ 320              		@ sp needed
+ 321 01bc 5DF8047B 		ldr	r7, [sp], #4
+ 322              	.LCFI5:
+ 323              		.cfi_restore 7
+ 324              		.cfi_def_cfa_offset 0
+ 325 01c0 7047     		bx	lr
+ 326              	.L14:
+ 327 01c2 00BF     		.align	2
+ 328              	.L13:
+ 329 01c4 00000038 		.word	939524096
+ 330 01c8 DF59375F 		.word	1597463007
+ 331 01cc 00008046 		.word	1182793728
+ 332              		.cfi_endproc
+ 333              	.LFE145:
+ 335              		.text
+ 336              	.Letext0:
+ 337              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 338              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 339              		.file 5 "/usr/include/newlib/sys/_types.h"
+ 340              		.file 6 "/usr/include/newlib/sys/reent.h"
+ 341              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 342              		.file 8 "/usr/include/newlib/math.h"
+ 343              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 344              		.file 10 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ARM GAS  /tmp/ccamIjIX.s 			page 29
 
 
- 227 00ae B4E7     		b	.L4
- 228              	.LVL27:
- 229              	.L5:
- 127:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 230              		.loc 1 127 7 is_stmt 1 view .LVU88
- 127:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 231              		.loc 1 127 34 is_stmt 0 view .LVU89
- 232 00b0 013C     		subs	r4, r4, #1
- 233              	.LVL28:
- 131:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   }
- 234              		.loc 1 131 12 view .LVU90
- 235 00b2 0020     		movs	r0, #0
- 236              	.LVL29:
- 127:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 237              		.loc 1 127 39 view .LVU91
- 238 00b4 6410     		asrs	r4, r4, #1
- 239              	.LVL30:
- 127:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 240              		.loc 1 127 19 view .LVU92
- 241 00b6 2341     		asrs	r3, r3, r4
- 242              	.LVL31:
- 127:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****     }
- 243              		.loc 1 127 12 view .LVU93
- 244 00b8 1BB2     		sxth	r3, r3
- 245              	.LVL32:
- 129:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
- 246              		.loc 1 129 5 is_stmt 1 view .LVU94
- 247              		.loc 1 140 1 is_stmt 0 view .LVU95
- 248 00ba 70BC     		pop	{r4, r5, r6}
- 249              	.LCFI3:
- 250              		.cfi_restore 6
- 251              		.cfi_restore 5
- 252              		.cfi_restore 4
- 253              		.cfi_def_cfa_offset 0
- 254              	.LVL33:
- 129:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
- 255              		.loc 1 129 11 view .LVU96
- 256 00bc 0B80     		strh	r3, [r1]	@ movhi
- 131:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   }
- 257              		.loc 1 131 5 is_stmt 1 view .LVU97
- 258              		.loc 1 140 1 is_stmt 0 view .LVU98
- 259 00be 7047     		bx	lr
- 260              	.LVL34:
- 261              	.L2:
- 136:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
- 262              		.loc 1 136 5 is_stmt 1 view .LVU99
- 136:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
- 263              		.loc 1 136 11 is_stmt 0 view .LVU100
- 264 00c0 0023     		movs	r3, #0
- 138:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   }
- 265              		.loc 1 138 12 view .LVU101
- 266 00c2 4FF0FF30 		mov	r0, #-1
- 136:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c **** 
- 267              		.loc 1 136 11 view .LVU102
- 268 00c6 0B80     		strh	r3, [r1]	@ movhi
- 138:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_sqrt_q15.c ****   }
- 269              		.loc 1 138 5 is_stmt 1 view .LVU103
-ARM GAS  /tmp/ccIIsoPe.s 			page 28
-
-
- 270              		.loc 1 140 1 is_stmt 0 view .LVU104
- 271 00c8 7047     		bx	lr
- 272              	.L15:
- 273 00ca 00BF     		.align	2
- 274              	.L14:
- 275 00cc DF59375F 		.word	1597463007
- 276              		.cfi_endproc
- 277              	.LFE145:
- 279              		.text
- 280              	.Letext0:
- 281              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 282              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 283              		.file 5 "/usr/include/newlib/sys/_types.h"
- 284              		.file 6 "/usr/include/newlib/sys/reent.h"
- 285              		.file 7 "/usr/include/newlib/sys/lock.h"
- 286              		.file 8 "/usr/include/newlib/math.h"
- 287              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 288              		.file 10 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
-ARM GAS  /tmp/ccIIsoPe.s 			page 29
+ARM GAS  /tmp/ccamIjIX.s 			page 30
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_sqrt_q15.c
-     /tmp/ccIIsoPe.s:17     .text.arm_sqrt_q15:0000000000000000 $t
-     /tmp/ccIIsoPe.s:26     .text.arm_sqrt_q15:0000000000000000 arm_sqrt_q15
-     /tmp/ccIIsoPe.s:275    .text.arm_sqrt_q15:00000000000000cc $d
+     /tmp/ccamIjIX.s:17     .text.arm_sqrt_q15:0000000000000000 $t
+     /tmp/ccamIjIX.s:25     .text.arm_sqrt_q15:0000000000000000 arm_sqrt_q15
+     /tmp/ccamIjIX.s:329    .text.arm_sqrt_q15:00000000000001c4 $d
 
 NO UNDEFINED SYMBOLS

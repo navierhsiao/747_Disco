@@ -70,6 +70,8 @@ build/uart.o: BSP/Hardware/Src/uart.c BSP/Hardware/Src/../../system.h \
  Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h \
  BSP/Hardware/Src/../../Components/Inc/lcd.h \
  BSP/Hardware/Src/../../Components/Inc/touch.h \
+ BSP/Hardware/Src/../../Components/Inc/is42s32800j.h \
+ BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
  BSP/Hardware/Src/../../Hardware/Inc/ltdc_dsi.h \
  BSP/Hardware/Src/../../Hardware/Inc/i2c.h \
  BSP/Hardware/Src/../../Hardware/Inc/qspi.h \
@@ -219,6 +221,10 @@ Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h:
 BSP/Hardware/Src/../../Components/Inc/lcd.h:
 
 BSP/Hardware/Src/../../Components/Inc/touch.h:
+
+BSP/Hardware/Src/../../Components/Inc/is42s32800j.h:
+
+BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/sdram.h:
 
 BSP/Hardware/Src/../../Hardware/Inc/ltdc_dsi.h:
 

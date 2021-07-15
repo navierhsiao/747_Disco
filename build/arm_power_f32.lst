@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccRvOkC3.s 			page 1
+ARM GAS  /tmp/ccpDmdSG.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccRvOkC3.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_power_f32.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccRvOkC3.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_power_f32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_power_f32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_power_f32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c"
+  18              		.global	arm_power_f32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_power_f32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c"
    1:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****  * Title:        arm_power_f32.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccRvOkC3.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****  */
   28:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
   29:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccRvOkC3.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
   31:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** /**
+ARM GAS  /tmp/ccpDmdSG.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   @ingroup groupStats
   33:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****  */
   34:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
@@ -118,11 +116,11 @@ ARM GAS  /tmp/ccRvOkC3.s 			page 1
   84:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     pSrc += 4;
   85:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
   86:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     /* Decrement the loop counter */
-ARM GAS  /tmp/ccRvOkC3.s 			page 3
-
-
   87:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     blkCnt--;
   88:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   }
+ARM GAS  /tmp/ccpDmdSG.s 			page 3
+
+
   89:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   sumV2 = vpadd_f32(vget_low_f32(sumV),vget_high_f32(sumV));
   90:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   sum = sumV2[0] + sumV2[1];
   91:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
@@ -150,23 +148,39 @@ ARM GAS  /tmp/ccRvOkC3.s 			page 1
  113:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****         uint32_t blockSize,
  114:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****         float32_t * pResult)
  115:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** {
-  30              		.loc 1 115 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 115 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 89B0     		sub	sp, sp, #36
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
  116:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 116 9 view .LVU1
  117:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****         float32_t sum = 0.0f;                          /* Temporary result storage */
-  36              		.loc 1 117 9 view .LVU2
+  46              		.loc 1 117 19
+  47 000c 4FF00003 		mov	r3, #0
+  48 0010 BB61     		str	r3, [r7, #24]	@ float
  118:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****         float32_t in;                                  /* Temporary variable to store input value *
-  37              		.loc 1 118 9 view .LVU3
  119:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  120:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** #if defined (ARM_MATH_LOOPUNROLL)
  121:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  122:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   /* Loop unrolling: Compute 4 outputs at a time */
  123:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   blkCnt = blockSize >> 2U;
  124:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
+ARM GAS  /tmp/ccpDmdSG.s 			page 4
+
+
  125:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   while (blkCnt > 0U)
  126:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   {
  127:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     /* C = A[0] * A[0] + A[1] * A[1] + ... + A[blockSize-1] * A[blockSize-1] */
@@ -178,9 +192,6 @@ ARM GAS  /tmp/ccRvOkC3.s 			page 1
  133:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     in = *pSrc++;
  134:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     sum += in * in;
  135:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
-ARM GAS  /tmp/ccRvOkC3.s 			page 4
-
-
  136:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     in = *pSrc++;
  137:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     sum += in * in;
  138:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
@@ -198,82 +209,92 @@ ARM GAS  /tmp/ccRvOkC3.s 			page 1
  150:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  151:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   /* Initialize blkCnt with number of samples */
  152:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   blkCnt = blockSize;
-  38              		.loc 1 152 3 view .LVU4
+  49              		.loc 1 152 10
+  50 0012 BB68     		ldr	r3, [r7, #8]
+  51 0014 FB61     		str	r3, [r7, #28]
  153:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  154:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  155:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  156:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   while (blkCnt > 0U)
-  39              		.loc 1 156 3 view .LVU5
-  40              		.loc 1 156 9 view .LVU6
- 117:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****         float32_t in;                                  /* Temporary variable to store input value *
-  41              		.loc 1 117 19 is_stmt 0 view .LVU7
-  42 0000 9FED057A 		vldr.32	s14, .L7
-  43              		.loc 1 156 9 view .LVU8
-  44 0004 29B1     		cbz	r1, .L2
-  45              	.LVL1:
-  46              	.L3:
+  52              		.loc 1 156 9
+  53 0016 11E0     		b	.L2
+  54              	.L3:
  157:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   {
  158:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     /* C = A[0] * A[0] + A[1] * A[1] + ... + A[blockSize-1] * A[blockSize-1] */
  159:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  160:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     /* Compute Power and store result in a temporary variable, sum. */
  161:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     in = *pSrc++;
-  47              		.loc 1 161 5 is_stmt 1 view .LVU9
-  48              		.loc 1 161 8 is_stmt 0 view .LVU10
-  49 0006 F0EC017A 		vldmia.32	r0!, {s15}
-  50              	.LVL2:
+  55              		.loc 1 161 15
+  56 0018 FB68     		ldr	r3, [r7, #12]
+  57 001a 1A1D     		adds	r2, r3, #4
+  58 001c FA60     		str	r2, [r7, #12]
+  59              		.loc 1 161 8
+  60 001e 1B68     		ldr	r3, [r3]	@ float
+  61 0020 7B61     		str	r3, [r7, #20]	@ float
  162:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     sum += in * in;
-  51              		.loc 1 162 5 is_stmt 1 view .LVU11
- 156:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   {
-  52              		.loc 1 156 9 is_stmt 0 view .LVU12
-  53 000a 0139     		subs	r1, r1, #1
-  54              	.LVL3:
-  55              		.loc 1 162 9 view .LVU13
-  56 000c A7EEA77A 		vfma.f32	s14, s15, s15
-  57              	.LVL4:
+  62              		.loc 1 162 15
+  63 0022 D7ED057A 		vldr.32	s15, [r7, #20]
+  64 0026 67EEA77A 		vmul.f32	s15, s15, s15
+  65              		.loc 1 162 9
+  66 002a 97ED067A 		vldr.32	s14, [r7, #24]
+  67 002e 77EE277A 		vadd.f32	s15, s14, s15
+ARM GAS  /tmp/ccpDmdSG.s 			page 5
+
+
+  68 0032 C7ED067A 		vstr.32	s15, [r7, #24]
  163:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  164:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     /* Decrement loop counter */
  165:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****     blkCnt--;
-  58              		.loc 1 165 5 is_stmt 1 view .LVU14
+  69              		.loc 1 165 11
+  70 0036 FB69     		ldr	r3, [r7, #28]
+  71 0038 013B     		subs	r3, r3, #1
+  72 003a FB61     		str	r3, [r7, #28]
+  73              	.L2:
  156:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   {
-  59              		.loc 1 156 9 view .LVU15
-  60 0010 F9D1     		bne	.L3
-  61              	.LVL5:
-ARM GAS  /tmp/ccRvOkC3.s 			page 5
-
-
-  62              	.L2:
+  74              		.loc 1 156 9
+  75 003c FB69     		ldr	r3, [r7, #28]
+  76 003e 002B     		cmp	r3, #0
+  77 0040 EAD1     		bne	.L3
  166:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   }
  167:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** 
  168:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   /* Store result to destination */
  169:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c ****   *pResult = sum;
-  63              		.loc 1 169 3 view .LVU16
-  64              		.loc 1 169 12 is_stmt 0 view .LVU17
-  65 0012 82ED007A 		vstr.32	s14, [r2]
+  78              		.loc 1 169 12
+  79 0042 7B68     		ldr	r3, [r7, #4]
+  80 0044 BA69     		ldr	r2, [r7, #24]	@ float
+  81 0046 1A60     		str	r2, [r3]	@ float
  170:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_power_f32.c **** }
-  66              		.loc 1 170 1 view .LVU18
-  67 0016 7047     		bx	lr
-  68              	.L8:
-  69              		.align	2
-  70              	.L7:
-  71 0018 00000000 		.word	0
-  72              		.cfi_endproc
-  73              	.LFE145:
-  75              		.text
-  76              	.Letext0:
-  77              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  78              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  79              		.file 4 "/usr/include/newlib/sys/_types.h"
-  80              		.file 5 "/usr/include/newlib/sys/reent.h"
-  81              		.file 6 "/usr/include/newlib/sys/lock.h"
-  82              		.file 7 "/usr/include/newlib/math.h"
-  83              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccRvOkC3.s 			page 6
+  82              		.loc 1 170 1
+  83 0048 00BF     		nop
+  84 004a 2437     		adds	r7, r7, #36
+  85              	.LCFI3:
+  86              		.cfi_def_cfa_offset 4
+  87 004c BD46     		mov	sp, r7
+  88              	.LCFI4:
+  89              		.cfi_def_cfa_register 13
+  90              		@ sp needed
+  91 004e 5DF8047B 		ldr	r7, [sp], #4
+  92              	.LCFI5:
+  93              		.cfi_restore 7
+  94              		.cfi_def_cfa_offset 0
+  95 0052 7047     		bx	lr
+  96              		.cfi_endproc
+  97              	.LFE145:
+  99              		.text
+ 100              	.Letext0:
+ 101              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 102              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 103              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 104              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 105              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 106              		.file 7 "/usr/include/newlib/math.h"
+ 107              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccpDmdSG.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_power_f32.c
-     /tmp/ccRvOkC3.s:17     .text.arm_power_f32:0000000000000000 $t
-     /tmp/ccRvOkC3.s:26     .text.arm_power_f32:0000000000000000 arm_power_f32
-     /tmp/ccRvOkC3.s:71     .text.arm_power_f32:0000000000000018 $d
+     /tmp/ccpDmdSG.s:17     .text.arm_power_f32:0000000000000000 $t
+     /tmp/ccpDmdSG.s:25     .text.arm_power_f32:0000000000000000 arm_power_f32
 
 NO UNDEFINED SYMBOLS

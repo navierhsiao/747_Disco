@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccEau4jJ.s 			page 1
+ARM GAS  /tmp/ccnORU6H.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"diskio.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.disk_status,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	disk_status
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	disk_status:
-  27              	.LVL0:
-  28              	.LFB335:
-  29              		.file 1 "./Libraries/FatFs/Src/diskio.c"
+  18              		.global	disk_status
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	disk_status:
+  26              	.LFB335:
+  27              		.file 1 "./Libraries/FatFs/Src/diskio.c"
    1:./Libraries/FatFs/Src/diskio.c **** /*-----------------------------------------------------------------------*/
    2:./Libraries/FatFs/Src/diskio.c **** /* Low level disk I/O module skeleton for FatFs     (C)ChaN, 2017        */
    3:./Libraries/FatFs/Src/diskio.c **** /*                                                                       */
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
   27:./Libraries/FatFs/Src/diskio.c **** 
   28:./Libraries/FatFs/Src/diskio.c **** /* Private function prototypes -----------------------------------------------*/
   29:./Libraries/FatFs/Src/diskio.c **** /* Private functions ---------------------------------------------------------*/
-ARM GAS  /tmp/ccEau4jJ.s 			page 2
-
-
   30:./Libraries/FatFs/Src/diskio.c **** 
   31:./Libraries/FatFs/Src/diskio.c **** /**
+ARM GAS  /tmp/ccnORU6H.s 			page 2
+
+
   32:./Libraries/FatFs/Src/diskio.c ****   * @brief  Gets Disk Status
   33:./Libraries/FatFs/Src/diskio.c ****   * @param  pdrv: Physical drive number (0..)
   34:./Libraries/FatFs/Src/diskio.c ****   * @retval DSTATUS: Operation status
@@ -71,145 +69,180 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
   37:./Libraries/FatFs/Src/diskio.c **** 	BYTE pdrv		/* Physical drive number to identify the drive */
   38:./Libraries/FatFs/Src/diskio.c **** )
   39:./Libraries/FatFs/Src/diskio.c **** {
-  30              		.loc 1 39 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 39 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 16
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 84B0     		sub	sp, sp, #16
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 24
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 0346     		mov	r3, r0
+  44 0008 FB71     		strb	r3, [r7, #7]
   40:./Libraries/FatFs/Src/diskio.c ****   DSTATUS stat;
-  35              		.loc 1 40 3 view .LVU1
   41:./Libraries/FatFs/Src/diskio.c **** 
   42:./Libraries/FatFs/Src/diskio.c ****   stat = disk.drv[pdrv]->disk_status(disk.lun[pdrv]);
-  36              		.loc 1 42 3 view .LVU2
-  37              		.loc 1 42 10 is_stmt 0 view .LVU3
-  38 0000 034B     		ldr	r3, .L3
-  39              		.loc 1 42 18 view .LVU4
-  40 0002 03EB8002 		add	r2, r3, r0, lsl #2
-  41              		.loc 1 42 10 view .LVU5
-  42 0006 1844     		add	r0, r0, r3
-  43              	.LVL1:
-  44              		.loc 1 42 24 view .LVU6
-  45 0008 5368     		ldr	r3, [r2, #4]
-  46              		.loc 1 42 10 view .LVU7
-  47 000a 007A     		ldrb	r0, [r0, #8]	@ zero_extendqisi2
-  48 000c 5B68     		ldr	r3, [r3, #4]
-  49 000e 1847     		bx	r3
-  50              	.LVL2:
-  51              	.L4:
-  52              		.align	2
-  53              	.L3:
-  54 0010 00000000 		.word	disk
-  55              		.cfi_endproc
-  56              	.LFE335:
-  58              		.section	.text.disk_initialize,"ax",%progbits
-  59              		.align	1
-  60              		.p2align 2,,3
-  61              		.global	disk_initialize
-  62              		.syntax unified
-  63              		.thumb
-  64              		.thumb_func
-  65              		.fpu fpv5-d16
-  67              	disk_initialize:
-  68              	.LVL3:
-  69              	.LFB336:
+  45              		.loc 1 42 18
+  46 000a FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  47 000c 084A     		ldr	r2, .L3
+  48 000e 9B00     		lsls	r3, r3, #2
+  49 0010 1344     		add	r3, r3, r2
+  50 0012 5B68     		ldr	r3, [r3, #4]
+  51              		.loc 1 42 24
+  52 0014 5B68     		ldr	r3, [r3, #4]
+  53              		.loc 1 42 10
+  54 0016 FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+  55 0018 0549     		ldr	r1, .L3
+  56 001a 0A44     		add	r2, r2, r1
+  57 001c 127A     		ldrb	r2, [r2, #8]	@ zero_extendqisi2
+  58 001e 1046     		mov	r0, r2
+  59 0020 9847     		blx	r3
+  60              	.LVL0:
+  61 0022 0346     		mov	r3, r0
+  62 0024 FB73     		strb	r3, [r7, #15]
   43:./Libraries/FatFs/Src/diskio.c ****   return stat;
+  63              		.loc 1 43 10
+  64 0026 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
   44:./Libraries/FatFs/Src/diskio.c **** }
+  65              		.loc 1 44 1
+  66 0028 1846     		mov	r0, r3
+  67 002a 1037     		adds	r7, r7, #16
+  68              	.LCFI3:
+  69              		.cfi_def_cfa_offset 8
+  70 002c BD46     		mov	sp, r7
+  71              	.LCFI4:
+ARM GAS  /tmp/ccnORU6H.s 			page 3
+
+
+  72              		.cfi_def_cfa_register 13
+  73              		@ sp needed
+  74 002e 80BD     		pop	{r7, pc}
+  75              	.L4:
+  76              		.align	2
+  77              	.L3:
+  78 0030 00000000 		.word	disk
+  79              		.cfi_endproc
+  80              	.LFE335:
+  82              		.section	.text.disk_initialize,"ax",%progbits
+  83              		.align	1
+  84              		.global	disk_initialize
+  85              		.syntax unified
+  86              		.thumb
+  87              		.thumb_func
+  88              		.fpu fpv5-d16
+  90              	disk_initialize:
+  91              	.LFB336:
   45:./Libraries/FatFs/Src/diskio.c **** 
   46:./Libraries/FatFs/Src/diskio.c **** /**
   47:./Libraries/FatFs/Src/diskio.c ****   * @brief  Initializes a Drive
   48:./Libraries/FatFs/Src/diskio.c ****   * @param  pdrv: Physical drive number (0..)
-ARM GAS  /tmp/ccEau4jJ.s 			page 3
-
-
   49:./Libraries/FatFs/Src/diskio.c ****   * @retval DSTATUS: Operation status
   50:./Libraries/FatFs/Src/diskio.c ****   */
   51:./Libraries/FatFs/Src/diskio.c **** DSTATUS disk_initialize (
   52:./Libraries/FatFs/Src/diskio.c **** 	BYTE pdrv				/* Physical drive nmuber to identify the drive */
   53:./Libraries/FatFs/Src/diskio.c **** )
   54:./Libraries/FatFs/Src/diskio.c **** {
-  70              		.loc 1 54 1 is_stmt 1 view -0
-  71              		.cfi_startproc
-  72              		@ args = 0, pretend = 0, frame = 0
-  73              		@ frame_needed = 0, uses_anonymous_args = 0
-  74              		@ link register save eliminated.
+  92              		.loc 1 54 1
+  93              		.cfi_startproc
+  94              		@ args = 0, pretend = 0, frame = 16
+  95              		@ frame_needed = 1, uses_anonymous_args = 0
+  96 0000 80B5     		push	{r7, lr}
+  97              	.LCFI5:
+  98              		.cfi_def_cfa_offset 8
+  99              		.cfi_offset 7, -8
+ 100              		.cfi_offset 14, -4
+ 101 0002 84B0     		sub	sp, sp, #16
+ 102              	.LCFI6:
+ 103              		.cfi_def_cfa_offset 24
+ 104 0004 00AF     		add	r7, sp, #0
+ 105              	.LCFI7:
+ 106              		.cfi_def_cfa_register 7
+ 107 0006 0346     		mov	r3, r0
+ 108 0008 FB71     		strb	r3, [r7, #7]
   55:./Libraries/FatFs/Src/diskio.c ****   DSTATUS stat = RES_OK;
-  75              		.loc 1 55 3 view .LVU9
+ 109              		.loc 1 55 11
+ 110 000a 0023     		movs	r3, #0
+ 111 000c FB73     		strb	r3, [r7, #15]
   56:./Libraries/FatFs/Src/diskio.c **** 
   57:./Libraries/FatFs/Src/diskio.c ****   if(disk.is_initialized[pdrv] == 0)
-  76              		.loc 1 57 3 view .LVU10
-  77              		.loc 1 57 25 is_stmt 0 view .LVU11
-  78 0000 084B     		ldr	r3, .L10
-  79              		.loc 1 57 5 view .LVU12
-  80 0002 1A5C     		ldrb	r2, [r3, r0]	@ zero_extendqisi2
-  81 0004 5AB9     		cbnz	r2, .L6
+ 112              		.loc 1 57 25
+ 113 000e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 114 0010 0D4A     		ldr	r2, .L8
+ 115 0012 D35C     		ldrb	r3, [r2, r3]	@ zero_extendqisi2
+ 116              		.loc 1 57 5
+ 117 0014 002B     		cmp	r3, #0
+ARM GAS  /tmp/ccnORU6H.s 			page 4
+
+
+ 118 0016 11D1     		bne	.L6
   58:./Libraries/FatFs/Src/diskio.c ****   {
   59:./Libraries/FatFs/Src/diskio.c ****     disk.is_initialized[pdrv] = 1;
-  82              		.loc 1 59 5 is_stmt 1 view .LVU13
+ 119              		.loc 1 59 24
+ 120 0018 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 121              		.loc 1 59 31
+ 122 001a 0B4A     		ldr	r2, .L8
+ 123 001c 0121     		movs	r1, #1
+ 124 001e D154     		strb	r1, [r2, r3]
   60:./Libraries/FatFs/Src/diskio.c ****     stat = disk.drv[pdrv]->disk_initialize(disk.lun[pdrv]);
-  83              		.loc 1 60 20 is_stmt 0 view .LVU14
-  84 0006 03EB8002 		add	r2, r3, r0, lsl #2
-  85              		.loc 1 60 12 view .LVU15
-  86 000a 1918     		adds	r1, r3, r0
-  54:./Libraries/FatFs/Src/diskio.c ****   DSTATUS stat = RES_OK;
-  87              		.loc 1 54 1 view .LVU16
-  88 000c 10B4     		push	{r4}
-  89              	.LCFI0:
-  90              		.cfi_def_cfa_offset 4
-  91              		.cfi_offset 4, -4
-  59:./Libraries/FatFs/Src/diskio.c ****     stat = disk.drv[pdrv]->disk_initialize(disk.lun[pdrv]);
-  92              		.loc 1 59 31 view .LVU17
-  93 000e 0124     		movs	r4, #1
-  94              		.loc 1 60 26 view .LVU18
-  95 0010 5268     		ldr	r2, [r2, #4]
-  59:./Libraries/FatFs/Src/diskio.c ****     stat = disk.drv[pdrv]->disk_initialize(disk.lun[pdrv]);
-  96              		.loc 1 59 31 view .LVU19
-  97 0012 1C54     		strb	r4, [r3, r0]
-  98              		.loc 1 60 5 is_stmt 1 view .LVU20
+ 125              		.loc 1 60 20
+ 126 0020 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 127 0022 094A     		ldr	r2, .L8
+ 128 0024 9B00     		lsls	r3, r3, #2
+ 129 0026 1344     		add	r3, r3, r2
+ 130 0028 5B68     		ldr	r3, [r3, #4]
+ 131              		.loc 1 60 26
+ 132 002a 1B68     		ldr	r3, [r3]
+ 133              		.loc 1 60 12
+ 134 002c FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 135 002e 0649     		ldr	r1, .L8
+ 136 0030 0A44     		add	r2, r2, r1
+ 137 0032 127A     		ldrb	r2, [r2, #8]	@ zero_extendqisi2
+ 138 0034 1046     		mov	r0, r2
+ 139 0036 9847     		blx	r3
+ 140              	.LVL1:
+ 141 0038 0346     		mov	r3, r0
+ 142 003a FB73     		strb	r3, [r7, #15]
+ 143              	.L6:
   61:./Libraries/FatFs/Src/diskio.c ****   }
   62:./Libraries/FatFs/Src/diskio.c ****   return stat;
+ 144              		.loc 1 62 10
+ 145 003c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
   63:./Libraries/FatFs/Src/diskio.c **** }
-  99              		.loc 1 63 1 is_stmt 0 view .LVU21
- 100 0014 5DF8044B 		ldr	r4, [sp], #4
- 101              	.LCFI1:
- 102              		.cfi_restore 4
- 103              		.cfi_def_cfa_offset 0
-  60:./Libraries/FatFs/Src/diskio.c ****   }
- 104              		.loc 1 60 12 view .LVU22
- 105 0018 087A     		ldrb	r0, [r1, #8]	@ zero_extendqisi2
- 106              	.LVL4:
-  60:./Libraries/FatFs/Src/diskio.c ****   }
-ARM GAS  /tmp/ccEau4jJ.s 			page 4
+ 146              		.loc 1 63 1
+ 147 003e 1846     		mov	r0, r3
+ 148 0040 1037     		adds	r7, r7, #16
+ 149              	.LCFI8:
+ 150              		.cfi_def_cfa_offset 8
+ 151 0042 BD46     		mov	sp, r7
+ 152              	.LCFI9:
+ 153              		.cfi_def_cfa_register 13
+ 154              		@ sp needed
+ 155 0044 80BD     		pop	{r7, pc}
+ 156              	.L9:
+ 157 0046 00BF     		.align	2
+ 158              	.L8:
+ 159 0048 00000000 		.word	disk
+ 160              		.cfi_endproc
+ 161              	.LFE336:
+ 163              		.section	.text.disk_read,"ax",%progbits
+ 164              		.align	1
+ 165              		.global	disk_read
+ 166              		.syntax unified
+ 167              		.thumb
+ 168              		.thumb_func
+ 169              		.fpu fpv5-d16
+ARM GAS  /tmp/ccnORU6H.s 			page 5
 
 
- 107              		.loc 1 60 12 view .LVU23
- 108 001a 1368     		ldr	r3, [r2]
- 109 001c 1847     		bx	r3
- 110              	.LVL5:
- 111              	.L6:
-  62:./Libraries/FatFs/Src/diskio.c **** }
- 112              		.loc 1 62 3 is_stmt 1 view .LVU24
- 113              		.loc 1 63 1 is_stmt 0 view .LVU25
- 114 001e 0020     		movs	r0, #0
- 115              	.LVL6:
- 116              		.loc 1 63 1 view .LVU26
- 117 0020 7047     		bx	lr
- 118              	.L11:
- 119 0022 00BF     		.align	2
- 120              	.L10:
- 121 0024 00000000 		.word	disk
- 122              		.cfi_endproc
- 123              	.LFE336:
- 125              		.section	.text.disk_read,"ax",%progbits
- 126              		.align	1
- 127              		.p2align 2,,3
- 128              		.global	disk_read
- 129              		.syntax unified
- 130              		.thumb
- 131              		.thumb_func
- 132              		.fpu fpv5-d16
- 134              	disk_read:
- 135              	.LVL7:
- 136              	.LFB337:
+ 171              	disk_read:
+ 172              	.LFB337:
   64:./Libraries/FatFs/Src/diskio.c **** 
   65:./Libraries/FatFs/Src/diskio.c **** /**
   66:./Libraries/FatFs/Src/diskio.c ****   * @brief  Reads Sector(s)
@@ -226,70 +259,82 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
   77:./Libraries/FatFs/Src/diskio.c **** 	UINT count		/* Number of sectors to read */
   78:./Libraries/FatFs/Src/diskio.c **** )
   79:./Libraries/FatFs/Src/diskio.c **** {
- 137              		.loc 1 79 1 is_stmt 1 view -0
- 138              		.cfi_startproc
- 139              		@ args = 0, pretend = 0, frame = 0
- 140              		@ frame_needed = 0, uses_anonymous_args = 0
- 141              		@ link register save eliminated.
+ 173              		.loc 1 79 1
+ 174              		.cfi_startproc
+ 175              		@ args = 0, pretend = 0, frame = 24
+ 176              		@ frame_needed = 1, uses_anonymous_args = 0
+ 177 0000 90B5     		push	{r4, r7, lr}
+ 178              	.LCFI10:
+ 179              		.cfi_def_cfa_offset 12
+ 180              		.cfi_offset 4, -12
+ 181              		.cfi_offset 7, -8
+ 182              		.cfi_offset 14, -4
+ 183 0002 87B0     		sub	sp, sp, #28
+ 184              	.LCFI11:
+ 185              		.cfi_def_cfa_offset 40
+ 186 0004 00AF     		add	r7, sp, #0
+ 187              	.LCFI12:
+ 188              		.cfi_def_cfa_register 7
+ 189 0006 B960     		str	r1, [r7, #8]
+ 190 0008 7A60     		str	r2, [r7, #4]
+ 191 000a 3B60     		str	r3, [r7]
+ 192 000c 0346     		mov	r3, r0
+ 193 000e FB73     		strb	r3, [r7, #15]
   80:./Libraries/FatFs/Src/diskio.c ****   DRESULT res;
- 142              		.loc 1 80 3 view .LVU28
   81:./Libraries/FatFs/Src/diskio.c **** 
   82:./Libraries/FatFs/Src/diskio.c ****   res = disk.drv[pdrv]->disk_read(disk.lun[pdrv], buff, sector, count);
- 143              		.loc 1 82 3 view .LVU29
-  79:./Libraries/FatFs/Src/diskio.c ****   DRESULT res;
- 144              		.loc 1 79 1 is_stmt 0 view .LVU30
-ARM GAS  /tmp/ccEau4jJ.s 			page 5
+ 194              		.loc 1 82 17
+ 195 0010 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 196 0012 0A4A     		ldr	r2, .L12
+ 197 0014 9B00     		lsls	r3, r3, #2
+ 198 0016 1344     		add	r3, r3, r2
+ 199 0018 5B68     		ldr	r3, [r3, #4]
+ 200              		.loc 1 82 23
+ 201 001a 9C68     		ldr	r4, [r3, #8]
+ 202              		.loc 1 82 9
+ 203 001c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 204 001e 074A     		ldr	r2, .L12
+ 205 0020 1344     		add	r3, r3, r2
+ 206 0022 187A     		ldrb	r0, [r3, #8]	@ zero_extendqisi2
+ 207 0024 3B68     		ldr	r3, [r7]
+ 208 0026 7A68     		ldr	r2, [r7, #4]
+ARM GAS  /tmp/ccnORU6H.s 			page 6
 
 
- 145 0000 30B4     		push	{r4, r5}
- 146              	.LCFI2:
- 147              		.cfi_def_cfa_offset 8
- 148              		.cfi_offset 4, -8
- 149              		.cfi_offset 5, -4
- 150              		.loc 1 82 9 view .LVU31
- 151 0002 054C     		ldr	r4, .L14
- 152              		.loc 1 82 17 view .LVU32
- 153 0004 04EB8005 		add	r5, r4, r0, lsl #2
- 154              		.loc 1 82 9 view .LVU33
- 155 0008 2044     		add	r0, r0, r4
- 156              	.LVL8:
- 157              		.loc 1 82 23 view .LVU34
- 158 000a 6C68     		ldr	r4, [r5, #4]
- 159              		.loc 1 82 9 view .LVU35
- 160 000c 007A     		ldrb	r0, [r0, #8]	@ zero_extendqisi2
- 161 000e A468     		ldr	r4, [r4, #8]
- 162 0010 A446     		mov	ip, r4
+ 209 0028 B968     		ldr	r1, [r7, #8]
+ 210 002a A047     		blx	r4
+ 211              	.LVL2:
+ 212 002c 0346     		mov	r3, r0
+ 213 002e FB75     		strb	r3, [r7, #23]
   83:./Libraries/FatFs/Src/diskio.c ****   return res;
+ 214              		.loc 1 83 10
+ 215 0030 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
   84:./Libraries/FatFs/Src/diskio.c **** }
- 163              		.loc 1 84 1 view .LVU36
- 164 0012 30BC     		pop	{r4, r5}
- 165              	.LCFI3:
- 166              		.cfi_restore 5
- 167              		.cfi_restore 4
- 168              		.cfi_def_cfa_offset 0
-  82:./Libraries/FatFs/Src/diskio.c ****   return res;
- 169              		.loc 1 82 9 view .LVU37
- 170 0014 6047     		bx	ip
- 171              	.LVL9:
- 172              	.L15:
-  82:./Libraries/FatFs/Src/diskio.c ****   return res;
- 173              		.loc 1 82 9 view .LVU38
- 174 0016 00BF     		.align	2
- 175              	.L14:
- 176 0018 00000000 		.word	disk
- 177              		.cfi_endproc
- 178              	.LFE337:
- 180              		.section	.text.disk_write,"ax",%progbits
- 181              		.align	1
- 182              		.p2align 2,,3
- 183              		.global	disk_write
- 184              		.syntax unified
- 185              		.thumb
- 186              		.thumb_func
- 187              		.fpu fpv5-d16
- 189              	disk_write:
- 190              	.LVL10:
- 191              	.LFB338:
+ 216              		.loc 1 84 1
+ 217 0032 1846     		mov	r0, r3
+ 218 0034 1C37     		adds	r7, r7, #28
+ 219              	.LCFI13:
+ 220              		.cfi_def_cfa_offset 12
+ 221 0036 BD46     		mov	sp, r7
+ 222              	.LCFI14:
+ 223              		.cfi_def_cfa_register 13
+ 224              		@ sp needed
+ 225 0038 90BD     		pop	{r4, r7, pc}
+ 226              	.L13:
+ 227 003a 00BF     		.align	2
+ 228              	.L12:
+ 229 003c 00000000 		.word	disk
+ 230              		.cfi_endproc
+ 231              	.LFE337:
+ 233              		.section	.text.disk_write,"ax",%progbits
+ 234              		.align	1
+ 235              		.global	disk_write
+ 236              		.syntax unified
+ 237              		.thumb
+ 238              		.thumb_func
+ 239              		.fpu fpv5-d16
+ 241              	disk_write:
+ 242              	.LFB338:
   85:./Libraries/FatFs/Src/diskio.c **** 
   86:./Libraries/FatFs/Src/diskio.c **** /**
   87:./Libraries/FatFs/Src/diskio.c ****   * @brief  Writes Sector(s)
@@ -298,9 +343,6 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
   90:./Libraries/FatFs/Src/diskio.c ****   * @param  sector: Sector address (LBA)
   91:./Libraries/FatFs/Src/diskio.c ****   * @param  count: Number of sectors to write (1..128)
   92:./Libraries/FatFs/Src/diskio.c ****   * @retval DRESULT: Operation result
-ARM GAS  /tmp/ccEau4jJ.s 			page 6
-
-
   93:./Libraries/FatFs/Src/diskio.c ****   */
   94:./Libraries/FatFs/Src/diskio.c **** #if _USE_WRITE == 1
   95:./Libraries/FatFs/Src/diskio.c **** DRESULT disk_write (
@@ -310,70 +352,85 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
   99:./Libraries/FatFs/Src/diskio.c **** 	UINT count        	/* Number of sectors to write */
  100:./Libraries/FatFs/Src/diskio.c **** )
  101:./Libraries/FatFs/Src/diskio.c **** {
- 192              		.loc 1 101 1 is_stmt 1 view -0
- 193              		.cfi_startproc
- 194              		@ args = 0, pretend = 0, frame = 0
- 195              		@ frame_needed = 0, uses_anonymous_args = 0
- 196              		@ link register save eliminated.
+ 243              		.loc 1 101 1
+ 244              		.cfi_startproc
+ 245              		@ args = 0, pretend = 0, frame = 24
+ 246              		@ frame_needed = 1, uses_anonymous_args = 0
+ 247 0000 90B5     		push	{r4, r7, lr}
+ 248              	.LCFI15:
+ARM GAS  /tmp/ccnORU6H.s 			page 7
+
+
+ 249              		.cfi_def_cfa_offset 12
+ 250              		.cfi_offset 4, -12
+ 251              		.cfi_offset 7, -8
+ 252              		.cfi_offset 14, -4
+ 253 0002 87B0     		sub	sp, sp, #28
+ 254              	.LCFI16:
+ 255              		.cfi_def_cfa_offset 40
+ 256 0004 00AF     		add	r7, sp, #0
+ 257              	.LCFI17:
+ 258              		.cfi_def_cfa_register 7
+ 259 0006 B960     		str	r1, [r7, #8]
+ 260 0008 7A60     		str	r2, [r7, #4]
+ 261 000a 3B60     		str	r3, [r7]
+ 262 000c 0346     		mov	r3, r0
+ 263 000e FB73     		strb	r3, [r7, #15]
  102:./Libraries/FatFs/Src/diskio.c ****   DRESULT res;
- 197              		.loc 1 102 3 view .LVU40
  103:./Libraries/FatFs/Src/diskio.c **** 
  104:./Libraries/FatFs/Src/diskio.c ****   res = disk.drv[pdrv]->disk_write(disk.lun[pdrv], buff, sector, count);
- 198              		.loc 1 104 3 view .LVU41
- 101:./Libraries/FatFs/Src/diskio.c ****   DRESULT res;
- 199              		.loc 1 101 1 is_stmt 0 view .LVU42
- 200 0000 30B4     		push	{r4, r5}
- 201              	.LCFI4:
- 202              		.cfi_def_cfa_offset 8
- 203              		.cfi_offset 4, -8
- 204              		.cfi_offset 5, -4
- 205              		.loc 1 104 9 view .LVU43
- 206 0002 054C     		ldr	r4, .L18
- 207              		.loc 1 104 17 view .LVU44
- 208 0004 04EB8005 		add	r5, r4, r0, lsl #2
- 209              		.loc 1 104 9 view .LVU45
- 210 0008 2044     		add	r0, r0, r4
- 211              	.LVL11:
- 212              		.loc 1 104 23 view .LVU46
- 213 000a 6C68     		ldr	r4, [r5, #4]
- 214              		.loc 1 104 9 view .LVU47
- 215 000c 007A     		ldrb	r0, [r0, #8]	@ zero_extendqisi2
- 216 000e E468     		ldr	r4, [r4, #12]
- 217 0010 A446     		mov	ip, r4
+ 264              		.loc 1 104 17
+ 265 0010 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 266 0012 0A4A     		ldr	r2, .L16
+ 267 0014 9B00     		lsls	r3, r3, #2
+ 268 0016 1344     		add	r3, r3, r2
+ 269 0018 5B68     		ldr	r3, [r3, #4]
+ 270              		.loc 1 104 23
+ 271 001a DC68     		ldr	r4, [r3, #12]
+ 272              		.loc 1 104 9
+ 273 001c FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 274 001e 074A     		ldr	r2, .L16
+ 275 0020 1344     		add	r3, r3, r2
+ 276 0022 187A     		ldrb	r0, [r3, #8]	@ zero_extendqisi2
+ 277 0024 3B68     		ldr	r3, [r7]
+ 278 0026 7A68     		ldr	r2, [r7, #4]
+ 279 0028 B968     		ldr	r1, [r7, #8]
+ 280 002a A047     		blx	r4
+ 281              	.LVL3:
+ 282 002c 0346     		mov	r3, r0
+ 283 002e FB75     		strb	r3, [r7, #23]
  105:./Libraries/FatFs/Src/diskio.c ****   return res;
+ 284              		.loc 1 105 10
+ 285 0030 FB7D     		ldrb	r3, [r7, #23]	@ zero_extendqisi2
  106:./Libraries/FatFs/Src/diskio.c **** }
- 218              		.loc 1 106 1 view .LVU48
- 219 0012 30BC     		pop	{r4, r5}
- 220              	.LCFI5:
- 221              		.cfi_restore 5
- 222              		.cfi_restore 4
- 223              		.cfi_def_cfa_offset 0
- 104:./Libraries/FatFs/Src/diskio.c ****   return res;
- 224              		.loc 1 104 9 view .LVU49
- 225 0014 6047     		bx	ip
- 226              	.LVL12:
- 227              	.L19:
- 104:./Libraries/FatFs/Src/diskio.c ****   return res;
- 228              		.loc 1 104 9 view .LVU50
- 229 0016 00BF     		.align	2
- 230              	.L18:
- 231 0018 00000000 		.word	disk
-ARM GAS  /tmp/ccEau4jJ.s 			page 7
+ 286              		.loc 1 106 1
+ 287 0032 1846     		mov	r0, r3
+ 288 0034 1C37     		adds	r7, r7, #28
+ 289              	.LCFI18:
+ 290              		.cfi_def_cfa_offset 12
+ 291 0036 BD46     		mov	sp, r7
+ 292              	.LCFI19:
+ 293              		.cfi_def_cfa_register 13
+ 294              		@ sp needed
+ 295 0038 90BD     		pop	{r4, r7, pc}
+ 296              	.L17:
+ 297 003a 00BF     		.align	2
+ 298              	.L16:
+ 299 003c 00000000 		.word	disk
+ 300              		.cfi_endproc
+ARM GAS  /tmp/ccnORU6H.s 			page 8
 
 
- 232              		.cfi_endproc
- 233              	.LFE338:
- 235              		.section	.text.disk_ioctl,"ax",%progbits
- 236              		.align	1
- 237              		.p2align 2,,3
- 238              		.global	disk_ioctl
- 239              		.syntax unified
- 240              		.thumb
- 241              		.thumb_func
- 242              		.fpu fpv5-d16
- 244              	disk_ioctl:
- 245              	.LVL13:
- 246              	.LFB339:
+ 301              	.LFE338:
+ 303              		.section	.text.disk_ioctl,"ax",%progbits
+ 304              		.align	1
+ 305              		.global	disk_ioctl
+ 306              		.syntax unified
+ 307              		.thumb
+ 308              		.thumb_func
+ 309              		.fpu fpv5-d16
+ 311              	disk_ioctl:
+ 312              	.LFB339:
  107:./Libraries/FatFs/Src/diskio.c **** #endif /* _USE_WRITE == 1 */
  108:./Libraries/FatFs/Src/diskio.c **** 
  109:./Libraries/FatFs/Src/diskio.c **** /**
@@ -390,66 +447,80 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
  120:./Libraries/FatFs/Src/diskio.c **** 	void *buff		/* Buffer to send/receive control data */
  121:./Libraries/FatFs/Src/diskio.c **** )
  122:./Libraries/FatFs/Src/diskio.c **** {
- 247              		.loc 1 122 1 is_stmt 1 view -0
- 248              		.cfi_startproc
- 249              		@ args = 0, pretend = 0, frame = 0
- 250              		@ frame_needed = 0, uses_anonymous_args = 0
- 251              		@ link register save eliminated.
+ 313              		.loc 1 122 1
+ 314              		.cfi_startproc
+ 315              		@ args = 0, pretend = 0, frame = 16
+ 316              		@ frame_needed = 1, uses_anonymous_args = 0
+ 317 0000 80B5     		push	{r7, lr}
+ 318              	.LCFI20:
+ 319              		.cfi_def_cfa_offset 8
+ 320              		.cfi_offset 7, -8
+ 321              		.cfi_offset 14, -4
+ 322 0002 84B0     		sub	sp, sp, #16
+ 323              	.LCFI21:
+ 324              		.cfi_def_cfa_offset 24
+ 325 0004 00AF     		add	r7, sp, #0
+ 326              	.LCFI22:
+ 327              		.cfi_def_cfa_register 7
+ 328 0006 0346     		mov	r3, r0
+ 329 0008 3A60     		str	r2, [r7]
+ 330 000a FB71     		strb	r3, [r7, #7]
+ 331 000c 0B46     		mov	r3, r1
+ 332 000e BB71     		strb	r3, [r7, #6]
  123:./Libraries/FatFs/Src/diskio.c ****   DRESULT res;
- 252              		.loc 1 123 3 view .LVU52
  124:./Libraries/FatFs/Src/diskio.c **** 
  125:./Libraries/FatFs/Src/diskio.c ****   res = disk.drv[pdrv]->disk_ioctl(disk.lun[pdrv], cmd, buff);
- 253              		.loc 1 125 3 view .LVU53
- 254              		.loc 1 125 9 is_stmt 0 view .LVU54
- 255 0000 054B     		ldr	r3, .L22
- 122:./Libraries/FatFs/Src/diskio.c ****   DRESULT res;
- 256              		.loc 1 122 1 view .LVU55
- 257 0002 10B4     		push	{r4}
- 258              	.LCFI6:
- 259              		.cfi_def_cfa_offset 4
- 260              		.cfi_offset 4, -4
- 261              		.loc 1 125 17 view .LVU56
- 262 0004 03EB8004 		add	r4, r3, r0, lsl #2
- 263              		.loc 1 125 9 view .LVU57
- 264 0008 1844     		add	r0, r0, r3
- 265              	.LVL14:
- 266              		.loc 1 125 23 view .LVU58
- 267 000a 6368     		ldr	r3, [r4, #4]
- 268              		.loc 1 125 9 view .LVU59
- 269 000c 007A     		ldrb	r0, [r0, #8]	@ zero_extendqisi2
- 270 000e 1B69     		ldr	r3, [r3, #16]
-ARM GAS  /tmp/ccEau4jJ.s 			page 8
+ 333              		.loc 1 125 17
+ 334 0010 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 335 0012 094A     		ldr	r2, .L20
+ 336 0014 9B00     		lsls	r3, r3, #2
+ 337 0016 1344     		add	r3, r3, r2
+ 338 0018 5B68     		ldr	r3, [r3, #4]
+ 339              		.loc 1 125 23
+ 340 001a 1B69     		ldr	r3, [r3, #16]
+ARM GAS  /tmp/ccnORU6H.s 			page 9
 
 
+ 341              		.loc 1 125 9
+ 342 001c FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 343 001e 0649     		ldr	r1, .L20
+ 344 0020 0A44     		add	r2, r2, r1
+ 345 0022 107A     		ldrb	r0, [r2, #8]	@ zero_extendqisi2
+ 346 0024 B979     		ldrb	r1, [r7, #6]	@ zero_extendqisi2
+ 347 0026 3A68     		ldr	r2, [r7]
+ 348 0028 9847     		blx	r3
+ 349              	.LVL4:
+ 350 002a 0346     		mov	r3, r0
+ 351 002c FB73     		strb	r3, [r7, #15]
  126:./Libraries/FatFs/Src/diskio.c ****   return res;
+ 352              		.loc 1 126 10
+ 353 002e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
  127:./Libraries/FatFs/Src/diskio.c **** }
- 271              		.loc 1 127 1 view .LVU60
- 272 0010 5DF8044B 		ldr	r4, [sp], #4
- 273              	.LCFI7:
- 274              		.cfi_restore 4
- 275              		.cfi_def_cfa_offset 0
- 125:./Libraries/FatFs/Src/diskio.c ****   return res;
- 276              		.loc 1 125 9 view .LVU61
- 277 0014 1847     		bx	r3
- 278              	.LVL15:
- 279              	.L23:
- 125:./Libraries/FatFs/Src/diskio.c ****   return res;
- 280              		.loc 1 125 9 view .LVU62
- 281 0016 00BF     		.align	2
- 282              	.L22:
- 283 0018 00000000 		.word	disk
- 284              		.cfi_endproc
- 285              	.LFE339:
- 287              		.section	.text.get_fattime,"ax",%progbits
- 288              		.align	1
- 289              		.p2align 2,,3
- 290              		.weak	get_fattime
- 291              		.syntax unified
- 292              		.thumb
- 293              		.thumb_func
- 294              		.fpu fpv5-d16
- 296              	get_fattime:
- 297              	.LFB340:
+ 354              		.loc 1 127 1
+ 355 0030 1846     		mov	r0, r3
+ 356 0032 1037     		adds	r7, r7, #16
+ 357              	.LCFI23:
+ 358              		.cfi_def_cfa_offset 8
+ 359 0034 BD46     		mov	sp, r7
+ 360              	.LCFI24:
+ 361              		.cfi_def_cfa_register 13
+ 362              		@ sp needed
+ 363 0036 80BD     		pop	{r7, pc}
+ 364              	.L21:
+ 365              		.align	2
+ 366              	.L20:
+ 367 0038 00000000 		.word	disk
+ 368              		.cfi_endproc
+ 369              	.LFE339:
+ 371              		.section	.text.get_fattime,"ax",%progbits
+ 372              		.align	1
+ 373              		.weak	get_fattime
+ 374              		.syntax unified
+ 375              		.thumb
+ 376              		.thumb_func
+ 377              		.fpu fpv5-d16
+ 379              	get_fattime:
+ 380              	.LFB340:
  128:./Libraries/FatFs/Src/diskio.c **** #endif /* _USE_IOCTL == 1 */
  129:./Libraries/FatFs/Src/diskio.c **** 
  130:./Libraries/FatFs/Src/diskio.c **** /**
@@ -459,61 +530,77 @@ ARM GAS  /tmp/ccEau4jJ.s 			page 1
  134:./Libraries/FatFs/Src/diskio.c ****   */
  135:./Libraries/FatFs/Src/diskio.c **** __weak DWORD get_fattime (void)
  136:./Libraries/FatFs/Src/diskio.c **** {
- 298              		.loc 1 136 1 is_stmt 1 view -0
- 299              		.cfi_startproc
- 300              		@ args = 0, pretend = 0, frame = 0
- 301              		@ frame_needed = 0, uses_anonymous_args = 0
- 302              		@ link register save eliminated.
+ 381              		.loc 1 136 1
+ 382              		.cfi_startproc
+ 383              		@ args = 0, pretend = 0, frame = 0
+ 384              		@ frame_needed = 1, uses_anonymous_args = 0
+ 385              		@ link register save eliminated.
+ 386 0000 80B4     		push	{r7}
+ 387              	.LCFI25:
+ 388              		.cfi_def_cfa_offset 4
+ARM GAS  /tmp/ccnORU6H.s 			page 10
+
+
+ 389              		.cfi_offset 7, -4
+ 390 0002 00AF     		add	r7, sp, #0
+ 391              	.LCFI26:
+ 392              		.cfi_def_cfa_register 7
  137:./Libraries/FatFs/Src/diskio.c ****   return 0;
- 303              		.loc 1 137 3 view .LVU64
+ 393              		.loc 1 137 10
+ 394 0004 0023     		movs	r3, #0
  138:./Libraries/FatFs/Src/diskio.c **** }
- 304              		.loc 1 138 1 is_stmt 0 view .LVU65
- 305 0000 0020     		movs	r0, #0
- 306 0002 7047     		bx	lr
- 307              		.cfi_endproc
- 308              	.LFE340:
- 310              		.text
- 311              	.Letext0:
- 312              		.file 2 "./Libraries/FatFs/Inc/integer.h"
- 313              		.file 3 "./Libraries/FatFs/Inc/diskio.h"
- 314              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 315              		.file 5 "./Libraries/CMSIS/Core/Include/core_cm7.h"
-ARM GAS  /tmp/ccEau4jJ.s 			page 9
-
-
- 316              		.file 6 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 317              		.file 7 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 318              		.file 8 "/usr/include/newlib/sys/_types.h"
- 319              		.file 9 "/usr/include/newlib/sys/reent.h"
- 320              		.file 10 "/usr/include/newlib/sys/lock.h"
- 321              		.file 11 "/usr/include/newlib/math.h"
- 322              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 323              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 324              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
- 325              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 326              		.file 16 "./Libraries/FatFs/Inc/ff_gen_drv.h"
-ARM GAS  /tmp/ccEau4jJ.s 			page 10
+ 395              		.loc 1 138 1
+ 396 0006 1846     		mov	r0, r3
+ 397 0008 BD46     		mov	sp, r7
+ 398              	.LCFI27:
+ 399              		.cfi_def_cfa_register 13
+ 400              		@ sp needed
+ 401 000a 5DF8047B 		ldr	r7, [sp], #4
+ 402              	.LCFI28:
+ 403              		.cfi_restore 7
+ 404              		.cfi_def_cfa_offset 0
+ 405 000e 7047     		bx	lr
+ 406              		.cfi_endproc
+ 407              	.LFE340:
+ 409              		.text
+ 410              	.Letext0:
+ 411              		.file 2 "./Libraries/FatFs/Inc/integer.h"
+ 412              		.file 3 "./Libraries/FatFs/Inc/diskio.h"
+ 413              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 414              		.file 5 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 415              		.file 6 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 416              		.file 7 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 417              		.file 8 "/usr/include/newlib/sys/_types.h"
+ 418              		.file 9 "/usr/include/newlib/sys/reent.h"
+ 419              		.file 10 "/usr/include/newlib/sys/lock.h"
+ 420              		.file 11 "/usr/include/newlib/math.h"
+ 421              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 422              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 423              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 424              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 425              		.file 16 "./Libraries/FatFs/Inc/ff_gen_drv.h"
+ARM GAS  /tmp/ccnORU6H.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 diskio.c
-     /tmp/ccEau4jJ.s:17     .text.disk_status:0000000000000000 $t
-     /tmp/ccEau4jJ.s:26     .text.disk_status:0000000000000000 disk_status
-     /tmp/ccEau4jJ.s:54     .text.disk_status:0000000000000010 $d
-     /tmp/ccEau4jJ.s:59     .text.disk_initialize:0000000000000000 $t
-     /tmp/ccEau4jJ.s:67     .text.disk_initialize:0000000000000000 disk_initialize
-     /tmp/ccEau4jJ.s:121    .text.disk_initialize:0000000000000024 $d
-     /tmp/ccEau4jJ.s:126    .text.disk_read:0000000000000000 $t
-     /tmp/ccEau4jJ.s:134    .text.disk_read:0000000000000000 disk_read
-     /tmp/ccEau4jJ.s:176    .text.disk_read:0000000000000018 $d
-     /tmp/ccEau4jJ.s:181    .text.disk_write:0000000000000000 $t
-     /tmp/ccEau4jJ.s:189    .text.disk_write:0000000000000000 disk_write
-     /tmp/ccEau4jJ.s:231    .text.disk_write:0000000000000018 $d
-     /tmp/ccEau4jJ.s:236    .text.disk_ioctl:0000000000000000 $t
-     /tmp/ccEau4jJ.s:244    .text.disk_ioctl:0000000000000000 disk_ioctl
-     /tmp/ccEau4jJ.s:283    .text.disk_ioctl:0000000000000018 $d
-     /tmp/ccEau4jJ.s:288    .text.get_fattime:0000000000000000 $t
-     /tmp/ccEau4jJ.s:296    .text.get_fattime:0000000000000000 get_fattime
+     /tmp/ccnORU6H.s:17     .text.disk_status:0000000000000000 $t
+     /tmp/ccnORU6H.s:25     .text.disk_status:0000000000000000 disk_status
+     /tmp/ccnORU6H.s:78     .text.disk_status:0000000000000030 $d
+     /tmp/ccnORU6H.s:83     .text.disk_initialize:0000000000000000 $t
+     /tmp/ccnORU6H.s:90     .text.disk_initialize:0000000000000000 disk_initialize
+     /tmp/ccnORU6H.s:159    .text.disk_initialize:0000000000000048 $d
+     /tmp/ccnORU6H.s:164    .text.disk_read:0000000000000000 $t
+     /tmp/ccnORU6H.s:171    .text.disk_read:0000000000000000 disk_read
+     /tmp/ccnORU6H.s:229    .text.disk_read:000000000000003c $d
+     /tmp/ccnORU6H.s:234    .text.disk_write:0000000000000000 $t
+     /tmp/ccnORU6H.s:241    .text.disk_write:0000000000000000 disk_write
+     /tmp/ccnORU6H.s:299    .text.disk_write:000000000000003c $d
+     /tmp/ccnORU6H.s:304    .text.disk_ioctl:0000000000000000 $t
+     /tmp/ccnORU6H.s:311    .text.disk_ioctl:0000000000000000 disk_ioctl
+     /tmp/ccnORU6H.s:367    .text.disk_ioctl:0000000000000038 $d
+     /tmp/ccnORU6H.s:372    .text.get_fattime:0000000000000000 $t
+     /tmp/ccnORU6H.s:379    .text.get_fattime:0000000000000000 get_fattime
 
 UNDEFINED SYMBOLS
 disk

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccUHo4Fe.s 			page 1
+ARM GAS  /tmp/ccPwlrLU.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccUHo4Fe.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_mean_q31.c"
@@ -19,17 +19,15 @@ ARM GAS  /tmp/ccUHo4Fe.s 			page 1
   16              		.global	__aeabi_ldivmod
   17              		.section	.text.arm_mean_q31,"ax",%progbits
   18              		.align	1
-  19              		.p2align 2,,3
-  20              		.global	arm_mean_q31
-  21              		.arch armv7e-m
-  22              		.syntax unified
-  23              		.thumb
-  24              		.thumb_func
-  25              		.fpu fpv5-d16
-  27              	arm_mean_q31:
-  28              	.LVL0:
-  29              	.LFB145:
-  30              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c"
+  19              		.global	arm_mean_q31
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv5-d16
+  26              	arm_mean_q31:
+  27              	.LFB145:
+  28              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c"
    1:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****  * Title:        arm_mean_q31.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccUHo4Fe.s 			page 1
   26:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****  * limitations under the License.
   27:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****  */
   28:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
-ARM GAS  /tmp/ccUHo4Fe.s 			page 2
-
-
   29:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** #include "arm_math.h"
   30:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
+ARM GAS  /tmp/ccPwlrLU.s 			page 2
+
+
   31:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** /**
   32:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   @ingroup groupStats
   33:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****  */
@@ -93,15 +91,36 @@ ARM GAS  /tmp/ccUHo4Fe.s 			page 1
   58:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****         uint32_t blockSize,
   59:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****         q31_t * pResult)
   60:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** {
-  31              		.loc 1 60 1 view -0
-  32              		.cfi_startproc
-  33              		@ args = 0, pretend = 0, frame = 0
-  34              		@ frame_needed = 0, uses_anonymous_args = 0
+  29              		.loc 1 60 1
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 32
+  32              		@ frame_needed = 1, uses_anonymous_args = 0
+  33 0000 B0B5     		push	{r4, r5, r7, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 7, -8
+  39              		.cfi_offset 14, -4
+  40 0002 88B0     		sub	sp, sp, #32
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 48
+  43 0004 00AF     		add	r7, sp, #0
+  44              	.LCFI2:
+  45              		.cfi_def_cfa_register 7
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 B960     		str	r1, [r7, #8]
+  48 000a 7A60     		str	r2, [r7, #4]
   61:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 61 9 view .LVU1
   62:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****         q63_t sum = 0;                                 /* Temporary result storage */
-  36              		.loc 1 62 9 view .LVU2
+  49              		.loc 1 62 15
+  50 000c 4FF00002 		mov	r2, #0
+  51 0010 4FF00003 		mov	r3, #0
+  52 0014 C7E90423 		strd	r2, [r7, #16]
   63:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
+ARM GAS  /tmp/ccPwlrLU.s 			page 3
+
+
   64:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
   65:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
   66:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   /* Loop unrolling: Compute 4 outputs at a time */
@@ -118,9 +137,6 @@ ARM GAS  /tmp/ccUHo4Fe.s 			page 1
   77:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
   78:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****     sum += *pSrc++;
   79:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
-ARM GAS  /tmp/ccUHo4Fe.s 			page 3
-
-
   80:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****     /* Decrement the loop counter */
   81:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****     blkCnt--;
   82:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   }
@@ -132,122 +148,94 @@ ARM GAS  /tmp/ccUHo4Fe.s 			page 1
   88:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
   89:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   /* Initialize blkCnt with number of samples */
   90:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   blkCnt = blockSize;
-  37              		.loc 1 90 3 view .LVU3
+  53              		.loc 1 90 10
+  54 0018 BB68     		ldr	r3, [r7, #8]
+  55 001a FB61     		str	r3, [r7, #28]
   91:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
   92:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
   93:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
   94:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   while (blkCnt > 0U)
-  38              		.loc 1 94 3 view .LVU4
-  39              		.loc 1 94 9 view .LVU5
-  60:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  40              		.loc 1 60 1 is_stmt 0 view .LVU6
-  41 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
-  42              	.LCFI0:
-  43              		.cfi_def_cfa_offset 24
-  44              		.cfi_offset 3, -24
-  45              		.cfi_offset 4, -20
-  46              		.cfi_offset 5, -16
-  47              		.cfi_offset 6, -12
-  48              		.cfi_offset 7, -8
-  49              		.cfi_offset 14, -4
-  60:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  50              		.loc 1 60 1 view .LVU7
-  51 0002 1746     		mov	r7, r2
-  52              		.loc 1 94 9 view .LVU8
-  53 0004 81B1     		cbz	r1, .L4
-  54 0006 0B46     		mov	r3, r1
-  62:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
-  55              		.loc 1 62 15 view .LVU9
-  56 0008 0024     		movs	r4, #0
-  57 000a 0025     		movs	r5, #0
-  58              	.LVL1:
-  59              	.L3:
+  56              		.loc 1 94 9
+  57 001c 10E0     		b	.L2
+  58              	.L3:
   95:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   {
   96:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****     /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) */
   97:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****     sum += *pSrc++;
-  60              		.loc 1 97 5 is_stmt 1 view .LVU10
-  61              		.loc 1 97 12 is_stmt 0 view .LVU11
-  62 000c 50F8046B 		ldr	r6, [r0], #4
-  63              	.LVL2:
-  64              		.loc 1 97 9 view .LVU12
-  65 0010 A419     		adds	r4, r4, r6
-  66              	.LVL3:
-  67              		.loc 1 97 9 view .LVU13
-  68 0012 45EBE675 		adc	r5, r5, r6, asr #31
-  69              	.LVL4:
+  59              		.loc 1 97 17
+  60 001e FB68     		ldr	r3, [r7, #12]
+  61 0020 1A1D     		adds	r2, r3, #4
+  62 0022 FA60     		str	r2, [r7, #12]
+  63              		.loc 1 97 12
+  64 0024 1B68     		ldr	r3, [r3]
+  65 0026 1A46     		mov	r2, r3
+  66 0028 4FEAE273 		asr	r3, r2, #31
+  67              		.loc 1 97 9
+  68 002c D7E90401 		ldrd	r0, [r7, #16]
+  69 0030 8418     		adds	r4, r0, r2
+  70 0032 41EB0305 		adc	r5, r1, r3
+  71 0036 C7E90445 		strd	r4, [r7, #16]
   98:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
   99:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****     /* Decrement loop counter */
  100:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****     blkCnt--;
-ARM GAS  /tmp/ccUHo4Fe.s 			page 4
+  72              		.loc 1 100 11
+ARM GAS  /tmp/ccPwlrLU.s 			page 4
 
 
-  70              		.loc 1 100 5 is_stmt 1 view .LVU14
+  73 003a FB69     		ldr	r3, [r7, #28]
+  74 003c 013B     		subs	r3, r3, #1
+  75 003e FB61     		str	r3, [r7, #28]
+  76              	.L2:
   94:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   {
-  71              		.loc 1 94 9 view .LVU15
-  72 0016 013B     		subs	r3, r3, #1
-  73              	.LVL5:
-  94:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   {
-  74              		.loc 1 94 9 is_stmt 0 view .LVU16
-  75 0018 F8D1     		bne	.L3
-  76 001a 0A46     		mov	r2, r1
-  77              	.LVL6:
-  94:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   {
-  78              		.loc 1 94 9 view .LVU17
-  79 001c 2046     		mov	r0, r4
-  80              	.LVL7:
-  94:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   {
-  81              		.loc 1 94 9 view .LVU18
-  82 001e 2946     		mov	r1, r5
-  83              	.LVL8:
-  94:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   {
-  84              		.loc 1 94 9 view .LVU19
-  85 0020 FFF7FEFF 		bl	__aeabi_ldivmod
-  86              	.LVL9:
+  77              		.loc 1 94 9
+  78 0040 FB69     		ldr	r3, [r7, #28]
+  79 0042 002B     		cmp	r3, #0
+  80 0044 EBD1     		bne	.L3
  101:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   }
  102:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** 
  103:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) / blockSize  */
  104:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   /* Store result to destination */
  105:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   *pResult = (q31_t) (sum / blockSize);
-  87              		.loc 1 105 3 is_stmt 1 view .LVU20
-  88              		.loc 1 105 12 is_stmt 0 view .LVU21
-  89 0024 3860     		str	r0, [r7]
+  81              		.loc 1 105 27
+  82 0046 BB68     		ldr	r3, [r7, #8]
+  83 0048 1A46     		mov	r2, r3
+  84 004a 4FF00003 		mov	r3, #0
+  85 004e D7E90401 		ldrd	r0, [r7, #16]
+  86 0052 FFF7FEFF 		bl	__aeabi_ldivmod
+  87              	.LVL0:
+  88 0056 0246     		mov	r2, r0
+  89 0058 0B46     		mov	r3, r1
+  90              		.loc 1 105 12
+  91 005a 7B68     		ldr	r3, [r7, #4]
+  92 005c 1A60     		str	r2, [r3]
  106:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** }
-  90              		.loc 1 106 1 view .LVU22
-  91 0026 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
-  92              	.LVL10:
-  93              	.L4:
-  94:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c ****   {
-  94              		.loc 1 94 9 view .LVU23
-  95 0028 0846     		mov	r0, r1
-  96              	.LVL11:
- 105:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** }
-  97              		.loc 1 105 3 is_stmt 1 view .LVU24
- 105:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_q31.c **** }
-  98              		.loc 1 105 12 is_stmt 0 view .LVU25
-  99 002a 3860     		str	r0, [r7]
- 100              		.loc 1 106 1 view .LVU26
- 101 002c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
- 102              		.cfi_endproc
- 103              	.LFE145:
- 105 002e 00BF     		.text
- 106              	.Letext0:
- 107              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 108              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 109              		.file 4 "/usr/include/newlib/sys/_types.h"
- 110              		.file 5 "/usr/include/newlib/sys/reent.h"
- 111              		.file 6 "/usr/include/newlib/sys/lock.h"
- 112              		.file 7 "/usr/include/newlib/math.h"
- 113              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccUHo4Fe.s 			page 5
-
-
-ARM GAS  /tmp/ccUHo4Fe.s 			page 6
+  93              		.loc 1 106 1
+  94 005e 00BF     		nop
+  95 0060 2037     		adds	r7, r7, #32
+  96              	.LCFI3:
+  97              		.cfi_def_cfa_offset 16
+  98 0062 BD46     		mov	sp, r7
+  99              	.LCFI4:
+ 100              		.cfi_def_cfa_register 13
+ 101              		@ sp needed
+ 102 0064 B0BD     		pop	{r4, r5, r7, pc}
+ 103              		.cfi_endproc
+ 104              	.LFE145:
+ 106              		.text
+ 107              	.Letext0:
+ 108              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 109              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 110              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 111              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 112              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 113              		.file 7 "/usr/include/newlib/math.h"
+ 114              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccPwlrLU.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_mean_q31.c
-     /tmp/ccUHo4Fe.s:18     .text.arm_mean_q31:0000000000000000 $t
-     /tmp/ccUHo4Fe.s:27     .text.arm_mean_q31:0000000000000000 arm_mean_q31
+     /tmp/ccPwlrLU.s:18     .text.arm_mean_q31:0000000000000000 $t
+     /tmp/ccPwlrLU.s:26     .text.arm_mean_q31:0000000000000000 arm_mean_q31
 
 UNDEFINED SYMBOLS
 __aeabi_ldivmod

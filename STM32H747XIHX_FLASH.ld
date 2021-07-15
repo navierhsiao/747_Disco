@@ -51,6 +51,7 @@ MEMORY
   RAM_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 288K
   RAM_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K
   ITCMRAM (xrw)  : ORIGIN = 0x00000000, LENGTH = 64K
+  SDRAM (xrw)     : ORIGIN = 0XD0000000, LENGTH = 32768K
 }
 
 /* Sections */
@@ -176,6 +177,11 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
   } >RAM
+
+  .sdram_section (NOLOAD) : {
+    . = ABSOLUTE(0xD0000000);
+    *(.exSDRAM) 
+  } AT> SDRAM
 
   /* Remove information from the compiler libraries */
   /DISCARD/ :

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccxDyfWh.s 			page 1
+ARM GAS  /tmp/ccZiIyT4.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccxDyfWh.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_nn_mult_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccxDyfWh.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_nn_mult_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_nn_mult_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_nn_mult_q15:
-  27              	.LVL0:
-  28              	.LFB149:
-  29              		.file 1 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c"
+  18              		.global	arm_nn_mult_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_nn_mult_q15:
+  26              	.LFB149:
+  27              		.file 1 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c"
    1:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** /*
    2:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.
    3:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****  *
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccxDyfWh.s 			page 1
   27:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****  * Target Processor:  Cortex-M cores
   28:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****  *
   29:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****  * -------------------------------------------------------------------- */
-ARM GAS  /tmp/ccxDyfWh.s 			page 2
-
-
   30:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   31:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** #include "arm_nnfunctions.h"
+ARM GAS  /tmp/ccZiIyT4.s 			page 2
+
+
   32:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   33:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** /**    
   34:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****  * @ingroup groupSupport    
@@ -96,306 +94,295 @@ ARM GAS  /tmp/ccxDyfWh.s 			page 1
   62:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   const uint16_t out_shift,
   63:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   uint32_t blockSize)
   64:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** {
-  30              		.loc 1 64 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 4, pretend = 0, frame = 8
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 64 1
+  29              		.cfi_startproc
+  30              		@ args = 4, pretend = 0, frame = 112
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 9DB0     		sub	sp, sp, #116
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 120
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
+  46 000c 7B80     		strh	r3, [r7, #2]	@ movhi
   65:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   uint32_t blkCnt;                               /* loop counters */
-  34              		.loc 1 65 3 view .LVU1
   66:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   67:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** #if defined (ARM_MATH_DSP)
   68:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   69:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** /* Run the below code for Cortex-M4 and Cortex-M3 */
+ARM GAS  /tmp/ccZiIyT4.s 			page 3
+
+
   70:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   q31_t inA1, inA2, inB1, inB2;                  /* temporary input variables */
-  35              		.loc 1 70 3 view .LVU2
   71:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   q15_t out1, out2, out3, out4;                  /* temporary output variables */
-  36              		.loc 1 71 3 view .LVU3
   72:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   q31_t mul1, mul2, mul3, mul4;                  /* temporary variables */
-  37              		.loc 1 72 3 view .LVU4
   73:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   74:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   /* loop Unrolling */
   75:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   blkCnt = blockSize >> 2U;
-  38              		.loc 1 75 3 view .LVU5
-  64:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   uint32_t blkCnt;                               /* loop counters */
-  39              		.loc 1 64 1 is_stmt 0 view .LVU6
-ARM GAS  /tmp/ccxDyfWh.s 			page 3
-
-
-  40 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-  41              	.LCFI0:
-  42              		.cfi_def_cfa_offset 36
-  43              		.cfi_offset 4, -36
-  44              		.cfi_offset 5, -32
-  45              		.cfi_offset 6, -28
-  46              		.cfi_offset 7, -24
-  47              		.cfi_offset 8, -20
-  48              		.cfi_offset 9, -16
-  49              		.cfi_offset 10, -12
-  50              		.cfi_offset 11, -8
-  51              		.cfi_offset 14, -4
-  52 0004 83B0     		sub	sp, sp, #12
-  53              	.LCFI1:
-  54              		.cfi_def_cfa_offset 48
-  55              	.LVL1:
+  47              		.loc 1 75 10
+  48 000e BB6F     		ldr	r3, [r7, #120]
+  49 0010 9B08     		lsrs	r3, r3, #2
+  50 0012 FB66     		str	r3, [r7, #108]
   76:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   77:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.
   78:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****    ** a second loop below computes the remaining 1 to 3 samples. */
   79:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   while (blkCnt > 0U)
-  56              		.loc 1 79 3 is_stmt 1 view .LVU7
-  64:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   uint32_t blkCnt;                               /* loop counters */
-  57              		.loc 1 64 1 is_stmt 0 view .LVU8
-  58 0006 9046     		mov	r8, r2
-  59              		.loc 1 79 9 is_stmt 1 view .LVU9
-  60 0008 0C9A     		ldr	r2, [sp, #48]
-  61              	.LVL2:
-  62              		.loc 1 79 9 is_stmt 0 view .LVU10
-  63 000a 5FEA9209 		lsrs	r9, r2, #2
-  64              	.LVL3:
-  65              		.loc 1 79 9 view .LVU11
-  66 000e 40D0     		beq	.L2
-  67              	.LBB2:
+  51              		.loc 1 79 9
+  52 0014 A0E0     		b	.L2
+  53              	.L3:
   80:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   {
   81:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceA */
   82:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     inA1 = *__SIMD32(pSrcA)++;
+  54              		.loc 1 82 13
+  55 0016 07F10C02 		add	r2, r7, #12
+  56 001a 1368     		ldr	r3, [r2]
+  57              		.loc 1 82 28
+  58 001c 191D     		adds	r1, r3, #4
+  59 001e 1160     		str	r1, [r2]
+  60              		.loc 1 82 10
+  61 0020 1B68     		ldr	r3, [r3]
+  62 0022 3B66     		str	r3, [r7, #96]
   83:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceB */
   84:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     inB1 = *__SIMD32(pSrcB)++;
+  63              		.loc 1 84 13
+  64 0024 07F10802 		add	r2, r7, #8
+  65 0028 1368     		ldr	r3, [r2]
+  66              		.loc 1 84 28
+  67 002a 191D     		adds	r1, r3, #4
+  68 002c 1160     		str	r1, [r2]
+  69              		.loc 1 84 10
+  70 002e 1B68     		ldr	r3, [r3]
+  71 0030 FB65     		str	r3, [r7, #92]
   85:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceA */
   86:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     inA2 = *__SIMD32(pSrcA)++;
+  72              		.loc 1 86 13
+  73 0032 07F10C02 		add	r2, r7, #12
+  74 0036 1368     		ldr	r3, [r2]
+  75              		.loc 1 86 28
+  76 0038 191D     		adds	r1, r3, #4
+  77 003a 1160     		str	r1, [r2]
+  78              		.loc 1 86 10
+  79 003c 1B68     		ldr	r3, [r3]
+  80 003e BB65     		str	r3, [r7, #88]
   87:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceB */
   88:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     inB2 = *__SIMD32(pSrcB)++;
+  81              		.loc 1 88 13
+  82 0040 07F10802 		add	r2, r7, #8
+  83 0044 1368     		ldr	r3, [r2]
+  84              		.loc 1 88 28
+ARM GAS  /tmp/ccZiIyT4.s 			page 4
+
+
+  85 0046 191D     		adds	r1, r3, #4
+  86 0048 1160     		str	r1, [r2]
+  87              		.loc 1 88 10
+  88 004a 1B68     		ldr	r3, [r3]
+  89 004c 7B65     		str	r3, [r7, #84]
   89:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   90:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* multiply mul = sourceA * sourceB */
   91:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     mul1 = (q31_t) ((q15_t) (inA1 >> 16) * (q15_t) (inB1 >> 16));
+  90              		.loc 1 91 35
+  91 004e 3B6E     		ldr	r3, [r7, #96]
+  92 0050 1B14     		asrs	r3, r3, #16
+  93              		.loc 1 91 21
+  94 0052 1BB2     		sxth	r3, r3
+  95 0054 1A46     		mov	r2, r3
+  96              		.loc 1 91 58
+  97 0056 FB6D     		ldr	r3, [r7, #92]
+  98 0058 1B14     		asrs	r3, r3, #16
+  99              		.loc 1 91 44
+ 100 005a 1BB2     		sxth	r3, r3
+ 101              		.loc 1 91 10
+ 102 005c 03FB02F3 		mul	r3, r3, r2
+ 103 0060 3B65     		str	r3, [r7, #80]
   92:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     mul2 = (q31_t) ((q15_t) inA1 * (q15_t) inB1);
+ 104              		.loc 1 92 21
+ 105 0062 3B6E     		ldr	r3, [r7, #96]
+ 106 0064 1BB2     		sxth	r3, r3
+ 107              		.loc 1 92 36
+ 108 0066 FA6D     		ldr	r2, [r7, #92]
+ 109 0068 12B2     		sxth	r2, r2
+ 110              		.loc 1 92 10
+ 111 006a 02FB03F3 		mul	r3, r2, r3
+ 112 006e FB64     		str	r3, [r7, #76]
   93:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     mul3 = (q31_t) ((q15_t) (inA2 >> 16) * (q15_t) (inB2 >> 16));
+ 113              		.loc 1 93 35
+ 114 0070 BB6D     		ldr	r3, [r7, #88]
+ 115 0072 1B14     		asrs	r3, r3, #16
+ 116              		.loc 1 93 21
+ 117 0074 1BB2     		sxth	r3, r3
+ 118 0076 1A46     		mov	r2, r3
+ 119              		.loc 1 93 58
+ 120 0078 7B6D     		ldr	r3, [r7, #84]
+ 121 007a 1B14     		asrs	r3, r3, #16
+ 122              		.loc 1 93 44
+ 123 007c 1BB2     		sxth	r3, r3
+ 124              		.loc 1 93 10
+ 125 007e 03FB02F3 		mul	r3, r3, r2
+ 126 0082 BB64     		str	r3, [r7, #72]
   94:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     mul4 = (q31_t) ((q15_t) inA2 * (q15_t) inB2);
+ 127              		.loc 1 94 21
+ 128 0084 BB6D     		ldr	r3, [r7, #88]
+ 129 0086 1BB2     		sxth	r3, r3
+ 130              		.loc 1 94 36
+ 131 0088 7A6D     		ldr	r2, [r7, #84]
+ 132 008a 12B2     		sxth	r2, r2
+ 133              		.loc 1 94 10
+ 134 008c 02FB03F3 		mul	r3, r2, r3
+ 135 0090 7B64     		str	r3, [r7, #68]
+ARM GAS  /tmp/ccZiIyT4.s 			page 5
+
+
+ 136              	.LBB2:
   95:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
   96:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* saturate result to 16 bit */
   97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out1 = (q15_t) __SSAT((mul1 + NN_ROUND(out_shift)) >> out_shift, 16);
-  68              		.loc 1 97 20 view .LVU12
-  69 0010 4FF0010E 		mov	lr, #1
-  70 0014 08F10402 		add	r2, r8, #4
-  71 0018 0026     		movs	r6, #0
-  72 001a 00F1040B 		add	fp, r0, #4
-  73 001e 0EFA03FE 		lsl	lr, lr, r3
-ARM GAS  /tmp/ccxDyfWh.s 			page 4
-
-
-  74 0022 01F1040A 		add	r10, r1, #4
-  75 0026 8C46     		mov	ip, r1
-  76 0028 0192     		str	r2, [sp, #4]
-  77 002a 4FEA5E0E 		lsr	lr, lr, #1
-  78              	.LVL4:
-  79              	.L3:
-  80              		.loc 1 97 20 view .LVU13
-  81              	.LBE2:
-  82:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceB */
-  82              		.loc 1 82 5 is_stmt 1 view .LVU14
-  82:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceB */
-  83              		.loc 1 82 10 is_stmt 0 view .LVU15
-  84 002e 50F83620 		ldr	r2, [r0, r6, lsl #3]
-  85              	.LVL5:
-  84:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceA */
-  86              		.loc 1 84 5 is_stmt 1 view .LVU16
-  84:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceA */
-  87              		.loc 1 84 10 is_stmt 0 view .LVU17
-  88 0032 5CF83670 		ldr	r7, [ip, r6, lsl #3]
-  89              	.LVL6:
-  86:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceB */
-  90              		.loc 1 86 5 is_stmt 1 view .LVU18
-  86:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* read two samples at a time from sourceB */
-  91              		.loc 1 86 10 is_stmt 0 view .LVU19
-  92 0036 5BF83650 		ldr	r5, [fp, r6, lsl #3]
-  93              	.LVL7:
-  88:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
-  94              		.loc 1 88 5 is_stmt 1 view .LVU20
-  91:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     mul2 = (q31_t) ((q15_t) inA1 * (q15_t) inB1);
-  95              		.loc 1 91 5 view .LVU21
-  92:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     mul3 = (q31_t) ((q15_t) (inA2 >> 16) * (q15_t) (inB2 >> 16));
-  96              		.loc 1 92 5 view .LVU22
-  93:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     mul4 = (q31_t) ((q15_t) inA2 * (q15_t) inB2);
-  97              		.loc 1 93 5 view .LVU23
-  94:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
-  98              		.loc 1 94 5 view .LVU24
-  99              		.loc 1 97 5 view .LVU25
- 100              	.LBB3:
- 101              		.loc 1 97 20 view .LVU26
- 102              		.loc 1 97 20 view .LVU27
- 103              	.LBE3:
- 104              	.LBB4:
+ 137              		.loc 1 97 20
+ 138 0092 7B88     		ldrh	r3, [r7, #2]
+ 139 0094 0122     		movs	r2, #1
+ 140 0096 02FA03F3 		lsl	r3, r2, r3
+ 141 009a 5A08     		lsrs	r2, r3, #1
+ 142 009c 3B6D     		ldr	r3, [r7, #80]
+ 143 009e 1A44     		add	r2, r2, r3
+ 144 00a0 7B88     		ldrh	r3, [r7, #2]
+ 145 00a2 22FA03F3 		lsr	r3, r2, r3
+ 146 00a6 3B64     		str	r3, [r7, #64]
+ 147 00a8 3B6C     		ldr	r3, [r7, #64]
+ 148              		.syntax unified
+ 149              	@ 97 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
+ 150 00aa 03F30F03 		ssat r3, #16, r3
+ 151              	@ 0 "" 2
+ 152              		.thumb
+ 153              		.syntax unified
+ 154 00ae FB63     		str	r3, [r7, #60]
+ 155 00b0 FB6B     		ldr	r3, [r7, #60]
+ 156              	.LBE2:
+ 157              		.loc 1 97 10
+ 158 00b2 7B87     		strh	r3, [r7, #58]	@ movhi
+ 159              	.LBB3:
   98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
- 105              		.loc 1 98 20 is_stmt 0 view .LVU28
- 106 003a 12FB07E4 		smlabb	r4, r2, r7, lr
- 107              	.LBE4:
- 108              	.LBB5:
+ 160              		.loc 1 98 20
+ 161 00b4 7B88     		ldrh	r3, [r7, #2]
+ 162 00b6 0122     		movs	r2, #1
+ 163 00b8 02FA03F3 		lsl	r3, r2, r3
+ 164 00bc 5A08     		lsrs	r2, r3, #1
+ 165 00be FB6C     		ldr	r3, [r7, #76]
+ 166 00c0 1A44     		add	r2, r2, r3
+ 167 00c2 7B88     		ldrh	r3, [r7, #2]
+ 168 00c4 22FA03F3 		lsr	r3, r2, r3
+ 169 00c8 7B63     		str	r3, [r7, #52]
+ 170 00ca 7B6B     		ldr	r3, [r7, #52]
+ 171              		.syntax unified
+ 172              	@ 98 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
+ 173 00cc 03F30F03 		ssat r3, #16, r3
+ 174              	@ 0 "" 2
+ 175              		.thumb
+ 176              		.syntax unified
+ 177 00d0 3B63     		str	r3, [r7, #48]
+ 178 00d2 3B6B     		ldr	r3, [r7, #48]
+ 179              	.LBE3:
+ 180              		.loc 1 98 10
+ 181 00d4 FB85     		strh	r3, [r7, #46]	@ movhi
+ 182              	.LBB4:
   99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 109              		.loc 1 99 20 view .LVU29
- 110 003e 5AF83610 		ldr	r1, [r10, r6, lsl #3]
- 111              	.LBE5:
- 112              	.LBB6:
-  97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
- 113              		.loc 1 97 20 view .LVU30
- 114 0042 17FB32E7 		smlatt	r7, r7, r2, lr
- 115              	.LVL8:
-  97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
-ARM GAS  /tmp/ccxDyfWh.s 			page 5
+ 183              		.loc 1 99 20
+ 184 00d6 7B88     		ldrh	r3, [r7, #2]
+ 185 00d8 0122     		movs	r2, #1
+ 186 00da 02FA03F3 		lsl	r3, r2, r3
+ 187 00de 5A08     		lsrs	r2, r3, #1
+ARM GAS  /tmp/ccZiIyT4.s 			page 6
 
 
- 116              		.loc 1 97 20 view .LVU31
- 117              	.LBE6:
- 118              	.LBB7:
+ 188 00e0 BB6C     		ldr	r3, [r7, #72]
+ 189 00e2 1A44     		add	r2, r2, r3
+ 190 00e4 7B88     		ldrh	r3, [r7, #2]
+ 191 00e6 22FA03F3 		lsr	r3, r2, r3
+ 192 00ea BB62     		str	r3, [r7, #40]
+ 193 00ec BB6A     		ldr	r3, [r7, #40]
+ 194              		.syntax unified
+ 195              	@ 99 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
+ 196 00ee 03F30F03 		ssat r3, #16, r3
+ 197              	@ 0 "" 2
+ 198              		.thumb
+ 199              		.syntax unified
+ 200 00f2 7B62     		str	r3, [r7, #36]
+ 201 00f4 7B6A     		ldr	r3, [r7, #36]
+ 202              	.LBE4:
+ 203              		.loc 1 99 10
+ 204 00f6 7B84     		strh	r3, [r7, #34]	@ movhi
+ 205              	.LBB5:
  100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 119              		.loc 1 100 20 view .LVU32
- 120 0046 5AF83620 		ldr	r2, [r10, r6, lsl #3]
- 121              	.LVL9:
- 122              		.loc 1 100 20 view .LVU33
- 123              	.LBE7:
- 124              	.LBB8:
-  98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 125              		.loc 1 98 20 view .LVU34
- 126 004a DC40     		lsrs	r4, r4, r3
- 127              	.LBE8:
- 128              	.LBB9:
- 129              		.loc 1 100 20 view .LVU35
- 130 004c 15FB02E2 		smlabb	r2, r5, r2, lr
- 131              	.LBE9:
- 132              	.LBB10:
-  97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
- 133              		.loc 1 97 20 view .LVU36
- 134 0050 DF40     		lsrs	r7, r7, r3
- 135              	.LVL10:
-  97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
- 136              		.loc 1 97 20 view .LVU37
- 137              	.LBE10:
- 138              	.LBB11:
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 139              		.loc 1 99 20 view .LVU38
- 140 0052 11FB35E5 		smlatt	r5, r1, r5, lr
- 141              	.LVL11:
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 142              		.loc 1 99 20 view .LVU39
- 143              	.LBE11:
+ 206              		.loc 1 100 20
+ 207 00f8 7B88     		ldrh	r3, [r7, #2]
+ 208 00fa 0122     		movs	r2, #1
+ 209 00fc 02FA03F3 		lsl	r3, r2, r3
+ 210 0100 5A08     		lsrs	r2, r3, #1
+ 211 0102 7B6C     		ldr	r3, [r7, #68]
+ 212 0104 1A44     		add	r2, r2, r3
+ 213 0106 7B88     		ldrh	r3, [r7, #2]
+ 214 0108 22FA03F3 		lsr	r3, r2, r3
+ 215 010c FB61     		str	r3, [r7, #28]
+ 216 010e FB69     		ldr	r3, [r7, #28]
+ 217              		.syntax unified
+ 218              	@ 100 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
+ 219 0110 03F30F03 		ssat r3, #16, r3
+ 220              	@ 0 "" 2
+ 221              		.thumb
+ 222              		.syntax unified
+ 223 0114 BB61     		str	r3, [r7, #24]
+ 224 0116 BB69     		ldr	r3, [r7, #24]
+ 225              	.LBE5:
+ 226              		.loc 1 100 10
+ 227 0118 FB82     		strh	r3, [r7, #22]	@ movhi
  101:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  102:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* store the result */
  103:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  104:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  105:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     *__SIMD32(pDst)++ = __PKHBT(out2, out1, 16);
+ 228              		.loc 1 105 25
+ 229 011a B7F92E30 		ldrsh	r3, [r7, #46]
+ 230 011e 9AB2     		uxth	r2, r3
+ 231 0120 B7F93A30 		ldrsh	r3, [r7, #58]
+ 232 0124 1B04     		lsls	r3, r3, #16
+ 233 0126 42EA0300 		orr	r0, r2, r3
+ 234              		.loc 1 105 6
+ 235 012a 3A1D     		adds	r2, r7, #4
+ 236 012c 1368     		ldr	r3, [r2]
+ 237              		.loc 1 105 20
+ 238 012e 191D     		adds	r1, r3, #4
+ARM GAS  /tmp/ccZiIyT4.s 			page 7
+
+
+ 239 0130 1160     		str	r1, [r2]
+ 240              		.loc 1 105 25
+ 241 0132 0246     		mov	r2, r0
+ 242              		.loc 1 105 23
+ 243 0134 1A60     		str	r2, [r3]
  106:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     *__SIMD32(pDst)++ = __PKHBT(out4, out3, 16);
- 144              		.loc 1 106 23 view .LVU40
- 145 0056 0199     		ldr	r1, [sp, #4]
- 146              	.LBB12:
- 100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
- 147              		.loc 1 100 20 view .LVU41
- 148 0058 DA40     		lsrs	r2, r2, r3
- 149              	.LBE12:
- 150              	.LBB13:
-  98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 151              		.loc 1 98 20 view .LVU42
- 152              		.syntax unified
- 153              	@ 98 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
- 154 005a 04F30F04 		ssat r4, #16, r4
- 155              	@ 0 "" 2
- 156              		.thumb
- 157              		.syntax unified
- 158              	.LBE13:
-ARM GAS  /tmp/ccxDyfWh.s 			page 6
-
-
- 159              	.LBB14:
- 100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
- 160              		.loc 1 100 20 view .LVU43
- 161              		.syntax unified
- 162              	@ 100 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
- 163 005e 02F30F02 		ssat r2, #16, r2
- 164              	@ 0 "" 2
- 165              		.thumb
- 166              		.syntax unified
- 167              	.LBE14:
- 105:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     *__SIMD32(pDst)++ = __PKHBT(out4, out3, 16);
- 168              		.loc 1 105 25 view .LVU44
- 169 0062 A4B2     		uxth	r4, r4
- 170              	.LBB15:
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 171              		.loc 1 99 20 view .LVU45
- 172 0064 DD40     		lsrs	r5, r5, r3
- 173              	.LBE15:
- 174              		.loc 1 106 25 view .LVU46
- 175 0066 92B2     		uxth	r2, r2
- 176              	.LBB16:
-  97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
- 177              		.loc 1 97 20 view .LVU47
- 178              		.syntax unified
- 179              	@ 97 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
- 180 0068 07F30F07 		ssat r7, #16, r7
- 181              	@ 0 "" 2
- 182              	.LVL12:
-  97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
- 183              		.loc 1 97 20 is_stmt 1 view .LVU48
-  97:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out2 = (q15_t) __SSAT((mul2 + NN_ROUND(out_shift)) >> out_shift, 16);
- 184              		.loc 1 97 20 is_stmt 0 view .LVU49
- 185              		.thumb
- 186              		.syntax unified
- 187              	.LBE16:
-  98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 188              		.loc 1 98 5 is_stmt 1 view .LVU50
- 189              	.LBB17:
-  98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 190              		.loc 1 98 20 view .LVU51
-  98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 191              		.loc 1 98 20 view .LVU52
-  98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 192              		.loc 1 98 20 view .LVU53
-  98:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out3 = (q15_t) __SSAT((mul3 + NN_ROUND(out_shift)) >> out_shift, 16);
- 193              		.loc 1 98 20 is_stmt 0 view .LVU54
- 194              	.LBE17:
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 195              		.loc 1 99 5 is_stmt 1 view .LVU55
- 196              	.LBB18:
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 197              		.loc 1 99 20 view .LVU56
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 198              		.loc 1 99 20 view .LVU57
- 199              		.syntax unified
- 200              	@ 99 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
- 201 006c 05F30F05 		ssat r5, #16, r5
-ARM GAS  /tmp/ccxDyfWh.s 			page 7
-
-
- 202              	@ 0 "" 2
- 203              	.LVL13:
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 204              		.loc 1 99 20 view .LVU58
-  99:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     out4 = (q15_t) __SSAT((mul4 + NN_ROUND(out_shift)) >> out_shift, 16);
- 205              		.loc 1 99 20 is_stmt 0 view .LVU59
- 206              		.thumb
- 207              		.syntax unified
- 208              	.LBE18:
- 100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
- 209              		.loc 1 100 5 is_stmt 1 view .LVU60
- 210              	.LBB19:
- 100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
- 211              		.loc 1 100 20 view .LVU61
- 100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
- 212              		.loc 1 100 20 view .LVU62
- 100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
- 213              		.loc 1 100 20 view .LVU63
- 100:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
- 214              		.loc 1 100 20 is_stmt 0 view .LVU64
- 215              	.LBE19:
- 105:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     *__SIMD32(pDst)++ = __PKHBT(out4, out3, 16);
- 216              		.loc 1 105 5 is_stmt 1 view .LVU65
- 105:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     *__SIMD32(pDst)++ = __PKHBT(out4, out3, 16);
- 217              		.loc 1 105 25 is_stmt 0 view .LVU66
- 218 0070 44EA0744 		orr	r4, r4, r7, lsl #16
- 219              		.loc 1 106 25 view .LVU67
- 220 0074 42EA0542 		orr	r2, r2, r5, lsl #16
- 105:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     *__SIMD32(pDst)++ = __PKHBT(out4, out3, 16);
- 221              		.loc 1 105 23 view .LVU68
- 222 0078 48F83640 		str	r4, [r8, r6, lsl #3]
- 223              	.LVL14:
- 224              		.loc 1 106 5 is_stmt 1 view .LVU69
- 225              		.loc 1 106 23 is_stmt 0 view .LVU70
- 226 007c 41F83620 		str	r2, [r1, r6, lsl #3]
+ 244              		.loc 1 106 25
+ 245 0136 B7F91630 		ldrsh	r3, [r7, #22]
+ 246 013a 9AB2     		uxth	r2, r3
+ 247 013c B7F92230 		ldrsh	r3, [r7, #34]
+ 248 0140 1B04     		lsls	r3, r3, #16
+ 249 0142 42EA0300 		orr	r0, r2, r3
+ 250              		.loc 1 106 6
+ 251 0146 3A1D     		adds	r2, r7, #4
+ 252 0148 1368     		ldr	r3, [r2]
+ 253              		.loc 1 106 20
+ 254 014a 191D     		adds	r1, r3, #4
+ 255 014c 1160     		str	r1, [r2]
+ 256              		.loc 1 106 25
+ 257 014e 0246     		mov	r2, r0
+ 258              		.loc 1 106 23
+ 259 0150 1A60     		str	r2, [r3]
  107:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  108:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** #else
  109:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
@@ -406,139 +393,138 @@ ARM GAS  /tmp/ccxDyfWh.s 			page 1
  114:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  115:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* Decrement the blockSize loop counter */
  116:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     blkCnt--;
- 227              		.loc 1 116 5 is_stmt 1 view .LVU71
- 228              	.LVL15:
+ 260              		.loc 1 116 11
+ 261 0152 FB6E     		ldr	r3, [r7, #108]
+ 262 0154 013B     		subs	r3, r3, #1
+ 263 0156 FB66     		str	r3, [r7, #108]
+ 264              	.L2:
   79:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   {
- 229              		.loc 1 79 9 view .LVU72
- 230 0080 0136     		adds	r6, r6, #1
- 231              	.LVL16:
-  79:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   {
- 232              		.loc 1 79 9 is_stmt 0 view .LVU73
- 233 0082 B145     		cmp	r9, r6
- 234 0084 D3D1     		bne	.L3
- 235 0086 00EBC900 		add	r0, r0, r9, lsl #3
- 236              	.LVL17:
-ARM GAS  /tmp/ccxDyfWh.s 			page 8
-
-
-  79:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   {
- 237              		.loc 1 79 9 view .LVU74
- 238 008a 0CEBC901 		add	r1, ip, r9, lsl #3
- 239 008e 08EBC908 		add	r8, r8, r9, lsl #3
- 240              	.LVL18:
- 241              	.L2:
+ 265              		.loc 1 79 9
+ 266 0158 FB6E     		ldr	r3, [r7, #108]
+ 267 015a 002B     		cmp	r3, #0
+ 268 015c 7FF45BAF 		bne	.L3
  117:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   }
  118:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  119:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   /* If the blockSize is not a multiple of 4, compute any remaining output samples here.
  120:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****    ** No loop unrolling is used. */
  121:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   blkCnt = blockSize % 0x4U;
- 242              		.loc 1 121 3 is_stmt 1 view .LVU75
+ 269              		.loc 1 121 10
+ 270 0160 BB6F     		ldr	r3, [r7, #120]
+ 271 0162 03F00303 		and	r3, r3, #3
+ 272 0166 FB66     		str	r3, [r7, #108]
  122:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  123:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** #else
  124:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  125:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   /* Run the below code for Cortex-M0 */
  126:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  127:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   /* Initialize blkCnt with number of samples */
+ARM GAS  /tmp/ccZiIyT4.s 			page 8
+
+
  128:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   blkCnt = blockSize;
  129:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  130:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** #endif /* #if defined (ARM_MATH_DSP) */
  131:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  132:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  133:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   while (blkCnt > 0U)
- 243              		.loc 1 133 3 view .LVU76
- 244              		.loc 1 133 9 view .LVU77
- 245 0092 0C9A     		ldr	r2, [sp, #48]
- 246 0094 12F00304 		ands	r4, r2, #3
- 247              	.LVL19:
- 248              		.loc 1 133 9 is_stmt 0 view .LVU78
- 249 0098 12D0     		beq	.L1
- 250              	.LBB20:
+ 273              		.loc 1 133 9
+ 274 0168 24E0     		b	.L4
+ 275              	.L5:
+ 276              	.LBB6:
  134:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   {
  135:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* C = A * B */
  136:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* Multiply the inputs and store the result in the destination buffer */
  137:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     *pDst++ = (q15_t) __SSAT((((q31_t) (*pSrcA++) * (*pSrcB++) + NN_ROUND(out_shift)) >> out_shift)
- 251              		.loc 1 137 23 view .LVU79
- 252 009a 0125     		movs	r5, #1
- 253 009c 00EB4404 		add	r4, r0, r4, lsl #1
- 254              	.LVL20:
- 255              		.loc 1 137 23 view .LVU80
- 256 00a0 9D40     		lsls	r5, r5, r3
- 257 00a2 6D08     		lsrs	r5, r5, #1
- 258              	.LVL21:
- 259              	.L5:
- 260              		.loc 1 137 23 view .LVU81
- 261              	.LBE20:
- 262              		.loc 1 137 5 is_stmt 1 view .LVU82
- 263              	.LBB21:
- 264              		.loc 1 137 23 view .LVU83
- 265              		.loc 1 137 23 view .LVU84
- 266 00a4 30F8022B 		ldrh	r2, [r0], #2
- 267              	.LVL22:
- 268              		.loc 1 137 23 is_stmt 0 view .LVU85
- 269 00a8 31F8026B 		ldrh	r6, [r1], #2
- 270              	.LVL23:
- 271              		.loc 1 137 23 view .LVU86
-ARM GAS  /tmp/ccxDyfWh.s 			page 9
-
-
- 272              	.LBE21:
- 133:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   {
- 273              		.loc 1 133 9 view .LVU87
- 274 00ac A042     		cmp	r0, r4
- 275              	.LBB22:
- 276              		.loc 1 137 23 view .LVU88
- 277 00ae 12FB0652 		smlabb	r2, r2, r6, r5
- 278 00b2 22FA03F2 		lsr	r2, r2, r3
- 279              		.syntax unified
- 280              	@ 137 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
- 281 00b6 02F30F02 		ssat r2, #16, r2
- 282              	@ 0 "" 2
- 283              	.LVL24:
- 284              		.loc 1 137 23 is_stmt 1 view .LVU89
- 285              		.loc 1 137 23 is_stmt 0 view .LVU90
- 286              		.thumb
- 287              		.syntax unified
- 288              	.LBE22:
- 289              		.loc 1 137 15 view .LVU91
- 290 00ba 28F8022B 		strh	r2, [r8], #2	@ movhi
- 291              	.LVL25:
+ 277              		.loc 1 137 23
+ 278 016a FB68     		ldr	r3, [r7, #12]
+ 279 016c 9A1C     		adds	r2, r3, #2
+ 280 016e FA60     		str	r2, [r7, #12]
+ 281 0170 B3F90030 		ldrsh	r3, [r3]
+ 282 0174 1946     		mov	r1, r3
+ 283 0176 BB68     		ldr	r3, [r7, #8]
+ 284 0178 9A1C     		adds	r2, r3, #2
+ 285 017a BA60     		str	r2, [r7, #8]
+ 286 017c B3F90030 		ldrsh	r3, [r3]
+ 287 0180 03FB01F3 		mul	r3, r3, r1
+ 288 0184 1946     		mov	r1, r3
+ 289 0186 7B88     		ldrh	r3, [r7, #2]
+ 290 0188 0122     		movs	r2, #1
+ 291 018a 02FA03F3 		lsl	r3, r2, r3
+ 292 018e 5B08     		lsrs	r3, r3, #1
+ 293 0190 CA18     		adds	r2, r1, r3
+ 294 0192 7B88     		ldrh	r3, [r7, #2]
+ 295 0194 22FA03F3 		lsr	r3, r2, r3
+ 296 0198 BB66     		str	r3, [r7, #104]
+ 297 019a BB6E     		ldr	r3, [r7, #104]
+ 298              		.syntax unified
+ 299              	@ 137 "./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c" 1
+ 300 019c 03F30F03 		ssat r3, #16, r3
+ 301              	@ 0 "" 2
+ 302              		.thumb
+ 303              		.syntax unified
+ 304 01a0 7B66     		str	r3, [r7, #100]
+ 305 01a2 796E     		ldr	r1, [r7, #100]
+ 306              	.LBE6:
+ 307              		.loc 1 137 10
+ 308 01a4 7B68     		ldr	r3, [r7, #4]
+ 309 01a6 9A1C     		adds	r2, r3, #2
+ 310 01a8 7A60     		str	r2, [r7, #4]
+ 311              		.loc 1 137 15
+ 312 01aa 0AB2     		sxth	r2, r1
+ 313              		.loc 1 137 13
+ 314 01ac 1A80     		strh	r2, [r3]	@ movhi
  138:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** 
  139:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     /* Decrement the blockSize loop counter */
  140:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****     blkCnt--;
- 292              		.loc 1 140 5 is_stmt 1 view .LVU92
+ 315              		.loc 1 140 11
+ 316 01ae FB6E     		ldr	r3, [r7, #108]
+ARM GAS  /tmp/ccZiIyT4.s 			page 9
+
+
+ 317 01b0 013B     		subs	r3, r3, #1
+ 318 01b2 FB66     		str	r3, [r7, #108]
+ 319              	.L4:
  133:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   {
- 293              		.loc 1 133 9 view .LVU93
- 294 00be F1D1     		bne	.L5
- 295              	.LVL26:
- 296              	.L1:
+ 320              		.loc 1 133 9
+ 321 01b4 FB6E     		ldr	r3, [r7, #108]
+ 322 01b6 002B     		cmp	r3, #0
+ 323 01b8 D7D1     		bne	.L5
  141:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c ****   }
  142:./Libraries/CMSIS/NN/Source/NNSupportFunctions/arm_nn_mult_q15.c **** }
- 297              		.loc 1 142 1 is_stmt 0 view .LVU94
- 298 00c0 03B0     		add	sp, sp, #12
- 299              	.LCFI2:
- 300              		.cfi_def_cfa_offset 36
- 301              		@ sp needed
- 302 00c2 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 303              		.loc 1 142 1 view .LVU95
- 304              		.cfi_endproc
- 305              	.LFE149:
- 307 00c6 00BF     		.text
- 308              	.Letext0:
- 309              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 310              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 311              		.file 4 "/usr/include/newlib/sys/_types.h"
- 312              		.file 5 "/usr/include/newlib/sys/reent.h"
- 313              		.file 6 "/usr/include/newlib/sys/lock.h"
- 314              		.file 7 "/usr/include/newlib/math.h"
- 315              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 316              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
- 317              		.file 10 "./Libraries/CMSIS/NN/Include/arm_nn_tables.h"
-ARM GAS  /tmp/ccxDyfWh.s 			page 10
+ 324              		.loc 1 142 1
+ 325 01ba 00BF     		nop
+ 326 01bc 00BF     		nop
+ 327 01be 7437     		adds	r7, r7, #116
+ 328              	.LCFI3:
+ 329              		.cfi_def_cfa_offset 4
+ 330 01c0 BD46     		mov	sp, r7
+ 331              	.LCFI4:
+ 332              		.cfi_def_cfa_register 13
+ 333              		@ sp needed
+ 334 01c2 5DF8047B 		ldr	r7, [sp], #4
+ 335              	.LCFI5:
+ 336              		.cfi_restore 7
+ 337              		.cfi_def_cfa_offset 0
+ 338 01c6 7047     		bx	lr
+ 339              		.cfi_endproc
+ 340              	.LFE149:
+ 342              		.text
+ 343              	.Letext0:
+ 344              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 345              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 346              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 347              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 348              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 349              		.file 7 "/usr/include/newlib/math.h"
+ 350              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 351              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ 352              		.file 10 "./Libraries/CMSIS/NN/Include/arm_nn_tables.h"
+ARM GAS  /tmp/ccZiIyT4.s 			page 10
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_nn_mult_q15.c
-     /tmp/ccxDyfWh.s:17     .text.arm_nn_mult_q15:0000000000000000 $t
-     /tmp/ccxDyfWh.s:26     .text.arm_nn_mult_q15:0000000000000000 arm_nn_mult_q15
+     /tmp/ccZiIyT4.s:17     .text.arm_nn_mult_q15:0000000000000000 $t
+     /tmp/ccZiIyT4.s:25     .text.arm_nn_mult_q15:0000000000000000 arm_nn_mult_q15
 
 NO UNDEFINED SYMBOLS

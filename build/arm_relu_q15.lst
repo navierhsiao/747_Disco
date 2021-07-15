@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc7KqjTq.s 			page 1
+ARM GAS  /tmp/ccVqBG49.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_relu_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_relu_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_relu_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_relu_q15:
-  27              	.LVL0:
-  28              	.LFB149:
-  29              		.file 1 "./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c"
+  18              		.global	arm_relu_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_relu_q15:
+  26              	.LFB149:
+  27              		.file 1 "./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c"
    1:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** /*
    2:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.
    3:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****  *
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
   27:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****  * Target Processor:  Cortex-M cores
   28:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****  *
   29:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****  * -------------------------------------------------------------------- */
-ARM GAS  /tmp/cc7KqjTq.s 			page 2
-
-
   30:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   31:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** #include "arm_math.h"
+ARM GAS  /tmp/ccVqBG49.s 			page 2
+
+
   32:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** #include "arm_nnfunctions.h"
   33:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   34:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** /**
@@ -88,48 +86,75 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
   54:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   55:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** void arm_relu_q15(q15_t * data, uint16_t size)
   56:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** {
-  30              		.loc 1 56 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 56 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 56
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 8FB0     		sub	sp, sp, #60
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 64
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  44 0008 0B46     		mov	r3, r1
+  45 000a 7B80     		strh	r3, [r7, #2]	@ movhi
   57:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   58:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** #if defined (ARM_MATH_DSP)
   59:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     /* Run the following code for Cortex-M4 and Cortex-M7 */
   60:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   61:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     uint16_t  i = size >> 1;
-  35              		.loc 1 61 5 view .LVU1
+  46              		.loc 1 61 15
+  47 000c 7B88     		ldrh	r3, [r7, #2]
+  48 000e 5B08     		lsrs	r3, r3, #1
+  49 0010 FB86     		strh	r3, [r7, #54]	@ movhi
   62:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     q15_t    *pIn = data;
-  36              		.loc 1 62 5 view .LVU2
+  50              		.loc 1 62 15
+  51 0012 7B68     		ldr	r3, [r7, #4]
+  52 0014 3B61     		str	r3, [r7, #16]
   63:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     q15_t    *pOut = data;
-  37              		.loc 1 63 5 view .LVU3
+ARM GAS  /tmp/ccVqBG49.s 			page 3
+
+
+  53              		.loc 1 63 15
+  54 0016 7B68     		ldr	r3, [r7, #4]
+  55 0018 FB60     		str	r3, [r7, #12]
   64:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     q31_t     in;
-  38              		.loc 1 64 5 view .LVU4
   65:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     q31_t     buf;
-  39              		.loc 1 65 5 view .LVU5
   66:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     q31_t     mask;
-  40              		.loc 1 66 5 view .LVU6
   67:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   68:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     while (i)
-  41              		.loc 1 68 5 view .LVU7
-  42              		.loc 1 68 11 view .LVU8
-  43 0000 4B08     		lsrs	r3, r1, #1
-  56:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
-  44              		.loc 1 56 1 is_stmt 0 view .LVU9
-  45 0002 30B4     		push	{r4, r5}
-  46              	.LCFI0:
-ARM GAS  /tmp/cc7KqjTq.s 			page 3
-
-
-  47              		.cfi_def_cfa_offset 8
-  48              		.cfi_offset 4, -8
-  49              		.cfi_offset 5, -4
-  50              		.loc 1 68 11 view .LVU10
-  51 0004 1FD0     		beq	.L5
-  52 0006 5C1E     		subs	r4, r3, #1
-  53              	.LBB6:
-  54              	.LBB7:
-  55              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
+  56              		.loc 1 68 11
+  57 001a 32E0     		b	.L2
+  58              	.L6:
+  69:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     {
+  70:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         in = *__SIMD32(pIn)++;
+  59              		.loc 1 70 15
+  60 001c 07F11002 		add	r2, r7, #16
+  61 0020 1368     		ldr	r3, [r2]
+  62              		.loc 1 70 28
+  63 0022 191D     		adds	r1, r3, #4
+  64 0024 1160     		str	r1, [r2]
+  65              		.loc 1 70 12
+  66 0026 1B68     		ldr	r3, [r3]
+  67 0028 3B63     		str	r3, [r7, #48]
+  71:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
+  72:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         /* extract the first bit */
+  73:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         buf = __ROR(in & 0x80008000, 15);
+  68              		.loc 1 73 15
+  69 002a 3B6B     		ldr	r3, [r7, #48]
+  70 002c 03F08023 		and	r3, r3, #-2147450880
+  71 0030 BB61     		str	r3, [r7, #24]
+  72 0032 0F23     		movs	r3, #15
+  73 0034 7B61     		str	r3, [r7, #20]
+  74              	.LBB6:
+  75              	.LBB7:
+  76              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
    1:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -153,6 +178,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
   21:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
   22:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * limitations under the License.
   23:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccVqBG49.s 			page 4
+
+
   24:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
   25:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
   26:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __CMSIS_GCC_H
@@ -178,9 +206,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
   46:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
   47:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
   48:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/cc7KqjTq.s 			page 4
-
-
   49:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
   50:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
   51:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif                                           
@@ -213,6 +238,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
   78:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
   79:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   80:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ARM GAS  /tmp/ccVqBG49.s 			page 5
+
+
   81:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
   82:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
   83:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
@@ -238,9 +266,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  103:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
  104:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
  105:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
-ARM GAS  /tmp/cc7KqjTq.s 			page 5
-
-
  106:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
  107:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
  108:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
@@ -273,6 +298,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  135:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   typedef struct {
  136:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t const* src;
  137:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t* dest;
+ARM GAS  /tmp/ccVqBG49.s 			page 6
+
+
  138:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t  wlen;
  139:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   } __copy_table_t;
  140:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
@@ -298,9 +326,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  160:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     }
  161:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
  162:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  
-ARM GAS  /tmp/cc7KqjTq.s 			page 6
-
-
  163:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   _start();
  164:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  165:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
@@ -333,6 +358,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  192:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
  193:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
  194:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ARM GAS  /tmp/ccVqBG49.s 			page 7
+
+
  195:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  196:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
  197:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -358,9 +386,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  217:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  218:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_CONTROL(void)
  219:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/cc7KqjTq.s 			page 7
-
-
  220:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  221:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  222:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
@@ -393,6 +418,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  249:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  250:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) : "memory");
  251:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccVqBG49.s 			page 8
+
+
  252:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  253:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  254:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
@@ -418,9 +446,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  274:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  275:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  276:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
-ARM GAS  /tmp/cc7KqjTq.s 			page 8
-
-
  277:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  278:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  279:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -453,6 +478,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  306:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  307:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  308:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVqBG49.s 			page 9
+
+
  309:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  310:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer
  311:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Process Stack Pointer (PSP).
@@ -478,9 +506,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  331:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  332:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  333:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp_ns"  : "=r" (result) );
-ARM GAS  /tmp/cc7KqjTq.s 			page 9
-
-
  334:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  335:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  336:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -513,6 +538,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  363:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  364:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer
  365:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer (MSP).
+ARM GAS  /tmp/ccVqBG49.s 			page 10
+
+
  366:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               MSP Register value
  367:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  368:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_MSP(void)
@@ -538,9 +566,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  388:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  389:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  390:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/cc7KqjTq.s 			page 10
-
-
  391:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  392:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  393:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -573,6 +598,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  420:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Stack Pointer (SP) when in secure state.
  421:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               SP Register value
  422:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccVqBG49.s 			page 11
+
+
  423:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_SP_NS(void)
  424:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  425:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -598,9 +626,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  445:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Priority Mask
  446:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current state of the priority mask bit from the Priority Mask Register.
  447:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Priority Mask value
-ARM GAS  /tmp/cc7KqjTq.s 			page 11
-
-
  448:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  449:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PRIMASK(void)
  450:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -633,6 +658,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  477:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
  478:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  479:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PRIMASK(uint32_t priMask)
+ARM GAS  /tmp/ccVqBG49.s 			page 12
+
+
  480:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  481:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR primask, %0" : : "r" (priMask) : "memory");
  482:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -658,9 +686,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  502:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Enable FIQ
  503:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
  504:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
-ARM GAS  /tmp/cc7KqjTq.s 			page 12
-
-
  505:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  506:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_fault_irq(void)
  507:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -693,6 +718,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  534:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  535:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  536:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVqBG49.s 			page 13
+
+
  537:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  538:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  539:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Base Priority (non-secure)
@@ -718,9 +746,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  559:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  560:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri, %0" : : "r" (basePri) : "memory");
  561:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cc7KqjTq.s 			page 13
-
-
  562:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  563:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  564:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
@@ -753,6 +778,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  591:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Fault Mask register.
  592:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Fault Mask register value
  593:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccVqBG49.s 			page 14
+
+
  594:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_FAULTMASK(void)
  595:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  596:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -778,9 +806,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  616:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  617:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  618:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 14
-
-
  619:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  620:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Fault Mask
  621:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Fault Mask register.
@@ -813,6 +838,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  648:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    )
  649:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  650:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccVqBG49.s 			page 15
+
+
  651:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer Limit
  652:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  653:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
@@ -838,9 +866,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  673:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  674:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer Limit (non-secure)
  675:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
-ARM GAS  /tmp/cc7KqjTq.s 			page 15
-
-
  676:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always.
  677:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  678:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Process Stack Pointer Limit (PSPLIM) when in
@@ -873,6 +898,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  705:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  706:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
  707:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
+ARM GAS  /tmp/ccVqBG49.s 			page 16
+
+
  708:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
  709:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   (void)ProcStackPtrLimit;
  710:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -898,9 +926,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  730:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  731:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psplim_ns, %0\n" : : "r" (ProcStackPtrLimit));
  732:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/cc7KqjTq.s 			page 16
-
-
  733:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  734:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  735:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -933,6 +958,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  762:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer Limit (non-secure)
  763:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  764:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always.
+ARM GAS  /tmp/ccVqBG49.s 			page 17
+
+
  765:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  766:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Main Stack Pointer Limit(MSPLIM) when in sec
  767:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               MSPLIM Register value
@@ -958,9 +986,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  787:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   mode.
  788:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  789:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer Limit (MSPLIM).
-ARM GAS  /tmp/cc7KqjTq.s 			page 17
-
-
  790:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    MainStackPtrLimit  Main Stack Pointer Limit value to set
  791:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  792:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSPLIM(uint32_t MainStackPtrLimit)
@@ -993,6 +1018,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  819:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msplim_ns, %0" : : "r" (MainStackPtrLimit));
  820:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  821:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccVqBG49.s 			page 18
+
+
  822:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  823:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  824:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
@@ -1018,9 +1046,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  844:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  845:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("VMRS %0, fpscr" : "=r" (result) );
  846:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/cc7KqjTq.s 			page 18
-
-
  847:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  848:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  849:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(0U);
@@ -1053,6 +1078,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  876:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  877:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /*@} end of CMSIS_Core_RegAccFunctions */
  878:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVqBG49.s 			page 19
+
+
  879:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  880:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* ##########################  Core Instruction Access  ######################### */
  881:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /** \defgroup CMSIS_Core_InstructionInterface CMSIS Core Instruction Interface
@@ -1078,9 +1106,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  901:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details No Operation does nothing. This instruction can be used for code alignment purposes.
  902:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  903:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __NOP()                             __ASM volatile ("nop")
-ARM GAS  /tmp/cc7KqjTq.s 			page 19
-
-
  904:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  905:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  906:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Wait For Interrupt
@@ -1113,6 +1138,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  933:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __ISB(void)
  934:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  935:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("isb 0xF":::"memory");
+ARM GAS  /tmp/ccVqBG49.s 			page 20
+
+
  936:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  937:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  938:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1138,9 +1166,6 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  958:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  959:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  960:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 20
-
-
  961:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  962:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Reverse byte order (32 bit)
  963:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Reverses the byte order in unsigned integer value. For example, 0x12345678 becomes 0x785
@@ -1173,6 +1198,9 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  990:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("rev16 %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
  991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return result;
  992:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccVqBG49.s 			page 21
+
+
  993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  995:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1198,20 +1226,51 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1015:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Rotate Right in unsigned value (32 bit)
 1016:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Rotate Right (immediate) provides the value of the contents of a register rotated by a v
 1017:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    op1  Value to rotate
-ARM GAS  /tmp/cc7KqjTq.s 			page 21
-
-
 1018:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    op2  Number of Bits to rotate
 1019:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Rotated value
 1020:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1021:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2)
 1022:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1023:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   op2 %= 32U;
+  77              		.loc 2 1023 7
+  78 0036 7B69     		ldr	r3, [r7, #20]
+  79 0038 03F01F03 		and	r3, r3, #31
+  80 003c 7B61     		str	r3, [r7, #20]
 1024:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if (op2 == 0U)
+  81              		.loc 2 1024 6
+  82 003e 7B69     		ldr	r3, [r7, #20]
+  83 0040 002B     		cmp	r3, #0
+  84 0042 01D1     		bne	.L3
 1025:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
 1026:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     return op1;
+  85              		.loc 2 1026 12
+  86 0044 BB69     		ldr	r3, [r7, #24]
+  87 0046 03E0     		b	.L4
+  88              	.L3:
 1027:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
 1028:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return (op1 >> op2) | (op1 << (32U - op2));
+  89              		.loc 2 1028 23
+  90 0048 BA69     		ldr	r2, [r7, #24]
+  91 004a 7B69     		ldr	r3, [r7, #20]
+  92 004c 62FA03F3 		ror	r3, r2, r3
+  93              	.L4:
+  94              	.LBE7:
+  95              	.LBE6:
+  96              		.loc 1 73 13
+  97 0050 FB62     		str	r3, [r7, #44]
+ARM GAS  /tmp/ccVqBG49.s 			page 22
+
+
+  74:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
+  75:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         /* if MSB=1, mask will be 0xFF, 0x0 otherwise */
+  76:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         mask = __QSUB16(0x00000000, buf);
+  98              		.loc 1 76 16
+  99 0052 FB6A     		ldr	r3, [r7, #44]
+ 100 0054 0022     		movs	r2, #0
+ 101 0056 7A62     		str	r2, [r7, #36]
+ 102 0058 3B62     		str	r3, [r7, #32]
+ 103              	.LBB8:
+ 104              	.LBB9:
 1029:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1030:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1031:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1258,10 +1317,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1072:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1073:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Count leading zeros
 1074:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Counts the number of leading zeros of a data value.
-ARM GAS  /tmp/cc7KqjTq.s 			page 22
-
-
 1075:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to count the leading zeros
+ARM GAS  /tmp/ccVqBG49.s 			page 23
+
+
 1076:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             number of leading zeros in value
 1077:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1078:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __CLZ(uint32_t value)
@@ -1318,10 +1377,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1129:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint16_t __LDREXH(volatile uint16_t *addr)
 1130:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1131:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
-ARM GAS  /tmp/cc7KqjTq.s 			page 23
-
-
 1132:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVqBG49.s 			page 24
+
+
 1133:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
 1134:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrexh %0, %1" : "=r" (result) : "Q" (*addr) );
 1135:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -1378,10 +1437,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1186:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1187:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    uint32_t result;
 1188:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 24
-
-
 1189:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("strexh %0, %2, %1" : "=&r" (result), "=Q" (*addr) : "r" ((uint32_t)value) );
+ARM GAS  /tmp/ccVqBG49.s 			page 25
+
+
 1190:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1191:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1192:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1438,10 +1497,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1243:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1244:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1245:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/cc7KqjTq.s 			page 25
-
-
 1246:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Unsigned Saturate
+ARM GAS  /tmp/ccVqBG49.s 			page 26
+
+
 1247:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Saturates an unsigned value.
 1248:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  ARG1  Value to be saturated
 1249:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  ARG2  Bit position to saturate to (0..31)
@@ -1498,10 +1557,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1300:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   LDRT Unprivileged (16 bit)
 1301:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a Unprivileged LDRT instruction for 16 bit values.
 1302:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
-ARM GAS  /tmp/cc7KqjTq.s 			page 26
-
-
 1303:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint16_t at (*ptr)
+ARM GAS  /tmp/ccVqBG49.s 			page 27
+
+
 1304:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1305:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint16_t __LDRHT(volatile uint16_t *ptr)
 1306:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1558,10 +1617,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1357:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1358:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1359:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 27
-
-
 1360:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccVqBG49.s 			page 28
+
+
 1361:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   STRT Unprivileged (32 bit)
 1362:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a Unprivileged STRT instruction for 32 bit values.
 1363:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
@@ -1618,10 +1677,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1414:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****       return max;
 1415:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     }
 1416:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     else if (val < 0)
-ARM GAS  /tmp/cc7KqjTq.s 			page 28
-
-
 1417:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     {
+ARM GAS  /tmp/ccVqBG49.s 			page 29
+
+
 1418:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****       return 0U;
 1419:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     }
 1420:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
@@ -1678,10 +1737,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1471:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("lda %0, %1" : "=r" (result) : "Q" (*ptr) );
 1472:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1473:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cc7KqjTq.s 			page 29
-
-
 1474:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVqBG49.s 			page 30
+
+
 1475:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1476:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1477:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Store-Release (8 bit)
@@ -1738,10 +1797,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1528:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Load-Acquire Exclusive (16 bit)
 1529:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a LDAH exclusive instruction for 16 bit values.
 1530:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
-ARM GAS  /tmp/cc7KqjTq.s 			page 30
-
-
 1531:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint16_t at (*ptr)
+ARM GAS  /tmp/ccVqBG49.s 			page 31
+
+
 1532:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1533:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint16_t __LDAEXH(volatile uint16_t *ptr)
 1534:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1798,10 +1857,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1585:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1586:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("stlexh %0, %2, %1" : "=&r" (result), "=Q" (*ptr) : "r" ((uint32_t)value) );
 1587:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
-ARM GAS  /tmp/cc7KqjTq.s 			page 31
-
-
 1588:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccVqBG49.s 			page 32
+
+
 1589:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1590:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1591:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1858,10 +1917,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1642:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1643:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1644:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 32
-
-
 1645:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UADD8(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccVqBG49.s 			page 33
+
+
 1646:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1647:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1648:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1918,10 +1977,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1699:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1700:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1701:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 33
-
-
 1702:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UQSUB8(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccVqBG49.s 			page 34
+
+
 1703:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1704:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1705:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1978,10 +2037,10 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1756:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1757:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1758:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 34
-
-
 1759:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UHADD16(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccVqBG49.s 			page 35
+
+
 1760:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1761:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1762:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2002,126 +2061,85 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
 1777:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1778:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1779:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("qsub16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
-  56              		.loc 2 1779 3 view .LVU11
-  57 0008 0025     		movs	r5, #0
-  58 000a A4B2     		uxth	r4, r4
-  59 000c 0134     		adds	r4, r4, #1
-  60 000e 00EB8404 		add	r4, r0, r4, lsl #2
-  61              	.LVL1:
-  62              	.L3:
-  63              		.loc 2 1779 3 view .LVU12
-  64              	.LBE7:
-  65              	.LBE6:
-  69:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     {
-  70:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         in = *__SIMD32(pIn)++;
-  66              		.loc 1 70 9 is_stmt 1 view .LVU13
-  67              		.loc 1 70 12 is_stmt 0 view .LVU14
-  68 0012 50F8042B 		ldr	r2, [r0], #4
-  69              	.LVL2:
-  71:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
-  72:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         /* extract the first bit */
-  73:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         buf = __ROR(in & 0x80008000, 15);
-  70              		.loc 1 73 9 is_stmt 1 view .LVU15
-  71              	.LBB10:
-  72              	.LBI10:
-1021:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-  73              		.loc 2 1021 31 view .LVU16
-  74              	.LBB11:
-1023:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if (op2 == 0U)
-  75              		.loc 2 1023 3 view .LVU17
-1024:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
-  76              		.loc 2 1024 3 view .LVU18
-1028:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-  77              		.loc 2 1028 3 view .LVU19
-1028:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-  78              		.loc 2 1028 3 is_stmt 0 view .LVU20
-  79              	.LBE11:
-  80              	.LBE10:
-  74:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
-ARM GAS  /tmp/cc7KqjTq.s 			page 35
-
-
-  75:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         /* if MSB=1, mask will be 0xFF, 0x0 otherwise */
-  76:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         mask = __QSUB16(0x00000000, buf);
-  81              		.loc 1 76 9 is_stmt 1 view .LVU21
-  82              	.LBB13:
-  83              	.LBI6:
-1775:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-  84              		.loc 2 1775 31 view .LVU22
-  85              	.LBB8:
-1777:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-  86              		.loc 2 1777 3 view .LVU23
-  87              		.loc 2 1779 3 view .LVU24
-  88              	.LBE8:
-  89              	.LBE13:
-  73:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
-  90              		.loc 1 73 15 is_stmt 0 view .LVU25
-  91 0016 02F08023 		and	r3, r2, #-2147450880
-  92              	.LBB14:
-  93              	.LBB12:
-1028:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-  94              		.loc 2 1028 23 view .LVU26
-  95 001a 4FEAF333 		ror	r3, r3, #15
-  96              	.LVL3:
-1028:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-  97              		.loc 2 1028 23 view .LVU27
-  98              	.LBE12:
-  99              	.LBE14:
- 100              	.LBB15:
- 101              	.LBB9:
- 102              		.loc 2 1779 3 view .LVU28
- 103              		.syntax unified
- 104              	@ 1779 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 105 001e D5FA13F3 		qsub16 r3, r5, r3
- 106              	@ 0 "" 2
- 107              	.LVL4:
+ 105              		.loc 2 1779 3
+ 106 005a 7B6A     		ldr	r3, [r7, #36]
+ 107 005c 3A6A     		ldr	r2, [r7, #32]
+ 108              		.syntax unified
+ 109              	@ 1779 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 110 005e D3FA12F3 		qsub16 r3, r3, r2
+ 111              	@ 0 "" 2
+ 112              		.thumb
+ 113              		.syntax unified
+ 114 0062 FB61     		str	r3, [r7, #28]
 1780:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 108              		.loc 2 1780 3 is_stmt 1 view .LVU29
- 109              		.loc 2 1780 3 is_stmt 0 view .LVU30
- 110              		.thumb
- 111              		.syntax unified
- 112              	.LBE9:
- 113              	.LBE15:
+ 115              		.loc 2 1780 9
+ 116 0064 FB69     		ldr	r3, [r7, #28]
+ 117              	.LBE9:
+ 118              	.LBE8:
+ 119              		.loc 1 76 14
+ 120 0066 BB62     		str	r3, [r7, #40]
   77:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   78:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         *__SIMD32(pOut)++ = in & (~mask);
- 114              		.loc 1 78 9 is_stmt 1 view .LVU31
- 115              		.loc 1 78 32 is_stmt 0 view .LVU32
- 116 0022 22EA0303 		bic	r3, r2, r3
- 117              	.LVL5:
-  68:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     {
- 118              		.loc 1 68 11 view .LVU33
- 119 0026 A042     		cmp	r0, r4
- 120              		.loc 1 78 27 view .LVU34
- 121 0028 40F8043C 		str	r3, [r0, #-4]
+ 121              		.loc 1 78 35
+ 122 0068 BB6A     		ldr	r3, [r7, #40]
+ 123 006a D943     		mvns	r1, r3
+ 124              		.loc 1 78 10
+ 125 006c 07F10C02 		add	r2, r7, #12
+ 126 0070 1368     		ldr	r3, [r2]
+ 127              		.loc 1 78 24
+ 128 0072 181D     		adds	r0, r3, #4
+ 129 0074 1060     		str	r0, [r2]
+ 130              		.loc 1 78 32
+ 131 0076 3A6B     		ldr	r2, [r7, #48]
+ 132 0078 0A40     		ands	r2, r2, r1
+ 133              		.loc 1 78 27
+ 134 007a 1A60     		str	r2, [r3]
   79:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         i--;
- 122              		.loc 1 79 9 is_stmt 1 view .LVU35
+ 135              		.loc 1 79 10
+ 136 007c FB8E     		ldrh	r3, [r7, #54]
+ 137 007e 013B     		subs	r3, r3, #1
+ARM GAS  /tmp/ccVqBG49.s 			page 36
+
+
+ 138 0080 FB86     		strh	r3, [r7, #54]	@ movhi
+ 139              	.L2:
   68:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     {
- 123              		.loc 1 68 11 view .LVU36
- 124 002c F1D1     		bne	.L3
-ARM GAS  /tmp/cc7KqjTq.s 			page 36
-
-
- 125              	.LVL6:
- 126              	.L2:
+ 140              		.loc 1 68 11
+ 141 0082 FB8E     		ldrh	r3, [r7, #54]
+ 142 0084 002B     		cmp	r3, #0
+ 143 0086 C9D1     		bne	.L6
   80:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     }
   81:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
   82:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     if (size & 0x1)
- 127              		.loc 1 82 5 view .LVU37
- 128              		.loc 1 82 8 is_stmt 0 view .LVU38
- 129 002e CB07     		lsls	r3, r1, #31
- 130 0030 03D5     		bpl	.L1
+ 144              		.loc 1 82 14
+ 145 0088 7B88     		ldrh	r3, [r7, #2]
+ 146 008a 03F00103 		and	r3, r3, #1
+ 147              		.loc 1 82 8
+ 148 008e 002B     		cmp	r3, #0
+ 149 0090 0AD0     		beq	.L9
   83:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     {
   84:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         if (*pIn < 0)
- 131              		.loc 1 84 9 is_stmt 1 view .LVU39
- 132              		.loc 1 84 12 is_stmt 0 view .LVU40
- 133 0032 B4F90030 		ldrsh	r3, [r4]
- 134 0036 002B     		cmp	r3, #0
- 135 0038 01DB     		blt	.L12
- 136              	.L1:
+ 150              		.loc 1 84 13
+ 151 0092 3B69     		ldr	r3, [r7, #16]
+ 152 0094 B3F90030 		ldrsh	r3, [r3]
+ 153              		.loc 1 84 12
+ 154 0098 002B     		cmp	r3, #0
+ 155 009a 02DA     		bge	.L8
   85:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         {
   86:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****             *pIn = 0;
+ 156              		.loc 1 86 13
+ 157 009c 3B69     		ldr	r3, [r7, #16]
+ 158              		.loc 1 86 18
+ 159 009e 0022     		movs	r2, #0
+ 160 00a0 1A80     		strh	r2, [r3]	@ movhi
+ 161              	.L8:
   87:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         }
   88:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         pIn++;
+ 162              		.loc 1 88 12
+ 163 00a2 3B69     		ldr	r3, [r7, #16]
+ 164 00a4 0233     		adds	r3, r3, #2
+ 165 00a6 3B61     		str	r3, [r7, #16]
+ 166              	.L9:
   89:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     }
   90:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** #else
   91:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     /* Run the following code as reference implementation for Cortex-M0 and Cortex-M3 */
@@ -2136,62 +2154,42 @@ ARM GAS  /tmp/cc7KqjTq.s 			page 1
  100:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** #endif                          /* ARM_MATH_DSP */
  101:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** 
  102:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c **** }
- 137              		.loc 1 102 1 view .LVU41
- 138 003a 30BC     		pop	{r4, r5}
- 139              	.LCFI1:
- 140              		.cfi_remember_state
- 141              		.cfi_restore 5
- 142              		.cfi_restore 4
- 143              		.cfi_def_cfa_offset 0
- 144 003c 7047     		bx	lr
- 145              	.L12:
- 146              	.LCFI2:
- 147              		.cfi_restore_state
-  86:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         }
- 148              		.loc 1 86 13 is_stmt 1 view .LVU42
-  86:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****         }
- 149              		.loc 1 86 18 is_stmt 0 view .LVU43
- 150 003e 0023     		movs	r3, #0
- 151 0040 2380     		strh	r3, [r4]	@ movhi
- 152              	.LVL7:
- 153              		.loc 1 102 1 view .LVU44
- 154 0042 30BC     		pop	{r4, r5}
- 155              	.LCFI3:
- 156              		.cfi_remember_state
-ARM GAS  /tmp/cc7KqjTq.s 			page 37
+ 167              		.loc 1 102 1
+ 168 00a8 00BF     		nop
+ 169 00aa 3C37     		adds	r7, r7, #60
+ 170              	.LCFI3:
+ARM GAS  /tmp/ccVqBG49.s 			page 37
 
 
- 157              		.cfi_restore 5
- 158              		.cfi_restore 4
- 159              		.cfi_def_cfa_offset 0
- 160 0044 7047     		bx	lr
- 161              	.LVL8:
- 162              	.L5:
- 163              	.LCFI4:
- 164              		.cfi_restore_state
-  62:./Libraries/CMSIS/NN/Source/ActivationFunctions/arm_relu_q15.c ****     q15_t    *pOut = data;
- 165              		.loc 1 62 15 view .LVU45
- 166 0046 0446     		mov	r4, r0
- 167 0048 F1E7     		b	.L2
- 168              		.cfi_endproc
- 169              	.LFE149:
- 171 004a 00BF     		.text
- 172              	.Letext0:
- 173              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 174              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 175              		.file 5 "/usr/include/newlib/sys/_types.h"
- 176              		.file 6 "/usr/include/newlib/sys/reent.h"
- 177              		.file 7 "/usr/include/newlib/sys/lock.h"
- 178              		.file 8 "/usr/include/newlib/math.h"
- 179              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 180              		.file 10 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
- 181              		.file 11 "./Libraries/CMSIS/NN/Include/arm_nn_tables.h"
-ARM GAS  /tmp/cc7KqjTq.s 			page 38
+ 171              		.cfi_def_cfa_offset 4
+ 172 00ac BD46     		mov	sp, r7
+ 173              	.LCFI4:
+ 174              		.cfi_def_cfa_register 13
+ 175              		@ sp needed
+ 176 00ae 5DF8047B 		ldr	r7, [sp], #4
+ 177              	.LCFI5:
+ 178              		.cfi_restore 7
+ 179              		.cfi_def_cfa_offset 0
+ 180 00b2 7047     		bx	lr
+ 181              		.cfi_endproc
+ 182              	.LFE149:
+ 184              		.text
+ 185              	.Letext0:
+ 186              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 187              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 188              		.file 5 "/usr/include/newlib/sys/_types.h"
+ 189              		.file 6 "/usr/include/newlib/sys/reent.h"
+ 190              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 191              		.file 8 "/usr/include/newlib/math.h"
+ 192              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 193              		.file 10 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ 194              		.file 11 "./Libraries/CMSIS/NN/Include/arm_nn_tables.h"
+ARM GAS  /tmp/ccVqBG49.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_relu_q15.c
-     /tmp/cc7KqjTq.s:17     .text.arm_relu_q15:0000000000000000 $t
-     /tmp/cc7KqjTq.s:26     .text.arm_relu_q15:0000000000000000 arm_relu_q15
+     /tmp/ccVqBG49.s:17     .text.arm_relu_q15:0000000000000000 $t
+     /tmp/ccVqBG49.s:25     .text.arm_relu_q15:0000000000000000 arm_relu_q15
 
 NO UNDEFINED SYMBOLS

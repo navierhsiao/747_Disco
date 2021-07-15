@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc2ZRuSH.s 			page 1
+ARM GAS  /tmp/ccktQlB7.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_shift_q7.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_shift_q7,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_shift_q7
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_shift_q7:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c"
+  18              		.global	arm_shift_q7
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_shift_q7:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c"
    1:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****  * Title:        arm_shift_q7.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****  */
   28:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
   29:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** #include "arm_math.h"
-ARM GAS  /tmp/cc2ZRuSH.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
   31:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** /**
+ARM GAS  /tmp/ccktQlB7.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   @ingroup groupMath
   33:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****  */
   34:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
@@ -92,16 +90,37 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
   58:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****         q7_t * pDst,
   59:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****         uint32_t blockSize)
   60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** {
-  30              		.loc 1 60 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 60 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 89B0     		sub	sp, sp, #36
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 7A60     		str	r2, [r7, #4]
+  45 000a 3B60     		str	r3, [r7]
+  46 000c 0B46     		mov	r3, r1
+  47 000e FB72     		strb	r3, [r7, #11]
   61:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 61 9 view .LVU1
   62:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****         uint8_t sign = (shiftBits & 0x80);             /* Sign of shiftBits */
-  36              		.loc 1 62 9 view .LVU2
+  48              		.loc 1 62 35
+  49 0010 FB7A     		ldrb	r3, [r7, #11]	@ zero_extendqisi2
+  50              		.loc 1 62 17
+  51 0012 23F07F03 		bic	r3, r3, #127
+  52 0016 FB76     		strb	r3, [r7, #27]
   63:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
+ARM GAS  /tmp/ccktQlB7.s 			page 3
+
+
   64:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** #if defined (ARM_MATH_LOOPUNROLL)
   65:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
   66:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** #if defined (ARM_MATH_DSP)
@@ -118,9 +137,6 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
   77:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     {
   78:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       /* C = A << shiftBits */
   79:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
-ARM GAS  /tmp/cc2ZRuSH.s 			page 3
-
-
   80:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** #if defined (ARM_MATH_DSP)
   81:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       /* Read 4 inputs */
   82:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       in1 = *pSrc++;
@@ -162,6 +178,9 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
  118:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****                                      (in2 >> -shiftBits),
  119:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****                                      (in3 >> -shiftBits),
  120:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****                                      (in4 >> -shiftBits) ));
+ARM GAS  /tmp/ccktQlB7.s 			page 4
+
+
  121:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** #else
  122:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       *pDst++ = (*pSrc++ >> -shiftBits);
  123:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       *pDst++ = (*pSrc++ >> -shiftBits);
@@ -178,83 +197,75 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
  134:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   blkCnt = blockSize % 0x4U;
  135:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
  136:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** #else
-ARM GAS  /tmp/cc2ZRuSH.s 			page 4
-
-
  137:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
  138:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   /* Initialize blkCnt with number of samples */
  139:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   blkCnt = blockSize;
-  37              		.loc 1 139 3 view .LVU3
+  53              		.loc 1 139 10
+  54 0018 3B68     		ldr	r3, [r7]
+  55 001a FB61     		str	r3, [r7, #28]
  140:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
  141:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  142:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
  143:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   /* If the shift value is positive then do right shift else left shift */
  144:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   if (sign == 0U)
-  38              		.loc 1 144 3 view .LVU4
-  39              		.loc 1 144 6 is_stmt 0 view .LVU5
-  40 0000 0029     		cmp	r1, #0
-  41              	.LVL1:
-  60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****         uint32_t blkCnt;                               /* Loop counter */
-  42              		.loc 1 60 1 view .LVU6
-  43 0002 10B4     		push	{r4}
-  44              	.LCFI0:
-  45              		.cfi_def_cfa_offset 4
-  46              		.cfi_offset 4, -4
-  47              		.loc 1 144 6 view .LVU7
-  48 0004 0EDB     		blt	.L14
+  56              		.loc 1 144 6
+  57 001c FB7E     		ldrb	r3, [r7, #27]	@ zero_extendqisi2
+  58 001e 002B     		cmp	r3, #0
+  59 0020 2FD1     		bne	.L6
  145:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   {
  146:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     while (blkCnt > 0U)
-  49              		.loc 1 146 11 is_stmt 1 view .LVU8
-  50 0006 53B1     		cbz	r3, .L1
-  51 0008 C418     		adds	r4, r0, r3
-  52              	.LVL2:
-  53              	.L5:
+  60              		.loc 1 146 11
+  61 0022 17E0     		b	.L3
+  62              	.L4:
+  63              	.LBB2:
  147:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     {
  148:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       /* C = A << shiftBits */
  149:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
  150:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       /* Shift input and store result in destination buffer. */
  151:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       *pDst++ = (q7_t) __SSAT(((q15_t) *pSrc++ << shiftBits), 8);
-  54              		.loc 1 151 7 view .LVU9
-  55              	.LBB2:
-  56              		.loc 1 151 24 view .LVU10
-  57              		.loc 1 151 24 view .LVU11
-  58 000a 10F9013B 		ldrsb	r3, [r0], #1
-  59              	.LVL3:
-  60              		.loc 1 151 24 is_stmt 0 view .LVU12
-  61              	.LBE2:
- 146:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     {
-  62              		.loc 1 146 11 view .LVU13
-  63 000e 8442     		cmp	r4, r0
-  64              	.LBB3:
-  65              		.loc 1 151 24 view .LVU14
-  66 0010 03FA01F3 		lsl	r3, r3, r1
-  67              	.LVL4:
-  68              		.loc 1 151 24 view .LVU15
-  69              		.syntax unified
-  70              	@ 151 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c" 1
-  71 0014 03F30703 		ssat r3, #8, r3
-  72              	@ 0 "" 2
-  73              	.LVL5:
-  74              		.loc 1 151 24 is_stmt 1 view .LVU16
-  75              		.loc 1 151 24 is_stmt 0 view .LVU17
-  76              		.thumb
-ARM GAS  /tmp/cc2ZRuSH.s 			page 5
+  64              		.loc 1 151 24
+  65 0024 FB68     		ldr	r3, [r7, #12]
+  66 0026 5A1C     		adds	r2, r3, #1
+  67 0028 FA60     		str	r2, [r7, #12]
+  68 002a 93F90030 		ldrsb	r3, [r3]
+  69 002e 1A46     		mov	r2, r3
+  70 0030 97F90B30 		ldrsb	r3, [r7, #11]
+  71 0034 02FA03F3 		lsl	r3, r2, r3
+  72 0038 7B61     		str	r3, [r7, #20]
+  73 003a 7B69     		ldr	r3, [r7, #20]
+  74              		.syntax unified
+  75              	@ 151 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c" 1
+  76 003c 03F30703 		ssat r3, #8, r3
+  77              	@ 0 "" 2
+  78              		.thumb
+ARM GAS  /tmp/ccktQlB7.s 			page 5
 
 
-  77              		.syntax unified
-  78              	.LBE3:
-  79              		.loc 1 151 17 view .LVU18
-  80 0018 02F8013B 		strb	r3, [r2], #1
-  81              	.LVL6:
+  79              		.syntax unified
+  80 0040 3B61     		str	r3, [r7, #16]
+  81 0042 3969     		ldr	r1, [r7, #16]
+  82              	.LBE2:
+  83              		.loc 1 151 12
+  84 0044 7B68     		ldr	r3, [r7, #4]
+  85 0046 5A1C     		adds	r2, r3, #1
+  86 0048 7A60     		str	r2, [r7, #4]
+  87              		.loc 1 151 17
+  88 004a 4AB2     		sxtb	r2, r1
+  89              		.loc 1 151 15
+  90 004c 1A70     		strb	r2, [r3]
  152:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
  153:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       /* Decrement loop counter */
  154:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****       blkCnt--;
-  82              		.loc 1 154 7 is_stmt 1 view .LVU19
+  91              		.loc 1 154 13
+  92 004e FB69     		ldr	r3, [r7, #28]
+  93 0050 013B     		subs	r3, r3, #1
+  94 0052 FB61     		str	r3, [r7, #28]
+  95              	.L3:
  146:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     {
-  83              		.loc 1 146 11 view .LVU20
-  84 001c F5D1     		bne	.L5
-  85              	.LVL7:
-  86              	.L1:
+  96              		.loc 1 146 11
+  97 0054 FB69     		ldr	r3, [r7, #28]
+  98 0056 002B     		cmp	r3, #0
+  99 0058 E4D1     		bne	.L4
  155:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     }
  156:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   }
  157:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   else
@@ -272,72 +283,80 @@ ARM GAS  /tmp/cc2ZRuSH.s 			page 1
  169:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****   }
  170:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
  171:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** }
-  87              		.loc 1 171 1 is_stmt 0 view .LVU21
-  88 001e 5DF8044B 		ldr	r4, [sp], #4
-  89              	.LCFI1:
-  90              		.cfi_remember_state
-  91              		.cfi_restore 4
-  92              		.cfi_def_cfa_offset 0
-  93 0022 7047     		bx	lr
-  94              	.LVL8:
-  95              	.L14:
-  96              	.LCFI2:
-  97              		.cfi_restore_state
- 159:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     {
-  98              		.loc 1 159 11 is_stmt 1 view .LVU22
-  99 0024 002B     		cmp	r3, #0
- 100 0026 FAD0     		beq	.L1
- 101 0028 4942     		rsbs	r1, r1, #0
- 102 002a C418     		adds	r4, r0, r3
- 103              	.LVL9:
- 104              	.L6:
+ 100              		.loc 1 171 1
+ 101 005a 15E0     		b	.L8
+ 102              	.L7:
  164:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
- 105              		.loc 1 164 7 view .LVU23
+ 103              		.loc 1 164 23
+ 104 005c FB68     		ldr	r3, [r7, #12]
+ 105 005e 5A1C     		adds	r2, r3, #1
+ 106 0060 FA60     		str	r2, [r7, #12]
  164:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
- 106              		.loc 1 164 18 is_stmt 0 view .LVU24
- 107 002c 10F9013B 		ldrsb	r3, [r0], #1
- 108              	.LVL10:
+ 107              		.loc 1 164 18
+ 108 0062 93F90030 		ldrsb	r3, [r3]
+ 109 0066 1A46     		mov	r2, r3
  164:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
-ARM GAS  /tmp/cc2ZRuSH.s 			page 6
+ 110              		.loc 1 164 29
+ 111 0068 97F90B30 		ldrsb	r3, [r7, #11]
+ARM GAS  /tmp/ccktQlB7.s 			page 6
 
 
- 109              		.loc 1 164 26 view .LVU25
- 110 0030 0B41     		asrs	r3, r3, r1
- 159:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     {
- 111              		.loc 1 159 11 view .LVU26
- 112 0032 A042     		cmp	r0, r4
+ 112 006c 5B42     		rsbs	r3, r3, #0
  164:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
- 113              		.loc 1 164 15 view .LVU27
- 114 0034 02F8013B 		strb	r3, [r2], #1
- 115              	.LVL11:
+ 113              		.loc 1 164 26
+ 114 006e 42FA03F1 		asr	r1, r2, r3
+ 164:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
+ 115              		.loc 1 164 12
+ 116 0072 7B68     		ldr	r3, [r7, #4]
+ 117 0074 5A1C     		adds	r2, r3, #1
+ 118 0076 7A60     		str	r2, [r7, #4]
+ 164:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c **** 
+ 119              		.loc 1 164 15
+ 120 0078 4AB2     		sxtb	r2, r1
+ 121 007a 1A70     		strb	r2, [r3]
  167:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     }
- 116              		.loc 1 167 7 is_stmt 1 view .LVU28
+ 122              		.loc 1 167 13
+ 123 007c FB69     		ldr	r3, [r7, #28]
+ 124 007e 013B     		subs	r3, r3, #1
+ 125 0080 FB61     		str	r3, [r7, #28]
+ 126              	.L6:
  159:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_shift_q7.c ****     {
- 117              		.loc 1 159 11 view .LVU29
- 118 0038 F8D1     		bne	.L6
- 119              		.loc 1 171 1 is_stmt 0 view .LVU30
- 120 003a 5DF8044B 		ldr	r4, [sp], #4
- 121              	.LCFI3:
- 122              		.cfi_restore 4
- 123              		.cfi_def_cfa_offset 0
- 124 003e 7047     		bx	lr
- 125              		.cfi_endproc
- 126              	.LFE145:
- 128              		.text
- 129              	.Letext0:
- 130              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 131              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 132              		.file 4 "/usr/include/newlib/sys/_types.h"
- 133              		.file 5 "/usr/include/newlib/sys/reent.h"
- 134              		.file 6 "/usr/include/newlib/sys/lock.h"
- 135              		.file 7 "/usr/include/newlib/math.h"
- 136              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/cc2ZRuSH.s 			page 7
+ 127              		.loc 1 159 11
+ 128 0082 FB69     		ldr	r3, [r7, #28]
+ 129 0084 002B     		cmp	r3, #0
+ 130 0086 E9D1     		bne	.L7
+ 131              	.L8:
+ 132              		.loc 1 171 1
+ 133 0088 00BF     		nop
+ 134 008a 2437     		adds	r7, r7, #36
+ 135              	.LCFI3:
+ 136              		.cfi_def_cfa_offset 4
+ 137 008c BD46     		mov	sp, r7
+ 138              	.LCFI4:
+ 139              		.cfi_def_cfa_register 13
+ 140              		@ sp needed
+ 141 008e 5DF8047B 		ldr	r7, [sp], #4
+ 142              	.LCFI5:
+ 143              		.cfi_restore 7
+ 144              		.cfi_def_cfa_offset 0
+ 145 0092 7047     		bx	lr
+ 146              		.cfi_endproc
+ 147              	.LFE145:
+ 149              		.text
+ 150              	.Letext0:
+ 151              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 152              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 153              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 154              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 155              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 156              		.file 7 "/usr/include/newlib/math.h"
+ 157              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccktQlB7.s 			page 7
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_shift_q7.c
-     /tmp/cc2ZRuSH.s:17     .text.arm_shift_q7:0000000000000000 $t
-     /tmp/cc2ZRuSH.s:26     .text.arm_shift_q7:0000000000000000 arm_shift_q7
+     /tmp/ccktQlB7.s:17     .text.arm_shift_q7:0000000000000000 $t
+     /tmp/ccktQlB7.s:25     .text.arm_shift_q7:0000000000000000 arm_shift_q7
 
 NO UNDEFINED SYMBOLS

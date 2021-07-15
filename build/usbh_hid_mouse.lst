@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccIVR161.s 			page 1
+ARM GAS  /tmp/ccUqXxcE.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,26 +9,100 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"usbh_hid_mouse.c"
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              		.section	.text.USBH_HID_MouseInit,"ax",%progbits
-  17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	USBH_HID_MouseInit
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	USBH_HID_MouseInit:
-  27              	.LVL0:
-  28              	.LFB338:
-  29              		.file 1 "./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c"
+  16              		.comm	mouse_info,5,4
+  17              		.comm	mouse_report_data,8,4
+  18              		.comm	mouse_rx_report_buf,8,4
+  19              		.section	.rodata.prop_b1,"a"
+  20              		.align	2
+  23              	prop_b1:
+  24 0000 00000000 		.word	mouse_report_data
+  25 0004 01000000 		.word	1
+  26 0008 00       		.byte	0
+  27 0009 00       		.byte	0
+  28 000a 00       		.byte	0
+  29 000b 00       		.space	1
+  30 000c 00000000 		.word	0
+  31 0010 01000000 		.word	1
+  32 0014 00000000 		.word	0
+  33 0018 01000000 		.word	1
+  34 001c 01000000 		.word	1
+  35              		.section	.rodata.prop_b2,"a"
+  36              		.align	2
+  39              	prop_b2:
+  40 0000 00000000 		.word	mouse_report_data
+  41 0004 01000000 		.word	1
+  42 0008 01       		.byte	1
+  43 0009 00       		.byte	0
+  44 000a 00       		.byte	0
+  45 000b 00       		.space	1
+  46 000c 00000000 		.word	0
+  47 0010 01000000 		.word	1
+  48 0014 00000000 		.word	0
+  49 0018 01000000 		.word	1
+  50 001c 01000000 		.word	1
+  51              		.section	.rodata.prop_b3,"a"
+  52              		.align	2
+  55              	prop_b3:
+  56 0000 00000000 		.word	mouse_report_data
+  57 0004 01000000 		.word	1
+  58 0008 02       		.byte	2
+  59 0009 00       		.byte	0
+  60 000a 00       		.byte	0
+  61 000b 00       		.space	1
+  62 000c 00000000 		.word	0
+  63 0010 01000000 		.word	1
+ARM GAS  /tmp/ccUqXxcE.s 			page 2
+
+
+  64 0014 00000000 		.word	0
+  65 0018 01000000 		.word	1
+  66 001c 01000000 		.word	1
+  67              		.section	.rodata.prop_x,"a"
+  68              		.align	2
+  71              	prop_x:
+  72 0000 01000000 		.word	mouse_report_data+1
+  73 0004 08000000 		.word	8
+  74 0008 00       		.byte	0
+  75 0009 00       		.byte	0
+  76 000a 01       		.byte	1
+  77 000b 00       		.space	1
+  78 000c 00000000 		.word	0
+  79 0010 FFFF0000 		.word	65535
+  80 0014 00000000 		.word	0
+  81 0018 FFFF0000 		.word	65535
+  82 001c 01000000 		.word	1
+  83              		.section	.rodata.prop_y,"a"
+  84              		.align	2
+  87              	prop_y:
+  88 0000 02000000 		.word	mouse_report_data+2
+  89 0004 08000000 		.word	8
+  90 0008 00       		.byte	0
+  91 0009 00       		.byte	0
+  92 000a 01       		.byte	1
+  93 000b 00       		.space	1
+  94 000c 00000000 		.word	0
+  95 0010 FFFF0000 		.word	65535
+  96 0014 00000000 		.word	0
+  97 0018 FFFF0000 		.word	65535
+  98 001c 01000000 		.word	1
+  99              		.section	.text.USBH_HID_MouseInit,"ax",%progbits
+ 100              		.align	1
+ 101              		.global	USBH_HID_MouseInit
+ 102              		.arch armv7e-m
+ 103              		.syntax unified
+ 104              		.thumb
+ 105              		.thumb_func
+ 106              		.fpu fpv5-d16
+ 108              	USBH_HID_MouseInit:
+ 109              	.LFB338:
+ 110              		.file 1 "./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c"
    1:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** /**
    2:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   ******************************************************************************
    3:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   * @file    usbh_hid_mouse.c
@@ -44,6 +118,9 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
   13:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
   14:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   * the License. You may obtain a copy of the License at:
   15:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   *                      www.st.com/SLA0044
+ARM GAS  /tmp/ccUqXxcE.s 			page 3
+
+
   16:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   *
   17:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   ******************************************************************************
   18:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   */
@@ -58,9 +135,6 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
   27:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** /* Includes ------------------------------------------------------------------*/
   28:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** #include "usbh_hid_mouse.h"
   29:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** #include "usbh_hid_parser.h"
-ARM GAS  /tmp/ccIVR161.s 			page 2
-
-
   30:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
   31:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
   32:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** /** @addtogroup USBH_LIB
@@ -104,6 +178,9 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
   70:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   */
   71:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
   72:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** /** @defgroup USBH_HID_MOUSE_Private_FunctionPrototypes
+ARM GAS  /tmp/ccUqXxcE.s 			page 4
+
+
   73:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   * @{
   74:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   */
   75:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** static USBH_StatusTypeDef USBH_HID_MouseDecode(USBH_HandleTypeDef *phost);
@@ -118,9 +195,6 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
   84:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   */
   85:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** HID_MOUSE_Info_TypeDef    mouse_info;
   86:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** uint32_t                  mouse_report_data[2];
-ARM GAS  /tmp/ccIVR161.s 			page 3
-
-
   87:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** uint32_t                  mouse_rx_report_buf[2];
   88:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
   89:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** /* Structures defining how to access items in a HID mouse report */
@@ -164,6 +238,9 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
  127:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0,     /*signed?*/
  128:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0,     /*min value read can return*/
  129:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   1,     /*max value read can return*/
+ARM GAS  /tmp/ccUqXxcE.s 			page 5
+
+
  130:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0,     /*min vale device can report*/
  131:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   1,     /*max value device can report*/
  132:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   1      /*resolution*/
@@ -178,9 +255,6 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
  141:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0,     /*count (only for array items)*/
  142:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   1,     /*signed?*/
  143:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0,     /*min value read can return*/
-ARM GAS  /tmp/ccIVR161.s 			page 4
-
-
  144:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0xFFFF,/*max value read can return*/
  145:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0,     /*min vale device can report*/
  146:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   0xFFFF,/*max value device can report*/
@@ -220,156 +294,162 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
  180:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   */
  181:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** USBH_StatusTypeDef USBH_HID_MouseInit(USBH_HandleTypeDef *phost)
  182:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** {
-  30              		.loc 1 182 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111              		.loc 1 182 1
+ 112              		.cfi_startproc
+ 113              		@ args = 0, pretend = 0, frame = 16
+ 114              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  /tmp/ccUqXxcE.s 			page 6
+
+
+ 115 0000 80B5     		push	{r7, lr}
+ 116              	.LCFI0:
+ 117              		.cfi_def_cfa_offset 8
+ 118              		.cfi_offset 7, -8
+ 119              		.cfi_offset 14, -4
+ 120 0002 84B0     		sub	sp, sp, #16
+ 121              	.LCFI1:
+ 122              		.cfi_def_cfa_offset 24
+ 123 0004 00AF     		add	r7, sp, #0
+ 124              	.LCFI2:
+ 125              		.cfi_def_cfa_register 7
+ 126 0006 7860     		str	r0, [r7, #4]
  183:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   uint32_t i;
-  34              		.loc 1 183 3 view .LVU1
  184:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   HID_HandleTypeDef *HID_Handle = (HID_HandleTypeDef *) phost->pActiveClass->pData;
-  35              		.loc 1 184 3 view .LVU2
-  36              		.loc 1 184 22 is_stmt 0 view .LVU3
-  37 0000 D0F87C14 		ldr	r1, [r0, #1148]
+ 127              		.loc 1 184 62
+ 128 0008 7B68     		ldr	r3, [r7, #4]
+ 129 000a D3F87C34 		ldr	r3, [r3, #1148]
+ 130              		.loc 1 184 22
+ 131 000e DB69     		ldr	r3, [r3, #28]
+ 132 0010 BB60     		str	r3, [r7, #8]
  185:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  186:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.x = 0U;
-  38              		.loc 1 186 16 view .LVU4
-  39 0004 0023     		movs	r3, #0
-  40 0006 0E4A     		ldr	r2, .L5
- 182:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   uint32_t i;
-  41              		.loc 1 182 1 view .LVU5
-  42 0008 70B5     		push	{r4, r5, r6, lr}
-ARM GAS  /tmp/ccIVR161.s 			page 5
-
-
-  43              	.LCFI0:
-  44              		.cfi_def_cfa_offset 16
-  45              		.cfi_offset 4, -16
-  46              		.cfi_offset 5, -12
-  47              		.cfi_offset 6, -8
-  48              		.cfi_offset 14, -4
- 184:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   HID_HandleTypeDef *HID_Handle = (HID_HandleTypeDef *) phost->pActiveClass->pData;
-  49              		.loc 1 184 22 view .LVU6
-  50 000a CC69     		ldr	r4, [r1, #28]
-  51              	.LVL1:
-  52              		.loc 1 186 3 is_stmt 1 view .LVU7
+ 133              		.loc 1 186 16
+ 134 0012 1D4B     		ldr	r3, .L6
+ 135 0014 0022     		movs	r2, #0
+ 136 0016 1A70     		strb	r2, [r3]
  187:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.y = 0U;
-  53              		.loc 1 187 3 view .LVU8
+ 137              		.loc 1 187 16
+ 138 0018 1B4B     		ldr	r3, .L6
+ 139 001a 0022     		movs	r2, #0
+ 140 001c 5A70     		strb	r2, [r3, #1]
  188:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.buttons[0] = 0U;
-  54              		.loc 1 188 3 view .LVU9
+ 141              		.loc 1 188 25
+ 142 001e 1A4B     		ldr	r3, .L6
+ 143 0020 0022     		movs	r2, #0
+ 144 0022 9A70     		strb	r2, [r3, #2]
  189:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.buttons[1] = 0U;
+ 145              		.loc 1 189 25
+ 146 0024 184B     		ldr	r3, .L6
+ 147 0026 0022     		movs	r2, #0
+ 148 0028 DA70     		strb	r2, [r3, #3]
  190:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.buttons[2] = 0U;
+ 149              		.loc 1 190 25
+ 150 002a 174B     		ldr	r3, .L6
+ 151 002c 0022     		movs	r2, #0
+ 152 002e 1A71     		strb	r2, [r3, #4]
  191:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  192:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   for (i = 0U; i < (sizeof(mouse_report_data) / sizeof(uint32_t)); i++)
+ 153              		.loc 1 192 10
+ 154 0030 0023     		movs	r3, #0
+ 155 0032 FB60     		str	r3, [r7, #12]
+ 156              		.loc 1 192 3
+ 157 0034 0CE0     		b	.L2
+ 158              	.L3:
  193:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
  194:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_report_data[i] = 0U;
-  55              		.loc 1 194 26 is_stmt 0 view .LVU10
-  56 000c 0D4D     		ldr	r5, .L5+4
+ 159              		.loc 1 194 26 discriminator 3
+ARM GAS  /tmp/ccUqXxcE.s 			page 7
+
+
+ 160 0036 154A     		ldr	r2, .L6+4
+ 161 0038 FB68     		ldr	r3, [r7, #12]
+ 162 003a 0021     		movs	r1, #0
+ 163 003c 42F82310 		str	r1, [r2, r3, lsl #2]
  195:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_rx_report_buf[i] = 0U;
+ 164              		.loc 1 195 28 discriminator 3
+ 165 0040 134A     		ldr	r2, .L6+8
+ 166 0042 FB68     		ldr	r3, [r7, #12]
+ 167 0044 0021     		movs	r1, #0
+ 168 0046 42F82310 		str	r1, [r2, r3, lsl #2]
+ 192:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
+ 169              		.loc 1 192 69 discriminator 3
+ 170 004a FB68     		ldr	r3, [r7, #12]
+ 171 004c 0133     		adds	r3, r3, #1
+ 172 004e FB60     		str	r3, [r7, #12]
+ 173              	.L2:
+ 192:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
+ 174              		.loc 1 192 3 discriminator 1
+ 175 0050 FB68     		ldr	r3, [r7, #12]
+ 176 0052 012B     		cmp	r3, #1
+ 177 0054 EFD9     		bls	.L3
  196:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
  197:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  198:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   if (HID_Handle->length > sizeof(mouse_report_data))
-  57              		.loc 1 198 6 view .LVU11
-  58 000e 268B     		ldrh	r6, [r4, #24]
- 195:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_rx_report_buf[i] = 0U;
-  59              		.loc 1 195 28 view .LVU12
-  60 0010 0D49     		ldr	r1, .L5+8
-  61              		.loc 1 198 6 view .LVU13
-  62 0012 082E     		cmp	r6, #8
- 186:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.y = 0U;
-  63              		.loc 1 186 16 view .LVU14
-  64 0014 1370     		strb	r3, [r2]
- 187:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.buttons[0] = 0U;
-  65              		.loc 1 187 16 view .LVU15
-  66 0016 5370     		strb	r3, [r2, #1]
- 188:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.buttons[1] = 0U;
-  67              		.loc 1 188 25 view .LVU16
-  68 0018 9370     		strb	r3, [r2, #2]
- 189:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.buttons[2] = 0U;
-  69              		.loc 1 189 3 is_stmt 1 view .LVU17
- 189:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   mouse_info.buttons[2] = 0U;
-  70              		.loc 1 189 25 is_stmt 0 view .LVU18
-  71 001a D370     		strb	r3, [r2, #3]
- 190:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
-  72              		.loc 1 190 3 is_stmt 1 view .LVU19
- 190:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
-  73              		.loc 1 190 25 is_stmt 0 view .LVU20
-  74 001c 1371     		strb	r3, [r2, #4]
- 192:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
-  75              		.loc 1 192 3 is_stmt 1 view .LVU21
-  76              	.LVL2:
- 192:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
-ARM GAS  /tmp/ccIVR161.s 			page 6
-
-
-  77              		.loc 1 192 16 view .LVU22
- 194:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_rx_report_buf[i] = 0U;
-  78              		.loc 1 194 5 view .LVU23
- 194:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_rx_report_buf[i] = 0U;
-  79              		.loc 1 194 26 is_stmt 0 view .LVU24
-  80 001e C5E90033 		strd	r3, r3, [r5]
- 195:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
-  81              		.loc 1 195 28 view .LVU25
-  82 0022 C1E90033 		strd	r3, r3, [r1]
- 192:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
-  83              		.loc 1 192 68 is_stmt 1 view .LVU26
-  84              	.LVL3:
- 192:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
-  85              		.loc 1 192 16 view .LVU27
-  86              		.loc 1 198 3 view .LVU28
-  87              		.loc 1 198 6 is_stmt 0 view .LVU29
-  88 0026 01D9     		bls	.L2
+ 178              		.loc 1 198 17
+ 179 0056 BB68     		ldr	r3, [r7, #8]
+ 180 0058 1B8B     		ldrh	r3, [r3, #24]
+ 181              		.loc 1 198 6
+ 182 005a 082B     		cmp	r3, #8
+ 183 005c 02D9     		bls	.L4
  199:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
  200:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     HID_Handle->length = sizeof(mouse_report_data);
-  89              		.loc 1 200 5 is_stmt 1 view .LVU30
-  90              		.loc 1 200 24 is_stmt 0 view .LVU31
-  91 0028 0823     		movs	r3, #8
-  92 002a 2383     		strh	r3, [r4, #24]	@ movhi
-  93              	.L2:
+ 184              		.loc 1 200 24
+ 185 005e BB68     		ldr	r3, [r7, #8]
+ 186 0060 0822     		movs	r2, #8
+ 187 0062 1A83     		strh	r2, [r3, #24]	@ movhi
+ 188              	.L4:
  201:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
  202:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   HID_Handle->pData = (uint8_t *)(void *)mouse_rx_report_buf;
-  94              		.loc 1 202 3 is_stmt 1 view .LVU32
-  95              		.loc 1 202 21 is_stmt 0 view .LVU33
-  96 002c 6161     		str	r1, [r4, #20]
+ 189              		.loc 1 202 21
+ 190 0064 BB68     		ldr	r3, [r7, #8]
+ 191 0066 0A4A     		ldr	r2, .L6+8
+ 192 0068 5A61     		str	r2, [r3, #20]
  203:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   USBH_HID_FifoInit(&HID_Handle->fifo, phost->device.Data, HID_QUEUE_SIZE * sizeof(mouse_report_dat
-  97              		.loc 1 203 3 is_stmt 1 view .LVU34
-  98 002e 5022     		movs	r2, #80
-  99 0030 00F50771 		add	r1, r0, #540
- 100 0034 04F10800 		add	r0, r4, #8
- 101              	.LVL4:
- 102              		.loc 1 203 3 is_stmt 0 view .LVU35
- 103 0038 FFF7FEFF 		bl	USBH_HID_FifoInit
- 104              	.LVL5:
+ 193              		.loc 1 203 3
+ 194 006a BB68     		ldr	r3, [r7, #8]
+ 195 006c 03F10800 		add	r0, r3, #8
+ 196              		.loc 1 203 53
+ 197 0070 7B68     		ldr	r3, [r7, #4]
+ 198 0072 03F50773 		add	r3, r3, #540
+ 199              		.loc 1 203 3
+ 200 0076 5022     		movs	r2, #80
+ 201 0078 1946     		mov	r1, r3
+ 202 007a FFF7FEFF 		bl	USBH_HID_FifoInit
  204:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  205:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   return USBH_OK;
- 105              		.loc 1 205 3 is_stmt 1 view .LVU36
+ 203              		.loc 1 205 10
+ARM GAS  /tmp/ccUqXxcE.s 			page 8
+
+
+ 204 007e 0023     		movs	r3, #0
  206:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** }
- 106              		.loc 1 206 1 is_stmt 0 view .LVU37
- 107 003c 0020     		movs	r0, #0
- 108 003e 70BD     		pop	{r4, r5, r6, pc}
- 109              	.LVL6:
- 110              	.L6:
- 111              		.loc 1 206 1 view .LVU38
- 112              		.align	2
- 113              	.L5:
- 114 0040 00000000 		.word	mouse_info
- 115 0044 00000000 		.word	mouse_report_data
- 116 0048 00000000 		.word	mouse_rx_report_buf
- 117              		.cfi_endproc
- 118              	.LFE338:
- 120              		.section	.text.USBH_HID_GetMouseInfo,"ax",%progbits
- 121              		.align	1
-ARM GAS  /tmp/ccIVR161.s 			page 7
-
-
- 122              		.p2align 2,,3
- 123              		.global	USBH_HID_GetMouseInfo
- 124              		.syntax unified
- 125              		.thumb
- 126              		.thumb_func
- 127              		.fpu fpv5-d16
- 129              	USBH_HID_GetMouseInfo:
- 130              	.LVL7:
- 131              	.LFB339:
+ 205              		.loc 1 206 1
+ 206 0080 1846     		mov	r0, r3
+ 207 0082 1037     		adds	r7, r7, #16
+ 208              	.LCFI3:
+ 209              		.cfi_def_cfa_offset 8
+ 210 0084 BD46     		mov	sp, r7
+ 211              	.LCFI4:
+ 212              		.cfi_def_cfa_register 13
+ 213              		@ sp needed
+ 214 0086 80BD     		pop	{r7, pc}
+ 215              	.L7:
+ 216              		.align	2
+ 217              	.L6:
+ 218 0088 00000000 		.word	mouse_info
+ 219 008c 00000000 		.word	mouse_report_data
+ 220 0090 00000000 		.word	mouse_rx_report_buf
+ 221              		.cfi_endproc
+ 222              	.LFE338:
+ 224              		.section	.text.USBH_HID_GetMouseInfo,"ax",%progbits
+ 225              		.align	1
+ 226              		.global	USBH_HID_GetMouseInfo
+ 227              		.syntax unified
+ 228              		.thumb
+ 229              		.thumb_func
+ 230              		.fpu fpv5-d16
+ 232              	USBH_HID_GetMouseInfo:
+ 233              	.LFB339:
  207:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  208:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** /**
  209:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   * @brief  USBH_HID_GetMouseInfo
@@ -379,22 +459,72 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
  213:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   */
  214:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** HID_MOUSE_Info_TypeDef *USBH_HID_GetMouseInfo(USBH_HandleTypeDef *phost)
  215:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** {
- 132              		.loc 1 215 1 is_stmt 1 view -0
- 133              		.cfi_startproc
- 134              		@ args = 0, pretend = 0, frame = 0
- 135              		@ frame_needed = 0, uses_anonymous_args = 0
+ 234              		.loc 1 215 1
+ 235              		.cfi_startproc
+ 236              		@ args = 0, pretend = 0, frame = 8
+ 237              		@ frame_needed = 1, uses_anonymous_args = 0
+ 238 0000 80B5     		push	{r7, lr}
+ 239              	.LCFI5:
+ 240              		.cfi_def_cfa_offset 8
+ 241              		.cfi_offset 7, -8
+ 242              		.cfi_offset 14, -4
+ 243 0002 82B0     		sub	sp, sp, #8
+ 244              	.LCFI6:
+ 245              		.cfi_def_cfa_offset 16
+ 246 0004 00AF     		add	r7, sp, #0
+ 247              	.LCFI7:
+ 248              		.cfi_def_cfa_register 7
+ 249 0006 7860     		str	r0, [r7, #4]
  216:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   if (USBH_HID_MouseDecode(phost) == USBH_OK)
- 136              		.loc 1 216 3 view .LVU40
- 137              	.LBB4:
- 138              	.LBI4:
+ 250              		.loc 1 216 7
+ 251 0008 7868     		ldr	r0, [r7, #4]
+ARM GAS  /tmp/ccUqXxcE.s 			page 9
+
+
+ 252 000a FFF7FEFF 		bl	USBH_HID_MouseDecode
+ 253 000e 0346     		mov	r3, r0
+ 254              		.loc 1 216 6
+ 255 0010 002B     		cmp	r3, #0
+ 256 0012 01D1     		bne	.L9
  217:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
  218:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     return &mouse_info;
+ 257              		.loc 1 218 12
+ 258 0014 034B     		ldr	r3, .L11
+ 259 0016 00E0     		b	.L10
+ 260              	.L9:
  219:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
  220:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   else
  221:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
  222:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     return NULL;
+ 261              		.loc 1 222 12
+ 262 0018 0023     		movs	r3, #0
+ 263              	.L10:
  223:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
  224:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** }
+ 264              		.loc 1 224 1
+ 265 001a 1846     		mov	r0, r3
+ 266 001c 0837     		adds	r7, r7, #8
+ 267              	.LCFI8:
+ 268              		.cfi_def_cfa_offset 8
+ 269 001e BD46     		mov	sp, r7
+ 270              	.LCFI9:
+ 271              		.cfi_def_cfa_register 13
+ 272              		@ sp needed
+ 273 0020 80BD     		pop	{r7, pc}
+ 274              	.L12:
+ 275 0022 00BF     		.align	2
+ 276              	.L11:
+ 277 0024 00000000 		.word	mouse_info
+ 278              		.cfi_endproc
+ 279              	.LFE339:
+ 281              		.section	.text.USBH_HID_MouseDecode,"ax",%progbits
+ 282              		.align	1
+ 283              		.syntax unified
+ 284              		.thumb
+ 285              		.thumb_func
+ 286              		.fpu fpv5-d16
+ 288              	USBH_HID_MouseDecode:
+ 289              	.LFB340:
  225:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  226:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** /**
  227:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   * @brief  USBH_HID_MouseDecode
@@ -403,296 +533,212 @@ ARM GAS  /tmp/ccIVR161.s 			page 1
  230:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   * @retval USBH Status
  231:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   */
  232:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** static USBH_StatusTypeDef USBH_HID_MouseDecode(USBH_HandleTypeDef *phost)
- 139              		.loc 1 232 27 view .LVU41
- 140              	.LBB5:
  233:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** {
+ 290              		.loc 1 233 1
+ 291              		.cfi_startproc
+ 292              		@ args = 0, pretend = 0, frame = 16
+ 293              		@ frame_needed = 1, uses_anonymous_args = 0
+ARM GAS  /tmp/ccUqXxcE.s 			page 10
+
+
+ 294 0000 80B5     		push	{r7, lr}
+ 295              	.LCFI10:
+ 296              		.cfi_def_cfa_offset 8
+ 297              		.cfi_offset 7, -8
+ 298              		.cfi_offset 14, -4
+ 299 0002 84B0     		sub	sp, sp, #16
+ 300              	.LCFI11:
+ 301              		.cfi_def_cfa_offset 24
+ 302 0004 00AF     		add	r7, sp, #0
+ 303              	.LCFI12:
+ 304              		.cfi_def_cfa_register 7
+ 305 0006 7860     		str	r0, [r7, #4]
  234:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   HID_HandleTypeDef *HID_Handle = (HID_HandleTypeDef *) phost->pActiveClass->pData;
- 141              		.loc 1 234 3 view .LVU42
- 142              		.loc 1 234 22 is_stmt 0 view .LVU43
- 143 0000 D0F87C34 		ldr	r3, [r0, #1148]
- 144              	.LBE5:
- 145              	.LBE4:
- 215:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   if (USBH_HID_MouseDecode(phost) == USBH_OK)
- 146              		.loc 1 215 1 view .LVU44
- 147 0004 10B5     		push	{r4, lr}
- 148              	.LCFI1:
- 149              		.cfi_def_cfa_offset 8
- 150              		.cfi_offset 4, -8
-ARM GAS  /tmp/ccIVR161.s 			page 8
-
-
- 151              		.cfi_offset 14, -4
- 152              	.LBB9:
- 153              	.LBB6:
- 154              		.loc 1 234 22 view .LVU45
- 155 0006 DC69     		ldr	r4, [r3, #28]
- 156              	.LVL8:
+ 306              		.loc 1 234 62
+ 307 0008 7B68     		ldr	r3, [r7, #4]
+ 308 000a D3F87C34 		ldr	r3, [r3, #1148]
+ 309              		.loc 1 234 22
+ 310 000e DB69     		ldr	r3, [r3, #28]
+ 311 0010 FB60     		str	r3, [r7, #12]
  235:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  236:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   if (HID_Handle->length == 0U)
- 157              		.loc 1 236 3 is_stmt 1 view .LVU46
- 158              		.loc 1 236 17 is_stmt 0 view .LVU47
- 159 0008 228B     		ldrh	r2, [r4, #24]
- 160              		.loc 1 236 6 view .LVU48
- 161 000a 3AB1     		cbz	r2, .L10
+ 312              		.loc 1 236 17
+ 313 0012 FB68     		ldr	r3, [r7, #12]
+ 314 0014 1B8B     		ldrh	r3, [r3, #24]
+ 315              		.loc 1 236 6
+ 316 0016 002B     		cmp	r3, #0
+ 317 0018 01D1     		bne	.L14
  237:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
  238:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     return USBH_FAIL;
+ 318              		.loc 1 238 12
+ 319 001a 0223     		movs	r3, #2
+ 320 001c 39E0     		b	.L15
+ 321              	.L14:
  239:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
  240:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   /*Fill report */
  241:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   if (USBH_HID_FifoRead(&HID_Handle->fifo, &mouse_report_data, HID_Handle->length) ==  HID_Handle->
- 162              		.loc 1 241 3 is_stmt 1 view .LVU49
- 163              		.loc 1 241 7 is_stmt 0 view .LVU50
- 164 000c 1549     		ldr	r1, .L13
- 165 000e 04F10800 		add	r0, r4, #8
- 166              	.LVL9:
- 167              		.loc 1 241 7 view .LVU51
- 168 0012 FFF7FEFF 		bl	USBH_HID_FifoRead
- 169              	.LVL10:
- 170              		.loc 1 241 6 view .LVU52
- 171 0016 238B     		ldrh	r3, [r4, #24]
- 172 0018 8342     		cmp	r3, r0
- 173 001a 01D0     		beq	.L12
- 174              	.L10:
- 175              	.LBE6:
- 176              	.LBE9:
- 222:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
- 177              		.loc 1 222 12 view .LVU53
- 178 001c 0020     		movs	r0, #0
- 224:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
- 179              		.loc 1 224 1 view .LVU54
- 180 001e 10BD     		pop	{r4, pc}
- 181              	.LVL11:
- 182              	.L12:
- 183              	.LBB10:
- 184              	.LBB7:
+ 322              		.loc 1 241 7
+ 323 001e FB68     		ldr	r3, [r7, #12]
+ 324 0020 03F10800 		add	r0, r3, #8
+ 325 0024 FB68     		ldr	r3, [r7, #12]
+ 326 0026 1B8B     		ldrh	r3, [r3, #24]
+ 327 0028 1A46     		mov	r2, r3
+ 328 002a 1C49     		ldr	r1, .L17
+ 329 002c FFF7FEFF 		bl	USBH_HID_FifoRead
+ 330 0030 0346     		mov	r3, r0
+ 331 0032 1A46     		mov	r2, r3
+ 332              		.loc 1 241 98
+ 333 0034 FB68     		ldr	r3, [r7, #12]
+ 334 0036 1B8B     		ldrh	r3, [r3, #24]
+ 335              		.loc 1 241 6
+ 336 0038 9A42     		cmp	r2, r3
+ 337 003a 29D1     		bne	.L16
  242:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   {
  243:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     /*Decode report */
  244:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.x = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_x, 0U);
- 185              		.loc 1 244 5 is_stmt 1 view .LVU55
- 186              		.loc 1 244 29 is_stmt 0 view .LVU56
- 187 0020 0021     		movs	r1, #0
- 188 0022 1148     		ldr	r0, .L13+4
- 189              		.loc 1 244 18 view .LVU57
- 190 0024 114C     		ldr	r4, .L13+8
- 191              	.LVL12:
- 192              		.loc 1 244 29 view .LVU58
- 193 0026 FFF7FEFF 		bl	HID_ReadItem
- 194              	.LVL13:
- 195 002a 0346     		mov	r3, r0
-ARM GAS  /tmp/ccIVR161.s 			page 9
+ 338              		.loc 1 244 29
+ 339 003c 0021     		movs	r1, #0
+ARM GAS  /tmp/ccUqXxcE.s 			page 11
 
 
+ 340 003e 1848     		ldr	r0, .L17+4
+ 341 0040 FFF7FEFF 		bl	HID_ReadItem
+ 342 0044 0346     		mov	r3, r0
+ 343              		.loc 1 244 20
+ 344 0046 DAB2     		uxtb	r2, r3
+ 345              		.loc 1 244 18
+ 346 0048 164B     		ldr	r3, .L17+8
+ 347 004a 1A70     		strb	r2, [r3]
  245:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.y = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_y, 0U);
- 196              		.loc 1 245 29 view .LVU59
- 197 002c 0021     		movs	r1, #0
- 198 002e 1048     		ldr	r0, .L13+12
- 244:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.y = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_y, 0U);
- 199              		.loc 1 244 20 view .LVU60
- 200 0030 2370     		strb	r3, [r4]
- 201              		.loc 1 245 5 is_stmt 1 view .LVU61
- 202              		.loc 1 245 29 is_stmt 0 view .LVU62
- 203 0032 FFF7FEFF 		bl	HID_ReadItem
- 204              	.LVL14:
- 205 0036 0346     		mov	r3, r0
+ 348              		.loc 1 245 29
+ 349 004c 0021     		movs	r1, #0
+ 350 004e 1648     		ldr	r0, .L17+12
+ 351 0050 FFF7FEFF 		bl	HID_ReadItem
+ 352 0054 0346     		mov	r3, r0
+ 353              		.loc 1 245 20
+ 354 0056 DAB2     		uxtb	r2, r3
+ 355              		.loc 1 245 18
+ 356 0058 124B     		ldr	r3, .L17+8
+ 357 005a 5A70     		strb	r2, [r3, #1]
  246:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  247:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.buttons[0] = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_b1, 0U);
- 206              		.loc 1 247 38 view .LVU63
- 207 0038 0021     		movs	r1, #0
- 208 003a 0E48     		ldr	r0, .L13+16
- 245:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
- 209              		.loc 1 245 20 view .LVU64
- 210 003c 6370     		strb	r3, [r4, #1]
- 211              		.loc 1 247 5 is_stmt 1 view .LVU65
- 212              		.loc 1 247 38 is_stmt 0 view .LVU66
- 213 003e FFF7FEFF 		bl	HID_ReadItem
- 214              	.LVL15:
- 215 0042 0346     		mov	r3, r0
+ 358              		.loc 1 247 38
+ 359 005c 0021     		movs	r1, #0
+ 360 005e 1348     		ldr	r0, .L17+16
+ 361 0060 FFF7FEFF 		bl	HID_ReadItem
+ 362 0064 0346     		mov	r3, r0
+ 363              		.loc 1 247 29
+ 364 0066 DAB2     		uxtb	r2, r3
+ 365              		.loc 1 247 27
+ 366 0068 0E4B     		ldr	r3, .L17+8
+ 367 006a 9A70     		strb	r2, [r3, #2]
  248:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.buttons[1] = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_b2, 0U);
- 216              		.loc 1 248 38 view .LVU67
- 217 0044 0021     		movs	r1, #0
- 218 0046 0C48     		ldr	r0, .L13+20
- 247:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.buttons[1] = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_b2, 0U);
- 219              		.loc 1 247 29 view .LVU68
- 220 0048 A370     		strb	r3, [r4, #2]
- 221              		.loc 1 248 5 is_stmt 1 view .LVU69
- 222              		.loc 1 248 38 is_stmt 0 view .LVU70
- 223 004a FFF7FEFF 		bl	HID_ReadItem
- 224              	.LVL16:
- 225 004e 0346     		mov	r3, r0
+ 368              		.loc 1 248 38
+ 369 006c 0021     		movs	r1, #0
+ 370 006e 1048     		ldr	r0, .L17+20
+ 371 0070 FFF7FEFF 		bl	HID_ReadItem
+ 372 0074 0346     		mov	r3, r0
+ 373              		.loc 1 248 29
+ 374 0076 DAB2     		uxtb	r2, r3
+ 375              		.loc 1 248 27
+ 376 0078 0A4B     		ldr	r3, .L17+8
+ 377 007a DA70     		strb	r2, [r3, #3]
  249:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.buttons[2] = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_b3, 0U);
- 226              		.loc 1 249 38 view .LVU71
- 227 0050 0021     		movs	r1, #0
- 228 0052 0A48     		ldr	r0, .L13+24
- 248:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     mouse_info.buttons[1] = (uint8_t)HID_ReadItem((HID_Report_ItemTypedef *) &prop_b2, 0U);
- 229              		.loc 1 248 29 view .LVU72
- 230 0054 E370     		strb	r3, [r4, #3]
- 231              		.loc 1 249 5 is_stmt 1 view .LVU73
- 232              		.loc 1 249 38 is_stmt 0 view .LVU74
- 233 0056 FFF7FEFF 		bl	HID_ReadItem
- 234              	.LVL17:
- 235 005a 0346     		mov	r3, r0
- 236              	.LBE7:
- 237              	.LBE10:
- 218:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
- 238              		.loc 1 218 12 view .LVU75
- 239 005c 2046     		mov	r0, r4
- 240              	.LBB11:
- 241              	.LBB8:
- 242              		.loc 1 249 29 view .LVU76
-ARM GAS  /tmp/ccIVR161.s 			page 10
-
-
- 243 005e 2371     		strb	r3, [r4, #4]
+ 378              		.loc 1 249 38
+ 379 007c 0021     		movs	r1, #0
+ 380 007e 0D48     		ldr	r0, .L17+24
+ 381 0080 FFF7FEFF 		bl	HID_ReadItem
+ 382 0084 0346     		mov	r3, r0
+ 383              		.loc 1 249 29
+ 384 0086 DAB2     		uxtb	r2, r3
+ 385              		.loc 1 249 27
+ 386 0088 064B     		ldr	r3, .L17+8
+ 387 008a 1A71     		strb	r2, [r3, #4]
  250:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
  251:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****     return USBH_OK;
- 244              		.loc 1 251 5 is_stmt 1 view .LVU77
- 245              	.LVL18:
- 246              		.loc 1 251 5 is_stmt 0 view .LVU78
- 247              	.LBE8:
- 248              	.LBE11:
- 224:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** 
- 249              		.loc 1 224 1 view .LVU79
- 250 0060 10BD     		pop	{r4, pc}
- 251              	.L14:
- 252 0062 00BF     		.align	2
- 253              	.L13:
- 254 0064 00000000 		.word	mouse_report_data
- 255 0068 00000000 		.word	.LANCHOR0
- 256 006c 00000000 		.word	mouse_info
- 257 0070 00000000 		.word	.LANCHOR1
- 258 0074 00000000 		.word	.LANCHOR2
- 259 0078 00000000 		.word	.LANCHOR3
- 260 007c 00000000 		.word	.LANCHOR4
- 261              		.cfi_endproc
- 262              	.LFE339:
- 264              		.comm	mouse_rx_report_buf,8,4
- 265              		.comm	mouse_report_data,8,4
- 266              		.comm	mouse_info,5,4
- 267              		.section	.rodata.prop_b1,"a"
- 268              		.align	2
- 269              		.set	.LANCHOR2,. + 0
- 272              	prop_b1:
- 273 0000 00000000 		.word	mouse_report_data
- 274 0004 01000000 		.word	1
- 275 0008 00       		.byte	0
- 276 0009 00       		.byte	0
- 277 000a 00       		.byte	0
- 278 000b 00       		.space	1
- 279 000c 00000000 		.word	0
- 280 0010 01000000 		.word	1
- 281 0014 00000000 		.word	0
- 282 0018 01000000 		.word	1
- 283 001c 01000000 		.word	1
- 284              		.section	.rodata.prop_b2,"a"
- 285              		.align	2
- 286              		.set	.LANCHOR3,. + 0
- 289              	prop_b2:
- 290 0000 00000000 		.word	mouse_report_data
- 291 0004 01000000 		.word	1
- 292 0008 01       		.byte	1
- 293 0009 00       		.byte	0
- 294 000a 00       		.byte	0
- 295 000b 00       		.space	1
- 296 000c 00000000 		.word	0
- 297 0010 01000000 		.word	1
- 298 0014 00000000 		.word	0
- 299 0018 01000000 		.word	1
- 300 001c 01000000 		.word	1
- 301              		.section	.rodata.prop_b3,"a"
-ARM GAS  /tmp/ccIVR161.s 			page 11
+ 388              		.loc 1 251 12
+ 389 008c 0023     		movs	r3, #0
+ARM GAS  /tmp/ccUqXxcE.s 			page 12
 
 
- 302              		.align	2
- 303              		.set	.LANCHOR4,. + 0
- 306              	prop_b3:
- 307 0000 00000000 		.word	mouse_report_data
- 308 0004 01000000 		.word	1
- 309 0008 02       		.byte	2
- 310 0009 00       		.byte	0
- 311 000a 00       		.byte	0
- 312 000b 00       		.space	1
- 313 000c 00000000 		.word	0
- 314 0010 01000000 		.word	1
- 315 0014 00000000 		.word	0
- 316 0018 01000000 		.word	1
- 317 001c 01000000 		.word	1
- 318              		.section	.rodata.prop_x,"a"
- 319              		.align	2
- 320              		.set	.LANCHOR0,. + 0
- 323              	prop_x:
- 324 0000 01000000 		.word	mouse_report_data+1
- 325 0004 08000000 		.word	8
- 326 0008 00       		.byte	0
- 327 0009 00       		.byte	0
- 328 000a 01       		.byte	1
- 329 000b 00       		.space	1
- 330 000c 00000000 		.word	0
- 331 0010 FFFF0000 		.word	65535
- 332 0014 00000000 		.word	0
- 333 0018 FFFF0000 		.word	65535
- 334 001c 01000000 		.word	1
- 335              		.section	.rodata.prop_y,"a"
- 336              		.align	2
- 337              		.set	.LANCHOR1,. + 0
- 340              	prop_y:
- 341 0000 02000000 		.word	mouse_report_data+2
- 342 0004 08000000 		.word	8
- 343 0008 00       		.byte	0
- 344 0009 00       		.byte	0
- 345 000a 01       		.byte	1
- 346 000b 00       		.space	1
- 347 000c 00000000 		.word	0
- 348 0010 FFFF0000 		.word	65535
- 349 0014 00000000 		.word	0
- 350 0018 FFFF0000 		.word	65535
- 351 001c 01000000 		.word	1
- 352              		.text
- 353              	.Letext0:
- 354              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 355              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
- 356              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 357              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 358              		.file 6 "/usr/include/newlib/sys/_types.h"
- 359              		.file 7 "/usr/include/newlib/sys/reent.h"
- 360              		.file 8 "/usr/include/newlib/sys/lock.h"
- 361              		.file 9 "/usr/include/newlib/math.h"
- 362              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 363              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 364              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
-ARM GAS  /tmp/ccIVR161.s 			page 12
-
-
- 365              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 366              		.file 14 "/usr/include/newlib/stdlib.h"
- 367              		.file 15 "./Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
- 368              		.file 16 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_def.h"
- 369              		.file 17 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h"
- 370              		.file 18 "./Libraries/STM32_USB_Host_Library/Class/HID/Inc/usbh_hid.h"
- 371              		.file 19 "./Libraries/STM32_USB_Host_Library/Class/HID/Inc/usbh_hid_mouse.h"
- 372              		.file 20 "./Libraries/STM32_USB_Host_Library/Class/HID/Inc/usbh_hid_parser.h"
-ARM GAS  /tmp/ccIVR161.s 			page 13
+ 390 008e 00E0     		b	.L15
+ 391              	.L16:
+ 252:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   }
+ 253:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c ****   return   USBH_FAIL;
+ 392              		.loc 1 253 12
+ 393 0090 0223     		movs	r3, #2
+ 394              	.L15:
+ 254:./Libraries/STM32_USB_Host_Library/Class/HID/Src/usbh_hid_mouse.c **** }
+ 395              		.loc 1 254 1
+ 396 0092 1846     		mov	r0, r3
+ 397 0094 1037     		adds	r7, r7, #16
+ 398              	.LCFI13:
+ 399              		.cfi_def_cfa_offset 8
+ 400 0096 BD46     		mov	sp, r7
+ 401              	.LCFI14:
+ 402              		.cfi_def_cfa_register 13
+ 403              		@ sp needed
+ 404 0098 80BD     		pop	{r7, pc}
+ 405              	.L18:
+ 406 009a 00BF     		.align	2
+ 407              	.L17:
+ 408 009c 00000000 		.word	mouse_report_data
+ 409 00a0 00000000 		.word	prop_x
+ 410 00a4 00000000 		.word	mouse_info
+ 411 00a8 00000000 		.word	prop_y
+ 412 00ac 00000000 		.word	prop_b1
+ 413 00b0 00000000 		.word	prop_b2
+ 414 00b4 00000000 		.word	prop_b3
+ 415              		.cfi_endproc
+ 416              	.LFE340:
+ 418              		.text
+ 419              	.Letext0:
+ 420              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 421              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 422              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 423              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 424              		.file 6 "/usr/include/newlib/sys/_types.h"
+ 425              		.file 7 "/usr/include/newlib/sys/reent.h"
+ 426              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 427              		.file 9 "/usr/include/newlib/math.h"
+ 428              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 429              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 430              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 431              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 432              		.file 14 "/usr/include/newlib/stdlib.h"
+ 433              		.file 15 "./Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ 434              		.file 16 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_def.h"
+ 435              		.file 17 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h"
+ 436              		.file 18 "./Libraries/STM32_USB_Host_Library/Class/HID/Inc/usbh_hid.h"
+ 437              		.file 19 "./Libraries/STM32_USB_Host_Library/Class/HID/Inc/usbh_hid_mouse.h"
+ 438              		.file 20 "./Libraries/STM32_USB_Host_Library/Class/HID/Inc/usbh_hid_parser.h"
+ARM GAS  /tmp/ccUqXxcE.s 			page 13
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usbh_hid_mouse.c
-     /tmp/ccIVR161.s:17     .text.USBH_HID_MouseInit:0000000000000000 $t
-     /tmp/ccIVR161.s:26     .text.USBH_HID_MouseInit:0000000000000000 USBH_HID_MouseInit
-     /tmp/ccIVR161.s:114    .text.USBH_HID_MouseInit:0000000000000040 $d
                             *COM*:0000000000000005 mouse_info
                             *COM*:0000000000000008 mouse_report_data
                             *COM*:0000000000000008 mouse_rx_report_buf
-     /tmp/ccIVR161.s:121    .text.USBH_HID_GetMouseInfo:0000000000000000 $t
-     /tmp/ccIVR161.s:129    .text.USBH_HID_GetMouseInfo:0000000000000000 USBH_HID_GetMouseInfo
-     /tmp/ccIVR161.s:254    .text.USBH_HID_GetMouseInfo:0000000000000064 $d
-     /tmp/ccIVR161.s:268    .rodata.prop_b1:0000000000000000 $d
-     /tmp/ccIVR161.s:272    .rodata.prop_b1:0000000000000000 prop_b1
-     /tmp/ccIVR161.s:285    .rodata.prop_b2:0000000000000000 $d
-     /tmp/ccIVR161.s:289    .rodata.prop_b2:0000000000000000 prop_b2
-     /tmp/ccIVR161.s:302    .rodata.prop_b3:0000000000000000 $d
-     /tmp/ccIVR161.s:306    .rodata.prop_b3:0000000000000000 prop_b3
-     /tmp/ccIVR161.s:319    .rodata.prop_x:0000000000000000 $d
-     /tmp/ccIVR161.s:323    .rodata.prop_x:0000000000000000 prop_x
-     /tmp/ccIVR161.s:336    .rodata.prop_y:0000000000000000 $d
-     /tmp/ccIVR161.s:340    .rodata.prop_y:0000000000000000 prop_y
+     /tmp/ccUqXxcE.s:20     .rodata.prop_b1:0000000000000000 $d
+     /tmp/ccUqXxcE.s:23     .rodata.prop_b1:0000000000000000 prop_b1
+     /tmp/ccUqXxcE.s:36     .rodata.prop_b2:0000000000000000 $d
+     /tmp/ccUqXxcE.s:39     .rodata.prop_b2:0000000000000000 prop_b2
+     /tmp/ccUqXxcE.s:52     .rodata.prop_b3:0000000000000000 $d
+     /tmp/ccUqXxcE.s:55     .rodata.prop_b3:0000000000000000 prop_b3
+     /tmp/ccUqXxcE.s:68     .rodata.prop_x:0000000000000000 $d
+     /tmp/ccUqXxcE.s:71     .rodata.prop_x:0000000000000000 prop_x
+     /tmp/ccUqXxcE.s:84     .rodata.prop_y:0000000000000000 $d
+     /tmp/ccUqXxcE.s:87     .rodata.prop_y:0000000000000000 prop_y
+     /tmp/ccUqXxcE.s:100    .text.USBH_HID_MouseInit:0000000000000000 $t
+     /tmp/ccUqXxcE.s:108    .text.USBH_HID_MouseInit:0000000000000000 USBH_HID_MouseInit
+     /tmp/ccUqXxcE.s:218    .text.USBH_HID_MouseInit:0000000000000088 $d
+     /tmp/ccUqXxcE.s:225    .text.USBH_HID_GetMouseInfo:0000000000000000 $t
+     /tmp/ccUqXxcE.s:232    .text.USBH_HID_GetMouseInfo:0000000000000000 USBH_HID_GetMouseInfo
+     /tmp/ccUqXxcE.s:288    .text.USBH_HID_MouseDecode:0000000000000000 USBH_HID_MouseDecode
+     /tmp/ccUqXxcE.s:277    .text.USBH_HID_GetMouseInfo:0000000000000024 $d
+     /tmp/ccUqXxcE.s:282    .text.USBH_HID_MouseDecode:0000000000000000 $t
+     /tmp/ccUqXxcE.s:408    .text.USBH_HID_MouseDecode:000000000000009c $d
 
 UNDEFINED SYMBOLS
 USBH_HID_FifoInit

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccrgQwP2.s 			page 1
+ARM GAS  /tmp/ccXrasvA.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccrgQwP2.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_q15_to_q7.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccrgQwP2.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_q15_to_q7,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_q15_to_q7
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_q15_to_q7:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c"
+  18              		.global	arm_q15_to_q7
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_q15_to_q7:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c"
    1:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****  * Title:        arm_q15_to_q7.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccrgQwP2.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****  */
   28:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
   29:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccrgQwP2.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
   31:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** /**
+ARM GAS  /tmp/ccXrasvA.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   @ingroup groupSupport
   33:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****  */
   34:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
@@ -90,15 +88,29 @@ ARM GAS  /tmp/ccrgQwP2.s 			page 1
   56:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****         q7_t * pDst,
   57:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****         uint32_t blockSize)
   58:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** {
-  30              		.loc 1 58 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 58 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
   59:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 59 9 view .LVU1
   60:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   const q15_t *pIn = pSrc;                             /* Source pointer */
-  36              		.loc 1 60 3 view .LVU2
+  46              		.loc 1 60 16
+  47 000c FB68     		ldr	r3, [r7, #12]
+  48 000e 3B61     		str	r3, [r7, #16]
   61:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
   62:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #if defined (ARM_MATH_LOOPUNROLL) && defined (ARM_MATH_DSP)
   63:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****         q31_t in1, in2;
@@ -106,6 +118,9 @@ ARM GAS  /tmp/ccrgQwP2.s 			page 1
   65:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #endif
   66:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
   67:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #if defined (ARM_MATH_LOOPUNROLL)
+ARM GAS  /tmp/ccXrasvA.s 			page 3
+
+
   68:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
   69:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   /* Loop unrolling: Compute 4 outputs at a time */
   70:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   blkCnt = blockSize >> 2U;
@@ -118,9 +133,6 @@ ARM GAS  /tmp/ccrgQwP2.s 			page 1
   77:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #if defined (ARM_MATH_DSP)
   78:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
   79:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****     in1 = read_q15x2_ia ((q15_t **) &pIn);
-ARM GAS  /tmp/ccrgQwP2.s 			page 3
-
-
   80:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****     in2 = read_q15x2_ia ((q15_t **) &pIn);
   81:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
   82:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #ifndef ARM_MATH_BIG_ENDIAN
@@ -166,67 +178,95 @@ ARM GAS  /tmp/ccrgQwP2.s 			page 1
  122:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   blkCnt = blockSize % 0x4U;
  123:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
  124:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #else
+ARM GAS  /tmp/ccXrasvA.s 			page 4
+
+
  125:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
  126:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   /* Initialize blkCnt with number of samples */
  127:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   blkCnt = blockSize;
-  37              		.loc 1 127 3 view .LVU3
+  49              		.loc 1 127 10
+  50 0010 7B68     		ldr	r3, [r7, #4]
+  51 0012 7B61     		str	r3, [r7, #20]
  128:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
  129:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  130:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
  131:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   while (blkCnt > 0U)
-  38              		.loc 1 131 3 view .LVU4
-  39              		.loc 1 131 9 view .LVU5
-  40 0000 3AB1     		cbz	r2, .L1
-  41 0002 0A44     		add	r2, r2, r1
-ARM GAS  /tmp/ccrgQwP2.s 			page 4
-
-
-  42              	.LVL1:
-  43              	.L3:
+  52              		.loc 1 131 9
+  53 0014 0EE0     		b	.L2
+  54              	.L3:
  132:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   {
  133:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****     /* C = (q7_t) A >> 8 */
  134:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
  135:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****     /* Convert from q15 to q7 and store result in destination buffer */
  136:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****     *pDst++ = (q7_t) (*pIn++ >> 8);
-  44              		.loc 1 136 5 view .LVU6
-  45              		.loc 1 136 15 is_stmt 0 view .LVU7
-  46 0004 30F9023B 		ldrsh	r3, [r0], #2
-  47              	.LVL2:
-  48              		.loc 1 136 15 view .LVU8
-  49 0008 1B12     		asrs	r3, r3, #8
-  50 000a 01F8013B 		strb	r3, [r1], #1
-  51              	.LVL3:
+  55              		.loc 1 136 27
+  56 0016 3B69     		ldr	r3, [r7, #16]
+  57 0018 9A1C     		adds	r2, r3, #2
+  58 001a 3A61     		str	r2, [r7, #16]
+  59              		.loc 1 136 23
+  60 001c B3F90030 		ldrsh	r3, [r3]
+  61              		.loc 1 136 15
+  62 0020 1B12     		asrs	r3, r3, #8
+  63 0022 19B2     		sxth	r1, r3
+  64              		.loc 1 136 10
+  65 0024 BB68     		ldr	r3, [r7, #8]
+  66 0026 5A1C     		adds	r2, r3, #1
+  67 0028 BA60     		str	r2, [r7, #8]
+  68              		.loc 1 136 15
+  69 002a 4AB2     		sxtb	r2, r1
+  70              		.loc 1 136 13
+  71 002c 1A70     		strb	r2, [r3]
  137:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
  138:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****     /* Decrement loop counter */
  139:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****     blkCnt--;
-  52              		.loc 1 139 5 is_stmt 1 view .LVU9
+  72              		.loc 1 139 11
+  73 002e 7B69     		ldr	r3, [r7, #20]
+  74 0030 013B     		subs	r3, r3, #1
+  75 0032 7B61     		str	r3, [r7, #20]
+  76              	.L2:
  131:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   {
-  53              		.loc 1 131 9 view .LVU10
-  54 000e 9142     		cmp	r1, r2
-  55 0010 F8D1     		bne	.L3
-  56              	.L1:
+  77              		.loc 1 131 9
+  78 0034 7B69     		ldr	r3, [r7, #20]
+  79 0036 002B     		cmp	r3, #0
+  80 0038 EDD1     		bne	.L3
  140:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c ****   }
  141:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** 
  142:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_q15_to_q7.c **** }
-  57              		.loc 1 142 1 is_stmt 0 view .LVU11
-  58 0012 7047     		bx	lr
-  59              		.cfi_endproc
-  60              	.LFE145:
-  62              		.text
-  63              	.Letext0:
-  64              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  65              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  66              		.file 4 "/usr/include/newlib/sys/_types.h"
-  67              		.file 5 "/usr/include/newlib/sys/reent.h"
-  68              		.file 6 "/usr/include/newlib/sys/lock.h"
-  69              		.file 7 "/usr/include/newlib/math.h"
-  70              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccrgQwP2.s 			page 5
+  81              		.loc 1 142 1
+  82 003a 00BF     		nop
+  83 003c 00BF     		nop
+  84 003e 1C37     		adds	r7, r7, #28
+  85              	.LCFI3:
+  86              		.cfi_def_cfa_offset 4
+ARM GAS  /tmp/ccXrasvA.s 			page 5
+
+
+  87 0040 BD46     		mov	sp, r7
+  88              	.LCFI4:
+  89              		.cfi_def_cfa_register 13
+  90              		@ sp needed
+  91 0042 5DF8047B 		ldr	r7, [sp], #4
+  92              	.LCFI5:
+  93              		.cfi_restore 7
+  94              		.cfi_def_cfa_offset 0
+  95 0046 7047     		bx	lr
+  96              		.cfi_endproc
+  97              	.LFE145:
+  99              		.text
+ 100              	.Letext0:
+ 101              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 102              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 103              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 104              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 105              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 106              		.file 7 "/usr/include/newlib/math.h"
+ 107              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccXrasvA.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_q15_to_q7.c
-     /tmp/ccrgQwP2.s:17     .text.arm_q15_to_q7:0000000000000000 $t
-     /tmp/ccrgQwP2.s:26     .text.arm_q15_to_q7:0000000000000000 arm_q15_to_q7
+     /tmp/ccXrasvA.s:17     .text.arm_q15_to_q7:0000000000000000 $t
+     /tmp/ccXrasvA.s:25     .text.arm_q15_to_q7:0000000000000000 arm_q15_to_q7
 
 NO UNDEFINED SYMBOLS

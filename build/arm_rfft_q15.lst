@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cczOAdgn.s 			page 1
+ARM GAS  /tmp/ccVAH24M.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,26 +9,24 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_rfft_q15.c"
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              		.section	.text.arm_split_rfft_q15,"ax",%progbits
+  16              		.section	.text.arm_rfft_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_split_rfft_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_split_rfft_q15:
-  27              	.LVL0:
-  28              	.LFB146:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c"
+  18              		.global	arm_rfft_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_rfft_q15:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c"
    1:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****  * Title:        arm_rfft_q15.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****  */
   28:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
   29:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #include "arm_math.h"
-ARM GAS  /tmp/cczOAdgn.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
   31:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** /* ----------------------------------------------------------------------
+ARM GAS  /tmp/ccVAH24M.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****  * Internal functions prototypes
   33:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****  * -------------------------------------------------------------------- */
   34:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
@@ -109,25 +107,121 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   75:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t * pSrc,
   76:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t * pDst)
   77:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** {
+  28              		.loc 1 77 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 8AB0     		sub	sp, sp, #40
+  38              	.LCFI1:
+ARM GAS  /tmp/ccVAH24M.s 			page 3
+
+
+  39              		.cfi_def_cfa_offset 48
+  40 0004 02AF     		add	r7, sp, #8
+  41              	.LCFI2:
+  42              		.cfi_def_cfa 7, 40
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
   78:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   const arm_cfft_instance_q15 *S_CFFT = S->pCfft;
+  46              		.loc 1 78 32
+  47 000c FB68     		ldr	r3, [r7, #12]
+  48 000e 5B69     		ldr	r3, [r3, #20]
+  49 0010 BB61     		str	r3, [r7, #24]
   79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t L2 = S->fftLenReal >> 1U;
+  50              		.loc 1 79 24
+  51 0012 FB68     		ldr	r3, [r7, #12]
+  52 0014 1B68     		ldr	r3, [r3]
+  53              		.loc 1 79 18
+  54 0016 5B08     		lsrs	r3, r3, #1
+  55 0018 7B61     		str	r3, [r7, #20]
   80:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;
   81:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
   82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   /* Calculation of RIFFT of input */
   83:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   if (S->ifftFlagR == 1U)
+  56              		.loc 1 83 8
+  57 001a FB68     		ldr	r3, [r7, #12]
+  58 001c 1B79     		ldrb	r3, [r3, #4]	@ zero_extendqisi2
+  59              		.loc 1 83 6
+  60 001e 012B     		cmp	r3, #1
+  61 0020 2ED1     		bne	.L2
   84:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
   85:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      /*  Real IFFT core process */
   86:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      arm_split_rifft_q15 (pSrc, L2, S->pTwiddleAReal, S->pTwiddleBReal, pDst, S->twidCoefRModifier)
-ARM GAS  /tmp/cczOAdgn.s 			page 3
-
-
+  62              		.loc 1 86 6
+  63 0022 FB68     		ldr	r3, [r7, #12]
+  64 0024 DA68     		ldr	r2, [r3, #12]
+  65 0026 FB68     		ldr	r3, [r7, #12]
+  66 0028 1969     		ldr	r1, [r3, #16]
+  67 002a FB68     		ldr	r3, [r7, #12]
+  68 002c 9B68     		ldr	r3, [r3, #8]
+  69 002e 0193     		str	r3, [sp, #4]
+  70 0030 7B68     		ldr	r3, [r7, #4]
+  71 0032 0093     		str	r3, [sp]
+  72 0034 0B46     		mov	r3, r1
+  73 0036 7969     		ldr	r1, [r7, #20]
+  74 0038 B868     		ldr	r0, [r7, #8]
+  75 003a FFF7FEFF 		bl	arm_split_rifft_q15
   87:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
   88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      /* Complex IFFT process */
   89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      arm_cfft_q15 (S_CFFT, pDst, S->ifftFlagR, S->bitReverseFlagR);
+  76              		.loc 1 89 6
+  77 003e FB68     		ldr	r3, [r7, #12]
+  78 0040 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+  79 0042 FB68     		ldr	r3, [r7, #12]
+  80 0044 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+  81 0046 7968     		ldr	r1, [r7, #4]
+  82 0048 B869     		ldr	r0, [r7, #24]
+  83 004a FFF7FEFF 		bl	arm_cfft_q15
+ARM GAS  /tmp/ccVAH24M.s 			page 4
+
+
   90:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
   91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      for(i = 0; i < S->fftLenReal; i++)
+  84              		.loc 1 91 12
+  85 004e 0023     		movs	r3, #0
+  86 0050 FB61     		str	r3, [r7, #28]
+  87              		.loc 1 91 6
+  88 0052 0FE0     		b	.L3
+  89              	.L4:
   92:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
   93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pDst[i] = pDst[i] << 1U;
+  90              		.loc 1 93 23 discriminator 3
+  91 0054 FB69     		ldr	r3, [r7, #28]
+  92 0056 5B00     		lsls	r3, r3, #1
+  93 0058 7A68     		ldr	r2, [r7, #4]
+  94 005a 1344     		add	r3, r3, r2
+  95 005c B3F90030 		ldrsh	r3, [r3]
+  96              		.loc 1 93 27 discriminator 3
+  97 0060 5900     		lsls	r1, r3, #1
+  98              		.loc 1 93 13 discriminator 3
+  99 0062 FB69     		ldr	r3, [r7, #28]
+ 100 0064 5B00     		lsls	r3, r3, #1
+ 101 0066 7A68     		ldr	r2, [r7, #4]
+ 102 0068 1344     		add	r3, r3, r2
+ 103              		.loc 1 93 17 discriminator 3
+ 104 006a 0AB2     		sxth	r2, r1
+ 105 006c 1A80     		strh	r2, [r3]	@ movhi
+  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
+ 106              		.loc 1 91 37 discriminator 3
+ 107 006e FB69     		ldr	r3, [r7, #28]
+ 108 0070 0133     		adds	r3, r3, #1
+ 109 0072 FB61     		str	r3, [r7, #28]
+ 110              	.L3:
+  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
+ 111              		.loc 1 91 22 discriminator 1
+ 112 0074 FB68     		ldr	r3, [r7, #12]
+ 113 0076 1B68     		ldr	r3, [r3]
+  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
+ 114              		.loc 1 91 6 discriminator 1
+ 115 0078 FA69     		ldr	r2, [r7, #28]
+ 116 007a 9A42     		cmp	r2, r3
+ 117 007c EAD3     		bcc	.L4
   94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      }
   95:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   }
   96:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   else
@@ -142,6 +236,58 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  105:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   }
  106:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  107:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** }
+ 118              		.loc 1 107 1
+ 119 007e 15E0     		b	.L6
+ARM GAS  /tmp/ccVAH24M.s 			page 5
+
+
+ 120              	.L2:
+ 101:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
+ 121              		.loc 1 101 6
+ 122 0080 FB68     		ldr	r3, [r7, #12]
+ 123 0082 1A79     		ldrb	r2, [r3, #4]	@ zero_extendqisi2
+ 124 0084 FB68     		ldr	r3, [r7, #12]
+ 125 0086 5B79     		ldrb	r3, [r3, #5]	@ zero_extendqisi2
+ 126 0088 B968     		ldr	r1, [r7, #8]
+ 127 008a B869     		ldr	r0, [r7, #24]
+ 128 008c FFF7FEFF 		bl	arm_cfft_q15
+ 104:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   }
+ 129              		.loc 1 104 6
+ 130 0090 FB68     		ldr	r3, [r7, #12]
+ 131 0092 DA68     		ldr	r2, [r3, #12]
+ 132 0094 FB68     		ldr	r3, [r7, #12]
+ 133 0096 1969     		ldr	r1, [r3, #16]
+ 134 0098 FB68     		ldr	r3, [r7, #12]
+ 135 009a 9B68     		ldr	r3, [r3, #8]
+ 136 009c 0193     		str	r3, [sp, #4]
+ 137 009e 7B68     		ldr	r3, [r7, #4]
+ 138 00a0 0093     		str	r3, [sp]
+ 139 00a2 0B46     		mov	r3, r1
+ 140 00a4 7969     		ldr	r1, [r7, #20]
+ 141 00a6 B868     		ldr	r0, [r7, #8]
+ 142 00a8 FFF7FEFF 		bl	arm_split_rfft_q15
+ 143              	.L6:
+ 144              		.loc 1 107 1
+ 145 00ac 00BF     		nop
+ 146 00ae 2037     		adds	r7, r7, #32
+ 147              	.LCFI3:
+ 148              		.cfi_def_cfa_offset 8
+ 149 00b0 BD46     		mov	sp, r7
+ 150              	.LCFI4:
+ 151              		.cfi_def_cfa_register 13
+ 152              		@ sp needed
+ 153 00b2 80BD     		pop	{r7, pc}
+ 154              		.cfi_endproc
+ 155              	.LFE145:
+ 157              		.section	.text.arm_split_rfft_q15,"ax",%progbits
+ 158              		.align	1
+ 159              		.global	arm_split_rfft_q15
+ 160              		.syntax unified
+ 161              		.thumb
+ 162              		.thumb_func
+ 163              		.fpu fpv5-d16
+ 165              	arm_split_rfft_q15:
+ 166              	.LFB146:
  108:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  109:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** /**
  110:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   @} end of RealFFT group
@@ -152,6 +298,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  115:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   @param[in]     pSrc      points to input buffer
  116:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   @param[in]     fftLen    length of FFT
  117:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   @param[in]     pATable   points to twiddle Coef A buffer
+ARM GAS  /tmp/ccVAH24M.s 			page 6
+
+
  118:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   @param[in]     pBTable   points to twiddle Coef B buffer
  119:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   @param[out]    pDst      points to output buffer
  120:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   @param[in]     modifier  twiddle coefficient modifier that supports different size FFTs with the 
@@ -169,128 +318,109 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  132:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t * pDst,
  133:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t modifier)
  134:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** {       
-  30              		.loc 1 134 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 8, pretend = 0, frame = 8
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+ 167              		.loc 1 134 1
+ 168              		.cfi_startproc
+ 169              		@ args = 8, pretend = 0, frame = 176
+ 170              		@ frame_needed = 1, uses_anonymous_args = 0
+ 171              		@ link register save eliminated.
+ 172 0000 80B4     		push	{r7}
+ 173              	.LCFI5:
+ 174              		.cfi_def_cfa_offset 4
+ 175              		.cfi_offset 7, -4
+ 176 0002 ADB0     		sub	sp, sp, #180
+ 177              	.LCFI6:
+ 178              		.cfi_def_cfa_offset 184
+ 179 0004 00AF     		add	r7, sp, #0
+ 180              	.LCFI7:
+ 181              		.cfi_def_cfa_register 7
+ 182 0006 F860     		str	r0, [r7, #12]
+ 183 0008 B960     		str	r1, [r7, #8]
+ 184 000a 7A60     		str	r2, [r7, #4]
+ 185 000c 3B60     		str	r3, [r7]
  135:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;                                    /* Loop Counter */
-  34              		.loc 1 135 9 view .LVU1
  136:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q31_t outR, outI;                              /* Temporary variables for output */
-  35              		.loc 1 136 9 view .LVU2
  137:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   const q15_t *pCoefA, *pCoefB;                        /* Temporary pointers for twiddle factors */
-ARM GAS  /tmp/cczOAdgn.s 			page 4
-
-
-  36              		.loc 1 137 3 view .LVU3
  138:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t *pSrc1, *pSrc2;
-  37              		.loc 1 138 9 view .LVU4
  139:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #if defined (ARM_MATH_DSP)
  140:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t *pD1, *pD2;
-  38              		.loc 1 140 9 view .LVU5
  141:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #endif
  142:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  143:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   /* Init coefficient pointers */
  144:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pCoefA = &pATable[modifier * 2];
-  39              		.loc 1 144 3 view .LVU6
- 134:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;                                    /* Loop Counter */
-  40              		.loc 1 134 1 is_stmt 0 view .LVU7
-  41 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-  42              	.LCFI0:
-  43              		.cfi_def_cfa_offset 36
-  44              		.cfi_offset 4, -36
-  45              		.cfi_offset 5, -32
-  46              		.cfi_offset 6, -28
-  47              		.cfi_offset 7, -24
-  48              		.cfi_offset 8, -20
-  49              		.cfi_offset 9, -16
-  50              		.cfi_offset 10, -12
-  51              		.cfi_offset 11, -8
-  52              		.cfi_offset 14, -4
+ 186              		.loc 1 144 20
+ 187 000e D7F8BC30 		ldr	r3, [r7, #188]
+ 188 0012 9B00     		lsls	r3, r3, #2
+ 189              		.loc 1 144 10
+ 190 0014 7A68     		ldr	r2, [r7, #4]
+ 191 0016 1344     		add	r3, r3, r2
+ 192 0018 C7F8A830 		str	r3, [r7, #168]
  145:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pCoefB = &pBTable[modifier * 2];
+ 193              		.loc 1 145 20
+ 194 001c D7F8BC30 		ldr	r3, [r7, #188]
+ 195 0020 9B00     		lsls	r3, r3, #2
+ARM GAS  /tmp/ccVAH24M.s 			page 7
+
+
+ 196              		.loc 1 145 10
+ 197 0022 3A68     		ldr	r2, [r7]
+ 198 0024 1344     		add	r3, r3, r2
+ 199 0026 C7F8A430 		str	r3, [r7, #164]
  146:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  147:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pSrc1 = &pSrc[2];
+ 200              		.loc 1 147 11
+ 201 002a FB68     		ldr	r3, [r7, #12]
+ 202 002c 0433     		adds	r3, r3, #4
+ 203              		.loc 1 147 9
+ 204 002e BB63     		str	r3, [r7, #56]
  148:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pSrc2 = &pSrc[(2U * fftLen) - 2U];
-  53              		.loc 1 148 16 view .LVU8
-  54 0004 6FF04049 		mvn	r9, #-1073741824
- 134:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;                                    /* Loop Counter */
-  55              		.loc 1 134 1 view .LVU9
-  56 0008 83B0     		sub	sp, sp, #12
-  57              	.LCFI1:
-  58              		.cfi_def_cfa_offset 48
+ 205              		.loc 1 148 16
+ 206 0030 BA68     		ldr	r2, [r7, #8]
+ 207 0032 6FF04043 		mvn	r3, #-1073741824
+ 208 0036 1344     		add	r3, r3, r2
+ 209 0038 9B00     		lsls	r3, r3, #2
+ 210              		.loc 1 148 11
+ 211 003a FA68     		ldr	r2, [r7, #12]
+ 212 003c 1344     		add	r3, r3, r2
+ 213              		.loc 1 148 9
+ 214 003e 7B63     		str	r3, [r7, #52]
  149:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  150:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #if defined (ARM_MATH_DSP)
  151:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  152:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     i = 1U;
+ 215              		.loc 1 152 7
+ 216 0040 0123     		movs	r3, #1
+ 217 0042 C7F8AC30 		str	r3, [r7, #172]
  153:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pD1 = pDst + 2;
+ 218              		.loc 1 153 9
+ 219 0046 D7F8B830 		ldr	r3, [r7, #184]
+ 220 004a 0433     		adds	r3, r3, #4
+ 221 004c C7F8A030 		str	r3, [r7, #160]
  154:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pD2 = pDst + (4U * fftLen) - 2;
+ 222              		.loc 1 154 32
+ 223 0050 BB68     		ldr	r3, [r7, #8]
+ 224 0052 DB00     		lsls	r3, r3, #3
+ 225 0054 043B     		subs	r3, r3, #4
+ 226              		.loc 1 154 9
+ 227 0056 D7F8B820 		ldr	r2, [r7, #184]
+ 228 005a 1344     		add	r3, r3, r2
+ 229 005c C7F89C30 		str	r3, [r7, #156]
  155:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  156:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     for (i = fftLen - 1; i > 0; i--)
-  59              		.loc 1 156 5 view .LVU10
-  60 000a B1F1010C 		subs	ip, r1, #1
- 148:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  61              		.loc 1 148 16 view .LVU11
-  62 000e 8944     		add	r9, r9, r1
- 134:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;                                    /* Loop Counter */
-  63              		.loc 1 134 1 view .LVU12
-  64 0010 0D9C     		ldr	r4, [sp, #52]
- 148:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  65              		.loc 1 148 16 view .LVU13
-  66 0012 4FEA8905 		lsl	r5, r9, #2
- 144:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pCoefB = &pBTable[modifier * 2];
-  67              		.loc 1 144 10 view .LVU14
-ARM GAS  /tmp/cczOAdgn.s 			page 5
-
-
-  68 0016 02EB8402 		add	r2, r2, r4, lsl #2
-  69              	.LVL1:
- 145:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  70              		.loc 1 145 3 is_stmt 1 view .LVU15
- 148:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  71              		.loc 1 148 11 is_stmt 0 view .LVU16
-  72 001a 00EB8909 		add	r9, r0, r9, lsl #2
- 148:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  73              		.loc 1 148 16 view .LVU17
-  74 001e 0195     		str	r5, [sp, #4]
- 145:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  75              		.loc 1 145 10 view .LVU18
-  76 0020 03EB8403 		add	r3, r3, r4, lsl #2
-  77              	.LVL2:
- 147:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pSrc2 = &pSrc[(2U * fftLen) - 2U];
-  78              		.loc 1 147 3 is_stmt 1 view .LVU19
- 148:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  79              		.loc 1 148 3 view .LVU20
- 152:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pD1 = pDst + 2;
-  80              		.loc 1 152 5 view .LVU21
- 153:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pD2 = pDst + (4U * fftLen) - 2;
-  81              		.loc 1 153 5 view .LVU22
- 154:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
-  82              		.loc 1 154 5 view .LVU23
-  83              		.loc 1 156 5 view .LVU24
-  84              		.loc 1 156 26 view .LVU25
-  85              		.loc 1 156 5 is_stmt 0 view .LVU26
-  86 0024 2DD0     		beq	.L2
-  87 0026 CE00     		lsls	r6, r1, #3
-  88              	.LVL3:
-  89              		.loc 1 156 5 view .LVU27
-  90 0028 0C99     		ldr	r1, [sp, #48]
-  91              	.LVL4:
-  92              		.loc 1 156 5 view .LVU28
-  93 002a 00F1040B 		add	fp, r0, #4
-  94              	.LVL5:
-  95              		.loc 1 156 5 view .LVU29
-  96 002e 4FEA840A 		lsl	r10, r4, #2
-  97 0032 083E     		subs	r6, r6, #8
-  98              	.LVL6:
-  99              		.loc 1 156 5 view .LVU30
- 100 0034 01F10807 		add	r7, r1, #8
- 101 0038 0E44     		add	r6, r6, r1
- 102              	.LVL7:
- 103              	.L3:
+ 230              		.loc 1 156 12
+ 231 0060 BB68     		ldr	r3, [r7, #8]
+ 232 0062 013B     		subs	r3, r3, #1
+ 233 0064 C7F8AC30 		str	r3, [r7, #172]
+ 234              		.loc 1 156 5
+ 235 0068 C0E0     		b	.L8
+ 236              	.L21:
  157:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     {
  158:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /*
  159:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****           outR = (  pSrc[2 * i]             * pATable[2 * i]
  160:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   - pSrc[2 * i + 1]         * pATable[2 * i + 1]
  161:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   + pSrc[2 * n - 2 * i]     * pBTable[2 * i]
+ARM GAS  /tmp/ccVAH24M.s 			page 8
+
+
  162:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   + pSrc[2 * n - 2 * i + 1] * pBTable[2 * i + 1]);
  163:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  164:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****           outI = (  pIn[2 * i + 1]         * pATable[2 * i]
@@ -298,16 +428,19 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  166:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   + pIn[2 * n - 2 * i]     * pBTable[2 * i + 1]
  167:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   - pIn[2 * n - 2 * i + 1] * pBTable[2 * i])
  168:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****          */
-ARM GAS  /tmp/cczOAdgn.s 			page 6
-
-
  169:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  170:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  171:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  172:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* pSrc[2 * i] * pATable[2 * i] - pSrc[2 * i + 1] * pATable[2 * i + 1] */
  173:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outR = __SMUSD(read_q15x2 (pSrc1), read_q15x2((q15_t *) pCoefA));
- 104              		.loc 1 173 9 is_stmt 1 discriminator 3 view .LVU31
- 105              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 237              		.loc 1 173 24 discriminator 3
+ 238 006a BB6B     		ldr	r3, [r7, #56]
+ 239 006c FB63     		str	r3, [r7, #60]
+ 240 006e FB6B     		ldr	r3, [r7, #60]
+ 241 0070 1B68     		ldr	r3, [r3]	@ unaligned
+ 242              	.LBB52:
+ 243              	.LBB53:
+ 244              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
    1:./Libraries/CMSIS/DSP/Include/arm_math.h **** /******************************************************************************
    2:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @file     arm_math.h
    3:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @brief    Public header file for CMSIS DSP Library
@@ -345,6 +478,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   35:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Basic math functions
   36:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Fast math functions
   37:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Complex math functions
+ARM GAS  /tmp/ccVAH24M.s 			page 9
+
+
   38:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Filters
   39:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Matrix functions
   40:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - Transform functions
@@ -358,9 +494,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   48:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
   49:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Using the Library
   50:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * ------------
-ARM GAS  /tmp/cczOAdgn.s 			page 7
-
-
   51:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
   52:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The library installer contains prebuilt versions of the libraries in the <code>Lib</code> fold
   53:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_cortexM7lfdp_math.lib (Cortex-M7, Little endian, Double Precision Floating Point Unit)
@@ -405,6 +538,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   92:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The library installer contains a project file to rebuild libraries on MDK toolchain in the <co
   93:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_cortexM_math.uvprojx
   94:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
+ARM GAS  /tmp/ccVAH24M.s 			page 10
+
+
   95:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
   96:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The libraries can be built by opening the arm_cortexM_math.uvprojx project in MDK-ARM, selecti
   97:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
@@ -418,9 +554,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  105:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Define macro ARM_MATH_BIG_ENDIAN to build the library for big endian targets. By default libra
  106:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  107:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_MATRIX_CHECK:
-ARM GAS  /tmp/cczOAdgn.s 			page 8
-
-
  108:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  109:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Define macro ARM_MATH_MATRIX_CHECK for checking on the input and output sizes of matrices
  110:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
@@ -465,6 +598,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  149:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Please refer to \ref ChangeLog_pg.
  150:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  151:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 11
+
+
  152:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  153:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  154:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupMath Basic Math Functions
@@ -478,9 +614,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  162:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * There are separate functions for Q15, Q31, and floating-point data.
  163:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
  164:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
-ARM GAS  /tmp/cczOAdgn.s 			page 9
-
-
  165:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  166:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  167:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupCmplxMath Complex Math Functions
@@ -525,6 +658,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  206:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * \par Init Functions
  207:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * There is an associated initialization function for each type of matrix
  208:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * data structure.
+ARM GAS  /tmp/ccVAH24M.s 			page 12
+
+
  209:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The initialization function sets the values of the internal structure fields.
  210:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * Refer to \ref arm_mat_init_f32(), \ref arm_mat_init_q31() and \ref arm_mat_init_q15()
  211:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * for floating-point, Q31 and Q15 types,  respectively.
@@ -538,9 +674,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  219:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_f32 S = {nRows, nColumns, pData};</code>
  220:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_q31 S = {nRows, nColumns, pData};</code>
  221:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_q15 S = {nRows, nColumns, pData};</code>
-ARM GAS  /tmp/cczOAdgn.s 			page 10
-
-
  222:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * </pre>
  223:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * where <code>nRows</code> specifies the number of rows, <code>nColumns</code>
  224:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * specifies the number of columns, and <code>pData</code> points to the
@@ -585,6 +718,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  263:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  264:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupSupport Support Functions
  265:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
+ARM GAS  /tmp/ccVAH24M.s 			page 13
+
+
  266:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  267:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  268:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupInterpolation Interpolation Functions
@@ -598,9 +734,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  276:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  277:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  278:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 11
-
-
  279:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifndef _ARM_MATH_H
  280:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define _ARM_MATH_H
  281:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -645,6 +778,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  320:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  321:./Libraries/CMSIS/DSP/Include/arm_math.h **** #include "string.h"
  322:./Libraries/CMSIS/DSP/Include/arm_math.h **** #include "math.h"
+ARM GAS  /tmp/ccVAH24M.s 			page 14
+
+
  323:./Libraries/CMSIS/DSP/Include/arm_math.h **** #include "float.h"
  324:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  325:./Libraries/CMSIS/DSP/Include/arm_math.h **** /* evaluate ARM DSP feature */
@@ -658,9 +794,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  333:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  334:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  335:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifdef   __cplusplus
-ARM GAS  /tmp/cczOAdgn.s 			page 12
-
-
  336:./Libraries/CMSIS/DSP/Include/arm_math.h **** extern "C"
  337:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  338:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
@@ -705,6 +838,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  377:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_SUCCESS        =  0,        /**< No error */
  378:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_ARGUMENT_ERROR = -1,        /**< One or more arguments are incorrect */
  379:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_LENGTH_ERROR   = -2,        /**< Length of data buffer is incorrect */
+ARM GAS  /tmp/ccVAH24M.s 			page 15
+
+
  380:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_SIZE_MISMATCH  = -3,        /**< Size of matrices is not compatible with the operation
  381:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_NANINF         = -4,        /**< Not-a-number (NaN) or infinity is generated */
  382:./Libraries/CMSIS/DSP/Include/arm_math.h ****     ARM_MATH_SINGULAR       = -5,        /**< Input matrix is singular and cannot be inverted */
@@ -718,9 +854,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  390:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  391:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  392:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief 16-bit fractional data type in 1.15 format.
-ARM GAS  /tmp/cczOAdgn.s 			page 13
-
-
  393:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  394:./Libraries/CMSIS/DSP/Include/arm_math.h ****   typedef int16_t q15_t;
  395:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -765,6 +898,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  434:./Libraries/CMSIS/DSP/Include/arm_math.h ****   #define __SIMD32_TYPE __un(aligned) int32_t
  435:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined(_MSC_VER )
  436:./Libraries/CMSIS/DSP/Include/arm_math.h ****   #define __SIMD32_TYPE int32_t
+ARM GAS  /tmp/ccVAH24M.s 			page 16
+
+
  437:./Libraries/CMSIS/DSP/Include/arm_math.h **** #else
  438:./Libraries/CMSIS/DSP/Include/arm_math.h ****   #error Unknown compiler
  439:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
@@ -778,9 +914,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  447:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  448:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  449:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
-ARM GAS  /tmp/cczOAdgn.s 			page 14
-
-
  450:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Read 2 Q15 from Q15 pointer.
  451:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     pQ15      points to input value
  452:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        Q31 value
@@ -789,31 +922,45 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  455:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t * pQ15)
  456:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  457:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val;
- 106              		.loc 2 457 3 discriminator 3 view .LVU32
  458:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  459:./Libraries/CMSIS/DSP/Include/arm_math.h ****   memcpy (&val, pQ15, 4);
- 107              		.loc 2 459 3 discriminator 3 view .LVU33
- 108 003a 5BF8041B 		ldr	r1, [fp], #4	@ unaligned
- 109              	.LVL8:
+ 245              		.loc 2 459 3 discriminator 3
+ 246 0072 3B63     		str	r3, [r7, #48]
  460:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  461:./Libraries/CMSIS/DSP/Include/arm_math.h ****   return (val);
- 110              		.loc 2 461 3 discriminator 3 view .LVU34
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 111              		.loc 2 457 3 discriminator 3 view .LVU35
+ 247              		.loc 2 461 10 discriminator 3
+ 248 0074 3B6B     		ldr	r3, [r7, #48]
+ 249              	.LBE53:
+ 250              	.LBE52:
+ 251              		.loc 1 173 16 discriminator 3
+ 252 0076 1A46     		mov	r2, r3
+ 253 0078 D7F8A830 		ldr	r3, [r7, #168]
+ 254 007c 3B64     		str	r3, [r7, #64]
+ 255 007e 3B6C     		ldr	r3, [r7, #64]
+ 256 0080 1B68     		ldr	r3, [r3]	@ unaligned
+ 257              	.LBB54:
+ 258              	.LBB55:
  459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 112              		.loc 2 459 3 discriminator 3 view .LVU36
- 113 003e D2F800E0 		ldr	lr, [r2]	@ unaligned
- 114              	.LVL9:
- 115              		.loc 2 461 3 discriminator 3 view .LVU37
- 116              	.LBB52:
- 117              	.LBI52:
- 118              		.file 3 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
+ 259              		.loc 2 459 3 discriminator 3
+ 260 0082 FB62     		str	r3, [r7, #44]
+ 261              		.loc 2 461 10 discriminator 3
+ 262 0084 FB6A     		ldr	r3, [r7, #44]
+ 263 0086 FA64     		str	r2, [r7, #76]
+ 264 0088 BB64     		str	r3, [r7, #72]
+ 265              	.LBE55:
+ 266              	.LBE54:
+ 267              	.LBB56:
+ 268              	.LBB57:
+ 269              		.file 3 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
    1:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
    4:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @version  V5.2.0
    5:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @date     08. May 2019
    6:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  ******************************************************************************/
+ARM GAS  /tmp/ccVAH24M.s 			page 17
+
+
    7:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /*
    8:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
    9:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  *
@@ -838,9 +985,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   28:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* ignore some GCC warnings */
   29:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #pragma GCC diagnostic push
   30:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
-ARM GAS  /tmp/cczOAdgn.s 			page 15
-
-
   31:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
   32:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
   33:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -874,6 +1018,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   61:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __PACKED
   62:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
   63:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccVAH24M.s 			page 18
+
+
   64:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
   65:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
   66:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -898,9 +1045,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
   85:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   86:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
   87:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
-ARM GAS  /tmp/cczOAdgn.s 			page 16
-
-
   88:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   89:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
   90:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
@@ -934,6 +1078,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  118:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  119:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  120:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
+ARM GAS  /tmp/ccVAH24M.s 			page 19
+
+
  121:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  122:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __PROGRAM_START
  123:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -958,9 +1105,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  142:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t* dest;
  143:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t  wlen;
  144:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   } __zero_table_t;
-ARM GAS  /tmp/cczOAdgn.s 			page 17
-
-
  145:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
  146:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   extern const __copy_table_t __copy_table_start__;
  147:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   extern const __copy_table_t __copy_table_end__;
@@ -994,6 +1138,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  175:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  176:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  177:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __VECTOR_TABLE
+ARM GAS  /tmp/ccVAH24M.s 			page 20
+
+
  178:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __VECTOR_TABLE            __Vectors
  179:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  180:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1018,9 +1165,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  199:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  200:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  201:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 18
-
-
  202:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  203:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
  204:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
@@ -1054,6 +1198,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  232:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  233:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_CONTROL_NS(void)
  234:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccVAH24M.s 			page 21
+
+
  235:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  236:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  237:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, control_ns" : "=r" (result) );
@@ -1078,9 +1225,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  256:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Control Register (non-secure)
  257:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Writes the given value to the non-secure Control Register when in secure state.
  258:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    control  Control Register value to set
-ARM GAS  /tmp/cczOAdgn.s 			page 19
-
-
  259:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  260:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_CONTROL_NS(uint32_t control)
  261:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1114,6 +1258,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  289:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  290:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, apsr" : "=r" (result) );
  291:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/ccVAH24M.s 			page 22
+
+
  292:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  293:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  294:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1138,9 +1285,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  313:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  314:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PSP(void)
  315:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/cczOAdgn.s 			page 20
-
-
  316:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  317:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  318:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp"  : "=r" (result) );
@@ -1174,6 +1318,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  346:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psp, %0" : : "r" (topOfProcStack) : );
  347:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  348:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 23
+
+
  349:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  350:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  351:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1198,9 +1345,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  370:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  371:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  372:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msp" : "=r" (result) );
-ARM GAS  /tmp/cczOAdgn.s 			page 21
-
-
  373:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  374:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  375:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1234,6 +1378,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  403:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  404:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  405:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccVAH24M.s 			page 24
+
+
  406:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer (non-secure)
  407:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Main Stack Pointer (MSP) when in secure state.
  408:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
@@ -1258,9 +1405,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  427:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, sp_ns" : "=r" (result) );
  428:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  429:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cczOAdgn.s 			page 22
-
-
  430:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  431:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  432:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1294,6 +1438,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  460:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Priority Mask (non-secure)
  461:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current state of the non-secure priority mask bit from the Priority Mask Reg
  462:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Priority Mask value
+ARM GAS  /tmp/ccVAH24M.s 			page 25
+
+
  463:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  464:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PRIMASK_NS(void)
  465:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1318,9 +1465,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  484:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  485:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  486:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/cczOAdgn.s 			page 23
-
-
  487:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Priority Mask (non-secure)
  488:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Priority Mask Register when in secure state.
  489:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
@@ -1354,6 +1498,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  517:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_fault_irq(void)
  518:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  519:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid f" : : : "memory");
+ARM GAS  /tmp/ccVAH24M.s 			page 26
+
+
  520:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  521:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  522:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1378,9 +1525,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  541:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Base Priority register value
  542:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  543:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_BASEPRI_NS(void)
-ARM GAS  /tmp/cczOAdgn.s 			page 24
-
-
  544:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  545:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  546:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1414,6 +1558,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  574:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  575:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  576:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 27
+
+
  577:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  578:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Base Priority with condition
  579:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Base Priority register only if BASEPRI masking is disable
@@ -1438,9 +1585,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  598:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, faultmask" : "=r" (result) );
  599:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  600:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cczOAdgn.s 			page 25
-
-
  601:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  602:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  603:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
@@ -1474,6 +1618,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  631:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  632:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Fault Mask (non-secure)
  633:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Fault Mask register when in secure state.
+ARM GAS  /tmp/ccVAH24M.s 			page 28
+
+
  634:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    faultMask  Fault Mask value to set
  635:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  636:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_FAULTMASK_NS(uint32_t faultMask)
@@ -1498,9 +1645,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  655:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
  656:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Process Stack Pointer Limit (PSPLIM).
  657:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               PSPLIM Register value
-ARM GAS  /tmp/cczOAdgn.s 			page 26
-
-
  658:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  659:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PSPLIM(void)
  660:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1534,6 +1678,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  688:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psplim_ns"  : "=r" (result) );
  689:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return result;
  690:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccVAH24M.s 			page 29
+
+
  691:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  692:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  693:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1558,9 +1705,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  712:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  713:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  714:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 27
-
-
  715:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  716:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE  ) && (__ARM_FEATURE_CMSE   == 3))
  717:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1594,6 +1738,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  745:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  746:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_MSPLIM(void)
  747:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccVAH24M.s 			page 30
+
+
  748:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
  749:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
  750:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
@@ -1618,9 +1765,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  769:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_MSPLIM_NS(void)
  770:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  771:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
-ARM GAS  /tmp/cczOAdgn.s 			page 28
-
-
  772:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
  773:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return 0U;
  774:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -1654,6 +1798,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  802:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  803:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  804:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE  ) && (__ARM_FEATURE_CMSE   == 3))
+ARM GAS  /tmp/ccVAH24M.s 			page 31
+
+
  805:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  806:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer Limit (non-secure)
  807:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
@@ -1678,9 +1825,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  826:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  827:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  828:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/cczOAdgn.s 			page 29
-
-
  829:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get FPSCR
  830:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Floating Point Status/Control register.
  831:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Floating Point Status/Control register value
@@ -1714,6 +1858,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  859:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_FPSCR(uint32_t fpscr)
  860:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  861:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) && \
+ARM GAS  /tmp/ccVAH24M.s 			page 32
+
+
  862:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
  863:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if __has_builtin(__builtin_arm_set_fpscr)
  864:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** // Re-enable using built-in when GCC has been fixed
@@ -1738,9 +1885,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  883:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   @{
  884:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** */
  885:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 30
-
-
  886:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* Define macros for porting to both thumb1 and thumb2.
  887:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * For thumb1, use low register (r0-r7), specified by constraint "l"
  888:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * Otherwise, use general registers, specified by constraint "r" */
@@ -1774,6 +1918,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  916:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  917:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __WFE()                             __ASM volatile ("wfe")
  918:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 33
+
+
  919:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  920:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  921:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Send Event
@@ -1798,9 +1945,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  940:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Data Synchronization Barrier
  941:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Acts as a special kind of Data Memory Barrier.
  942:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            It completes when all explicit memory accesses before this instruction complete.
-ARM GAS  /tmp/cczOAdgn.s 			page 31
-
-
  943:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  944:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __DSB(void)
  945:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1834,6 +1978,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  973:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  974:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("rev %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
  975:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return result;
+ARM GAS  /tmp/ccVAH24M.s 			page 34
+
+
  976:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  977:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  978:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1858,9 +2005,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  997:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Reverses the byte order in a 16-bit value and returns the signed 16-bit result. For exam
  998:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    value  Value to reverse
  999:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Reversed value
-ARM GAS  /tmp/cczOAdgn.s 			page 32
-
-
 1000:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1001:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE int16_t __REVSH(int16_t value)
 1002:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1894,6 +2038,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1030:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1031:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1032:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccVAH24M.s 			page 35
+
+
 1033:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Breakpoint
 1034:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Causes the processor to enter Debug state.
 1035:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            Debug tools can use this to investigate system state when the instruction at a particula
@@ -1918,9 +2065,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1054:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    )
 1055:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("rbit %0, %1" : "=r" (result) : "r" (value) );
 1056:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
-ARM GAS  /tmp/cczOAdgn.s 			page 33
-
-
 1057:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t s = (4U /*sizeof(v)*/ * 8U) - 1U; /* extra shift needed at end */
 1058:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1059:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   result = value;                      /* r will be reversed bits of v; first get LSB of v */
@@ -1954,6 +2098,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1087:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      single CLZ instruction.
 1088:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    */
 1089:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if (value == 0U)
+ARM GAS  /tmp/ccVAH24M.s 			page 36
+
+
 1090:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
 1091:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     return 32U;
 1092:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
@@ -1978,9 +2125,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1111:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
 1112:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrexb %0, %1" : "=r" (result) : "Q" (*addr) );
 1113:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
-ARM GAS  /tmp/cczOAdgn.s 			page 34
-
-
 1114:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     /* Prior to GCC 4.8, "Q" will be expanded to [rx, #0] which is not
 1115:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****        accepted by assembler. So has to use following less efficient pattern.
 1116:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     */
@@ -2014,6 +2158,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1144:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1145:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1146:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   LDR Exclusive (32 bit)
+ARM GAS  /tmp/ccVAH24M.s 			page 37
+
+
 1147:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a exclusive LDR instruction for 32 bit values.
 1148:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
 1149:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint32_t at (*ptr)
@@ -2038,9 +2185,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1168:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __STREXB(uint8_t value, volatile uint8_t *addr)
 1169:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1170:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    uint32_t result;
-ARM GAS  /tmp/cczOAdgn.s 			page 35
-
-
 1171:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1172:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("strexb %0, %2, %1" : "=&r" (result), "=Q" (*addr) : "r" ((uint32_t)value) );
 1173:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
@@ -2074,6 +2218,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1201:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1202:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __STREXW(uint32_t value, volatile uint32_t *addr)
 1203:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccVAH24M.s 			page 38
+
+
 1204:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    uint32_t result;
 1205:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1206:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("strex %0, %2, %1" : "=&r" (result), "=Q" (*addr) : "r" (value) );
@@ -2098,9 +2245,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1225:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1226:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
 1227:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
-ARM GAS  /tmp/cczOAdgn.s 			page 36
-
-
 1228:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    )
 1229:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1230:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Signed Saturate
@@ -2134,6 +2278,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1258:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  })
 1259:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1260:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 39
+
+
 1261:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1262:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Rotate Right with Extend (32 bit)
 1263:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Moves each bit of a bitstring right by one bit.
@@ -2158,9 +2305,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1282:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1283:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __LDRBT(volatile uint8_t *ptr)
 1284:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/cczOAdgn.s 			page 37
-
-
 1285:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1286:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1287:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
@@ -2194,6 +2338,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1315:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrht %0, [%1]" : "=r" (result) : "r" (ptr) : "memory" );
 1316:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
 1317:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return ((uint16_t) result);    /* Add explicit type cast here */
+ARM GAS  /tmp/ccVAH24M.s 			page 40
+
+
 1318:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1319:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1320:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2218,9 +2365,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1339:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1340:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
 1341:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/cczOAdgn.s 			page 38
-
-
 1342:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STRBT(uint8_t value, volatile uint8_t *ptr)
 1343:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1344:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("strbt %1, %0" : "=Q" (*ptr) : "r" ((uint32_t)value) );
@@ -2254,6 +2398,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1372:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
 1373:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    ) */
 1374:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 41
+
+
 1375:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1376:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Signed Saturate
 1377:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Saturates a signed value.
@@ -2278,9 +2425,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1396:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
 1397:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return val;
 1398:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cczOAdgn.s 			page 39
-
-
 1399:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1400:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1401:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Unsigned Saturate
@@ -2314,6 +2458,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1429:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
 1430:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    )
 1431:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccVAH24M.s 			page 42
+
+
 1432:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Load-Acquire (8 bit)
 1433:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a LDAB instruction for 8 bit value.
 1434:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
@@ -2338,9 +2485,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1453:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1454:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1455:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 40
-
-
 1456:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldah %0, %1" : "=r" (result) : "Q" (*ptr) );
 1457:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return ((uint16_t) result);
 1458:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -2374,6 +2518,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1486:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1487:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1488:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccVAH24M.s 			page 43
+
+
 1489:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Store-Release (16 bit)
 1490:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STLH instruction for 16 bit values.
 1491:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
@@ -2398,9 +2545,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1510:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1511:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1512:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/cczOAdgn.s 			page 41
-
-
 1513:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Load-Acquire Exclusive (8 bit)
 1514:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a LDAB exclusive instruction for 8 bit value.
 1515:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
@@ -2434,6 +2578,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1543:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Load-Acquire Exclusive (32 bit)
 1544:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a LDA exclusive instruction for 32 bit values.
 1545:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
+ARM GAS  /tmp/ccVAH24M.s 			page 44
+
+
 1546:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint32_t at (*ptr)
 1547:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1548:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __LDAEX(volatile uint32_t *ptr)
@@ -2458,9 +2605,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1567:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    uint32_t result;
 1568:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1569:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("stlexb %0, %2, %1" : "=&r" (result), "=Q" (*ptr) : "r" ((uint32_t)value) );
-ARM GAS  /tmp/cczOAdgn.s 			page 42
-
-
 1570:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1571:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1572:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2494,6 +2638,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1600:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1601:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    uint32_t result;
 1602:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 45
+
+
 1603:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("stlex %0, %2, %1" : "=&r" (result), "=Q" (*ptr) : "r" ((uint32_t)value) );
 1604:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1605:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -2518,9 +2665,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1624:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1625:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("sadd8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1626:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/cczOAdgn.s 			page 43
-
-
 1627:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1628:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1629:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __QADD8(uint32_t op1, uint32_t op2)
@@ -2554,6 +2698,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1657:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uqadd8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1658:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1659:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccVAH24M.s 			page 46
+
+
 1660:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1661:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UHADD8(uint32_t op1, uint32_t op2)
 1662:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2578,9 +2725,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1681:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1682:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("qsub8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1683:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/cczOAdgn.s 			page 44
-
-
 1684:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1685:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1686:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SHSUB8(uint32_t op1, uint32_t op2)
@@ -2614,6 +2758,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1714:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uhsub8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1715:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1716:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccVAH24M.s 			page 47
+
+
 1717:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1718:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1719:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SADD16(uint32_t op1, uint32_t op2)
@@ -2638,9 +2785,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1738:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1739:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("shadd16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1740:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/cczOAdgn.s 			page 45
-
-
 1741:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1742:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1743:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UADD16(uint32_t op1, uint32_t op2)
@@ -2674,6 +2818,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1771:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("ssub16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1772:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1773:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccVAH24M.s 			page 48
+
+
 1774:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1775:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __QSUB16(uint32_t op1, uint32_t op2)
 1776:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2698,9 +2845,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1795:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("usub16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1796:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1797:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cczOAdgn.s 			page 46
-
-
 1798:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1799:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UQSUB16(uint32_t op1, uint32_t op2)
 1800:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2734,6 +2878,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1828:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1829:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1830:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 49
+
+
 1831:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SHASX(uint32_t op1, uint32_t op2)
 1832:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1833:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -2758,9 +2905,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1852:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1853:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1854:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 47
-
-
 1855:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UHASX(uint32_t op1, uint32_t op2)
 1856:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1857:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -2794,6 +2938,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1885:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1886:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1887:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __USAX(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccVAH24M.s 			page 50
+
+
 1888:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1889:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1890:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2818,9 +2965,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1909:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1910:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1911:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __USAD8(uint32_t op1, uint32_t op2)
-ARM GAS  /tmp/cczOAdgn.s 			page 48
-
-
 1912:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1913:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1914:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2854,6 +2998,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1942:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1943:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1944:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 51
+
+
 1945:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uxtb16 %0, %1" : "=r" (result) : "r" (op1));
 1946:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1947:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -2878,9 +3025,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1966:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1967:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1968:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 49
-
-
 1969:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("sxtab16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1970:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1971:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -2914,6 +3058,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 1999:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 2000:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 2001:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smladx %0, %1, %2, %3" : "=r" (result) : "r" (op1), "r" (op2), "r" (op3) );
+ARM GAS  /tmp/ccVAH24M.s 			page 52
+
+
 2002:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 2003:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 2004:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2938,9 +3085,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 2023:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 2024:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   union llreg_u{
 2025:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t w32[2];
-ARM GAS  /tmp/cczOAdgn.s 			page 50
-
-
 2026:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint64_t w64;
 2027:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   } llr;
 2028:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   llr.w64 = acc;
@@ -2955,26 +3099,30 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
 2037:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 2038:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 2039:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMUSD  (uint32_t op1, uint32_t op2)
- 119              		.loc 3 2039 31 discriminator 3 view .LVU38
- 120              	.LBB53:
 2040:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 2041:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
- 121              		.loc 3 2041 3 discriminator 3 view .LVU39
 2042:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 2043:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smusd %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
- 122              		.loc 3 2043 3 discriminator 3 view .LVU40
- 123              		.syntax unified
- 124              	@ 2043 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 125 0042 41FB0EF4 		smusd r4, r1, lr
- 126              	@ 0 "" 2
- 127              	.LVL10:
+ 270              		.loc 3 2043 3 discriminator 3
+ 271 008a FB6C     		ldr	r3, [r7, #76]
+ 272 008c BA6C     		ldr	r2, [r7, #72]
+ 273              		.syntax unified
+ 274              	@ 2043 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 275 008e 43FB02F3 		smusd r3, r3, r2
+ 276              	@ 0 "" 2
+ 277              		.thumb
+ 278              		.syntax unified
+ 279 0092 7B64     		str	r3, [r7, #68]
 2044:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 128              		.loc 3 2044 3 discriminator 3 view .LVU41
- 129              		.loc 3 2044 3 is_stmt 0 discriminator 3 view .LVU42
- 130              		.thumb
- 131              		.syntax unified
- 132              	.LBE53:
- 133              	.LBE52:
+ 280              		.loc 3 2044 9 discriminator 3
+ 281 0094 7B6C     		ldr	r3, [r7, #68]
+ 282              	.LBE57:
+ 283              	.LBE56:
+ARM GAS  /tmp/ccVAH24M.s 			page 53
+
+
+ 284              		.loc 1 173 14 discriminator 3
+ 285 0096 C7F89830 		str	r3, [r7, #152]
  174:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
  175:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* -(pSrc[2 * i + 1] * pATable[2 * i + 1] - pSrc[2 * i] * pATable[2 * i]) */
  176:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outR = -(__SMUSD(read_q15x2 (pSrc1), read_q15x2((q15_t *) pCoefA)));
@@ -2982,53 +3130,71 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  178:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  179:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* pSrc[2 * n - 2 * i] * pBTable[2 * i] + pSrc[2 * n - 2 * i + 1] * pBTable[2 * i + 1]) */
  180:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outR = __SMLAD(read_q15x2 (pSrc2), read_q15x2((q15_t *) pCoefB), outR) >> 16U;
- 134              		.loc 1 180 9 is_stmt 1 discriminator 3 view .LVU43
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 135              		.loc 2 457 3 discriminator 3 view .LVU44
+ 286              		.loc 1 180 24 discriminator 3
+ 287 009a 7B6B     		ldr	r3, [r7, #52]
+ 288 009c 3B65     		str	r3, [r7, #80]
+ 289 009e 3B6D     		ldr	r3, [r7, #80]
+ 290 00a0 1B68     		ldr	r3, [r3]	@ unaligned
+ 291              	.LBB58:
+ 292              	.LBB59:
  459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 136              		.loc 2 459 3 discriminator 3 view .LVU45
- 137 0046 59F80459 		ldr	r5, [r9], #-4	@ unaligned
- 138              	.LVL11:
- 139              		.loc 2 461 3 discriminator 3 view .LVU46
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 140              		.loc 2 457 3 discriminator 3 view .LVU47
+ 293              		.loc 2 459 3 discriminator 3
+ 294 00a2 BB62     		str	r3, [r7, #40]
+ 295              		.loc 2 461 10 discriminator 3
+ 296 00a4 BB6A     		ldr	r3, [r7, #40]
+ 297              	.LBE59:
+ 298              	.LBE58:
+ 299              		.loc 1 180 16 discriminator 3
+ 300 00a6 1946     		mov	r1, r3
+ 301 00a8 D7F8A430 		ldr	r3, [r7, #164]
+ 302 00ac 7B65     		str	r3, [r7, #84]
+ 303 00ae 7B6D     		ldr	r3, [r7, #84]
+ 304 00b0 1B68     		ldr	r3, [r3]	@ unaligned
+ 305              	.LBB60:
+ 306              	.LBB61:
  459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 141              		.loc 2 459 3 discriminator 3 view .LVU48
- 142 004a D3F80080 		ldr	r8, [r3]	@ unaligned
- 143              	.LVL12:
- 144              		.loc 2 461 3 discriminator 3 view .LVU49
- 145              	.LBB54:
-ARM GAS  /tmp/cczOAdgn.s 			page 51
-
-
- 146              	.LBI54:
-1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 147              		.loc 3 1989 31 discriminator 3 view .LVU50
- 148              	.LBB55:
-1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 149              		.loc 3 1991 3 discriminator 3 view .LVU51
+ 307              		.loc 2 459 3 discriminator 3
+ 308 00b2 7B62     		str	r3, [r7, #36]
+ 309              		.loc 2 461 10 discriminator 3
+ 310 00b4 7B6A     		ldr	r3, [r7, #36]
+ 311              	.LBE61:
+ 312              	.LBE60:
+ 313              		.loc 1 180 16 discriminator 3
+ 314 00b6 1A46     		mov	r2, r3
+ 315 00b8 D7F89830 		ldr	r3, [r7, #152]
+ 316 00bc 7966     		str	r1, [r7, #100]
+ 317 00be 3A66     		str	r2, [r7, #96]
+ 318 00c0 FB65     		str	r3, [r7, #92]
+ 319              	.LBB62:
+ 320              	.LBB63:
 1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 150              		.loc 3 1993 3 discriminator 3 view .LVU52
- 151              		.syntax unified
- 152              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 153 004e 25FB0844 		smlad r4, r5, r8, r4
- 154              	@ 0 "" 2
- 155              	.LVL13:
+ 321              		.loc 3 1993 3 discriminator 3
+ 322 00c2 7B6E     		ldr	r3, [r7, #100]
+ 323 00c4 3A6E     		ldr	r2, [r7, #96]
+ 324 00c6 F96D     		ldr	r1, [r7, #92]
+ 325              		.syntax unified
+ 326              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 327 00c8 23FB0213 		smlad r3, r3, r2, r1
+ 328              	@ 0 "" 2
+ 329              		.thumb
+ 330              		.syntax unified
+ARM GAS  /tmp/ccVAH24M.s 			page 54
+
+
+ 331 00cc BB65     		str	r3, [r7, #88]
 1994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 156              		.loc 3 1994 3 discriminator 3 view .LVU53
-1994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 157              		.loc 3 1994 3 is_stmt 0 discriminator 3 view .LVU54
- 158              		.thumb
- 159              		.syntax unified
- 160              	.LBE55:
- 161              	.LBE54:
- 181:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 182:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* pIn[2 * n - 2 * i] * pBTable[2 * i + 1] - pIn[2 * n - 2 * i + 1] * pBTable[2 * i] */
- 183:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
- 184:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outI = __SMUSDX(read_q15x2_da (&pSrc2), read_q15x2((q15_t *) pCoefB));
- 162              		.loc 1 184 9 is_stmt 1 discriminator 3 view .LVU55
- 163              	.LBB56:
- 164              	.LBI56:
+ 332              		.loc 3 1994 9 discriminator 3
+ 333 00ce BB6D     		ldr	r3, [r7, #88]
+ 334              	.LBE63:
+ 335              	.LBE62:
+ 336              		.loc 1 180 80 discriminator 3
+ 337 00d0 1B0C     		lsrs	r3, r3, #16
+ 338              		.loc 1 180 14 discriminator 3
+ 339 00d2 C7F89830 		str	r3, [r7, #152]
+ 340 00d6 07F13403 		add	r3, r7, #52
+ 341 00da BB66     		str	r3, [r7, #104]
+ 342              	.LBB64:
+ 343              	.LBB65:
  462:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
  463:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  464:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
@@ -3053,240 +3219,301 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  483:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        Q31 value
  484:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  485:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE q31_t read_q15x2_da (
- 165              		.loc 2 485 28 discriminator 3 view .LVU56
- 166              	.LBB57:
  486:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
  487:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  488:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val;
-ARM GAS  /tmp/cczOAdgn.s 			page 52
-
-
- 167              		.loc 2 488 3 discriminator 3 view .LVU57
  489:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  490:./Libraries/CMSIS/DSP/Include/arm_math.h ****   memcpy (&val, *pQ15, 4);
- 168              		.loc 2 490 3 discriminator 3 view .LVU58
+ 344              		.loc 2 490 3 discriminator 3
+ 345 00dc BB6E     		ldr	r3, [r7, #104]
+ 346 00de 1B68     		ldr	r3, [r3]
+ 347 00e0 1B68     		ldr	r3, [r3]	@ unaligned
+ 348 00e2 3B62     		str	r3, [r7, #32]
  491:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 -= 2;
- 169              		.loc 2 491 3 discriminator 3 view .LVU59
+ 349              		.loc 2 491 9 discriminator 3
+ 350 00e4 BB6E     		ldr	r3, [r7, #104]
+ 351 00e6 1B68     		ldr	r3, [r3]
+ 352 00e8 1A1F     		subs	r2, r3, #4
+ 353 00ea BB6E     		ldr	r3, [r7, #104]
+ 354 00ec 1A60     		str	r2, [r3]
  492:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  493:./Libraries/CMSIS/DSP/Include/arm_math.h ****   return (val);
- 170              		.loc 2 493 3 discriminator 3 view .LVU60
- 171              		.loc 2 493 3 is_stmt 0 discriminator 3 view .LVU61
- 172              	.LBE57:
- 173              	.LBE56:
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 174              		.loc 2 457 3 is_stmt 1 discriminator 3 view .LVU62
+ARM GAS  /tmp/ccVAH24M.s 			page 55
+
+
+ 355              		.loc 2 493 10 discriminator 3
+ 356 00ee 3B6A     		ldr	r3, [r7, #32]
+ 357              	.LBE65:
+ 358              	.LBE64:
+ 181:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
+ 182:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* pIn[2 * n - 2 * i] * pBTable[2 * i + 1] - pIn[2 * n - 2 * i + 1] * pBTable[2 * i] */
+ 183:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 184:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outI = __SMUSDX(read_q15x2_da (&pSrc2), read_q15x2((q15_t *) pCoefB));
+ 359              		.loc 1 184 16 discriminator 3
+ 360 00f0 1A46     		mov	r2, r3
+ 361 00f2 D7F8A430 		ldr	r3, [r7, #164]
+ 362 00f6 FB66     		str	r3, [r7, #108]
+ 363 00f8 FB6E     		ldr	r3, [r7, #108]
+ 364 00fa 1B68     		ldr	r3, [r3]	@ unaligned
+ 365              	.LBB66:
+ 366              	.LBB67:
  459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 175              		.loc 2 459 3 discriminator 3 view .LVU63
+ 367              		.loc 2 459 3 discriminator 3
+ 368 00fc FB61     		str	r3, [r7, #28]
  461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 176              		.loc 2 461 3 discriminator 3 view .LVU64
- 177              	.LBB58:
- 178              	.LBI58:
+ 369              		.loc 2 461 10 discriminator 3
+ 370 00fe FB69     		ldr	r3, [r7, #28]
+ 371 0100 BA67     		str	r2, [r7, #120]
+ 372 0102 7B67     		str	r3, [r7, #116]
+ 373              	.LBE67:
+ 374              	.LBE66:
+ 375              	.LBB68:
+ 376              	.LBB69:
 2045:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 2046:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 2047:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMUSDX (uint32_t op1, uint32_t op2)
- 179              		.loc 3 2047 31 discriminator 3 view .LVU65
- 180              	.LBB59:
 2048:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 2049:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
- 181              		.loc 3 2049 3 discriminator 3 view .LVU66
 2050:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 2051:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smusdx %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
- 182              		.loc 3 2051 3 discriminator 3 view .LVU67
- 183              		.syntax unified
- 184              	@ 2051 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 185 0052 45FB18F5 		smusdx r5, r5, r8
- 186              	@ 0 "" 2
- 187              	.LVL14:
+ 377              		.loc 3 2051 3 discriminator 3
+ 378 0104 BB6F     		ldr	r3, [r7, #120]
+ 379 0106 7A6F     		ldr	r2, [r7, #116]
+ 380              		.syntax unified
+ 381              	@ 2051 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 382 0108 43FB12F3 		smusdx r3, r3, r2
+ 383              	@ 0 "" 2
+ 384              		.thumb
+ 385              		.syntax unified
+ 386 010c 3B67     		str	r3, [r7, #112]
 2052:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 188              		.loc 3 2052 3 discriminator 3 view .LVU68
- 189              		.loc 3 2052 3 is_stmt 0 discriminator 3 view .LVU69
- 190              		.thumb
- 191              		.syntax unified
- 192              	.LBE59:
- 193              	.LBE58:
+ 387              		.loc 3 2052 9 discriminator 3
+ 388 010e 3B6F     		ldr	r3, [r7, #112]
+ 389              	.LBE69:
+ 390              	.LBE68:
+ 391              		.loc 1 184 14 discriminator 3
+ 392 0110 C7F89430 		str	r3, [r7, #148]
+ 393 0114 07F13803 		add	r3, r7, #56
+ 394 0118 FB67     		str	r3, [r7, #124]
+ 395              	.LBB70:
+ 396              	.LBB71:
+ 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
+ARM GAS  /tmp/ccVAH24M.s 			page 56
+
+
+ 397              		.loc 2 474 3 discriminator 3
+ 398 011a FB6F     		ldr	r3, [r7, #124]
+ 399 011c 1B68     		ldr	r3, [r3]
+ 400 011e 1B68     		ldr	r3, [r3]	@ unaligned
+ 401 0120 BB61     		str	r3, [r7, #24]
+ 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 402              		.loc 2 475 9 discriminator 3
+ 403 0122 FB6F     		ldr	r3, [r7, #124]
+ 404 0124 1B68     		ldr	r3, [r3]
+ 405 0126 1A1D     		adds	r2, r3, #4
+ 406 0128 FB6F     		ldr	r3, [r7, #124]
+ 407 012a 1A60     		str	r2, [r3]
+ 477:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 408              		.loc 2 477 10 discriminator 3
+ 409 012c BB69     		ldr	r3, [r7, #24]
+ 410              	.LBE71:
+ 411              	.LBE70:
  185:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
  186:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outI = __SMUSDX(read_q15x2 ((q15_t *) pCoefB), read_q15x2_da (&pSrc2));
  187:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
  188:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  189:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* (pIn[2 * i + 1] * pATable[2 * i] + pIn[2 * i] * pATable[2 * i + 1] */
  190:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outI = __SMLADX(read_q15x2_ia (&pSrc1), read_q15x2 ((q15_t *) pCoefA), outI);
- 194              		.loc 1 190 9 is_stmt 1 discriminator 3 view .LVU70
- 195              	.LBB60:
- 196              	.LBI60:
- 469:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
- 197              		.loc 2 469 28 discriminator 3 view .LVU71
- 198              	.LBB61:
- 472:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 199              		.loc 2 472 3 discriminator 3 view .LVU72
-ARM GAS  /tmp/cczOAdgn.s 			page 53
-
-
- 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 200              		.loc 2 474 3 discriminator 3 view .LVU73
- 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 201              		.loc 2 475 3 discriminator 3 view .LVU74
- 477:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 202              		.loc 2 477 3 discriminator 3 view .LVU75
- 477:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 203              		.loc 2 477 3 is_stmt 0 discriminator 3 view .LVU76
- 204              	.LBE61:
- 205              	.LBE60:
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 206              		.loc 2 457 3 is_stmt 1 discriminator 3 view .LVU77
+ 412              		.loc 1 190 16 discriminator 3
+ 413 012e 1946     		mov	r1, r3
+ 414 0130 D7F8A830 		ldr	r3, [r7, #168]
+ 415 0134 C7F88030 		str	r3, [r7, #128]
+ 416 0138 D7F88030 		ldr	r3, [r7, #128]
+ 417 013c 1B68     		ldr	r3, [r3]	@ unaligned
+ 418              	.LBB72:
+ 419              	.LBB73:
  459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 207              		.loc 2 459 3 discriminator 3 view .LVU78
+ 420              		.loc 2 459 3 discriminator 3
+ 421 013e 7B61     		str	r3, [r7, #20]
  461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 208              		.loc 2 461 3 discriminator 3 view .LVU79
- 209              	.LBB62:
- 210              	.LBI62:
-1997:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 211              		.loc 3 1997 31 discriminator 3 view .LVU80
- 212              	.LBB63:
-1999:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 213              		.loc 3 1999 3 discriminator 3 view .LVU81
+ 422              		.loc 2 461 10 discriminator 3
+ 423 0140 7B69     		ldr	r3, [r7, #20]
+ 424              	.LBE73:
+ 425              	.LBE72:
+ 426              		.loc 1 190 16 discriminator 3
+ 427 0142 1A46     		mov	r2, r3
+ 428 0144 D7F89430 		ldr	r3, [r7, #148]
+ 429 0148 C7F89010 		str	r1, [r7, #144]
+ 430 014c C7F88C20 		str	r2, [r7, #140]
+ 431 0150 C7F88830 		str	r3, [r7, #136]
+ 432              	.LBB74:
+ 433              	.LBB75:
 2001:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 214              		.loc 3 2001 3 discriminator 3 view .LVU82
- 215              		.syntax unified
- 216              	@ 2001 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 217 0056 21FB1E51 		smladx r1, r1, lr, r5
- 218              	@ 0 "" 2
- 219              	.LVL15:
+ 434              		.loc 3 2001 3 discriminator 3
+ 435 0154 D7F89030 		ldr	r3, [r7, #144]
+ 436 0158 D7F88C20 		ldr	r2, [r7, #140]
+ 437 015c D7F88810 		ldr	r1, [r7, #136]
+ 438              		.syntax unified
+ 439              	@ 2001 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 440 0160 23FB1213 		smladx r3, r3, r2, r1
+ 441              	@ 0 "" 2
+ 442              		.thumb
+ARM GAS  /tmp/ccVAH24M.s 			page 57
+
+
+ 443              		.syntax unified
+ 444 0164 C7F88430 		str	r3, [r7, #132]
 2002:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 220              		.loc 3 2002 3 discriminator 3 view .LVU83
-2002:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 221              		.loc 3 2002 3 is_stmt 0 discriminator 3 view .LVU84
- 222              		.thumb
- 223              		.syntax unified
- 224              	.LBE63:
- 225              	.LBE62:
+ 445              		.loc 3 2002 9 discriminator 3
+ 446 0168 D7F88430 		ldr	r3, [r7, #132]
+ 447              	.LBE75:
+ 448              	.LBE74:
+ 449              		.loc 1 190 14 discriminator 3
+ 450 016c C7F89430 		str	r3, [r7, #148]
  191:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  192:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* write output */
  193:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         *pD1++ = (q15_t) outR;
- 226              		.loc 1 193 9 is_stmt 1 discriminator 3 view .LVU85
+ 451              		.loc 1 193 13 discriminator 3
+ 452 0170 D7F8A030 		ldr	r3, [r7, #160]
+ 453 0174 9A1C     		adds	r2, r3, #2
+ 454 0176 C7F8A020 		str	r2, [r7, #160]
+ 455              		.loc 1 193 18 discriminator 3
+ 456 017a D7F89820 		ldr	r2, [r7, #152]
+ 457 017e 12B2     		sxth	r2, r2
+ 458              		.loc 1 193 16 discriminator 3
+ 459 0180 1A80     		strh	r2, [r3]	@ movhi
  194:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         *pD1++ = outI >> 16U;
- 227              		.loc 1 194 23 is_stmt 0 discriminator 3 view .LVU86
- 228 005a 0914     		asrs	r1, r1, #16
- 229              	.LVL16:
- 156:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     {
- 230              		.loc 1 156 5 discriminator 3 view .LVU87
- 231 005c BCF1010C 		subs	ip, ip, #1
- 232              	.LVL17:
- 193:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         *pD1++ = outI >> 16U;
- 233              		.loc 1 193 18 discriminator 3 view .LVU88
- 234 0060 4FEA2444 		asr	r4, r4, #16
- 235              	.LVL18:
+ 460              		.loc 1 194 23 discriminator 3
+ 461 0182 D7F89430 		ldr	r3, [r7, #148]
+ 462 0186 1914     		asrs	r1, r3, #16
+ 463              		.loc 1 194 13 discriminator 3
+ 464 0188 D7F8A030 		ldr	r3, [r7, #160]
+ 465 018c 9A1C     		adds	r2, r3, #2
+ 466 018e C7F8A020 		str	r2, [r7, #160]
+ 467              		.loc 1 194 16 discriminator 3
+ 468 0192 0AB2     		sxth	r2, r1
+ 469 0194 1A80     		strh	r2, [r3]	@ movhi
  195:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  196:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* write complex conjugate output */
  197:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2[0] = (q15_t) outR;
-ARM GAS  /tmp/cczOAdgn.s 			page 54
-
-
+ 470              		.loc 1 197 18 discriminator 3
+ 471 0196 D7F89830 		ldr	r3, [r7, #152]
+ 472 019a 1AB2     		sxth	r2, r3
+ 473              		.loc 1 197 16 discriminator 3
+ 474 019c D7F89C30 		ldr	r3, [r7, #156]
+ 475 01a0 1A80     		strh	r2, [r3]	@ movhi
  198:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2[1] = -(outI >> 16U);
+ 476              		.loc 1 198 25 discriminator 3
+ 477 01a2 D7F89430 		ldr	r3, [r7, #148]
+ 478 01a6 1B14     		asrs	r3, r3, #16
+ 479              		.loc 1 198 16 discriminator 3
+ 480 01a8 9BB2     		uxth	r3, r3
+ 481 01aa 5B42     		rsbs	r3, r3, #0
+ 482 01ac 9AB2     		uxth	r2, r3
+ 483              		.loc 1 198 12 discriminator 3
+ 484 01ae D7F89C30 		ldr	r3, [r7, #156]
+ 485 01b2 0233     		adds	r3, r3, #2
+ 486              		.loc 1 198 16 discriminator 3
+ 487 01b4 12B2     		sxth	r2, r2
+ 488 01b6 1A80     		strh	r2, [r3]	@ movhi
  199:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2 -= 2;
+ 489              		.loc 1 199 13 discriminator 3
+ARM GAS  /tmp/ccVAH24M.s 			page 58
+
+
+ 490 01b8 D7F89C30 		ldr	r3, [r7, #156]
+ 491 01bc 043B     		subs	r3, r3, #4
+ 492 01be C7F89C30 		str	r3, [r7, #156]
  200:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  201:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         /* update coefficient pointer */
  202:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pCoefB = pCoefB + (2U * modifier);
- 236              		.loc 1 202 16 discriminator 3 view .LVU89
- 237 0064 5344     		add	r3, r3, r10
- 238              	.LVL19:
- 198:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2 -= 2;
- 239              		.loc 1 198 16 discriminator 3 view .LVU90
- 240 0066 C1F10005 		rsb	r5, r1, #0
- 194:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 241              		.loc 1 194 16 discriminator 3 view .LVU91
- 242 006a 27F8021C 		strh	r1, [r7, #-2]	@ movhi
- 193:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         *pD1++ = outI >> 16U;
- 243              		.loc 1 193 16 discriminator 3 view .LVU92
- 244 006e 27F8044C 		strh	r4, [r7, #-4]	@ movhi
- 194:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 245              		.loc 1 194 9 is_stmt 1 discriminator 3 view .LVU93
- 197:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2[1] = -(outI >> 16U);
- 246              		.loc 1 197 9 discriminator 3 view .LVU94
+ 493              		.loc 1 202 25 discriminator 3
+ 494 01c2 D7F8BC30 		ldr	r3, [r7, #188]
+ 495 01c6 9B00     		lsls	r3, r3, #2
+ 496              		.loc 1 202 16 discriminator 3
+ 497 01c8 D7F8A420 		ldr	r2, [r7, #164]
+ 498 01cc 1344     		add	r3, r3, r2
+ 499 01ce C7F8A430 		str	r3, [r7, #164]
  203:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pCoefA = pCoefA + (2U * modifier);
- 247              		.loc 1 203 16 is_stmt 0 discriminator 3 view .LVU95
- 248 0072 5244     		add	r2, r2, r10
- 249              	.LVL20:
- 198:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2 -= 2;
- 250              		.loc 1 198 16 discriminator 3 view .LVU96
- 251 0074 F580     		strh	r5, [r6, #6]	@ movhi
- 252 0076 07F10407 		add	r7, r7, #4
- 197:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2[1] = -(outI >> 16U);
- 253              		.loc 1 197 16 discriminator 3 view .LVU97
- 254 007a B480     		strh	r4, [r6, #4]	@ movhi
- 198:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pD2 -= 2;
- 255              		.loc 1 198 9 is_stmt 1 discriminator 3 view .LVU98
- 199:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 256              		.loc 1 199 9 discriminator 3 view .LVU99
- 202:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         pCoefA = pCoefA + (2U * modifier);
- 257              		.loc 1 202 9 discriminator 3 view .LVU100
- 258              	.LVL21:
- 259              		.loc 1 203 9 discriminator 3 view .LVU101
+ 500              		.loc 1 203 25 discriminator 3
+ 501 01d2 D7F8BC30 		ldr	r3, [r7, #188]
+ 502 01d6 9B00     		lsls	r3, r3, #2
+ 503              		.loc 1 203 16 discriminator 3
+ 504 01d8 D7F8A820 		ldr	r2, [r7, #168]
+ 505 01dc 1344     		add	r3, r3, r2
+ 506 01de C7F8A830 		str	r3, [r7, #168]
  156:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     {
- 260              		.loc 1 156 33 discriminator 3 view .LVU102
+ 507              		.loc 1 156 34 discriminator 3
+ 508 01e2 D7F8AC30 		ldr	r3, [r7, #172]
+ 509 01e6 013B     		subs	r3, r3, #1
+ 510 01e8 C7F8AC30 		str	r3, [r7, #172]
+ 511              	.L8:
  156:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     {
- 261              		.loc 1 156 26 discriminator 3 view .LVU103
- 262 007c A6F10406 		sub	r6, r6, #4
- 156:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     {
- 263              		.loc 1 156 5 is_stmt 0 discriminator 3 view .LVU104
- 264 0080 DBD1     		bne	.L3
- 265              	.LVL22:
- 266              	.L2:
+ 512              		.loc 1 156 5 discriminator 1
+ 513 01ec D7F8AC30 		ldr	r3, [r7, #172]
+ 514 01f0 002B     		cmp	r3, #0
+ 515 01f2 7FF43AAF 		bne	.L21
  204:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     }
  205:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  206:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[2U * fftLen]      = (pSrc[0] - pSrc[1]) >> 1U;
- 267              		.loc 1 206 5 is_stmt 1 view .LVU105
- 268              		.loc 1 206 35 is_stmt 0 view .LVU106
- 269 0082 B0F90030 		ldrsh	r3, [r0]
- 270              	.LVL23:
-ARM GAS  /tmp/cczOAdgn.s 			page 55
-
-
- 271              		.loc 1 206 45 view .LVU107
- 272 0086 B0F90240 		ldrsh	r4, [r0, #2]
- 273              		.loc 1 206 28 view .LVU108
- 274 008a 0C99     		ldr	r1, [sp, #48]
- 275 008c 019A     		ldr	r2, [sp, #4]
- 276              	.LVL24:
- 277              		.loc 1 206 39 view .LVU109
- 278 008e 1B1B     		subs	r3, r3, r4
- 279              		.loc 1 206 28 view .LVU110
- 280 0090 0A44     		add	r2, r2, r1
- 281              		.loc 1 206 50 view .LVU111
- 282 0092 5B10     		asrs	r3, r3, #1
+ 516              		.loc 1 206 35
+ 517 01f6 FB68     		ldr	r3, [r7, #12]
+ 518 01f8 B3F90030 		ldrsh	r3, [r3]
+ 519 01fc 1A46     		mov	r2, r3
+ 520              		.loc 1 206 45
+ 521 01fe FB68     		ldr	r3, [r7, #12]
+ 522 0200 0233     		adds	r3, r3, #2
+ 523 0202 B3F90030 		ldrsh	r3, [r3]
+ 524              		.loc 1 206 39
+ 525 0206 D31A     		subs	r3, r2, r3
+ 526              		.loc 1 206 50
+ 527 0208 5910     		asrs	r1, r3, #1
+ 528              		.loc 1 206 9
+ 529 020a BB68     		ldr	r3, [r7, #8]
+ 530 020c 9B00     		lsls	r3, r3, #2
+ 531 020e D7F8B820 		ldr	r2, [r7, #184]
+ 532 0212 1344     		add	r3, r3, r2
+ 533              		.loc 1 206 28
+ 534 0214 0AB2     		sxth	r2, r1
+ 535 0216 1A80     		strh	r2, [r3]	@ movhi
  207:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[2U * fftLen + 1U] = 0;
- 283              		.loc 1 207 28 view .LVU112
- 284 0094 0021     		movs	r1, #0
- 206:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[2U * fftLen + 1U] = 0;
- 285              		.loc 1 206 28 view .LVU113
- 286 0096 9380     		strh	r3, [r2, #4]	@ movhi
- 287              		.loc 1 207 5 is_stmt 1 view .LVU114
+ 536              		.loc 1 207 9
+ARM GAS  /tmp/ccVAH24M.s 			page 59
+
+
+ 537 0218 BB68     		ldr	r3, [r7, #8]
+ 538 021a 9B00     		lsls	r3, r3, #2
+ 539 021c 0233     		adds	r3, r3, #2
+ 540 021e D7F8B820 		ldr	r2, [r7, #184]
+ 541 0222 1344     		add	r3, r3, r2
+ 542              		.loc 1 207 28
+ 543 0224 0022     		movs	r2, #0
+ 544 0226 1A80     		strh	r2, [r3]	@ movhi
  208:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  209:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[0] = (pSrc[0] + pSrc[1]) >> 1U;
- 288              		.loc 1 209 5 view .LVU115
- 207:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 289              		.loc 1 207 28 is_stmt 0 view .LVU116
- 290 0098 D180     		strh	r1, [r2, #6]	@ movhi
- 291              		.loc 1 209 20 view .LVU117
- 292 009a B0F90030 		ldrsh	r3, [r0]
- 293              		.loc 1 209 30 view .LVU118
- 294 009e B0F90220 		ldrsh	r2, [r0, #2]
+ 545              		.loc 1 209 20
+ 546 0228 FB68     		ldr	r3, [r7, #12]
+ 547 022a B3F90030 		ldrsh	r3, [r3]
+ 548 022e 1A46     		mov	r2, r3
+ 549              		.loc 1 209 30
+ 550 0230 FB68     		ldr	r3, [r7, #12]
+ 551 0232 0233     		adds	r3, r3, #2
+ 552 0234 B3F90030 		ldrsh	r3, [r3]
+ 553              		.loc 1 209 24
+ 554 0238 1344     		add	r3, r3, r2
+ 555              		.loc 1 209 35
+ 556 023a 5B10     		asrs	r3, r3, #1
+ 557              		.loc 1 209 13
+ 558 023c 1AB2     		sxth	r2, r3
+ 559 023e D7F8B830 		ldr	r3, [r7, #184]
+ 560 0242 1A80     		strh	r2, [r3]	@ movhi
  210:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[1] = 0;
- 295              		.loc 1 210 13 view .LVU119
- 296 00a2 0C98     		ldr	r0, [sp, #48]
- 297              	.LVL25:
- 209:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[1] = 0;
- 298              		.loc 1 209 24 view .LVU120
- 299 00a4 1344     		add	r3, r3, r2
- 300              		.loc 1 210 13 view .LVU121
- 301 00a6 4180     		strh	r1, [r0, #2]	@ movhi
- 209:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[1] = 0;
- 302              		.loc 1 209 35 view .LVU122
- 303 00a8 5B10     		asrs	r3, r3, #1
- 209:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****     pDst[1] = 0;
- 304              		.loc 1 209 13 view .LVU123
- 305 00aa 0380     		strh	r3, [r0]	@ movhi
- 306              		.loc 1 210 5 is_stmt 1 view .LVU124
- 307              	.LVL26:
+ 561              		.loc 1 210 9
+ 562 0244 D7F8B830 		ldr	r3, [r7, #184]
+ 563 0248 0233     		adds	r3, r3, #2
+ 564              		.loc 1 210 13
+ 565 024a 0022     		movs	r2, #0
+ 566 024c 1A80     		strh	r2, [r3]	@ movhi
  211:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  212:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
  213:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
@@ -3298,9 +3525,6 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  219:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****           outR = (  pSrc[2 * i]             * pATable[2 * i]
  220:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   - pSrc[2 * i + 1]         * pATable[2 * i + 1]
  221:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   + pSrc[2 * n - 2 * i]     * pBTable[2 * i]
-ARM GAS  /tmp/cczOAdgn.s 			page 56
-
-
  222:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   + pSrc[2 * n - 2 * i + 1] * pBTable[2 * i + 1]);
  223:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         */
  224:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
@@ -3314,6 +3538,9 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  232:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   + pIn[2 * i]             * pATable[2 * i + 1]
  233:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   + pIn[2 * n - 2 * i]     * pBTable[2 * i + 1]
  234:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****                   - pIn[2 * n - 2 * i + 1] * pBTable[2 * i]);
+ARM GAS  /tmp/ccVAH24M.s 			page 60
+
+
  235:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         */
  236:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  237:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outI = *pSrc2 * *(pCoefB + 1);
@@ -3348,29 +3575,34 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  266:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  267:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #endif /* #if defined (ARM_MATH_DSP) */
  268:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** }
- 308              		.loc 1 268 1 is_stmt 0 view .LVU125
- 309 00ac 03B0     		add	sp, sp, #12
- 310              	.LCFI2:
- 311              		.cfi_def_cfa_offset 36
- 312              		@ sp needed
- 313 00ae BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 314              		.loc 1 268 1 view .LVU126
- 315              		.cfi_endproc
- 316              	.LFE146:
- 318 00b2 00BF     		.section	.text.arm_split_rifft_q15,"ax",%progbits
-ARM GAS  /tmp/cczOAdgn.s 			page 57
+ 567              		.loc 1 268 1
+ 568 024e 00BF     		nop
+ 569 0250 B437     		adds	r7, r7, #180
+ 570              	.LCFI8:
+ 571              		.cfi_def_cfa_offset 4
+ 572 0252 BD46     		mov	sp, r7
+ 573              	.LCFI9:
+ 574              		.cfi_def_cfa_register 13
+ 575              		@ sp needed
+ 576 0254 5DF8047B 		ldr	r7, [sp], #4
+ 577              	.LCFI10:
+ 578              		.cfi_restore 7
+ 579              		.cfi_def_cfa_offset 0
+ 580 0258 7047     		bx	lr
+ 581              		.cfi_endproc
+ 582              	.LFE146:
+ 584              		.section	.text.arm_split_rifft_q15,"ax",%progbits
+ 585              		.align	1
+ 586              		.global	arm_split_rifft_q15
+ 587              		.syntax unified
+ 588              		.thumb
+ 589              		.thumb_func
+ 590              		.fpu fpv5-d16
+ARM GAS  /tmp/ccVAH24M.s 			page 61
 
 
- 319              		.align	1
- 320              		.p2align 2,,3
- 321              		.global	arm_split_rifft_q15
- 322              		.syntax unified
- 323              		.thumb
- 324              		.thumb_func
- 325              		.fpu fpv5-d16
- 327              	arm_split_rifft_q15:
- 328              	.LVL27:
- 329              	.LFB147:
+ 592              	arm_split_rifft_q15:
+ 593              	.LFB147:
  269:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  270:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  271:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** /**
@@ -3395,62 +3627,67 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  290:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t * pDst,
  291:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t modifier)
  292:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** {
- 330              		.loc 1 292 1 is_stmt 1 view -0
- 331              		.cfi_startproc
- 332              		@ args = 8, pretend = 0, frame = 0
- 333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 594              		.loc 1 292 1
+ 595              		.cfi_startproc
+ 596              		@ args = 8, pretend = 0, frame = 184
+ 597              		@ frame_needed = 1, uses_anonymous_args = 0
+ 598              		@ link register save eliminated.
+ 599 0000 80B4     		push	{r7}
+ 600              	.LCFI11:
+ 601              		.cfi_def_cfa_offset 4
+ 602              		.cfi_offset 7, -4
+ 603 0002 AFB0     		sub	sp, sp, #188
+ 604              	.LCFI12:
+ 605              		.cfi_def_cfa_offset 192
+ 606 0004 00AF     		add	r7, sp, #0
+ 607              	.LCFI13:
+ 608              		.cfi_def_cfa_register 7
+ 609 0006 F860     		str	r0, [r7, #12]
+ 610 0008 B960     		str	r1, [r7, #8]
+ 611 000a 7A60     		str	r2, [r7, #4]
+ 612 000c 3B60     		str	r3, [r7]
  293:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;                                    /* Loop Counter */
- 334              		.loc 1 293 9 view .LVU128
  294:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q31_t outR, outI;                              /* Temporary variables for output */
- 335              		.loc 1 294 9 view .LVU129
  295:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   const q15_t *pCoefA, *pCoefB;                        /* Temporary pointers for twiddle factors */
- 336              		.loc 1 295 3 view .LVU130
  296:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t *pSrc1, *pSrc2;
- 337              		.loc 1 296 9 view .LVU131
  297:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         q15_t *pDst1 = &pDst[0];
- 338              		.loc 1 297 9 view .LVU132
- 292:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;                                    /* Loop Counter */
- 339              		.loc 1 292 1 is_stmt 0 view .LVU133
- 340 0000 2DE9F047 		push	{r4, r5, r6, r7, r8, r9, r10, lr}
- 341              	.LCFI3:
- 342              		.cfi_def_cfa_offset 32
- 343              		.cfi_offset 4, -32
- 344              		.cfi_offset 5, -28
- 345              		.cfi_offset 6, -24
- 346              		.cfi_offset 7, -20
-ARM GAS  /tmp/cczOAdgn.s 			page 58
-
-
- 347              		.cfi_offset 8, -16
- 348              		.cfi_offset 9, -12
- 349              		.cfi_offset 10, -8
- 350              		.cfi_offset 14, -4
+ 613              		.loc 1 297 16
+ 614 000e D7F8C030 		ldr	r3, [r7, #192]
+ 615 0012 BB63     		str	r3, [r7, #56]
  298:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  299:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pCoefA = &pATable[0];
+ 616              		.loc 1 299 10
+ 617 0014 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccVAH24M.s 			page 62
+
+
+ 618 0016 C7F8B030 		str	r3, [r7, #176]
  300:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pCoefB = &pBTable[0];
+ 619              		.loc 1 300 10
+ 620 001a 3B68     		ldr	r3, [r7]
+ 621 001c C7F8AC30 		str	r3, [r7, #172]
  301:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  302:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pSrc1 = &pSrc[0];
+ 622              		.loc 1 302 9
+ 623 0020 FB68     		ldr	r3, [r7, #12]
+ 624 0022 3B64     		str	r3, [r7, #64]
  303:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pSrc2 = &pSrc[2 * fftLen];
- 351              		.loc 1 303 11 view .LVU134
- 352 0004 00EB810C 		add	ip, r0, r1, lsl #2
- 292:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;                                    /* Loop Counter */
- 353              		.loc 1 292 1 view .LVU135
- 354 0008 DDF820E0 		ldr	lr, [sp, #32]
- 355              	.LVL28:
- 299:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pCoefB = &pBTable[0];
- 356              		.loc 1 299 3 is_stmt 1 view .LVU136
- 300:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 357              		.loc 1 300 3 view .LVU137
- 302:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   pSrc2 = &pSrc[2 * fftLen];
- 358              		.loc 1 302 3 view .LVU138
- 359              		.loc 1 303 3 view .LVU139
+ 625              		.loc 1 303 11
+ 626 0024 BB68     		ldr	r3, [r7, #8]
+ 627 0026 9B00     		lsls	r3, r3, #2
+ 628 0028 FA68     		ldr	r2, [r7, #12]
+ 629 002a 1344     		add	r3, r3, r2
+ 630              		.loc 1 303 9
+ 631 002c FB63     		str	r3, [r7, #60]
  304:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  305:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   i = fftLen;
- 360              		.loc 1 305 3 view .LVU140
+ 632              		.loc 1 305 5
+ 633 002e BB68     		ldr	r3, [r7, #8]
+ 634 0030 C7F8B430 		str	r3, [r7, #180]
  306:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   while (i > 0U)
- 361              		.loc 1 306 3 view .LVU141
- 362              		.loc 1 306 9 view .LVU142
- 363 000c E1B1     		cbz	r1, .L10
+ 635              		.loc 1 306 9
+ 636 0034 BDE0     		b	.L23
+ 637              	.L36:
  307:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
  308:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /*
  309:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         outR = (  pIn[2 * i]             * pATable[2 * i]
@@ -3469,6 +3706,62 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  322:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  323:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /* pIn[2 * n - 2 * i] * pBTable[2 * i] - pIn[2 * n - 2 * i + 1] * pBTable[2 * i + 1]) */
  324:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       outR = __SMUSD(read_q15x2(pSrc2), read_q15x2((q15_t *) pCoefB));
+ 638              		.loc 1 324 22
+ 639 0036 FB6B     		ldr	r3, [r7, #60]
+ 640 0038 7B64     		str	r3, [r7, #68]
+ 641 003a 7B6C     		ldr	r3, [r7, #68]
+ 642 003c 1B68     		ldr	r3, [r3]	@ unaligned
+ 643              	.LBB76:
+ 644              	.LBB77:
+ 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 645              		.loc 2 459 3
+ 646 003e 7B63     		str	r3, [r7, #52]
+ 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 647              		.loc 2 461 10
+ARM GAS  /tmp/ccVAH24M.s 			page 63
+
+
+ 648 0040 7B6B     		ldr	r3, [r7, #52]
+ 649              	.LBE77:
+ 650              	.LBE76:
+ 651              		.loc 1 324 14
+ 652 0042 1A46     		mov	r2, r3
+ 653 0044 D7F8AC30 		ldr	r3, [r7, #172]
+ 654 0048 BB64     		str	r3, [r7, #72]
+ 655 004a BB6C     		ldr	r3, [r7, #72]
+ 656 004c 1B68     		ldr	r3, [r3]	@ unaligned
+ 657              	.LBB78:
+ 658              	.LBB79:
+ 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 659              		.loc 2 459 3
+ 660 004e 3B63     		str	r3, [r7, #48]
+ 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 661              		.loc 2 461 10
+ 662 0050 3B6B     		ldr	r3, [r7, #48]
+ 663 0052 7A65     		str	r2, [r7, #84]
+ 664 0054 3B65     		str	r3, [r7, #80]
+ 665              	.LBE79:
+ 666              	.LBE78:
+ 667              	.LBB80:
+ 668              	.LBB81:
+2043:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ 669              		.loc 3 2043 3
+ 670 0056 7B6D     		ldr	r3, [r7, #84]
+ 671 0058 3A6D     		ldr	r2, [r7, #80]
+ 672              		.syntax unified
+ 673              	@ 2043 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 674 005a 43FB02F3 		smusd r3, r3, r2
+ 675              	@ 0 "" 2
+ 676              		.thumb
+ 677              		.syntax unified
+ 678 005e FB64     		str	r3, [r7, #76]
+2044:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ 679              		.loc 3 2044 9
+ 680 0060 FB6C     		ldr	r3, [r7, #76]
+ 681              	.LBE81:
+ 682              	.LBE80:
+ 683              		.loc 1 324 12
+ 684 0062 C7F8A830 		str	r3, [r7, #168]
  325:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
  326:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /* -(-pIn[2 * n - 2 * i] * pBTable[2 * i] + pIn[2 * n - 2 * i + 1] * pBTable[2 * i + 1])) */
  327:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       outR = -(__SMUSD(read_q15x2(pSrc2), read_q15x2((q15_t *) pCoefB)));
@@ -3476,16 +3769,225 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  329:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  330:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /* pIn[2 * i] * pATable[2 * i] + pIn[2 * i + 1] * pATable[2 * i + 1] + pIn[2 * n - 2 * i] * p
  331:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       outR = __SMLAD(read_q15x2(pSrc1), read_q15x2 ((q15_t *) pCoefA), outR) >> 16U;
+ 685              		.loc 1 331 22
+ 686 0066 3B6C     		ldr	r3, [r7, #64]
+ 687 0068 BB65     		str	r3, [r7, #88]
+ 688 006a BB6D     		ldr	r3, [r7, #88]
+ 689 006c 1B68     		ldr	r3, [r3]	@ unaligned
+ 690              	.LBB82:
+ 691              	.LBB83:
+ 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 692              		.loc 2 459 3
+ARM GAS  /tmp/ccVAH24M.s 			page 64
+
+
+ 693 006e FB62     		str	r3, [r7, #44]
+ 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 694              		.loc 2 461 10
+ 695 0070 FB6A     		ldr	r3, [r7, #44]
+ 696              	.LBE83:
+ 697              	.LBE82:
+ 698              		.loc 1 331 14
+ 699 0072 1946     		mov	r1, r3
+ 700 0074 D7F8B030 		ldr	r3, [r7, #176]
+ 701 0078 FB65     		str	r3, [r7, #92]
+ 702 007a FB6D     		ldr	r3, [r7, #92]
+ 703 007c 1B68     		ldr	r3, [r3]	@ unaligned
+ 704              	.LBB84:
+ 705              	.LBB85:
+ 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 706              		.loc 2 459 3
+ 707 007e BB62     		str	r3, [r7, #40]
+ 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 708              		.loc 2 461 10
+ 709 0080 BB6A     		ldr	r3, [r7, #40]
+ 710              	.LBE85:
+ 711              	.LBE84:
+ 712              		.loc 1 331 14
+ 713 0082 1A46     		mov	r2, r3
+ 714 0084 D7F8A830 		ldr	r3, [r7, #168]
+ 715 0088 F966     		str	r1, [r7, #108]
+ 716 008a BA66     		str	r2, [r7, #104]
+ 717 008c 7B66     		str	r3, [r7, #100]
+ 718              	.LBB86:
+ 719              	.LBB87:
+1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ 720              		.loc 3 1993 3
+ 721 008e FB6E     		ldr	r3, [r7, #108]
+ 722 0090 BA6E     		ldr	r2, [r7, #104]
+ 723 0092 796E     		ldr	r1, [r7, #100]
+ 724              		.syntax unified
+ 725              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 726 0094 23FB0213 		smlad r3, r3, r2, r1
+ 727              	@ 0 "" 2
+ 728              		.thumb
+ 729              		.syntax unified
+ 730 0098 3B66     		str	r3, [r7, #96]
+1994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ 731              		.loc 3 1994 9
+ 732 009a 3B6E     		ldr	r3, [r7, #96]
+ 733              	.LBE87:
+ 734              	.LBE86:
+ 735              		.loc 1 331 78
+ 736 009c 1B0C     		lsrs	r3, r3, #16
+ 737              		.loc 1 331 12
+ 738 009e C7F8A830 		str	r3, [r7, #168]
+ 739 00a2 07F13C03 		add	r3, r7, #60
+ 740 00a6 3B67     		str	r3, [r7, #112]
+ 741              	.LBB88:
+ 742              	.LBB89:
+ 490:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 -= 2;
+ 743              		.loc 2 490 3
+ARM GAS  /tmp/ccVAH24M.s 			page 65
+
+
+ 744 00a8 3B6F     		ldr	r3, [r7, #112]
+ 745 00aa 1B68     		ldr	r3, [r3]
+ 746 00ac 1B68     		ldr	r3, [r3]	@ unaligned
+ 747 00ae 7B62     		str	r3, [r7, #36]
+ 491:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 748              		.loc 2 491 9
+ 749 00b0 3B6F     		ldr	r3, [r7, #112]
+ 750 00b2 1B68     		ldr	r3, [r3]
+ 751 00b4 1A1F     		subs	r2, r3, #4
+ 752 00b6 3B6F     		ldr	r3, [r7, #112]
+ 753 00b8 1A60     		str	r2, [r3]
+ 754              		.loc 2 493 10
+ 755 00ba 7B6A     		ldr	r3, [r7, #36]
+ 756              	.LBE89:
+ 757              	.LBE88:
  332:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  333:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /* -pIn[2 * n - 2 * i] * pBTable[2 * i + 1] + pIn[2 * n - 2 * i + 1] * pBTable[2 * i] */
-ARM GAS  /tmp/cczOAdgn.s 			page 59
-
-
  334:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       outI = __SMUADX(read_q15x2_da (&pSrc2), read_q15x2((q15_t *) pCoefB));
+ 758              		.loc 1 334 14
+ 759 00bc 1A46     		mov	r2, r3
+ 760 00be D7F8AC30 		ldr	r3, [r7, #172]
+ 761 00c2 7B67     		str	r3, [r7, #116]
+ 762 00c4 7B6F     		ldr	r3, [r7, #116]
+ 763 00c6 1B68     		ldr	r3, [r3]	@ unaligned
+ 764              	.LBB90:
+ 765              	.LBB91:
+ 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 766              		.loc 2 459 3
+ 767 00c8 3B62     		str	r3, [r7, #32]
+ 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 768              		.loc 2 461 10
+ 769 00ca 3B6A     		ldr	r3, [r7, #32]
+ 770 00cc C7F88020 		str	r2, [r7, #128]
+ 771 00d0 FB67     		str	r3, [r7, #124]
+ 772              	.LBE91:
+ 773              	.LBE90:
+ 774              	.LBB92:
+ 775              	.LBB93:
+1985:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ 776              		.loc 3 1985 3
+ 777 00d2 D7F88030 		ldr	r3, [r7, #128]
+ 778 00d6 FA6F     		ldr	r2, [r7, #124]
+ 779              		.syntax unified
+ 780              	@ 1985 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 781 00d8 23FB12F3 		smuadx r3, r3, r2
+ 782              	@ 0 "" 2
+ 783              		.thumb
+ 784              		.syntax unified
+ 785 00dc BB67     		str	r3, [r7, #120]
+1986:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ 786              		.loc 3 1986 9
+ 787 00de BB6F     		ldr	r3, [r7, #120]
+ 788              	.LBE93:
+ 789              	.LBE92:
+ 790              		.loc 1 334 12
+ 791 00e0 C7F8A430 		str	r3, [r7, #164]
+ 792 00e4 D7F8B030 		ldr	r3, [r7, #176]
+ARM GAS  /tmp/ccVAH24M.s 			page 66
+
+
+ 793 00e8 C7F88430 		str	r3, [r7, #132]
+ 794 00ec D7F88430 		ldr	r3, [r7, #132]
+ 795 00f0 1B68     		ldr	r3, [r3]	@ unaligned
+ 796              	.LBB94:
+ 797              	.LBB95:
+ 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 798              		.loc 2 459 3
+ 799 00f2 FB61     		str	r3, [r7, #28]
+ 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 800              		.loc 2 461 10
+ 801 00f4 FB69     		ldr	r3, [r7, #28]
+ 802              	.LBE95:
+ 803              	.LBE94:
  335:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  336:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /* pIn[2 * i + 1] * pATable[2 * i] - pIn[2 * i] * pATable[2 * i + 1] */
  337:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  338:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       outI = __SMLSDX(read_q15x2 ((q15_t *) pCoefA), read_q15x2_ia (&pSrc1), -outI);
+ 804              		.loc 1 338 14
+ 805 00f6 1946     		mov	r1, r3
+ 806 00f8 07F14003 		add	r3, r7, #64
+ 807 00fc C7F88830 		str	r3, [r7, #136]
+ 808              	.LBB96:
+ 809              	.LBB97:
+ 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
+ 810              		.loc 2 474 3
+ 811 0100 D7F88830 		ldr	r3, [r7, #136]
+ 812 0104 1B68     		ldr	r3, [r3]
+ 813 0106 1B68     		ldr	r3, [r3]	@ unaligned
+ 814 0108 BB61     		str	r3, [r7, #24]
+ 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 815              		.loc 2 475 9
+ 816 010a D7F88830 		ldr	r3, [r7, #136]
+ 817 010e 1B68     		ldr	r3, [r3]
+ 818 0110 1A1D     		adds	r2, r3, #4
+ 819 0112 D7F88830 		ldr	r3, [r7, #136]
+ 820 0116 1A60     		str	r2, [r3]
+ 477:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 821              		.loc 2 477 10
+ 822 0118 BB69     		ldr	r3, [r7, #24]
+ 823              	.LBE97:
+ 824              	.LBE96:
+ 825              		.loc 1 338 14
+ 826 011a 1A46     		mov	r2, r3
+ 827              		.loc 1 338 78
+ 828 011c D7F8A430 		ldr	r3, [r7, #164]
+ 829 0120 5B42     		rsbs	r3, r3, #0
+ 830 0122 C7F89810 		str	r1, [r7, #152]
+ 831 0126 C7F89420 		str	r2, [r7, #148]
+ 832 012a C7F89030 		str	r3, [r7, #144]
+ 833              	.LBB98:
+ 834              	.LBB99:
+2053:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+2054:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+2055:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMLSD (uint32_t op1, uint32_t op2, uint32_t op3)
+2056:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+2057:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
+2058:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccVAH24M.s 			page 67
+
+
+2059:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smlsd %0, %1, %2, %3" : "=r" (result) : "r" (op1), "r" (op2), "r" (op3) );
+2060:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+2061:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+2062:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+2063:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMLSDX (uint32_t op1, uint32_t op2, uint32_t op3)
+2064:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+2065:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
+2066:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+2067:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smlsdx %0, %1, %2, %3" : "=r" (result) : "r" (op1), "r" (op2), "r" (op3) );
+ 835              		.loc 3 2067 3
+ 836 012e D7F89830 		ldr	r3, [r7, #152]
+ 837 0132 D7F89420 		ldr	r2, [r7, #148]
+ 838 0136 D7F89010 		ldr	r1, [r7, #144]
+ 839              		.syntax unified
+ 840              	@ 2067 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 841 013a 43FB1213 		smlsdx r3, r3, r2, r1
+ 842              	@ 0 "" 2
+ 843              		.thumb
+ 844              		.syntax unified
+ 845 013e C7F88C30 		str	r3, [r7, #140]
+2068:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ 846              		.loc 3 2068 9
+ 847 0142 D7F88C30 		ldr	r3, [r7, #140]
+ 848              	.LBE99:
+ 849              	.LBE98:
+ 850              		.loc 1 338 12
+ 851 0146 C7F8A430 		str	r3, [r7, #164]
  339:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
  340:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       outI = __SMLSDX(read_q15x2_ia (&pSrc1), read_q15x2 ((q15_t *) pCoefA), -outI);
  341:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
@@ -3493,6 +3995,58 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  343:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /* write output */
  344:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  345:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       write_q15x2_ia (&pDst1, __PKHBT(outR, (outI >> 16U), 16));
+ 852              		.loc 1 345 31
+ 853 014a D7F8A830 		ldr	r3, [r7, #168]
+ 854 014e 9AB2     		uxth	r2, r3
+ 855 0150 D7F8A430 		ldr	r3, [r7, #164]
+ 856 0154 1B14     		asrs	r3, r3, #16
+ 857 0156 1B04     		lsls	r3, r3, #16
+ 858 0158 1343     		orrs	r3, r3, r2
+ 859              		.loc 1 345 7
+ 860 015a 1A46     		mov	r2, r3
+ 861 015c 07F13803 		add	r3, r7, #56
+ 862 0160 C7F8A030 		str	r3, [r7, #160]
+ 863 0164 C7F89C20 		str	r2, [r7, #156]
+ 864              	.LBB100:
+ 865              	.LBB101:
+ 494:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 495:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 496:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
+ 497:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Write 2 Q15 to Q15 pointer and increment pointer afterwards.
+ 498:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     pQ15      points to input value
+ 499:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     value     Q31 value
+ 500:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        none
+ 501:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
+ 502:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE void write_q15x2_ia (
+ARM GAS  /tmp/ccVAH24M.s 			page 68
+
+
+ 503:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15,
+ 504:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t    value)
+ 505:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
+ 506:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val = value;
+ 866              		.loc 2 506 9
+ 867 0168 D7F89C30 		ldr	r3, [r7, #156]
+ 868 016c 7B61     		str	r3, [r7, #20]
+ 507:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 508:./Libraries/CMSIS/DSP/Include/arm_math.h ****   memcpy (*pQ15, &val, 4);
+ 869              		.loc 2 508 3
+ 870 016e D7F8A030 		ldr	r3, [r7, #160]
+ 871 0172 1B68     		ldr	r3, [r3]
+ 872 0174 7A69     		ldr	r2, [r7, #20]
+ 873 0176 1A60     		str	r2, [r3]	@ unaligned
+ 509:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
+ 874              		.loc 2 509 9
+ 875 0178 D7F8A030 		ldr	r3, [r7, #160]
+ 876 017c 1B68     		ldr	r3, [r3]
+ 877 017e 1A1D     		adds	r2, r3, #4
+ 878 0180 D7F8A030 		ldr	r3, [r7, #160]
+ 879 0184 1A60     		str	r2, [r3]
+ 510:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
+ 880              		.loc 2 510 1
+ 881 0186 00BF     		nop
+ 882              	.LBE101:
+ 883              	.LBE100:
  346:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
  347:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       write_q15x2_ia (&pDst1, __PKHBT((outI >> 16U), outR, 16));
  348:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
@@ -3522,492 +4076,75 @@ ARM GAS  /tmp/cczOAdgn.s 			page 1
  372:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  373:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       /* update coefficient pointer */
  374:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       pCoefB = pCoefB + (2 * modifier);
- 364              		.loc 1 374 23 is_stmt 0 view .LVU143
- 365 000e 099C     		ldr	r4, [sp, #36]
- 366 0010 A700     		lsls	r7, r4, #2
- 367              	.LVL29:
- 368              	.L12:
- 324:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
- 369              		.loc 1 324 7 is_stmt 1 view .LVU144
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 370              		.loc 2 457 3 view .LVU145
- 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 371              		.loc 2 459 3 view .LVU146
- 372 0012 5CF80449 		ldr	r4, [ip], #-4	@ unaligned
- 373              	.LVL30:
- 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 374              		.loc 2 461 3 view .LVU147
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/cczOAdgn.s 			page 60
+ 884              		.loc 1 374 23
+ 885 0188 D7F8C430 		ldr	r3, [r7, #196]
+ARM GAS  /tmp/ccVAH24M.s 			page 69
 
 
- 375              		.loc 2 457 3 view .LVU148
- 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 376              		.loc 2 459 3 view .LVU149
- 377 0016 D3F800A0 		ldr	r10, [r3]	@ unaligned
- 378              	.LVL31:
- 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 379              		.loc 2 461 3 view .LVU150
- 380              	.LBB64:
- 381              	.LBI64:
-2039:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 382              		.loc 3 2039 31 view .LVU151
- 383              	.LBB65:
-2041:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 384              		.loc 3 2041 3 view .LVU152
-2043:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 385              		.loc 3 2043 3 view .LVU153
- 386              		.syntax unified
- 387              	@ 2043 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 388 001a 44FB0AF5 		smusd r5, r4, r10
- 389              	@ 0 "" 2
- 390              	.LVL32:
-2044:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 391              		.loc 3 2044 3 view .LVU154
-2044:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 392              		.loc 3 2044 3 is_stmt 0 view .LVU155
- 393              		.thumb
- 394              		.syntax unified
- 395              	.LBE65:
- 396              	.LBE64:
- 331:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 397              		.loc 1 331 7 is_stmt 1 view .LVU156
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 398              		.loc 2 457 3 view .LVU157
- 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 399              		.loc 2 459 3 view .LVU158
- 400 001e 50F8049B 		ldr	r9, [r0], #4	@ unaligned
- 401              	.LVL33:
- 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 402              		.loc 2 461 3 view .LVU159
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 403              		.loc 2 457 3 view .LVU160
- 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 404              		.loc 2 459 3 view .LVU161
- 405 0022 1668     		ldr	r6, [r2]	@ unaligned
- 406              	.LVL34:
- 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 407              		.loc 2 461 3 view .LVU162
- 408              	.LBB66:
- 409              	.LBI66:
-1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 410              		.loc 3 1989 31 view .LVU163
- 411              	.LBB67:
-1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 412              		.loc 3 1991 3 view .LVU164
-1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 413              		.loc 3 1993 3 view .LVU165
- 414              		.syntax unified
-ARM GAS  /tmp/cczOAdgn.s 			page 61
-
-
- 415              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 416 0024 29FB0658 		smlad r8, r9, r6, r5
- 417              	@ 0 "" 2
- 418              	.LVL35:
-1994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 419              		.loc 3 1994 3 view .LVU166
-1994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 420              		.loc 3 1994 3 is_stmt 0 view .LVU167
- 421              		.thumb
- 422              		.syntax unified
- 423              	.LBE67:
- 424              	.LBE66:
- 334:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 425              		.loc 1 334 7 is_stmt 1 view .LVU168
- 426              	.LBB68:
- 427              	.LBI68:
- 485:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
- 428              		.loc 2 485 28 view .LVU169
- 429              	.LBB69:
- 488:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 430              		.loc 2 488 3 view .LVU170
- 490:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 -= 2;
- 431              		.loc 2 490 3 view .LVU171
- 491:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 432              		.loc 2 491 3 view .LVU172
- 433              		.loc 2 493 3 view .LVU173
- 434              		.loc 2 493 3 is_stmt 0 view .LVU174
- 435              	.LBE69:
- 436              	.LBE68:
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 437              		.loc 2 457 3 is_stmt 1 view .LVU175
- 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 438              		.loc 2 459 3 view .LVU176
- 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 439              		.loc 2 461 3 view .LVU177
- 440              	.LBB70:
- 441              	.LBI70:
-1981:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 442              		.loc 3 1981 31 view .LVU178
- 443              	.LBB71:
-1983:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 444              		.loc 3 1983 3 view .LVU179
-1985:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 445              		.loc 3 1985 3 view .LVU180
- 446              		.syntax unified
- 447              	@ 1985 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 448 0028 24FB1AF4 		smuadx r4, r4, r10
- 449              	@ 0 "" 2
- 450              	.LVL36:
-1986:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 451              		.loc 3 1986 3 view .LVU181
-1986:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
- 452              		.loc 3 1986 3 is_stmt 0 view .LVU182
- 453              		.thumb
- 454              		.syntax unified
- 455              	.LBE71:
- 456              	.LBE70:
-ARM GAS  /tmp/cczOAdgn.s 			page 62
-
-
- 338:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
- 457              		.loc 1 338 7 is_stmt 1 view .LVU183
- 457:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 458              		.loc 2 457 3 view .LVU184
- 459:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 459              		.loc 2 459 3 view .LVU185
- 461:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 460              		.loc 2 461 3 view .LVU186
- 461              	.LBB72:
- 462              	.LBI72:
- 469:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
- 463              		.loc 2 469 28 view .LVU187
- 464              	.LBB73:
- 472:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 465              		.loc 2 472 3 view .LVU188
- 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 466              		.loc 2 474 3 view .LVU189
- 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 467              		.loc 2 475 3 view .LVU190
- 477:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 468              		.loc 2 477 3 view .LVU191
- 477:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 469              		.loc 2 477 3 is_stmt 0 view .LVU192
- 470              	.LBE73:
- 471              	.LBE72:
- 472              	.LBB74:
- 473              	.LBI74:
-2053:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-2054:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-2055:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMLSD (uint32_t op1, uint32_t op2, uint32_t op3)
-2056:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-2057:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
-2058:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-2059:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smlsd %0, %1, %2, %3" : "=r" (result) : "r" (op1), "r" (op2), "r" (op3) );
-2060:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-2061:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-2062:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-2063:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMLSDX (uint32_t op1, uint32_t op2, uint32_t op3)
- 474              		.loc 3 2063 31 is_stmt 1 view .LVU193
- 475              	.LBB75:
-2064:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-2065:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
- 476              		.loc 3 2065 3 view .LVU194
-2066:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-2067:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smlsdx %0, %1, %2, %3" : "=r" (result) : "r" (op1), "r" (op2), "r" (op3) );
- 477              		.loc 3 2067 3 view .LVU195
- 478              	.LBE75:
- 479              	.LBE74:
- 338:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
- 480              		.loc 1 338 78 is_stmt 0 view .LVU196
- 481 002c 6442     		rsbs	r4, r4, #0
- 482              	.LVL37:
- 483              	.LBB77:
- 484              	.LBB76:
- 485              		.loc 3 2067 3 view .LVU197
- 486              		.syntax unified
- 487              	@ 2067 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
-ARM GAS  /tmp/cczOAdgn.s 			page 63
-
-
- 488 002e 46FB1944 		smlsdx r4, r6, r9, r4
- 489              	@ 0 "" 2
- 490              	.LVL38:
-2068:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 491              		.loc 3 2068 3 is_stmt 1 view .LVU198
- 492              		.loc 3 2068 3 is_stmt 0 view .LVU199
- 493              		.thumb
- 494              		.syntax unified
- 495              	.LBE76:
- 496              	.LBE77:
- 345:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
- 497              		.loc 1 345 7 is_stmt 1 view .LVU200
- 498              	.LBB78:
- 499              	.LBI78:
- 494:./Libraries/CMSIS/DSP/Include/arm_math.h **** }
- 495:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 496:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
- 497:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Write 2 Q15 to Q15 pointer and increment pointer afterwards.
- 498:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     pQ15      points to input value
- 499:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     value     Q31 value
- 500:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        none
- 501:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
- 502:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE void write_q15x2_ia (
- 500              		.loc 2 502 27 view .LVU201
- 501              	.LBB79:
- 503:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15,
- 504:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t    value)
- 505:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
- 506:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val = value;
- 502              		.loc 2 506 3 view .LVU202
- 507:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 508:./Libraries/CMSIS/DSP/Include/arm_math.h ****   memcpy (*pQ15, &val, 4);
- 503              		.loc 2 508 3 view .LVU203
- 504              	.LBE79:
- 505              	.LBE78:
- 345:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
- 506              		.loc 1 345 31 is_stmt 0 view .LVU204
- 507 0032 064D     		ldr	r5, .L18
- 306:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
- 508              		.loc 1 306 9 view .LVU205
- 509 0034 0139     		subs	r1, r1, #1
- 510              	.LVL39:
- 511              		.loc 1 374 14 view .LVU206
- 512 0036 3B44     		add	r3, r3, r7
- 513              	.LVL40:
+ 886 018c 9B00     		lsls	r3, r3, #2
+ 887              		.loc 1 374 14
+ 888 018e D7F8AC20 		ldr	r2, [r7, #172]
+ 889 0192 1344     		add	r3, r3, r2
+ 890 0194 C7F8AC30 		str	r3, [r7, #172]
  375:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       pCoefA = pCoefA + (2 * modifier);
- 514              		.loc 1 375 14 view .LVU207
- 515 0038 3A44     		add	r2, r2, r7
- 516              	.LVL41:
- 345:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** #else
- 517              		.loc 1 345 31 view .LVU208
- 518 003a 05EA0405 		and	r5, r5, r4
- 519 003e 45EA1845 		orr	r5, r5, r8, lsr #16
- 520              	.LBB81:
- 521              	.LBB80:
- 522              		.loc 2 508 3 view .LVU209
- 523 0042 4EF8045B 		str	r5, [lr], #4	@ unaligned
-ARM GAS  /tmp/cczOAdgn.s 			page 64
-
-
- 524              	.LVL42:
- 509:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 525              		.loc 2 509 3 is_stmt 1 view .LVU210
- 526              		.loc 2 509 3 is_stmt 0 view .LVU211
- 527              	.LBE80:
- 528              	.LBE81:
- 374:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       pCoefA = pCoefA + (2 * modifier);
- 529              		.loc 1 374 7 is_stmt 1 view .LVU212
- 530              		.loc 1 375 7 view .LVU213
+ 891              		.loc 1 375 23
+ 892 0198 D7F8C430 		ldr	r3, [r7, #196]
+ 893 019c 9B00     		lsls	r3, r3, #2
+ 894              		.loc 1 375 14
+ 895 019e D7F8B020 		ldr	r2, [r7, #176]
+ 896 01a2 1344     		add	r3, r3, r2
+ 897 01a4 C7F8B030 		str	r3, [r7, #176]
  376:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  377:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****       i--;
- 531              		.loc 1 377 7 view .LVU214
+ 898              		.loc 1 377 8
+ 899 01a8 D7F8B430 		ldr	r3, [r7, #180]
+ 900 01ac 013B     		subs	r3, r3, #1
+ 901 01ae C7F8B430 		str	r3, [r7, #180]
+ 902              	.L23:
  306:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
- 532              		.loc 1 306 9 view .LVU215
- 533 0046 E4D1     		bne	.L12
- 534              	.LVL43:
- 535              	.L10:
+ 903              		.loc 1 306 9
+ 904 01b2 D7F8B430 		ldr	r3, [r7, #180]
+ 905 01b6 002B     		cmp	r3, #0
+ 906 01b8 7FF43DAF 		bne	.L36
  378:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   }
  379:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
  380:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** }
- 536              		.loc 1 380 1 is_stmt 0 view .LVU216
- 537 0048 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
- 538              	.LVL44:
- 539              	.L19:
- 540              		.loc 1 380 1 view .LVU217
- 541              		.align	2
- 542              	.L18:
- 543 004c 0000FFFF 		.word	-65536
- 544              		.cfi_endproc
- 545              	.LFE147:
- 547              		.section	.text.arm_rfft_q15,"ax",%progbits
- 548              		.align	1
- 549              		.p2align 2,,3
- 550              		.global	arm_rfft_q15
- 551              		.syntax unified
- 552              		.thumb
- 553              		.thumb_func
- 554              		.fpu fpv5-d16
- 556              	arm_rfft_q15:
- 557              	.LVL45:
- 558              	.LFB145:
-  77:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   const arm_cfft_instance_q15 *S_CFFT = S->pCfft;
- 559              		.loc 1 77 1 is_stmt 1 view -0
- 560              		.cfi_startproc
- 561              		@ args = 0, pretend = 0, frame = 0
- 562              		@ frame_needed = 0, uses_anonymous_args = 0
-  78:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t L2 = S->fftLenReal >> 1U;
- 563              		.loc 1 78 3 view .LVU219
-  77:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   const arm_cfft_instance_q15 *S_CFFT = S->pCfft;
- 564              		.loc 1 77 1 is_stmt 0 view .LVU220
- 565 0000 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
- 566              	.LCFI4:
- 567              		.cfi_def_cfa_offset 24
- 568              		.cfi_offset 4, -24
- 569              		.cfi_offset 5, -20
- 570              		.cfi_offset 6, -16
- 571              		.cfi_offset 7, -12
-ARM GAS  /tmp/cczOAdgn.s 			page 65
-
-
- 572              		.cfi_offset 8, -8
- 573              		.cfi_offset 14, -4
- 574 0004 1446     		mov	r4, r2
-  83:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
- 575              		.loc 1 83 8 view .LVU221
- 576 0006 0279     		ldrb	r2, [r0, #4]	@ zero_extendqisi2
- 577              	.LVL46:
-  79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;
- 578              		.loc 1 79 18 view .LVU222
- 579 0008 0368     		ldr	r3, [r0]
-  77:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   const arm_cfft_instance_q15 *S_CFFT = S->pCfft;
- 580              		.loc 1 77 1 view .LVU223
- 581 000a 82B0     		sub	sp, sp, #8
- 582              	.LCFI5:
- 583              		.cfi_def_cfa_offset 32
-  83:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
- 584              		.loc 1 83 6 view .LVU224
- 585 000c 012A     		cmp	r2, #1
-  77:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   const arm_cfft_instance_q15 *S_CFFT = S->pCfft;
- 586              		.loc 1 77 1 view .LVU225
- 587 000e 0546     		mov	r5, r0
- 588 0010 0E46     		mov	r6, r1
-  79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;
- 589              		.loc 1 79 18 view .LVU226
- 590 0012 4FEA5307 		lsr	r7, r3, #1
-  78:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t L2 = S->fftLenReal >> 1U;
- 591              		.loc 1 78 32 view .LVU227
- 592 0016 D0F81480 		ldr	r8, [r0, #20]
- 593              	.LVL47:
-  79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****         uint32_t i;
- 594              		.loc 1 79 9 is_stmt 1 view .LVU228
-  80:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 595              		.loc 1 80 9 view .LVU229
-  83:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
- 596              		.loc 1 83 3 view .LVU230
-  83:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   {
- 597              		.loc 1 83 6 is_stmt 0 view .LVU231
- 598 001a 0FD0     		beq	.L28
- 101:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 599              		.loc 1 101 6 is_stmt 1 view .LVU232
- 600 001c 4046     		mov	r0, r8
- 601              	.LVL48:
- 101:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 602              		.loc 1 101 6 is_stmt 0 view .LVU233
- 603 001e 6B79     		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 604 0020 FFF7FEFF 		bl	arm_cfft_q15
- 605              	.LVL49:
- 104:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****   }
- 606              		.loc 1 104 6 is_stmt 1 view .LVU234
- 607 0024 AB68     		ldr	r3, [r5, #8]
- 608 0026 3946     		mov	r1, r7
- 609 0028 0094     		str	r4, [sp]
- 610 002a 0193     		str	r3, [sp, #4]
- 611 002c 3046     		mov	r0, r6
- 612 002e D5E90323 		ldrd	r2, r3, [r5, #12]
- 613 0032 FFF7FEFF 		bl	arm_split_rfft_q15
- 614              	.LVL50:
-ARM GAS  /tmp/cczOAdgn.s 			page 66
-
-
- 615              	.L20:
- 107:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 616              		.loc 1 107 1 is_stmt 0 view .LVU235
- 617 0036 02B0     		add	sp, sp, #8
- 618              	.LCFI6:
- 619              		.cfi_remember_state
- 620              		.cfi_def_cfa_offset 24
- 621              		@ sp needed
- 622 0038 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 623              	.LVL51:
- 624              	.L28:
- 625              	.LCFI7:
- 626              		.cfi_restore_state
-  86:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 627              		.loc 1 86 6 is_stmt 1 view .LVU236
- 628 003c 8368     		ldr	r3, [r0, #8]
- 629 003e 3946     		mov	r1, r7
- 630              	.LVL52:
-  86:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 631              		.loc 1 86 6 is_stmt 0 view .LVU237
- 632 0040 3046     		mov	r0, r6
- 633              	.LVL53:
-  86:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 634              		.loc 1 86 6 view .LVU238
- 635 0042 0094     		str	r4, [sp]
- 636 0044 0193     		str	r3, [sp, #4]
- 637 0046 D5E90323 		ldrd	r2, r3, [r5, #12]
- 638 004a FFF7FEFF 		bl	arm_split_rifft_q15
- 639              	.LVL54:
-  89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 640              		.loc 1 89 6 is_stmt 1 view .LVU239
- 641 004e 2146     		mov	r1, r4
- 642 0050 4046     		mov	r0, r8
- 643 0052 6B79     		ldrb	r3, [r5, #5]	@ zero_extendqisi2
- 644 0054 2A79     		ldrb	r2, [r5, #4]	@ zero_extendqisi2
- 645 0056 FFF7FEFF 		bl	arm_cfft_q15
- 646              	.LVL55:
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 647              		.loc 1 91 6 view .LVU240
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 648              		.loc 1 91 17 view .LVU241
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 649              		.loc 1 91 22 is_stmt 0 view .LVU242
- 650 005a 2968     		ldr	r1, [r5]
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 651              		.loc 1 91 6 view .LVU243
- 652 005c 0029     		cmp	r1, #0
- 653 005e EAD0     		beq	.L20
- 654 0060 A21E     		subs	r2, r4, #2
- 655 0062 02EB4101 		add	r1, r2, r1, lsl #1
- 656              	.LVL56:
- 657              	.L24:
-  93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      }
- 658              		.loc 1 93 9 is_stmt 1 discriminator 3 view .LVU244
-  93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      }
- 659              		.loc 1 93 23 is_stmt 0 discriminator 3 view .LVU245
- 660 0066 32F9023F 		ldrsh	r3, [r2, #2]!
-ARM GAS  /tmp/cczOAdgn.s 			page 67
-
-
-  93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      }
- 661              		.loc 1 93 27 discriminator 3 view .LVU246
- 662 006a 5B00     		lsls	r3, r3, #1
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 663              		.loc 1 91 6 discriminator 3 view .LVU247
- 664 006c 8A42     		cmp	r2, r1
-  93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      }
- 665              		.loc 1 93 17 discriminator 3 view .LVU248
- 666 006e 1380     		strh	r3, [r2]	@ movhi
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 667              		.loc 1 91 36 is_stmt 1 discriminator 3 view .LVU249
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 668              		.loc 1 91 17 discriminator 3 view .LVU250
-  91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c ****      {
- 669              		.loc 1 91 6 is_stmt 0 discriminator 3 view .LVU251
- 670 0070 F9D1     		bne	.L24
- 107:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 671              		.loc 1 107 1 view .LVU252
- 672 0072 02B0     		add	sp, sp, #8
- 673              	.LCFI8:
- 674              		.cfi_def_cfa_offset 24
- 675              		@ sp needed
- 676 0074 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 107:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_rfft_q15.c **** 
- 677              		.loc 1 107 1 view .LVU253
- 678              		.cfi_endproc
- 679              	.LFE145:
- 681              		.text
- 682              	.Letext0:
- 683              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 684              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 685              		.file 6 "/usr/include/newlib/sys/_types.h"
- 686              		.file 7 "/usr/include/newlib/sys/reent.h"
- 687              		.file 8 "/usr/include/newlib/sys/lock.h"
- 688              		.file 9 "/usr/include/newlib/math.h"
-ARM GAS  /tmp/cczOAdgn.s 			page 68
+ 907              		.loc 1 380 1
+ 908 01bc 00BF     		nop
+ 909 01be 00BF     		nop
+ 910 01c0 BC37     		adds	r7, r7, #188
+ 911              	.LCFI14:
+ 912              		.cfi_def_cfa_offset 4
+ 913 01c2 BD46     		mov	sp, r7
+ 914              	.LCFI15:
+ 915              		.cfi_def_cfa_register 13
+ 916              		@ sp needed
+ 917 01c4 5DF8047B 		ldr	r7, [sp], #4
+ 918              	.LCFI16:
+ 919              		.cfi_restore 7
+ 920              		.cfi_def_cfa_offset 0
+ 921 01c8 7047     		bx	lr
+ 922              		.cfi_endproc
+ 923              	.LFE147:
+ 925              		.text
+ 926              	.Letext0:
+ 927              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 928              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 929              		.file 6 "/usr/include/newlib/sys/_types.h"
+ 930              		.file 7 "/usr/include/newlib/sys/reent.h"
+ 931              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 932              		.file 9 "/usr/include/newlib/math.h"
+ARM GAS  /tmp/ccVAH24M.s 			page 70
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_rfft_q15.c
-     /tmp/cczOAdgn.s:17     .text.arm_split_rfft_q15:0000000000000000 $t
-     /tmp/cczOAdgn.s:26     .text.arm_split_rfft_q15:0000000000000000 arm_split_rfft_q15
-     /tmp/cczOAdgn.s:319    .text.arm_split_rifft_q15:0000000000000000 $t
-     /tmp/cczOAdgn.s:327    .text.arm_split_rifft_q15:0000000000000000 arm_split_rifft_q15
-     /tmp/cczOAdgn.s:543    .text.arm_split_rifft_q15:000000000000004c $d
-     /tmp/cczOAdgn.s:548    .text.arm_rfft_q15:0000000000000000 $t
-     /tmp/cczOAdgn.s:556    .text.arm_rfft_q15:0000000000000000 arm_rfft_q15
+     /tmp/ccVAH24M.s:17     .text.arm_rfft_q15:0000000000000000 $t
+     /tmp/ccVAH24M.s:25     .text.arm_rfft_q15:0000000000000000 arm_rfft_q15
+     /tmp/ccVAH24M.s:592    .text.arm_split_rifft_q15:0000000000000000 arm_split_rifft_q15
+     /tmp/ccVAH24M.s:165    .text.arm_split_rfft_q15:0000000000000000 arm_split_rfft_q15
+     /tmp/ccVAH24M.s:158    .text.arm_split_rfft_q15:0000000000000000 $t
+     /tmp/ccVAH24M.s:585    .text.arm_split_rifft_q15:0000000000000000 $t
 
 UNDEFINED SYMBOLS
 arm_cfft_q15

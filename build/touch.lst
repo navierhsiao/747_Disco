@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccMUUnz5.s 			page 1
+ARM GAS  /tmp/ccW19crm.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,26 +9,39 @@ ARM GAS  /tmp/ccMUUnz5.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"touch.c"
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              		.section	.text.touch_get_horizontal_offset,"ax",%progbits
-  17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	touch_get_horizontal_offset
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	touch_get_horizontal_offset:
-  27              	.LVL0:
-  28              	.LFB339:
-  29              		.file 1 "./BSP/Components/Src/touch.c"
+  16              		.comm	touch,24,4
+  17              		.comm	i2c_object,372,4
+  18              		.global	i2c_object_attr
+  19              		.section	.rodata.i2c_object_attr,"a"
+  20              		.align	2
+  23              	i2c_object_attr:
+  24 0000 001C0058 		.word	1476402176
+  25 0004 FFECC010 		.word	281079039
+  26 0008 00000000 		.word	0
+  27 000c 01000000 		.word	1
+  28 0010 00000000 		.word	0
+  29 0014 00000000 		.word	0
+  30 0018 00000000 		.word	0
+  31 001c 00000000 		.word	0
+  32 0020 00000000 		.word	0
+  33              		.section	.text.touch_init,"ax",%progbits
+  34              		.align	1
+  35              		.global	touch_init
+  36              		.arch armv7e-m
+  37              		.syntax unified
+  38              		.thumb
+  39              		.thumb_func
+  40              		.fpu fpv5-d16
+  42              	touch_init:
+  43              	.LFB338:
+  44              		.file 1 "./BSP/Components/Src/touch.c"
    1:./BSP/Components/Src/touch.c **** #include "../../system.h"
    2:./BSP/Components/Src/touch.c **** #include "ft6x06_reg.h"
    3:./BSP/Components/Src/touch.c **** 
@@ -45,170 +58,170 @@ ARM GAS  /tmp/ccMUUnz5.s 			page 1
   14:./BSP/Components/Src/touch.c ****     .OwnAddress2Masks   =I2C_OA2_NOMASK,  
   15:./BSP/Components/Src/touch.c ****     .GeneralCallMode    =I2C_GENERALCALL_DISABLE,   
   16:./BSP/Components/Src/touch.c ****     .NoStretchMode      =I2C_NOSTRETCH_DISABLE   
+ARM GAS  /tmp/ccW19crm.s 			page 2
+
+
   17:./BSP/Components/Src/touch.c **** };
   18:./BSP/Components/Src/touch.c **** 
   19:./BSP/Components/Src/touch.c **** int touch_get_horizontal_offset(touch_objectTypeDef* obj);
   20:./BSP/Components/Src/touch.c **** 
   21:./BSP/Components/Src/touch.c **** void touch_init(void)
   22:./BSP/Components/Src/touch.c **** {
+  45              		.loc 1 22 1
+  46              		.cfi_startproc
+  47              		@ args = 0, pretend = 0, frame = 0
+  48              		@ frame_needed = 1, uses_anonymous_args = 0
+  49 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  50              	.LCFI0:
+  51              		.cfi_def_cfa_offset 20
+  52              		.cfi_offset 4, -20
+  53              		.cfi_offset 5, -16
+  54              		.cfi_offset 6, -12
+  55              		.cfi_offset 7, -8
+  56              		.cfi_offset 14, -4
+  57 0002 87B0     		sub	sp, sp, #28
+  58              	.LCFI1:
+  59              		.cfi_def_cfa_offset 48
+  60 0004 06AF     		add	r7, sp, #24
+  61              	.LCFI2:
+  62              		.cfi_def_cfa 7, 24
   23:./BSP/Components/Src/touch.c **** 
   24:./BSP/Components/Src/touch.c ****     I2C_Object_Init(&i2c_object,i2c_object_attr);
+  63              		.loc 1 24 5
+  64 0006 0D4E     		ldr	r6, .L2
+  65 0008 6D46     		mov	r5, sp
+  66 000a 06F10C04 		add	r4, r6, #12
+  67 000e 0FCC     		ldmia	r4!, {r0, r1, r2, r3}
+  68 0010 0FC5     		stmia	r5!, {r0, r1, r2, r3}
+  69 0012 94E80300 		ldm	r4, {r0, r1}
+  70 0016 85E80300 		stm	r5, {r0, r1}
+  71 001a 96E80E00 		ldm	r6, {r1, r2, r3}
+  72 001e 0848     		ldr	r0, .L2+4
+  73 0020 FFF7FEFF 		bl	I2C_Object_Init
   25:./BSP/Components/Src/touch.c **** 
   26:./BSP/Components/Src/touch.c ****     i2c_object.i2c_init;
   27:./BSP/Components/Src/touch.c ****     touch.get_touch_offset=touch_get_horizontal_offset;
+  74              		.loc 1 27 27
+  75 0024 074B     		ldr	r3, .L2+8
+  76 0026 084A     		ldr	r2, .L2+12
+  77 0028 5A61     		str	r2, [r3, #20]
   28:./BSP/Components/Src/touch.c ****     touch.get_touch_offset(&touch);
+  78              		.loc 1 28 10
+  79 002a 064B     		ldr	r3, .L2+8
+  80 002c 5B69     		ldr	r3, [r3, #20]
+  81              		.loc 1 28 5
+  82 002e 0548     		ldr	r0, .L2+8
+  83 0030 9847     		blx	r3
+  84              	.LVL0:
   29:./BSP/Components/Src/touch.c **** }
-ARM GAS  /tmp/ccMUUnz5.s 			page 2
+  85              		.loc 1 29 1
+  86 0032 00BF     		nop
+  87 0034 0437     		adds	r7, r7, #4
+  88              	.LCFI3:
+ARM GAS  /tmp/ccW19crm.s 			page 3
 
 
+  89              		.cfi_def_cfa_offset 20
+  90 0036 BD46     		mov	sp, r7
+  91              	.LCFI4:
+  92              		.cfi_def_cfa_register 13
+  93              		@ sp needed
+  94 0038 F0BD     		pop	{r4, r5, r6, r7, pc}
+  95              	.L3:
+  96 003a 00BF     		.align	2
+  97              	.L2:
+  98 003c 00000000 		.word	i2c_object_attr
+  99 0040 00000000 		.word	i2c_object
+ 100 0044 00000000 		.word	touch
+ 101 0048 00000000 		.word	touch_get_horizontal_offset
+ 102              		.cfi_endproc
+ 103              	.LFE338:
+ 105              		.section	.text.touch_get_horizontal_offset,"ax",%progbits
+ 106              		.align	1
+ 107              		.global	touch_get_horizontal_offset
+ 108              		.syntax unified
+ 109              		.thumb
+ 110              		.thumb_func
+ 111              		.fpu fpv5-d16
+ 113              	touch_get_horizontal_offset:
+ 114              	.LFB339:
   30:./BSP/Components/Src/touch.c **** 
   31:./BSP/Components/Src/touch.c **** int touch_get_horizontal_offset(touch_objectTypeDef* obj)
   32:./BSP/Components/Src/touch.c **** {
-  30              		.loc 1 32 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+ 115              		.loc 1 32 1
+ 116              		.cfi_startproc
+ 117              		@ args = 0, pretend = 0, frame = 8
+ 118              		@ frame_needed = 1, uses_anonymous_args = 0
+ 119              		@ link register save eliminated.
+ 120 0000 80B4     		push	{r7}
+ 121              	.LCFI5:
+ 122              		.cfi_def_cfa_offset 4
+ 123              		.cfi_offset 7, -4
+ 124 0002 83B0     		sub	sp, sp, #12
+ 125              	.LCFI6:
+ 126              		.cfi_def_cfa_offset 16
+ 127 0004 00AF     		add	r7, sp, #0
+ 128              	.LCFI7:
+ 129              		.cfi_def_cfa_register 7
+ 130 0006 7860     		str	r0, [r7, #4]
   33:./BSP/Components/Src/touch.c ****     return 3;
-  35              		.loc 1 33 5 view .LVU1
+ 131              		.loc 1 33 12
+ 132 0008 0323     		movs	r3, #3
   34:./BSP/Components/Src/touch.c **** }...
-  36              		.loc 1 34 1 is_stmt 0 view .LVU2
-  37 0000 0320     		movs	r0, #3
-  38              	.LVL1:
-  39              		.loc 1 34 1 view .LVU3
-  40 0002 7047     		bx	lr
-  41              		.cfi_endproc
-  42              	.LFE339:
-  44              		.section	.text.touch_init,"ax",%progbits
-  45              		.align	1
-  46              		.p2align 2,,3
-  47              		.global	touch_init
-  48              		.syntax unified
-  49              		.thumb
-  50              		.thumb_func
-  51              		.fpu fpv5-d16
-  53              	touch_init:
-  54              	.LFB338:
-  22:./BSP/Components/Src/touch.c **** {
-  55              		.loc 1 22 1 is_stmt 1 view -0
-  56              		.cfi_startproc
-  57              		@ args = 0, pretend = 0, frame = 0
-  58              		@ frame_needed = 0, uses_anonymous_args = 0
-  24:./BSP/Components/Src/touch.c ****     I2C_Object_Init(&i2c_object,i2c_object_attr);
-  59              		.loc 1 24 5 view .LVU5
-  22:./BSP/Components/Src/touch.c **** {
-  60              		.loc 1 22 1 is_stmt 0 view .LVU6
-  61 0000 70B5     		push	{r4, r5, r6, lr}
-  62              	.LCFI0:
-  63              		.cfi_def_cfa_offset 16
-  64              		.cfi_offset 4, -16
-  65              		.cfi_offset 5, -12
-  66              		.cfi_offset 6, -8
-  67              		.cfi_offset 14, -4
-  24:./BSP/Components/Src/touch.c ****     I2C_Object_Init(&i2c_object,i2c_object_attr);
-  68              		.loc 1 24 5 view .LVU7
-  69 0002 0A4E     		ldr	r6, .L5
-  22:./BSP/Components/Src/touch.c **** {
-  70              		.loc 1 22 1 view .LVU8
-  71 0004 86B0     		sub	sp, sp, #24
-  72              	.LCFI1:
-  73              		.cfi_def_cfa_offset 40
-  24:./BSP/Components/Src/touch.c ****     I2C_Object_Init(&i2c_object,i2c_object_attr);
-  74              		.loc 1 24 5 view .LVU9
-  75 0006 06F10C05 		add	r5, r6, #12
-  76 000a 6C46     		mov	r4, sp
-  77 000c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
-ARM GAS  /tmp/ccMUUnz5.s 			page 3
+ 133              		.loc 1 34 1
+ 134 000a 1846     		mov	r0, r3
+ 135 000c 0C37     		adds	r7, r7, #12
+ 136              	.LCFI8:
+ 137              		.cfi_def_cfa_offset 4
+ 138 000e BD46     		mov	sp, r7
+ 139              	.LCFI9:
+ 140              		.cfi_def_cfa_register 13
+ 141              		@ sp needed
+ 142 0010 5DF8047B 		ldr	r7, [sp], #4
+ARM GAS  /tmp/ccW19crm.s 			page 4
 
 
-  78 000e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
-  79 0010 95E80300 		ldm	r5, {r0, r1}
-  80 0014 84E80300 		stm	r4, {r0, r1}
-  81 0018 96E80E00 		ldm	r6, {r1, r2, r3}
-  82 001c 0448     		ldr	r0, .L5+4
-  83 001e FFF7FEFF 		bl	I2C_Object_Init
-  84              	.LVL2:
-  26:./BSP/Components/Src/touch.c ****     i2c_object.i2c_init;
-  85              		.loc 1 26 5 is_stmt 1 view .LVU10
-  27:./BSP/Components/Src/touch.c ****     touch.get_touch_offset=touch_get_horizontal_offset;
-  86              		.loc 1 27 5 view .LVU11
-  27:./BSP/Components/Src/touch.c ****     touch.get_touch_offset=touch_get_horizontal_offset;
-  87              		.loc 1 27 27 is_stmt 0 view .LVU12
-  88 0022 044B     		ldr	r3, .L5+8
-  89 0024 044A     		ldr	r2, .L5+12
-  90 0026 5A61     		str	r2, [r3, #20]
-  28:./BSP/Components/Src/touch.c ****     touch.get_touch_offset(&touch);
-  91              		.loc 1 28 5 is_stmt 1 view .LVU13
-  29:./BSP/Components/Src/touch.c **** }
-  92              		.loc 1 29 1 is_stmt 0 view .LVU14
-  93 0028 06B0     		add	sp, sp, #24
-  94              	.LCFI2:
-  95              		.cfi_def_cfa_offset 16
-  96              		@ sp needed
-  97 002a 70BD     		pop	{r4, r5, r6, pc}
-  98              	.L6:
-  99              		.align	2
- 100              	.L5:
- 101 002c 00000000 		.word	.LANCHOR0
- 102 0030 00000000 		.word	i2c_object
- 103 0034 00000000 		.word	touch
- 104 0038 00000000 		.word	touch_get_horizontal_offset
- 105              		.cfi_endproc
- 106              	.LFE338:
- 108              		.global	i2c_object_attr
- 109              		.comm	i2c_object,372,4
- 110              		.comm	touch,24,4
- 111              		.section	.rodata.i2c_object_attr,"a"
- 112              		.align	2
- 113              		.set	.LANCHOR0,. + 0
- 116              	i2c_object_attr:
- 117 0000 001C0058 		.word	1476402176
- 118 0004 FFECC010 		.word	281079039
- 119 0008 00000000 		.word	0
- 120 000c 01000000 		.word	1
- 121 0010 00000000 		.word	0
- 122 0014 00000000 		.word	0
- 123 0018 00000000 		.word	0
- 124 001c 00000000 		.word	0
- 125 0020 00000000 		.word	0
- 126              		.text
- 127              	.Letext0:
- 128              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 129              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
- 130              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 131              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
- 132              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-ARM GAS  /tmp/ccMUUnz5.s 			page 4
-
-
- 133              		.file 7 "/usr/include/newlib/sys/_types.h"
- 134              		.file 8 "/usr/include/newlib/sys/reent.h"
- 135              		.file 9 "/usr/include/newlib/sys/lock.h"
- 136              		.file 10 "/usr/include/newlib/math.h"
- 137              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 138              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
- 139              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 140              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h"
- 141              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
- 142              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 143              		.file 17 "/usr/include/newlib/stdlib.h"
- 144              		.file 18 "./BSP/Components/Src/../../Components/Inc/lcd.h"
- 145              		.file 19 "./BSP/Components/Src/../../Components/Inc/touch.h"
- 146              		.file 20 "./BSP/Components/Src/../../Hardware/Inc/i2c.h"
-ARM GAS  /tmp/ccMUUnz5.s 			page 5
+ 143              	.LCFI10:
+ 144              		.cfi_restore 7
+ 145              		.cfi_def_cfa_offset 0
+ 146 0014 7047     		bx	lr
+ 147              		.cfi_endproc
+ 148              	.LFE339:
+ 150              		.text
+ 151              	.Letext0:
+ 152              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 153              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 154              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 155              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
+ 156              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 157              		.file 7 "/usr/include/newlib/sys/_types.h"
+ 158              		.file 8 "/usr/include/newlib/sys/reent.h"
+ 159              		.file 9 "/usr/include/newlib/sys/lock.h"
+ 160              		.file 10 "/usr/include/newlib/math.h"
+ 161              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 162              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma.h"
+ 163              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 164              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_i2c.h"
+ 165              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 166              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 167              		.file 17 "/usr/include/newlib/stdlib.h"
+ 168              		.file 18 "./BSP/Components/Src/../../Components/Inc/lcd.h"
+ 169              		.file 19 "./BSP/Components/Src/../../Components/Inc/touch.h"
+ 170              		.file 20 "./BSP/Components/Src/../../Hardware/Inc/i2c.h"
+ARM GAS  /tmp/ccW19crm.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 touch.c
-     /tmp/ccMUUnz5.s:17     .text.touch_get_horizontal_offset:0000000000000000 $t
-     /tmp/ccMUUnz5.s:26     .text.touch_get_horizontal_offset:0000000000000000 touch_get_horizontal_offset
-     /tmp/ccMUUnz5.s:45     .text.touch_init:0000000000000000 $t
-     /tmp/ccMUUnz5.s:53     .text.touch_init:0000000000000000 touch_init
-     /tmp/ccMUUnz5.s:101    .text.touch_init:000000000000002c $d
-                            *COM*:0000000000000174 i2c_object
                             *COM*:0000000000000018 touch
-     /tmp/ccMUUnz5.s:116    .rodata.i2c_object_attr:0000000000000000 i2c_object_attr
-     /tmp/ccMUUnz5.s:112    .rodata.i2c_object_attr:0000000000000000 $d
+                            *COM*:0000000000000174 i2c_object
+     /tmp/ccW19crm.s:23     .rodata.i2c_object_attr:0000000000000000 i2c_object_attr
+     /tmp/ccW19crm.s:20     .rodata.i2c_object_attr:0000000000000000 $d
+     /tmp/ccW19crm.s:34     .text.touch_init:0000000000000000 $t
+     /tmp/ccW19crm.s:42     .text.touch_init:0000000000000000 touch_init
+     /tmp/ccW19crm.s:98     .text.touch_init:000000000000003c $d
+     /tmp/ccW19crm.s:113    .text.touch_get_horizontal_offset:0000000000000000 touch_get_horizontal_offset
+     /tmp/ccW19crm.s:106    .text.touch_get_horizontal_offset:0000000000000000 $t
 
 UNDEFINED SYMBOLS
 I2C_Object_Init

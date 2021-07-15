@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1Aav3b.s 			page 1
+ARM GAS  /tmp/cc0HEqCM.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cc1Aav3b.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_cos_q31.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cc1Aav3b.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_cos_q31,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_cos_q31
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_cos_q31:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c"
+  18              		.global	arm_cos_q31
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_cos_q31:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c"
    1:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****  * Title:        arm_cos_q31.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cc1Aav3b.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****  */
   28:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
   29:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** #include "arm_math.h"
-ARM GAS  /tmp/cc1Aav3b.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** #include "arm_common_tables.h"
   31:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
+ARM GAS  /tmp/cc0HEqCM.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** /**
   33:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   @ingroup groupFastMath
   34:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****  */
@@ -83,153 +81,213 @@ ARM GAS  /tmp/cc1Aav3b.s 			page 1
   49:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** q31_t arm_cos_q31(
   50:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   q31_t x)
   51:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** {
-  30              		.loc 1 51 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 51 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 2DE9F003 		push	{r4, r5, r6, r7, r8, r9}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 24
+  36              		.cfi_offset 4, -24
+  37              		.cfi_offset 5, -20
+  38              		.cfi_offset 6, -16
+  39              		.cfi_offset 7, -12
+  40              		.cfi_offset 8, -8
+  41              		.cfi_offset 9, -4
+  42 0004 88B0     		sub	sp, sp, #32
+  43              	.LCFI1:
+  44              		.cfi_def_cfa_offset 56
+  45 0006 00AF     		add	r7, sp, #0
+  46              	.LCFI2:
+  47              		.cfi_def_cfa_register 7
+  48 0008 7860     		str	r0, [r7, #4]
   52:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   q31_t cosVal;                                  /* Temporary input, output variables */
-  35              		.loc 1 52 3 view .LVU1
   53:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   int32_t index;                                 /* Index variable */
-  36              		.loc 1 53 3 view .LVU2
   54:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   q31_t a, b;                                    /* Two nearest output values */
-  37              		.loc 1 54 3 view .LVU3
   55:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   q31_t fract;                                   /* Temporary values for fractional values */
-  38              		.loc 1 55 3 view .LVU4
   56:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
   57:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   /* add 0.25 (pi/2) to read sine table */
   58:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   x = (uint32_t)x + 0x20000000;
-  39              		.loc 1 58 3 view .LVU5
+  49              		.loc 1 58 7
+  50 000a 7B68     		ldr	r3, [r7, #4]
+  51              		.loc 1 58 19
+  52 000c 03F10053 		add	r3, r3, #536870912
+  53              		.loc 1 58 5
+  54 0010 7B60     		str	r3, [r7, #4]
   59:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   if (x < 0)
-  40              		.loc 1 59 3 view .LVU6
-  41              		.loc 1 59 6 is_stmt 0 view .LVU7
-  42 0000 10F10053 		adds	r3, r0, #536870912
-  43              	.LVL1:
+  55              		.loc 1 59 6
+  56 0012 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/cc0HEqCM.s 			page 3
+
+
+  57 0014 002B     		cmp	r3, #0
+  58 0016 03DA     		bge	.L2
   60:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   { /* convert negative numbers to corresponding positive ones */
   61:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****     x = (uint32_t)x + 0x80000000;
-  44              		.loc 1 61 5 is_stmt 1 view .LVU8
-  45              		.loc 1 61 21 is_stmt 0 view .LVU9
-  46 0004 48BF     		it	mi
-  47 0006 00F12043 		addmi	r3, r0, #-1610612736
-  48              	.LVL2:
+  59              		.loc 1 61 9
+  60 0018 7B68     		ldr	r3, [r7, #4]
+  61              		.loc 1 61 21
+  62 001a 03F10043 		add	r3, r3, #-2147483648
+  63              		.loc 1 61 7
+  64 001e 7B60     		str	r3, [r7, #4]
+  65              	.L2:
   62:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   }
   63:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
   64:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   /* Calculate the nearest index */
   65:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   index = (uint32_t)x >> FAST_MATH_Q31_SHIFT;
-  49              		.loc 1 65 3 is_stmt 1 view .LVU10
+  66              		.loc 1 65 11
+  67 0020 7B68     		ldr	r3, [r7, #4]
+  68              		.loc 1 65 23
+  69 0022 9B0D     		lsrs	r3, r3, #22
+  70              		.loc 1 65 9
+  71 0024 FB61     		str	r3, [r7, #28]
   66:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-ARM GAS  /tmp/cc1Aav3b.s 			page 3
-
-
   67:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   /* Calculation of fractional value */
   68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   fract = (x - (index << FAST_MATH_Q31_SHIFT)) << 9;
+  72              		.loc 1 68 23
+  73 0026 FB69     		ldr	r3, [r7, #28]
+  74 0028 9B05     		lsls	r3, r3, #22
+  75              		.loc 1 68 14
+  76 002a 7A68     		ldr	r2, [r7, #4]
+  77 002c D31A     		subs	r3, r2, r3
+  78              		.loc 1 68 9
+  79 002e 5B02     		lsls	r3, r3, #9
+  80 0030 BB61     		str	r3, [r7, #24]
   69:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
   70:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   /* Read two nearest values of input value from the sin table */
   71:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   a = sinTable_q31[index];
+  81              		.loc 1 71 5
+  82 0032 2A4A     		ldr	r2, .L4
+  83 0034 FB69     		ldr	r3, [r7, #28]
+  84 0036 52F82330 		ldr	r3, [r2, r3, lsl #2]
+  85 003a 7B61     		str	r3, [r7, #20]
   72:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   b = sinTable_q31[index+1];
+  86              		.loc 1 72 25
+  87 003c FB69     		ldr	r3, [r7, #28]
+  88 003e 0133     		adds	r3, r3, #1
+  89              		.loc 1 72 5
+  90 0040 264A     		ldr	r2, .L4
+  91 0042 52F82330 		ldr	r3, [r2, r3, lsl #2]
+  92 0046 3B61     		str	r3, [r7, #16]
   73:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
   74:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   /* Linear interpolation process */
   75:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   cosVal = (q63_t) (0x80000000 - fract) * a >> 32;
+  93              		.loc 1 75 32
+  94 0048 BB69     		ldr	r3, [r7, #24]
+  95 004a C3F10043 		rsb	r3, r3, #-2147483648
+  96              		.loc 1 75 12
+  97 004e 1846     		mov	r0, r3
+ARM GAS  /tmp/cc0HEqCM.s 			page 4
+
+
+  98 0050 4FF00001 		mov	r1, #0
+  99              		.loc 1 75 41
+ 100 0054 7B69     		ldr	r3, [r7, #20]
+ 101 0056 1A46     		mov	r2, r3
+ 102 0058 4FEAE273 		asr	r3, r2, #31
+ 103 005c 02FB01FC 		mul	ip, r2, r1
+ 104 0060 00FB03F6 		mul	r6, r0, r3
+ 105 0064 6644     		add	r6, r6, ip
+ 106 0066 A0FB0223 		umull	r2, r3, r0, r2
+ 107 006a F118     		adds	r1, r6, r3
+ 108 006c 0B46     		mov	r3, r1
+ 109              		.loc 1 75 45
+ 110 006e 4FF00000 		mov	r0, #0
+ 111 0072 4FF00001 		mov	r1, #0
+ 112 0076 1800     		movs	r0, r3
+ 113 0078 D917     		asrs	r1, r3, #31
+ 114              		.loc 1 75 10
+ 115 007a 0346     		mov	r3, r0
+ 116 007c FB60     		str	r3, [r7, #12]
   76:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   cosVal = (q31_t) ((((q63_t) cosVal << 32) + ((q63_t) fract * b)) >> 32);
-  50              		.loc 1 76 38 is_stmt 0 view .LVU11
-  51 000a 0020     		movs	r0, #0
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  52              		.loc 1 68 14 view .LVU12
-  53 000c C3F31502 		ubfx	r2, r3, #0, #22
-  65:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  54              		.loc 1 65 23 view .LVU13
-  55 0010 9B0D     		lsrs	r3, r3, #22
-  56              	.LVL3:
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  57              		.loc 1 68 3 is_stmt 1 view .LVU14
-  51:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   q31_t cosVal;                                  /* Temporary input, output variables */
-  58              		.loc 1 51 1 is_stmt 0 view .LVU15
-  59 0012 F0B4     		push	{r4, r5, r6, r7}
-  60              	.LCFI0:
-  61              		.cfi_def_cfa_offset 16
-  62              		.cfi_offset 4, -16
-  63              		.cfi_offset 5, -12
-  64              		.cfi_offset 6, -8
-  65              		.cfi_offset 7, -4
-  68:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  66              		.loc 1 68 9 view .LVU16
-  67 0014 5202     		lsls	r2, r2, #9
-  68              	.LVL4:
-  71:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   b = sinTable_q31[index+1];
-  69              		.loc 1 71 3 is_stmt 1 view .LVU17
-  72:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  70              		.loc 1 72 3 view .LVU18
-  75:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   cosVal = (q31_t) ((((q63_t) cosVal << 32) + ((q63_t) fract * b)) >> 32);
-  71              		.loc 1 75 3 view .LVU19
-  72              		.loc 1 76 3 view .LVU20
+ 117              		.loc 1 76 23
+ 118 007e FB68     		ldr	r3, [r7, #12]
+ 119 0080 1A46     		mov	r2, r3
+ 120 0082 4FEAE273 		asr	r3, r2, #31
+ 121              		.loc 1 76 38
+ 122 0086 4FF00000 		mov	r0, #0
+ 123 008a 4FF00001 		mov	r1, #0
+ 124 008e 1100     		movs	r1, r2
+ 125 0090 0020     		movs	r0, #0
+ 126              		.loc 1 76 48
+ 127 0092 BB69     		ldr	r3, [r7, #24]
+ 128 0094 9846     		mov	r8, r3
+ 129 0096 4FEAE879 		asr	r9, r8, #31
+ 130              		.loc 1 76 62
+ 131 009a 3B69     		ldr	r3, [r7, #16]
+ 132 009c 1A46     		mov	r2, r3
+ 133 009e 4FEAE273 		asr	r3, r2, #31
+ 134 00a2 02FB09FC 		mul	ip, r2, r9
+ 135 00a6 08FB03F6 		mul	r6, r8, r3
+ 136 00aa 6644     		add	r6, r6, ip
+ 137 00ac A8FB0223 		umull	r2, r3, r8, r2
+ 138 00b0 1E44     		add	r6, r6, r3
+ 139 00b2 3346     		mov	r3, r6
+ 140              		.loc 1 76 45
+ 141 00b4 8418     		adds	r4, r0, r2
+ 142 00b6 41EB0305 		adc	r5, r1, r3
+ 143              		.loc 1 76 68
+ 144 00ba 4FF00002 		mov	r2, #0
+ 145 00be 4FF00003 		mov	r3, #0
+ 146 00c2 2A00     		movs	r2, r5
+ 147 00c4 EB17     		asrs	r3, r5, #31
+ 148              		.loc 1 76 10
+ 149 00c6 1346     		mov	r3, r2
+ 150 00c8 FB60     		str	r3, [r7, #12]
   77:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
   78:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   /* Return output value */
   79:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   return (cosVal << 1);
-  73              		.loc 1 79 3 view .LVU21
-  72:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  74              		.loc 1 72 5 is_stmt 0 view .LVU22
-  75 0016 094D     		ldr	r5, .L5
-  76 0018 5E1C     		adds	r6, r3, #1
-  75:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   cosVal = (q31_t) ((((q63_t) cosVal << 32) + ((q63_t) fract * b)) >> 32);
-  77              		.loc 1 75 41 view .LVU23
-  78 001a 55F82340 		ldr	r4, [r5, r3, lsl #2]
-  75:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   cosVal = (q31_t) ((((q63_t) cosVal << 32) + ((q63_t) fract * b)) >> 32);
-  79              		.loc 1 75 32 view .LVU24
-  80 001e C2F10043 		rsb	r3, r2, #-2147483648
-  81              	.LVL5:
-  76:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-ARM GAS  /tmp/cc1Aav3b.s 			page 4
+ARM GAS  /tmp/cc0HEqCM.s 			page 5
 
 
-  82              		.loc 1 76 45 view .LVU25
-  83 0022 55F826C0 		ldr	ip, [r5, r6, lsl #2]
-  75:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c ****   cosVal = (q31_t) ((((q63_t) cosVal << 32) + ((q63_t) fract * b)) >> 32);
-  84              		.loc 1 75 41 view .LVU26
-  85 0026 E717     		asrs	r7, r4, #31
-  86 0028 A3FB0445 		umull	r4, r5, r3, r4
-  76:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  87              		.loc 1 76 38 view .LVU27
-  88 002c 03FB0751 		mla	r1, r3, r7, r5
+ 151              		.loc 1 79 18
+ 152 00ca FB68     		ldr	r3, [r7, #12]
+ 153 00cc 5B00     		lsls	r3, r3, #1
   80:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** }
-  89              		.loc 1 80 1 view .LVU28
-  90 0030 F0BC     		pop	{r4, r5, r6, r7}
-  91              	.LCFI1:
-  92              		.cfi_restore 7
-  93              		.cfi_restore 6
-  94              		.cfi_restore 5
-  95              		.cfi_restore 4
-  96              		.cfi_def_cfa_offset 0
-  97              	.LVL6:
-  76:./Libraries/CMSIS/DSP/Source/FastMathFunctions/arm_cos_q31.c **** 
-  98              		.loc 1 76 45 view .LVU29
-  99 0032 CCFB0201 		smlal	r0, r1, ip, r2
- 100              		.loc 1 80 1 view .LVU30
- 101 0036 4800     		lsls	r0, r1, #1
- 102 0038 7047     		bx	lr
- 103              	.L6:
- 104 003a 00BF     		.align	2
- 105              	.L5:
- 106 003c 00000000 		.word	sinTable_q31
- 107              		.cfi_endproc
- 108              	.LFE145:
- 110              		.text
- 111              	.Letext0:
- 112              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 113              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 114              		.file 4 "/usr/include/newlib/sys/_types.h"
- 115              		.file 5 "/usr/include/newlib/sys/reent.h"
- 116              		.file 6 "/usr/include/newlib/sys/lock.h"
- 117              		.file 7 "/usr/include/newlib/math.h"
- 118              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 119              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
-ARM GAS  /tmp/cc1Aav3b.s 			page 5
+ 154              		.loc 1 80 1
+ 155 00ce 1846     		mov	r0, r3
+ 156 00d0 2037     		adds	r7, r7, #32
+ 157              	.LCFI3:
+ 158              		.cfi_def_cfa_offset 24
+ 159 00d2 BD46     		mov	sp, r7
+ 160              	.LCFI4:
+ 161              		.cfi_def_cfa_register 13
+ 162              		@ sp needed
+ 163 00d4 BDE8F003 		pop	{r4, r5, r6, r7, r8, r9}
+ 164              	.LCFI5:
+ 165              		.cfi_restore 9
+ 166              		.cfi_restore 8
+ 167              		.cfi_restore 7
+ 168              		.cfi_restore 6
+ 169              		.cfi_restore 5
+ 170              		.cfi_restore 4
+ 171              		.cfi_def_cfa_offset 0
+ 172 00d8 7047     		bx	lr
+ 173              	.L5:
+ 174 00da 00BF     		.align	2
+ 175              	.L4:
+ 176 00dc 00000000 		.word	sinTable_q31
+ 177              		.cfi_endproc
+ 178              	.LFE145:
+ 180              		.text
+ 181              	.Letext0:
+ 182              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 183              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 184              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 185              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 186              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 187              		.file 7 "/usr/include/newlib/math.h"
+ 188              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 189              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ARM GAS  /tmp/cc0HEqCM.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_cos_q31.c
-     /tmp/cc1Aav3b.s:17     .text.arm_cos_q31:0000000000000000 $t
-     /tmp/cc1Aav3b.s:26     .text.arm_cos_q31:0000000000000000 arm_cos_q31
-     /tmp/cc1Aav3b.s:106    .text.arm_cos_q31:000000000000003c $d
+     /tmp/cc0HEqCM.s:17     .text.arm_cos_q31:0000000000000000 $t
+     /tmp/cc0HEqCM.s:25     .text.arm_cos_q31:0000000000000000 arm_cos_q31
+     /tmp/cc0HEqCM.s:176    .text.arm_cos_q31:00000000000000dc $d
 
 UNDEFINED SYMBOLS
 sinTable_q31

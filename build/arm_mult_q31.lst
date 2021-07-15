@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccg3Oq2F.s 			page 1
+ARM GAS  /tmp/ccVJO1Fr.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccg3Oq2F.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_mult_q31.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccg3Oq2F.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_mult_q31,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_mult_q31
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_mult_q31:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c"
+  18              		.global	arm_mult_q31
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_mult_q31:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c"
    1:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****  * Title:        arm_mult_q31.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccg3Oq2F.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****  */
   28:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
   29:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccg3Oq2F.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
   31:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** /**
+ARM GAS  /tmp/ccVJO1Fr.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   @ingroup groupMath
   33:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****  */
   34:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
@@ -90,15 +88,29 @@ ARM GAS  /tmp/ccg3Oq2F.s 			page 1
   56:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****         q31_t * pDst,
   57:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****         uint32_t blockSize)
   58:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** {
-  30              		.loc 1 58 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 58 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 B0B4     		push	{r4, r5, r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 7, -4
+  39 0002 89B0     		sub	sp, sp, #36
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 48
+  42 0004 00AF     		add	r7, sp, #0
+  43              	.LCFI2:
+  44              		.cfi_def_cfa_register 7
+  45 0006 F860     		str	r0, [r7, #12]
+  46 0008 B960     		str	r1, [r7, #8]
+  47 000a 7A60     		str	r2, [r7, #4]
+  48 000c 3B60     		str	r3, [r7]
   59:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 59 9 view .LVU1
   60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****         q31_t out;                                     /* Temporary output variable */
-  36              		.loc 1 60 9 view .LVU2
   61:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
   62:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
   63:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
@@ -106,6 +118,9 @@ ARM GAS  /tmp/ccg3Oq2F.s 			page 1
   65:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   blkCnt = blockSize >> 2U;
   66:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
   67:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   while (blkCnt > 0U)
+ARM GAS  /tmp/ccVJO1Fr.s 			page 3
+
+
   68:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   {
   69:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     /* C = A * B */
   70:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
@@ -118,9 +133,6 @@ ARM GAS  /tmp/ccg3Oq2F.s 			page 1
   77:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = __SSAT(out, 31);
   78:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     *pDst++ = out << 1U;
   79:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
-ARM GAS  /tmp/ccg3Oq2F.s 			page 3
-
-
   80:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = ((q63_t) *pSrcA++ * *pSrcB++) >> 32;
   81:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = __SSAT(out, 31);
   82:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     *pDst++ = out << 1U;
@@ -140,114 +152,136 @@ ARM GAS  /tmp/ccg3Oq2F.s 			page 1
   96:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
   97:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   /* Initialize blkCnt with number of samples */
   98:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   blkCnt = blockSize;
-  37              		.loc 1 98 3 view .LVU3
+  49              		.loc 1 98 10
+  50 000e 3B68     		ldr	r3, [r7]
+  51 0010 FB61     		str	r3, [r7, #28]
   99:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
  100:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  101:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
  102:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   while (blkCnt > 0U)
-  38              		.loc 1 102 3 view .LVU4
-  39              		.loc 1 102 9 view .LVU5
-  40 0000 83B1     		cbz	r3, .L9
-  58:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****         uint32_t blkCnt;                               /* Loop counter */
-  41              		.loc 1 58 1 is_stmt 0 view .LVU6
-  42 0002 30B4     		push	{r4, r5}
-  43              	.LCFI0:
-  44              		.cfi_def_cfa_offset 8
-  45              		.cfi_offset 4, -8
-  46              		.cfi_offset 5, -4
-  47              	.LVL1:
-  48              	.L3:
+  52              		.loc 1 102 9
+  53 0012 2FE0     		b	.L2
+  54              	.L3:
  103:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   {
  104:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     /* C = A * B */
  105:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
  106:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     /* Multiply inputs and store result in destination buffer. */
  107:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = ((q63_t) *pSrcA++ * *pSrcB++) >> 32;
-  49              		.loc 1 107 5 is_stmt 1 view .LVU7
+  55              		.loc 1 107 26
+  56 0014 FB68     		ldr	r3, [r7, #12]
+  57 0016 1A1D     		adds	r2, r3, #4
+  58 0018 FA60     		str	r2, [r7, #12]
+  59              		.loc 1 107 20
+  60 001a 1B68     		ldr	r3, [r3]
+  61              		.loc 1 107 12
+  62 001c 1846     		mov	r0, r3
+  63 001e 4FEAE071 		asr	r1, r0, #31
+  64              		.loc 1 107 37
+  65 0022 BB68     		ldr	r3, [r7, #8]
+ARM GAS  /tmp/ccVJO1Fr.s 			page 4
+
+
+  66 0024 1A1D     		adds	r2, r3, #4
+  67 0026 BA60     		str	r2, [r7, #8]
+  68              		.loc 1 107 31
+  69 0028 1B68     		ldr	r3, [r3]
+  70 002a 1A46     		mov	r2, r3
+  71 002c 4FEAE273 		asr	r3, r2, #31
+  72              		.loc 1 107 29
+  73 0030 02FB01F5 		mul	r5, r2, r1
+  74 0034 00FB03F4 		mul	r4, r0, r3
+  75 0038 2C44     		add	r4, r4, r5
+  76 003a A0FB0223 		umull	r2, r3, r0, r2
+  77 003e E118     		adds	r1, r4, r3
+  78 0040 0B46     		mov	r3, r1
+  79              		.loc 1 107 41
+  80 0042 4FF00000 		mov	r0, #0
+  81 0046 4FF00001 		mov	r1, #0
+  82 004a 1800     		movs	r0, r3
+  83 004c D917     		asrs	r1, r3, #31
+  84              		.loc 1 107 9
+  85 004e 0346     		mov	r3, r0
+  86 0050 BB61     		str	r3, [r7, #24]
+  87              	.LBB2:
  108:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = __SSAT(out, 31);
-  50              		.loc 1 108 5 view .LVU8
-  51              	.LBB2:
-  52              		.loc 1 108 11 view .LVU9
-  53              		.loc 1 108 11 view .LVU10
-  54              	.LBE2:
- 107:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = __SSAT(out, 31);
-  55              		.loc 1 107 29 is_stmt 0 view .LVU11
-  56 0004 50F8044B 		ldr	r4, [r0], #4
-  57              	.LVL2:
- 102:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   {
-  58              		.loc 1 102 9 view .LVU12
-  59 0008 013B     		subs	r3, r3, #1
-  60              	.LVL3:
- 107:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = __SSAT(out, 31);
-ARM GAS  /tmp/ccg3Oq2F.s 			page 4
-
-
-  61              		.loc 1 107 29 view .LVU13
-  62 000a 51F8045B 		ldr	r5, [r1], #4
-  63              	.LVL4:
- 107:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     out = __SSAT(out, 31);
-  64              		.loc 1 107 29 view .LVU14
-  65 000e 84FB0545 		smull	r4, r5, r4, r5
-  66              	.LBB3:
-  67              		.loc 1 108 11 view .LVU15
-  68              		.syntax unified
-  69              	@ 108 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c" 1
-  70 0012 05F31E04 		ssat r4, #31, r5
-  71              	@ 0 "" 2
-  72              	.LVL5:
-  73              		.loc 1 108 11 is_stmt 1 view .LVU16
-  74              		.loc 1 108 11 is_stmt 0 view .LVU17
-  75              		.thumb
-  76              		.syntax unified
-  77              	.LBE3:
+  88              		.loc 1 108 11
+  89 0052 BB69     		ldr	r3, [r7, #24]
+  90 0054 7B61     		str	r3, [r7, #20]
+  91 0056 7B69     		ldr	r3, [r7, #20]
+  92              		.syntax unified
+  93              	@ 108 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c" 1
+  94 0058 03F31E03 		ssat r3, #31, r3
+  95              	@ 0 "" 2
+  96              		.thumb
+  97              		.syntax unified
+  98 005c 3B61     		str	r3, [r7, #16]
+  99 005e 3B69     		ldr	r3, [r7, #16]
+ 100              	.LBE2:
+ 101              		.loc 1 108 9
+ 102 0060 BB61     		str	r3, [r7, #24]
  109:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     *pDst++ = out << 1U;
-  78              		.loc 1 109 5 is_stmt 1 view .LVU18
-  79              		.loc 1 109 19 is_stmt 0 view .LVU19
-  80 0016 4FEA4404 		lsl	r4, r4, #1
-  81              	.LVL6:
-  82              		.loc 1 109 13 view .LVU20
-  83 001a 42F8044B 		str	r4, [r2], #4
-  84              	.LVL7:
+ 103              		.loc 1 109 10
+ 104 0062 7B68     		ldr	r3, [r7, #4]
+ 105 0064 1A1D     		adds	r2, r3, #4
+ 106 0066 7A60     		str	r2, [r7, #4]
+ 107              		.loc 1 109 19
+ 108 0068 BA69     		ldr	r2, [r7, #24]
+ 109 006a 5200     		lsls	r2, r2, #1
+ 110              		.loc 1 109 13
+ 111 006c 1A60     		str	r2, [r3]
  110:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
  111:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     /* Decrement loop counter */
  112:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****     blkCnt--;
-  85              		.loc 1 112 5 is_stmt 1 view .LVU21
+ 112              		.loc 1 112 11
+ 113 006e FB69     		ldr	r3, [r7, #28]
+ 114 0070 013B     		subs	r3, r3, #1
+ 115 0072 FB61     		str	r3, [r7, #28]
+ 116              	.L2:
  102:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   {
-  86              		.loc 1 102 9 view .LVU22
-  87 001e F1D1     		bne	.L3
+ARM GAS  /tmp/ccVJO1Fr.s 			page 5
+
+
+ 117              		.loc 1 102 9
+ 118 0074 FB69     		ldr	r3, [r7, #28]
+ 119 0076 002B     		cmp	r3, #0
+ 120 0078 CCD1     		bne	.L3
  113:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c ****   }
  114:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** 
  115:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_mult_q31.c **** }
-  88              		.loc 1 115 1 is_stmt 0 view .LVU23
-  89 0020 30BC     		pop	{r4, r5}
-  90              	.LCFI1:
-  91              		.cfi_restore 5
-  92              		.cfi_restore 4
-  93              		.cfi_def_cfa_offset 0
-  94 0022 7047     		bx	lr
-  95              	.LVL8:
-  96              	.L9:
-  97              		.loc 1 115 1 view .LVU24
-  98 0024 7047     		bx	lr
-  99              		.cfi_endproc
- 100              	.LFE145:
- 102 0026 00BF     		.text
- 103              	.Letext0:
- 104              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 105              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 106              		.file 4 "/usr/include/newlib/sys/_types.h"
- 107              		.file 5 "/usr/include/newlib/sys/reent.h"
- 108              		.file 6 "/usr/include/newlib/sys/lock.h"
- 109              		.file 7 "/usr/include/newlib/math.h"
-ARM GAS  /tmp/ccg3Oq2F.s 			page 5
-
-
- 110              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccg3Oq2F.s 			page 6
+ 121              		.loc 1 115 1
+ 122 007a 00BF     		nop
+ 123 007c 00BF     		nop
+ 124 007e 2437     		adds	r7, r7, #36
+ 125              	.LCFI3:
+ 126              		.cfi_def_cfa_offset 12
+ 127 0080 BD46     		mov	sp, r7
+ 128              	.LCFI4:
+ 129              		.cfi_def_cfa_register 13
+ 130              		@ sp needed
+ 131 0082 B0BC     		pop	{r4, r5, r7}
+ 132              	.LCFI5:
+ 133              		.cfi_restore 7
+ 134              		.cfi_restore 5
+ 135              		.cfi_restore 4
+ 136              		.cfi_def_cfa_offset 0
+ 137 0084 7047     		bx	lr
+ 138              		.cfi_endproc
+ 139              	.LFE145:
+ 141              		.text
+ 142              	.Letext0:
+ 143              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 144              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 145              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 146              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 147              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 148              		.file 7 "/usr/include/newlib/math.h"
+ 149              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccVJO1Fr.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_mult_q31.c
-     /tmp/ccg3Oq2F.s:17     .text.arm_mult_q31:0000000000000000 $t
-     /tmp/ccg3Oq2F.s:26     .text.arm_mult_q31:0000000000000000 arm_mult_q31
+     /tmp/ccVJO1Fr.s:17     .text.arm_mult_q31:0000000000000000 $t
+     /tmp/ccVJO1Fr.s:25     .text.arm_mult_q31:0000000000000000 arm_mult_q31
 
 NO UNDEFINED SYMBOLS

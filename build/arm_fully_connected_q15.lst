@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc18yqYK.s 			page 1
+ARM GAS  /tmp/ccPCAT0t.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_fully_connected_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_fully_connected_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_fully_connected_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_fully_connected_q15:
-  27              	.LVL0:
-  28              	.LFB149:
-  29              		.file 1 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c"
+  18              		.global	arm_fully_connected_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_fully_connected_q15:
+  26              	.LFB149:
+  27              		.file 1 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c"
    1:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** /*
    2:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****  * Copyright (C) 2010-2018 Arm Limited or its affiliates. All rights reserved.
    3:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****  *
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
   27:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****  * Target Processor:  Cortex-M cores
   28:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****  *
   29:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****  * -------------------------------------------------------------------- */
-ARM GAS  /tmp/cc18yqYK.s 			page 2
-
-
   30:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   31:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** #include "arm_math.h"
+ARM GAS  /tmp/ccPCAT0t.s 			page 2
+
+
   32:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** #include "arm_nnfunctions.h"
   33:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   34:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** /**
@@ -107,202 +105,177 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
   73:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****                         q15_t * pOut,
   74:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****                         q15_t * vec_buffer)
   75:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** {
-  30              		.loc 1 75 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 20, pretend = 0, frame = 56
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 75 1
+  29              		.cfi_startproc
+  30              		@ args = 20, pretend = 0, frame = 216
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 B7B0     		sub	sp, sp, #220
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 224
+  40 0004 00AF     		add	r7, sp, #0
+ARM GAS  /tmp/ccPCAT0t.s 			page 3
+
+
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 1146     		mov	r1, r2
+  46 000c 1A46     		mov	r2, r3
+  47 000e 0B46     		mov	r3, r1	@ movhi
+  48 0010 FB80     		strh	r3, [r7, #6]	@ movhi
+  49 0012 1346     		mov	r3, r2	@ movhi
+  50 0014 BB80     		strh	r3, [r7, #4]	@ movhi
   76:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   77:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** #if defined (ARM_MATH_DSP)
   78:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     /* Run the following code for Cortex-M4 and Cortex-M7 */
   79:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   80:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     const q15_t *pB = pM;
-  34              		.loc 1 80 5 view .LVU1
-  75:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 3
-
-
-  35              		.loc 1 75 1 is_stmt 0 view .LVU2
-  36 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-  37              	.LCFI0:
-  38              		.cfi_def_cfa_offset 36
-  39              		.cfi_offset 4, -36
-  40              		.cfi_offset 5, -32
-  41              		.cfi_offset 6, -28
-  42              		.cfi_offset 7, -24
-  43              		.cfi_offset 8, -20
-  44              		.cfi_offset 9, -16
-  45              		.cfi_offset 10, -12
-  46              		.cfi_offset 11, -8
-  47              		.cfi_offset 14, -4
-  48 0004 8FB0     		sub	sp, sp, #60
-  49              	.LCFI1:
-  50              		.cfi_def_cfa_offset 96
-  75:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
-  51              		.loc 1 75 1 view .LVU3
-  52 0006 1446     		mov	r4, r2
-  53 0008 CDE90B23 		strd	r2, r3, [sp, #44]
+  51              		.loc 1 80 18
+  52 0016 BB68     		ldr	r3, [r7, #8]
+  53 0018 FB61     		str	r3, [r7, #28]
   81:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     const q15_t *pB2 = pB + dim_vec;
-  54              		.loc 1 81 27 view .LVU4
-  55 000c 5200     		lsls	r2, r2, #1
-  56              	.LVL1:
-  75:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
-  57              		.loc 1 75 1 view .LVU5
-  58 000e BDF86450 		ldrh	r5, [sp, #100]
-  59 0012 0290     		str	r0, [sp, #8]
-  60              	.LVL2:
-  61              		.loc 1 81 5 is_stmt 1 view .LVU6
-  62              		.loc 1 81 27 is_stmt 0 view .LVU7
-  63 0014 0192     		str	r2, [sp, #4]
-  64              	.LVL3:
+  54              		.loc 1 81 27
+  55 001a FA69     		ldr	r2, [r7, #28]
+  56 001c FB88     		ldrh	r3, [r7, #6]
+  57 001e 5B00     		lsls	r3, r3, #1
+  58 0020 1344     		add	r3, r3, r2
+  59              		.loc 1 81 18
+  60 0022 BB61     		str	r3, [r7, #24]
   82:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     q15_t    *pO = pOut;
-  65              		.loc 1 82 5 is_stmt 1 view .LVU8
+  61              		.loc 1 82 15
+  62 0024 D7F8EC30 		ldr	r3, [r7, #236]
+  63 0028 C7F8D430 		str	r3, [r7, #212]
   83:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     const q15_t    *pA;
-  66              		.loc 1 83 5 view .LVU9
   84:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     const q15_t    *pBias = bias;
-  67              		.loc 1 84 5 view .LVU10
+  64              		.loc 1 84 21
+  65 002c D7F8E830 		ldr	r3, [r7, #232]
+  66 0030 C7F8D030 		str	r3, [r7, #208]
   85:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     uint16_t rowCnt = num_of_rows >> 1;
-  68              		.loc 1 85 5 view .LVU11
+  67              		.loc 1 85 14
+  68 0034 BB88     		ldrh	r3, [r7, #4]
+  69 0036 5B08     		lsrs	r3, r3, #1
+  70 0038 A7F8CE30 		strh	r3, [r7, #206]	@ movhi
   86:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   87:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     /* this loop loops over different output */
   88:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     while (rowCnt) {
-  69              		.loc 1 88 5 view .LVU12
-  70              		.loc 1 88 11 view .LVU13
-  75:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
-  71              		.loc 1 75 1 is_stmt 0 view .LVU14
-  72 0016 BDF86020 		ldrh	r2, [sp, #96]
-  73              	.LVL4:
-  75:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
-  74              		.loc 1 75 1 view .LVU15
-  75 001a 0395     		str	r5, [sp, #12]
-  76 001c 0492     		str	r2, [sp, #16]
-  77              		.loc 1 88 11 view .LVU16
-  78 001e 5A08     		lsrs	r2, r3, #1
-  79 0020 00F09180 		beq	.L2
-ARM GAS  /tmp/cc18yqYK.s 			page 4
-
-
-  80              	.LBB23:
+  71              		.loc 1 88 11
+  72 003c 28E1     		b	.L2
+  73              	.L11:
+  74              	.LBB23:
   89:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
+  75              		.loc 1 89 41
+  76 003e D7F8D030 		ldr	r3, [r7, #208]
+  77 0042 9A1C     		adds	r2, r3, #2
+  78 0044 C7F8D020 		str	r2, [r7, #208]
+  79              		.loc 1 89 35
+  80 0048 B3F90030 		ldrsh	r3, [r3]
+  81              		.loc 1 89 27
+  82 004c 1A46     		mov	r2, r3
+  83              		.loc 1 89 45
+ARM GAS  /tmp/ccPCAT0t.s 			page 4
+
+
+  84 004e B7F8E030 		ldrh	r3, [r7, #224]
+  85 0052 02FA03F3 		lsl	r3, r2, r3
+  86 0056 1946     		mov	r1, r3
+  87              		.loc 1 89 62
+  88 0058 B7F8E430 		ldrh	r3, [r7, #228]
+  89 005c 0122     		movs	r2, #1
+  90 005e 02FA03F3 		lsl	r3, r2, r3
+  91 0062 5B08     		lsrs	r3, r3, #1
+  92              		.loc 1 89 60
+  93 0064 0B44     		add	r3, r3, r1
+  94              		.loc 1 89 19
+  95 0066 C7F8C830 		str	r3, [r7, #200]
   90:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum2 = ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
+  96              		.loc 1 90 41
+  97 006a D7F8D030 		ldr	r3, [r7, #208]
+  98 006e 9A1C     		adds	r2, r3, #2
+  99 0070 C7F8D020 		str	r2, [r7, #208]
+ 100              		.loc 1 90 35
+ 101 0074 B3F90030 		ldrsh	r3, [r3]
+ 102              		.loc 1 90 27
+ 103 0078 1A46     		mov	r2, r3
+ 104              		.loc 1 90 45
+ 105 007a B7F8E030 		ldrh	r3, [r7, #224]
+ 106 007e 02FA03F3 		lsl	r3, r2, r3
+ 107 0082 1946     		mov	r1, r3
+ 108              		.loc 1 90 62
+ 109 0084 B7F8E430 		ldrh	r3, [r7, #228]
+ 110 0088 0122     		movs	r2, #1
+ 111 008a 02FA03F3 		lsl	r3, r2, r3
+ 112 008e 5B08     		lsrs	r3, r3, #1
+ 113              		.loc 1 90 60
+ 114 0090 0B44     		add	r3, r3, r1
+ 115              		.loc 1 90 19
+ 116 0092 C7F8C430 		str	r3, [r7, #196]
   91:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   92:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         uint16_t  colCnt = dim_vec >> 2;
-  81              		.loc 1 92 19 view .LVU17
-  82 0024 A308     		lsrs	r3, r4, #2
-  83              	.LVL5:
-  84              		.loc 1 92 19 view .LVU18
-  85 0026 013A     		subs	r2, r2, #1
-  86 0028 0746     		mov	r7, r0
-  87 002a 04F00304 		and	r4, r4, #3
-  88 002e 96B2     		uxth	r6, r2
-  89 0030 581E     		subs	r0, r3, #1
-  90              	.LVL6:
-  91              		.loc 1 92 19 view .LVU19
-  92 0032 1A9A     		ldr	r2, [sp, #104]
-  93 0034 07F1100E 		add	lr, r7, #16
-  94 0038 80B2     		uxth	r0, r0
-  95 003a 0693     		str	r3, [sp, #24]
-  96 003c 0594     		str	r4, [sp, #20]
-  97 003e 631E     		subs	r3, r4, #1
-  98 0040 02F10804 		add	r4, r2, #8
-  99 0044 0EEBC00E 		add	lr, lr, r0, lsl #3
- 100 0048 421C     		adds	r2, r0, #1
-  89:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 101              		.loc 1 89 62 view .LVU20
- 102 004a 4FF0010B 		mov	fp, #1
- 103 004e 04EB8600 		add	r0, r4, r6, lsl #2
- 104 0052 0D96     		str	r6, [sp, #52]
- 105 0054 9BB2     		uxth	r3, r3
- 106 0056 0BFA05FB 		lsl	fp, fp, r5
- 107 005a 0790     		str	r0, [sp, #28]
- 108 005c D000     		lsls	r0, r2, #3
- 109 005e 07EBC202 		add	r2, r7, r2, lsl #3
- 110 0062 0133     		adds	r3, r3, #1
- 111 0064 0890     		str	r0, [sp, #32]
- 112 0066 4FEA5B0B 		lsr	fp, fp, #1
- 113 006a 1A98     		ldr	r0, [sp, #104]
- 114 006c 5B00     		lsls	r3, r3, #1
- 115 006e 0992     		str	r2, [sp, #36]
- 116 0070 1B9A     		ldr	r2, [sp, #108]
- 117 0072 00F10408 		add	r8, r0, #4
- 118 0076 0A93     		str	r3, [sp, #40]
- 119 0078 02F10409 		add	r9, r2, #4
- 120              	.LVL7:
- 121              	.L7:
-  89:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 122              		.loc 1 89 9 is_stmt 1 view .LVU21
+ 117              		.loc 1 92 19
+ 118 0096 FB88     		ldrh	r3, [r7, #6]
+ 119 0098 9B08     		lsrs	r3, r3, #2
+ 120 009a A7F8C230 		strh	r3, [r7, #194]	@ movhi
   93:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   94:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         pA = pV;
+ 121              		.loc 1 94 12
+ 122 009e FB68     		ldr	r3, [r7, #12]
+ 123 00a0 7B61     		str	r3, [r7, #20]
   95:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         pB2 = pB + dim_vec;
- 123              		.loc 1 95 18 is_stmt 0 view .LVU22
- 124 007c 019B     		ldr	r3, [sp, #4]
-  89:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 125              		.loc 1 89 27 view .LVU23
- 126 007e 38F9046C 		ldrsh	r6, [r8, #-4]
-ARM GAS  /tmp/cc18yqYK.s 			page 5
-
-
- 127              		.loc 1 95 18 view .LVU24
- 128 0082 01EB030C 		add	ip, r1, r3
-  90:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
- 129              		.loc 1 90 27 view .LVU25
- 130 0086 38F9022C 		ldrsh	r2, [r8, #-2]
-  89:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 131              		.loc 1 89 45 view .LVU26
- 132 008a 049B     		ldr	r3, [sp, #16]
- 133 008c 9E40     		lsls	r6, r6, r3
-  90:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
- 134              		.loc 1 90 45 view .LVU27
- 135 008e 9A40     		lsls	r2, r2, r3
+ 124              		.loc 1 95 18
+ 125 00a2 FA69     		ldr	r2, [r7, #28]
+ 126 00a4 FB88     		ldrh	r3, [r7, #6]
+ 127 00a6 5B00     		lsls	r3, r3, #1
+ 128 00a8 1344     		add	r3, r3, r2
+ 129              		.loc 1 95 13
+ 130 00aa BB61     		str	r3, [r7, #24]
   96:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
   97:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         while (colCnt)
- 136              		.loc 1 97 15 view .LVU28
- 137 0090 069B     		ldr	r3, [sp, #24]
-  89:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum2 = ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 138              		.loc 1 89 60 view .LVU29
- 139 0092 06EB0B0A 		add	r10, r6, fp
- 140              	.LVL8:
-  90:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
- 141              		.loc 1 90 9 is_stmt 1 view .LVU30
-  90:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
- 142              		.loc 1 90 60 is_stmt 0 view .LVU31
- 143 0096 5A44     		add	r2, r2, fp
- 144              	.LVL9:
-  92:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
- 145              		.loc 1 92 9 is_stmt 1 view .LVU32
-  94:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         pB2 = pB + dim_vec;
- 146              		.loc 1 94 9 view .LVU33
-  95:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
- 147              		.loc 1 95 9 view .LVU34
- 148              		.loc 1 97 9 view .LVU35
- 149              		.loc 1 97 15 view .LVU36
- 150 0098 002B     		cmp	r3, #0
- 151 009a 00F0A680 		beq	.L13
- 152              		.loc 1 97 15 is_stmt 0 view .LVU37
- 153 009e 029B     		ldr	r3, [sp, #8]
- 154 00a0 01F10805 		add	r5, r1, #8
- 155 00a4 0CF10804 		add	r4, ip, #8
- 156 00a8 03F10800 		add	r0, r3, #8
- 157              	.LVL10:
- 158              	.L4:
- 159              	.LBB24:
+ 131              		.loc 1 97 15
+ 132 00ac 7CE0     		b	.L3
+ARM GAS  /tmp/ccPCAT0t.s 			page 5
+
+
+ 133              	.L8:
+ 134              	.LBB24:
   98:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
   99:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q31_t     inV1, inM1, inM2;
- 160              		.loc 1 99 13 is_stmt 1 view .LVU38
  100:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inV1 = *__SIMD32(pA)++;
- 161              		.loc 1 100 13 view .LVU39
+ 135              		.loc 1 100 21
+ 136 00ae 07F11402 		add	r2, r7, #20
+ 137 00b2 1368     		ldr	r3, [r2]
+ 138              		.loc 1 100 33
+ 139 00b4 191D     		adds	r1, r3, #4
+ 140 00b6 1160     		str	r1, [r2]
+ 141              		.loc 1 100 18
+ 142 00b8 1B68     		ldr	r3, [r3]
+ 143 00ba C7F88830 		str	r3, [r7, #136]
  101:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM1 = *__SIMD32(pB)++;
- 162              		.loc 1 101 13 view .LVU40
+ 144              		.loc 1 101 21
+ 145 00be 07F11C02 		add	r2, r7, #28
+ 146 00c2 1368     		ldr	r3, [r2]
+ 147              		.loc 1 101 33
+ 148 00c4 191D     		adds	r1, r3, #4
+ 149 00c6 1160     		str	r1, [r2]
+ 150              		.loc 1 101 18
+ 151 00c8 1B68     		ldr	r3, [r3]
+ 152 00ca C7F88430 		str	r3, [r7, #132]
  102:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum = __SMLAD(inV1, inM1, sum);
- 163              		.loc 1 102 13 view .LVU41
- 164              		.loc 1 102 19 is_stmt 0 view .LVU42
- 165 00ac 50F8087C 		ldr	r7, [r0, #-8]
- 166              	.LVL11:
- 167              	.LBB25:
-ARM GAS  /tmp/cc18yqYK.s 			page 6
-
-
- 168              	.LBI25:
- 169              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
+ 153              		.loc 1 102 19
+ 154 00ce D7F88810 		ldr	r1, [r7, #136]
+ 155 00d2 D7F88420 		ldr	r2, [r7, #132]
+ 156 00d6 D7F8C830 		ldr	r3, [r7, #200]
+ 157 00da F964     		str	r1, [r7, #76]
+ 158 00dc BA64     		str	r2, [r7, #72]
+ 159 00de 7B64     		str	r3, [r7, #68]
+ 160              	.LBB25:
+ 161              	.LBB26:
+ 162              		.file 2 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
    1:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -325,6 +298,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
   20:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   21:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
   22:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * limitations under the License.
+ARM GAS  /tmp/ccPCAT0t.s 			page 6
+
+
   23:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
   24:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
   25:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
@@ -358,9 +334,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
   53:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
   54:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   55:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __USED
-ARM GAS  /tmp/cc18yqYK.s 			page 7
-
-
   56:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
   57:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   58:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __WEAK
@@ -385,6 +358,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
   77:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   78:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
   79:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+ARM GAS  /tmp/ccPCAT0t.s 			page 7
+
+
   80:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   81:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
   82:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
@@ -418,9 +394,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  110:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
  111:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
  112:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/cc18yqYK.s 			page 8
-
-
  113:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
  114:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
  115:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -445,6 +418,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  134:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
  135:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   typedef struct {
  136:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t const* src;
+ARM GAS  /tmp/ccPCAT0t.s 			page 8
+
+
  137:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t* dest;
  138:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t  wlen;
  139:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   } __copy_table_t;
@@ -478,9 +454,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  167:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  168:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  169:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __INITIAL_SP
-ARM GAS  /tmp/cc18yqYK.s 			page 9
-
-
  170:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __INITIAL_SP              __StackTop
  171:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  172:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -505,6 +478,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  191:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  192:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
  193:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+ARM GAS  /tmp/ccPCAT0t.s 			page 9
+
+
  194:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
  195:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  196:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
@@ -538,9 +514,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  224:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  225:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  226:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 10
-
-
  227:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  228:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  229:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Control Register (non-secure)
@@ -565,6 +538,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  248:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_CONTROL(uint32_t control)
  249:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  250:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control, %0" : : "r" (control) : "memory");
+ARM GAS  /tmp/ccPCAT0t.s 			page 10
+
+
  251:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  252:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  253:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -598,9 +574,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  281:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  282:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get APSR Register
  283:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the content of the APSR Register.
-ARM GAS  /tmp/cc18yqYK.s 			page 11
-
-
  284:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               APSR Register value
  285:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  286:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_APSR(void)
@@ -625,6 +598,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  305:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  306:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  307:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 11
+
+
  308:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  309:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  310:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer
@@ -658,9 +634,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  338:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  339:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  340:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer
-ARM GAS  /tmp/cc18yqYK.s 			page 12
-
-
  341:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Process Stack Pointer (PSP).
  342:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfProcStack  Process Stack Pointer value to set
  343:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -685,6 +658,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  362:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  363:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  364:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer
+ARM GAS  /tmp/ccPCAT0t.s 			page 12
+
+
  365:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Main Stack Pointer (MSP).
  366:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               MSP Register value
  367:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -718,9 +694,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  395:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer (MSP).
  396:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfMainStack  Main Stack Pointer value to set
  397:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/cc18yqYK.s 			page 13
-
-
  398:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSP(uint32_t topOfMainStack)
  399:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  400:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msp, %0" : : "r" (topOfMainStack) : );
@@ -745,6 +718,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  419:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Stack Pointer (non-secure)
  420:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Stack Pointer (SP) when in secure state.
  421:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               SP Register value
+ARM GAS  /tmp/ccPCAT0t.s 			page 13
+
+
  422:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  423:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_SP_NS(void)
  424:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -778,9 +754,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  452:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  453:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, primask" : "=r" (result) :: "memory");
  454:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/cc18yqYK.s 			page 14
-
-
  455:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  456:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  457:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -805,6 +778,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  476:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Priority Mask Register.
  477:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    priMask  Priority Mask
  478:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccPCAT0t.s 			page 14
+
+
  479:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PRIMASK(uint32_t priMask)
  480:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  481:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR primask, %0" : : "r" (priMask) : "memory");
@@ -838,9 +814,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  509:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  510:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  511:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 15
-
-
  512:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  513:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Disable FIQ
  514:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Disables FIQ interrupts by setting the F-bit in the CPSR.
@@ -865,6 +838,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  533:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  534:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  535:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 15
+
+
  536:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  537:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  538:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -898,9 +874,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  566:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Base Priority (non-secure)
  567:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Base Priority register when in secure state.
  568:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
-ARM GAS  /tmp/cc18yqYK.s 			page 16
-
-
  569:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  570:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_BASEPRI_NS(uint32_t basePri)
  571:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -925,6 +898,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  590:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Fault Mask
  591:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the Fault Mask register.
  592:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Fault Mask register value
+ARM GAS  /tmp/ccPCAT0t.s 			page 16
+
+
  593:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  594:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_FAULTMASK(void)
  595:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -958,9 +934,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  623:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  624:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_FAULTMASK(uint32_t faultMask)
  625:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/cc18yqYK.s 			page 17
-
-
  626:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR faultmask, %0" : : "r" (faultMask) : "memory");
  627:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  628:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -985,6 +958,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  647:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if ((defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
  648:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_8M_BASE__ ) && (__ARM_ARCH_8M_BASE__ == 1))    )
  649:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 17
+
+
  650:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  651:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer Limit
  652:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
@@ -1018,9 +994,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  680:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  681:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_PSPLIM_NS(void)
  682:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/cc18yqYK.s 			page 18
-
-
  683:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
  684:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
  685:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return 0U;
@@ -1045,6 +1018,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  704:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_PSPLIM(uint32_t ProcStackPtrLimit)
  705:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  706:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
+ARM GAS  /tmp/ccPCAT0t.s 			page 18
+
+
  707:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
  708:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure PSPLIM is RAZ/WI
  709:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   (void)ProcStackPtrLimit;
@@ -1078,9 +1054,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  737:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  738:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer Limit
  739:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
-ARM GAS  /tmp/cc18yqYK.s 			page 19
-
-
  740:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always in non-secure
  741:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   mode.
  742:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1105,6 +1078,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  761:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  762:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer Limit (non-secure)
  763:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
+ARM GAS  /tmp/ccPCAT0t.s 			page 19
+
+
  764:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always.
  765:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  766:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Main Stack Pointer Limit(MSPLIM) when in sec
@@ -1138,9 +1114,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  794:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
  795:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
  796:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   // without main extensions, the non-secure MSPLIM is RAZ/WI
-ARM GAS  /tmp/cc18yqYK.s 			page 20
-
-
  797:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   (void)MainStackPtrLimit;
  798:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  799:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msplim, %0" : : "r" (MainStackPtrLimit));
@@ -1165,6 +1138,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  818:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  819:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR msplim_ns, %0" : : "r" (MainStackPtrLimit));
  820:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccPCAT0t.s 			page 20
+
+
  821:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  822:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  823:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1198,9 +1174,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  851:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  852:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  853:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 21
-
-
  854:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  855:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set FPSCR
  856:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Floating Point Status/Control register.
@@ -1225,6 +1198,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  875:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  876:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  877:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /*@} end of CMSIS_Core_RegAccFunctions */
+ARM GAS  /tmp/ccPCAT0t.s 			page 21
+
+
  878:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  879:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  880:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* ##########################  Core Instruction Access  ######################### */
@@ -1258,9 +1234,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  908:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  909:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __WFI()                             __ASM volatile ("wfi")
  910:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 22
-
-
  911:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  912:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  913:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Wait For Event
@@ -1285,6 +1258,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  932:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  933:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __ISB(void)
  934:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccPCAT0t.s 			page 22
+
+
  935:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("isb 0xF":::"memory");
  936:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  937:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1318,9 +1294,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  965:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Reversed value
  966:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  967:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __REV(uint32_t value)
-ARM GAS  /tmp/cc18yqYK.s 			page 23
-
-
  968:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  969:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 5)
  970:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return __builtin_bswap32(value);
@@ -1345,6 +1318,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  990:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("rev16 %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
  991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return result;
+ARM GAS  /tmp/ccPCAT0t.s 			page 23
+
+
  992:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1378,9 +1354,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1022:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1023:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   op2 %= 32U;
 1024:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   if (op2 == 0U)
-ARM GAS  /tmp/cc18yqYK.s 			page 24
-
-
 1025:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
 1026:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     return op1;
 1027:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
@@ -1405,6 +1378,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1046:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Reversed value
 1047:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1048:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __RBIT(uint32_t value)
+ARM GAS  /tmp/ccPCAT0t.s 			page 24
+
+
 1049:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1050:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1051:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1438,9 +1414,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1079:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1080:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   /* Even though __builtin_clz produces a CLZ instruction on ARM, formally
 1081:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      __builtin_clz(0) is undefined behaviour, so handle this case specially.
-ARM GAS  /tmp/cc18yqYK.s 			page 25
-
-
 1082:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      This guarantees ARM-compatible results if happening to compile on a non-ARM
 1083:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      target, and ensures the compiler doesn't decide to activate any
 1084:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      optimisations using the logic "value was passed to __builtin_clz, so it
@@ -1465,6 +1438,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1103:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a exclusive LDR instruction for 8 bit value.
 1104:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
 1105:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             value of type uint8_t at (*ptr)
+ARM GAS  /tmp/ccPCAT0t.s 			page 25
+
+
 1106:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1107:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __LDREXB(volatile uint8_t *addr)
 1108:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1498,9 +1474,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1136:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     /* Prior to GCC 4.8, "Q" will be expanded to [rx, #0] which is not
 1137:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****        accepted by assembler. So has to use following less efficient pattern.
 1138:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     */
-ARM GAS  /tmp/cc18yqYK.s 			page 26
-
-
 1139:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrexh %0, [%1]" : "=r" (result) : "r" (addr) : "memory" );
 1140:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
 1141:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return ((uint16_t) result);    /* Add explicit type cast here */
@@ -1525,6 +1498,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1160:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1161:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   STR Exclusive (8 bit)
 1162:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a exclusive STR instruction for 8 bit values.
+ARM GAS  /tmp/ccPCAT0t.s 			page 26
+
+
 1163:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1164:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
 1165:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return          0  Function succeeded
@@ -1558,9 +1534,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1193:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1194:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1195:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   STR Exclusive (32 bit)
-ARM GAS  /tmp/cc18yqYK.s 			page 27
-
-
 1196:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a exclusive STR instruction for 32 bit values.
 1197:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1198:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
@@ -1585,6 +1558,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1217:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("clrex" ::: "memory");
 1218:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1219:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 27
+
+
 1220:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
 1221:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
 1222:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) || \
@@ -1618,9 +1594,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1250:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             Saturated value
 1251:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1252:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __USAT(ARG1,ARG2) \
-ARM GAS  /tmp/cc18yqYK.s 			page 28
-
-
 1253:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  __extension__ \
 1254:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** ({                          \
 1255:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t __RES, __ARG1 = (ARG1); \
@@ -1645,6 +1618,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1274:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1275:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1276:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 28
+
+
 1277:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1278:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   LDRT Unprivileged (8 bit)
 1279:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a Unprivileged LDRT instruction for 8 bit value.
@@ -1678,9 +1654,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1307:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1308:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1309:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
-ARM GAS  /tmp/cc18yqYK.s 			page 29
-
-
 1310:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrht %0, %1" : "=r" (result) : "Q" (*ptr) );
 1311:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
 1312:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     /* Prior to GCC 4.8, "Q" will be expanded to [rx, #0] which is not
@@ -1705,6 +1678,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1331:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrt %0, %1" : "=r" (result) : "Q" (*ptr) );
 1332:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1333:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccPCAT0t.s 			page 29
+
+
 1334:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1335:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1336:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1738,9 +1714,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1364:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
 1365:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1366:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STRT(uint32_t value, volatile uint32_t *ptr)
-ARM GAS  /tmp/cc18yqYK.s 			page 30
-
-
 1367:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1368:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("strt %1, %0" : "=Q" (*ptr) : "r" (value) );
 1369:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -1765,6 +1738,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1388:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     if (val > max)
 1389:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     {
 1390:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****       return max;
+ARM GAS  /tmp/ccPCAT0t.s 			page 30
+
+
 1391:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     }
 1392:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     else if (val < min)
 1393:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     {
@@ -1798,9 +1774,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1421:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return (uint32_t)val;
 1422:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1423:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 31
-
-
 1424:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif /* ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
 1425:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
 1426:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            (defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1))    ) */
@@ -1825,6 +1798,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1445:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1446:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1447:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Load-Acquire (16 bit)
+ARM GAS  /tmp/ccPCAT0t.s 			page 31
+
+
 1448:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a LDAH instruction for 16 bit values.
 1449:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
 1450:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint16_t at (*ptr)
@@ -1858,9 +1834,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1478:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STLB instruction for 8 bit values.
 1479:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1480:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
-ARM GAS  /tmp/cc18yqYK.s 			page 32
-
-
 1481:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1482:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STLB(uint8_t value, volatile uint8_t *ptr)
 1483:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1885,6 +1858,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1502:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STL instruction for 32 bit values.
 1503:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1504:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
+ARM GAS  /tmp/ccPCAT0t.s 			page 32
+
+
 1505:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1506:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __STL(uint32_t value, volatile uint32_t *ptr)
 1507:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1918,9 +1894,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1535:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1536:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1537:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldaexh %0, %1" : "=r" (result) : "Q" (*ptr) );
-ARM GAS  /tmp/cc18yqYK.s 			page 33
-
-
 1538:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return ((uint16_t) result);
 1539:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1540:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1945,6 +1918,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1559:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STLB exclusive instruction for 8 bit values.
 1560:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1561:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
+ARM GAS  /tmp/ccPCAT0t.s 			page 33
+
+
 1562:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return          0  Function succeeded
 1563:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return          1  Function failed
 1564:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
@@ -1978,9 +1954,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1592:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Store-Release Exclusive (32 bit)
 1593:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STL exclusive instruction for 32 bit values.
 1594:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
-ARM GAS  /tmp/cc18yqYK.s 			page 34
-
-
 1595:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
 1596:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return          0  Function succeeded
 1597:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return          1  Function failed
@@ -2005,6 +1978,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1616:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   @{
 1617:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** */
 1618:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 34
+
+
 1619:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_DSP) && (__ARM_FEATURE_DSP == 1))
 1620:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1621:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SADD8(uint32_t op1, uint32_t op2)
@@ -2038,9 +2014,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1649:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uadd8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1650:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1651:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cc18yqYK.s 			page 35
-
-
 1652:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1653:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UQADD8(uint32_t op1, uint32_t op2)
 1654:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2065,6 +2038,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1673:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1674:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("ssub8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1675:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/ccPCAT0t.s 			page 35
+
+
 1676:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1677:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1678:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __QSUB8(uint32_t op1, uint32_t op2)
@@ -2098,9 +2074,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1706:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uqsub8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1707:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1708:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cc18yqYK.s 			page 36
-
-
 1709:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1710:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UHSUB8(uint32_t op1, uint32_t op2)
 1711:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2125,6 +2098,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1730:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1731:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("qadd16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1732:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/ccPCAT0t.s 			page 36
+
+
 1733:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1734:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1735:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SHADD16(uint32_t op1, uint32_t op2)
@@ -2158,9 +2134,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1763:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uhadd16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1764:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1765:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/cc18yqYK.s 			page 37
-
-
 1766:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1767:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SSUB16(uint32_t op1, uint32_t op2)
 1768:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2185,6 +2158,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1787:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("shsub16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1788:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1789:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccPCAT0t.s 			page 37
+
+
 1790:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1791:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __USUB16(uint32_t op1, uint32_t op2)
 1792:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2218,9 +2194,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1820:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1821:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1822:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 38
-
-
 1823:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __QASX(uint32_t op1, uint32_t op2)
 1824:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1825:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -2245,6 +2218,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1844:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1845:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1846:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 38
+
+
 1847:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UQASX(uint32_t op1, uint32_t op2)
 1848:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1849:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -2278,9 +2254,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1877:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1878:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1879:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SHSAX(uint32_t op1, uint32_t op2)
-ARM GAS  /tmp/cc18yqYK.s 			page 39
-
-
 1880:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1881:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1882:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2305,6 +2278,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1901:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1902:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1903:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UHSAX(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccPCAT0t.s 			page 39
+
+
 1904:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1905:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1906:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2338,9 +2314,6 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1934:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __USAT16(ARG1,ARG2) \
 1935:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** ({                          \
 1936:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t __RES, __ARG1 = (ARG1); \
-ARM GAS  /tmp/cc18yqYK.s 			page 40
-
-
 1937:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM ("usat16 %0, %1, %2" : "=r" (__RES) :  "I" (ARG2), "r" (__ARG1) ); \
 1938:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __RES; \
 1939:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  })
@@ -2365,6 +2338,9 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1958:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1959:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1960:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccPCAT0t.s 			page 40
+
+
 1961:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("sxtb16 %0, %1" : "=r" (result) : "r" (op1));
 1962:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1963:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -2394,575 +2370,591 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
 1987:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1988:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMLAD (uint32_t op1, uint32_t op2, uint32_t op3)
- 170              		.loc 2 1989 31 is_stmt 1 view .LVU43
- 171              	.LBB26:
 1990:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
-ARM GAS  /tmp/cc18yqYK.s 			page 41
-
-
- 172              		.loc 2 1991 3 view .LVU44
 1992:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smlad %0, %1, %2, %3" : "=r" (result) : "r" (op1), "r" (op2), "r" (op3) );
- 173              		.loc 2 1993 3 view .LVU45
- 174 00b0 55F8083C 		ldr	r3, [r5, #-8]
- 175              		.syntax unified
- 176              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 177 00b4 27FB03AA 		smlad r10, r7, r3, r10
- 178              	@ 0 "" 2
- 179              	.LVL12:
+ 163              		.loc 2 1993 3
+ 164 00e0 FB6C     		ldr	r3, [r7, #76]
+ 165 00e2 BA6C     		ldr	r2, [r7, #72]
+ 166 00e4 796C     		ldr	r1, [r7, #68]
+ 167              		.syntax unified
+ 168              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 169 00e6 23FB0213 		smlad r3, r3, r2, r1
+ 170              	@ 0 "" 2
+ 171              		.thumb
+ 172              		.syntax unified
+ 173 00ea 3B64     		str	r3, [r7, #64]
 1994:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 180              		.loc 2 1994 3 view .LVU46
- 181              		.loc 2 1994 3 is_stmt 0 view .LVU47
- 182              		.thumb
- 183              		.syntax unified
- 184              	.LBE26:
- 185              	.LBE25:
+ 174              		.loc 2 1994 9
+ 175 00ec 3B6C     		ldr	r3, [r7, #64]
+ 176              	.LBE26:
+ 177              	.LBE25:
+ 178              		.loc 1 102 17
+ 179 00ee C7F8C830 		str	r3, [r7, #200]
  103:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM2 = *__SIMD32(pB2)++;
- 186              		.loc 1 103 13 is_stmt 1 view .LVU48
+ 180              		.loc 1 103 21
+ 181 00f2 07F11802 		add	r2, r7, #24
+ 182 00f6 1368     		ldr	r3, [r2]
+ 183              		.loc 1 103 34
+ 184 00f8 191D     		adds	r1, r3, #4
+ARM GAS  /tmp/ccPCAT0t.s 			page 41
+
+
+ 185 00fa 1160     		str	r1, [r2]
+ 186              		.loc 1 103 18
+ 187 00fc 1B68     		ldr	r3, [r3]
+ 188 00fe C7F88030 		str	r3, [r7, #128]
  104:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum2 = __SMLAD(inV1, inM2, sum2);
- 187              		.loc 1 104 13 view .LVU49
- 188              	.LBB27:
- 189              	.LBI27:
-1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 190              		.loc 2 1989 31 view .LVU50
- 191              	.LBB28:
-1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 192              		.loc 2 1991 3 view .LVU51
+ 189              		.loc 1 104 20
+ 190 0102 D7F88810 		ldr	r1, [r7, #136]
+ 191 0106 D7F88020 		ldr	r2, [r7, #128]
+ 192 010a D7F8C430 		ldr	r3, [r7, #196]
+ 193 010e F965     		str	r1, [r7, #92]
+ 194 0110 BA65     		str	r2, [r7, #88]
+ 195 0112 7B65     		str	r3, [r7, #84]
+ 196              	.LBB27:
+ 197              	.LBB28:
 1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 193              		.loc 2 1993 3 view .LVU52
- 194 00b8 54F8083C 		ldr	r3, [r4, #-8]
- 195              		.syntax unified
- 196              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 197 00bc 27FB0327 		smlad r7, r7, r3, r2
- 198              	@ 0 "" 2
- 199              	.LVL13:
- 200              		.loc 2 1994 3 view .LVU53
- 201              		.loc 2 1994 3 is_stmt 0 view .LVU54
- 202              		.thumb
- 203              		.syntax unified
- 204              	.LBE28:
- 205              	.LBE27:
+ 198              		.loc 2 1993 3
+ 199 0114 FB6D     		ldr	r3, [r7, #92]
+ 200 0116 BA6D     		ldr	r2, [r7, #88]
+ 201 0118 796D     		ldr	r1, [r7, #84]
+ 202              		.syntax unified
+ 203              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 204 011a 23FB0213 		smlad r3, r3, r2, r1
+ 205              	@ 0 "" 2
+ 206              		.thumb
+ 207              		.syntax unified
+ 208 011e 3B65     		str	r3, [r7, #80]
+ 209              		.loc 2 1994 9
+ 210 0120 3B6D     		ldr	r3, [r7, #80]
+ 211              	.LBE28:
+ 212              	.LBE27:
+ 213              		.loc 1 104 18
+ 214 0122 C7F8C430 		str	r3, [r7, #196]
  105:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  106:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inV1 = *__SIMD32(pA)++;
- 206              		.loc 1 106 13 is_stmt 1 view .LVU55
+ 215              		.loc 1 106 21
+ 216 0126 07F11402 		add	r2, r7, #20
+ 217 012a 1368     		ldr	r3, [r2]
+ 218              		.loc 1 106 33
+ 219 012c 191D     		adds	r1, r3, #4
+ 220 012e 1160     		str	r1, [r2]
+ 221              		.loc 1 106 18
+ 222 0130 1B68     		ldr	r3, [r3]
+ 223 0132 C7F88830 		str	r3, [r7, #136]
  107:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM1 = *__SIMD32(pB)++;
- 207              		.loc 1 107 13 view .LVU56
+ 224              		.loc 1 107 21
+ 225 0136 07F11C02 		add	r2, r7, #28
+ 226 013a 1368     		ldr	r3, [r2]
+ 227              		.loc 1 107 33
+ 228 013c 191D     		adds	r1, r3, #4
+ 229 013e 1160     		str	r1, [r2]
+ 230              		.loc 1 107 18
+ 231 0140 1B68     		ldr	r3, [r3]
+ 232 0142 C7F88430 		str	r3, [r7, #132]
  108:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum = __SMLAD(inV1, inM1, sum);
- 208              		.loc 1 108 13 view .LVU57
- 209              		.loc 1 108 19 is_stmt 0 view .LVU58
- 210 00c0 50F8043C 		ldr	r3, [r0, #-4]
- 211              	.LVL14:
- 212              	.LBB29:
- 213              	.LBI29:
-1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 214              		.loc 2 1989 31 is_stmt 1 view .LVU59
- 215              	.LBB30:
-ARM GAS  /tmp/cc18yqYK.s 			page 42
+ 233              		.loc 1 108 19
+ 234 0146 D7F88810 		ldr	r1, [r7, #136]
+ 235 014a D7F88420 		ldr	r2, [r7, #132]
+ARM GAS  /tmp/ccPCAT0t.s 			page 42
 
 
-1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 216              		.loc 2 1991 3 view .LVU60
+ 236 014e D7F8C830 		ldr	r3, [r7, #200]
+ 237 0152 F966     		str	r1, [r7, #108]
+ 238 0154 BA66     		str	r2, [r7, #104]
+ 239 0156 7B66     		str	r3, [r7, #100]
+ 240              	.LBB29:
+ 241              	.LBB30:
 1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 217              		.loc 2 1993 3 view .LVU61
- 218 00c4 55F8046C 		ldr	r6, [r5, #-4]
- 219              		.syntax unified
- 220              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 221 00c8 23FB06AA 		smlad r10, r3, r6, r10
- 222              	@ 0 "" 2
- 223              	.LVL15:
- 224              		.loc 2 1994 3 view .LVU62
- 225              		.loc 2 1994 3 is_stmt 0 view .LVU63
- 226              		.thumb
- 227              		.syntax unified
- 228              	.LBE30:
- 229              	.LBE29:
+ 242              		.loc 2 1993 3
+ 243 0158 FB6E     		ldr	r3, [r7, #108]
+ 244 015a BA6E     		ldr	r2, [r7, #104]
+ 245 015c 796E     		ldr	r1, [r7, #100]
+ 246              		.syntax unified
+ 247              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 248 015e 23FB0213 		smlad r3, r3, r2, r1
+ 249              	@ 0 "" 2
+ 250              		.thumb
+ 251              		.syntax unified
+ 252 0162 3B66     		str	r3, [r7, #96]
+ 253              		.loc 2 1994 9
+ 254 0164 3B6E     		ldr	r3, [r7, #96]
+ 255              	.LBE30:
+ 256              	.LBE29:
+ 257              		.loc 1 108 17
+ 258 0166 C7F8C830 		str	r3, [r7, #200]
  109:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM2 = *__SIMD32(pB2)++;
- 230              		.loc 1 109 13 is_stmt 1 view .LVU64
+ 259              		.loc 1 109 21
+ 260 016a 07F11802 		add	r2, r7, #24
+ 261 016e 1368     		ldr	r3, [r2]
+ 262              		.loc 1 109 34
+ 263 0170 191D     		adds	r1, r3, #4
+ 264 0172 1160     		str	r1, [r2]
+ 265              		.loc 1 109 18
+ 266 0174 1B68     		ldr	r3, [r3]
+ 267 0176 C7F88030 		str	r3, [r7, #128]
  110:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum2 = __SMLAD(inV1, inM2, sum2);
- 231              		.loc 1 110 13 view .LVU65
- 232              	.LBB31:
- 233              	.LBI31:
-1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 234              		.loc 2 1989 31 view .LVU66
- 235              	.LBB32:
-1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 236              		.loc 2 1991 3 view .LVU67
+ 268              		.loc 1 110 20
+ 269 017a D7F88810 		ldr	r1, [r7, #136]
+ 270 017e D7F88020 		ldr	r2, [r7, #128]
+ 271 0182 D7F8C430 		ldr	r3, [r7, #196]
+ 272 0186 F967     		str	r1, [r7, #124]
+ 273 0188 BA67     		str	r2, [r7, #120]
+ 274 018a 7B67     		str	r3, [r7, #116]
+ 275              	.LBB31:
+ 276              	.LBB32:
 1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 237              		.loc 2 1993 3 view .LVU68
- 238 00cc 54F8042C 		ldr	r2, [r4, #-4]
- 239              		.syntax unified
- 240              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 241 00d0 23FB0272 		smlad r2, r3, r2, r7
- 242              	@ 0 "" 2
- 243              	.LVL16:
- 244              		.loc 2 1994 3 view .LVU69
- 245              		.loc 2 1994 3 is_stmt 0 view .LVU70
- 246              		.thumb
- 247              		.syntax unified
- 248              	.LBE32:
- 249              	.LBE31:
+ 277              		.loc 2 1993 3
+ 278 018c FB6F     		ldr	r3, [r7, #124]
+ 279 018e BA6F     		ldr	r2, [r7, #120]
+ 280 0190 796F     		ldr	r1, [r7, #116]
+ 281              		.syntax unified
+ 282              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 283 0192 23FB0213 		smlad r3, r3, r2, r1
+ 284              	@ 0 "" 2
+ 285              		.thumb
+ 286              		.syntax unified
+ 287 0196 3B67     		str	r3, [r7, #112]
+ 288              		.loc 2 1994 9
+ARM GAS  /tmp/ccPCAT0t.s 			page 43
+
+
+ 289 0198 3B6F     		ldr	r3, [r7, #112]
+ 290              	.LBE32:
+ 291              	.LBE31:
+ 292              		.loc 1 110 18
+ 293 019a C7F8C430 		str	r3, [r7, #196]
  111:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  112:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             colCnt--;
- 250              		.loc 1 112 13 is_stmt 1 view .LVU71
- 251              		.loc 1 112 13 is_stmt 0 view .LVU72
- 252              	.LBE24:
+ 294              		.loc 1 112 19
+ 295 019e B7F8C230 		ldrh	r3, [r7, #194]
+ 296 01a2 013B     		subs	r3, r3, #1
+ 297 01a4 A7F8C230 		strh	r3, [r7, #194]	@ movhi
+ 298              	.L3:
+ 299              	.LBE24:
   97:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
- 253              		.loc 1 97 15 is_stmt 1 view .LVU73
- 254 00d4 0830     		adds	r0, r0, #8
- 255              	.LVL17:
-  97:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
- 256              		.loc 1 97 15 is_stmt 0 view .LVU74
- 257 00d6 0835     		adds	r5, r5, #8
- 258              	.LVL18:
-  97:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
- 259              		.loc 1 97 15 view .LVU75
- 260 00d8 0834     		adds	r4, r4, #8
-ARM GAS  /tmp/cc18yqYK.s 			page 43
-
-
- 261              	.LVL19:
-  97:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
- 262              		.loc 1 97 15 view .LVU76
- 263 00da 7045     		cmp	r0, lr
- 264 00dc E6D1     		bne	.L4
- 265 00de 089B     		ldr	r3, [sp, #32]
- 266              	.LVL20:
- 267              	.LBB33:
- 106:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM1 = *__SIMD32(pB)++;
- 268              		.loc 1 106 33 view .LVU77
- 269 00e0 0998     		ldr	r0, [sp, #36]
- 270              	.LVL21:
- 106:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM1 = *__SIMD32(pB)++;
- 271              		.loc 1 106 33 view .LVU78
- 272 00e2 1944     		add	r1, r1, r3
- 273 00e4 9C44     		add	ip, ip, r3
- 274              	.LVL22:
- 275              	.L3:
- 106:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM1 = *__SIMD32(pB)++;
- 276              		.loc 1 106 33 view .LVU79
- 277              	.LBE33:
+ 300              		.loc 1 97 15
+ 301 01a8 B7F8C230 		ldrh	r3, [r7, #194]
+ 302 01ac 002B     		cmp	r3, #0
+ 303 01ae 7FF47EAF 		bne	.L8
  113:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         }
  114:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         colCnt = dim_vec & 0x3;
- 278              		.loc 1 114 9 is_stmt 1 view .LVU80
+ 304              		.loc 1 114 16
+ 305 01b2 FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 306 01b4 03F00303 		and	r3, r3, #3
+ 307 01b8 A7F8C230 		strh	r3, [r7, #194]	@ movhi
  115:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         while (colCnt)
- 279              		.loc 1 115 9 view .LVU81
- 280              		.loc 1 115 15 view .LVU82
- 281 00e6 059B     		ldr	r3, [sp, #20]
- 282 00e8 002B     		cmp	r3, #0
- 283 00ea 7CD0     		beq	.L14
- 284 00ec 0A9B     		ldr	r3, [sp, #40]
- 285 00ee CF18     		adds	r7, r1, r3
- 286              	.L6:
- 287              	.LBB34:
+ 308              		.loc 1 115 15
+ 309 01bc 2CE0     		b	.L9
+ 310              	.L10:
+ 311              	.LBB33:
  116:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
  117:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inV = *pA++;
- 288              		.loc 1 117 13 view .LVU83
- 289              	.LVL23:
+ 312              		.loc 1 117 32
+ 313 01be 7B69     		ldr	r3, [r7, #20]
+ 314 01c0 9A1C     		adds	r2, r3, #2
+ 315 01c2 7A61     		str	r2, [r7, #20]
+ 316              		.loc 1 117 23
+ 317 01c4 1B88     		ldrh	r3, [r3]	@ movhi
+ 318 01c6 A7F89230 		strh	r3, [r7, #146]	@ movhi
  118:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inM = *pB++;
+ 319              		.loc 1 118 32
+ 320 01ca FB69     		ldr	r3, [r7, #28]
+ 321 01cc 9A1C     		adds	r2, r3, #2
+ 322 01ce FA61     		str	r2, [r7, #28]
+ 323              		.loc 1 118 23
+ 324 01d0 1B88     		ldrh	r3, [r3]	@ movhi
+ 325 01d2 A7F89030 		strh	r3, [r7, #144]	@ movhi
  119:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inM2 = *pB2++;
+ 326              		.loc 1 119 34
+ 327 01d6 BB69     		ldr	r3, [r7, #24]
+ 328 01d8 9A1C     		adds	r2, r3, #2
+ 329 01da BA61     		str	r2, [r7, #24]
+ 330              		.loc 1 119 23
+ 331 01dc 1B88     		ldrh	r3, [r3]	@ movhi
+ 332 01de A7F88E30 		strh	r3, [r7, #142]	@ movhi
  120:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  121:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum += inV * inM;
- 290              		.loc 1 121 17 is_stmt 0 view .LVU84
- 291 00f0 31F8025B 		ldrh	r5, [r1], #2
- 292              	.LVL24:
- 117:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inM = *pB++;
- 293              		.loc 1 117 23 view .LVU85
- 294 00f4 30F9023B 		ldrsh	r3, [r0], #2
- 295              	.LVL25:
- 118:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inM = *pB++;
- 296              		.loc 1 118 13 is_stmt 1 view .LVU86
- 119:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
- 297              		.loc 1 119 13 view .LVU87
- 298              		.loc 1 121 13 view .LVU88
+ 333              		.loc 1 121 24
+ARM GAS  /tmp/ccPCAT0t.s 			page 44
+
+
+ 334 01e2 B7F99230 		ldrsh	r3, [r7, #146]
+ 335 01e6 B7F99020 		ldrsh	r2, [r7, #144]
+ 336 01ea 02FB03F3 		mul	r3, r2, r3
+ 337              		.loc 1 121 17
+ 338 01ee D7F8C820 		ldr	r2, [r7, #200]
+ 339 01f2 1344     		add	r3, r3, r2
+ 340 01f4 C7F8C830 		str	r3, [r7, #200]
  122:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum2 += inV * inM2;
- 299              		.loc 1 122 18 is_stmt 0 view .LVU89
- 300 00f8 3CF8024B 		ldrh	r4, [ip], #2
-ARM GAS  /tmp/cc18yqYK.s 			page 44
-
-
- 301              	.LVL26:
- 302              		.loc 1 122 18 view .LVU90
- 303              	.LBE34:
- 115:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
- 304              		.loc 1 115 15 view .LVU91
- 305 00fc B942     		cmp	r1, r7
- 306              	.LBB35:
- 121:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum2 += inV * inM2;
- 307              		.loc 1 121 17 view .LVU92
- 308 00fe 13FB05AA 		smlabb	r10, r3, r5, r10
- 309              	.LVL27:
- 310              		.loc 1 122 13 is_stmt 1 view .LVU93
- 311              		.loc 1 122 18 is_stmt 0 view .LVU94
- 312 0102 13FB0422 		smlabb	r2, r3, r4, r2
- 313              	.LVL28:
+ 341              		.loc 1 122 25
+ 342 01f8 B7F99230 		ldrsh	r3, [r7, #146]
+ 343 01fc B7F98E20 		ldrsh	r2, [r7, #142]
+ 344 0200 02FB03F3 		mul	r3, r2, r3
+ 345              		.loc 1 122 18
+ 346 0204 D7F8C420 		ldr	r2, [r7, #196]
+ 347 0208 1344     		add	r3, r3, r2
+ 348 020a C7F8C430 		str	r3, [r7, #196]
  123:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             colCnt--;
- 314              		.loc 1 123 13 is_stmt 1 view .LVU95
- 315              		.loc 1 123 13 is_stmt 0 view .LVU96
- 316              	.LBE35:
+ 349              		.loc 1 123 19
+ 350 020e B7F8C230 		ldrh	r3, [r7, #194]
+ 351 0212 013B     		subs	r3, r3, #1
+ 352 0214 A7F8C230 		strh	r3, [r7, #194]	@ movhi
+ 353              	.L9:
+ 354              	.LBE33:
  115:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
- 317              		.loc 1 115 15 is_stmt 1 view .LVU97
- 318 0106 F3D1     		bne	.L6
- 319              	.LVL29:
- 320              	.L5:
+ 355              		.loc 1 115 15
+ 356 0218 B7F8C230 		ldrh	r3, [r7, #194]
+ 357 021c 002B     		cmp	r3, #0
+ 358 021e CED1     		bne	.L10
+ 359              	.LBB34:
  124:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         }                       /* while over colCnt */
  125:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         *pO++ =  (q15_t) (__SSAT((sum >> out_shift), 16));
- 321              		.loc 1 125 9 view .LVU98
- 322              	.LBB36:
- 323              		.loc 1 125 27 view .LVU99
- 324              		.loc 1 125 27 view .LVU100
- 325 0108 039B     		ldr	r3, [sp, #12]
- 326 010a 08F10408 		add	r8, r8, #4
- 327              	.LVL30:
- 328              		.loc 1 125 27 is_stmt 0 view .LVU101
- 329 010e 09F10409 		add	r9, r9, #4
- 330 0112 4AFA03F6 		asr	r6, r10, r3
- 331              	.LVL31:
- 332              		.loc 1 125 27 view .LVU102
- 333              	.LBE36:
- 334              	.LBB37:
+ 360              		.loc 1 125 27
+ 361 0220 B7F8E430 		ldrh	r3, [r7, #228]
+ 362 0224 D7F8C820 		ldr	r2, [r7, #200]
+ 363 0228 42FA03F3 		asr	r3, r2, r3
+ 364 022c C7F8A030 		str	r3, [r7, #160]
+ 365 0230 D7F8A030 		ldr	r3, [r7, #160]
+ 366              		.syntax unified
+ 367              	@ 125 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c" 1
+ 368 0234 03F30F03 		ssat r3, #16, r3
+ 369              	@ 0 "" 2
+ 370              		.thumb
+ 371              		.syntax unified
+ 372 0238 C7F89C30 		str	r3, [r7, #156]
+ 373 023c D7F89C10 		ldr	r1, [r7, #156]
+ 374              	.LBE34:
+ 375              		.loc 1 125 12
+ 376 0240 D7F8D430 		ldr	r3, [r7, #212]
+ 377 0244 9A1C     		adds	r2, r3, #2
+ 378 0246 C7F8D420 		str	r2, [r7, #212]
+ 379              		.loc 1 125 18
+ 380 024a 0AB2     		sxth	r2, r1
+ 381              		.loc 1 125 15
+ 382 024c 1A80     		strh	r2, [r3]	@ movhi
+ 383              	.LBB35:
  126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         *pO++ = (q15_t) (__SSAT((sum2>> out_shift), 16));
- 335              		.loc 1 126 26 view .LVU103
- 336 0116 1A41     		asrs	r2, r2, r3
- 337              	.LVL32:
- 338              		.loc 1 126 26 view .LVU104
- 339              	.LBE37:
+ 384              		.loc 1 126 26
+ARM GAS  /tmp/ccPCAT0t.s 			page 45
+
+
+ 385 024e B7F8E430 		ldrh	r3, [r7, #228]
+ 386 0252 D7F8C420 		ldr	r2, [r7, #196]
+ 387 0256 42FA03F3 		asr	r3, r2, r3
+ 388 025a C7F89830 		str	r3, [r7, #152]
+ 389 025e D7F89830 		ldr	r3, [r7, #152]
+ 390              		.syntax unified
+ 391              	@ 126 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c" 1
+ 392 0262 03F30F03 		ssat r3, #16, r3
+ 393              	@ 0 "" 2
+ 394              		.thumb
+ 395              		.syntax unified
+ 396 0266 C7F89430 		str	r3, [r7, #148]
+ 397 026a D7F89410 		ldr	r1, [r7, #148]
+ 398              	.LBE35:
+ 399              		.loc 1 126 12
+ 400 026e D7F8D430 		ldr	r3, [r7, #212]
+ 401 0272 9A1C     		adds	r2, r3, #2
+ 402 0274 C7F8D420 		str	r2, [r7, #212]
+ 403              		.loc 1 126 17
+ 404 0278 0AB2     		sxth	r2, r1
+ 405              		.loc 1 126 15
+ 406 027a 1A80     		strh	r2, [r3]	@ movhi
  127:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
  128:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         /* adjust the pointers and counters */
  129:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         pB = pB + dim_vec;
- 340              		.loc 1 129 17 view .LVU105
- 341 0118 019B     		ldr	r3, [sp, #4]
- 342              	.LBB38:
- 125:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         *pO++ = (q15_t) (__SSAT((sum2>> out_shift), 16));
- 343              		.loc 1 125 27 view .LVU106
- 344              		.syntax unified
- 345              	@ 125 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c" 1
- 346 011a 06F30F06 		ssat r6, #16, r6
-ARM GAS  /tmp/cc18yqYK.s 			page 45
-
-
- 347              	@ 0 "" 2
- 348              	.LVL33:
- 125:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         *pO++ = (q15_t) (__SSAT((sum2>> out_shift), 16));
- 349              		.loc 1 125 27 is_stmt 1 view .LVU107
- 125:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         *pO++ = (q15_t) (__SSAT((sum2>> out_shift), 16));
- 350              		.loc 1 125 27 is_stmt 0 view .LVU108
- 351              		.thumb
- 352              		.syntax unified
- 353              	.LBE38:
- 354              		.loc 1 129 17 view .LVU109
- 355 011e F918     		adds	r1, r7, r3
- 356              	.LVL34:
- 357              		.loc 1 129 17 view .LVU110
- 358              	.LBE23:
-  88:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 359              		.loc 1 88 11 view .LVU111
- 360 0120 079B     		ldr	r3, [sp, #28]
- 361              	.LBB41:
- 362              	.LBB39:
- 126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
- 363              		.loc 1 126 26 view .LVU112
- 364              		.syntax unified
- 365              	@ 126 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c" 1
- 366 0122 02F30F02 		ssat r2, #16, r2
- 367              	@ 0 "" 2
- 368              		.thumb
- 369              		.syntax unified
- 370              	.LBE39:
- 371              	.LBE41:
-  88:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 372              		.loc 1 88 11 view .LVU113
- 373 0126 9845     		cmp	r8, r3
- 374              	.LBB42:
- 125:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         *pO++ = (q15_t) (__SSAT((sum2>> out_shift), 16));
- 375              		.loc 1 125 18 view .LVU114
- 376 0128 29F8086C 		strh	r6, [r9, #-8]	@ movhi
- 126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
- 377              		.loc 1 126 9 is_stmt 1 view .LVU115
- 378              	.LBB40:
- 126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
- 379              		.loc 1 126 26 view .LVU116
- 380              	.LVL35:
- 126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
- 381              		.loc 1 126 26 view .LVU117
- 126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
- 382              		.loc 1 126 26 view .LVU118
- 126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
- 383              		.loc 1 126 26 is_stmt 0 view .LVU119
- 384              	.LBE40:
- 126:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 		
- 385              		.loc 1 126 17 view .LVU120
- 386 012c 29F8062C 		strh	r2, [r9, #-6]	@ movhi
- 387              		.loc 1 129 9 is_stmt 1 view .LVU121
- 388              	.LVL36:
+ 407              		.loc 1 129 17
+ 408 027c FA69     		ldr	r2, [r7, #28]
+ 409 027e FB88     		ldrh	r3, [r7, #6]
+ 410 0280 5B00     		lsls	r3, r3, #1
+ 411 0282 1344     		add	r3, r3, r2
+ 412              		.loc 1 129 12
+ 413 0284 FB61     		str	r3, [r7, #28]
  130:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         rowCnt --;
- 389              		.loc 1 130 9 view .LVU122
- 390              		.loc 1 130 9 is_stmt 0 view .LVU123
-ARM GAS  /tmp/cc18yqYK.s 			page 46
-
-
- 391              	.LBE42:
+ 414              		.loc 1 130 16
+ 415 0286 B7F8CE30 		ldrh	r3, [r7, #206]
+ 416 028a 013B     		subs	r3, r3, #1
+ 417 028c A7F8CE30 		strh	r3, [r7, #206]	@ movhi
+ 418              	.L2:
+ 419              	.LBE23:
   88:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 392              		.loc 1 88 11 is_stmt 1 view .LVU124
- 393 0130 A4D1     		bne	.L7
-  88:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 394              		.loc 1 88 11 is_stmt 0 view .LVU125
- 395 0132 0D9B     		ldr	r3, [sp, #52]
- 396 0134 1A9A     		ldr	r2, [sp, #104]
- 397              	.LVL37:
-  88:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 398              		.loc 1 88 11 view .LVU126
- 399 0136 0133     		adds	r3, r3, #1
- 400 0138 02EB8302 		add	r2, r2, r3, lsl #2
- 401 013c 1A92     		str	r2, [sp, #104]
- 402              	.LVL38:
-  88:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum =  ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 403              		.loc 1 88 11 view .LVU127
- 404 013e 1B9A     		ldr	r2, [sp, #108]
- 405 0140 02EB8303 		add	r3, r2, r3, lsl #2
- 406 0144 1B93     		str	r3, [sp, #108]
- 407              	.LVL39:
- 408              	.L2:
+ 420              		.loc 1 88 11
+ 421 0290 B7F8CE30 		ldrh	r3, [r7, #206]
+ 422 0294 002B     		cmp	r3, #0
+ 423 0296 7FF4D2AE 		bne	.L11
  131:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     }
  132:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  133:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     rowCnt = num_of_rows & 0x1;
- 409              		.loc 1 133 5 is_stmt 1 view .LVU128
+ 424              		.loc 1 133 12
+ 425 029a BB88     		ldrh	r3, [r7, #4]	@ movhi
+ 426 029c 03F00103 		and	r3, r3, #1
+ 427 02a0 A7F8CE30 		strh	r3, [r7, #206]	@ movhi
  134:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  135:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     while (rowCnt) {
- 410              		.loc 1 135 5 view .LVU129
- 411              		.loc 1 135 11 view .LVU130
- 412 0146 0C9B     		ldr	r3, [sp, #48]
- 413 0148 DB07     		lsls	r3, r3, #31
- 414 014a 48D5     		bpl	.L8
- 415              	.LVL40:
- 416              	.LBB43:
+ 428              		.loc 1 135 11
+ 429 02a4 ABE0     		b	.L12
+ 430              	.L19:
+ 431              	.LBB36:
+ARM GAS  /tmp/ccPCAT0t.s 			page 46
+
+
  136:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum = ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 417              		.loc 1 136 9 view .LVU131
- 418              		.loc 1 136 26 is_stmt 0 view .LVU132
- 419 014c 1A9B     		ldr	r3, [sp, #104]
- 420              		.loc 1 136 61 view .LVU133
- 421 014e 0122     		movs	r2, #1
- 422              		.loc 1 136 44 view .LVU134
- 423 0150 0498     		ldr	r0, [sp, #16]
- 424              		.loc 1 136 26 view .LVU135
- 425 0152 B3F90030 		ldrsh	r3, [r3]
- 426              		.loc 1 136 44 view .LVU136
- 427 0156 8340     		lsls	r3, r3, r0
- 428              		.loc 1 136 61 view .LVU137
- 429 0158 0398     		ldr	r0, [sp, #12]
- 430 015a 8240     		lsls	r2, r2, r0
- 431              		.loc 1 136 59 view .LVU138
- 432 015c 03EB5203 		add	r3, r3, r2, lsr #1
- 433              	.LVL41:
+ 432              		.loc 1 136 40
+ 433 02a6 D7F8D030 		ldr	r3, [r7, #208]
+ 434 02aa 9A1C     		adds	r2, r3, #2
+ 435 02ac C7F8D020 		str	r2, [r7, #208]
+ 436              		.loc 1 136 34
+ 437 02b0 B3F90030 		ldrsh	r3, [r3]
+ 438              		.loc 1 136 26
+ 439 02b4 1A46     		mov	r2, r3
+ 440              		.loc 1 136 44
+ 441 02b6 B7F8E030 		ldrh	r3, [r7, #224]
+ 442 02ba 02FA03F3 		lsl	r3, r2, r3
+ 443 02be 1946     		mov	r1, r3
+ 444              		.loc 1 136 61
+ 445 02c0 B7F8E430 		ldrh	r3, [r7, #228]
+ 446 02c4 0122     		movs	r2, #1
+ 447 02c6 02FA03F3 		lsl	r3, r2, r3
+ 448 02ca 5B08     		lsrs	r3, r3, #1
+ 449              		.loc 1 136 59
+ 450 02cc 0B44     		add	r3, r3, r1
+ 451              		.loc 1 136 19
+ 452 02ce C7F8BC30 		str	r3, [r7, #188]
  137:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  138:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         uint16_t  colCnt = dim_vec >> 2;
- 434              		.loc 1 138 9 is_stmt 1 view .LVU139
+ 453              		.loc 1 138 19
+ 454 02d2 FB88     		ldrh	r3, [r7, #6]
+ 455 02d4 9B08     		lsrs	r3, r3, #2
+ 456 02d6 A7F8BA30 		strh	r3, [r7, #186]	@ movhi
  139:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
-ARM GAS  /tmp/cc18yqYK.s 			page 47
-
-
  140:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         pA = pV;
- 435              		.loc 1 140 9 view .LVU140
+ 457              		.loc 1 140 12
+ 458 02da FB68     		ldr	r3, [r7, #12]
+ 459 02dc 7B61     		str	r3, [r7, #20]
  141:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****       
  142:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         while (colCnt) {
- 436              		.loc 1 142 9 view .LVU141
- 437              		.loc 1 142 15 view .LVU142
- 438 0160 0B9A     		ldr	r2, [sp, #44]
- 439 0162 9208     		lsrs	r2, r2, #2
- 440 0164 23D0     		beq	.L9
- 441 0166 0298     		ldr	r0, [sp, #8]
- 442 0168 013A     		subs	r2, r2, #1
- 443 016a 01F10807 		add	r7, r1, #8
- 444 016e 00F1100C 		add	ip, r0, #16
- 445 0172 1FFA82FE 		uxth	lr, r2
- 446 0176 00F10804 		add	r4, r0, #8
- 447 017a 0CEBCE0C 		add	ip, ip, lr, lsl #3
- 448              	.LVL42:
- 449              	.L10:
- 450              	.LBB44:
+ 460              		.loc 1 142 15
+ 461 02de 48E0     		b	.L13
+ 462              	.L16:
+ 463              	.LBB37:
  143:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q31_t     inV1, inM1;
- 451              		.loc 1 143 13 view .LVU143
  144:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inV1 = *__SIMD32(pA)++;
- 452              		.loc 1 144 13 view .LVU144
+ 464              		.loc 1 144 21
+ 465 02e0 07F11402 		add	r2, r7, #20
+ 466 02e4 1368     		ldr	r3, [r2]
+ 467              		.loc 1 144 33
+ 468 02e6 191D     		adds	r1, r3, #4
+ 469 02e8 1160     		str	r1, [r2]
+ 470              		.loc 1 144 18
+ 471 02ea 1B68     		ldr	r3, [r3]
+ 472 02ec C7F8A830 		str	r3, [r7, #168]
  145:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM1 = *__SIMD32(pB)++;
- 453              		.loc 1 145 13 view .LVU145
+ 473              		.loc 1 145 21
+ 474 02f0 07F11C02 		add	r2, r7, #28
+ 475 02f4 1368     		ldr	r3, [r2]
+ 476              		.loc 1 145 33
+ 477 02f6 191D     		adds	r1, r3, #4
+ 478 02f8 1160     		str	r1, [r2]
+ARM GAS  /tmp/ccPCAT0t.s 			page 47
+
+
+ 479              		.loc 1 145 18
+ 480 02fa 1B68     		ldr	r3, [r3]
+ 481 02fc C7F8A430 		str	r3, [r7, #164]
  146:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum = __SMLAD(inV1, inM1, sum);
- 454              		.loc 1 146 13 view .LVU146
- 455              	.LBB45:
- 456              	.LBI45:
-1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 457              		.loc 2 1989 31 view .LVU147
- 458              	.LBB46:
-1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 459              		.loc 2 1991 3 view .LVU148
+ 482              		.loc 1 146 19
+ 483 0300 D7F8A810 		ldr	r1, [r7, #168]
+ 484 0304 D7F8A420 		ldr	r2, [r7, #164]
+ 485 0308 D7F8BC30 		ldr	r3, [r7, #188]
+ 486 030c F962     		str	r1, [r7, #44]
+ 487 030e BA62     		str	r2, [r7, #40]
+ 488 0310 7B62     		str	r3, [r7, #36]
+ 489              	.LBB38:
+ 490              	.LBB39:
 1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 460              		.loc 2 1993 3 view .LVU149
- 461 017e 54F8082C 		ldr	r2, [r4, #-8]
- 462 0182 57F8080C 		ldr	r0, [r7, #-8]
- 463              		.syntax unified
- 464              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 465 0186 22FB0033 		smlad r3, r2, r0, r3
- 466              	@ 0 "" 2
- 467              	.LVL43:
- 468              		.loc 2 1994 3 view .LVU150
- 469              		.loc 2 1994 3 is_stmt 0 view .LVU151
- 470              		.thumb
- 471              		.syntax unified
- 472              	.LBE46:
- 473              	.LBE45:
+ 491              		.loc 2 1993 3
+ 492 0312 FB6A     		ldr	r3, [r7, #44]
+ 493 0314 BA6A     		ldr	r2, [r7, #40]
+ 494 0316 796A     		ldr	r1, [r7, #36]
+ 495              		.syntax unified
+ 496              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 497 0318 23FB0213 		smlad r3, r3, r2, r1
+ 498              	@ 0 "" 2
+ 499              		.thumb
+ 500              		.syntax unified
+ 501 031c 3B62     		str	r3, [r7, #32]
+ 502              		.loc 2 1994 9
+ 503 031e 3B6A     		ldr	r3, [r7, #32]
+ 504              	.LBE39:
+ 505              	.LBE38:
+ 506              		.loc 1 146 17
+ 507 0320 C7F8BC30 		str	r3, [r7, #188]
  147:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             
  148:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inV1 = *__SIMD32(pA)++;
- 474              		.loc 1 148 13 is_stmt 1 view .LVU152
+ 508              		.loc 1 148 21
+ 509 0324 07F11402 		add	r2, r7, #20
+ 510 0328 1368     		ldr	r3, [r2]
+ 511              		.loc 1 148 33
+ 512 032a 191D     		adds	r1, r3, #4
+ 513 032c 1160     		str	r1, [r2]
+ 514              		.loc 1 148 18
+ 515 032e 1B68     		ldr	r3, [r3]
+ 516 0330 C7F8A830 		str	r3, [r7, #168]
  149:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             inM1 = *__SIMD32(pB)++;
- 475              		.loc 1 149 13 view .LVU153
+ 517              		.loc 1 149 21
+ 518 0334 07F11C02 		add	r2, r7, #28
+ 519 0338 1368     		ldr	r3, [r2]
+ 520              		.loc 1 149 33
+ 521 033a 191D     		adds	r1, r3, #4
+ 522 033c 1160     		str	r1, [r2]
+ 523              		.loc 1 149 18
+ 524 033e 1B68     		ldr	r3, [r3]
+ 525 0340 C7F8A430 		str	r3, [r7, #164]
  150:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum = __SMLAD(inV1, inM1, sum);
- 476              		.loc 1 150 13 view .LVU154
- 477              	.LBB47:
-ARM GAS  /tmp/cc18yqYK.s 			page 48
+ 526              		.loc 1 150 19
+ 527 0344 D7F8A810 		ldr	r1, [r7, #168]
+ 528 0348 D7F8A420 		ldr	r2, [r7, #164]
+ 529 034c D7F8BC30 		ldr	r3, [r7, #188]
+ARM GAS  /tmp/ccPCAT0t.s 			page 48
 
 
- 478              	.LBI47:
-1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 479              		.loc 2 1989 31 view .LVU155
- 480              	.LBB48:
-1991:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 481              		.loc 2 1991 3 view .LVU156
+ 530 0350 F963     		str	r1, [r7, #60]
+ 531 0352 BA63     		str	r2, [r7, #56]
+ 532 0354 7B63     		str	r3, [r7, #52]
+ 533              	.LBB40:
+ 534              	.LBB41:
 1993:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
- 482              		.loc 2 1993 3 view .LVU157
- 483 018a 54F8042C 		ldr	r2, [r4, #-4]
- 484 018e 57F8040C 		ldr	r0, [r7, #-4]
- 485              		.syntax unified
- 486              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 487 0192 22FB0033 		smlad r3, r2, r0, r3
- 488              	@ 0 "" 2
- 489              	.LVL44:
- 490              		.loc 2 1994 3 view .LVU158
- 491              		.loc 2 1994 3 is_stmt 0 view .LVU159
- 492              		.thumb
- 493              		.syntax unified
- 494              	.LBE48:
- 495              	.LBE47:
+ 535              		.loc 2 1993 3
+ 536 0356 FB6B     		ldr	r3, [r7, #60]
+ 537 0358 BA6B     		ldr	r2, [r7, #56]
+ 538 035a 796B     		ldr	r1, [r7, #52]
+ 539              		.syntax unified
+ 540              	@ 1993 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 541 035c 23FB0213 		smlad r3, r3, r2, r1
+ 542              	@ 0 "" 2
+ 543              		.thumb
+ 544              		.syntax unified
+ 545 0360 3B63     		str	r3, [r7, #48]
+ 546              		.loc 2 1994 9
+ 547 0362 3B6B     		ldr	r3, [r7, #48]
+ 548              	.LBE41:
+ 549              	.LBE40:
+ 550              		.loc 1 150 17
+ 551 0364 C7F8BC30 		str	r3, [r7, #188]
  151:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 				
  152:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             colCnt--;
- 496              		.loc 1 152 13 is_stmt 1 view .LVU160
- 497              		.loc 1 152 13 is_stmt 0 view .LVU161
- 498              	.LBE44:
+ 552              		.loc 1 152 19
+ 553 0368 B7F8BA30 		ldrh	r3, [r7, #186]
+ 554 036c 013B     		subs	r3, r3, #1
+ 555 036e A7F8BA30 		strh	r3, [r7, #186]	@ movhi
+ 556              	.L13:
+ 557              	.LBE37:
  142:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q31_t     inV1, inM1;
- 499              		.loc 1 142 15 is_stmt 1 view .LVU162
- 500 0196 0834     		adds	r4, r4, #8
- 501              	.LVL45:
- 142:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q31_t     inV1, inM1;
- 502              		.loc 1 142 15 is_stmt 0 view .LVU163
- 503 0198 0837     		adds	r7, r7, #8
- 504              	.LVL46:
- 142:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q31_t     inV1, inM1;
- 505              		.loc 1 142 15 view .LVU164
- 506 019a A445     		cmp	ip, r4
- 507 019c EFD1     		bne	.L10
- 508 019e 0EF1010E 		add	lr, lr, #1
- 509 01a2 029A     		ldr	r2, [sp, #8]
- 510              	.LVL47:
- 142:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q31_t     inV1, inM1;
- 511              		.loc 1 142 15 view .LVU165
- 512 01a4 01EBCE01 		add	r1, r1, lr, lsl #3
- 513 01a8 02EBCE02 		add	r2, r2, lr, lsl #3
- 514 01ac 0292     		str	r2, [sp, #8]
- 515              	.LVL48:
- 516              	.L9:
+ 558              		.loc 1 142 15
+ 559 0372 B7F8BA30 		ldrh	r3, [r7, #186]
+ 560 0376 002B     		cmp	r3, #0
+ 561 0378 B2D1     		bne	.L16
  153:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 	}
  154:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 			
  155:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 	/* left-over of the vector */
  156:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 	colCnt = dim_vec & 0x3;
- 517              		.loc 1 156 2 is_stmt 1 view .LVU166
+ 562              		.loc 1 156 9
+ 563 037a FB88     		ldrh	r3, [r7, #6]	@ movhi
+ 564 037c 03F00303 		and	r3, r3, #3
+ 565 0380 A7F8BA30 		strh	r3, [r7, #186]	@ movhi
  157:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 	while(colCnt) {
- 518              		.loc 1 157 2 view .LVU167
- 519              		.loc 1 157 7 view .LVU168
- 520 01ae 0B9A     		ldr	r2, [sp, #44]
-ARM GAS  /tmp/cc18yqYK.s 			page 49
-
-
- 521 01b0 12F00302 		ands	r2, r2, #3
- 522 01b4 0DD0     		beq	.L11
- 523 01b6 013A     		subs	r2, r2, #1
- 524 01b8 0298     		ldr	r0, [sp, #8]
- 525 01ba 92B2     		uxth	r2, r2
- 526 01bc 0132     		adds	r2, r2, #1
- 527 01be 01EB4202 		add	r2, r1, r2, lsl #1
- 528              	.LVL49:
- 529              	.L12:
- 530              	.LBB49:
+ 566              		.loc 1 157 7
+ 567 0384 1BE0     		b	.L17
+ 568              	.L18:
+ 569              	.LBB42:
  158:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inV = *pA++;
- 531              		.loc 1 158 13 view .LVU169
+ 570              		.loc 1 158 32
+ 571 0386 7B69     		ldr	r3, [r7, #20]
+ 572 0388 9A1C     		adds	r2, r3, #2
+ 573 038a 7A61     		str	r2, [r7, #20]
+ 574              		.loc 1 158 23
+ 575 038c 1B88     		ldrh	r3, [r3]	@ movhi
+ 576 038e A7F8AE30 		strh	r3, [r7, #174]	@ movhi
+ARM GAS  /tmp/ccPCAT0t.s 			page 49
+
+
  159:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inM = *pB++;
- 532              		.loc 1 159 13 view .LVU170
+ 577              		.loc 1 159 32
+ 578 0392 FB69     		ldr	r3, [r7, #28]
+ 579 0394 9A1C     		adds	r2, r3, #2
+ 580 0396 FA61     		str	r2, [r7, #28]
+ 581              		.loc 1 159 23
+ 582 0398 1B88     		ldrh	r3, [r3]	@ movhi
+ 583 039a A7F8AC30 		strh	r3, [r7, #172]	@ movhi
  160:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  161:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             sum += inV * inM;
- 533              		.loc 1 161 13 view .LVU171
- 534              		.loc 1 161 17 is_stmt 0 view .LVU172
- 535 01c2 31F8024B 		ldrh	r4, [r1], #2
- 536              	.LVL50:
- 537              		.loc 1 161 17 view .LVU173
- 538 01c6 30F8025B 		ldrh	r5, [r0], #2
- 539              	.LVL51:
- 540              		.loc 1 161 17 view .LVU174
- 541              	.LBE49:
- 157:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inV = *pA++;
- 542              		.loc 1 157 7 view .LVU175
- 543 01ca 9142     		cmp	r1, r2
- 544              	.LBB50:
- 545              		.loc 1 161 17 view .LVU176
- 546 01cc 15FB0433 		smlabb	r3, r5, r4, r3
- 547              	.LVL52:
+ 584              		.loc 1 161 24
+ 585 039e B7F9AE30 		ldrsh	r3, [r7, #174]
+ 586 03a2 B7F9AC20 		ldrsh	r2, [r7, #172]
+ 587 03a6 02FB03F3 		mul	r3, r2, r3
+ 588              		.loc 1 161 17
+ 589 03aa D7F8BC20 		ldr	r2, [r7, #188]
+ 590 03ae 1344     		add	r3, r3, r2
+ 591 03b0 C7F8BC30 		str	r3, [r7, #188]
  162:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  163:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             colCnt--;
- 548              		.loc 1 163 13 is_stmt 1 view .LVU177
- 549              		.loc 1 163 13 is_stmt 0 view .LVU178
- 550              	.LBE50:
+ 592              		.loc 1 163 19
+ 593 03b4 B7F8BA30 		ldrh	r3, [r7, #186]
+ 594 03b8 013B     		subs	r3, r3, #1
+ 595 03ba A7F8BA30 		strh	r3, [r7, #186]	@ movhi
+ 596              	.L17:
+ 597              	.LBE42:
  157:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****             q15_t     inV = *pA++;
- 551              		.loc 1 157 7 is_stmt 1 view .LVU179
- 552 01d0 F7D1     		bne	.L12
- 553              	.LVL53:
- 554              	.L11:
+ 598              		.loc 1 157 7
+ 599 03be B7F8BA30 		ldrh	r3, [r7, #186]
+ 600 03c2 002B     		cmp	r3, #0
+ 601 03c4 DFD1     		bne	.L18
+ 602              	.LBB43:
  164:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 	}
  165:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  166:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         *pO++ =  (q15_t) (__SSAT((sum >> out_shift), 16));
- 555              		.loc 1 166 9 view .LVU180
- 556              	.LBB51:
- 557              		.loc 1 166 27 view .LVU181
- 558              		.loc 1 166 27 view .LVU182
- 559 01d2 039A     		ldr	r2, [sp, #12]
- 560 01d4 1341     		asrs	r3, r3, r2
- 561              	.LVL54:
- 562              		.loc 1 166 27 is_stmt 0 view .LVU183
- 563              	.LBE51:
- 564              		.loc 1 166 18 view .LVU184
- 565 01d6 1B9A     		ldr	r2, [sp, #108]
- 566              	.LBB52:
-ARM GAS  /tmp/cc18yqYK.s 			page 50
+ 603              		.loc 1 166 27
+ 604 03c6 B7F8E430 		ldrh	r3, [r7, #228]
+ 605 03ca D7F8BC20 		ldr	r2, [r7, #188]
+ 606 03ce 42FA03F3 		asr	r3, r2, r3
+ 607 03d2 C7F8B430 		str	r3, [r7, #180]
+ 608 03d6 D7F8B430 		ldr	r3, [r7, #180]
+ 609              		.syntax unified
+ 610              	@ 166 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c" 1
+ 611 03da 03F30F03 		ssat r3, #16, r3
+ 612              	@ 0 "" 2
+ 613              		.thumb
+ 614              		.syntax unified
+ 615 03de C7F8B030 		str	r3, [r7, #176]
+ 616 03e2 D7F8B010 		ldr	r1, [r7, #176]
+ 617              	.LBE43:
+ 618              		.loc 1 166 12
+ 619 03e6 D7F8D430 		ldr	r3, [r7, #212]
+ 620 03ea 9A1C     		adds	r2, r3, #2
+ 621 03ec C7F8D420 		str	r2, [r7, #212]
+ 622              		.loc 1 166 18
+ 623 03f0 0AB2     		sxth	r2, r1
+ 624              		.loc 1 166 15
+ARM GAS  /tmp/ccPCAT0t.s 			page 50
 
 
- 567              		.loc 1 166 27 view .LVU185
- 568              		.syntax unified
- 569              	@ 166 "./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c" 1
- 570 01d8 03F30F03 		ssat r3, #16, r3
- 571              	@ 0 "" 2
- 572              	.LVL55:
- 573              		.loc 1 166 27 is_stmt 1 view .LVU186
- 574              		.loc 1 166 27 is_stmt 0 view .LVU187
- 575              		.thumb
- 576              		.syntax unified
- 577              	.LBE52:
- 578              		.loc 1 166 18 view .LVU188
- 579 01dc 1380     		strh	r3, [r2]	@ movhi
+ 625 03f2 1A80     		strh	r2, [r3]	@ movhi
  167:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 			
  168:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         rowCnt --;
- 580              		.loc 1 168 9 is_stmt 1 view .LVU189
- 581              	.LVL56:
- 582              		.loc 1 168 9 is_stmt 0 view .LVU190
- 583              	.LBE43:
+ 626              		.loc 1 168 16
+ 627 03f4 B7F8CE30 		ldrh	r3, [r7, #206]
+ 628 03f8 013B     		subs	r3, r3, #1
+ 629 03fa A7F8CE30 		strh	r3, [r7, #206]	@ movhi
+ 630              	.L12:
+ 631              	.LBE36:
  135:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         q31_t     sum = ((q31_t)(*pBias++) << bias_shift) + NN_ROUND(out_shift);
- 584              		.loc 1 135 11 is_stmt 1 view .LVU191
- 585              	.L8:
+ 632              		.loc 1 135 11
+ 633 03fe B7F8CE30 		ldrh	r3, [r7, #206]
+ 634 0402 002B     		cmp	r3, #0
+ 635 0404 7FF44FAF 		bne	.L19
  169:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     }
  170:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  171:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** #else
@@ -2982,55 +2974,46 @@ ARM GAS  /tmp/cc18yqYK.s 			page 1
  185:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  186:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     /* Return to application */
  187:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****     return (ARM_MATH_SUCCESS);
- 586              		.loc 1 187 5 view .LVU192
+ 636              		.loc 1 187 12
+ 637 0408 0023     		movs	r3, #0
  188:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** 
  189:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c **** }
- 587              		.loc 1 189 1 is_stmt 0 view .LVU193
- 588 01de 0020     		movs	r0, #0
- 589 01e0 0FB0     		add	sp, sp, #60
- 590              	.LCFI2:
- 591              		.cfi_remember_state
- 592              		.cfi_def_cfa_offset 36
- 593              		@ sp needed
- 594 01e2 BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 595              	.LVL57:
- 596              	.L14:
- 597              	.LCFI3:
- 598              		.cfi_restore_state
- 599              	.LBB53:
-ARM GAS  /tmp/cc18yqYK.s 			page 51
+ 638              		.loc 1 189 1
+ 639 040a 1846     		mov	r0, r3
+ 640 040c DC37     		adds	r7, r7, #220
+ 641              	.LCFI3:
+ 642              		.cfi_def_cfa_offset 4
+ 643 040e BD46     		mov	sp, r7
+ 644              	.LCFI4:
+ 645              		.cfi_def_cfa_register 13
+ 646              		@ sp needed
+ 647 0410 5DF8047B 		ldr	r7, [sp], #4
+ 648              	.LCFI5:
+ 649              		.cfi_restore 7
+ 650              		.cfi_def_cfa_offset 0
+ 651 0414 7047     		bx	lr
+ 652              		.cfi_endproc
+ 653              	.LFE149:
+ 655              		.text
+ 656              	.Letext0:
+ 657              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 658              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ARM GAS  /tmp/ccPCAT0t.s 			page 51
 
 
- 115:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         {
- 600              		.loc 1 115 15 view .LVU194
- 601 01e6 0F46     		mov	r7, r1
- 602 01e8 8EE7     		b	.L5
- 603              	.LVL58:
- 604              	.L13:
-  94:./Libraries/CMSIS/NN/Source/FullyConnectedFunctions/arm_fully_connected_q15.c ****         pB2 = pB + dim_vec;
- 605              		.loc 1 94 12 view .LVU195
- 606 01ea 0298     		ldr	r0, [sp, #8]
- 607 01ec 7BE7     		b	.L3
- 608              	.LBE53:
- 609              		.cfi_endproc
- 610              	.LFE149:
- 612 01ee 00BF     		.text
- 613              	.Letext0:
- 614              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 615              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 616              		.file 5 "/usr/include/newlib/sys/_types.h"
- 617              		.file 6 "/usr/include/newlib/sys/reent.h"
- 618              		.file 7 "/usr/include/newlib/sys/lock.h"
- 619              		.file 8 "/usr/include/newlib/math.h"
- 620              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 621              		.file 10 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
- 622              		.file 11 "./Libraries/CMSIS/NN/Include/arm_nn_tables.h"
-ARM GAS  /tmp/cc18yqYK.s 			page 52
+ 659              		.file 5 "/usr/include/newlib/sys/_types.h"
+ 660              		.file 6 "/usr/include/newlib/sys/reent.h"
+ 661              		.file 7 "/usr/include/newlib/sys/lock.h"
+ 662              		.file 8 "/usr/include/newlib/math.h"
+ 663              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 664              		.file 10 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ 665              		.file 11 "./Libraries/CMSIS/NN/Include/arm_nn_tables.h"
+ARM GAS  /tmp/ccPCAT0t.s 			page 52
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_fully_connected_q15.c
-     /tmp/cc18yqYK.s:17     .text.arm_fully_connected_q15:0000000000000000 $t
-     /tmp/cc18yqYK.s:26     .text.arm_fully_connected_q15:0000000000000000 arm_fully_connected_q15
+     /tmp/ccPCAT0t.s:17     .text.arm_fully_connected_q15:0000000000000000 $t
+     /tmp/ccPCAT0t.s:25     .text.arm_fully_connected_q15:0000000000000000 arm_fully_connected_q15
 
 NO UNDEFINED SYMBOLS

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc35TNQH.s 			page 1
+ARM GAS  /tmp/cc0Qbjiq.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_mean_f32.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_mean_f32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_mean_f32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_mean_f32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c"
+  18              		.global	arm_mean_f32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_mean_f32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c"
    1:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****  * Title:        arm_mean_f32.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****  */
   28:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
   29:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** #include "arm_math.h"
-ARM GAS  /tmp/cc35TNQH.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
   31:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** /**
+ARM GAS  /tmp/cc0Qbjiq.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   @ingroup groupStats
   33:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****  */
   34:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
@@ -118,11 +116,11 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
   84:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     
   85:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     pSrc += 4;
   86:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     /* Decrement the loop counter */
-ARM GAS  /tmp/cc35TNQH.s 			page 3
-
-
   87:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     blkCnt--;
   88:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   }
+ARM GAS  /tmp/cc0Qbjiq.s 			page 3
+
+
   89:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
   90:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   sumV2 = vpadd_f32(vget_low_f32(sumV),vget_high_f32(sumV));
   91:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   sum = sumV2[0] + sumV2[1];
@@ -150,15 +148,29 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
  113:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****         uint32_t blockSize,
  114:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****         float32_t * pResult)
  115:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** {
-  30              		.loc 1 115 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 8
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 115 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
  116:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 116 9 view .LVU1
  117:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****         float32_t sum = 0.0f;                          /* Temporary result storage */
-  36              		.loc 1 117 9 view .LVU2
+  46              		.loc 1 117 19
+  47 000c 4FF00003 		mov	r3, #0
+  48 0010 3B61     		str	r3, [r7, #16]	@ float
  118:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  119:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** #if defined (ARM_MATH_LOOPUNROLL)
  120:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
@@ -166,6 +178,9 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
  122:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   blkCnt = blockSize >> 2U;
  123:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  124:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   while (blkCnt > 0U)
+ARM GAS  /tmp/cc0Qbjiq.s 			page 4
+
+
  125:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   {
  126:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) */
  127:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     sum += *pSrc++;
@@ -178,9 +193,6 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
  134:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  135:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     /* Decrement the loop counter */
  136:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     blkCnt--;
-ARM GAS  /tmp/cc35TNQH.s 			page 4
-
-
  137:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   }
  138:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  139:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   /* Loop unrolling: Compute remaining outputs */
@@ -190,103 +202,91 @@ ARM GAS  /tmp/cc35TNQH.s 			page 1
  143:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  144:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   /* Initialize blkCnt with number of samples */
  145:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   blkCnt = blockSize;
-  37              		.loc 1 145 3 view .LVU3
+  49              		.loc 1 145 10
+  50 0012 BB68     		ldr	r3, [r7, #8]
+  51 0014 7B61     		str	r3, [r7, #20]
  146:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  147:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  148:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  149:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   while (blkCnt > 0U)
-  38              		.loc 1 149 3 view .LVU4
-  39              		.loc 1 149 9 view .LVU5
- 115:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****         uint32_t blkCnt;                               /* Loop counter */
-  40              		.loc 1 115 1 is_stmt 0 view .LVU6
-  41 0000 82B0     		sub	sp, sp, #8
-  42              	.LCFI0:
-  43              		.cfi_def_cfa_offset 8
-  44              		.loc 1 149 9 view .LVU7
-  45 0002 0191     		str	r1, [sp, #4]
-  46 0004 91B1     		cbz	r1, .L4
-  47 0006 0B46     		mov	r3, r1
- 117:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
-  48              		.loc 1 117 19 view .LVU8
-  49 0008 DFED0A7A 		vldr.32	s15, .L8
-  50              	.LVL1:
-  51              	.L3:
+  52              		.loc 1 149 9
+  53 0016 0DE0     		b	.L2
+  54              	.L3:
  150:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   {
  151:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) */
  152:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     sum += *pSrc++;
-  52              		.loc 1 152 5 is_stmt 1 view .LVU9
-  53              		.loc 1 152 9 is_stmt 0 view .LVU10
-  54 000c B0EC017A 		vldmia.32	r0!, {s14}
-  55              	.LVL2:
- 149:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   {
-  56              		.loc 1 149 9 view .LVU11
-  57 0010 013B     		subs	r3, r3, #1
-  58              	.LVL3:
-  59              		.loc 1 152 9 view .LVU12
-  60 0012 77EE877A 		vadd.f32	s15, s15, s14
-  61              	.LVL4:
+  55              		.loc 1 152 17
+  56 0018 FB68     		ldr	r3, [r7, #12]
+  57 001a 1A1D     		adds	r2, r3, #4
+  58 001c FA60     		str	r2, [r7, #12]
+  59              		.loc 1 152 12
+  60 001e D3ED007A 		vldr.32	s15, [r3]
+  61              		.loc 1 152 9
+  62 0022 97ED047A 		vldr.32	s14, [r7, #16]
+  63 0026 77EE277A 		vadd.f32	s15, s14, s15
+  64 002a C7ED047A 		vstr.32	s15, [r7, #16]
  153:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  154:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     /* Decrement loop counter */
  155:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****     blkCnt--;
-  62              		.loc 1 155 5 is_stmt 1 view .LVU13
+  65              		.loc 1 155 11
+  66 002e 7B69     		ldr	r3, [r7, #20]
+  67 0030 013B     		subs	r3, r3, #1
+  68 0032 7B61     		str	r3, [r7, #20]
+  69              	.L2:
  149:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   {
-  63              		.loc 1 149 9 view .LVU14
-  64 0016 F9D1     		bne	.L3
-  65              	.LVL5:
-  66              	.L2:
+  70              		.loc 1 149 9
+  71 0034 7B69     		ldr	r3, [r7, #20]
+  72 0036 002B     		cmp	r3, #0
+  73 0038 EED1     		bne	.L3
+ARM GAS  /tmp/cc0Qbjiq.s 			page 5
+
+
  156:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   }
  157:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
  158:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   /* C = (A[0] + A[1] + A[2] + ... + A[blockSize-1]) / blockSize  */
  159:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   /* Store result to destination */
-ARM GAS  /tmp/cc35TNQH.s 			page 5
-
-
  160:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c ****   *pResult = (sum / blockSize);
-  67              		.loc 1 160 3 view .LVU15
-  68              		.loc 1 160 19 is_stmt 0 view .LVU16
-  69 0018 9DED017A 		vldr.32	s14, [sp, #4]	@ int
-  70 001c B8EE477A 		vcvt.f32.u32	s14, s14
-  71 0020 C7EE876A 		vdiv.f32	s13, s15, s14
-  72              		.loc 1 160 12 view .LVU17
-  73 0024 C2ED006A 		vstr.32	s13, [r2]
+  74              		.loc 1 160 19
+  75 003a BB68     		ldr	r3, [r7, #8]
+  76 003c 07EE903A 		vmov	s15, r3	@ int
+  77 0040 B8EE677A 		vcvt.f32.u32	s14, s15
+  78 0044 D7ED046A 		vldr.32	s13, [r7, #16]
+  79 0048 C6EE877A 		vdiv.f32	s15, s13, s14
+  80              		.loc 1 160 12
+  81 004c 7B68     		ldr	r3, [r7, #4]
+  82 004e C3ED007A 		vstr.32	s15, [r3]
  161:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** }
-  74              		.loc 1 161 1 view .LVU18
-  75 0028 02B0     		add	sp, sp, #8
-  76              	.LCFI1:
-  77              		.cfi_remember_state
-  78              		.cfi_def_cfa_offset 0
-  79              		@ sp needed
-  80 002a 7047     		bx	lr
-  81              	.LVL6:
-  82              	.L4:
-  83              	.LCFI2:
-  84              		.cfi_restore_state
- 117:./Libraries/CMSIS/DSP/Source/StatisticsFunctions/arm_mean_f32.c **** 
-  85              		.loc 1 117 19 view .LVU19
-  86 002c DFED017A 		vldr.32	s15, .L8
-  87 0030 F2E7     		b	.L2
-  88              	.L9:
-  89 0032 00BF     		.align	2
-  90              	.L8:
-  91 0034 00000000 		.word	0
-  92              		.cfi_endproc
-  93              	.LFE145:
-  95              		.text
-  96              	.Letext0:
-  97              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  98              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  99              		.file 4 "/usr/include/newlib/sys/_types.h"
- 100              		.file 5 "/usr/include/newlib/sys/reent.h"
- 101              		.file 6 "/usr/include/newlib/sys/lock.h"
- 102              		.file 7 "/usr/include/newlib/math.h"
- 103              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/cc35TNQH.s 			page 6
+  83              		.loc 1 161 1
+  84 0052 00BF     		nop
+  85 0054 1C37     		adds	r7, r7, #28
+  86              	.LCFI3:
+  87              		.cfi_def_cfa_offset 4
+  88 0056 BD46     		mov	sp, r7
+  89              	.LCFI4:
+  90              		.cfi_def_cfa_register 13
+  91              		@ sp needed
+  92 0058 5DF8047B 		ldr	r7, [sp], #4
+  93              	.LCFI5:
+  94              		.cfi_restore 7
+  95              		.cfi_def_cfa_offset 0
+  96 005c 7047     		bx	lr
+  97              		.cfi_endproc
+  98              	.LFE145:
+ 100              		.text
+ 101              	.Letext0:
+ 102              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 103              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 104              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 105              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 106              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 107              		.file 7 "/usr/include/newlib/math.h"
+ 108              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/cc0Qbjiq.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_mean_f32.c
-     /tmp/cc35TNQH.s:17     .text.arm_mean_f32:0000000000000000 $t
-     /tmp/cc35TNQH.s:26     .text.arm_mean_f32:0000000000000000 arm_mean_f32
-     /tmp/cc35TNQH.s:91     .text.arm_mean_f32:0000000000000034 $d
+     /tmp/cc0Qbjiq.s:17     .text.arm_mean_f32:0000000000000000 $t
+     /tmp/cc0Qbjiq.s:25     .text.arm_mean_f32:0000000000000000 arm_mean_f32
 
 NO UNDEFINED SYMBOLS

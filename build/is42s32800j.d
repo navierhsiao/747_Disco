@@ -1,5 +1,5 @@
-build/system_stm32h7xx.o: \
- Libraries/CMSIS/Device/ST/STM32H7xx/Source/system_stm32h7xx.c \
+build/is42s32800j.o: BSP/Components/Src/is42s32800j.c \
+ BSP/Components/Src/../../system.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  User/code/Inc/stm32h7xx_hal_conf.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -57,7 +57,29 @@ build/system_stm32h7xx.o: \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h \
- Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h
+ Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h \
+ Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h \
+ Libraries/FreeRTOS/Source/include/FreeRTOS.h \
+ User/code/Inc/FreeRTOSConfig.h \
+ Libraries/FreeRTOS/Source/include/projdefs.h \
+ Libraries/FreeRTOS/Source/include/portable.h \
+ Libraries/FreeRTOS/Source/include/deprecated_definitions.h \
+ Libraries/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h \
+ Libraries/FreeRTOS/Source/include/mpu_wrappers.h \
+ Libraries/FreeRTOS/Source/include/task.h \
+ Libraries/FreeRTOS/Source/include/list.h \
+ Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h \
+ BSP/Components/Src/../../Components/Inc/lcd.h \
+ BSP/Components/Src/../../Components/Inc/touch.h \
+ BSP/Components/Src/../../Components/Inc/is42s32800j.h \
+ BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
+ BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h \
+ BSP/Components/Src/../../Hardware/Inc/i2c.h \
+ BSP/Components/Src/../../Hardware/Inc/qspi.h \
+ BSP/Components/Src/../../Hardware/Inc/sdram.h \
+ BSP/Components/Src/../../Hardware/Inc/uart.h
+
+BSP/Components/Src/../../system.h:
 
 Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 
@@ -174,3 +196,43 @@ Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart_ex.h:
 Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart.h:
 
 Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_usart_ex.h:
+
+Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h:
+
+Libraries/FreeRTOS/Source/include/FreeRTOS.h:
+
+User/code/Inc/FreeRTOSConfig.h:
+
+Libraries/FreeRTOS/Source/include/projdefs.h:
+
+Libraries/FreeRTOS/Source/include/portable.h:
+
+Libraries/FreeRTOS/Source/include/deprecated_definitions.h:
+
+Libraries/FreeRTOS/Source/portable/GCC/ARM_CM4F/portmacro.h:
+
+Libraries/FreeRTOS/Source/include/mpu_wrappers.h:
+
+Libraries/FreeRTOS/Source/include/task.h:
+
+Libraries/FreeRTOS/Source/include/list.h:
+
+Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h:
+
+BSP/Components/Src/../../Components/Inc/lcd.h:
+
+BSP/Components/Src/../../Components/Inc/touch.h:
+
+BSP/Components/Src/../../Components/Inc/is42s32800j.h:
+
+BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h:
+
+BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h:
+
+BSP/Components/Src/../../Hardware/Inc/i2c.h:
+
+BSP/Components/Src/../../Hardware/Inc/qspi.h:
+
+BSP/Components/Src/../../Hardware/Inc/sdram.h:
+
+BSP/Components/Src/../../Hardware/Inc/uart.h:

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccVL3wmI.s 			page 1
+ARM GAS  /tmp/ccqRtGyj.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_fir_interpolate_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_fir_interpolate_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_fir_interpolate_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_fir_interpolate_q15:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c"
+  18              		.global	arm_fir_interpolate_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_fir_interpolate_q15:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c"
    1:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****  * Title:        arm_fir_interpolate_q15.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****  */
   28:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
   29:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccVL3wmI.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
   31:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** /**
+ARM GAS  /tmp/ccqRtGyj.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   @ingroup groupFilters
   33:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****  */
   34:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
@@ -94,43 +92,55 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
   60:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q15_t * pDst,
   61:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t blockSize)
   62:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** {
-  30              		.loc 1 62 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 32
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 62 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 72
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 F0B4     		push	{r4, r5, r6, r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 7, -4
+  40 0002 92B0     		sub	sp, sp, #72
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 88
+  43 0004 00AF     		add	r7, sp, #0
+  44              	.LCFI2:
+  45              		.cfi_def_cfa_register 7
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 B960     		str	r1, [r7, #8]
+  48 000a 7A60     		str	r2, [r7, #4]
+  49 000c 3B60     		str	r3, [r7]
   63:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #if (1)
   64:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** //#if !defined(ARM_MATH_CM0_FAMILY)
   65:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
   66:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q15_t *pState = S->pState;                     /* State pointer */
-  34              		.loc 1 66 9 view .LVU1
-  62:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #if (1)
-  35              		.loc 1 62 1 is_stmt 0 view .LVU2
-  36 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-  37              	.LCFI0:
-  38              		.cfi_def_cfa_offset 36
-  39              		.cfi_offset 4, -36
-  40              		.cfi_offset 5, -32
-  41              		.cfi_offset 6, -28
-  42              		.cfi_offset 7, -24
-  43              		.cfi_offset 8, -20
-  44              		.cfi_offset 9, -16
-  45              		.cfi_offset 10, -12
-  46              		.cfi_offset 11, -8
-  47              		.cfi_offset 14, -4
-  48 0004 8246     		mov	r10, r0
-ARM GAS  /tmp/ccVL3wmI.s 			page 3
+ARM GAS  /tmp/ccqRtGyj.s 			page 3
 
 
-  49 0006 89B0     		sub	sp, sp, #36
-  50              	.LCFI1:
-  51              		.cfi_def_cfa_offset 72
+  50              		.loc 1 66 16
+  51 000e FB68     		ldr	r3, [r7, #12]
+  52 0010 9B68     		ldr	r3, [r3, #8]
+  53 0012 7B64     		str	r3, [r7, #68]
   67:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
+  54              		.loc 1 67 16
+  55 0014 FB68     		ldr	r3, [r7, #12]
+  56 0016 5B68     		ldr	r3, [r3, #4]
+  57 0018 FB61     		str	r3, [r7, #28]
   68:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q15_t *pStateCur;                              /* Points to the current sample of the state
   69:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q15_t *ptr1;                                   /* Temporary pointer for state buffer */
   70:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *ptr2;                                   /* Temporary pointer for coefficient buffer 
   71:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q63_t sum0;                                    /* Accumulators */
   72:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t i, blkCnt, tapCnt;                    /* Loop counters */
   73:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t phaseLen = S->phaseLength;            /* Length of each polyphase filter component
+  58              		.loc 1 73 30
+  59 001a FB68     		ldr	r3, [r7, #12]
+  60 001c 5B88     		ldrh	r3, [r3, #2]
+  61              		.loc 1 73 18
+  62 001e BB61     		str	r3, [r7, #24]
   74:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t j;
   75:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
   76:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
@@ -142,27 +152,17 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
   82:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   /* S->pState buffer contains previous frame (phaseLen - 1) samples */
   83:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   /* pStateCur points to the location where the new input data should be written */
   84:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   pStateCur = S->pState + (phaseLen - 1U);
-  52              		.loc 1 84 25 view .LVU3
-  53 0008 6FF00044 		mvn	r4, #-2147483648
-  73:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t j;
-  54              		.loc 1 73 18 view .LVU4
-  55 000c 4088     		ldrh	r0, [r0, #2]
-  56              	.LVL1:
-  67:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
-  57              		.loc 1 67 16 view .LVU5
-  58 000e DAF80450 		ldr	r5, [r10, #4]
-  62:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #if (1)
-  59              		.loc 1 62 1 view .LVU6
-  60 0012 0292     		str	r2, [sp, #8]
-  61              		.loc 1 84 25 view .LVU7
-  62 0014 0444     		add	r4, r4, r0
-  66:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
-  63              		.loc 1 66 16 view .LVU8
-  64 0016 DAF80820 		ldr	r2, [r10, #8]
-  65              	.LVL2:
-  62:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #if (1)
-  66              		.loc 1 62 1 view .LVU9
-  67 001a 0591     		str	r1, [sp, #20]
+  63              		.loc 1 84 16
+  64 0020 FB68     		ldr	r3, [r7, #12]
+  65 0022 9A68     		ldr	r2, [r3, #8]
+  66              		.loc 1 84 25
+  67 0024 B969     		ldr	r1, [r7, #24]
+  68 0026 6FF00043 		mvn	r3, #-2147483648
+  69 002a 0B44     		add	r3, r3, r1
+  70 002c 5B00     		lsls	r3, r3, #1
+  71              		.loc 1 84 13
+  72 002e 1344     		add	r3, r3, r2
+  73 0030 3B64     		str	r3, [r7, #64]
   85:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
   86:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
   87:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
   97:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     *pStateCur++ = *pSrc++;
   98:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
   99:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Address modifier index of coefficient buffer */
-ARM GAS  /tmp/ccVL3wmI.s 			page 4
+ARM GAS  /tmp/ccqRtGyj.s 			page 4
 
 
  100:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     j = 1U;
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  154:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         c2 = *(ptr2 + S->L * 2);
  155:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  156:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         /* Read the input sample */
-ARM GAS  /tmp/ccVL3wmI.s 			page 5
+ARM GAS  /tmp/ccqRtGyj.s 			page 5
 
 
  157:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         x1 = *(ptr1++);
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  211:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  212:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         /* Decrement loop counter */
  213:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         tapCnt--;
-ARM GAS  /tmp/ccVL3wmI.s 			page 6
+ARM GAS  /tmp/ccqRtGyj.s 			page 6
 
 
  214:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       }
@@ -335,134 +335,81 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  245:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  246:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   /* Initialize blkCnt with number of samples */
  247:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   blkCnt = blockSize;
+  74              		.loc 1 247 10
+  75 0032 3B68     		ldr	r3, [r7]
+  76 0034 BB62     		str	r3, [r7, #40]
  248:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  249:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  250:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  251:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   while (blkCnt > 0U)
-  68              		.loc 1 251 9 view .LVU10
-  69 001c 1946     		mov	r1, r3
-  70              	.LVL3:
-  71              		.loc 1 251 9 view .LVU11
-  72 001e 0793     		str	r3, [sp, #28]
-  66:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
-  73              		.loc 1 66 16 view .LVU12
-  74 0020 0692     		str	r2, [sp, #24]
-  75              	.LVL4:
-  67:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q15_t *pStateCur;                              /* Points to the current sample of the state
-  76              		.loc 1 67 3 is_stmt 1 view .LVU13
-  67:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q15_t *pStateCur;                              /* Points to the current sample of the state
-  77              		.loc 1 67 16 is_stmt 0 view .LVU14
-  78 0022 0195     		str	r5, [sp, #4]
-  79              	.LVL5:
-  68:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q15_t *ptr1;                                   /* Temporary pointer for state buffer */
-  80              		.loc 1 68 9 is_stmt 1 view .LVU15
-  69:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *ptr2;                                   /* Temporary pointer for coefficient buffer 
-  81              		.loc 1 69 9 view .LVU16
-ARM GAS  /tmp/ccVL3wmI.s 			page 7
-
-
-  70:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         q63_t sum0;                                    /* Accumulators */
-  82              		.loc 1 70 3 view .LVU17
-  71:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t i, blkCnt, tapCnt;                    /* Loop counters */
-  83              		.loc 1 71 9 view .LVU18
-  72:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t phaseLen = S->phaseLength;            /* Length of each polyphase filter component
-  84              		.loc 1 72 9 view .LVU19
-  73:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         uint32_t j;
-  85              		.loc 1 73 9 view .LVU20
-  74:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
-  86              		.loc 1 74 9 view .LVU21
-  84:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
-  87              		.loc 1 84 3 view .LVU22
- 247:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
-  88              		.loc 1 247 3 view .LVU23
-  89              		.loc 1 251 3 view .LVU24
-  90              		.loc 1 251 9 view .LVU25
-  91 0024 002B     		cmp	r3, #0
-  92 0026 64D0     		beq	.L12
-  93 0028 6300     		lsls	r3, r4, #1
-  94              	.LVL6:
-  66:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
-  95              		.loc 1 66 16 is_stmt 0 view .LVU26
-  96 002a 9346     		mov	fp, r2
-  97              		.loc 1 251 9 view .LVU27
-  98 002c 0491     		str	r1, [sp, #16]
-  99 002e 023B     		subs	r3, r3, #2
- 100              	.LVL7:
- 101              		.loc 1 251 9 view .LVU28
- 102 0030 D318     		adds	r3, r2, r3
- 103              	.LVL8:
- 104              		.loc 1 251 9 view .LVU29
- 105 0032 0393     		str	r3, [sp, #12]
- 106              	.LVL9:
- 107              	.L8:
+  77              		.loc 1 251 9
+  78 0036 71E0     		b	.L2
+  79              	.L7:
  252:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
  253:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Copy new input sample into the state buffer */
  254:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     *pStateCur++ = *pSrc++;
- 108              		.loc 1 254 5 is_stmt 1 view .LVU30
- 109              		.loc 1 254 20 is_stmt 0 view .LVU31
- 110 0034 059A     		ldr	r2, [sp, #20]
- 111 0036 32F9023B 		ldrsh	r3, [r2], #2
- 112              	.LVL10:
- 113              		.loc 1 254 20 view .LVU32
- 114 003a 0592     		str	r2, [sp, #20]
- 115              		.loc 1 254 18 view .LVU33
- 116 003c 039A     		ldr	r2, [sp, #12]
- 117              	.LVL11:
- 118              		.loc 1 254 18 view .LVU34
- 119 003e 22F8023F 		strh	r3, [r2, #2]!	@ movhi
+  80              		.loc 1 254 25
+  81 0038 BA68     		ldr	r2, [r7, #8]
+  82 003a 931C     		adds	r3, r2, #2
+  83 003c BB60     		str	r3, [r7, #8]
+  84              		.loc 1 254 15
+  85 003e 3B6C     		ldr	r3, [r7, #64]
+  86 0040 991C     		adds	r1, r3, #2
+  87 0042 3964     		str	r1, [r7, #64]
+  88              		.loc 1 254 20
+  89 0044 B2F90020 		ldrsh	r2, [r2]
+ARM GAS  /tmp/ccqRtGyj.s 			page 7
+
+
+  90              		.loc 1 254 18
+  91 0048 1A80     		strh	r2, [r3]	@ movhi
  255:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  256:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Address modifier index of coefficient buffer */
  257:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     j = 1U;
+  92              		.loc 1 257 7
+  93 004a 0123     		movs	r3, #1
+  94 004c 3B62     		str	r3, [r7, #32]
  258:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  259:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Loop over the Interpolation factor. */
  260:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     i = S->L;
- 120              		.loc 1 260 10 view .LVU35
- 121 0042 9AF80090 		ldrb	r9, [r10]	@ zero_extendqisi2
-ARM GAS  /tmp/ccVL3wmI.s 			page 8
-
-
- 254:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 122              		.loc 1 254 18 view .LVU36
- 123 0046 0392     		str	r2, [sp, #12]
- 257:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 124              		.loc 1 257 5 is_stmt 1 view .LVU37
- 125              	.LVL12:
- 126              		.loc 1 260 5 view .LVU38
+  95              		.loc 1 260 10
+  96 004e FB68     		ldr	r3, [r7, #12]
+  97 0050 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  98              		.loc 1 260 7
+  99 0052 FB62     		str	r3, [r7, #44]
  261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     while (i > 0U)
- 127              		.loc 1 261 5 view .LVU39
- 128              		.loc 1 261 11 view .LVU40
- 129 0048 B9F1000F 		cmp	r9, #0
- 130 004c 3AD0     		beq	.L3
- 131 004e CC46     		mov	ip, r9
- 257:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 132              		.loc 1 257 7 is_stmt 0 view .LVU41
- 133 0050 4FF0010E 		mov	lr, #1
- 134              	.LVL13:
+ 100              		.loc 1 261 11
+ 101 0054 59E0     		b	.L3
+ 102              	.L6:
  262:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
  263:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Set accumulator to zero */
  264:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       sum0 = 0;
+ 103              		.loc 1 264 12
+ 104 0056 4FF00002 		mov	r2, #0
+ 105 005a 4FF00003 		mov	r3, #0
+ 106 005e C7E90C23 		strd	r2, [r7, #48]
  265:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  266:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Initialize state pointer */
  267:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       ptr1 = pState;
+ 107              		.loc 1 267 12
+ 108 0062 7B6C     		ldr	r3, [r7, #68]
+ 109 0064 FB63     		str	r3, [r7, #60]
  268:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  269:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Initialize coefficient pointer */
  270:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       ptr2 = pCoeffs + (S->L - j);
- 135              		.loc 1 270 12 view .LVU42
- 136 0054 019A     		ldr	r2, [sp, #4]
- 137              		.loc 1 270 30 view .LVU43
- 138 0056 ACEB0E03 		sub	r3, ip, lr
- 261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     while (i > 0U)
- 139              		.loc 1 261 11 view .LVU44
- 140 005a DDF80880 		ldr	r8, [sp, #8]
- 264:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 141              		.loc 1 264 7 is_stmt 1 view .LVU45
- 142              	.LVL14:
- 267:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 143              		.loc 1 267 7 view .LVU46
- 144              		.loc 1 270 7 view .LVU47
- 145              		.loc 1 270 12 is_stmt 0 view .LVU48
- 146 005e 02EB4303 		add	r3, r2, r3, lsl #1
- 147              	.LVL15:
+ 110              		.loc 1 270 26
+ 111 0066 FB68     		ldr	r3, [r7, #12]
+ 112 0068 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 113 006a 1A46     		mov	r2, r3
+ 114              		.loc 1 270 30
+ 115 006c 3B6A     		ldr	r3, [r7, #32]
+ 116 006e D31A     		subs	r3, r2, r3
+ 117              		.loc 1 270 22
+ 118 0070 5B00     		lsls	r3, r3, #1
+ 119              		.loc 1 270 12
+ 120 0072 FA69     		ldr	r2, [r7, #28]
+ 121 0074 1344     		add	r3, r3, r2
+ 122 0076 BB63     		str	r3, [r7, #56]
  271:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  272:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Loop over the polyPhase length.
  273:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****          Repeat until we've computed numTaps-(4*S->L) coefficients. */
@@ -471,6 +418,9 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  276:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  277:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****      /* Loop unrolling: Compute 4 outputs at a time */
  278:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       tapCnt = phaseLen >> 2U;
+ARM GAS  /tmp/ccqRtGyj.s 			page 8
+
+
  279:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  280:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       while (tapCnt > 0U)
  281:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       {
@@ -478,9 +428,6 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  283:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         sum0 += (q63_t) *ptr1++ * *ptr2;
  284:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  285:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         /* Upsampling is done by stuffing L-1 zeros between each sample.
-ARM GAS  /tmp/ccVL3wmI.s 			page 9
-
-
  286:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****          * So instead of multiplying zeros with coefficients,
  287:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****          * Increment the coefficient pointer by interpolation factor times. */
  288:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         ptr2 += S->L;
@@ -505,232 +452,155 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  307:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  308:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Initialize tapCnt with number of samples */
  309:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       tapCnt = phaseLen;
- 148              		.loc 1 309 7 is_stmt 1 view .LVU49
+ 123              		.loc 1 309 14
+ 124 0078 BB69     		ldr	r3, [r7, #24]
+ 125 007a 7B62     		str	r3, [r7, #36]
  310:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  311:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  312:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  313:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       while (tapCnt > 0U)
- 149              		.loc 1 313 7 view .LVU50
- 150              		.loc 1 313 13 view .LVU51
- 151 0062 10B3     		cbz	r0, .L13
- 152              	.LVL16:
- 153              	.L22:
+ 126              		.loc 1 313 13
+ 127 007c 26E0     		b	.L4
+ 128              	.L5:
  314:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       {
  315:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         /* Perform the multiply-accumulate */
  316:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         sum0 += (q63_t) *ptr1++ * *ptr2;
+ 129              		.loc 1 316 30
+ 130 007e FB6B     		ldr	r3, [r7, #60]
+ 131 0080 9A1C     		adds	r2, r3, #2
+ 132 0082 FA63     		str	r2, [r7, #60]
+ 133              		.loc 1 316 25
+ 134 0084 B3F90030 		ldrsh	r3, [r3]
+ 135              		.loc 1 316 17
+ 136 0088 18B2     		sxth	r0, r3
+ 137 008a 4FEAE071 		asr	r1, r0, #31
+ 138              		.loc 1 316 35
+ 139 008e BB6B     		ldr	r3, [r7, #56]
+ 140 0090 B3F90030 		ldrsh	r3, [r3]
+ 141 0094 1AB2     		sxth	r2, r3
+ARM GAS  /tmp/ccqRtGyj.s 			page 9
+
+
+ 142 0096 4FEAE273 		asr	r3, r2, #31
+ 143              		.loc 1 316 33
+ 144 009a 02FB01FC 		mul	ip, r2, r1
+ 145 009e 00FB03F6 		mul	r6, r0, r3
+ 146 00a2 6644     		add	r6, r6, ip
+ 147 00a4 A0FB0223 		umull	r2, r3, r0, r2
+ 148 00a8 F118     		adds	r1, r6, r3
+ 149 00aa 0B46     		mov	r3, r1
+ 150              		.loc 1 316 14
+ 151 00ac D7E90C01 		ldrd	r0, [r7, #48]
+ 152 00b0 8418     		adds	r4, r0, r2
+ 153 00b2 41EB0305 		adc	r5, r1, r3
+ 154 00b6 C7E90C45 		strd	r4, [r7, #48]
  317:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  318:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         /* Upsampling is done by stuffing L-1 zeros between each sample.
  319:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****          * So instead of multiplying zeros with coefficients,
  320:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****          * Increment the coefficient pointer by interpolation factor times. */
  321:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         ptr2 += S->L;
- 154              		.loc 1 321 14 is_stmt 0 view .LVU52
- 155 0064 4FEA4C0C 		lsl	ip, ip, #1
- 156 0068 0246     		mov	r2, r0
- 157 006a 5946     		mov	r1, fp
- 264:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 158              		.loc 1 264 12 view .LVU53
- 159 006c 0024     		movs	r4, #0
- 160 006e 0025     		movs	r5, #0
- 161              	.LVL17:
- 162              	.L5:
- 316:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 163              		.loc 1 316 9 is_stmt 1 view .LVU54
- 316:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 164              		.loc 1 316 14 is_stmt 0 view .LVU55
- 165 0070 1E88     		ldrh	r6, [r3]
-ARM GAS  /tmp/ccVL3wmI.s 			page 10
-
-
- 313:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       {
- 166              		.loc 1 313 13 view .LVU56
- 167 0072 013A     		subs	r2, r2, #1
- 168              	.LVL18:
- 316:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 169              		.loc 1 316 14 view .LVU57
- 170 0074 31F8027B 		ldrh	r7, [r1], #2
- 171              	.LVL19:
- 172              		.loc 1 321 14 view .LVU58
- 173 0078 6344     		add	r3, r3, ip
- 174              	.LVL20:
- 316:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 175              		.loc 1 316 14 view .LVU59
- 176 007a C7FB8645 		smlalbb	r4, r5, r7, r6
- 177              	.LVL21:
- 178              		.loc 1 321 9 is_stmt 1 view .LVU60
+ 155              		.loc 1 321 18
+ 156 00ba FB68     		ldr	r3, [r7, #12]
+ 157 00bc 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 158              		.loc 1 321 14
+ 159 00be 5B00     		lsls	r3, r3, #1
+ 160 00c0 BA6B     		ldr	r2, [r7, #56]
+ 161 00c2 1344     		add	r3, r3, r2
+ 162 00c4 BB63     		str	r3, [r7, #56]
  322:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  323:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         /* Decrement loop counter */
  324:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****         tapCnt--;
- 179              		.loc 1 324 9 view .LVU61
+ 163              		.loc 1 324 15
+ 164 00c6 7B6A     		ldr	r3, [r7, #36]
+ 165 00c8 013B     		subs	r3, r3, #1
+ 166 00ca 7B62     		str	r3, [r7, #36]
+ 167              	.L4:
  313:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       {
- 180              		.loc 1 313 13 view .LVU62
- 181 007e F7D1     		bne	.L5
- 182 0080 E30B     		lsrs	r3, r4, #15
- 183              	.LVL22:
- 261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
- 184              		.loc 1 261 11 is_stmt 0 view .LVU63
- 185 0082 F145     		cmp	r9, lr
- 186 0084 43EA4543 		orr	r3, r3, r5, lsl #17
+ 168              		.loc 1 313 13
+ 169 00cc 7B6A     		ldr	r3, [r7, #36]
+ 170 00ce 002B     		cmp	r3, #0
+ 171 00d0 D5D1     		bne	.L5
+ 172              	.LBB2:
  325:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       }
  326:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  327:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* The result is in the accumulator, store in the destination buffer. */
  328:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       *pDst++ = (q15_t) (__SSAT((sum0 >> 15), 16));
- 187              		.loc 1 328 7 is_stmt 1 view .LVU64
- 188              	.LBB2:
- 189              		.loc 1 328 26 view .LVU65
- 190              	.LVL23:
- 191              		.loc 1 328 26 view .LVU66
- 192              		.syntax unified
- 193              	@ 328 "./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c" 1
- 194 0088 03F30F03 		ssat r3, #16, r3
- 195              	@ 0 "" 2
- 196              	.LVL24:
- 197              		.loc 1 328 26 view .LVU67
- 198              		.loc 1 328 26 is_stmt 0 view .LVU68
- 199              		.thumb
- 200              		.syntax unified
- 201              	.LBE2:
- 202              		.loc 1 328 17 view .LVU69
- 203 008c 28F8023B 		strh	r3, [r8], #2	@ movhi
- 204              	.LVL25:
+ 173              		.loc 1 328 26
+ 174 00d2 D7E90C01 		ldrd	r0, [r7, #48]
+ 175 00d6 4FF00002 		mov	r2, #0
+ 176 00da 4FF00003 		mov	r3, #0
+ 177 00de C20B     		lsrs	r2, r0, #15
+ 178 00e0 42EA4142 		orr	r2, r2, r1, lsl #17
+ 179 00e4 CB13     		asrs	r3, r1, #15
+ 180 00e6 1346     		mov	r3, r2
+ 181 00e8 7B61     		str	r3, [r7, #20]
+ 182 00ea 7B69     		ldr	r3, [r7, #20]
+ 183              		.syntax unified
+ 184              	@ 328 "./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c" 1
+ 185 00ec 03F30F03 		ssat r3, #16, r3
+ARM GAS  /tmp/ccqRtGyj.s 			page 10
+
+
+ 186              	@ 0 "" 2
+ 187              		.thumb
+ 188              		.syntax unified
+ 189 00f0 3B61     		str	r3, [r7, #16]
+ 190 00f2 3969     		ldr	r1, [r7, #16]
+ 191              	.LBE2:
+ 192              		.loc 1 328 12
+ 193 00f4 7B68     		ldr	r3, [r7, #4]
+ 194 00f6 9A1C     		adds	r2, r3, #2
+ 195 00f8 7A60     		str	r2, [r7, #4]
+ 196              		.loc 1 328 17
+ 197 00fa 0AB2     		sxth	r2, r1
+ 198              		.loc 1 328 15
+ 199 00fc 1A80     		strh	r2, [r3]	@ movhi
  329:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  330:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Increment the address modifier index of coefficient buffer */
  331:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       j++;
- 205              		.loc 1 331 7 is_stmt 1 view .LVU70
- 206              		.loc 1 331 8 is_stmt 0 view .LVU71
- 207 0090 0EF10103 		add	r3, lr, #1
-ARM GAS  /tmp/ccVL3wmI.s 			page 11
-
-
- 208              	.LVL26:
+ 200              		.loc 1 331 8
+ 201 00fe 3B6A     		ldr	r3, [r7, #32]
+ 202 0100 0133     		adds	r3, r3, #1
+ 203 0102 3B62     		str	r3, [r7, #32]
  332:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  333:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Decrement the loop counter */
  334:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       i--;
- 209              		.loc 1 334 7 is_stmt 1 view .LVU72
+ 204              		.loc 1 334 8
+ 205 0104 FB6A     		ldr	r3, [r7, #44]
+ 206 0106 013B     		subs	r3, r3, #1
+ 207 0108 FB62     		str	r3, [r7, #44]
+ 208              	.L3:
  261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
- 210              		.loc 1 261 11 view .LVU73
- 211 0094 12D0     		beq	.L6
- 212              	.LVL27:
- 213              	.L23:
- 261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
- 214              		.loc 1 261 11 is_stmt 0 view .LVU74
- 215 0096 9E46     		mov	lr, r3
- 216 0098 9AF800C0 		ldrb	ip, [r10]	@ zero_extendqisi2
- 217              	.LVL28:
- 264:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 218              		.loc 1 264 7 is_stmt 1 view .LVU75
- 267:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 219              		.loc 1 267 7 view .LVU76
- 270:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 220              		.loc 1 270 7 view .LVU77
- 270:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 221              		.loc 1 270 12 is_stmt 0 view .LVU78
- 222 009c 019A     		ldr	r2, [sp, #4]
- 270:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 223              		.loc 1 270 30 view .LVU79
- 224 009e ACEB0E03 		sub	r3, ip, lr
- 270:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 225              		.loc 1 270 12 view .LVU80
- 226 00a2 02EB4303 		add	r3, r2, r3, lsl #1
- 227              	.LVL29:
- 309:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 228              		.loc 1 309 7 is_stmt 1 view .LVU81
- 313:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       {
- 229              		.loc 1 313 7 view .LVU82
- 313:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       {
- 230              		.loc 1 313 13 view .LVU83
- 231 00a6 0028     		cmp	r0, #0
- 232 00a8 DCD1     		bne	.L22
- 233              	.L13:
- 261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
- 234              		.loc 1 261 11 is_stmt 0 view .LVU84
- 235 00aa F145     		cmp	r9, lr
- 313:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       {
- 236              		.loc 1 313 13 view .LVU85
- 237 00ac 0346     		mov	r3, r0
- 238              	.LVL30:
- 328:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 239              		.loc 1 328 7 is_stmt 1 view .LVU86
- 240              	.LBB3:
- 328:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 241              		.loc 1 328 26 view .LVU87
- 328:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 242              		.loc 1 328 26 view .LVU88
- 243              		.syntax unified
- 244              	@ 328 "./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c" 1
- 245 00ae 03F30F03 		ssat r3, #16, r3
-ARM GAS  /tmp/ccVL3wmI.s 			page 12
-
-
- 246              	@ 0 "" 2
- 247              	.LVL31:
- 328:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 248              		.loc 1 328 26 view .LVU89
- 328:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 249              		.loc 1 328 26 is_stmt 0 view .LVU90
- 250              		.thumb
- 251              		.syntax unified
- 252              	.LBE3:
- 328:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 253              		.loc 1 328 17 view .LVU91
- 254 00b2 28F8023B 		strh	r3, [r8], #2	@ movhi
- 255              	.LVL32:
- 331:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 256              		.loc 1 331 7 is_stmt 1 view .LVU92
- 331:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
- 257              		.loc 1 331 8 is_stmt 0 view .LVU93
- 258 00b6 0EF10103 		add	r3, lr, #1
- 259              	.LVL33:
- 260              		.loc 1 334 7 is_stmt 1 view .LVU94
- 261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
- 261              		.loc 1 261 11 view .LVU95
- 262 00ba ECD1     		bne	.L23
- 263              	.LVL34:
- 264              	.L6:
- 261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
- 265              		.loc 1 261 11 is_stmt 0 view .LVU96
- 266 00bc 029B     		ldr	r3, [sp, #8]
- 267              	.LVL35:
- 261:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     {
- 268              		.loc 1 261 11 view .LVU97
- 269 00be 03EB4903 		add	r3, r3, r9, lsl #1
- 270 00c2 0293     		str	r3, [sp, #8]
- 271              	.LVL36:
- 272              	.L3:
+ 209              		.loc 1 261 11
+ 210 010a FB6A     		ldr	r3, [r7, #44]
+ 211 010c 002B     		cmp	r3, #0
+ 212 010e A2D1     		bne	.L6
  335:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     }
  336:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  337:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Advance the state pointer by 1
  338:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****      * to process the next group of interpolation factor number samples */
  339:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     pState = pState + 1;
- 273              		.loc 1 339 5 is_stmt 1 view .LVU98
- 251:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
- 274              		.loc 1 251 9 is_stmt 0 view .LVU99
- 275 00c4 049B     		ldr	r3, [sp, #16]
- 276              		.loc 1 339 12 view .LVU100
- 277 00c6 0BF1020B 		add	fp, fp, #2
- 278              	.LVL37:
+ 213              		.loc 1 339 12
+ 214 0110 7B6C     		ldr	r3, [r7, #68]
+ 215 0112 0233     		adds	r3, r3, #2
+ 216 0114 7B64     		str	r3, [r7, #68]
  340:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  341:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Decrement the loop counter */
  342:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     blkCnt--;
- 279              		.loc 1 342 5 is_stmt 1 view .LVU101
+ 217              		.loc 1 342 11
+ 218 0116 BB6A     		ldr	r3, [r7, #40]
+ 219 0118 013B     		subs	r3, r3, #1
+ 220 011a BB62     		str	r3, [r7, #40]
+ 221              	.L2:
  251:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
- 280              		.loc 1 251 9 view .LVU102
- 281 00ca 013B     		subs	r3, r3, #1
- 282              	.LVL38:
- 251:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
- 283              		.loc 1 251 9 is_stmt 0 view .LVU103
-ARM GAS  /tmp/ccVL3wmI.s 			page 13
-
-
- 284 00cc 0493     		str	r3, [sp, #16]
- 285 00ce B1D1     		bne	.L8
- 286 00d0 DDE90632 		ldrd	r3, r2, [sp, #24]
- 287              	.LVL39:
- 251:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
- 288              		.loc 1 251 9 view .LVU104
- 289 00d4 03EB4202 		add	r2, r3, r2, lsl #1
- 290              	.LVL40:
- 291              	.L2:
+ 222              		.loc 1 251 9
+ 223 011c BB6A     		ldr	r3, [r7, #40]
+ 224 011e 002B     		cmp	r3, #0
+ 225 0120 8AD1     		bne	.L7
  343:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   }
+ARM GAS  /tmp/ccqRtGyj.s 			page 11
+
+
  344:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  345:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   /* Processing is complete.
  346:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****      Now copy the last phaseLen - 1 samples to the satrt of the state buffer.
@@ -738,7 +608,10 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  348:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  349:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   /* Points to the start of the state buffer */
  350:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   pStateCur = S->pState;
- 292              		.loc 1 350 3 is_stmt 1 view .LVU105
+ 226              		.loc 1 350 13
+ 227 0122 FB68     		ldr	r3, [r7, #12]
+ 228 0124 9B68     		ldr	r3, [r3, #8]
+ 229 0126 3B64     		str	r3, [r7, #64]
  351:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  352:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
  353:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
@@ -762,47 +635,48 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  371:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  372:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Initialize tapCnt with number of samples */
  373:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     tapCnt = (phaseLen - 1U);
- 293              		.loc 1 373 5 view .LVU106
+ 230              		.loc 1 373 12
+ 231 0128 BB69     		ldr	r3, [r7, #24]
+ 232 012a 013B     		subs	r3, r3, #1
+ 233 012c 7B62     		str	r3, [r7, #36]
  374:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  375:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  376:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  377:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   /* Copy data */
  378:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   while (tapCnt > 0U)
- 294              		.loc 1 378 3 view .LVU107
- 295              		.loc 1 378 9 view .LVU108
- 296 00d8 0138     		subs	r0, r0, #1
- 297              	.LVL41:
- 298              		.loc 1 378 9 is_stmt 0 view .LVU109
- 299 00da 07D0     		beq	.L1
- 300 00dc 069B     		ldr	r3, [sp, #24]
- 301 00de 023B     		subs	r3, r3, #2
- 302              	.LVL42:
- 303              	.L10:
-ARM GAS  /tmp/ccVL3wmI.s 			page 14
-
-
+ 234              		.loc 1 378 9
+ 235 012e 0BE0     		b	.L8
+ 236              	.L9:
  379:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
  380:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     *pStateCur++ = *pState++;
- 304              		.loc 1 380 5 is_stmt 1 view .LVU110
- 305              		.loc 1 380 20 is_stmt 0 view .LVU111
- 306 00e0 32F9021B 		ldrsh	r1, [r2], #2
- 307              	.LVL43:
- 378:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
- 308              		.loc 1 378 9 view .LVU112
- 309 00e4 0138     		subs	r0, r0, #1
- 310              	.LVL44:
- 311              		.loc 1 380 18 view .LVU113
- 312 00e6 23F8021F 		strh	r1, [r3, #2]!	@ movhi
+ 237              		.loc 1 380 27
+ 238 0130 7A6C     		ldr	r2, [r7, #68]
+ 239 0132 931C     		adds	r3, r2, #2
+ 240 0134 7B64     		str	r3, [r7, #68]
+ 241              		.loc 1 380 15
+ 242 0136 3B6C     		ldr	r3, [r7, #64]
+ 243 0138 991C     		adds	r1, r3, #2
+ 244 013a 3964     		str	r1, [r7, #64]
+ 245              		.loc 1 380 20
+ARM GAS  /tmp/ccqRtGyj.s 			page 12
+
+
+ 246 013c B2F90020 		ldrsh	r2, [r2]
+ 247              		.loc 1 380 18
+ 248 0140 1A80     		strh	r2, [r3]	@ movhi
  381:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  382:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     /* Decrement loop counter */
  383:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****     tapCnt--;
- 313              		.loc 1 383 5 is_stmt 1 view .LVU114
- 314              	.LVL45:
+ 249              		.loc 1 383 11
+ 250 0142 7B6A     		ldr	r3, [r7, #36]
+ 251 0144 013B     		subs	r3, r3, #1
+ 252 0146 7B62     		str	r3, [r7, #36]
+ 253              	.L8:
  378:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   {
- 315              		.loc 1 378 9 view .LVU115
- 316 00ea F9D1     		bne	.L10
- 317              	.LVL46:
- 318              	.L1:
+ 254              		.loc 1 378 9
+ 255 0148 7B6A     		ldr	r3, [r7, #36]
+ 256 014a 002B     		cmp	r3, #0
+ 257 014c F0D1     		bne	.L9
  384:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   }
  385:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  386:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #else
@@ -838,15 +712,15 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  416:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Set accumulator to zero */
  417:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       sum0 = 0;
  418:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
-ARM GAS  /tmp/ccVL3wmI.s 			page 15
-
-
  419:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Initialize state pointer */
  420:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       ptr1 = pState;
  421:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  422:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Initialize coefficient pointer */
  423:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       ptr2 = pCoeffs + (i - 1U);
  424:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
+ARM GAS  /tmp/ccqRtGyj.s 			page 13
+
+
  425:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       /* Loop over the polyPhase length */
  426:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****       tapCnt = phaseLen;
  427:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
@@ -898,44 +772,44 @@ ARM GAS  /tmp/ccVL3wmI.s 			page 1
  473:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** #endif /* #if !defined(ARM_MATH_CM0_FAMILY) */
  474:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** 
  475:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c **** }
-ARM GAS  /tmp/ccVL3wmI.s 			page 16
+ 258              		.loc 1 475 1
+ 259 014e 00BF     		nop
+ 260 0150 00BF     		nop
+ 261 0152 4837     		adds	r7, r7, #72
+ 262              	.LCFI3:
+ 263              		.cfi_def_cfa_offset 16
+ARM GAS  /tmp/ccqRtGyj.s 			page 14
 
 
- 319              		.loc 1 475 1 is_stmt 0 view .LVU116
- 320 00ec 09B0     		add	sp, sp, #36
- 321              	.LCFI2:
- 322              		.cfi_remember_state
- 323              		.cfi_def_cfa_offset 36
- 324              		@ sp needed
- 325 00ee BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 326              	.LVL47:
- 327              	.L12:
- 328              	.LCFI3:
- 329              		.cfi_restore_state
-  66:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
- 330              		.loc 1 66 16 view .LVU117
- 331 00f2 069A     		ldr	r2, [sp, #24]
- 332              	.LVL48:
-  66:./Libraries/CMSIS/DSP/Source/FilteringFunctions/arm_fir_interpolate_q15.c ****   const q15_t *pCoeffs = S->pCoeffs;                   /* Coefficient pointer */
- 333              		.loc 1 66 16 view .LVU118
- 334 00f4 F0E7     		b	.L2
- 335              		.cfi_endproc
- 336              	.LFE145:
- 338 00f6 00BF     		.text
- 339              	.Letext0:
- 340              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 341              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 342              		.file 4 "/usr/include/newlib/sys/_types.h"
- 343              		.file 5 "/usr/include/newlib/sys/reent.h"
- 344              		.file 6 "/usr/include/newlib/sys/lock.h"
- 345              		.file 7 "/usr/include/newlib/math.h"
- 346              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccVL3wmI.s 			page 17
+ 264 0154 BD46     		mov	sp, r7
+ 265              	.LCFI4:
+ 266              		.cfi_def_cfa_register 13
+ 267              		@ sp needed
+ 268 0156 F0BC     		pop	{r4, r5, r6, r7}
+ 269              	.LCFI5:
+ 270              		.cfi_restore 7
+ 271              		.cfi_restore 6
+ 272              		.cfi_restore 5
+ 273              		.cfi_restore 4
+ 274              		.cfi_def_cfa_offset 0
+ 275 0158 7047     		bx	lr
+ 276              		.cfi_endproc
+ 277              	.LFE145:
+ 279              		.text
+ 280              	.Letext0:
+ 281              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 282              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 283              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 284              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 285              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 286              		.file 7 "/usr/include/newlib/math.h"
+ 287              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccqRtGyj.s 			page 15
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_fir_interpolate_q15.c
-     /tmp/ccVL3wmI.s:17     .text.arm_fir_interpolate_q15:0000000000000000 $t
-     /tmp/ccVL3wmI.s:26     .text.arm_fir_interpolate_q15:0000000000000000 arm_fir_interpolate_q15
+     /tmp/ccqRtGyj.s:17     .text.arm_fir_interpolate_q15:0000000000000000 $t
+     /tmp/ccqRtGyj.s:25     .text.arm_fir_interpolate_q15:0000000000000000 arm_fir_interpolate_q15
 
 NO UNDEFINED SYMBOLS

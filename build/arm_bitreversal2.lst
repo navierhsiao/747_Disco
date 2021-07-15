@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccZi0iIh.s 			page 1
+ARM GAS  /tmp/ccEDDgXU.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccZi0iIh.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_bitreversal2.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccZi0iIh.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_bitreversal_32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_bitreversal_32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_bitreversal_32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c"
+  18              		.global	arm_bitreversal_32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_bitreversal_32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c"
    1:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****  * Title:        arm_bitreversal2.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccZi0iIh.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****  */
   28:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   29:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccZi0iIh.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** #include "arm_common_tables.h"
   31:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
+ARM GAS  /tmp/ccEDDgXU.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** /**
   33:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   @brief         In-place 32 bit reversal function.
   34:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   @param[in,out] pSrc        points to in-place buffer of unknown 32-bit data type
@@ -76,171 +74,192 @@ ARM GAS  /tmp/ccZi0iIh.s 			page 1
   42:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   const uint16_t bitRevLen, 
   43:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   const uint16_t *pBitRevTab)
   44:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** {
-  30              		.loc 1 44 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 44 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 89B0     		sub	sp, sp, #36
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 0B46     		mov	r3, r1
+  45 000a 7A60     		str	r2, [r7, #4]
+  46 000c 7B81     		strh	r3, [r7, #10]	@ movhi
   45:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   uint32_t a, b, i, tmp;
-  34              		.loc 1 45 3 view .LVU1
   46:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   47:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   for (i = 0; i < bitRevLen; )
-  35              		.loc 1 47 3 view .LVU2
-  36              		.loc 1 47 15 view .LVU3
-  37              		.loc 1 47 3 is_stmt 0 view .LVU4
-  38 0000 21B3     		cbz	r1, .L9
-  39 0002 02F1020C 		add	ip, r2, #2
-  44:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   uint32_t a, b, i, tmp;
-  40              		.loc 1 44 1 view .LVU5
-  41 0006 2DE9F041 		push	{r4, r5, r6, r7, r8, lr}
-  42              	.LCFI0:
-  43              		.cfi_def_cfa_offset 24
-  44              		.cfi_offset 4, -24
-  45              		.cfi_offset 5, -20
-  46              		.cfi_offset 6, -16
-  47              		.cfi_offset 7, -12
-  48              		.cfi_offset 8, -8
-  49              		.cfi_offset 14, -4
-  50 000a 9046     		mov	r8, r2
-  51              		.loc 1 47 10 view .LVU6
-  52 000c 0025     		movs	r5, #0
-  53              	.LVL1:
-  54              	.L3:
+  47              		.loc 1 47 10
+  48 000e 0023     		movs	r3, #0
+  49 0010 FB61     		str	r3, [r7, #28]
+  50              		.loc 1 47 3
+  51 0012 43E0     		b	.L2
+  52              	.L3:
   48:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
   49:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      a = pBitRevTab[i    ] >> 2;
-  55              		.loc 1 49 6 is_stmt 1 view .LVU7
+  53              		.loc 1 49 20
+  54 0014 FB69     		ldr	r3, [r7, #28]
+  55 0016 5B00     		lsls	r3, r3, #1
+  56 0018 7A68     		ldr	r2, [r7, #4]
+  57 001a 1344     		add	r3, r3, r2
+  58 001c 1B88     		ldrh	r3, [r3]
+  59              		.loc 1 49 28
+  60 001e 9B08     		lsrs	r3, r3, #2
+  61 0020 9BB2     		uxth	r3, r3
+  62              		.loc 1 49 8
+  63 0022 BB61     		str	r3, [r7, #24]
   50:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      b = pBitRevTab[i + 1] >> 2;
-  56              		.loc 1 50 6 view .LVU8
+  64              		.loc 1 50 20
+  65 0024 FB69     		ldr	r3, [r7, #28]
+ARM GAS  /tmp/ccEDDgXU.s 			page 3
+
+
+  66 0026 0133     		adds	r3, r3, #1
+  67 0028 5B00     		lsls	r3, r3, #1
+  68 002a 7A68     		ldr	r2, [r7, #4]
+  69 002c 1344     		add	r3, r3, r2
+  70 002e 1B88     		ldrh	r3, [r3]
+  71              		.loc 1 50 28
+  72 0030 9B08     		lsrs	r3, r3, #2
+  73 0032 9BB2     		uxth	r3, r3
+  74              		.loc 1 50 8
+  75 0034 7B61     		str	r3, [r7, #20]
   51:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   52:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      //real
   53:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      tmp = pSrc[a];
-  57              		.loc 1 53 6 view .LVU9
-  49:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      b = pBitRevTab[i + 1] >> 2;
-  58              		.loc 1 49 28 is_stmt 0 view .LVU10
-  59 000e 38F81540 		ldrh	r4, [r8, r5, lsl #1]
-  50:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      b = pBitRevTab[i + 1] >> 2;
-ARM GAS  /tmp/ccZi0iIh.s 			page 3
-
-
-  60              		.loc 1 50 28 view .LVU11
-  61 0012 3CF81530 		ldrh	r3, [ip, r5, lsl #1]
+  76              		.loc 1 53 16
+  77 0036 BB69     		ldr	r3, [r7, #24]
+  78 0038 9B00     		lsls	r3, r3, #2
+  79 003a FA68     		ldr	r2, [r7, #12]
+  80 003c 1344     		add	r3, r3, r2
+  81              		.loc 1 53 10
+  82 003e 1B68     		ldr	r3, [r3]
+  83 0040 3B61     		str	r3, [r7, #16]
   54:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
+  84              		.loc 1 54 20
+  85 0042 7B69     		ldr	r3, [r7, #20]
+  86 0044 9B00     		lsls	r3, r3, #2
+  87 0046 FA68     		ldr	r2, [r7, #12]
+  88 0048 1A44     		add	r2, r2, r3
+  89              		.loc 1 54 10
+  90 004a BB69     		ldr	r3, [r7, #24]
+  91 004c 9B00     		lsls	r3, r3, #2
+  92 004e F968     		ldr	r1, [r7, #12]
+  93 0050 0B44     		add	r3, r3, r1
+  94              		.loc 1 54 20
+  95 0052 1268     		ldr	r2, [r2]
+  96              		.loc 1 54 14
+  97 0054 1A60     		str	r2, [r3]
   55:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
+  98              		.loc 1 55 10
+  99 0056 7B69     		ldr	r3, [r7, #20]
+ 100 0058 9B00     		lsls	r3, r3, #2
+ 101 005a FA68     		ldr	r2, [r7, #12]
+ 102 005c 1344     		add	r3, r3, r2
+ 103              		.loc 1 55 14
+ 104 005e 3A69     		ldr	r2, [r7, #16]
+ 105 0060 1A60     		str	r2, [r3]
   56:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   57:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      //complex
   58:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      tmp = pSrc[a+1];
+ 106              		.loc 1 58 16
+ 107 0062 BB69     		ldr	r3, [r7, #24]
+ 108 0064 0133     		adds	r3, r3, #1
+ 109 0066 9B00     		lsls	r3, r3, #2
+ 110 0068 FA68     		ldr	r2, [r7, #12]
+ 111 006a 1344     		add	r3, r3, r2
+ 112              		.loc 1 58 10
+ 113 006c 1B68     		ldr	r3, [r3]
+ 114 006e 3B61     		str	r3, [r7, #16]
+ARM GAS  /tmp/ccEDDgXU.s 			page 4
+
+
   59:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
+ 115              		.loc 1 59 22
+ 116 0070 7B69     		ldr	r3, [r7, #20]
+ 117 0072 0133     		adds	r3, r3, #1
+ 118 0074 9B00     		lsls	r3, r3, #2
+ 119 0076 FA68     		ldr	r2, [r7, #12]
+ 120 0078 1A44     		add	r2, r2, r3
+ 121              		.loc 1 59 10
+ 122 007a BB69     		ldr	r3, [r7, #24]
+ 123 007c 0133     		adds	r3, r3, #1
+ 124 007e 9B00     		lsls	r3, r3, #2
+ 125 0080 F968     		ldr	r1, [r7, #12]
+ 126 0082 0B44     		add	r3, r3, r1
+ 127              		.loc 1 59 22
+ 128 0084 1268     		ldr	r2, [r2]
+ 129              		.loc 1 59 16
+ 130 0086 1A60     		str	r2, [r3]
   60:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
+ 131              		.loc 1 60 10
+ 132 0088 7B69     		ldr	r3, [r7, #20]
+ 133 008a 0133     		adds	r3, r3, #1
+ 134 008c 9B00     		lsls	r3, r3, #2
+ 135 008e FA68     		ldr	r2, [r7, #12]
+ 136 0090 1344     		add	r3, r3, r2
+ 137              		.loc 1 60 16
+ 138 0092 3A69     		ldr	r2, [r7, #16]
+ 139 0094 1A60     		str	r2, [r3]
   61:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   62:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****     i += 2;
-  62              		.loc 1 62 7 view .LVU12
-  63 0016 0235     		adds	r5, r5, #2
-  64              	.LVL2:
-  49:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      b = pBitRevTab[i + 1] >> 2;
-  65              		.loc 1 49 8 view .LVU13
-  66 0018 A408     		lsrs	r4, r4, #2
-  50:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
-  67              		.loc 1 50 8 view .LVU14
-  68 001a 9B08     		lsrs	r3, r3, #2
+ 140              		.loc 1 62 7
+ 141 0096 FB69     		ldr	r3, [r7, #28]
+ 142 0098 0233     		adds	r3, r3, #2
+ 143 009a FB61     		str	r3, [r7, #28]
+ 144              	.L2:
   47:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
-  69              		.loc 1 47 3 view .LVU15
-  70 001c 8D42     		cmp	r5, r1
-  53:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
-  71              		.loc 1 53 16 view .LVU16
-  72 001e 4FEA8407 		lsl	r7, r4, #2
-  53:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
-  73              		.loc 1 53 10 view .LVU17
-  74 0022 50F824E0 		ldr	lr, [r0, r4, lsl #2]
-  75              	.LVL3:
-  54:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
-  76              		.loc 1 54 6 is_stmt 1 view .LVU18
-  54:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
-  77              		.loc 1 54 20 is_stmt 0 view .LVU19
-  78 0026 4FEA8306 		lsl	r6, r3, #2
-  54:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
-  79              		.loc 1 54 14 view .LVU20
-  80 002a 50F82320 		ldr	r2, [r0, r3, lsl #2]
-  58:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
-  81              		.loc 1 58 16 view .LVU21
-  82 002e 07F10407 		add	r7, r7, #4
-  59:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
-  83              		.loc 1 59 22 view .LVU22
-  84 0032 06F10406 		add	r6, r6, #4
-  54:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
-  85              		.loc 1 54 14 view .LVU23
-  86 0036 40F82420 		str	r2, [r0, r4, lsl #2]
-  87              	.LVL4:
-  55:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
-  88              		.loc 1 55 6 is_stmt 1 view .LVU24
-  55:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
-  89              		.loc 1 55 14 is_stmt 0 view .LVU25
-  90 003a 40F823E0 		str	lr, [r0, r3, lsl #2]
-  58:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
-  91              		.loc 1 58 6 is_stmt 1 view .LVU26
-  58:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
-  92              		.loc 1 58 10 is_stmt 0 view .LVU27
-ARM GAS  /tmp/ccZi0iIh.s 			page 4
-
-
-  93 003e C459     		ldr	r4, [r0, r7]
-  94              	.LVL5:
-  59:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
-  95              		.loc 1 59 6 is_stmt 1 view .LVU28
-  59:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
-  96              		.loc 1 59 22 is_stmt 0 view .LVU29
-  97 0040 8359     		ldr	r3, [r0, r6]
-  59:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
-  98              		.loc 1 59 16 view .LVU30
-  99 0042 C351     		str	r3, [r0, r7]
-  60:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
- 100              		.loc 1 60 6 is_stmt 1 view .LVU31
-  60:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
- 101              		.loc 1 60 16 is_stmt 0 view .LVU32
- 102 0044 8451     		str	r4, [r0, r6]
- 103              		.loc 1 62 5 is_stmt 1 view .LVU33
- 104              	.LVL6:
+ 145              		.loc 1 47 17 discriminator 1
+ 146 009c 7B89     		ldrh	r3, [r7, #10]
   47:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
- 105              		.loc 1 47 15 view .LVU34
-  47:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
- 106              		.loc 1 47 3 is_stmt 0 view .LVU35
- 107 0046 E2D3     		bcc	.L3
+ 147              		.loc 1 47 3 discriminator 1
+ 148 009e FA69     		ldr	r2, [r7, #28]
+ 149 00a0 9A42     		cmp	r2, r3
+ 150 00a2 B7D3     		bcc	.L3
   63:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   }
   64:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** }
- 108              		.loc 1 64 1 view .LVU36
- 109 0048 BDE8F081 		pop	{r4, r5, r6, r7, r8, pc}
- 110              	.LVL7:
- 111              	.L9:
- 112              	.LCFI1:
- 113              		.cfi_def_cfa_offset 0
- 114              		.cfi_restore 4
- 115              		.cfi_restore 5
- 116              		.cfi_restore 6
- 117              		.cfi_restore 7
- 118              		.cfi_restore 8
- 119              		.cfi_restore 14
- 120              		.loc 1 64 1 view .LVU37
- 121 004c 7047     		bx	lr
- 122              		.cfi_endproc
- 123              	.LFE145:
- 125 004e 00BF     		.section	.text.arm_bitreversal_16,"ax",%progbits
- 126              		.align	1
- 127              		.p2align 2,,3
- 128              		.global	arm_bitreversal_16
- 129              		.syntax unified
- 130              		.thumb
- 131              		.thumb_func
- 132              		.fpu fpv5-d16
- 134              	arm_bitreversal_16:
- 135              	.LVL8:
- 136              	.LFB146:
+ 151              		.loc 1 64 1
+ 152 00a4 00BF     		nop
+ 153 00a6 00BF     		nop
+ 154 00a8 2437     		adds	r7, r7, #36
+ 155              	.LCFI3:
+ 156              		.cfi_def_cfa_offset 4
+ 157 00aa BD46     		mov	sp, r7
+ 158              	.LCFI4:
+ 159              		.cfi_def_cfa_register 13
+ 160              		@ sp needed
+ 161 00ac 5DF8047B 		ldr	r7, [sp], #4
+ 162              	.LCFI5:
+ 163              		.cfi_restore 7
+ARM GAS  /tmp/ccEDDgXU.s 			page 5
+
+
+ 164              		.cfi_def_cfa_offset 0
+ 165 00b0 7047     		bx	lr
+ 166              		.cfi_endproc
+ 167              	.LFE145:
+ 169              		.section	.text.arm_bitreversal_16,"ax",%progbits
+ 170              		.align	1
+ 171              		.global	arm_bitreversal_16
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.fpu fpv5-d16
+ 177              	arm_bitreversal_16:
+ 178              	.LFB146:
   65:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   66:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   67:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** /**
   68:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   @brief         In-place 16 bit reversal function.
   69:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   @param[in,out] pSrc        points to in-place buffer of unknown 16-bit data type
   70:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   @param[in]     bitRevLen   bit reversal table length
-ARM GAS  /tmp/ccZi0iIh.s 			page 5
-
-
   71:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   @param[in]     pBitRevTab  points to bit reversal table
   72:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   @return        none
   73:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** */
@@ -250,169 +269,189 @@ ARM GAS  /tmp/ccZi0iIh.s 			page 1
   77:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   const uint16_t bitRevLen, 
   78:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   const uint16_t *pBitRevTab)
   79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** {
- 137              		.loc 1 79 1 is_stmt 1 view -0
- 138              		.cfi_startproc
- 139              		@ args = 0, pretend = 0, frame = 0
- 140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 179              		.loc 1 79 1
+ 180              		.cfi_startproc
+ 181              		@ args = 0, pretend = 0, frame = 24
+ 182              		@ frame_needed = 1, uses_anonymous_args = 0
+ 183              		@ link register save eliminated.
+ 184 0000 80B4     		push	{r7}
+ 185              	.LCFI6:
+ 186              		.cfi_def_cfa_offset 4
+ 187              		.cfi_offset 7, -4
+ 188 0002 87B0     		sub	sp, sp, #28
+ 189              	.LCFI7:
+ 190              		.cfi_def_cfa_offset 32
+ 191 0004 00AF     		add	r7, sp, #0
+ 192              	.LCFI8:
+ 193              		.cfi_def_cfa_register 7
+ 194 0006 F860     		str	r0, [r7, #12]
+ 195 0008 0B46     		mov	r3, r1
+ 196 000a 7A60     		str	r2, [r7, #4]
+ 197 000c 7B81     		strh	r3, [r7, #10]	@ movhi
   80:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   uint16_t a, b, i, tmp;
- 141              		.loc 1 80 3 view .LVU39
   81:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   for (i = 0; i < bitRevLen; )
- 142              		.loc 1 82 3 view .LVU40
- 143              		.loc 1 82 15 view .LVU41
- 144              		.loc 1 82 3 is_stmt 0 view .LVU42
- 145 0000 01B3     		cbz	r1, .L21
- 146              		.loc 1 82 10 view .LVU43
- 147 0002 0023     		movs	r3, #0
-  79:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   uint16_t a, b, i, tmp;
- 148              		.loc 1 79 1 view .LVU44
- 149 0004 F0B5     		push	{r4, r5, r6, r7, lr}
- 150              	.LCFI2:
- 151              		.cfi_def_cfa_offset 20
- 152              		.cfi_offset 4, -20
- 153              		.cfi_offset 5, -16
- 154              		.cfi_offset 6, -12
- 155              		.cfi_offset 7, -8
- 156              		.cfi_offset 14, -4
- 157              	.LVL9:
- 158              	.L15:
+ 198              		.loc 1 82 10
+ 199 000e 0023     		movs	r3, #0
+ 200 0010 FB82     		strh	r3, [r7, #22]	@ movhi
+ 201              		.loc 1 82 3
+ 202 0012 41E0     		b	.L5
+ 203              	.L6:
   83:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
+ARM GAS  /tmp/ccEDDgXU.s 			page 6
+
+
   84:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      a = pBitRevTab[i    ] >> 2;
- 159              		.loc 1 84 6 is_stmt 1 view .LVU45
+ 204              		.loc 1 84 20
+ 205 0014 FB8A     		ldrh	r3, [r7, #22]
+ 206 0016 5B00     		lsls	r3, r3, #1
+ 207 0018 7A68     		ldr	r2, [r7, #4]
+ 208 001a 1344     		add	r3, r3, r2
+ 209 001c 1B88     		ldrh	r3, [r3]
+ 210              		.loc 1 84 8
+ 211 001e 9B08     		lsrs	r3, r3, #2
+ 212 0020 BB82     		strh	r3, [r7, #20]	@ movhi
   85:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      b = pBitRevTab[i + 1] >> 2;
- 160              		.loc 1 85 6 view .LVU46
+ 213              		.loc 1 85 20
+ 214 0022 FB8A     		ldrh	r3, [r7, #22]
+ 215 0024 0133     		adds	r3, r3, #1
+ 216 0026 5B00     		lsls	r3, r3, #1
+ 217 0028 7A68     		ldr	r2, [r7, #4]
+ 218 002a 1344     		add	r3, r3, r2
+ 219 002c 1B88     		ldrh	r3, [r3]
+ 220              		.loc 1 85 8
+ 221 002e 9B08     		lsrs	r3, r3, #2
+ 222 0030 7B82     		strh	r3, [r7, #18]	@ movhi
   86:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   87:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      //real
   88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      tmp = pSrc[a];
- 161              		.loc 1 88 6 view .LVU47
-  85:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      b = pBitRevTab[i + 1] >> 2;
- 162              		.loc 1 85 20 is_stmt 0 view .LVU48
- 163 0006 02EB4304 		add	r4, r2, r3, lsl #1
-  84:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      b = pBitRevTab[i + 1] >> 2;
- 164              		.loc 1 84 8 view .LVU49
- 165 000a 32F81350 		ldrh	r5, [r2, r3, lsl #1]
+ 223              		.loc 1 88 16
+ 224 0032 BB8A     		ldrh	r3, [r7, #20]
+ 225 0034 5B00     		lsls	r3, r3, #1
+ 226 0036 FA68     		ldr	r2, [r7, #12]
+ 227 0038 1344     		add	r3, r3, r2
+ 228              		.loc 1 88 10
+ 229 003a 1B88     		ldrh	r3, [r3]	@ movhi
+ 230 003c 3B82     		strh	r3, [r7, #16]	@ movhi
   89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
+ 231              		.loc 1 89 20
+ 232 003e 7B8A     		ldrh	r3, [r7, #18]
+ 233 0040 5B00     		lsls	r3, r3, #1
+ 234 0042 FA68     		ldr	r2, [r7, #12]
+ 235 0044 1A44     		add	r2, r2, r3
+ 236              		.loc 1 89 10
+ 237 0046 BB8A     		ldrh	r3, [r7, #20]
+ 238 0048 5B00     		lsls	r3, r3, #1
+ 239 004a F968     		ldr	r1, [r7, #12]
+ 240 004c 0B44     		add	r3, r3, r1
+ 241              		.loc 1 89 20
+ 242 004e 1288     		ldrh	r2, [r2]
+ 243              		.loc 1 89 14
+ 244 0050 1A80     		strh	r2, [r3]	@ movhi
   90:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
+ 245              		.loc 1 90 10
+ 246 0052 7B8A     		ldrh	r3, [r7, #18]
+ 247 0054 5B00     		lsls	r3, r3, #1
+ 248 0056 FA68     		ldr	r2, [r7, #12]
+ 249 0058 1344     		add	r3, r3, r2
+ 250              		.loc 1 90 14
+ 251 005a 3A8A     		ldrh	r2, [r7, #16]	@ movhi
+ 252 005c 1A80     		strh	r2, [r3]	@ movhi
   91:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
+ARM GAS  /tmp/ccEDDgXU.s 			page 7
+
+
   92:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      //complex
   93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      tmp = pSrc[a+1];
+ 253              		.loc 1 93 16
+ 254 005e BB8A     		ldrh	r3, [r7, #20]
+ 255 0060 0133     		adds	r3, r3, #1
+ 256 0062 5B00     		lsls	r3, r3, #1
+ 257 0064 FA68     		ldr	r2, [r7, #12]
+ 258 0066 1344     		add	r3, r3, r2
+ 259              		.loc 1 93 10
+ 260 0068 1B88     		ldrh	r3, [r3]	@ movhi
+ 261 006a 3B82     		strh	r3, [r7, #16]	@ movhi
   94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
+ 262              		.loc 1 94 22
+ 263 006c 7B8A     		ldrh	r3, [r7, #18]
+ 264 006e 0133     		adds	r3, r3, #1
+ 265 0070 5B00     		lsls	r3, r3, #1
+ 266 0072 FA68     		ldr	r2, [r7, #12]
+ 267 0074 1A44     		add	r2, r2, r3
+ 268              		.loc 1 94 10
+ 269 0076 BB8A     		ldrh	r3, [r7, #20]
+ 270 0078 0133     		adds	r3, r3, #1
+ 271 007a 5B00     		lsls	r3, r3, #1
+ 272 007c F968     		ldr	r1, [r7, #12]
+ 273 007e 0B44     		add	r3, r3, r1
+ 274              		.loc 1 94 22
+ 275 0080 1288     		ldrh	r2, [r2]
+ 276              		.loc 1 94 16
+ 277 0082 1A80     		strh	r2, [r3]	@ movhi
   95:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
-ARM GAS  /tmp/ccZi0iIh.s 			page 6
-
-
+ 278              		.loc 1 95 10
+ 279 0084 7B8A     		ldrh	r3, [r7, #18]
+ 280 0086 0133     		adds	r3, r3, #1
+ 281 0088 5B00     		lsls	r3, r3, #1
+ 282 008a FA68     		ldr	r2, [r7, #12]
+ 283 008c 1344     		add	r3, r3, r2
+ 284              		.loc 1 95 16
+ 285 008e 3A8A     		ldrh	r2, [r7, #16]	@ movhi
+ 286 0090 1A80     		strh	r2, [r3]	@ movhi
   96:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
   97:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****     i += 2;
- 166              		.loc 1 97 7 view .LVU50
- 167 000e 0233     		adds	r3, r3, #2
- 168              	.LVL10:
-  85:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
- 169              		.loc 1 85 8 view .LVU51
- 170 0010 6488     		ldrh	r4, [r4, #2]
-  88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
- 171              		.loc 1 88 16 view .LVU52
- 172 0012 AD08     		lsrs	r5, r5, #2
- 173              		.loc 1 97 7 view .LVU53
- 174 0014 9BB2     		uxth	r3, r3
- 175              	.LVL11:
-  89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
- 176              		.loc 1 89 20 view .LVU54
- 177 0016 A408     		lsrs	r4, r4, #2
- 178              	.LVL12:
-  88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
- 179              		.loc 1 88 10 view .LVU55
- 180 0018 30F815C0 		ldrh	ip, [r0, r5, lsl #1]
- 181              	.LVL13:
-  89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
- 182              		.loc 1 89 6 is_stmt 1 view .LVU56
-  88:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a] = pSrc[b];
- 183              		.loc 1 88 16 is_stmt 0 view .LVU57
- 184 001c 6F00     		lsls	r7, r5, #1
+ 287              		.loc 1 97 7
+ 288 0092 FB8A     		ldrh	r3, [r7, #22]	@ movhi
+ 289 0094 0233     		adds	r3, r3, #2
+ 290 0096 FB82     		strh	r3, [r7, #22]	@ movhi
+ 291              	.L5:
   82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
- 185              		.loc 1 82 3 view .LVU58
- 186 001e 9942     		cmp	r1, r3
-  89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
- 187              		.loc 1 89 20 view .LVU59
- 188 0020 4FEA4406 		lsl	r6, r4, #1
- 189 0024 30F814E0 		ldrh	lr, [r0, r4, lsl #1]
-  93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
- 190              		.loc 1 93 16 view .LVU60
- 191 0028 07F10207 		add	r7, r7, #2
-  94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
- 192              		.loc 1 94 22 view .LVU61
- 193 002c 06F10206 		add	r6, r6, #2
-  89:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b] = tmp;
- 194              		.loc 1 89 14 view .LVU62
- 195 0030 20F815E0 		strh	lr, [r0, r5, lsl #1]	@ movhi
-  90:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
- 196              		.loc 1 90 6 is_stmt 1 view .LVU63
-  90:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
- 197              		.loc 1 90 14 is_stmt 0 view .LVU64
- 198 0034 20F814C0 		strh	ip, [r0, r4, lsl #1]	@ movhi
-  93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
- 199              		.loc 1 93 6 is_stmt 1 view .LVU65
-  93:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[a+1] = pSrc[b+1];
- 200              		.loc 1 93 10 is_stmt 0 view .LVU66
- 201 0038 C45B     		ldrh	r4, [r0, r7]
- 202              	.LVL14:
-  94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
- 203              		.loc 1 94 6 is_stmt 1 view .LVU67
-  94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
-ARM GAS  /tmp/ccZi0iIh.s 			page 7
-
-
- 204              		.loc 1 94 22 is_stmt 0 view .LVU68
- 205 003a 855B     		ldrh	r5, [r0, r6]
-  94:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****      pSrc[b+1] = tmp;
- 206              		.loc 1 94 16 view .LVU69
- 207 003c C553     		strh	r5, [r0, r7]	@ movhi
-  95:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
- 208              		.loc 1 95 6 is_stmt 1 view .LVU70
-  95:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** 
- 209              		.loc 1 95 16 is_stmt 0 view .LVU71
- 210 003e 8453     		strh	r4, [r0, r6]	@ movhi
- 211              		.loc 1 97 5 is_stmt 1 view .LVU72
- 212              	.LVL15:
-  82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
- 213              		.loc 1 82 15 view .LVU73
-  82:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   {
- 214              		.loc 1 82 3 is_stmt 0 view .LVU74
- 215 0040 E1D8     		bhi	.L15
+ 292              		.loc 1 82 3 discriminator 1
+ 293 0098 FA8A     		ldrh	r2, [r7, #22]
+ 294 009a 7B89     		ldrh	r3, [r7, #10]
+ 295 009c 9A42     		cmp	r2, r3
+ 296 009e B9D3     		bcc	.L6
   98:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c ****   }
   99:./Libraries/CMSIS/DSP/Source/TransformFunctions/arm_bitreversal2.c **** }
- 216              		.loc 1 99 1 view .LVU75
- 217 0042 F0BD     		pop	{r4, r5, r6, r7, pc}
- 218              	.LVL16:
- 219              	.L21:
- 220              	.LCFI3:
- 221              		.cfi_def_cfa_offset 0
- 222              		.cfi_restore 4
- 223              		.cfi_restore 5
- 224              		.cfi_restore 6
- 225              		.cfi_restore 7
- 226              		.cfi_restore 14
- 227              		.loc 1 99 1 view .LVU76
- 228 0044 7047     		bx	lr
- 229              		.cfi_endproc
- 230              	.LFE146:
- 232 0046 00BF     		.text
- 233              	.Letext0:
- 234              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 235              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 236              		.file 4 "/usr/include/newlib/sys/_types.h"
- 237              		.file 5 "/usr/include/newlib/sys/reent.h"
- 238              		.file 6 "/usr/include/newlib/sys/lock.h"
- 239              		.file 7 "/usr/include/newlib/math.h"
- 240              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
- 241              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
-ARM GAS  /tmp/ccZi0iIh.s 			page 8
+ 297              		.loc 1 99 1
+ 298 00a0 00BF     		nop
+ 299 00a2 00BF     		nop
+ 300 00a4 1C37     		adds	r7, r7, #28
+ARM GAS  /tmp/ccEDDgXU.s 			page 8
+
+
+ 301              	.LCFI9:
+ 302              		.cfi_def_cfa_offset 4
+ 303 00a6 BD46     		mov	sp, r7
+ 304              	.LCFI10:
+ 305              		.cfi_def_cfa_register 13
+ 306              		@ sp needed
+ 307 00a8 5DF8047B 		ldr	r7, [sp], #4
+ 308              	.LCFI11:
+ 309              		.cfi_restore 7
+ 310              		.cfi_def_cfa_offset 0
+ 311 00ac 7047     		bx	lr
+ 312              		.cfi_endproc
+ 313              	.LFE146:
+ 315              		.text
+ 316              	.Letext0:
+ 317              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 318              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 319              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 320              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 321              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 322              		.file 7 "/usr/include/newlib/math.h"
+ 323              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ 324              		.file 9 "./Libraries/CMSIS/DSP/Include/arm_common_tables.h"
+ARM GAS  /tmp/ccEDDgXU.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_bitreversal2.c
-     /tmp/ccZi0iIh.s:17     .text.arm_bitreversal_32:0000000000000000 $t
-     /tmp/ccZi0iIh.s:26     .text.arm_bitreversal_32:0000000000000000 arm_bitreversal_32
-     /tmp/ccZi0iIh.s:126    .text.arm_bitreversal_16:0000000000000000 $t
-     /tmp/ccZi0iIh.s:134    .text.arm_bitreversal_16:0000000000000000 arm_bitreversal_16
+     /tmp/ccEDDgXU.s:17     .text.arm_bitreversal_32:0000000000000000 $t
+     /tmp/ccEDDgXU.s:25     .text.arm_bitreversal_32:0000000000000000 arm_bitreversal_32
+     /tmp/ccEDDgXU.s:170    .text.arm_bitreversal_16:0000000000000000 $t
+     /tmp/ccEDDgXU.s:177    .text.arm_bitreversal_16:0000000000000000 arm_bitreversal_16
 
 NO UNDEFINED SYMBOLS

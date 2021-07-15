@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccM0Bbkd.s 			page 1
+ARM GAS  /tmp/ccgwf8ZO.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_mat_mult_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_mat_mult_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_mat_mult_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_mat_mult_q15:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c"
+  18              		.global	arm_mat_mult_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_mat_mult_q15:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c"
    1:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****  * Title:        arm_mat_mult_q15.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****  */
   28:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
   29:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccM0Bbkd.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
   31:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** /**
+ARM GAS  /tmp/ccgwf8ZO.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   @ingroup groupMatrix
   33:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****  */
   34:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
@@ -98,68 +96,79 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   64:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         arm_matrix_instance_q15 * pDst,
   65:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t                   * pState)
   66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** {
-  30              		.loc 1 66 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 48
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 66 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 192
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 B0B4     		push	{r4, r5, r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 12
+  36              		.cfi_offset 4, -12
+  37              		.cfi_offset 5, -8
+  38              		.cfi_offset 7, -4
+  39 0002 B1B0     		sub	sp, sp, #196
+  40              	.LCFI1:
+  41              		.cfi_def_cfa_offset 208
+  42 0004 00AF     		add	r7, sp, #0
+  43              	.LCFI2:
+  44              		.cfi_def_cfa_register 7
+  45 0006 F860     		str	r0, [r7, #12]
+  46 0008 B960     		str	r1, [r7, #8]
+  47 000a 7A60     		str	r2, [r7, #4]
+  48 000c 3B60     		str	r3, [r7]
   67:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q63_t sum;                                     /* Accumulator */
-  34              		.loc 1 67 9 view .LVU1
+ARM GAS  /tmp/ccgwf8ZO.s 			page 3
+
+
   68:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
   69:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #if defined (ARM_MATH_DSP)                             /* != CM0 */
   70:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
   71:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *pSrcBT = pState;                        /* Input data matrix pointer for transpose *
-  35              		.loc 1 71 9 view .LVU2
-  66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q63_t sum;                                     /* Accumulator */
-  36              		.loc 1 66 1 is_stmt 0 view .LVU3
-  37 0000 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-  38              	.LCFI0:
-  39              		.cfi_def_cfa_offset 36
-  40              		.cfi_offset 4, -36
-  41              		.cfi_offset 5, -32
-  42              		.cfi_offset 6, -28
-  43              		.cfi_offset 7, -24
-ARM GAS  /tmp/ccM0Bbkd.s 			page 3
-
-
-  44              		.cfi_offset 8, -20
-  45              		.cfi_offset 9, -16
-  46              		.cfi_offset 10, -12
-  47              		.cfi_offset 11, -8
-  48              		.cfi_offset 14, -4
-  49 0004 8DB0     		sub	sp, sp, #52
-  50              	.LCFI1:
-  51              		.cfi_def_cfa_offset 88
+  49              		.loc 1 71 16
+  50 000e 3B68     		ldr	r3, [r7]
+  51 0010 C7F8A030 		str	r3, [r7, #160]
   72:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *pInA = pSrcA->pData;                    /* Input data matrix pointer A of Q15 type *
+  52              		.loc 1 72 28
+  53 0014 FB68     		ldr	r3, [r7, #12]
+  54 0016 5B68     		ldr	r3, [r3, #4]
+  55              		.loc 1 72 16
+  56 0018 FB63     		str	r3, [r7, #60]
   73:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *pInB = pSrcB->pData;                    /* Input data matrix pointer B of Q15 type *
+  57              		.loc 1 73 28
+  58 001a BB68     		ldr	r3, [r7, #8]
+  59 001c 5B68     		ldr	r3, [r3, #4]
+  60              		.loc 1 73 16
+  61 001e BB63     		str	r3, [r7, #56]
   74:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *px;                                     /* Temporary output data matrix pointer */
   75:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numRowsA = pSrcA->numRows;            /* Number of rows of input matrix A */
+  62              		.loc 1 75 18
+  63 0020 FB68     		ldr	r3, [r7, #12]
+  64 0022 1B88     		ldrh	r3, [r3]	@ movhi
+  65 0024 A7F89E30 		strh	r3, [r7, #158]	@ movhi
   76:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsB = pSrcB->numCols;            /* Number of columns of input matrix B */
+  66              		.loc 1 76 18
+  67 0028 BB68     		ldr	r3, [r7, #8]
+  68 002a 5B88     		ldrh	r3, [r3, #2]	@ movhi
+  69 002c A7F89C30 		strh	r3, [r7, #156]	@ movhi
   77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsA = pSrcA->numCols;            /* Number of columns of input matrix A */
+  70              		.loc 1 77 18
+  71 0030 FB68     		ldr	r3, [r7, #12]
+  72 0032 5B88     		ldrh	r3, [r3, #2]	@ movhi
+  73 0034 A7F89A30 		strh	r3, [r7, #154]	@ movhi
   78:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numRowsB = pSrcB->numRows;            /* Number of rows of input matrix A */
+  74              		.loc 1 78 18
+  75 0038 BB68     		ldr	r3, [r7, #8]
+  76 003a 1B88     		ldrh	r3, [r3]	@ movhi
+  77 003c A7F89830 		strh	r3, [r7, #152]	@ movhi
   79:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint32_t col, i = 0U, row = numRowsB, colCnt;  /* Loop counters */
-  52              		.loc 1 79 31 view .LVU4
-  53 0006 0D88     		ldrh	r5, [r1]
-  66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q63_t sum;                                     /* Accumulator */
-  54              		.loc 1 66 1 view .LVU5
-  55 0008 8146     		mov	r9, r0
-  56 000a 1C46     		mov	r4, r3
-  57 000c 0B93     		str	r3, [sp, #44]
-  58              	.LVL1:
-  72:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *pInA = pSrcA->pData;                    /* Input data matrix pointer A of Q15 type *
-  59              		.loc 1 72 9 is_stmt 1 view .LVU6
-  73:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *px;                                     /* Temporary output data matrix pointer */
-  60              		.loc 1 73 9 view .LVU7
-  61 000e 05EB4506 		add	r6, r5, r5, lsl #1
-  76:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsA = pSrcA->numCols;            /* Number of columns of input matrix A */
-  62              		.loc 1 76 18 is_stmt 0 view .LVU8
-  63 0012 4B88     		ldrh	r3, [r1, #2]
-  64              	.LVL2:
-  76:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsA = pSrcA->numCols;            /* Number of columns of input matrix A */
-  65              		.loc 1 76 18 view .LVU9
-  66 0014 A446     		mov	ip, r4
-  66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q63_t sum;                                     /* Accumulator */
-  67              		.loc 1 66 1 view .LVU10
-  68 0016 0590     		str	r0, [sp, #20]
+  78              		.loc 1 79 23
+  79 0040 0023     		movs	r3, #0
+  80 0042 C7F8AC30 		str	r3, [r7, #172]
+  81              		.loc 1 79 31
+  82 0046 B7F89830 		ldrh	r3, [r7, #152]
+  83 004a C7F8A830 		str	r3, [r7, #168]
+  84              	.L8:
   80:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         arm_status status;                             /* Status of matrix multiplication */
   81:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         
   82:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q31_t in;                                      /* Temporary variable to hold the input valu
@@ -169,6 +178,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   86:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
   87:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   /* Check for matrix mismatch condition */
   88:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   if ((pSrcA->numCols != pSrcB->numRows) ||
+ARM GAS  /tmp/ccgwf8ZO.s 			page 4
+
+
   89:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       (pSrcA->numRows != pDst->numRows)  ||
   90:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       (pSrcB->numCols != pDst->numCols)    )
   91:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   {
@@ -178,9 +190,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   95:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   else
   96:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
   97:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #endif /* #ifdef ARM_MATH_MATRIX_CHECK */
-ARM GAS  /tmp/ccM0Bbkd.s 			page 4
-
-
   98:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
   99:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   {
  100:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     /* Matrix transpose */
@@ -188,125 +197,34 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  102:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     {
  103:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* The pointer px is set to starting address of column being processed */
  104:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       px = pSrcBT + i;
+  85              		.loc 1 104 19
+  86 004e D7F8AC30 		ldr	r3, [r7, #172]
+  87 0052 5B00     		lsls	r3, r3, #1
+  88              		.loc 1 104 10
+  89 0054 D7F8A020 		ldr	r2, [r7, #160]
+  90 0058 1344     		add	r3, r3, r2
+  91 005a C7F8B430 		str	r3, [r7, #180]
  105:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  106:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* Apply loop unrolling and exchange columns with row elements */
  107:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       col = numColsB >> 2U;
+  92              		.loc 1 107 22
+  93 005e B7F89C30 		ldrh	r3, [r7, #156]
+  94 0062 9B08     		lsrs	r3, r3, #2
+  95 0064 9BB2     		uxth	r3, r3
+  96              		.loc 1 107 11
+  97 0066 C7F8B030 		str	r3, [r7, #176]
  108:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  109:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* First part of the processing with loop unrolling.  Compute 4 outputs at a time.
  110:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****        ** a second loop below computes the remaining 1 to 3 samples. */
  111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       while (col > 0U)
- 112:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 113:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Read two elements from row */
- 114:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         in = read_q15x2_ia ((q15_t **) &pInB);
- 115:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 116:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Unpack and store one element in destination */
- 117:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
- 118:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) in;
- 119:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
- 120:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
- 121:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
- 122:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 123:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Update pointer px to point to next row of transposed matrix */
- 124:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px += numRowsB;
-  69              		.loc 1 124 12 view .LVU11
-  70 0018 6800     		lsls	r0, r5, #1
-  71              	.LVL3:
- 107:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
-  72              		.loc 1 107 22 view .LVU12
-  73 001a 4FEA930E 		lsr	lr, r3, #2
-  74 001e 03F00308 		and	r8, r3, #3
-  76:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsA = pSrcA->numCols;            /* Number of columns of input matrix A */
-  75              		.loc 1 76 18 view .LVU13
-  76 0022 0893     		str	r3, [sp, #32]
-  77 0024 7600     		lsls	r6, r6, #1
-  75:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsB = pSrcB->numCols;            /* Number of columns of input matrix B */
-  78              		.loc 1 75 18 view .LVU14
-  79 0026 B9F80030 		ldrh	r3, [r9]
-  80 002a 4FEACE0A 		lsl	r10, lr, #3
-  73:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *px;                                     /* Temporary output data matrix pointer */
-  81              		.loc 1 73 28 view .LVU15
-  82 002e 4F68     		ldr	r7, [r1, #4]
-  83              	.LVL4:
-  74:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numRowsA = pSrcA->numRows;            /* Number of rows of input matrix A */
-  84              		.loc 1 74 9 is_stmt 1 view .LVU16
-  75:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsB = pSrcB->numCols;            /* Number of columns of input matrix B */
-  85              		.loc 1 75 9 view .LVU17
-  86 0030 4FEA4801 		lsl	r1, r8, #1
-  87              	.LVL5:
-  75:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsB = pSrcB->numCols;            /* Number of columns of input matrix B */
-  88              		.loc 1 75 18 is_stmt 0 view .LVU18
-  89 0034 0493     		str	r3, [sp, #16]
-  90              	.LVL6:
-  76:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numColsA = pSrcA->numCols;            /* Number of columns of input matrix A */
-ARM GAS  /tmp/ccM0Bbkd.s 			page 5
-
-
-  91              		.loc 1 76 9 is_stmt 1 view .LVU19
-  77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numRowsB = pSrcB->numRows;            /* Number of rows of input matrix A */
-  92              		.loc 1 77 9 view .LVU20
-  93 0036 0EFB00F3 		mul	r3, lr, r0
-  94              	.LVL7:
-  66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q63_t sum;                                     /* Accumulator */
-  95              		.loc 1 66 1 is_stmt 0 view .LVU21
-  96 003a 0692     		str	r2, [sp, #24]
-  97 003c 9B00     		lsls	r3, r3, #2
-  77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numRowsB = pSrcB->numRows;            /* Number of rows of input matrix A */
-  98              		.loc 1 77 18 view .LVU22
-  99 003e B9F80220 		ldrh	r2, [r9, #2]
- 100              	.LVL8:
-  77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numRowsB = pSrcB->numRows;            /* Number of rows of input matrix A */
- 101              		.loc 1 77 18 view .LVU23
- 102 0042 04EB4509 		add	r9, r4, r5, lsl #1
- 103              	.LVL9:
-  77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint16_t numRowsB = pSrcB->numRows;            /* Number of rows of input matrix A */
- 104              		.loc 1 77 18 view .LVU24
- 105 0046 0291     		str	r1, [sp, #8]
- 106 0048 ED00     		lsls	r5, r5, #3
- 107 004a 0392     		str	r2, [sp, #12]
- 108              	.LVL10:
-  78:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         uint32_t col, i = 0U, row = numRowsB, colCnt;  /* Loop counters */
- 109              		.loc 1 78 9 is_stmt 1 view .LVU25
-  79:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         arm_status status;                             /* Status of matrix multiplication */
- 110              		.loc 1 79 9 view .LVU26
-  79:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         arm_status status;                             /* Status of matrix multiplication */
- 111              		.loc 1 79 9 is_stmt 0 view .LVU27
- 112 004c 0193     		str	r3, [sp, #4]
- 113              	.LVL11:
- 114              	.L6:
-  80:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         
- 115              		.loc 1 80 9 is_stmt 1 view .LVU28
-  82:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q31_t inA1, inB1, inA2, inB2;
- 116              		.loc 1 82 9 view .LVU29
-  83:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 117              		.loc 1 83 9 view .LVU30
- 101:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     {
- 118              		.loc 1 101 5 view .LVU31
- 104:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 119              		.loc 1 104 7 view .LVU32
- 104:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 120              		.loc 1 104 10 is_stmt 0 view .LVU33
- 121 004e 6346     		mov	r3, ip
- 122              	.LVL12:
- 107:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 123              		.loc 1 107 7 is_stmt 1 view .LVU34
- 111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 124              		.loc 1 111 7 view .LVU35
- 111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 125              		.loc 1 111 13 view .LVU36
- 126 0050 BEF1000F 		cmp	lr, #0
- 127 0054 17D0     		beq	.L2
- 128 0056 3A46     		mov	r2, r7
- 129 0058 7146     		mov	r1, lr
- 130              	.LVL13:
-ARM GAS  /tmp/ccM0Bbkd.s 			page 6
-
-
- 131              	.L3:
- 114:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 132              		.loc 1 114 9 view .LVU37
- 133              	.LBB19:
- 134              	.LBI19:
- 135              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+  98              		.loc 1 111 13
+  99 006a 56E0     		b	.L2
+ 100              	.L5:
+ 101 006c 07F13803 		add	r3, r7, #56
+ 102 0070 3B67     		str	r3, [r7, #112]
+ 103              	.LBB19:
+ 104              	.LBB20:
+ 105              		.file 2 "./Libraries/CMSIS/DSP/Include/arm_math.h"
    1:./Libraries/CMSIS/DSP/Include/arm_math.h **** /******************************************************************************
    2:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @file     arm_math.h
    3:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @brief    Public header file for CMSIS DSP Library
@@ -320,6 +238,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   11:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
   12:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
   13:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * not use this file except in compliance with the License.
+ARM GAS  /tmp/ccgwf8ZO.s 			page 5
+
+
   14:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * You may obtain a copy of the License at
   15:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
   16:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * www.apache.org/licenses/LICENSE-2.0
@@ -358,9 +279,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   49:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Using the Library
   50:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * ------------
   51:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
-ARM GAS  /tmp/ccM0Bbkd.s 			page 7
-
-
   52:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The library installer contains prebuilt versions of the libraries in the <code>Lib</code> fold
   53:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_cortexM7lfdp_math.lib (Cortex-M7, Little endian, Double Precision Floating Point Unit)
   54:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_cortexM7bfdp_math.lib (Cortex-M7, Big endian, Double Precision Floating Point Unit)
@@ -380,6 +298,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   68:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLl_math.lib (Armv8-M Mainline, Little endian)
   69:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLlfsp_math.lib (Armv8-M Mainline, Little endian, Single Precision Floating Point 
   70:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLld_math.lib (Armv8-M Mainline, Little endian, DSP instructions)
+ARM GAS  /tmp/ccgwf8ZO.s 			page 6
+
+
   71:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - arm_ARMv8MMLldfsp_math.lib (Armv8-M Mainline, Little endian, DSP instructions, Single Precis
   72:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
   73:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * The library functions are declared in the public file <code>arm_math.h</code> which is placed 
@@ -418,9 +339,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  106:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  107:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_MATRIX_CHECK:
  108:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
-ARM GAS  /tmp/ccM0Bbkd.s 			page 8
-
-
  109:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Define macro ARM_MATH_MATRIX_CHECK for checking on the input and output sizes of matrices
  110:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  111:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_ROUNDING:
@@ -440,6 +358,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  125:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * - ARM_MATH_NEON_EXPERIMENTAL:
  126:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
  127:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * Define macro ARM_MATH_NEON_EXPERIMENTAL to enable experimental Neon versions of 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 7
+
+
  128:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * of some DSP functions. Experimental Neon versions currently do not have better
  129:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * performances than the scalar versions.
  130:./Libraries/CMSIS/DSP/Include/arm_math.h ****    *
@@ -478,9 +399,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  163:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
  164:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  165:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 9
-
-
  166:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  167:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * @defgroup groupCmplxMath Complex Math Functions
  168:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * This set of functions operates on complex data vectors.
@@ -500,6 +418,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  182:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *
  183:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * This set of functions provides basic matrix math operations.
  184:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The functions operate on matrix data structures.  For example,
+ARM GAS  /tmp/ccgwf8ZO.s 			page 8
+
+
  185:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * the type
  186:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * definition for the floating-point matrix structure is shown
  187:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * below:
@@ -538,9 +459,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  220:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_q31 S = {nRows, nColumns, pData};</code>
  221:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <code>arm_matrix_instance_q15 S = {nRows, nColumns, pData};</code>
  222:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * </pre>
-ARM GAS  /tmp/ccM0Bbkd.s 			page 10
-
-
  223:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * where <code>nRows</code> specifies the number of rows, <code>nColumns</code>
  224:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * specifies the number of columns, and <code>pData</code> points to the
  225:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * data array.
@@ -560,6 +478,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  239:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * There is some overhead associated with this matrix size checking.
  240:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * The matrix size checking is enabled via the \#define
  241:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * <pre>
+ARM GAS  /tmp/ccgwf8ZO.s 			page 9
+
+
  242:./Libraries/CMSIS/DSP/Include/arm_math.h ****  *     ARM_MATH_MATRIX_CHECK
  243:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * </pre>
  244:./Libraries/CMSIS/DSP/Include/arm_math.h ****  * within the library project settings.  By default this macro is defined
@@ -598,9 +519,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  277:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  278:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  279:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifndef _ARM_MATH_H
-ARM GAS  /tmp/ccM0Bbkd.s 			page 11
-
-
  280:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define _ARM_MATH_H
  281:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  282:./Libraries/CMSIS/DSP/Include/arm_math.h **** /* Compiler specific diagnostic adjustment */
@@ -620,6 +538,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  296:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  297:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( __CSMC__ )
  298:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 10
+
+
  299:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( __TASKING__ )
  300:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  301:./Libraries/CMSIS/DSP/Include/arm_math.h **** #elif defined ( _MSC_VER )
@@ -658,9 +579,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  334:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  335:./Libraries/CMSIS/DSP/Include/arm_math.h **** #ifdef   __cplusplus
  336:./Libraries/CMSIS/DSP/Include/arm_math.h **** extern "C"
-ARM GAS  /tmp/ccM0Bbkd.s 			page 12
-
-
  337:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  338:./Libraries/CMSIS/DSP/Include/arm_math.h **** #endif
  339:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -680,6 +598,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  353:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief Macros required for SINE and COSINE Fast math approximations
  354:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  355:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 11
+
+
  356:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define FAST_MATH_TABLE_SIZE  512
  357:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define FAST_MATH_Q31_SHIFT   (32 - 10)
  358:./Libraries/CMSIS/DSP/Include/arm_math.h **** #define FAST_MATH_Q15_SHIFT   (16 - 10)
@@ -718,9 +639,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  391:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  392:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief 16-bit fractional data type in 1.15 format.
  393:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
-ARM GAS  /tmp/ccM0Bbkd.s 			page 13
-
-
  394:./Libraries/CMSIS/DSP/Include/arm_math.h ****   typedef int16_t q15_t;
  395:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  396:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
@@ -740,6 +658,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  410:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  411:./Libraries/CMSIS/DSP/Include/arm_math.h ****   /**
  412:./Libraries/CMSIS/DSP/Include/arm_math.h ****    * @brief 64-bit floating-point type definition.
+ARM GAS  /tmp/ccgwf8ZO.s 			page 12
+
+
  413:./Libraries/CMSIS/DSP/Include/arm_math.h ****    */
  414:./Libraries/CMSIS/DSP/Include/arm_math.h ****   typedef double float64_t;
  415:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
@@ -778,9 +699,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  448:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  449:./Libraries/CMSIS/DSP/Include/arm_math.h **** /**
  450:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @brief         Read 2 Q15 from Q15 pointer.
-ARM GAS  /tmp/ccM0Bbkd.s 			page 14
-
-
  451:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @param[in]     pQ15      points to input value
  452:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        Q31 value
  453:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
@@ -800,204 +718,260 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  467:./Libraries/CMSIS/DSP/Include/arm_math.h ****   @return        Q31 value
  468:./Libraries/CMSIS/DSP/Include/arm_math.h ****  */
  469:./Libraries/CMSIS/DSP/Include/arm_math.h **** __STATIC_FORCEINLINE q31_t read_q15x2_ia (
- 136              		.loc 2 469 28 view .LVU38
- 137              	.LBB20:
+ARM GAS  /tmp/ccgwf8ZO.s 			page 13
+
+
  470:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
  471:./Libraries/CMSIS/DSP/Include/arm_math.h **** {
  472:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q31_t val;
- 138              		.loc 2 472 3 view .LVU39
  473:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   memcpy (&val, *pQ15, 4);
- 139              		.loc 2 474 3 view .LVU40
- 140 005a 1468     		ldr	r4, [r2]	@ unaligned
- 141              	.LVL14:
+ 106              		.loc 2 474 3
+ 107 0072 3B6F     		ldr	r3, [r7, #112]
+ 108 0074 1B68     		ldr	r3, [r3]
+ 109 0076 1B68     		ldr	r3, [r3]	@ unaligned
+ 110 0078 7B61     		str	r3, [r7, #20]
  475:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 142              		.loc 2 475 3 view .LVU41
+ 111              		.loc 2 475 9
+ 112 007a 3B6F     		ldr	r3, [r7, #112]
+ 113 007c 1B68     		ldr	r3, [r3]
+ 114 007e 1A1D     		adds	r2, r3, #4
+ 115 0080 3B6F     		ldr	r3, [r7, #112]
+ 116 0082 1A60     		str	r2, [r3]
  476:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
  477:./Libraries/CMSIS/DSP/Include/arm_math.h ****   return (val);
- 143              		.loc 2 477 3 view .LVU42
- 144              		.loc 2 477 3 is_stmt 0 view .LVU43
- 145              	.LBE20:
- 146              	.LBE19:
- 118:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
- 147              		.loc 1 118 9 is_stmt 1 view .LVU44
- 111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 148              		.loc 1 111 13 is_stmt 0 view .LVU45
- 149 005c 0139     		subs	r1, r1, #1
- 150              	.LVL15:
- 111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 151              		.loc 1 111 13 view .LVU46
- 152 005e 02F10802 		add	r2, r2, #8
- 153              	.LVL16:
+ 117              		.loc 2 477 10
+ 118 0084 7B69     		ldr	r3, [r7, #20]
+ 119              	.LBE20:
+ 120              	.LBE19:
+ 112:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
+ 113:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Read two elements from row */
+ 114:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         in = read_q15x2_ia ((q15_t **) &pInB);
+ 121              		.loc 1 114 14
+ 122 0086 BB67     		str	r3, [r7, #120]
+ 115:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
+ 116:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Unpack and store one element in destination */
+ 117:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
+ 118:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) in;
+ 123              		.loc 1 118 15
+ 124 0088 BB6F     		ldr	r3, [r7, #120]
+ 125 008a 1AB2     		sxth	r2, r3
+ 126              		.loc 1 118 13
+ 127 008c D7F8B430 		ldr	r3, [r7, #180]
+ 128 0090 1A80     		strh	r2, [r3]	@ movhi
+ 119:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
+ 120:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
+ 121:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
+ 122:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
+ 123:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Update pointer px to point to next row of transposed matrix */
+ 124:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px += numRowsB;
+ 129              		.loc 1 124 12
+ 130 0092 B7F89830 		ldrh	r3, [r7, #152]
+ 131 0096 5B00     		lsls	r3, r3, #1
+ 132 0098 D7F8B420 		ldr	r2, [r7, #180]
+ 133 009c 1344     		add	r3, r3, r2
+ 134 009e C7F8B430 		str	r3, [r7, #180]
  125:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  126:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Unpack and store second element in destination */
  127:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  128:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
- 154              		.loc 1 128 50 view .LVU47
- 155 0062 4FEA244B 		asr	fp, r4, #16
- 118:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
- 156              		.loc 1 118 15 view .LVU48
- 157 0066 1C80     		strh	r4, [r3]	@ movhi
-ARM GAS  /tmp/ccM0Bbkd.s 			page 15
+ 135              		.loc 1 128 50
+ 136 00a2 BB6F     		ldr	r3, [r7, #120]
+ 137 00a4 1B14     		asrs	r3, r3, #16
+ARM GAS  /tmp/ccgwf8ZO.s 			page 14
 
 
- 124:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 158              		.loc 1 124 9 is_stmt 1 view .LVU49
- 159              	.LVL17:
- 160              		.loc 1 128 9 view .LVU50
- 161              		.loc 1 128 15 is_stmt 0 view .LVU51
- 162 0068 23F800B0 		strh	fp, [r3, r0]	@ movhi
+ 138              		.loc 1 128 15
+ 139 00a6 1AB2     		sxth	r2, r3
+ 140              		.loc 1 128 13
+ 141 00a8 D7F8B430 		ldr	r3, [r7, #180]
+ 142 00ac 1A80     		strh	r2, [r3]	@ movhi
  129:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
  130:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) in;
  131:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
  132:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  133:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Update pointer px to point to next row of transposed matrix */
  134:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px += numRowsB;
- 163              		.loc 1 134 9 is_stmt 1 view .LVU52
- 164              	.LVL18:
+ 143              		.loc 1 134 12
+ 144 00ae B7F89830 		ldrh	r3, [r7, #152]
+ 145 00b2 5B00     		lsls	r3, r3, #1
+ 146 00b4 D7F8B420 		ldr	r2, [r7, #180]
+ 147 00b8 1344     		add	r3, r3, r2
+ 148 00ba C7F8B430 		str	r3, [r7, #180]
+ 149 00be 07F13803 		add	r3, r7, #56
+ 150 00c2 7B67     		str	r3, [r7, #116]
+ 151              	.LBB21:
+ 152              	.LBB22:
+ 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
+ 153              		.loc 2 474 3
+ 154 00c4 7B6F     		ldr	r3, [r7, #116]
+ 155 00c6 1B68     		ldr	r3, [r3]
+ 156 00c8 1B68     		ldr	r3, [r3]	@ unaligned
+ 157 00ca 3B61     		str	r3, [r7, #16]
+ 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 158              		.loc 2 475 9
+ 159 00cc 7B6F     		ldr	r3, [r7, #116]
+ 160 00ce 1B68     		ldr	r3, [r3]
+ 161 00d0 1A1D     		adds	r2, r3, #4
+ 162 00d2 7B6F     		ldr	r3, [r7, #116]
+ 163 00d4 1A60     		str	r2, [r3]
+ 164              		.loc 2 477 10
+ 165 00d6 3B69     		ldr	r3, [r7, #16]
+ 166              	.LBE22:
+ 167              	.LBE21:
  135:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  136:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Read two elements from row */
  137:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         in = read_q15x2_ia ((q15_t **) &pInB);
- 165              		.loc 1 137 9 view .LVU53
- 166              	.LBB21:
- 167              	.LBI21:
- 469:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
- 168              		.loc 2 469 28 view .LVU54
- 169              	.LBB22:
- 472:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 170              		.loc 2 472 3 view .LVU55
- 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 171              		.loc 2 474 3 view .LVU56
- 172 006c 52F8044C 		ldr	r4, [r2, #-4]	@ unaligned
- 173              	.LVL19:
- 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 174              		.loc 2 475 3 view .LVU57
- 175              		.loc 2 477 3 view .LVU58
- 176              		.loc 2 477 3 is_stmt 0 view .LVU59
- 177              	.LBE22:
- 178              	.LBE21:
+ 168              		.loc 1 137 14
+ 169 00d8 BB67     		str	r3, [r7, #120]
  138:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  139:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Unpack and store one element in destination */
  140:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  141:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) in;
- 179              		.loc 1 141 9 is_stmt 1 view .LVU60
+ 170              		.loc 1 141 15
+ 171 00da BB6F     		ldr	r3, [r7, #120]
+ 172 00dc 1AB2     		sxth	r2, r3
+ 173              		.loc 1 141 13
+ 174 00de D7F8B430 		ldr	r3, [r7, #180]
+ 175 00e2 1A80     		strh	r2, [r3]	@ movhi
  142:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
  143:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
  144:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
  145:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px += numRowsB;
+ARM GAS  /tmp/ccgwf8ZO.s 			page 15
+
+
+ 176              		.loc 1 145 12
+ 177 00e4 B7F89830 		ldrh	r3, [r7, #152]
+ 178 00e8 5B00     		lsls	r3, r3, #1
+ 179 00ea D7F8B420 		ldr	r2, [r7, #180]
+ 180 00ee 1344     		add	r3, r3, r2
+ 181 00f0 C7F8B430 		str	r3, [r7, #180]
  146:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  147:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #ifndef ARM_MATH_BIG_ENDIAN
  148:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) ((in & (q31_t) 0xffff0000) >> 16);
- 180              		.loc 1 148 50 is_stmt 0 view .LVU61
- 181 0070 4FEA244B 		asr	fp, r4, #16
- 141:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
- 182              		.loc 1 141 15 view .LVU62
- 183 0074 23F81040 		strh	r4, [r3, r0, lsl #1]	@ movhi
- 145:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 184              		.loc 1 145 9 is_stmt 1 view .LVU63
- 185              	.LVL20:
- 186              		.loc 1 148 9 view .LVU64
- 187              		.loc 1 148 15 is_stmt 0 view .LVU65
-ARM GAS  /tmp/ccM0Bbkd.s 			page 16
-
-
- 188 0078 23F806B0 		strh	fp, [r3, r6]	@ movhi
+ 182              		.loc 1 148 50
+ 183 00f4 BB6F     		ldr	r3, [r7, #120]
+ 184 00f6 1B14     		asrs	r3, r3, #16
+ 185              		.loc 1 148 15
+ 186 00f8 1AB2     		sxth	r2, r3
+ 187              		.loc 1 148 13
+ 188 00fa D7F8B430 		ldr	r3, [r7, #180]
+ 189 00fe 1A80     		strh	r2, [r3]	@ movhi
  149:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else
  150:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) in;
  151:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #endif /* #ifndef ARM_MATH_BIG_ENDIAN */
  152:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px += numRowsB;
- 189              		.loc 1 152 9 is_stmt 1 view .LVU66
- 190 007c 2B44     		add	r3, r3, r5
- 191              	.LVL21:
+ 190              		.loc 1 152 12
+ 191 0100 B7F89830 		ldrh	r3, [r7, #152]
+ 192 0104 5B00     		lsls	r3, r3, #1
+ 193 0106 D7F8B420 		ldr	r2, [r7, #180]
+ 194 010a 1344     		add	r3, r3, r2
+ 195 010c C7F8B430 		str	r3, [r7, #180]
  153:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Decrement column loop counter */
  155:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         col--;
- 192              		.loc 1 155 9 view .LVU67
+ 196              		.loc 1 155 12
+ 197 0110 D7F8B030 		ldr	r3, [r7, #176]
+ 198 0114 013B     		subs	r3, r3, #1
+ 199 0116 C7F8B030 		str	r3, [r7, #176]
+ 200              	.L2:
  111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 193              		.loc 1 111 13 view .LVU68
- 194 007e ECD1     		bne	.L3
- 195 0080 019B     		ldr	r3, [sp, #4]
- 196              	.LVL22:
- 111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 197              		.loc 1 111 13 is_stmt 0 view .LVU69
- 198 0082 5744     		add	r7, r7, r10
- 199 0084 6344     		add	r3, r3, ip
- 200              	.LVL23:
- 201              	.L2:
+ 201              		.loc 1 111 13
+ 202 011a D7F8B030 		ldr	r3, [r7, #176]
+ 203 011e 002B     		cmp	r3, #0
+ 204 0120 A4D1     		bne	.L5
  156:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       }
  157:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  158:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* If the columns of pSrcB is not a multiple of 4, compute any remaining output samples here.
  159:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****        ** No loop unrolling is used. */
  160:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       col = numColsB % 0x4U;
- 202              		.loc 1 160 7 is_stmt 1 view .LVU70
+ 205              		.loc 1 160 22
+ 206 0122 B7F89C30 		ldrh	r3, [r7, #156]
+ 207              		.loc 1 160 11
+ 208 0126 03F00303 		and	r3, r3, #3
+ 209 012a C7F8B030 		str	r3, [r7, #176]
  161:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  162:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       while (col > 0U)
- 203              		.loc 1 162 7 view .LVU71
- 204              		.loc 1 162 13 view .LVU72
- 205 0086 B8F1000F 		cmp	r8, #0
- 206 008a 09D0     		beq	.L4
- 207 008c 3946     		mov	r1, r7
- 208 008e 4246     		mov	r2, r8
- 209              	.LVL24:
- 210              	.L5:
+ 210              		.loc 1 162 13
+ 211 012e 14E0     		b	.L6
+ 212              	.L7:
  163:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
  164:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Read and store input element in destination */
+ARM GAS  /tmp/ccgwf8ZO.s 			page 16
+
+
  165:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = *pInB++;
- 211              		.loc 1 165 9 view .LVU73
- 212              		.loc 1 165 15 is_stmt 0 view .LVU74
- 213 0090 31F9024B 		ldrsh	r4, [r1], #2
- 214              	.LVL25:
- 162:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 215              		.loc 1 162 13 view .LVU75
- 216 0094 013A     		subs	r2, r2, #1
- 217              	.LVL26:
- 218              		.loc 1 165 13 view .LVU76
- 219 0096 1C80     		strh	r4, [r3]	@ movhi
+ 213              		.loc 1 165 20
+ 214 0130 BB6B     		ldr	r3, [r7, #56]
+ 215 0132 9A1C     		adds	r2, r3, #2
+ 216 0134 BA63     		str	r2, [r7, #56]
+ 217              		.loc 1 165 15
+ 218 0136 B3F90020 		ldrsh	r2, [r3]
+ 219              		.loc 1 165 13
+ 220 013a D7F8B430 		ldr	r3, [r7, #180]
+ 221 013e 1A80     		strh	r2, [r3]	@ movhi
  166:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  167:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Update pointer px to point to next row of transposed matrix */
  168:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px += numRowsB;
- 220              		.loc 1 168 9 is_stmt 1 view .LVU77
- 221              		.loc 1 168 12 is_stmt 0 view .LVU78
-ARM GAS  /tmp/ccM0Bbkd.s 			page 17
-
-
- 222 0098 0344     		add	r3, r3, r0
- 223              	.LVL27:
+ 222              		.loc 1 168 12
+ 223 0140 B7F89830 		ldrh	r3, [r7, #152]
+ 224 0144 5B00     		lsls	r3, r3, #1
+ 225 0146 D7F8B420 		ldr	r2, [r7, #180]
+ 226 014a 1344     		add	r3, r3, r2
+ 227 014c C7F8B430 		str	r3, [r7, #180]
  169:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  170:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Decrement column loop counter */
  171:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         col--;
- 224              		.loc 1 171 9 is_stmt 1 view .LVU79
+ 228              		.loc 1 171 12
+ 229 0150 D7F8B030 		ldr	r3, [r7, #176]
+ 230 0154 013B     		subs	r3, r3, #1
+ 231 0156 C7F8B030 		str	r3, [r7, #176]
+ 232              	.L6:
  162:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 225              		.loc 1 162 13 view .LVU80
- 226 009a F9D1     		bne	.L5
- 227 009c 029B     		ldr	r3, [sp, #8]
- 228              	.LVL28:
- 162:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 229              		.loc 1 162 13 is_stmt 0 view .LVU81
- 230 009e 1F44     		add	r7, r7, r3
- 231              	.LVL29:
- 232              	.L4:
+ 233              		.loc 1 162 13
+ 234 015a D7F8B030 		ldr	r3, [r7, #176]
+ 235 015e 002B     		cmp	r3, #0
+ 236 0160 E6D1     		bne	.L7
  172:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       }
  173:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  174:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       i++;
- 233              		.loc 1 174 7 is_stmt 1 view .LVU82
+ 237              		.loc 1 174 8
+ 238 0162 D7F8AC30 		ldr	r3, [r7, #172]
+ 239 0166 0133     		adds	r3, r3, #1
+ 240 0168 C7F8AC30 		str	r3, [r7, #172]
  175:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  176:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* Decrement row loop counter */
  177:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       row--;
- 234              		.loc 1 177 7 view .LVU83
+ 241              		.loc 1 177 10
+ 242 016c D7F8A830 		ldr	r3, [r7, #168]
+ 243 0170 013B     		subs	r3, r3, #1
+ 244 0172 C7F8A830 		str	r3, [r7, #168]
  178:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  179:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     } while (row > 0U);
- 235              		.loc 1 179 13 view .LVU84
- 236 00a0 0CF1020C 		add	ip, ip, #2
- 237              		.loc 1 179 5 is_stmt 0 view .LVU85
- 238 00a4 E145     		cmp	r9, ip
- 239 00a6 D2D1     		bne	.L6
+ 245              		.loc 1 179 5
+ 246 0176 D7F8A830 		ldr	r3, [r7, #168]
+ 247 017a 002B     		cmp	r3, #0
+ 248 017c 7FF467AF 		bne	.L8
  180:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  181:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     /* Reset variables for usage in following multiplication process */
  182:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     row = numRowsA;
- 240              		.loc 1 182 5 is_stmt 1 view .LVU86
+ 249              		.loc 1 182 9
+ 250 0180 B7F89E30 		ldrh	r3, [r7, #158]
+ARM GAS  /tmp/ccgwf8ZO.s 			page 17
+
+
+ 251 0184 C7F8A830 		str	r3, [r7, #168]
  183:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     i = 0U;
+ 252              		.loc 1 183 7
+ 253 0188 0023     		movs	r3, #0
+ 254 018a C7F8AC30 		str	r3, [r7, #172]
  184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     px = pDst->pData;
+ 255              		.loc 1 184 8
+ 256 018e 7B68     		ldr	r3, [r7, #4]
+ 257 0190 5B68     		ldr	r3, [r3, #4]
+ 258 0192 C7F8B430 		str	r3, [r7, #180]
+ 259              	.L20:
  185:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  186:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     /* The following loop performs the dot-product of each row in pSrcA with each column in pSrcB *
  187:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     /* row loop */
@@ -1005,163 +979,176 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  189:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     {
  190:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* For every row wise process, column loop counter is to be initiated */
  191:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       col = numColsB;
+ 260              		.loc 1 191 11
+ 261 0196 B7F89C30 		ldrh	r3, [r7, #156]
+ 262 019a C7F8B030 		str	r3, [r7, #176]
  192:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  193:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* For every row wise process, pIn2 pointer is set to starting address of transposed pSrcB da
  194:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       pInB = pSrcBT;
+ 263              		.loc 1 194 12
+ 264 019e D7F8A030 		ldr	r3, [r7, #160]
+ 265 01a2 BB63     		str	r3, [r7, #56]
+ 266              	.L19:
  195:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  196:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* column loop */
  197:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       do
  198:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
  199:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Set variable sum, that acts as accumulator, to zero */
  200:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         sum = 0;
+ 267              		.loc 1 200 13
+ 268 01a4 4FF00002 		mov	r2, #0
+ 269 01a8 4FF00003 		mov	r3, #0
+ 270 01ac C7E92E23 		strd	r2, [r7, #184]
  201:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  202:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Initiate pointer pInA to point to starting address of column being processed */
  203:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         pInA = pSrcA->pData + i;
+ 271              		.loc 1 203 21
+ 272 01b0 FB68     		ldr	r3, [r7, #12]
+ 273 01b2 5A68     		ldr	r2, [r3, #4]
+ 274              		.loc 1 203 29
+ 275 01b4 D7F8AC30 		ldr	r3, [r7, #172]
+ 276 01b8 5B00     		lsls	r3, r3, #1
+ 277 01ba 1344     		add	r3, r3, r2
+ 278              		.loc 1 203 14
+ 279 01bc FB63     		str	r3, [r7, #60]
  204:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 18
-
-
  205:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Apply loop unrolling and compute 2 MACs simultaneously. */
  206:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         colCnt = numColsA >> 2U;
- 241              		.loc 1 206 27 is_stmt 0 view .LVU87
- 242 00a8 039B     		ldr	r3, [sp, #12]
- 182:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     i = 0U;
- 243              		.loc 1 182 9 view .LVU88
- 244 00aa 0498     		ldr	r0, [sp, #16]
- 245              		.loc 1 206 27 view .LVU89
- 246 00ac 9908     		lsrs	r1, r3, #2
- 247 00ae 03F00302 		and	r2, r3, #3
- 248 00b2 5B00     		lsls	r3, r3, #1
- 182:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     i = 0U;
- 249              		.loc 1 182 9 view .LVU90
- 250 00b4 0790     		str	r0, [sp, #28]
- 251              	.LVL30:
- 183:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     i = 0U;
- 252              		.loc 1 183 5 is_stmt 1 view .LVU91
- 184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 253              		.loc 1 184 5 view .LVU92
- 184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 254              		.loc 1 184 8 is_stmt 0 view .LVU93
- 255 00b6 0698     		ldr	r0, [sp, #24]
- 256 00b8 4FEAC10A 		lsl	r10, r1, #3
- 257 00bc 0993     		str	r3, [sp, #36]
- 258              		.loc 1 206 16 view .LVU94
- 259 00be 0023     		movs	r3, #0
- 184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 260              		.loc 1 184 8 view .LVU95
- 261 00c0 4068     		ldr	r0, [r0, #4]
- 262              		.loc 1 206 16 view .LVU96
- 263 00c2 0193     		str	r3, [sp, #4]
- 264 00c4 5300     		lsls	r3, r2, #1
- 184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 265              		.loc 1 184 8 view .LVU97
- 266 00c6 0690     		str	r0, [sp, #24]
- 267              	.LVL31:
- 184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 268              		.loc 1 184 8 view .LVU98
- 269 00c8 0598     		ldr	r0, [sp, #20]
- 270              	.LVL32:
- 184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 271              		.loc 1 184 8 view .LVU99
- 272 00ca 0593     		str	r3, [sp, #20]
- 273              	.LVL33:
- 184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 274              		.loc 1 184 8 view .LVU100
- 275 00cc 089B     		ldr	r3, [sp, #32]
- 276 00ce 4068     		ldr	r0, [r0, #4]
- 277 00d0 5B00     		lsls	r3, r3, #1
- 278              		.loc 1 206 27 view .LVU101
- 279 00d2 0291     		str	r1, [sp, #8]
- 280 00d4 0392     		str	r2, [sp, #12]
- 281              	.LVL34:
- 282              		.loc 1 206 27 view .LVU102
- 283 00d6 0490     		str	r0, [sp, #16]
- 284              	.LVL35:
- 285              		.loc 1 206 27 view .LVU103
-ARM GAS  /tmp/ccM0Bbkd.s 			page 19
+ 280              		.loc 1 206 27
+ 281 01be B7F89A30 		ldrh	r3, [r7, #154]
+ 282 01c2 9B08     		lsrs	r3, r3, #2
+ 283 01c4 9BB2     		uxth	r3, r3
+ARM GAS  /tmp/ccgwf8ZO.s 			page 18
 
 
- 286 00d8 0A93     		str	r3, [sp, #40]
- 287              	.LVL36:
- 288              	.L12:
- 188:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     {
- 289              		.loc 1 188 5 is_stmt 1 view .LVU104
- 191:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 290              		.loc 1 191 7 view .LVU105
- 194:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 291              		.loc 1 194 7 view .LVU106
- 194:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 292              		.loc 1 194 12 is_stmt 0 view .LVU107
- 293 00da DDF82CE0 		ldr	lr, [sp, #44]
- 160:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 294              		.loc 1 160 22 view .LVU108
- 295 00de DDF82080 		ldr	r8, [sp, #32]
- 296 00e2 DDF81890 		ldr	r9, [sp, #24]
- 297              	.LVL37:
- 298              	.L11:
- 197:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
- 299              		.loc 1 197 7 is_stmt 1 view .LVU109
- 200:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 300              		.loc 1 200 9 view .LVU110
- 203:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 301              		.loc 1 203 9 view .LVU111
- 203:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 302              		.loc 1 203 29 is_stmt 0 view .LVU112
- 303 00e6 049B     		ldr	r3, [sp, #16]
- 304 00e8 019A     		ldr	r2, [sp, #4]
+ 284              		.loc 1 206 16
+ 285 01c6 C7F8A430 		str	r3, [r7, #164]
  207:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  208:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* matrix multiplication */
  209:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         while (colCnt > 0U)
- 305              		.loc 1 209 15 view .LVU113
- 306 00ea 029E     		ldr	r6, [sp, #8]
- 203:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 307              		.loc 1 203 29 view .LVU114
- 308 00ec 03EB020C 		add	ip, r3, r2
- 309              	.LVL38:
- 206:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 310              		.loc 1 206 9 is_stmt 1 view .LVU115
- 311              		.loc 1 209 9 view .LVU116
- 312              		.loc 1 209 15 view .LVU117
- 313 00f0 002E     		cmp	r6, #0
- 314 00f2 3ED0     		beq	.L13
- 315              		.loc 1 209 15 is_stmt 0 view .LVU118
- 316 00f4 7546     		mov	r5, lr
- 203:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 317              		.loc 1 203 14 view .LVU119
- 318 00f6 6446     		mov	r4, ip
- 200:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 319              		.loc 1 200 13 view .LVU120
- 320 00f8 0020     		movs	r0, #0
- 321 00fa 0021     		movs	r1, #0
- 322              	.LVL39:
- 323              	.L8:
+ 286              		.loc 1 209 15
+ 287 01ca 72E0     		b	.L9
+ 288              	.L16:
+ 289 01cc 07F13C03 		add	r3, r7, #60
+ 290 01d0 3B64     		str	r3, [r7, #64]
+ 291              	.LBB23:
+ 292              	.LBB24:
+ 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
+ 293              		.loc 2 474 3
+ 294 01d2 3B6C     		ldr	r3, [r7, #64]
+ 295 01d4 1B68     		ldr	r3, [r3]
+ 296 01d6 1B68     		ldr	r3, [r3]	@ unaligned
+ 297 01d8 7B63     		str	r3, [r7, #52]
+ 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 298              		.loc 2 475 9
+ 299 01da 3B6C     		ldr	r3, [r7, #64]
+ 300 01dc 1B68     		ldr	r3, [r3]
+ 301 01de 1A1D     		adds	r2, r3, #4
+ 302 01e0 3B6C     		ldr	r3, [r7, #64]
+ 303 01e2 1A60     		str	r2, [r3]
+ 304              		.loc 2 477 10
+ 305 01e4 7B6B     		ldr	r3, [r7, #52]
+ 306              	.LBE24:
+ 307              	.LBE23:
  210:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         {
  211:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* c(m,n) = a(1,1) * b(1,1) + a(1,2) * b(2,1) + .... + a(m,p) * b(p,n) */
  212:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 20
-
-
  213:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* read real and imag values from pSrcA and pSrcB buffer */
  214:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           inA1 = read_q15x2_ia ((q15_t **) &pInA);
- 324              		.loc 1 214 11 is_stmt 1 view .LVU121
- 472:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 325              		.loc 2 472 3 view .LVU122
+ 308              		.loc 1 214 18
+ 309 01e6 C7F88830 		str	r3, [r7, #136]
+ 310 01ea 07F13803 		add	r3, r7, #56
+ 311 01ee 7B64     		str	r3, [r7, #68]
+ 312              	.LBB25:
+ 313              	.LBB26:
  474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 326              		.loc 2 474 3 view .LVU123
- 327 00fc 2768     		ldr	r7, [r4]	@ unaligned
- 328              	.LVL40:
+ 314              		.loc 2 474 3
+ 315 01f0 7B6C     		ldr	r3, [r7, #68]
+ 316 01f2 1B68     		ldr	r3, [r3]
+ 317 01f4 1B68     		ldr	r3, [r3]	@ unaligned
+ 318 01f6 3B63     		str	r3, [r7, #48]
  475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 329              		.loc 2 475 3 view .LVU124
- 330              		.loc 2 477 3 view .LVU125
+ 319              		.loc 2 475 9
+ 320 01f8 7B6C     		ldr	r3, [r7, #68]
+ 321 01fa 1B68     		ldr	r3, [r3]
+ 322 01fc 1A1D     		adds	r2, r3, #4
+ 323 01fe 7B6C     		ldr	r3, [r7, #68]
+ 324 0200 1A60     		str	r2, [r3]
+ 325              		.loc 2 477 10
+ 326 0202 3B6B     		ldr	r3, [r7, #48]
+ 327              	.LBE26:
+ 328              	.LBE25:
+ARM GAS  /tmp/ccgwf8ZO.s 			page 19
+
+
  215:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           inB1 = read_q15x2_ia ((q15_t **) &pInB);
- 331              		.loc 1 215 11 view .LVU126
- 472:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 332              		.loc 2 472 3 view .LVU127
+ 329              		.loc 1 215 18
+ 330 0204 C7F88430 		str	r3, [r7, #132]
+ 331 0208 07F13C03 		add	r3, r7, #60
+ 332 020c BB64     		str	r3, [r7, #72]
+ 333              	.LBB27:
+ 334              	.LBB28:
  474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 333              		.loc 2 474 3 view .LVU128
- 334              	.LBB23:
- 335              	.LBB24:
- 336              		.file 3 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
+ 335              		.loc 2 474 3
+ 336 020e BB6C     		ldr	r3, [r7, #72]
+ 337 0210 1B68     		ldr	r3, [r3]
+ 338 0212 1B68     		ldr	r3, [r3]	@ unaligned
+ 339 0214 FB62     		str	r3, [r7, #44]
+ 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 340              		.loc 2 475 9
+ 341 0216 BB6C     		ldr	r3, [r7, #72]
+ 342 0218 1B68     		ldr	r3, [r3]
+ 343 021a 1A1D     		adds	r2, r3, #4
+ 344 021c BB6C     		ldr	r3, [r7, #72]
+ 345 021e 1A60     		str	r2, [r3]
+ 346              		.loc 2 477 10
+ 347 0220 FB6A     		ldr	r3, [r7, #44]
+ 348              	.LBE28:
+ 349              	.LBE27:
+ 216:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
+ 217:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           inA2 = read_q15x2_ia ((q15_t **) &pInA);
+ 350              		.loc 1 217 18
+ 351 0222 C7F88030 		str	r3, [r7, #128]
+ 352 0226 07F13803 		add	r3, r7, #56
+ 353 022a FB64     		str	r3, [r7, #76]
+ 354              	.LBB29:
+ 355              	.LBB30:
+ 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
+ 356              		.loc 2 474 3
+ 357 022c FB6C     		ldr	r3, [r7, #76]
+ 358 022e 1B68     		ldr	r3, [r3]
+ 359 0230 1B68     		ldr	r3, [r3]	@ unaligned
+ 360 0232 BB62     		str	r3, [r7, #40]
+ 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
+ 361              		.loc 2 475 9
+ 362 0234 FB6C     		ldr	r3, [r7, #76]
+ 363 0236 1B68     		ldr	r3, [r3]
+ 364 0238 1A1D     		adds	r2, r3, #4
+ 365 023a FB6C     		ldr	r3, [r7, #76]
+ 366 023c 1A60     		str	r2, [r3]
+ 367              		.loc 2 477 10
+ 368 023e BB6A     		ldr	r3, [r7, #40]
+ 369              	.LBE30:
+ 370              	.LBE29:
+ 218:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           inB2 = read_q15x2_ia ((q15_t **) &pInB);
+ 371              		.loc 1 218 18
+ 372 0240 FB67     		str	r3, [r7, #124]
+ 219:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
+ 220:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* Multiply and Accumlates */
+ 221:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           sum = __SMLALD(inA1, inB1, sum);
+ 373              		.loc 1 221 17
+ 374 0242 D7F88800 		ldr	r0, [r7, #136]
+ARM GAS  /tmp/ccgwf8ZO.s 			page 20
+
+
+ 375 0246 D7F88410 		ldr	r1, [r7, #132]
+ 376 024a D7E92E23 		ldrd	r2, [r7, #184]
+ 377 024e F865     		str	r0, [r7, #92]
+ 378 0250 B965     		str	r1, [r7, #88]
+ 379 0252 C7E91423 		strd	r2, [r7, #80]
+ 380              	.LBB31:
+ 381              	.LBB32:
+ 382              		.file 3 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h"
    1:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**************************************************************************//**
    2:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
    3:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
@@ -1198,9 +1185,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   34:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* Fallback for __has_builtin */
   35:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __has_builtin
   36:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
-ARM GAS  /tmp/ccM0Bbkd.s 			page 21
-
-
   37:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   38:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
   39:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
@@ -1214,6 +1198,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   47:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
   48:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
   49:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 21
+
+
   50:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
   51:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif                                           
   52:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
@@ -1258,9 +1245,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
   91:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
   92:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
   93:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccM0Bbkd.s 			page 22
-
-
   94:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
   95:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   96:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
@@ -1274,6 +1258,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  104:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
  105:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
  106:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ARM GAS  /tmp/ccgwf8ZO.s 			page 22
+
+
  107:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
  108:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
  109:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -1318,9 +1305,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  148:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_start__;
  149:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_end__;
  150:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 23
-
-
  151:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__copy_table_start__; pTable < &__copy_table_end__; ++pTable
  152:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
  153:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
@@ -1334,6 +1318,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  161:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
  162:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  
  163:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   _start();
+ARM GAS  /tmp/ccgwf8ZO.s 			page 23
+
+
  164:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  165:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   
  166:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
@@ -1378,9 +1365,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  205:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
  206:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  207:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
-ARM GAS  /tmp/ccM0Bbkd.s 			page 24
-
-
  208:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  209:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
  210:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -1394,6 +1378,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  218:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_CONTROL(void)
  219:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  220:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
+ARM GAS  /tmp/ccgwf8ZO.s 			page 24
+
+
  221:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  222:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, control" : "=r" (result) );
  223:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
@@ -1438,9 +1425,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  262:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR control_ns, %0" : : "r" (control) : "memory");
  263:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  264:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccM0Bbkd.s 			page 25
-
-
  265:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  266:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  267:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1454,6 +1438,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  275:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  276:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, ipsr" : "=r" (result) );
  277:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/ccgwf8ZO.s 			page 25
+
+
  278:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  279:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  280:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1498,9 +1485,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  319:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  320:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  321:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 26
-
-
  322:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  323:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  324:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1514,6 +1498,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  332:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  333:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psp_ns"  : "=r" (result) );
  334:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
+ARM GAS  /tmp/ccgwf8ZO.s 			page 26
+
+
  335:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  336:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  337:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1558,9 +1545,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  376:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  377:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  378:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccM0Bbkd.s 			page 27
-
-
  379:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Main Stack Pointer (non-secure)
  380:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Main Stack Pointer (MSP) when in secure stat
  381:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               MSP Register value
@@ -1574,6 +1558,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  389:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  390:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  391:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 27
+
+
  392:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  393:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  394:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer
@@ -1618,9 +1605,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  433:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Stack Pointer (non-secure)
  434:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Stack Pointer (SP) when in secure state.
  435:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    topOfStack  Stack Pointer value to set
-ARM GAS  /tmp/ccM0Bbkd.s 			page 28
-
-
  436:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  437:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_SP_NS(uint32_t topOfStack)
  438:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -1634,6 +1618,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  446:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current state of the priority mask bit from the Priority Mask Register.
  447:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Priority Mask value
  448:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccgwf8ZO.s 			page 28
+
+
  449:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_PRIMASK(void)
  450:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  451:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -1678,9 +1665,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  490:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  491:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PRIMASK_NS(uint32_t priMask)
  492:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccM0Bbkd.s 			page 29
-
-
  493:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR primask_ns, %0" : : "r" (priMask) : "memory");
  494:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  495:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -1694,6 +1678,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  503:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Enables FIQ interrupts by clearing the F-bit in the CPSR.
  504:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
  505:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccgwf8ZO.s 			page 29
+
+
  506:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_fault_irq(void)
  507:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
  508:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie f" : : : "memory");
@@ -1738,9 +1725,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  547:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, basepri_ns" : "=r" (result) );
  548:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  549:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/ccM0Bbkd.s 			page 30
-
-
  550:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  551:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  552:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1754,6 +1738,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  560:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR basepri, %0" : : "r" (basePri) : "memory");
  561:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  562:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 30
+
+
  563:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  564:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (defined (__ARM_FEATURE_CMSE ) && (__ARM_FEATURE_CMSE == 3))
  565:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -1798,9 +1785,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  604:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  605:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Fault Mask (non-secure)
  606:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Fault Mask register when in secure state.
-ARM GAS  /tmp/ccM0Bbkd.s 			page 31
-
-
  607:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Fault Mask register value
  608:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  609:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_FAULTMASK_NS(void)
@@ -1814,6 +1798,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  617:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  618:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  619:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccgwf8ZO.s 			page 31
+
+
  620:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Fault Mask
  621:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Fault Mask register.
  622:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    faultMask  Fault Mask value to set
@@ -1858,9 +1845,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  661:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)) && \
  662:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     (!defined (__ARM_FEATURE_CMSE) || (__ARM_FEATURE_CMSE < 3)))
  663:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     // without main extensions, the non-secure PSPLIM is RAZ/WI
-ARM GAS  /tmp/ccM0Bbkd.s 			page 32
-
-
  664:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return 0U;
  665:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  666:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
@@ -1874,6 +1858,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  674:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer Limit (non-secure)
  675:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  676:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence zero is returned always.
+ARM GAS  /tmp/ccgwf8ZO.s 			page 32
+
+
  677:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  678:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Process Stack Pointer Limit (PSPLIM) when in
  679:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               PSPLIM Register value
@@ -1918,9 +1905,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  718:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Set Process Stack Pointer (non-secure)
  719:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Devices without ARMv8-M Main Extensions (i.e. Cortex-M23) lack the non-secure
  720:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   Stack Pointer Limit register hence the write is silently ignored.
-ARM GAS  /tmp/ccM0Bbkd.s 			page 33
-
-
  721:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  722:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the non-secure Process Stack Pointer Limit (PSPLIM) when in s
  723:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ProcStackPtrLimit  Process Stack Pointer Limit value to set
@@ -1934,6 +1918,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  731:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MSR psplim_ns, %0\n" : : "r" (ProcStackPtrLimit));
  732:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  733:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccgwf8ZO.s 			page 33
+
+
  734:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  735:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  736:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -1978,9 +1965,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  775:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
  776:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, msplim_ns" : "=r" (result) );
  777:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return result;
-ARM GAS  /tmp/ccM0Bbkd.s 			page 34
-
-
  778:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
  779:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  780:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -1994,6 +1978,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  788:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  789:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Assigns the given value to the Main Stack Pointer Limit (MSPLIM).
  790:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    MainStackPtrLimit  Main Stack Pointer Limit value to set
+ARM GAS  /tmp/ccgwf8ZO.s 			page 34
+
+
  791:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  792:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __set_MSPLIM(uint32_t MainStackPtrLimit)
  793:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2038,9 +2025,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  832:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  833:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __get_FPSCR(void)
  834:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccM0Bbkd.s 			page 35
-
-
  835:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if ((defined (__FPU_PRESENT) && (__FPU_PRESENT == 1U)) && \
  836:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****      (defined (__FPU_USED   ) && (__FPU_USED    == 1U))     )
  837:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if __has_builtin(__builtin_arm_get_fpscr) 
@@ -2054,6 +2038,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  845:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("VMRS %0, fpscr" : "=r" (result) );
  846:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
  847:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
+ARM GAS  /tmp/ccgwf8ZO.s 			page 35
+
+
  848:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  849:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(0U);
  850:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
@@ -2098,9 +2085,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  889:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if defined (__thumb__) && !defined (__thumb2__)
  890:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=l" (r)
  891:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __CMSIS_GCC_RW_REG(r) "+l" (r)
-ARM GAS  /tmp/ccM0Bbkd.s 			page 36
-
-
  892:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "l" (r)
  893:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
  894:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __CMSIS_GCC_OUT_REG(r) "=r" (r)
@@ -2114,6 +2098,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  902:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
  903:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __NOP()                             __ASM volatile ("nop")
  904:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 36
+
+
  905:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  906:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Wait For Interrupt
  907:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Wait For Interrupt is a hint instruction that suspends execution until one of a number o
@@ -2158,9 +2145,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  946:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("dsb 0xF":::"memory");
  947:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
  948:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 37
-
-
  949:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  950:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
  951:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Data Memory Barrier
@@ -2174,6 +2158,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  959:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  960:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
  961:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccgwf8ZO.s 			page 37
+
+
  962:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Reverse byte order (32 bit)
  963:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Reverses the byte order in unsigned integer value. For example, 0x12345678 becomes 0x785
  964:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    value  Value to reverse
@@ -2218,9 +2205,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1003:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
 1004:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return (int16_t)__builtin_bswap16(value);
 1005:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
-ARM GAS  /tmp/ccM0Bbkd.s 			page 38
-
-
 1006:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   int16_t result;
 1007:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1008:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("revsh %0, %1" : __CMSIS_GCC_OUT_REG (result) : __CMSIS_GCC_USE_REG (value) );
@@ -2234,6 +2218,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1016:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Rotate Right (immediate) provides the value of the contents of a register rotated by a v
 1017:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    op1  Value to rotate
 1018:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    op2  Number of Bits to rotate
+ARM GAS  /tmp/ccgwf8ZO.s 			page 38
+
+
 1019:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return               Rotated value
 1020:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1021:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __ROR(uint32_t op1, uint32_t op2)
@@ -2278,9 +2265,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1060:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   for (value >>= 1U; value != 0U; value >>= 1U)
 1061:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   {
 1062:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     result <<= 1U;
-ARM GAS  /tmp/ccM0Bbkd.s 			page 39
-
-
 1063:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     result |= value & 1U;
 1064:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     s--;
 1065:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
@@ -2294,6 +2278,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1073:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Count leading zeros
 1074:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Counts the number of leading zeros of a data value.
 1075:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to count the leading zeros
+ARM GAS  /tmp/ccgwf8ZO.s 			page 39
+
+
 1076:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             number of leading zeros in value
 1077:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1078:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __CLZ(uint32_t value)
@@ -2338,9 +2325,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1117:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrexb %0, [%1]" : "=r" (result) : "r" (addr) : "memory" );
 1118:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
 1119:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return ((uint8_t) result);    /* Add explicit type cast here */
-ARM GAS  /tmp/ccM0Bbkd.s 			page 40
-
-
 1120:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1121:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1122:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2354,6 +2338,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1130:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1131:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1132:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 40
+
+
 1133:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #if (__GNUC__ > 4) || (__GNUC__ == 4 && __GNUC_MINOR__ >= 8)
 1134:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrexh %0, %1" : "=r" (result) : "Q" (*addr) );
 1135:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
@@ -2398,9 +2385,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1174:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1175:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1176:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 41
-
-
 1177:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1178:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   STR Exclusive (16 bit)
 1179:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a exclusive STR instruction for 16 bit values.
@@ -2414,6 +2398,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1187:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    uint32_t result;
 1188:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1189:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("strexh %0, %2, %1" : "=&r" (result), "=Q" (*addr) : "r" ((uint32_t)value) );
+ARM GAS  /tmp/ccgwf8ZO.s 			page 41
+
+
 1190:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1191:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1192:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2458,9 +2445,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1231:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Saturates a signed value.
 1232:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  ARG1  Value to be saturated
 1233:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  ARG2  Bit position to saturate to (1..32)
-ARM GAS  /tmp/ccM0Bbkd.s 			page 42
-
-
 1234:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             Saturated value
 1235:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1236:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #define __SSAT(ARG1,ARG2) \
@@ -2474,6 +2458,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1244:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1245:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1246:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Unsigned Saturate
+ARM GAS  /tmp/ccgwf8ZO.s 			page 42
+
+
 1247:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Saturates an unsigned value.
 1248:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  ARG1  Value to be saturated
 1249:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  ARG2  Bit position to saturate to (0..31)
@@ -2518,9 +2505,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1288:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrbt %0, %1" : "=r" (result) : "Q" (*ptr) );
 1289:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else
 1290:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     /* Prior to GCC 4.8, "Q" will be expanded to [rx, #0] which is not
-ARM GAS  /tmp/ccM0Bbkd.s 			page 43
-
-
 1291:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****        accepted by assembler. So has to use following less efficient pattern.
 1292:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     */
 1293:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("ldrbt %0, [%1]" : "=r" (result) : "r" (ptr) : "memory" );
@@ -2534,6 +2518,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1301:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a Unprivileged LDRT instruction for 16 bit values.
 1302:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
 1303:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint16_t at (*ptr)
+ARM GAS  /tmp/ccgwf8ZO.s 			page 43
+
+
 1304:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1305:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint16_t __LDRHT(volatile uint16_t *ptr)
 1306:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2578,9 +2565,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1345:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1346:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1347:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 44
-
-
 1348:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1349:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   STRT Unprivileged (16 bit)
 1350:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a Unprivileged STRT instruction for 16 bit values.
@@ -2594,6 +2578,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1358:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1359:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1360:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
+ARM GAS  /tmp/ccgwf8ZO.s 			page 44
+
+
 1361:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   STRT Unprivileged (32 bit)
 1362:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a Unprivileged STRT instruction for 32 bit values.
 1363:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
@@ -2638,9 +2625,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1402:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Saturates an unsigned value.
 1403:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to be saturated
 1404:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    sat  Bit position to saturate to (0..31)
-ARM GAS  /tmp/ccM0Bbkd.s 			page 45
-
-
 1405:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             Saturated value
 1406:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1407:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __USAT(int32_t val, uint32_t sat)
@@ -2654,6 +2638,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1415:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     }
 1416:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     else if (val < 0)
 1417:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     {
+ARM GAS  /tmp/ccgwf8ZO.s 			page 45
+
+
 1418:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****       return 0U;
 1419:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     }
 1420:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   }
@@ -2698,9 +2685,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1459:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1460:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1461:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccM0Bbkd.s 			page 46
-
-
 1462:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Load-Acquire (32 bit)
 1463:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a LDA instruction for 32 bit values.
 1464:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
@@ -2714,6 +2698,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1472:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1473:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1474:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 46
+
+
 1475:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1476:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1477:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Store-Release (8 bit)
@@ -2758,9 +2745,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1516:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return             value of type uint8_t at (*ptr)
 1517:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1518:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint8_t __LDAEXB(volatile uint8_t *ptr)
-ARM GAS  /tmp/ccM0Bbkd.s 			page 47
-
-
 1519:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1520:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t result;
 1521:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2774,6 +2758,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1529:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a LDAH exclusive instruction for 16 bit values.
 1530:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
 1531:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \return        value of type uint16_t at (*ptr)
+ARM GAS  /tmp/ccgwf8ZO.s 			page 47
+
+
 1532:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  */
 1533:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint16_t __LDAEXH(volatile uint16_t *ptr)
 1534:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -2818,9 +2805,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1573:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1574:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
 1575:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \brief   Store-Release Exclusive (16 bit)
-ARM GAS  /tmp/ccM0Bbkd.s 			page 48
-
-
 1576:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \details Executes a STLH exclusive instruction for 16 bit values.
 1577:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]  value  Value to store
 1578:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to location
@@ -2834,6 +2818,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1586:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    __ASM volatile ("stlexh %0, %2, %1" : "=&r" (result), "=Q" (*ptr) : "r" ((uint32_t)value) );
 1587:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****    return(result);
 1588:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccgwf8ZO.s 			page 48
+
+
 1589:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1590:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1591:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** /**
@@ -2878,9 +2865,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1630:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1631:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1632:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 49
-
-
 1633:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("qadd8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1634:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1635:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -2894,6 +2878,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1643:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1644:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1645:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UADD8(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccgwf8ZO.s 			page 49
+
+
 1646:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1647:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1648:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2938,9 +2925,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1687:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1688:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1689:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 50
-
-
 1690:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("shsub8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1691:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1692:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -2954,6 +2938,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1700:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1701:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1702:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UQSUB8(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccgwf8ZO.s 			page 50
+
+
 1703:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1704:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1705:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -2998,9 +2985,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1744:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1745:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1746:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 51
-
-
 1747:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uadd16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1748:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1749:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
@@ -3014,6 +2998,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1757:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1758:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1759:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __UHADD16(uint32_t op1, uint32_t op2)
+ARM GAS  /tmp/ccgwf8ZO.s 			page 51
+
+
 1760:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1761:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1762:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -3058,9 +3045,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1801:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1802:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1803:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uqsub16 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
-ARM GAS  /tmp/ccM0Bbkd.s 			page 52
-
-
 1804:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1805:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1806:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -3074,6 +3058,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1814:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1815:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SASX(uint32_t op1, uint32_t op2)
 1816:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
+ARM GAS  /tmp/ccgwf8ZO.s 			page 52
+
+
 1817:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1818:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1819:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("sasx %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
@@ -3118,9 +3105,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1858:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1859:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("uhasx %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1860:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
-ARM GAS  /tmp/ccM0Bbkd.s 			page 53
-
-
 1861:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
 1862:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1863:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SSAX(uint32_t op1, uint32_t op2)
@@ -3134,6 +3118,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1871:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __QSAX(uint32_t op1, uint32_t op2)
 1872:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
 1873:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
+ARM GAS  /tmp/ccgwf8ZO.s 			page 53
+
+
 1874:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1875:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("qsax %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1876:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
@@ -3178,9 +3165,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1915:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("usad8 %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1916:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1917:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/ccM0Bbkd.s 			page 54
-
-
 1918:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1919:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __USADA8(uint32_t op1, uint32_t op2, uint32_t op3)
 1920:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -3194,6 +3178,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1928:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** ({                          \
 1929:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   int32_t __RES, __ARG1 = (ARG1); \
 1930:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM ("ssat16 %0, %1, %2" : "=r" (__RES) :  "I" (ARG2), "r" (__ARG1) ); \
+ARM GAS  /tmp/ccgwf8ZO.s 			page 54
+
+
 1931:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __RES; \
 1932:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****  })
 1933:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
@@ -3238,9 +3225,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1972:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1973:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMUAD  (uint32_t op1, uint32_t op2)
 1974:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccM0Bbkd.s 			page 55
-
-
 1975:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   uint32_t result;
 1976:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1977:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smuad %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
@@ -3254,6 +3238,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 1985:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smuadx %0, %1, %2" : "=r" (result) : "r" (op1), "r" (op2) );
 1986:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(result);
 1987:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** }
+ARM GAS  /tmp/ccgwf8ZO.s 			page 55
+
+
 1988:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 1989:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __SMLAD (uint32_t op1, uint32_t op2, uint32_t op3)
 1990:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
@@ -3278,281 +3265,222 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
 2009:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint64_t w64;
 2010:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   } llr;
 2011:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   llr.w64 = acc;
+ 383              		.loc 3 2011 11
+ 384 0256 D7E91423 		ldrd	r2, [r7, #80]
+ 385 025a C7E90823 		strd	r2, [r7, #32]
 2012:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 2013:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #ifndef __ARMEB__   /* Little endian */
 2014:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smlald %0, %1, %2, %3" : "=r" (llr.w32[0]), "=r" (llr.w32[1]): "r" (op1), "r" (o
- 337              		.loc 3 2014 3 is_stmt 0 view .LVU129
- 338 00fe 0246     		mov	r2, r0
- 339 0100 D5F800B0 		ldr	fp, [r5]	@ unaligned
- 340              	.LVL41:
- 341              		.loc 3 2014 3 view .LVU130
- 342              	.LBE24:
- 343              	.LBE23:
- 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 344              		.loc 2 475 3 is_stmt 1 view .LVU131
- 345              		.loc 2 477 3 view .LVU132
- 216:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 217:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           inA2 = read_q15x2_ia ((q15_t **) &pInA);
- 346              		.loc 1 217 11 view .LVU133
- 347              	.LBB27:
- 348              	.LBI27:
- 469:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
- 349              		.loc 2 469 28 view .LVU134
-ARM GAS  /tmp/ccM0Bbkd.s 			page 56
-
-
- 350              	.LBB28:
- 472:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 351              		.loc 2 472 3 view .LVU135
- 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 352              		.loc 2 474 3 view .LVU136
- 353              	.LBE28:
- 354              	.LBE27:
- 355              	.LBB30:
- 356              	.LBB25:
- 357              		.loc 3 2014 3 is_stmt 0 view .LVU137
- 358 0104 0B46     		mov	r3, r1
- 359 0106 6868     		ldr	r0, [r5, #4]	@ unaligned
- 360              	.LVL42:
- 361              		.loc 3 2014 3 view .LVU138
- 362 0108 0834     		adds	r4, r4, #8
- 363              	.LVL43:
- 364              		.loc 3 2014 3 view .LVU139
- 365 010a 54F8041C 		ldr	r1, [r4, #-4]	@ unaligned
- 366              	.LVL44:
- 367              		.loc 3 2014 3 view .LVU140
- 368              	.LBE25:
- 369              	.LBE30:
- 370              	.LBB31:
- 371              	.LBB29:
- 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 372              		.loc 2 475 3 is_stmt 1 view .LVU141
- 373              		.loc 2 477 3 view .LVU142
- 374              		.loc 2 477 3 is_stmt 0 view .LVU143
- 375              	.LBE29:
- 376              	.LBE31:
- 218:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           inB2 = read_q15x2_ia ((q15_t **) &pInB);
- 377              		.loc 1 218 11 is_stmt 1 view .LVU144
- 378              	.LBB32:
- 379              	.LBI32:
- 469:./Libraries/CMSIS/DSP/Include/arm_math.h ****   q15_t ** pQ15)
- 380              		.loc 2 469 28 view .LVU145
- 381              	.LBB33:
- 472:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 382              		.loc 2 472 3 view .LVU146
- 474:./Libraries/CMSIS/DSP/Include/arm_math.h ****   *pQ15 += 2;
- 383              		.loc 2 474 3 view .LVU147
- 475:./Libraries/CMSIS/DSP/Include/arm_math.h **** 
- 384              		.loc 2 475 3 view .LVU148
- 385 010e 0835     		adds	r5, r5, #8
- 386              	.LVL45:
- 387              		.loc 2 477 3 view .LVU149
- 388              		.loc 2 477 3 is_stmt 0 view .LVU150
- 389              	.LBE33:
- 390              	.LBE32:
- 219:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 220:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* Multiply and Accumlates */
- 221:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           sum = __SMLALD(inA1, inB1, sum);
- 391              		.loc 1 221 11 is_stmt 1 view .LVU151
- 392              	.LBB34:
- 393              	.LBI23:
-2005:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 394              		.loc 3 2005 31 view .LVU152
-ARM GAS  /tmp/ccM0Bbkd.s 			page 57
-
-
- 395              	.LBB26:
-2007:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t w32[2];
- 396              		.loc 3 2007 3 view .LVU153
-2011:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 397              		.loc 3 2011 3 view .LVU154
- 398              		.loc 3 2014 3 view .LVU155
- 399              		.syntax unified
- 400              	@ 2014 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 401 0110 C7FBCB23 		smlald r2, r3, r7, fp
- 402              	@ 0 "" 2
+ 386              		.loc 3 2014 118
+ 387 025e 3A6A     		ldr	r2, [r7, #32]
+ 388              		.loc 3 2014 136
+ 389 0260 7B6A     		ldr	r3, [r7, #36]
+ 390              		.loc 3 2014 3
+ 391 0262 F96D     		ldr	r1, [r7, #92]
+ 392 0264 B86D     		ldr	r0, [r7, #88]
+ 393              		.syntax unified
+ 394              	@ 2014 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 395 0266 C1FBC023 		smlald r2, r3, r1, r0
+ 396              	@ 0 "" 2
+ 397              		.thumb
+ 398              		.syntax unified
+ 399 026a 3A62     		str	r2, [r7, #32]
+ 400 026c 7B62     		str	r3, [r7, #36]
 2015:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else               /* Big endian */
 2016:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   __ASM volatile ("smlald %0, %1, %2, %3" : "=r" (llr.w32[1]), "=r" (llr.w32[0]): "r" (op1), "r" (o
 2017:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #endif
 2018:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
 2019:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****   return(llr.w64);
- 403              		.loc 3 2019 3 view .LVU156
- 404              	.LVL46:
- 405              		.loc 3 2019 3 is_stmt 0 view .LVU157
- 406              		.thumb
- 407              		.syntax unified
- 408              	.LBE26:
- 409              	.LBE34:
+ 401              		.loc 3 2019 13
+ 402 026e D7E90823 		ldrd	r2, [r7, #32]
+ 403              	.LBE32:
+ 404              	.LBE31:
+ 405              		.loc 1 221 15
+ 406 0272 C7E92E23 		strd	r2, [r7, #184]
  222:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           sum = __SMLALD(inA2, inB2, sum);
- 410              		.loc 1 222 11 is_stmt 1 view .LVU158
- 411              	.LBB35:
- 412              	.LBI35:
-2005:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** {
- 413              		.loc 3 2005 31 view .LVU159
- 414              	.LBB36:
-2007:./Libraries/CMSIS/Core/Include/cmsis_gcc.h ****     uint32_t w32[2];
- 415              		.loc 3 2007 3 view .LVU160
+ARM GAS  /tmp/ccgwf8ZO.s 			page 56
+
+
+ 407              		.loc 1 222 17
+ 408 0276 D7F88000 		ldr	r0, [r7, #128]
+ 409 027a F96F     		ldr	r1, [r7, #124]
+ 410 027c D7E92E23 		ldrd	r2, [r7, #184]
+ 411 0280 F866     		str	r0, [r7, #108]
+ 412 0282 B966     		str	r1, [r7, #104]
+ 413 0284 C7E91823 		strd	r2, [r7, #96]
+ 414              	.LBB33:
+ 415              	.LBB34:
 2011:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** 
- 416              		.loc 3 2011 3 view .LVU161
+ 416              		.loc 3 2011 11
+ 417 0288 D7E91823 		ldrd	r2, [r7, #96]
+ 418 028c C7E90623 		strd	r2, [r7, #24]
 2014:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else               /* Big endian */
- 417              		.loc 3 2014 3 view .LVU162
- 418              		.syntax unified
- 419              	@ 2014 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
- 420 0114 C1FBC023 		smlald r2, r3, r1, r0
- 421              	@ 0 "" 2
- 422              	.LVL47:
- 423              		.loc 3 2019 3 view .LVU163
- 424              		.loc 3 2019 3 is_stmt 0 view .LVU164
- 425              		.thumb
+ 419              		.loc 3 2014 118
+ 420 0290 BA69     		ldr	r2, [r7, #24]
+2014:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else               /* Big endian */
+ 421              		.loc 3 2014 136
+ 422 0292 FB69     		ldr	r3, [r7, #28]
+2014:./Libraries/CMSIS/Core/Include/cmsis_gcc.h **** #else               /* Big endian */
+ 423              		.loc 3 2014 3
+ 424 0294 F96E     		ldr	r1, [r7, #108]
+ 425 0296 B86E     		ldr	r0, [r7, #104]
  426              		.syntax unified
- 427              	.LBE36:
- 428              	.LBE35:
- 209:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         {
- 429              		.loc 1 209 15 view .LVU165
- 430 0118 013E     		subs	r6, r6, #1
- 431              	.LVL48:
- 432              		.loc 1 222 15 view .LVU166
- 433 011a 1046     		mov	r0, r2
- 434              	.LVL49:
- 435              		.loc 1 222 15 view .LVU167
- 436 011c 1946     		mov	r1, r3
- 437              	.LVL50:
+ 427              	@ 2014 "./Libraries/CMSIS/Core/Include/cmsis_gcc.h" 1
+ 428 0298 C1FBC023 		smlald r2, r3, r1, r0
+ 429              	@ 0 "" 2
+ 430              		.thumb
+ 431              		.syntax unified
+ 432 029c BA61     		str	r2, [r7, #24]
+ 433 029e FB61     		str	r3, [r7, #28]
+ 434              		.loc 3 2019 13
+ 435 02a0 D7E90623 		ldrd	r2, [r7, #24]
+ 436              	.LBE34:
+ 437              	.LBE33:
+ 438              		.loc 1 222 15
+ 439 02a4 C7E92E23 		strd	r2, [r7, #184]
  223:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
-ARM GAS  /tmp/ccM0Bbkd.s 			page 58
-
-
  224:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* Decrement loop counter */
  225:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           colCnt--;
- 438              		.loc 1 225 11 is_stmt 1 view .LVU168
+ 440              		.loc 1 225 17
+ 441 02a8 D7F8A430 		ldr	r3, [r7, #164]
+ 442 02ac 013B     		subs	r3, r3, #1
+ 443 02ae C7F8A430 		str	r3, [r7, #164]
+ 444              	.L9:
  209:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         {
- 439              		.loc 1 209 15 view .LVU169
- 440 011e EDD1     		bne	.L8
- 441 0120 D644     		add	lr, lr, r10
- 442 0122 D444     		add	ip, ip, r10
- 443              	.LVL51:
- 444              	.L7:
+ 445              		.loc 1 209 15
+ 446 02b2 D7F8A430 		ldr	r3, [r7, #164]
+ 447 02b6 002B     		cmp	r3, #0
+ 448 02b8 88D1     		bne	.L16
  226:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         }
  227:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  228:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* process remaining column samples */
  229:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         colCnt = numColsA % 0x4U;
- 445              		.loc 1 229 9 view .LVU170
+ 449              		.loc 1 229 27
+ 450 02ba B7F89A30 		ldrh	r3, [r7, #154]
+ 451              		.loc 1 229 16
+ARM GAS  /tmp/ccgwf8ZO.s 			page 57
+
+
+ 452 02be 03F00303 		and	r3, r3, #3
+ 453 02c2 C7F8A430 		str	r3, [r7, #164]
  230:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  231:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         while (colCnt > 0U)
- 446              		.loc 1 231 9 view .LVU171
- 447              		.loc 1 231 15 view .LVU172
- 448 0124 039B     		ldr	r3, [sp, #12]
- 449 0126 53B1     		cbz	r3, .L9
- 450 0128 7246     		mov	r2, lr
- 451              	.LVL52:
- 452              	.L10:
+ 454              		.loc 1 231 15
+ 455 02c6 1BE0     		b	.L17
+ 456              	.L18:
  232:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         {
  233:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* c(m,n) = a(1,1) * b(1,1) + a(1,2) * b(2,1) + .... + a(m,p) * b(p,n) */
  234:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           sum += *pInA++ * *pInB++;
- 453              		.loc 1 234 11 view .LVU173
- 454              		.loc 1 234 15 is_stmt 0 view .LVU174
- 455 012a 3CF8025B 		ldrh	r5, [ip], #2
- 456              	.LVL53:
- 231:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         {
- 457              		.loc 1 231 15 view .LVU175
- 458 012e 013B     		subs	r3, r3, #1
- 459              	.LVL54:
- 460              		.loc 1 234 15 view .LVU176
- 461 0130 32F8024B 		ldrh	r4, [r2], #2
- 462              	.LVL55:
- 463              		.loc 1 234 15 view .LVU177
- 464 0134 C5FB8401 		smlalbb	r0, r1, r5, r4
- 465              	.LVL56:
+ 457              		.loc 1 234 23
+ 458 02c8 FB6B     		ldr	r3, [r7, #60]
+ 459 02ca 9A1C     		adds	r2, r3, #2
+ 460 02cc FA63     		str	r2, [r7, #60]
+ 461              		.loc 1 234 18
+ 462 02ce B3F90030 		ldrsh	r3, [r3]
+ 463 02d2 1946     		mov	r1, r3
+ 464              		.loc 1 234 33
+ 465 02d4 BB6B     		ldr	r3, [r7, #56]
+ 466 02d6 9A1C     		adds	r2, r3, #2
+ 467 02d8 BA63     		str	r2, [r7, #56]
+ 468              		.loc 1 234 28
+ 469 02da B3F90030 		ldrsh	r3, [r3]
+ 470              		.loc 1 234 26
+ 471 02de 03FB01F3 		mul	r3, r3, r1
+ 472 02e2 1A46     		mov	r2, r3
+ 473 02e4 4FEAE273 		asr	r3, r2, #31
+ 474              		.loc 1 234 15
+ 475 02e8 D7E92E01 		ldrd	r0, [r7, #184]
+ 476 02ec 8418     		adds	r4, r0, r2
+ 477 02ee 41EB0305 		adc	r5, r1, r3
+ 478 02f2 C7E92E45 		strd	r4, [r7, #184]
  235:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  236:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* Decrement loop counter */
  237:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           colCnt--;
- 466              		.loc 1 237 11 is_stmt 1 view .LVU178
+ 479              		.loc 1 237 17
+ 480 02f6 D7F8A430 		ldr	r3, [r7, #164]
+ 481 02fa 013B     		subs	r3, r3, #1
+ 482 02fc C7F8A430 		str	r3, [r7, #164]
+ 483              	.L17:
  231:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         {
- 467              		.loc 1 231 15 view .LVU179
- 468 0138 F7D1     		bne	.L10
- 469 013a 059B     		ldr	r3, [sp, #20]
- 470 013c 9E44     		add	lr, lr, r3
- 471              	.LVL57:
- 472              	.L9:
+ 484              		.loc 1 231 15
+ 485 0300 D7F8A430 		ldr	r3, [r7, #164]
+ 486 0304 002B     		cmp	r3, #0
+ 487 0306 DFD1     		bne	.L18
+ 488              	.LBB35:
  238:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         }
  239:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  240:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Saturate and store result in destination buffer */
  241:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         *px = (q15_t) (__SSAT((sum >> 15), 16));
- 473              		.loc 1 241 9 view .LVU180
-ARM GAS  /tmp/ccM0Bbkd.s 			page 59
+ 489              		.loc 1 241 24
+ 490 0308 D7E92E01 		ldrd	r0, [r7, #184]
+ 491 030c 4FF00002 		mov	r2, #0
+ 492 0310 4FF00003 		mov	r3, #0
+ 493 0314 C20B     		lsrs	r2, r0, #15
+ 494 0316 42EA4142 		orr	r2, r2, r1, lsl #17
+ 495 031a CB13     		asrs	r3, r1, #15
+ARM GAS  /tmp/ccgwf8ZO.s 			page 58
 
 
- 474              	.LBB37:
- 475              		.loc 1 241 24 view .LVU181
- 476              		.loc 1 241 24 view .LVU182
- 477 013e C30B     		lsrs	r3, r0, #15
- 478              	.LBE37:
+ 496 031c 1346     		mov	r3, r2
+ 497 031e C7F89430 		str	r3, [r7, #148]
+ 498 0322 D7F89430 		ldr	r3, [r7, #148]
+ 499              		.syntax unified
+ 500              	@ 241 "./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c" 1
+ 501 0326 03F30F03 		ssat r3, #16, r3
+ 502              	@ 0 "" 2
+ 503              		.thumb
+ 504              		.syntax unified
+ 505 032a C7F89030 		str	r3, [r7, #144]
+ 506 032e D7F89030 		ldr	r3, [r7, #144]
+ 507              	.LBE35:
+ 508              		.loc 1 241 15
+ 509 0332 1AB2     		sxth	r2, r3
+ 510              		.loc 1 241 13
+ 511 0334 D7F8B430 		ldr	r3, [r7, #180]
+ 512 0338 1A80     		strh	r2, [r3]	@ movhi
  242:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px++;
+ 513              		.loc 1 242 11
+ 514 033a D7F8B430 		ldr	r3, [r7, #180]
+ 515 033e 0233     		adds	r3, r3, #2
+ 516 0340 C7F8B430 		str	r3, [r7, #180]
  243:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  244:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Decrement column loop counter */
  245:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         col--;
+ 517              		.loc 1 245 12
+ 518 0344 D7F8B030 		ldr	r3, [r7, #176]
+ 519 0348 013B     		subs	r3, r3, #1
+ 520 034a C7F8B030 		str	r3, [r7, #176]
  246:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  247:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       } while (col > 0U);
- 479              		.loc 1 247 7 is_stmt 0 view .LVU183
- 480 0140 B8F10108 		subs	r8, r8, #1
- 481              	.LVL58:
- 482              	.LBB38:
- 241:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px++;
- 483              		.loc 1 241 24 view .LVU184
- 484 0144 43EA4143 		orr	r3, r3, r1, lsl #17
- 485              		.syntax unified
- 486              	@ 241 "./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c" 1
- 487 0148 03F30F03 		ssat r3, #16, r3
- 488              	@ 0 "" 2
- 489              	.LVL59:
- 241:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px++;
- 490              		.loc 1 241 24 is_stmt 1 view .LVU185
- 491              		.thumb
- 492              		.syntax unified
- 493              	.LBE38:
- 241:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px++;
- 494              		.loc 1 241 15 is_stmt 0 view .LVU186
- 495 014c 29F8023B 		strh	r3, [r9], #2	@ movhi
- 496              	.LVL60:
- 242:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         px++;
- 497              		.loc 1 242 9 is_stmt 1 view .LVU187
- 245:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 498              		.loc 1 245 9 view .LVU188
- 499              		.loc 1 247 15 view .LVU189
- 500              		.loc 1 247 7 is_stmt 0 view .LVU190
- 501 0150 C9D1     		bne	.L11
- 502              		.loc 1 247 7 view .LVU191
- 503 0152 069B     		ldr	r3, [sp, #24]
- 504              	.LVL61:
- 505              		.loc 1 247 7 view .LVU192
- 506 0154 0A9A     		ldr	r2, [sp, #40]
- 507 0156 1344     		add	r3, r3, r2
- 508 0158 099A     		ldr	r2, [sp, #36]
- 509 015a 0693     		str	r3, [sp, #24]
+ 521              		.loc 1 247 7
+ 522 034e D7F8B030 		ldr	r3, [r7, #176]
+ 523 0352 002B     		cmp	r3, #0
+ 524 0354 7FF426AF 		bne	.L19
  248:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  249:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       i = i + numColsA;
- 510              		.loc 1 249 7 is_stmt 1 view .LVU193
+ 525              		.loc 1 249 13
+ 526 0358 B7F89A30 		ldrh	r3, [r7, #154]
+ 527              		.loc 1 249 9
+ 528 035c D7F8AC20 		ldr	r2, [r7, #172]
+ 529 0360 1344     		add	r3, r3, r2
+ 530 0362 C7F8AC30 		str	r3, [r7, #172]
  250:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  251:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* Decrement row loop counter */
  252:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       row--;
- 511              		.loc 1 252 7 view .LVU194
- 512              	.LVL62:
+ 531              		.loc 1 252 10
+ 532 0366 D7F8A830 		ldr	r3, [r7, #168]
+ 533 036a 013B     		subs	r3, r3, #1
+ 534 036c C7F8A830 		str	r3, [r7, #168]
  253:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  254:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     } while (row > 0U);
-ARM GAS  /tmp/ccM0Bbkd.s 			page 60
-
-
- 513              		.loc 1 254 13 view .LVU195
- 514 015c 019B     		ldr	r3, [sp, #4]
- 515 015e 1344     		add	r3, r3, r2
- 516 0160 0193     		str	r3, [sp, #4]
- 517              		.loc 1 254 5 is_stmt 0 view .LVU196
- 518 0162 079B     		ldr	r3, [sp, #28]
- 519 0164 013B     		subs	r3, r3, #1
- 520              	.LVL63:
- 521              		.loc 1 254 5 view .LVU197
- 522 0166 0793     		str	r3, [sp, #28]
- 523 0168 B7D1     		bne	.L12
+ 535              		.loc 1 254 5
+ 536 0370 D7F8A830 		ldr	r3, [r7, #168]
+ 537 0374 002B     		cmp	r3, #0
+ 538 0376 7FF40EAF 		bne	.L20
  255:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
+ARM GAS  /tmp/ccgwf8ZO.s 			page 59
+
+
  256:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** #else /* #if defined (ARM_MATH_DSP) */
  257:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  258:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         q15_t *pIn1 = pSrcA->pData;                    /* Input data matrix pointer A */
@@ -3598,9 +3526,6 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  298:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       /* column loop */
  299:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       do
  300:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****       {
-ARM GAS  /tmp/ccM0Bbkd.s 			page 61
-
-
  301:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* Set the variable sum, that acts as accumulator, to zero */
  302:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         sum = 0;
  303:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
@@ -3613,6 +3538,9 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  310:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         /* matrix multiplication */
  311:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         while (colCnt > 0U)
  312:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****         {
+ARM GAS  /tmp/ccgwf8ZO.s 			page 60
+
+
  313:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* c(m,n) = a(1,1) * b(1,1) + a(1,2) * b(2,1) + .... + a(m,p) * b(p,n) */
  314:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  315:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****           /* Perform multiply-accumulates */
@@ -3649,52 +3577,51 @@ ARM GAS  /tmp/ccM0Bbkd.s 			page 1
  346:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  347:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     /* Set status as ARM_MATH_SUCCESS */
  348:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****     status = ARM_MATH_SUCCESS;
- 524              		.loc 1 348 5 is_stmt 1 view .LVU198
- 525              	.LVL64:
+ 539              		.loc 1 348 12
+ 540 037a 0023     		movs	r3, #0
+ 541 037c 87F88F30 		strb	r3, [r7, #143]
  349:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   }
  350:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
  351:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   /* Return to application */
  352:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c ****   return (status);
- 526              		.loc 1 352 3 view .LVU199
+ 542              		.loc 1 352 10
+ 543 0380 97F98F30 		ldrsb	r3, [r7, #143]
  353:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** }
- 527              		.loc 1 353 1 is_stmt 0 view .LVU200
-ARM GAS  /tmp/ccM0Bbkd.s 			page 62
+ 544              		.loc 1 353 1
+ 545 0384 1846     		mov	r0, r3
+ 546 0386 C437     		adds	r7, r7, #196
+ 547              	.LCFI3:
+ 548              		.cfi_def_cfa_offset 12
+ 549 0388 BD46     		mov	sp, r7
+ 550              	.LCFI4:
+ 551              		.cfi_def_cfa_register 13
+ 552              		@ sp needed
+ 553 038a B0BC     		pop	{r4, r5, r7}
+ 554              	.LCFI5:
+ARM GAS  /tmp/ccgwf8ZO.s 			page 61
 
 
- 528 016a 1846     		mov	r0, r3
- 529              	.LVL65:
- 530              		.loc 1 353 1 view .LVU201
- 531 016c 0DB0     		add	sp, sp, #52
- 532              	.LCFI2:
- 533              		.cfi_remember_state
- 534              		.cfi_def_cfa_offset 36
- 535              		@ sp needed
- 536 016e BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 537              	.LVL66:
- 538              	.L13:
- 539              	.LCFI3:
- 540              		.cfi_restore_state
- 200:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q15.c **** 
- 541              		.loc 1 200 13 view .LVU202
- 542 0172 0020     		movs	r0, #0
- 543 0174 0021     		movs	r1, #0
- 544 0176 D5E7     		b	.L7
- 545              		.cfi_endproc
- 546              	.LFE145:
- 548              		.text
- 549              	.Letext0:
- 550              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 551              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 552              		.file 6 "/usr/include/newlib/sys/_types.h"
- 553              		.file 7 "/usr/include/newlib/sys/reent.h"
- 554              		.file 8 "/usr/include/newlib/sys/lock.h"
- 555              		.file 9 "/usr/include/newlib/math.h"
-ARM GAS  /tmp/ccM0Bbkd.s 			page 63
+ 555              		.cfi_restore 7
+ 556              		.cfi_restore 5
+ 557              		.cfi_restore 4
+ 558              		.cfi_def_cfa_offset 0
+ 559 038c 7047     		bx	lr
+ 560              		.cfi_endproc
+ 561              	.LFE145:
+ 563              		.text
+ 564              	.Letext0:
+ 565              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 566              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 567              		.file 6 "/usr/include/newlib/sys/_types.h"
+ 568              		.file 7 "/usr/include/newlib/sys/reent.h"
+ 569              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 570              		.file 9 "/usr/include/newlib/math.h"
+ARM GAS  /tmp/ccgwf8ZO.s 			page 62
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_mat_mult_q15.c
-     /tmp/ccM0Bbkd.s:17     .text.arm_mat_mult_q15:0000000000000000 $t
-     /tmp/ccM0Bbkd.s:26     .text.arm_mat_mult_q15:0000000000000000 arm_mat_mult_q15
+     /tmp/ccgwf8ZO.s:17     .text.arm_mat_mult_q15:0000000000000000 $t
+     /tmp/ccgwf8ZO.s:25     .text.arm_mat_mult_q15:0000000000000000 arm_mat_mult_q15
 
 NO UNDEFINED SYMBOLS

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccdquRTq.s 			page 1
+ARM GAS  /tmp/ccLrNvS7.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccdquRTq.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_mat_mult_q31.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccdquRTq.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_mat_mult_q31,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_mat_mult_q31
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_mat_mult_q31:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c"
+  18              		.global	arm_mat_mult_q31
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_mat_mult_q31:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c"
    1:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****  * Title:        arm_mat_mult_q31.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccdquRTq.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****  */
   28:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
   29:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccdquRTq.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
   31:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** /**
+ARM GAS  /tmp/ccLrNvS7.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   @ingroup groupMatrix
   33:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****  */
   34:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
@@ -98,33 +96,91 @@ ARM GAS  /tmp/ccdquRTq.s 			page 1
   64:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   const arm_matrix_instance_q31 * pSrcB,
   65:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         arm_matrix_instance_q31 * pDst)
   66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** {
-  30              		.loc 1 66 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 16
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  28              		.loc 1 66 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 72
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 F0B4     		push	{r4, r5, r6, r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 7, -4
+  40 0002 92B0     		sub	sp, sp, #72
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 88
+  43 0004 00AF     		add	r7, sp, #0
+  44              	.LCFI2:
+  45              		.cfi_def_cfa_register 7
+  46 0006 F860     		str	r0, [r7, #12]
+  47 0008 B960     		str	r1, [r7, #8]
+  48 000a 7A60     		str	r2, [r7, #4]
   67:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pIn1 = pSrcA->pData;                    /* Input data matrix pointer A */
-  34              		.loc 1 67 3 view .LVU1
+ARM GAS  /tmp/ccLrNvS7.s 			page 3
+
+
+  49              		.loc 1 67 10
+  50 000c FB68     		ldr	r3, [r7, #12]
+  51 000e 5B68     		ldr	r3, [r3, #4]
+  52 0010 7B64     		str	r3, [r7, #68]
   68:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pIn2 = pSrcB->pData;                    /* Input data matrix pointer B */
+  53              		.loc 1 68 10
+  54 0012 BB68     		ldr	r3, [r7, #8]
+  55 0014 5B68     		ldr	r3, [r3, #4]
+  56 0016 3B64     		str	r3, [r7, #64]
   69:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pInA = pSrcA->pData;                    /* Input data matrix pointer A */
+  57              		.loc 1 69 10
+  58 0018 FB68     		ldr	r3, [r7, #12]
+  59 001a 5B68     		ldr	r3, [r3, #4]
+  60 001c FB63     		str	r3, [r7, #60]
   70:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pInB = pSrcB->pData;                    /* Input data matrix pointer B */
+  61              		.loc 1 70 10
+  62 001e BB68     		ldr	r3, [r7, #8]
+  63 0020 5B68     		ldr	r3, [r3, #4]
+  64 0022 FB61     		str	r3, [r7, #28]
   71:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pOut = pDst->pData;                     /* Output data matrix pointer */
+  65              		.loc 1 71 10
+  66 0024 7B68     		ldr	r3, [r7, #4]
+  67 0026 5B68     		ldr	r3, [r3, #4]
+  68 0028 BB61     		str	r3, [r7, #24]
   72:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *px;                                     /* Temporary output data matrix pointer */
   73:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q63_t sum;                                     /* Accumulator */
   74:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint16_t numRowsA = pSrcA->numRows;            /* Number of rows of input matrix A */
+  69              		.loc 1 74 12
+  70 002a FB68     		ldr	r3, [r7, #12]
+  71 002c 1B88     		ldrh	r3, [r3]	@ movhi
+  72 002e FB82     		strh	r3, [r7, #22]	@ movhi
   75:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint16_t numColsB = pSrcB->numCols;            /* Number of columns of input matrix B */
+  73              		.loc 1 75 12
+  74 0030 BB68     		ldr	r3, [r7, #8]
+  75 0032 5B88     		ldrh	r3, [r3, #2]	@ movhi
+  76 0034 BB82     		strh	r3, [r7, #20]	@ movhi
   76:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint16_t numColsA = pSrcA->numCols;            /* Number of columns of input matrix A */
+  77              		.loc 1 76 12
+  78 0036 FB68     		ldr	r3, [r7, #12]
+  79 0038 5B88     		ldrh	r3, [r3, #2]	@ movhi
+  80 003a 7B82     		strh	r3, [r7, #18]	@ movhi
   77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint32_t col, i = 0U, row = numRowsA, colCnt;  /* Loop counters */
+  81              		.loc 1 77 17
+  82 003c 0023     		movs	r3, #0
+  83 003e BB62     		str	r3, [r7, #40]
+  84              		.loc 1 77 25
+  85 0040 FB8A     		ldrh	r3, [r7, #22]
+  86 0042 7B62     		str	r3, [r7, #36]
+  87              	.L5:
   78:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   arm_status status;                             /* Status of matrix multiplication */
   79:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
   80:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** #ifdef ARM_MATH_MATRIX_CHECK
   81:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
-ARM GAS  /tmp/ccdquRTq.s 			page 3
-
-
   82:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   /* Check for matrix mismatch condition */
   83:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   if ((pSrcA->numCols != pSrcB->numRows) ||
   84:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       (pSrcA->numRows != pDst->numRows)  ||
   85:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       (pSrcB->numCols != pDst->numCols)    )
+ARM GAS  /tmp/ccLrNvS7.s 			page 4
+
+
   86:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   {
   87:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****     /* Set status as ARM_MATH_SIZE_MISMATCH */
   88:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****     status = ARM_MATH_SIZE_MISMATCH;
@@ -140,31 +196,51 @@ ARM GAS  /tmp/ccdquRTq.s 			page 1
   98:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****     {
   99:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       /* Output pointer is set to starting address of row being processed */
  100:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       px = pOut + i;
+  88              		.loc 1 100 17
+  89 0044 BB6A     		ldr	r3, [r7, #40]
+  90 0046 9B00     		lsls	r3, r3, #2
+  91              		.loc 1 100 10
+  92 0048 BA69     		ldr	r2, [r7, #24]
+  93 004a 1344     		add	r3, r3, r2
+  94 004c BB63     		str	r3, [r7, #56]
  101:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  102:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       /* For every row wise process, column loop counter is to be initiated */
  103:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       col = numColsB;
-  35              		.loc 1 103 11 is_stmt 0 view .LVU2
-  36 0000 B1F802C0 		ldrh	ip, [r1, #2]
-  66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pIn1 = pSrcA->pData;                    /* Input data matrix pointer A */
-  37              		.loc 1 66 1 view .LVU3
-  38 0004 0346     		mov	r3, r0
+  95              		.loc 1 103 11
+  96 004e BB8A     		ldrh	r3, [r7, #20]
+  97 0050 FB62     		str	r3, [r7, #44]
  104:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  105:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       /* For every row wise process, pIn2 pointer is set to starting address of pSrcB data */
  106:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       pIn2 = pSrcB->pData;
+  98              		.loc 1 106 12
+  99 0052 BB68     		ldr	r3, [r7, #8]
+ 100 0054 5B68     		ldr	r3, [r3, #4]
+ 101 0056 3B64     		str	r3, [r7, #64]
+ 102              	.L4:
  107:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  108:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       /* column loop */
  109:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       do
  110:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       {
  111:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* Set the variable sum, that acts as accumulator, to zero */
  112:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         sum = 0;
+ 103              		.loc 1 112 13
+ 104 0058 4FF00002 		mov	r2, #0
+ 105 005c 4FF00003 		mov	r3, #0
+ 106 0060 C7E90C23 		strd	r2, [r7, #48]
  113:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  114:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* Initialize pointer pIn1 to point to starting address of column being processed */
  115:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         pIn1 = pInA;
+ 107              		.loc 1 115 14
+ 108 0064 FB6B     		ldr	r3, [r7, #60]
+ 109 0066 7B64     		str	r3, [r7, #68]
  116:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  117:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** #if defined (ARM_MATH_LOOPUNROLL)
  118:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  119:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* Loop unrolling: Compute 4 MACs at a time. */
  120:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         colCnt = numColsA >> 2U;
+ARM GAS  /tmp/ccLrNvS7.s 			page 5
+
+
  121:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  122:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* matrix multiplication */
  123:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         while (colCnt > 0U)
@@ -178,9 +254,6 @@ ARM GAS  /tmp/ccdquRTq.s 			page 1
  131:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           sum += (q63_t) *pIn1++ * *pIn2;
  132:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           pIn2 += numColsB;
  133:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
-ARM GAS  /tmp/ccdquRTq.s 			page 4
-
-
  134:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           sum += (q63_t) *pIn1++ * *pIn2;
  135:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           pIn2 += numColsB;
  136:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
@@ -198,289 +271,198 @@ ARM GAS  /tmp/ccdquRTq.s 			page 1
  148:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  149:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* Initialize cntCnt with number of columns */
  150:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         colCnt = numColsA;
-  39              		.loc 1 150 16 view .LVU4
-  40 0006 4088     		ldrh	r0, [r0, #2]
-  41              	.LVL1:
-  68:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pInA = pSrcA->pData;                    /* Input data matrix pointer A */
-  42              		.loc 1 68 10 view .LVU5
-  43 0008 4968     		ldr	r1, [r1, #4]
-  44              	.LVL2:
-  66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pIn1 = pSrcA->pData;                    /* Input data matrix pointer A */
-  45              		.loc 1 66 1 view .LVU6
-  46 000a 2DE9F04F 		push	{r4, r5, r6, r7, r8, r9, r10, fp, lr}
-  47              	.LCFI0:
-  48              		.cfi_def_cfa_offset 36
-  49              		.cfi_offset 4, -36
-  50              		.cfi_offset 5, -32
-  51              		.cfi_offset 6, -28
-  52              		.cfi_offset 7, -24
-  53              		.cfi_offset 8, -20
-  54              		.cfi_offset 9, -16
-  55              		.cfi_offset 10, -12
-  56              		.cfi_offset 11, -8
-  57              		.cfi_offset 14, -4
-  58 000e 5468     		ldr	r4, [r2, #4]
-  59 0010 CCEB8C72 		rsb	r2, ip, ip, lsl #30
-  60              	.LVL3:
-  66:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pIn1 = pSrcA->pData;                    /* Input data matrix pointer A */
-  61              		.loc 1 66 1 view .LVU7
-  62 0014 85B0     		sub	sp, sp, #20
-  63              	.LCFI1:
-  64              		.cfi_def_cfa_offset 56
-  67:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pIn2 = pSrcB->pData;                    /* Input data matrix pointer B */
-  65              		.loc 1 67 10 view .LVU8
-  66 0016 D3F804A0 		ldr	r10, [r3, #4]
-  67              	.LVL4:
-  68:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pInA = pSrcA->pData;                    /* Input data matrix pointer A */
-  68              		.loc 1 68 3 is_stmt 1 view .LVU9
-  69:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pInB = pSrcB->pData;                    /* Input data matrix pointer B */
-  69              		.loc 1 69 3 view .LVU10
-  70:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pOut = pDst->pData;                     /* Output data matrix pointer */
-  70              		.loc 1 70 3 view .LVU11
-  71:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *px;                                     /* Temporary output data matrix pointer */
-ARM GAS  /tmp/ccdquRTq.s 			page 5
-
-
-  71              		.loc 1 71 3 view .LVU12
-  72:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q63_t sum;                                     /* Accumulator */
-  72              		.loc 1 72 3 view .LVU13
-  73:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint16_t numRowsA = pSrcA->numRows;            /* Number of rows of input matrix A */
-  73              		.loc 1 73 3 view .LVU14
-  74:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint16_t numColsB = pSrcB->numCols;            /* Number of columns of input matrix B */
-  74              		.loc 1 74 3 view .LVU15
-  75:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint16_t numColsA = pSrcA->numCols;            /* Number of columns of input matrix A */
-  75              		.loc 1 75 3 view .LVU16
-  76:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   uint32_t col, i = 0U, row = numRowsA, colCnt;  /* Loop counters */
-  76              		.loc 1 76 3 view .LVU17
-  77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   arm_status status;                             /* Status of matrix multiplication */
-  77              		.loc 1 77 3 view .LVU18
-  77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   arm_status status;                             /* Status of matrix multiplication */
-  78              		.loc 1 77 3 is_stmt 0 view .LVU19
-  79 001a 04EB8C09 		add	r9, r4, ip, lsl #2
-  77:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   arm_status status;                             /* Status of matrix multiplication */
-  80              		.loc 1 77 25 view .LVU20
-  81 001e B3F800B0 		ldrh	fp, [r3]
-  82 0022 9200     		lsls	r2, r2, #2
-  68:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   q31_t *pInA = pSrcA->pData;                    /* Input data matrix pointer A */
-  83              		.loc 1 68 10 view .LVU21
-  84 0024 0291     		str	r1, [sp, #8]
-  85              	.LVL5:
+ 110              		.loc 1 150 16
+ 111 0068 7B8A     		ldrh	r3, [r7, #18]
+ 112 006a 3B62     		str	r3, [r7, #32]
  151:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  152:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  153:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         while (colCnt > 0U)
+ 113              		.loc 1 154 15
+ 114 006c 23E0     		b	.L2
+ 115              	.L3:
  155:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
  156:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           /* c(m,n) = a(1,1) * b(1,1) + a(1,2) * b(2,1) + .... + a(m,p) * b(p,n) */
  157:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  158:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           /* Perform the multiply-accumulates */
  159:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           sum += (q63_t) *pIn1++ * *pIn2;
+ 116              		.loc 1 159 31
+ 117 006e 7B6C     		ldr	r3, [r7, #68]
+ 118 0070 1A1D     		adds	r2, r3, #4
+ 119 0072 7A64     		str	r2, [r7, #68]
+ 120              		.loc 1 159 26
+ 121 0074 1B68     		ldr	r3, [r3]
+ 122              		.loc 1 159 18
+ 123 0076 1846     		mov	r0, r3
+ 124 0078 4FEAE071 		asr	r1, r0, #31
+ 125              		.loc 1 159 36
+ 126 007c 3B6C     		ldr	r3, [r7, #64]
+ 127 007e 1B68     		ldr	r3, [r3]
+ARM GAS  /tmp/ccLrNvS7.s 			page 6
+
+
+ 128 0080 1A46     		mov	r2, r3
+ 129 0082 4FEAE273 		asr	r3, r2, #31
+ 130              		.loc 1 159 34
+ 131 0086 02FB01FC 		mul	ip, r2, r1
+ 132 008a 00FB03F6 		mul	r6, r0, r3
+ 133 008e 6644     		add	r6, r6, ip
+ 134 0090 A0FB0223 		umull	r2, r3, r0, r2
+ 135 0094 F118     		adds	r1, r6, r3
+ 136 0096 0B46     		mov	r3, r1
+ 137              		.loc 1 159 15
+ 138 0098 D7E90C01 		ldrd	r0, [r7, #48]
+ 139 009c 8418     		adds	r4, r0, r2
+ 140 009e 41EB0305 		adc	r5, r1, r3
+ 141 00a2 C7E90C45 		strd	r4, [r7, #48]
  160:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           pIn2 += numColsB;
+ 142              		.loc 1 160 16
+ 143 00a6 BB8A     		ldrh	r3, [r7, #20]
+ 144 00a8 9B00     		lsls	r3, r3, #2
+ 145 00aa 3A6C     		ldr	r2, [r7, #64]
+ 146 00ac 1344     		add	r3, r3, r2
+ 147 00ae 3B64     		str	r3, [r7, #64]
  161:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  162:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           /* Decrement loop counter */
  163:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           colCnt--;
+ 148              		.loc 1 163 17
+ 149 00b0 3B6A     		ldr	r3, [r7, #32]
+ 150 00b2 013B     		subs	r3, r3, #1
+ 151 00b4 3B62     		str	r3, [r7, #32]
+ 152              	.L2:
+ 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
+ 153              		.loc 1 154 15
+ 154 00b6 3B6A     		ldr	r3, [r7, #32]
+ 155 00b8 002B     		cmp	r3, #0
+ 156 00ba D8D1     		bne	.L3
  164:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         }
  165:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  166:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* Convert result from 2.62 to 1.31 format and store in destination buffer */
  167:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         *px++ = (q31_t) (sum >> 31);
+ 157              		.loc 1 167 30
+ 158 00bc D7E90C01 		ldrd	r0, [r7, #48]
+ 159 00c0 4FF00002 		mov	r2, #0
+ 160 00c4 4FF00003 		mov	r3, #0
+ 161 00c8 C20F     		lsrs	r2, r0, #31
+ 162 00ca 42EA4102 		orr	r2, r2, r1, lsl #1
+ 163 00ce CB17     		asrs	r3, r1, #31
+ 164              		.loc 1 167 12
+ 165 00d0 B96B     		ldr	r1, [r7, #56]
+ 166 00d2 081D     		adds	r0, r1, #4
+ 167 00d4 B863     		str	r0, [r7, #56]
+ 168              		.loc 1 167 17
+ 169 00d6 1346     		mov	r3, r2
+ 170              		.loc 1 167 15
+ 171 00d8 0B60     		str	r3, [r1]
  168:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  169:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* Decrement column loop counter */
  170:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         col--;
+ 172              		.loc 1 170 12
+ARM GAS  /tmp/ccLrNvS7.s 			page 7
+
+
+ 173 00da FB6A     		ldr	r3, [r7, #44]
+ 174 00dc 013B     		subs	r3, r3, #1
+ 175 00de FB62     		str	r3, [r7, #44]
  171:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  172:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         /* Update pointer pIn2 to point to starting address of next column */
  173:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         pIn2 = pInB + (numColsB - col);
+ 176              		.loc 1 173 33
+ 177 00e0 BA8A     		ldrh	r2, [r7, #20]
+ 178 00e2 FB6A     		ldr	r3, [r7, #44]
+ 179 00e4 D31A     		subs	r3, r2, r3
+ 180              		.loc 1 173 21
+ 181 00e6 9B00     		lsls	r3, r3, #2
+ 182              		.loc 1 173 14
+ 183 00e8 FA69     		ldr	r2, [r7, #28]
+ 184 00ea 1344     		add	r3, r3, r2
+ 185 00ec 3B64     		str	r3, [r7, #64]
  174:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  175:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       } while (col > 0U);
+ 186              		.loc 1 175 7
+ 187 00ee FB6A     		ldr	r3, [r7, #44]
+ 188 00f0 002B     		cmp	r3, #0
+ 189 00f2 B1D1     		bne	.L4
  176:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  177:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       /* Update pointer pInA to point to starting address of next row */
  178:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       i = i + numColsB;
+ 190              		.loc 1 178 13
+ 191 00f4 BB8A     		ldrh	r3, [r7, #20]
+ 192              		.loc 1 178 9
+ 193 00f6 BA6A     		ldr	r2, [r7, #40]
+ 194 00f8 1344     		add	r3, r3, r2
+ 195 00fa BB62     		str	r3, [r7, #40]
  179:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       pInA = pInA + numColsA;
-  86              		.loc 1 179 19 view .LVU22
-  87 0026 8300     		lsls	r3, r0, #2
-  88              	.LVL6:
- 160:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
-ARM GAS  /tmp/ccdquRTq.s 			page 6
-
-
-  89              		.loc 1 160 16 view .LVU23
-  90 0028 4FEA8C0C 		lsl	ip, ip, #2
-  91 002c 0392     		str	r2, [sp, #12]
-  92              	.LVL7:
-  93              		.loc 1 179 19 view .LVU24
-  94 002e 0193     		str	r3, [sp, #4]
-  95              	.LVL8:
-  96              	.L5:
-  78:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
-  97              		.loc 1 78 3 is_stmt 1 view .LVU25
-  97:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****     {
-  98              		.loc 1 97 5 view .LVU26
- 100:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
-  99              		.loc 1 100 7 view .LVU27
- 100 0030 039B     		ldr	r3, [sp, #12]
- 106:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 101              		.loc 1 106 12 is_stmt 0 view .LVU28
- 102 0032 DDF80880 		ldr	r8, [sp, #8]
- 103 0036 03EB090E 		add	lr, r3, r9
- 104              	.LVL9:
- 103:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 105              		.loc 1 103 7 is_stmt 1 view .LVU29
- 106:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 106              		.loc 1 106 7 view .LVU30
- 107              	.L4:
- 109:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       {
- 108              		.loc 1 109 7 view .LVU31
- 112:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 109              		.loc 1 112 9 view .LVU32
- 115:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 110              		.loc 1 115 9 view .LVU33
- 150:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 111              		.loc 1 150 9 view .LVU34
- 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
- 112              		.loc 1 154 9 view .LVU35
- 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
- 113              		.loc 1 154 15 view .LVU36
- 114 003a 00B3     		cbz	r0, .L6
- 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
- 115              		.loc 1 154 15 is_stmt 0 view .LVU37
- 116 003c 0246     		mov	r2, r0
- 117 003e 4346     		mov	r3, r8
- 115:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 118              		.loc 1 115 14 view .LVU38
- 119 0040 5146     		mov	r1, r10
- 112:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 120              		.loc 1 112 13 view .LVU39
- 121 0042 0024     		movs	r4, #0
- 122 0044 0025     		movs	r5, #0
- 123              	.LVL10:
- 124              	.L3:
- 159:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           pIn2 += numColsB;
- 125              		.loc 1 159 11 is_stmt 1 view .LVU40
- 159:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           pIn2 += numColsB;
- 126              		.loc 1 159 15 is_stmt 0 view .LVU41
- 127 0046 1E68     		ldr	r6, [r3]
- 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
-ARM GAS  /tmp/ccdquRTq.s 			page 7
-
-
- 128              		.loc 1 154 15 view .LVU42
- 129 0048 013A     		subs	r2, r2, #1
- 130              	.LVL11:
- 159:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           pIn2 += numColsB;
- 131              		.loc 1 159 15 view .LVU43
- 132 004a 51F8047B 		ldr	r7, [r1], #4
- 133              	.LVL12:
- 160:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 134              		.loc 1 160 16 view .LVU44
- 135 004e 6344     		add	r3, r3, ip
- 136              	.LVL13:
- 159:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****           pIn2 += numColsB;
- 137              		.loc 1 159 15 view .LVU45
- 138 0050 C6FB0745 		smlal	r4, r5, r6, r7
- 139              	.LVL14:
- 160:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 140              		.loc 1 160 11 is_stmt 1 view .LVU46
- 163:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         }
- 141              		.loc 1 163 11 view .LVU47
- 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
- 142              		.loc 1 154 15 view .LVU48
- 143 0054 F7D1     		bne	.L3
- 144 0056 E30F     		lsrs	r3, r4, #31
- 145              	.LVL15:
- 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
- 146              		.loc 1 154 15 is_stmt 0 view .LVU49
- 147 0058 43EA4503 		orr	r3, r3, r5, lsl #1
- 148              	.LVL16:
- 149              	.L2:
- 167:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 150              		.loc 1 167 9 is_stmt 1 view .LVU50
- 167:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 151              		.loc 1 167 15 is_stmt 0 view .LVU51
- 152 005c 4EF8043B 		str	r3, [lr], #4
- 153              	.LVL17:
- 170:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 154              		.loc 1 170 9 is_stmt 1 view .LVU52
- 173:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 155              		.loc 1 173 9 view .LVU53
- 175:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 156              		.loc 1 175 7 is_stmt 0 view .LVU54
- 157 0060 CE45     		cmp	lr, r9
- 158 0062 08F10408 		add	r8, r8, #4
- 159              	.LVL18:
- 175:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 160              		.loc 1 175 15 is_stmt 1 view .LVU55
- 175:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 161              		.loc 1 175 7 is_stmt 0 view .LVU56
- 162 0066 E8D1     		bne	.L4
- 178:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       pInA = pInA + numColsA;
- 163              		.loc 1 178 7 is_stmt 1 view .LVU57
- 164              		.loc 1 179 7 view .LVU58
- 165              		.loc 1 179 12 is_stmt 0 view .LVU59
- 166 0068 019B     		ldr	r3, [sp, #4]
+ 196              		.loc 1 179 19
+ 197 00fc 7B8A     		ldrh	r3, [r7, #18]
+ 198 00fe 9B00     		lsls	r3, r3, #2
+ 199              		.loc 1 179 12
+ 200 0100 FA6B     		ldr	r2, [r7, #60]
+ 201 0102 1344     		add	r3, r3, r2
+ 202 0104 FB63     		str	r3, [r7, #60]
  180:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  181:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       /* Decrement row loop counter */
  182:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****       row--;
-ARM GAS  /tmp/ccdquRTq.s 			page 8
-
-
+ 203              		.loc 1 182 10
+ 204 0106 7B6A     		ldr	r3, [r7, #36]
+ 205 0108 013B     		subs	r3, r3, #1
+ 206 010a 7B62     		str	r3, [r7, #36]
  183:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  184:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****     } while (row > 0U);
- 167              		.loc 1 184 5 view .LVU60
- 168 006a BBF1010B 		subs	fp, fp, #1
- 169              	.LVL19:
- 170              		.loc 1 184 5 view .LVU61
- 171 006e 0EEB0C09 		add	r9, lr, ip
- 179:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 172              		.loc 1 179 12 view .LVU62
- 173 0072 9A44     		add	r10, r10, r3
- 174              	.LVL20:
- 182:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
- 175              		.loc 1 182 7 is_stmt 1 view .LVU63
- 176              		.loc 1 184 13 view .LVU64
- 177              		.loc 1 184 5 is_stmt 0 view .LVU65
- 178 0074 DCD1     		bne	.L5
+ 207              		.loc 1 184 5
+ 208 010c 7B6A     		ldr	r3, [r7, #36]
+ 209 010e 002B     		cmp	r3, #0
+ 210 0110 98D1     		bne	.L5
  185:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  186:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****     /* Set status as ARM_MATH_SUCCESS */
  187:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****     status = ARM_MATH_SUCCESS;
- 179              		.loc 1 187 5 is_stmt 1 view .LVU66
- 180              	.LVL21:
+ 211              		.loc 1 187 12
+ 212 0112 0023     		movs	r3, #0
+ARM GAS  /tmp/ccLrNvS7.s 			page 8
+
+
+ 213 0114 7B74     		strb	r3, [r7, #17]
  188:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   }
  189:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** 
  190:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   /* Return to application */
  191:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****   return (status);
- 181              		.loc 1 191 3 view .LVU67
+ 214              		.loc 1 191 10
+ 215 0116 97F91130 		ldrsb	r3, [r7, #17]
  192:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c **** }
- 182              		.loc 1 192 1 is_stmt 0 view .LVU68
- 183 0076 5846     		mov	r0, fp
- 184 0078 05B0     		add	sp, sp, #20
- 185              	.LCFI2:
- 186              		.cfi_remember_state
- 187              		.cfi_def_cfa_offset 36
- 188              		@ sp needed
- 189 007a BDE8F08F 		pop	{r4, r5, r6, r7, r8, r9, r10, fp, pc}
- 190              	.LVL22:
- 191              	.L6:
- 192              	.LCFI3:
- 193              		.cfi_restore_state
- 154:./Libraries/CMSIS/DSP/Source/MatrixFunctions/arm_mat_mult_q31.c ****         {
- 194              		.loc 1 154 15 view .LVU69
- 195 007e 0346     		mov	r3, r0
- 196 0080 ECE7     		b	.L2
- 197              		.cfi_endproc
- 198              	.LFE145:
- 200 0082 00BF     		.text
- 201              	.Letext0:
- 202              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 203              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 204              		.file 4 "/usr/include/newlib/sys/_types.h"
- 205              		.file 5 "/usr/include/newlib/sys/reent.h"
- 206              		.file 6 "/usr/include/newlib/sys/lock.h"
- 207              		.file 7 "/usr/include/newlib/math.h"
- 208              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccdquRTq.s 			page 9
+ 216              		.loc 1 192 1
+ 217 011a 1846     		mov	r0, r3
+ 218 011c 4837     		adds	r7, r7, #72
+ 219              	.LCFI3:
+ 220              		.cfi_def_cfa_offset 16
+ 221 011e BD46     		mov	sp, r7
+ 222              	.LCFI4:
+ 223              		.cfi_def_cfa_register 13
+ 224              		@ sp needed
+ 225 0120 F0BC     		pop	{r4, r5, r6, r7}
+ 226              	.LCFI5:
+ 227              		.cfi_restore 7
+ 228              		.cfi_restore 6
+ 229              		.cfi_restore 5
+ 230              		.cfi_restore 4
+ 231              		.cfi_def_cfa_offset 0
+ 232 0122 7047     		bx	lr
+ 233              		.cfi_endproc
+ 234              	.LFE145:
+ 236              		.text
+ 237              	.Letext0:
+ 238              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 239              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 240              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 241              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 242              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 243              		.file 7 "/usr/include/newlib/math.h"
+ 244              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccLrNvS7.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_mat_mult_q31.c
-     /tmp/ccdquRTq.s:17     .text.arm_mat_mult_q31:0000000000000000 $t
-     /tmp/ccdquRTq.s:26     .text.arm_mat_mult_q31:0000000000000000 arm_mat_mult_q31
+     /tmp/ccLrNvS7.s:17     .text.arm_mat_mult_q31:0000000000000000 $t
+     /tmp/ccLrNvS7.s:25     .text.arm_mat_mult_q31:0000000000000000 arm_mat_mult_q31
 
 NO UNDEFINED SYMBOLS

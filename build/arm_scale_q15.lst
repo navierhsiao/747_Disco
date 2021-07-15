@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccXuqnFg.s 			page 1
+ARM GAS  /tmp/cc33NKsM.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccXuqnFg.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_scale_q15.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccXuqnFg.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_scale_q15,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_scale_q15
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_scale_q15:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c"
+  18              		.global	arm_scale_q15
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_scale_q15:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c"
    1:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****  * Title:        arm_scale_q15.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccXuqnFg.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****  */
   28:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
   29:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccXuqnFg.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
   31:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** /**
+ARM GAS  /tmp/cc33NKsM.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   @ingroup groupMath
   33:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****  */
   34:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
@@ -92,35 +90,44 @@ ARM GAS  /tmp/ccXuqnFg.s 			page 1
   58:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****         q15_t *pDst,
   59:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****         uint32_t blockSize)
   60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** {
-  30              		.loc 1 60 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 4, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 60 1
+  29              		.cfi_startproc
+  30              		@ args = 4, pretend = 0, frame = 32
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 89B0     		sub	sp, sp, #36
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 40
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 7B60     		str	r3, [r7, #4]
+  45 000a 0B46     		mov	r3, r1	@ movhi
+  46 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+  47 000e 1346     		mov	r3, r2
+  48 0010 7B72     		strb	r3, [r7, #9]
   61:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 61 9 view .LVU1
   62:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****         int8_t kShift = 15 - shift;                    /* Shift to apply after scaling */
-  36              		.loc 1 62 9 view .LVU2
-  60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
-  37              		.loc 1 60 1 is_stmt 0 view .LVU3
-  38 0000 30B4     		push	{r4, r5}
-  39              	.LCFI0:
-  40              		.cfi_def_cfa_offset 8
-  41              		.cfi_offset 4, -8
-  42              		.cfi_offset 5, -4
-  60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****         uint32_t blkCnt;                               /* Loop counter */
-  43              		.loc 1 60 1 view .LVU4
-  44 0002 029C     		ldr	r4, [sp, #8]
-  45              	.LVL1:
+  49              		.loc 1 62 28
+  50 0012 7B7A     		ldrb	r3, [r7, #9]	@ zero_extendqisi2
+  51 0014 C3F10F03 		rsb	r3, r3, #15
+  52 0018 DBB2     		uxtb	r3, r3
+  53              		.loc 1 62 16
+ARM GAS  /tmp/cc33NKsM.s 			page 3
+
+
+  54 001a FB76     		strb	r3, [r7, #27]
   63:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
   64:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** #if defined (ARM_MATH_LOOPUNROLL)
   65:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** #if defined (ARM_MATH_DSP)
   66:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   q31_t inA1, inA2;
   67:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   q31_t out1, out2, out3, out4;                  /* Temporary output variables */
   68:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   q15_t in1, in2, in3, in4;                      /* Temporary input variables */
-ARM GAS  /tmp/ccXuqnFg.s 			page 3
-
-
   69:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** #endif
   70:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** #endif
   71:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
@@ -171,6 +178,9 @@ ARM GAS  /tmp/ccXuqnFg.s 			page 1
  116:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****     blkCnt--;
  117:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   }
  118:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
+ARM GAS  /tmp/cc33NKsM.s 			page 4
+
+
  119:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   /* Loop unrolling: Compute remaining outputs */
  120:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   blkCnt = blockSize % 0x4U;
  121:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
@@ -178,98 +188,102 @@ ARM GAS  /tmp/ccXuqnFg.s 			page 1
  123:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
  124:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   /* Initialize blkCnt with number of samples */
  125:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   blkCnt = blockSize;
-ARM GAS  /tmp/ccXuqnFg.s 			page 4
-
-
-  46              		.loc 1 125 3 is_stmt 1 view .LVU5
+  55              		.loc 1 125 10
+  56 001c BB6A     		ldr	r3, [r7, #40]
+  57 001e FB61     		str	r3, [r7, #28]
  126:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
  127:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  128:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
  129:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   while (blkCnt > 0U)
-  47              		.loc 1 129 3 view .LVU6
-  48              		.loc 1 129 9 view .LVU7
-  49 0004 74B1     		cbz	r4, .L1
-  50 0006 C2F10F02 		rsb	r2, r2, #15
-  51              	.LVL2:
-  52              		.loc 1 129 9 is_stmt 0 view .LVU8
-  53 000a 55B2     		sxtb	r5, r2
-  54              	.LVL3:
-  55              	.L3:
+  58              		.loc 1 129 9
+  59 0020 1BE0     		b	.L2
+  60              	.L3:
+  61              	.LBB2:
  130:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   {
  131:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****     /* C = A * scale */
  132:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
  133:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****     /* Scale input and store result in destination buffer. */
  134:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****     *pDst++ = (q15_t) (__SSAT(((q31_t) *pSrc++ * scaleFract) >> kShift, 16));
-  56              		.loc 1 134 5 is_stmt 1 view .LVU9
-  57              	.LBB2:
-  58              		.loc 1 134 24 view .LVU10
-  59              		.loc 1 134 24 view .LVU11
-  60 000c 30F8022B 		ldrh	r2, [r0], #2
-  61              	.LVL4:
-  62              		.loc 1 134 24 is_stmt 0 view .LVU12
-  63              	.LBE2:
- 129:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   {
-  64              		.loc 1 129 9 view .LVU13
-  65 0010 013C     		subs	r4, r4, #1
-  66              	.LVL5:
-  67              	.LBB3:
-  68              		.loc 1 134 24 view .LVU14
-  69 0012 12FB01F2 		smulbb	r2, r2, r1
-  70 0016 42FA05F2 		asr	r2, r2, r5
-  71              		.syntax unified
-  72              	@ 134 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c" 1
-  73 001a 02F30F02 		ssat r2, #16, r2
-  74              	@ 0 "" 2
-  75              	.LVL6:
-  76              		.loc 1 134 24 is_stmt 1 view .LVU15
-  77              		.loc 1 134 24 is_stmt 0 view .LVU16
+  62              		.loc 1 134 24
+  63 0022 FB68     		ldr	r3, [r7, #12]
+  64 0024 9A1C     		adds	r2, r3, #2
+  65 0026 FA60     		str	r2, [r7, #12]
+  66 0028 B3F90030 		ldrsh	r3, [r3]
+  67 002c 1A46     		mov	r2, r3
+  68 002e B7F90A30 		ldrsh	r3, [r7, #10]
+  69 0032 03FB02F2 		mul	r2, r3, r2
+  70 0036 97F91B30 		ldrsb	r3, [r7, #27]
+  71 003a 42FA03F3 		asr	r3, r2, r3
+  72 003e 7B61     		str	r3, [r7, #20]
+  73 0040 7B69     		ldr	r3, [r7, #20]
+  74              		.syntax unified
+  75              	@ 134 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c" 1
+  76 0042 03F30F03 		ssat r3, #16, r3
+  77              	@ 0 "" 2
   78              		.thumb
   79              		.syntax unified
-  80              	.LBE3:
-  81              		.loc 1 134 15 view .LVU17
-  82 001e 23F8022B 		strh	r2, [r3], #2	@ movhi
-  83              	.LVL7:
+  80 0046 3B61     		str	r3, [r7, #16]
+  81 0048 3969     		ldr	r1, [r7, #16]
+  82              	.LBE2:
+  83              		.loc 1 134 10
+  84 004a 7B68     		ldr	r3, [r7, #4]
+  85 004c 9A1C     		adds	r2, r3, #2
+  86 004e 7A60     		str	r2, [r7, #4]
+  87              		.loc 1 134 15
+  88 0050 0AB2     		sxth	r2, r1
+  89              		.loc 1 134 13
+  90 0052 1A80     		strh	r2, [r3]	@ movhi
  135:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
  136:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****     /* Decrement loop counter */
  137:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****     blkCnt--;
-  84              		.loc 1 137 5 is_stmt 1 view .LVU18
+  91              		.loc 1 137 11
+  92 0054 FB69     		ldr	r3, [r7, #28]
+ARM GAS  /tmp/cc33NKsM.s 			page 5
+
+
+  93 0056 013B     		subs	r3, r3, #1
+  94 0058 FB61     		str	r3, [r7, #28]
+  95              	.L2:
  129:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   {
-  85              		.loc 1 129 9 view .LVU19
-  86 0022 F3D1     		bne	.L3
-  87              	.LVL8:
-  88              	.L1:
-ARM GAS  /tmp/ccXuqnFg.s 			page 5
-
-
+  96              		.loc 1 129 9
+  97 005a FB69     		ldr	r3, [r7, #28]
+  98 005c 002B     		cmp	r3, #0
+  99 005e E0D1     		bne	.L3
  138:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c ****   }
  139:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** 
  140:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_scale_q15.c **** }
-  89              		.loc 1 140 1 is_stmt 0 view .LVU20
-  90 0024 30BC     		pop	{r4, r5}
-  91              	.LCFI1:
-  92              		.cfi_restore 5
-  93              		.cfi_restore 4
-  94              		.cfi_def_cfa_offset 0
-  95              	.LVL9:
-  96              		.loc 1 140 1 view .LVU21
-  97 0026 7047     		bx	lr
-  98              		.cfi_endproc
-  99              	.LFE145:
- 101              		.text
- 102              	.Letext0:
- 103              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 104              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 105              		.file 4 "/usr/include/newlib/sys/_types.h"
- 106              		.file 5 "/usr/include/newlib/sys/reent.h"
- 107              		.file 6 "/usr/include/newlib/sys/lock.h"
- 108              		.file 7 "/usr/include/newlib/math.h"
- 109              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccXuqnFg.s 			page 6
+ 100              		.loc 1 140 1
+ 101 0060 00BF     		nop
+ 102 0062 00BF     		nop
+ 103 0064 2437     		adds	r7, r7, #36
+ 104              	.LCFI3:
+ 105              		.cfi_def_cfa_offset 4
+ 106 0066 BD46     		mov	sp, r7
+ 107              	.LCFI4:
+ 108              		.cfi_def_cfa_register 13
+ 109              		@ sp needed
+ 110 0068 5DF8047B 		ldr	r7, [sp], #4
+ 111              	.LCFI5:
+ 112              		.cfi_restore 7
+ 113              		.cfi_def_cfa_offset 0
+ 114 006c 7047     		bx	lr
+ 115              		.cfi_endproc
+ 116              	.LFE145:
+ 118              		.text
+ 119              	.Letext0:
+ 120              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 121              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 122              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 123              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 124              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 125              		.file 7 "/usr/include/newlib/math.h"
+ 126              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/cc33NKsM.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_scale_q15.c
-     /tmp/ccXuqnFg.s:17     .text.arm_scale_q15:0000000000000000 $t
-     /tmp/ccXuqnFg.s:26     .text.arm_scale_q15:0000000000000000 arm_scale_q15
+     /tmp/cc33NKsM.s:17     .text.arm_scale_q15:0000000000000000 $t
+     /tmp/cc33NKsM.s:25     .text.arm_scale_q15:0000000000000000 arm_scale_q15
 
 NO UNDEFINED SYMBOLS

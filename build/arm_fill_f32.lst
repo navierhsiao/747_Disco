@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc6g1Zyd.s 			page 1
+ARM GAS  /tmp/cczUMLpX.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cc6g1Zyd.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_fill_f32.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cc6g1Zyd.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_fill_f32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_fill_f32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_fill_f32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c"
+  18              		.global	arm_fill_f32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_fill_f32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c"
    1:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****  * Title:        arm_fill_f32.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cc6g1Zyd.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****  */
   28:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
   29:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** #include "arm_math.h"
-ARM GAS  /tmp/cc6g1Zyd.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
   31:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** /**
+ARM GAS  /tmp/cczUMLpX.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   @ingroup groupSupport
   33:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****  */
   34:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
@@ -118,11 +116,11 @@ ARM GAS  /tmp/cc6g1Zyd.s 			page 1
   84:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   }
   85:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
   86:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   /* If the blockSize is not a multiple of 4, compute any remaining output samples here.
-ARM GAS  /tmp/cc6g1Zyd.s 			page 3
-
-
   87:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****    ** No loop unrolling is used. */
   88:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   blkCnt = blockSize & 3;
+ARM GAS  /tmp/cczUMLpX.s 			page 3
+
+
   89:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
   90:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   while (blkCnt > 0U)
   91:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   {
@@ -140,13 +138,25 @@ ARM GAS  /tmp/cc6g1Zyd.s 			page 1
  103:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   float32_t * pDst,
  104:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   uint32_t blockSize)
  105:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** {
-  30              		.loc 1 105 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 105 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 87ED030A 		vstr.32	s0, [r7, #12]
+  44 000a B860     		str	r0, [r7, #8]
+  45 000c 7960     		str	r1, [r7, #4]
  106:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 106 3 view .LVU1
  107:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
  108:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** #if defined (ARM_MATH_LOOPUNROLL)
  109:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
@@ -168,67 +178,87 @@ ARM GAS  /tmp/cc6g1Zyd.s 			page 1
  125:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   }
  126:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
  127:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   /* Loop unrolling: Compute remaining outputs */
+ARM GAS  /tmp/cczUMLpX.s 			page 4
+
+
  128:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   blkCnt = blockSize % 0x4U;
  129:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
  130:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** #else
  131:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
  132:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   /* Initialize blkCnt with number of samples */
  133:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   blkCnt = blockSize;
-  36              		.loc 1 133 3 view .LVU2
+  46              		.loc 1 133 10
+  47 000e 7B68     		ldr	r3, [r7, #4]
+  48 0010 7B61     		str	r3, [r7, #20]
  134:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
  135:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  136:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
-ARM GAS  /tmp/cc6g1Zyd.s 			page 4
-
-
  137:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   while (blkCnt > 0U)
-  37              		.loc 1 137 3 view .LVU3
-  38              		.loc 1 137 9 view .LVU4
-  39 0000 19B1     		cbz	r1, .L1
-  40              	.LVL1:
-  41              	.L3:
+  49              		.loc 1 137 9
+  50 0012 07E0     		b	.L2
+  51              	.L3:
  138:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   {
  139:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****     /* C = value */
  140:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
  141:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****     /* Fill value in destination buffer */
  142:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****     *pDst++ = value;
-  42              		.loc 1 142 5 view .LVU5
- 137:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   {
-  43              		.loc 1 137 9 is_stmt 0 view .LVU6
-  44 0002 0139     		subs	r1, r1, #1
-  45              	.LVL2:
-  46              		.loc 1 142 13 view .LVU7
-  47 0004 A0EC010A 		vstmia.32	r0!, {s0}
-  48              	.LVL3:
+  52              		.loc 1 142 10
+  53 0014 BB68     		ldr	r3, [r7, #8]
+  54 0016 1A1D     		adds	r2, r3, #4
+  55 0018 BA60     		str	r2, [r7, #8]
+  56              		.loc 1 142 13
+  57 001a FA68     		ldr	r2, [r7, #12]	@ float
+  58 001c 1A60     		str	r2, [r3]	@ float
  143:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** 
  144:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****     /* Decrement loop counter */
  145:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****     blkCnt--;
-  49              		.loc 1 145 5 is_stmt 1 view .LVU8
+  59              		.loc 1 145 11
+  60 001e 7B69     		ldr	r3, [r7, #20]
+  61 0020 013B     		subs	r3, r3, #1
+  62 0022 7B61     		str	r3, [r7, #20]
+  63              	.L2:
  137:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   {
-  50              		.loc 1 137 9 view .LVU9
-  51 0008 FBD1     		bne	.L3
-  52              	.L1:
+  64              		.loc 1 137 9
+  65 0024 7B69     		ldr	r3, [r7, #20]
+  66 0026 002B     		cmp	r3, #0
+  67 0028 F4D1     		bne	.L3
  146:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c ****   }
  147:./Libraries/CMSIS/DSP/Source/SupportFunctions/arm_fill_f32.c **** }
-  53              		.loc 1 147 1 is_stmt 0 view .LVU10
-  54 000a 7047     		bx	lr
-  55              		.cfi_endproc
-  56              	.LFE145:
-  58              		.text
-  59              	.Letext0:
-  60              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  61              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  62              		.file 4 "/usr/include/newlib/sys/_types.h"
-  63              		.file 5 "/usr/include/newlib/sys/reent.h"
-  64              		.file 6 "/usr/include/newlib/sys/lock.h"
-  65              		.file 7 "/usr/include/newlib/math.h"
-  66              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/cc6g1Zyd.s 			page 5
+  68              		.loc 1 147 1
+  69 002a 00BF     		nop
+  70 002c 00BF     		nop
+  71 002e 1C37     		adds	r7, r7, #28
+  72              	.LCFI3:
+  73              		.cfi_def_cfa_offset 4
+  74 0030 BD46     		mov	sp, r7
+  75              	.LCFI4:
+  76              		.cfi_def_cfa_register 13
+  77              		@ sp needed
+  78 0032 5DF8047B 		ldr	r7, [sp], #4
+  79              	.LCFI5:
+  80              		.cfi_restore 7
+  81              		.cfi_def_cfa_offset 0
+ARM GAS  /tmp/cczUMLpX.s 			page 5
+
+
+  82 0036 7047     		bx	lr
+  83              		.cfi_endproc
+  84              	.LFE145:
+  86              		.text
+  87              	.Letext0:
+  88              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+  89              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+  90              		.file 4 "/usr/include/newlib/sys/_types.h"
+  91              		.file 5 "/usr/include/newlib/sys/reent.h"
+  92              		.file 6 "/usr/include/newlib/sys/lock.h"
+  93              		.file 7 "/usr/include/newlib/math.h"
+  94              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/cczUMLpX.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_fill_f32.c
-     /tmp/cc6g1Zyd.s:17     .text.arm_fill_f32:0000000000000000 $t
-     /tmp/cc6g1Zyd.s:26     .text.arm_fill_f32:0000000000000000 arm_fill_f32
+     /tmp/cczUMLpX.s:17     .text.arm_fill_f32:0000000000000000 $t
+     /tmp/cczUMLpX.s:25     .text.arm_fill_f32:0000000000000000 arm_fill_f32
 
 NO UNDEFINED SYMBOLS

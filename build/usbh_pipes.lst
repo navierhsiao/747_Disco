@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc0wwNPI.s 			page 1
+ARM GAS  /tmp/ccclhr0e.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/cc0wwNPI.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"usbh_pipes.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/cc0wwNPI.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.USBH_OpenPipe,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	USBH_OpenPipe
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	USBH_OpenPipe:
-  27              	.LVL0:
-  28              	.LFB338:
-  29              		.file 1 "./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c"
+  18              		.global	USBH_OpenPipe
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	USBH_OpenPipe:
+  26              	.LFB338:
+  27              		.file 1 "./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c"
    1:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
    2:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   ******************************************************************************
    3:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @file    usbh_pipes.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/cc0wwNPI.s 			page 1
   27:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @addtogroup USBH_LIB_CORE
   28:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** * @{
   29:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** */
-ARM GAS  /tmp/cc0wwNPI.s 			page 2
-
-
   30:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
   31:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /** @defgroup USBH_PIPES
+ARM GAS  /tmp/ccclhr0e.s 			page 2
+
+
   32:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief This file includes opening and closing Pipes
   33:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @{
   34:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
@@ -118,69 +116,79 @@ ARM GAS  /tmp/cc0wwNPI.s 			page 1
   84:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
   85:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** USBH_StatusTypeDef USBH_OpenPipe(USBH_HandleTypeDef *phost, uint8_t pipe_num,
   86:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****                                  uint8_t epnum, uint8_t dev_address,
-ARM GAS  /tmp/cc0wwNPI.s 			page 3
-
-
   87:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****                                  uint8_t speed, uint8_t ep_type, uint16_t mps)
   88:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
-  30              		.loc 1 88 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 12, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccclhr0e.s 			page 3
+
+
+  28              		.loc 1 88 1
+  29              		.cfi_startproc
+  30              		@ args = 12, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 86B0     		sub	sp, sp, #24
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 04AF     		add	r7, sp, #16
+  41              	.LCFI2:
+  42              		.cfi_def_cfa 7, 16
+  43 0006 7860     		str	r0, [r7, #4]
+  44 0008 0846     		mov	r0, r1
+  45 000a 1146     		mov	r1, r2
+  46 000c 1A46     		mov	r2, r3
+  47 000e 0346     		mov	r3, r0
+  48 0010 FB70     		strb	r3, [r7, #3]
+  49 0012 0B46     		mov	r3, r1
+  50 0014 BB70     		strb	r3, [r7, #2]
+  51 0016 1346     		mov	r3, r2
+  52 0018 7B70     		strb	r3, [r7, #1]
   89:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
-  34              		.loc 1 89 3 view .LVU1
-  88:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
-  35              		.loc 1 88 1 is_stmt 0 view .LVU2
-  36 0000 30B5     		push	{r4, r5, lr}
-  37              	.LCFI0:
-  38              		.cfi_def_cfa_offset 12
-  39              		.cfi_offset 4, -12
-  40              		.cfi_offset 5, -8
-  41              		.cfi_offset 14, -4
-  42 0002 85B0     		sub	sp, sp, #20
-  43              	.LCFI1:
-  44              		.cfi_def_cfa_offset 32
-  88:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
-  45              		.loc 1 88 1 view .LVU3
-  46 0004 9DF82040 		ldrb	r4, [sp, #32]	@ zero_extendqisi2
-  47 0008 9DF82450 		ldrb	r5, [sp, #36]	@ zero_extendqisi2
-  48              		.loc 1 89 3 view .LVU4
-  49 000c 0094     		str	r4, [sp]
-  88:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_OpenPipe(phost, pipe_num, epnum, dev_address, speed, ep_type, mps);
-  50              		.loc 1 88 1 view .LVU5
-  51 000e BDF82840 		ldrh	r4, [sp, #40]
-  52              		.loc 1 89 3 view .LVU6
-  53 0012 CDE90154 		strd	r5, r4, [sp, #4]
-  54 0016 FFF7FEFF 		bl	USBH_LL_OpenPipe
-  55              	.LVL1:
+  53              		.loc 1 89 3
+  54 001a 7878     		ldrb	r0, [r7, #1]	@ zero_extendqisi2
+  55 001c BA78     		ldrb	r2, [r7, #2]	@ zero_extendqisi2
+  56 001e F978     		ldrb	r1, [r7, #3]	@ zero_extendqisi2
+  57 0020 3B8B     		ldrh	r3, [r7, #24]
+  58 0022 0293     		str	r3, [sp, #8]
+  59 0024 3B7D     		ldrb	r3, [r7, #20]	@ zero_extendqisi2
+  60 0026 0193     		str	r3, [sp, #4]
+  61 0028 3B7C     		ldrb	r3, [r7, #16]	@ zero_extendqisi2
+  62 002a 0093     		str	r3, [sp]
+  63 002c 0346     		mov	r3, r0
+  64 002e 7868     		ldr	r0, [r7, #4]
+  65 0030 FFF7FEFF 		bl	USBH_LL_OpenPipe
   90:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
   91:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return USBH_OK;
-  56              		.loc 1 91 3 is_stmt 1 view .LVU7
+  66              		.loc 1 91 10
+  67 0034 0023     		movs	r3, #0
   92:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
-  57              		.loc 1 92 1 is_stmt 0 view .LVU8
-  58 001a 0020     		movs	r0, #0
-  59 001c 05B0     		add	sp, sp, #20
-  60              	.LCFI2:
-  61              		.cfi_def_cfa_offset 12
-  62              		@ sp needed
-  63 001e 30BD     		pop	{r4, r5, pc}
-  64              		.loc 1 92 1 view .LVU9
-  65              		.cfi_endproc
-  66              	.LFE338:
-  68              		.section	.text.USBH_ClosePipe,"ax",%progbits
-  69              		.align	1
-  70              		.p2align 2,,3
-  71              		.global	USBH_ClosePipe
-  72              		.syntax unified
-  73              		.thumb
-  74              		.thumb_func
-  75              		.fpu fpv5-d16
-  77              	USBH_ClosePipe:
-  78              	.LVL2:
-  79              	.LFB339:
-ARM GAS  /tmp/cc0wwNPI.s 			page 4
+  68              		.loc 1 92 1
+  69 0036 1846     		mov	r0, r3
+  70 0038 0837     		adds	r7, r7, #8
+  71              	.LCFI3:
+  72              		.cfi_def_cfa_offset 8
+  73 003a BD46     		mov	sp, r7
+  74              	.LCFI4:
+  75              		.cfi_def_cfa_register 13
+  76              		@ sp needed
+  77 003c 80BD     		pop	{r7, pc}
+  78              		.cfi_endproc
+  79              	.LFE338:
+  81              		.section	.text.USBH_ClosePipe,"ax",%progbits
+ARM GAS  /tmp/ccclhr0e.s 			page 4
 
 
+  82              		.align	1
+  83              		.global	USBH_ClosePipe
+  84              		.syntax unified
+  85              		.thumb
+  86              		.thumb_func
+  87              		.fpu fpv5-d16
+  89              	USBH_ClosePipe:
+  90              	.LFB339:
   93:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
   94:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
   95:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
@@ -192,42 +200,59 @@ ARM GAS  /tmp/cc0wwNPI.s 			page 1
  101:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
  102:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** USBH_StatusTypeDef USBH_ClosePipe(USBH_HandleTypeDef *phost, uint8_t pipe_num)
  103:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
-  80              		.loc 1 103 1 is_stmt 1 view -0
-  81              		.cfi_startproc
-  82              		@ args = 0, pretend = 0, frame = 0
-  83              		@ frame_needed = 0, uses_anonymous_args = 0
+  91              		.loc 1 103 1
+  92              		.cfi_startproc
+  93              		@ args = 0, pretend = 0, frame = 8
+  94              		@ frame_needed = 1, uses_anonymous_args = 0
+  95 0000 80B5     		push	{r7, lr}
+  96              	.LCFI5:
+  97              		.cfi_def_cfa_offset 8
+  98              		.cfi_offset 7, -8
+  99              		.cfi_offset 14, -4
+ 100 0002 82B0     		sub	sp, sp, #8
+ 101              	.LCFI6:
+ 102              		.cfi_def_cfa_offset 16
+ 103 0004 00AF     		add	r7, sp, #0
+ 104              	.LCFI7:
+ 105              		.cfi_def_cfa_register 7
+ 106 0006 7860     		str	r0, [r7, #4]
+ 107 0008 0B46     		mov	r3, r1
+ 108 000a FB70     		strb	r3, [r7, #3]
  104:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_ClosePipe(phost, pipe_num);
-  84              		.loc 1 104 3 view .LVU11
- 103:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   USBH_LL_ClosePipe(phost, pipe_num);
-  85              		.loc 1 103 1 is_stmt 0 view .LVU12
-  86 0000 08B5     		push	{r3, lr}
-  87              	.LCFI3:
-  88              		.cfi_def_cfa_offset 8
-  89              		.cfi_offset 3, -8
-  90              		.cfi_offset 14, -4
-  91              		.loc 1 104 3 view .LVU13
-  92 0002 FFF7FEFF 		bl	USBH_LL_ClosePipe
-  93              	.LVL3:
+ 109              		.loc 1 104 3
+ 110 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 111 000e 1946     		mov	r1, r3
+ 112 0010 7868     		ldr	r0, [r7, #4]
+ 113 0012 FFF7FEFF 		bl	USBH_LL_ClosePipe
  105:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  106:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return USBH_OK;
-  94              		.loc 1 106 3 is_stmt 1 view .LVU14
+ 114              		.loc 1 106 10
+ 115 0016 0023     		movs	r3, #0
  107:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
-  95              		.loc 1 107 1 is_stmt 0 view .LVU15
-  96 0006 0020     		movs	r0, #0
-  97 0008 08BD     		pop	{r3, pc}
-  98              		.cfi_endproc
-  99              	.LFE339:
- 101 000a 00BF     		.section	.text.USBH_AllocPipe,"ax",%progbits
- 102              		.align	1
- 103              		.p2align 2,,3
- 104              		.global	USBH_AllocPipe
- 105              		.syntax unified
- 106              		.thumb
- 107              		.thumb_func
- 108              		.fpu fpv5-d16
- 110              	USBH_AllocPipe:
- 111              	.LVL4:
- 112              	.LFB340:
+ 116              		.loc 1 107 1
+ 117 0018 1846     		mov	r0, r3
+ 118 001a 0837     		adds	r7, r7, #8
+ 119              	.LCFI8:
+ 120              		.cfi_def_cfa_offset 8
+ 121 001c BD46     		mov	sp, r7
+ 122              	.LCFI9:
+ 123              		.cfi_def_cfa_register 13
+ 124              		@ sp needed
+ARM GAS  /tmp/ccclhr0e.s 			page 5
+
+
+ 125 001e 80BD     		pop	{r7, pc}
+ 126              		.cfi_endproc
+ 127              	.LFE339:
+ 129              		.section	.text.USBH_AllocPipe,"ax",%progbits
+ 130              		.align	1
+ 131              		.global	USBH_AllocPipe
+ 132              		.syntax unified
+ 133              		.thumb
+ 134              		.thumb_func
+ 135              		.fpu fpv5-d16
+ 137              	USBH_AllocPipe:
+ 138              	.LFB340:
  108:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  109:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  110:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
@@ -238,42 +263,87 @@ ARM GAS  /tmp/cc0wwNPI.s 			page 1
  115:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @retval Pipe number
  116:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
  117:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** uint8_t USBH_AllocPipe(USBH_HandleTypeDef *phost, uint8_t ep_addr)
-ARM GAS  /tmp/cc0wwNPI.s 			page 5
-
-
  118:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
- 113              		.loc 1 118 1 is_stmt 1 view -0
- 114              		.cfi_startproc
- 115              		@ args = 0, pretend = 0, frame = 0
- 116              		@ frame_needed = 0, uses_anonymous_args = 0
- 117              		@ link register save eliminated.
+ 139              		.loc 1 118 1
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 16
+ 142              		@ frame_needed = 1, uses_anonymous_args = 0
+ 143 0000 80B5     		push	{r7, lr}
+ 144              	.LCFI10:
+ 145              		.cfi_def_cfa_offset 8
+ 146              		.cfi_offset 7, -8
+ 147              		.cfi_offset 14, -4
+ 148 0002 84B0     		sub	sp, sp, #16
+ 149              	.LCFI11:
+ 150              		.cfi_def_cfa_offset 24
+ 151 0004 00AF     		add	r7, sp, #0
+ 152              	.LCFI12:
+ 153              		.cfi_def_cfa_register 7
+ 154 0006 7860     		str	r0, [r7, #4]
+ 155 0008 0B46     		mov	r3, r1
+ 156 000a FB70     		strb	r3, [r7, #3]
  119:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint16_t pipe;
- 118              		.loc 1 119 3 view .LVU17
  120:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  121:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   pipe =  USBH_GetFreePipe(phost);
- 119              		.loc 1 121 3 view .LVU18
- 118:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint16_t pipe;
- 120              		.loc 1 118 1 is_stmt 0 view .LVU19
- 121 0000 30B4     		push	{r4, r5}
- 122              	.LCFI4:
- 123              		.cfi_def_cfa_offset 8
- 124              		.cfi_offset 4, -8
- 125              		.cfi_offset 5, -4
- 118:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint16_t pipe;
- 126              		.loc 1 118 1 view .LVU20
- 127 0002 0023     		movs	r3, #0
- 128 0004 0546     		mov	r5, r0
- 129              	.LVL5:
- 130              	.LBB4:
- 131              	.LBI4:
+ 157              		.loc 1 121 11
+ 158 000c 7868     		ldr	r0, [r7, #4]
+ 159 000e FFF7FEFF 		bl	USBH_GetFreePipe
+ 160 0012 0346     		mov	r3, r0
+ 161 0014 FB81     		strh	r3, [r7, #14]	@ movhi
  122:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  123:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   if (pipe != 0xFFFFU)
+ 162              		.loc 1 123 6
+ 163 0016 FB89     		ldrh	r3, [r7, #14]
+ 164 0018 4FF6FF72 		movw	r2, #65535
+ 165 001c 9342     		cmp	r3, r2
+ 166 001e 0BD0     		beq	.L6
  124:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ARM GAS  /tmp/ccclhr0e.s 			page 6
+
+
  125:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     phost->Pipes[pipe & 0xFU] = 0x8000U | ep_addr;
+ 167              		.loc 1 125 41
+ 168 0020 FA78     		ldrb	r2, [r7, #3]	@ zero_extendqisi2
+ 169              		.loc 1 125 23
+ 170 0022 FB89     		ldrh	r3, [r7, #14]
+ 171 0024 03F00F03 		and	r3, r3, #15
+ 172              		.loc 1 125 41
+ 173 0028 42F40042 		orr	r2, r2, #32768
+ 174              		.loc 1 125 31
+ 175 002c 7968     		ldr	r1, [r7, #4]
+ 176 002e 03F59073 		add	r3, r3, #288
+ 177 0032 9B00     		lsls	r3, r3, #2
+ 178 0034 0B44     		add	r3, r3, r1
+ 179 0036 5A60     		str	r2, [r3, #4]
+ 180              	.L6:
  126:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
  127:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  128:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return (uint8_t)pipe;
+ 181              		.loc 1 128 10
+ 182 0038 FB89     		ldrh	r3, [r7, #14]	@ movhi
+ 183 003a DBB2     		uxtb	r3, r3
  129:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 184              		.loc 1 129 1
+ 185 003c 1846     		mov	r0, r3
+ 186 003e 1037     		adds	r7, r7, #16
+ 187              	.LCFI13:
+ 188              		.cfi_def_cfa_offset 8
+ 189 0040 BD46     		mov	sp, r7
+ 190              	.LCFI14:
+ 191              		.cfi_def_cfa_register 13
+ 192              		@ sp needed
+ 193 0042 80BD     		pop	{r7, pc}
+ 194              		.cfi_endproc
+ 195              	.LFE340:
+ 197              		.section	.text.USBH_FreePipe,"ax",%progbits
+ 198              		.align	1
+ 199              		.global	USBH_FreePipe
+ 200              		.syntax unified
+ 201              		.thumb
+ 202              		.thumb_func
+ 203              		.fpu fpv5-d16
+ 205              	USBH_FreePipe:
+ 206              	.LFB341:
  130:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  131:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  132:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
@@ -285,195 +355,215 @@ ARM GAS  /tmp/cc0wwNPI.s 			page 1
  138:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
  139:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** USBH_StatusTypeDef USBH_FreePipe(USBH_HandleTypeDef *phost, uint8_t idx)
  140:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
+ 207              		.loc 1 140 1
+ 208              		.cfi_startproc
+ 209              		@ args = 0, pretend = 0, frame = 8
+ARM GAS  /tmp/ccclhr0e.s 			page 7
+
+
+ 210              		@ frame_needed = 1, uses_anonymous_args = 0
+ 211              		@ link register save eliminated.
+ 212 0000 80B4     		push	{r7}
+ 213              	.LCFI15:
+ 214              		.cfi_def_cfa_offset 4
+ 215              		.cfi_offset 7, -4
+ 216 0002 83B0     		sub	sp, sp, #12
+ 217              	.LCFI16:
+ 218              		.cfi_def_cfa_offset 16
+ 219 0004 00AF     		add	r7, sp, #0
+ 220              	.LCFI17:
+ 221              		.cfi_def_cfa_register 7
+ 222 0006 7860     		str	r0, [r7, #4]
+ 223 0008 0B46     		mov	r3, r1
+ 224 000a FB70     		strb	r3, [r7, #3]
  141:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   if (idx < 11U)
+ 225              		.loc 1 141 6
+ 226 000c FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 227 000e 0A2B     		cmp	r3, #10
+ 228 0010 0FD8     		bhi	.L9
  142:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
  143:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     phost->Pipes[idx] &= 0x7FFFU;
+ 229              		.loc 1 143 23
+ 230 0012 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 231 0014 7A68     		ldr	r2, [r7, #4]
+ 232 0016 03F59073 		add	r3, r3, #288
+ 233 001a 9B00     		lsls	r3, r3, #2
+ 234 001c 1344     		add	r3, r3, r2
+ 235 001e 5A68     		ldr	r2, [r3, #4]
+ 236 0020 FB78     		ldrb	r3, [r7, #3]	@ zero_extendqisi2
+ 237 0022 C2F30E02 		ubfx	r2, r2, #0, #15
+ 238 0026 7968     		ldr	r1, [r7, #4]
+ 239 0028 03F59073 		add	r3, r3, #288
+ 240 002c 9B00     		lsls	r3, r3, #2
+ 241 002e 0B44     		add	r3, r3, r1
+ 242 0030 5A60     		str	r2, [r3, #4]
+ 243              	.L9:
  144:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
  145:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  146:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return USBH_OK;
+ 244              		.loc 1 146 10
+ 245 0032 0023     		movs	r3, #0
  147:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 246              		.loc 1 147 1
+ 247 0034 1846     		mov	r0, r3
+ 248 0036 0C37     		adds	r7, r7, #12
+ 249              	.LCFI18:
+ 250              		.cfi_def_cfa_offset 4
+ 251 0038 BD46     		mov	sp, r7
+ 252              	.LCFI19:
+ 253              		.cfi_def_cfa_register 13
+ 254              		@ sp needed
+ 255 003a 5DF8047B 		ldr	r7, [sp], #4
+ 256              	.LCFI20:
+ 257              		.cfi_restore 7
+ 258              		.cfi_def_cfa_offset 0
+ 259 003e 7047     		bx	lr
+ARM GAS  /tmp/ccclhr0e.s 			page 8
+
+
+ 260              		.cfi_endproc
+ 261              	.LFE341:
+ 263              		.section	.text.USBH_GetFreePipe,"ax",%progbits
+ 264              		.align	1
+ 265              		.syntax unified
+ 266              		.thumb
+ 267              		.thumb_func
+ 268              		.fpu fpv5-d16
+ 270              	USBH_GetFreePipe:
+ 271              	.LFB342:
  148:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  149:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  150:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** /**
  151:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @brief  USBH_GetFreePipe
  152:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @param  phost: Host Handle
  153:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   *         Get a free Pipe number for allocation to a device endpoint
-ARM GAS  /tmp/cc0wwNPI.s 			page 6
-
-
  154:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   * @retval idx: Free Pipe number
  155:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   */
  156:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** static uint16_t USBH_GetFreePipe(USBH_HandleTypeDef *phost)
- 132              		.loc 1 156 17 is_stmt 1 view .LVU21
- 133              	.LBB5:
  157:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** {
+ 272              		.loc 1 157 1
+ 273              		.cfi_startproc
+ 274              		@ args = 0, pretend = 0, frame = 16
+ 275              		@ frame_needed = 1, uses_anonymous_args = 0
+ 276              		@ link register save eliminated.
+ 277 0000 80B4     		push	{r7}
+ 278              	.LCFI21:
+ 279              		.cfi_def_cfa_offset 4
+ 280              		.cfi_offset 7, -4
+ 281 0002 85B0     		sub	sp, sp, #20
+ 282              	.LCFI22:
+ 283              		.cfi_def_cfa_offset 24
+ 284 0004 00AF     		add	r7, sp, #0
+ 285              	.LCFI23:
+ 286              		.cfi_def_cfa_register 7
+ 287 0006 7860     		str	r0, [r7, #4]
  158:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   uint8_t idx = 0U;
- 134              		.loc 1 158 3 view .LVU22
+ 288              		.loc 1 158 11
+ 289 0008 0023     		movs	r3, #0
+ 290 000a FB73     		strb	r3, [r7, #15]
  159:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
  160:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   for (idx = 0U ; idx < 11U ; idx++)
- 135              		.loc 1 160 3 view .LVU23
- 136              		.loc 1 160 19 view .LVU24
- 137 0006 00F59062 		add	r2, r0, #1152
- 138              	.LVL6:
- 139              	.L9:
- 140              		.loc 1 160 31 view .LVU25
- 141              		.loc 1 160 19 view .LVU26
+ 291              		.loc 1 160 12
+ 292 000c 0023     		movs	r3, #0
+ 293 000e FB73     		strb	r3, [r7, #15]
+ 294              		.loc 1 160 3
+ 295 0010 10E0     		b	.L12
+ 296              	.L15:
  161:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
  162:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     if ((phost->Pipes[idx] & 0x8000U) == 0U)
- 142              		.loc 1 162 28 is_stmt 0 view .LVU27
- 143 000a 52F8044F 		ldr	r4, [r2, #4]!
- 144 000e D8B2     		uxtb	r0, r3
- 145              	.LVL7:
- 146              		.loc 1 162 5 is_stmt 1 view .LVU28
- 147              		.loc 1 162 8 is_stmt 0 view .LVU29
- 148 0010 2404     		lsls	r4, r4, #16
- 149 0012 05D5     		bpl	.L12
- 150 0014 0133     		adds	r3, r3, #1
- 160:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
- 151              		.loc 1 160 3 view .LVU30
- 152 0016 0B2B     		cmp	r3, #11
- 153 0018 F7D1     		bne	.L9
- 154 001a FF20     		movs	r0, #255
- 155              	.LVL8:
- 160:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
- 156              		.loc 1 160 3 view .LVU31
- 157              	.LBE5:
- 158              	.LBE4:
- 128:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
- 159              		.loc 1 128 3 is_stmt 1 view .LVU32
- 129:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
- 160              		.loc 1 129 1 is_stmt 0 view .LVU33
- 161 001c 30BC     		pop	{r4, r5}
- 162              	.LCFI5:
- 163              		.cfi_remember_state
- 164              		.cfi_restore 5
- 165              		.cfi_restore 4
- 166              		.cfi_def_cfa_offset 0
- 167              	.LVL9:
- 129:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
- 168              		.loc 1 129 1 view .LVU34
- 169 001e 7047     		bx	lr
- 170              	.LVL10:
- 171              	.L12:
- 172              	.LCFI6:
- 173              		.cfi_restore_state
- 174              	.LBB7:
-ARM GAS  /tmp/cc0wwNPI.s 			page 7
+ 297              		.loc 1 162 22
+ 298 0012 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 299 0014 7A68     		ldr	r2, [r7, #4]
+ 300 0016 03F59073 		add	r3, r3, #288
+ 301 001a 9B00     		lsls	r3, r3, #2
+ 302 001c 1344     		add	r3, r3, r2
+ 303 001e 5B68     		ldr	r3, [r3, #4]
+ARM GAS  /tmp/ccclhr0e.s 			page 9
 
 
- 175              	.LBB6:
+ 304              		.loc 1 162 28
+ 305 0020 03F40043 		and	r3, r3, #32768
+ 306              		.loc 1 162 8
+ 307 0024 002B     		cmp	r3, #0
+ 308 0026 02D1     		bne	.L13
  163:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     {
  164:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****       return (uint16_t)idx;
- 176              		.loc 1 164 7 is_stmt 1 view .LVU35
- 177              		.loc 1 164 7 is_stmt 0 view .LVU36
- 178              	.LBE6:
- 179              	.LBE7:
- 123:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
- 180              		.loc 1 123 3 is_stmt 1 view .LVU37
- 125:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
- 181              		.loc 1 125 5 view .LVU38
- 125:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
- 182              		.loc 1 125 31 is_stmt 0 view .LVU39
- 183 0020 05EB8303 		add	r3, r5, r3, lsl #2
- 125:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
- 184              		.loc 1 125 41 view .LVU40
- 185 0024 41F40041 		orr	r1, r1, #32768
- 186              	.LVL11:
- 129:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
- 187              		.loc 1 129 1 view .LVU41
- 188 0028 30BC     		pop	{r4, r5}
- 189              	.LCFI7:
- 190              		.cfi_restore 5
- 191              		.cfi_restore 4
- 192              		.cfi_def_cfa_offset 0
- 193              	.LVL12:
- 125:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
- 194              		.loc 1 125 31 view .LVU42
- 195 002a C3F88414 		str	r1, [r3, #1156]
- 196              	.LVL13:
- 128:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
- 197              		.loc 1 128 3 is_stmt 1 view .LVU43
- 129:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
- 198              		.loc 1 129 1 is_stmt 0 view .LVU44
- 199 002e 7047     		bx	lr
- 200              		.cfi_endproc
- 201              	.LFE340:
- 203              		.section	.text.USBH_FreePipe,"ax",%progbits
- 204              		.align	1
- 205              		.p2align 2,,3
- 206              		.global	USBH_FreePipe
- 207              		.syntax unified
- 208              		.thumb
- 209              		.thumb_func
- 210              		.fpu fpv5-d16
- 212              	USBH_FreePipe:
- 213              	.LVL14:
- 214              	.LFB341:
- 140:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   if (idx < 11U)
- 215              		.loc 1 140 1 is_stmt 1 view -0
- 216              		.cfi_startproc
- 217              		@ args = 0, pretend = 0, frame = 0
- 218              		@ frame_needed = 0, uses_anonymous_args = 0
- 219              		@ link register save eliminated.
- 141:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
- 220              		.loc 1 141 3 view .LVU46
- 141:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
-ARM GAS  /tmp/cc0wwNPI.s 			page 8
+ 309              		.loc 1 164 14
+ 310 0028 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 311 002a 9BB2     		uxth	r3, r3
+ 312 002c 07E0     		b	.L14
+ 313              	.L13:
+ 160:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 314              		.loc 1 160 34 discriminator 2
+ 315 002e FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 316 0030 0133     		adds	r3, r3, #1
+ 317 0032 FB73     		strb	r3, [r7, #15]
+ 318              	.L12:
+ 160:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   {
+ 319              		.loc 1 160 3 discriminator 1
+ 320 0034 FB7B     		ldrb	r3, [r7, #15]	@ zero_extendqisi2
+ 321 0036 0A2B     		cmp	r3, #10
+ 322 0038 EBD9     		bls	.L15
+ 165:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****     }
+ 166:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
+ 167:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
+ 168:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   return 0xFFFFU;
+ 323              		.loc 1 168 10
+ 324 003a 4FF6FF73 		movw	r3, #65535
+ 325              	.L14:
+ 169:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
+ 326              		.loc 1 169 1
+ 327 003e 1846     		mov	r0, r3
+ 328 0040 1437     		adds	r7, r7, #20
+ 329              	.LCFI24:
+ 330              		.cfi_def_cfa_offset 4
+ 331 0042 BD46     		mov	sp, r7
+ 332              	.LCFI25:
+ 333              		.cfi_def_cfa_register 13
+ 334              		@ sp needed
+ 335 0044 5DF8047B 		ldr	r7, [sp], #4
+ 336              	.LCFI26:
+ 337              		.cfi_restore 7
+ 338              		.cfi_def_cfa_offset 0
+ 339 0048 7047     		bx	lr
+ 340              		.cfi_endproc
+ 341              	.LFE342:
+ 343              		.text
+ 344              	.Letext0:
+ 345              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 346              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 347              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 348              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 349              		.file 6 "/usr/include/newlib/sys/_types.h"
+ 350              		.file 7 "/usr/include/newlib/sys/reent.h"
+ 351              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 352              		.file 9 "/usr/include/newlib/math.h"
+ARM GAS  /tmp/ccclhr0e.s 			page 10
 
 
- 221              		.loc 1 141 6 is_stmt 0 view .LVU47
- 222 0000 0A29     		cmp	r1, #10
- 223 0002 07D8     		bhi	.L14
- 143:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
- 224              		.loc 1 143 5 is_stmt 1 view .LVU48
- 225 0004 00EB8100 		add	r0, r0, r1, lsl #2
- 226              	.LVL15:
- 143:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c ****   }
- 227              		.loc 1 143 23 is_stmt 0 view .LVU49
- 228 0008 D0F88434 		ldr	r3, [r0, #1156]
- 229 000c C3F30E03 		ubfx	r3, r3, #0, #15
- 230 0010 C0F88434 		str	r3, [r0, #1156]
- 231              	.L14:
- 146:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** }
- 232              		.loc 1 146 3 is_stmt 1 view .LVU50
- 147:./Libraries/STM32_USB_Host_Library/Core/Src/usbh_pipes.c **** 
- 233              		.loc 1 147 1 is_stmt 0 view .LVU51
- 234 0014 0020     		movs	r0, #0
- 235 0016 7047     		bx	lr
- 236              		.cfi_endproc
- 237              	.LFE341:
- 239              		.text
- 240              	.Letext0:
- 241              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 242              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
- 243              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 244              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 245              		.file 6 "/usr/include/newlib/sys/_types.h"
- 246              		.file 7 "/usr/include/newlib/sys/reent.h"
- 247              		.file 8 "/usr/include/newlib/sys/lock.h"
- 248              		.file 9 "/usr/include/newlib/math.h"
- 249              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 250              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 251              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
- 252              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 253              		.file 14 "/usr/include/newlib/stdlib.h"
- 254              		.file 15 "./Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
- 255              		.file 16 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_def.h"
- 256              		.file 17 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h"
- 257              		.file 18 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_core.h"
-ARM GAS  /tmp/cc0wwNPI.s 			page 9
+ 353              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 354              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 355              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 356              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 357              		.file 14 "/usr/include/newlib/stdlib.h"
+ 358              		.file 15 "./Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ 359              		.file 16 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_def.h"
+ 360              		.file 17 "./Libraries/STM32_USB_Host_Library/Core/Inc/usbh_ctlreq.h"
+ARM GAS  /tmp/ccclhr0e.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usbh_pipes.c
-     /tmp/cc0wwNPI.s:17     .text.USBH_OpenPipe:0000000000000000 $t
-     /tmp/cc0wwNPI.s:26     .text.USBH_OpenPipe:0000000000000000 USBH_OpenPipe
-     /tmp/cc0wwNPI.s:69     .text.USBH_ClosePipe:0000000000000000 $t
-     /tmp/cc0wwNPI.s:77     .text.USBH_ClosePipe:0000000000000000 USBH_ClosePipe
-     /tmp/cc0wwNPI.s:102    .text.USBH_AllocPipe:0000000000000000 $t
-     /tmp/cc0wwNPI.s:110    .text.USBH_AllocPipe:0000000000000000 USBH_AllocPipe
-     /tmp/cc0wwNPI.s:204    .text.USBH_FreePipe:0000000000000000 $t
-     /tmp/cc0wwNPI.s:212    .text.USBH_FreePipe:0000000000000000 USBH_FreePipe
+     /tmp/ccclhr0e.s:17     .text.USBH_OpenPipe:0000000000000000 $t
+     /tmp/ccclhr0e.s:25     .text.USBH_OpenPipe:0000000000000000 USBH_OpenPipe
+     /tmp/ccclhr0e.s:82     .text.USBH_ClosePipe:0000000000000000 $t
+     /tmp/ccclhr0e.s:89     .text.USBH_ClosePipe:0000000000000000 USBH_ClosePipe
+     /tmp/ccclhr0e.s:130    .text.USBH_AllocPipe:0000000000000000 $t
+     /tmp/ccclhr0e.s:137    .text.USBH_AllocPipe:0000000000000000 USBH_AllocPipe
+     /tmp/ccclhr0e.s:270    .text.USBH_GetFreePipe:0000000000000000 USBH_GetFreePipe
+     /tmp/ccclhr0e.s:198    .text.USBH_FreePipe:0000000000000000 $t
+     /tmp/ccclhr0e.s:205    .text.USBH_FreePipe:0000000000000000 USBH_FreePipe
+     /tmp/ccclhr0e.s:264    .text.USBH_GetFreePipe:0000000000000000 $t
 
 UNDEFINED SYMBOLS
 USBH_LL_OpenPipe

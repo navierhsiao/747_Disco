@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccTn3TJm.s 			page 1
+ARM GAS  /tmp/ccgvE8vN.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccTn3TJm.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_pid_init_f32.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccTn3TJm.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_pid_init_f32,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_pid_init_f32
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_pid_init_f32:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c"
+  18              		.global	arm_pid_init_f32
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_pid_init_f32:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c"
    1:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****  * Title:        arm_pid_init_f32.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccTn3TJm.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****  */
   28:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
   29:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccTn3TJm.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
   31:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** /**
+ARM GAS  /tmp/ccgvE8vN.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   @addtogroup PID
   33:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   @{
   34:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****  */
@@ -86,94 +84,124 @@ ARM GAS  /tmp/ccTn3TJm.s 			page 1
   52:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   arm_pid_instance_f32 * S,
   53:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   int32_t resetStateFlag)
   54:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** {
-  30              		.loc 1 54 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 54 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32 0000 80B5     		push	{r7, lr}
+  33              	.LCFI0:
+  34              		.cfi_def_cfa_offset 8
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  37 0002 82B0     		sub	sp, sp, #8
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 16
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 7860     		str	r0, [r7, #4]
+  44 0008 3960     		str	r1, [r7]
   55:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   /* Derived coefficient A0 */
   56:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   S->A0 = S->Kp + S->Ki + S->Kd;
-  35              		.loc 1 56 3 view .LVU1
+  45              		.loc 1 56 12
+  46 000a 7B68     		ldr	r3, [r7, #4]
+  47 000c 93ED067A 		vldr.32	s14, [r3, #24]
+  48              		.loc 1 56 20
+  49 0010 7B68     		ldr	r3, [r7, #4]
+  50 0012 D3ED077A 		vldr.32	s15, [r3, #28]
+  51              		.loc 1 56 17
+  52 0016 37EE277A 		vadd.f32	s14, s14, s15
+  53              		.loc 1 56 28
+  54 001a 7B68     		ldr	r3, [r7, #4]
+  55 001c D3ED087A 		vldr.32	s15, [r3, #32]
+  56              		.loc 1 56 25
+  57 0020 77EE277A 		vadd.f32	s15, s14, s15
+  58              		.loc 1 56 9
+  59 0024 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccgvE8vN.s 			page 3
+
+
+  60 0026 C3ED007A 		vstr.32	s15, [r3]
   57:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
   58:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   /* Derived coefficient A1 */
   59:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   S->A1 = (-S->Kp) - ((float32_t) 2.0 * S->Kd);
-  36              		.loc 1 59 20 is_stmt 0 view .LVU2
-  37 0000 B0EE006A 		vmov.f32	s12, #2.0e+0
-  56:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  38              		.loc 1 56 28 view .LVU3
-  39 0004 D0ED086A 		vldr.32	s13, [r0, #32]
-  56:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  40              		.loc 1 56 12 view .LVU4
-  41 0008 90ED067A 		vldr.32	s14, [r0, #24]
-  56:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  42              		.loc 1 56 17 view .LVU5
-  43 000c D0ED077A 		vldr.32	s15, [r0, #28]
+  61              		.loc 1 59 14
+  62 002a 7B68     		ldr	r3, [r7, #4]
+  63 002c D3ED067A 		vldr.32	s15, [r3, #24]
+  64              		.loc 1 59 12
+  65 0030 B1EE677A 		vneg.f32	s14, s15
+  66              		.loc 1 59 42
+  67 0034 7B68     		ldr	r3, [r7, #4]
+  68 0036 D3ED087A 		vldr.32	s15, [r3, #32]
+  69              		.loc 1 59 39
+  70 003a 77EEA77A 		vadd.f32	s15, s15, s15
+  71              		.loc 1 59 20
+  72 003e 77EE677A 		vsub.f32	s15, s14, s15
+  73              		.loc 1 59 9
+  74 0042 7B68     		ldr	r3, [r7, #4]
+  75 0044 C3ED017A 		vstr.32	s15, [r3, #4]
   60:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
   61:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   /* Derived coefficient A2 */
   62:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   S->A2 = S->Kd;
-  44              		.loc 1 62 9 view .LVU6
-  45 0010 C0ED026A 		vstr.32	s13, [r0, #8]
-  56:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  46              		.loc 1 56 17 view .LVU7
-  47 0014 77EE277A 		vadd.f32	s15, s14, s15
-  59:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  48              		.loc 1 59 20 view .LVU8
-ARM GAS  /tmp/ccTn3TJm.s 			page 3
-
-
-  49 0018 96EEC67A 		vfnma.f32	s14, s13, s12
-  56:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  50              		.loc 1 56 25 view .LVU9
-  51 001c 77EEA67A 		vadd.f32	s15, s15, s13
-  56:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  52              		.loc 1 56 9 view .LVU10
-  53 0020 C0ED007A 		vstr.32	s15, [r0]
-  59:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  54              		.loc 1 59 3 is_stmt 1 view .LVU11
-  59:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
-  55              		.loc 1 59 9 is_stmt 0 view .LVU12
-  56 0024 80ED017A 		vstr.32	s14, [r0, #4]
-  57              		.loc 1 62 3 is_stmt 1 view .LVU13
+  76              		.loc 1 62 12
+  77 0048 7B68     		ldr	r3, [r7, #4]
+  78 004a 1A6A     		ldr	r2, [r3, #32]	@ float
+  79              		.loc 1 62 9
+  80 004c 7B68     		ldr	r3, [r7, #4]
+  81 004e 9A60     		str	r2, [r3, #8]	@ float
   63:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
   64:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   /* Check whether state needs reset or not */
   65:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   if (resetStateFlag)
-  58              		.loc 1 65 3 view .LVU14
-  59              		.loc 1 65 6 is_stmt 0 view .LVU15
-  60 0028 01B9     		cbnz	r1, .L7
+  82              		.loc 1 65 6
+  83 0050 3B68     		ldr	r3, [r7]
+  84 0052 002B     		cmp	r3, #0
+  85 0054 06D0     		beq	.L3
   66:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   {
   67:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****     /* Reset state to zero, The size will be always 3 samples */
   68:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****     memset(S->state, 0, 3U * sizeof(float32_t));
+  86              		.loc 1 68 13
+  87 0056 7B68     		ldr	r3, [r7, #4]
+  88 0058 0C33     		adds	r3, r3, #12
+  89              		.loc 1 68 5
+  90 005a 0C22     		movs	r2, #12
+  91 005c 0021     		movs	r1, #0
+  92 005e 1846     		mov	r0, r3
+  93 0060 FFF7FEFF 		bl	memset
+  94              	.L3:
   69:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   }
   70:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** 
   71:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c **** }
-  61              		.loc 1 71 1 view .LVU16
-  62 002a 7047     		bx	lr
-  63              	.L7:
-  68:./Libraries/CMSIS/DSP/Source/ControllerFunctions/arm_pid_init_f32.c ****   }
-  64              		.loc 1 68 5 is_stmt 1 view .LVU17
-  65 002c 0023     		movs	r3, #0
-  66 002e C360     		str	r3, [r0, #12]	@ unaligned
-  67 0030 0361     		str	r3, [r0, #16]	@ unaligned
-  68 0032 4361     		str	r3, [r0, #20]	@ unaligned
-  69              		.loc 1 71 1 is_stmt 0 view .LVU18
-  70 0034 7047     		bx	lr
-  71              		.cfi_endproc
-  72              	.LFE145:
-  74 0036 00BF     		.text
-  75              	.Letext0:
-  76              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  77              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  78              		.file 4 "/usr/include/newlib/sys/_types.h"
-  79              		.file 5 "/usr/include/newlib/sys/reent.h"
-  80              		.file 6 "/usr/include/newlib/sys/lock.h"
-  81              		.file 7 "/usr/include/newlib/math.h"
-  82              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccTn3TJm.s 			page 4
+  95              		.loc 1 71 1
+  96 0064 00BF     		nop
+  97 0066 0837     		adds	r7, r7, #8
+  98              	.LCFI3:
+  99              		.cfi_def_cfa_offset 8
+ 100 0068 BD46     		mov	sp, r7
+ 101              	.LCFI4:
+ARM GAS  /tmp/ccgvE8vN.s 			page 4
+
+
+ 102              		.cfi_def_cfa_register 13
+ 103              		@ sp needed
+ 104 006a 80BD     		pop	{r7, pc}
+ 105              		.cfi_endproc
+ 106              	.LFE145:
+ 108              		.text
+ 109              	.Letext0:
+ 110              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 111              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 112              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 113              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 114              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 115              		.file 7 "/usr/include/newlib/math.h"
+ 116              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/ccgvE8vN.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_pid_init_f32.c
-     /tmp/ccTn3TJm.s:17     .text.arm_pid_init_f32:0000000000000000 $t
-     /tmp/ccTn3TJm.s:26     .text.arm_pid_init_f32:0000000000000000 arm_pid_init_f32
+     /tmp/ccgvE8vN.s:17     .text.arm_pid_init_f32:0000000000000000 $t
+     /tmp/ccgvE8vN.s:25     .text.arm_pid_init_f32:0000000000000000 arm_pid_init_f32
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+memset

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccbzO4aU.s 			page 1
+ARM GAS  /tmp/cchjwWNo.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -9,7 +9,7 @@ ARM GAS  /tmp/ccbzO4aU.s 			page 1
    6              		.eabi_attribute 24, 1
    7              		.eabi_attribute 25, 1
    8              		.eabi_attribute 26, 1
-   9              		.eabi_attribute 30, 2
+   9              		.eabi_attribute 30, 6
   10              		.eabi_attribute 34, 1
   11              		.eabi_attribute 18, 4
   12              		.file	"arm_dot_prod_q7.c"
@@ -18,17 +18,15 @@ ARM GAS  /tmp/ccbzO4aU.s 			page 1
   15              		.cfi_sections	.debug_frame
   16              		.section	.text.arm_dot_prod_q7,"ax",%progbits
   17              		.align	1
-  18              		.p2align 2,,3
-  19              		.global	arm_dot_prod_q7
-  20              		.arch armv7e-m
-  21              		.syntax unified
-  22              		.thumb
-  23              		.thumb_func
-  24              		.fpu fpv5-d16
-  26              	arm_dot_prod_q7:
-  27              	.LVL0:
-  28              	.LFB145:
-  29              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c"
+  18              		.global	arm_dot_prod_q7
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	arm_dot_prod_q7:
+  26              	.LFB145:
+  27              		.file 1 "./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c"
    1:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** /* ----------------------------------------------------------------------
    2:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****  * Project:      CMSIS DSP Library
    3:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****  * Title:        arm_dot_prod_q7.c
@@ -58,11 +56,11 @@ ARM GAS  /tmp/ccbzO4aU.s 			page 1
   27:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****  */
   28:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
   29:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** #include "arm_math.h"
-ARM GAS  /tmp/ccbzO4aU.s 			page 2
-
-
   30:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
   31:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** /**
+ARM GAS  /tmp/cchjwWNo.s 			page 2
+
+
   32:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   @ingroup groupMath
   33:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****  */
   34:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
@@ -93,18 +91,36 @@ ARM GAS  /tmp/ccbzO4aU.s 			page 1
   59:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****         uint32_t blockSize,
   60:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****         q31_t * result)
   61:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** {
-  30              		.loc 1 61 1 view -0
-  31              		.cfi_startproc
-  32              		@ args = 0, pretend = 0, frame = 0
-  33              		@ frame_needed = 0, uses_anonymous_args = 0
-  34              		@ link register save eliminated.
+  28              		.loc 1 61 1
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 24
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 80B4     		push	{r7}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 4
+  36              		.cfi_offset 7, -4
+  37 0002 87B0     		sub	sp, sp, #28
+  38              	.LCFI1:
+  39              		.cfi_def_cfa_offset 32
+  40 0004 00AF     		add	r7, sp, #0
+  41              	.LCFI2:
+  42              		.cfi_def_cfa_register 7
+  43 0006 F860     		str	r0, [r7, #12]
+  44 0008 B960     		str	r1, [r7, #8]
+  45 000a 7A60     		str	r2, [r7, #4]
+  46 000c 3B60     		str	r3, [r7]
   62:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****         uint32_t blkCnt;                               /* Loop counter */
-  35              		.loc 1 62 9 view .LVU1
   63:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****         q31_t sum = 0;                                 /* Temporary return variable */
-  36              		.loc 1 63 9 view .LVU2
+  47              		.loc 1 63 15
+  48 000e 0023     		movs	r3, #0
+  49 0010 3B61     		str	r3, [r7, #16]
   64:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
   65:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** #if defined (ARM_MATH_LOOPUNROLL)
   66:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
+ARM GAS  /tmp/cchjwWNo.s 			page 3
+
+
   67:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** #if defined (ARM_MATH_DSP)
   68:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   q31_t input1, input2;                          /* Temporary variables */
   69:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   q31_t inA1, inA2, inB1, inB2;                  /* Temporary variables */
@@ -118,9 +134,6 @@ ARM GAS  /tmp/ccbzO4aU.s 			page 1
   77:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     /* C = A[0]* B[0] + A[1]* B[1] + A[2]* B[2] + .....+ A[blockSize-1]* B[blockSize-1] */
   78:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
   79:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** #if defined (ARM_MATH_DSP)
-ARM GAS  /tmp/ccbzO4aU.s 			page 3
-
-
   80:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     /* read 4 samples at a time from sourceA */
   81:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     input1 = read_q7x4_ia ((q7_t **) &pSrcA);
   82:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     /* read 4 samples at a time from sourceB */
@@ -156,31 +169,19 @@ ARM GAS  /tmp/ccbzO4aU.s 			page 1
  112:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
  113:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   /* Initialize blkCnt with number of samples */
  114:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   blkCnt = blockSize;
-  37              		.loc 1 114 3 view .LVU3
+  50              		.loc 1 114 10
+  51 0012 7B68     		ldr	r3, [r7, #4]
+  52 0014 7B61     		str	r3, [r7, #20]
  115:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
  116:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** #endif /* #if defined (ARM_MATH_LOOPUNROLL) */
  117:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
  118:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   while (blkCnt > 0U)
-  38              		.loc 1 118 3 view .LVU4
-  39              		.loc 1 118 9 view .LVU5
-  40 0000 6AB1     		cbz	r2, .L7
-  61:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****         uint32_t blkCnt;                               /* Loop counter */
-  41              		.loc 1 61 1 is_stmt 0 view .LVU6
-  42 0002 70B4     		push	{r4, r5, r6}
-  43              	.LCFI0:
-  44              		.cfi_def_cfa_offset 12
-  45              		.cfi_offset 4, -12
-  46              		.cfi_offset 5, -8
-  47              		.cfi_offset 6, -4
-  48 0004 8618     		adds	r6, r0, r2
-  63:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
-  49              		.loc 1 63 15 view .LVU7
-  50 0006 0022     		movs	r2, #0
-  51              	.LVL1:
-  52              	.L3:
-ARM GAS  /tmp/ccbzO4aU.s 			page 4
+  53              		.loc 1 118 9
+  54 0016 12E0     		b	.L2
+ARM GAS  /tmp/cchjwWNo.s 			page 4
 
 
+  55              	.L3:
  119:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   {
  120:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     /* C = A[0]* B[0] + A[1]* B[1] + A[2]* B[2] + .....+ A[blockSize-1]* B[blockSize-1] */
  121:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
@@ -189,71 +190,83 @@ ARM GAS  /tmp/ccbzO4aU.s 			page 1
  124:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** //    sum  = __SMLAD(*pSrcA++, *pSrcB++, sum);
  125:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** //#else
  126:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     sum += (q31_t) ((q15_t) *pSrcA++ * *pSrcB++);
-  53              		.loc 1 126 5 is_stmt 1 view .LVU8
-  54              		.loc 1 126 9 is_stmt 0 view .LVU9
-  55 0008 10F9015B 		ldrsb	r5, [r0], #1
-  56              	.LVL2:
-  57              		.loc 1 126 9 view .LVU10
-  58 000c 11F9014B 		ldrsb	r4, [r1], #1
-  59              	.LVL3:
- 118:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   {
-  60              		.loc 1 118 9 view .LVU11
-  61 0010 B042     		cmp	r0, r6
-  62              		.loc 1 126 9 view .LVU12
-  63 0012 15FB0422 		smlabb	r2, r5, r4, r2
-  64              	.LVL4:
+  56              		.loc 1 126 35
+  57 0018 FB68     		ldr	r3, [r7, #12]
+  58 001a 5A1C     		adds	r2, r3, #1
+  59 001c FA60     		str	r2, [r7, #12]
+  60              		.loc 1 126 29
+  61 001e 93F90030 		ldrsb	r3, [r3]
+  62              		.loc 1 126 21
+  63 0022 1946     		mov	r1, r3
+  64              		.loc 1 126 46
+  65 0024 BB68     		ldr	r3, [r7, #8]
+  66 0026 5A1C     		adds	r2, r3, #1
+  67 0028 BA60     		str	r2, [r7, #8]
+  68              		.loc 1 126 40
+  69 002a 93F90030 		ldrsb	r3, [r3]
+  70              		.loc 1 126 38
+  71 002e 03FB01F3 		mul	r3, r3, r1
+  72              		.loc 1 126 9
+  73 0032 3A69     		ldr	r2, [r7, #16]
+  74 0034 1344     		add	r3, r3, r2
+  75 0036 3B61     		str	r3, [r7, #16]
  127:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** //#endif
  128:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
  129:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     /* Decrement loop counter */
  130:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****     blkCnt--;
-  65              		.loc 1 130 5 is_stmt 1 view .LVU13
+  76              		.loc 1 130 11
+  77 0038 7B69     		ldr	r3, [r7, #20]
+  78 003a 013B     		subs	r3, r3, #1
+  79 003c 7B61     		str	r3, [r7, #20]
+  80              	.L2:
  118:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   {
-  66              		.loc 1 118 9 view .LVU14
-  67 0016 F7D1     		bne	.L3
+  81              		.loc 1 118 9
+  82 003e 7B69     		ldr	r3, [r7, #20]
+  83 0040 002B     		cmp	r3, #0
+  84 0042 E9D1     		bne	.L3
  131:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   }
  132:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** 
  133:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   /* Store result in destination buffer in 18.14 format */
  134:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c ****   *result = sum;
-  68              		.loc 1 134 3 view .LVU15
-  69              		.loc 1 134 11 is_stmt 0 view .LVU16
-  70 0018 1A60     		str	r2, [r3]
+  85              		.loc 1 134 11
+  86 0044 3B68     		ldr	r3, [r7]
+  87 0046 3A69     		ldr	r2, [r7, #16]
+  88 0048 1A60     		str	r2, [r3]
  135:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** }
-  71              		.loc 1 135 1 view .LVU17
-  72 001a 70BC     		pop	{r4, r5, r6}
-  73              	.LCFI1:
-  74              		.cfi_restore 6
-  75              		.cfi_restore 5
-  76              		.cfi_restore 4
-  77              		.cfi_def_cfa_offset 0
-  78 001c 7047     		bx	lr
-  79              	.LVL5:
-  80              	.L7:
- 134:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** }
-  81              		.loc 1 134 3 is_stmt 1 view .LVU18
- 134:./Libraries/CMSIS/DSP/Source/BasicMathFunctions/arm_dot_prod_q7.c **** }
-  82              		.loc 1 134 11 is_stmt 0 view .LVU19
-  83 001e 1A60     		str	r2, [r3]
-  84 0020 7047     		bx	lr
-  85              		.cfi_endproc
-  86              	.LFE145:
-  88 0022 00BF     		.text
-  89              	.Letext0:
-ARM GAS  /tmp/ccbzO4aU.s 			page 5
+  89              		.loc 1 135 1
+  90 004a 00BF     		nop
+  91 004c 1C37     		adds	r7, r7, #28
+  92              	.LCFI3:
+  93              		.cfi_def_cfa_offset 4
+ARM GAS  /tmp/cchjwWNo.s 			page 5
 
 
-  90              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  91              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  92              		.file 4 "/usr/include/newlib/sys/_types.h"
-  93              		.file 5 "/usr/include/newlib/sys/reent.h"
-  94              		.file 6 "/usr/include/newlib/sys/lock.h"
-  95              		.file 7 "/usr/include/newlib/math.h"
-  96              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
-ARM GAS  /tmp/ccbzO4aU.s 			page 6
+  94 004e BD46     		mov	sp, r7
+  95              	.LCFI4:
+  96              		.cfi_def_cfa_register 13
+  97              		@ sp needed
+  98 0050 5DF8047B 		ldr	r7, [sp], #4
+  99              	.LCFI5:
+ 100              		.cfi_restore 7
+ 101              		.cfi_def_cfa_offset 0
+ 102 0054 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE145:
+ 106              		.text
+ 107              	.Letext0:
+ 108              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 109              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 110              		.file 4 "/usr/include/newlib/sys/_types.h"
+ 111              		.file 5 "/usr/include/newlib/sys/reent.h"
+ 112              		.file 6 "/usr/include/newlib/sys/lock.h"
+ 113              		.file 7 "/usr/include/newlib/math.h"
+ 114              		.file 8 "./Libraries/CMSIS/DSP/Include/arm_math.h"
+ARM GAS  /tmp/cchjwWNo.s 			page 6
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 arm_dot_prod_q7.c
-     /tmp/ccbzO4aU.s:17     .text.arm_dot_prod_q7:0000000000000000 $t
-     /tmp/ccbzO4aU.s:26     .text.arm_dot_prod_q7:0000000000000000 arm_dot_prod_q7
+     /tmp/cchjwWNo.s:17     .text.arm_dot_prod_q7:0000000000000000 $t
+     /tmp/cchjwWNo.s:25     .text.arm_dot_prod_q7:0000000000000000 arm_dot_prod_q7
 
 NO UNDEFINED SYMBOLS
