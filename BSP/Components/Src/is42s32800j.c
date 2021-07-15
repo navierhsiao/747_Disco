@@ -1,7 +1,5 @@
 #include "../../system.h"
 
-sdram_objectTypeDef sdram_object;
-
 sdram_objectAttr sdram_attr={
     .Instance=              FMC_SDRAM_DEVICE,
     .SDBank=                FMC_SDRAM_BANK2,                   
@@ -47,7 +45,7 @@ void IS42S32800J_ExitPowerMode(sdram_objectTypeDef *object, uint32_t Interface) 
 
 void IS42S32800J_Init(void)
 {
-
+    sdram_objectTypeDef sdram_object;
     SDRAM_object_Init(&sdram_object,sdram_attr);
     sdram_object.sdram_timing=sdram_timing;
 
@@ -58,7 +56,6 @@ void IS42S32800J_Init(void)
     IS42S32800J_RefreshMode(&sdram_object,RegMode.TargetBank,RegMode.RefreshMode);
     IS42S32800J_ModeRegConfig(&sdram_object,&RegMode);
     IS42S32800J_RefreshRate(&sdram_object,RegMode.RefreshRate);
-    
 }
 
 void IS42S32800J_ClockEnable(sdram_objectTypeDef *object,uint32_t Interface) 

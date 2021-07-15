@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc6NU76Q.s 			page 1
+ARM GAS  /tmp/ccbcoRUy.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -41,268 +41,186 @@ ARM GAS  /tmp/cc6NU76Q.s 			page 1
   34              		.align	2
   37              	test:
   38 0000 00000000 		.space	4
-  39              		.global	sdram_test
-  40              		.section	.exSDRAM,"aw"
-  41              		.align	2
-  44              	sdram_test:
-  45 0000 00000000 		.space	2000
-  45      00000000 
-  45      00000000 
-  45      00000000 
-  45      00000000 
-  46              		.comm	read_test,200,4
-  47              		.section	.text.main,"ax",%progbits
-  48              		.align	1
-  49              		.global	main
-  50              		.arch armv7e-m
-  51              		.syntax unified
-  52              		.thumb
-  53              		.thumb_func
-ARM GAS  /tmp/cc6NU76Q.s 			page 2
-
-
-  54              		.fpu fpv5-d16
-  56              	main:
-  57              	.LFB338:
-  58              		.file 1 "./User/code/Src/main.c"
+  39              		.section	.text.main,"ax",%progbits
+  40              		.align	1
+  41              		.global	main
+  42              		.arch armv7e-m
+  43              		.syntax unified
+  44              		.thumb
+  45              		.thumb_func
+  46              		.fpu fpv5-d16
+  48              	main:
+  49              	.LFB338:
+  50              		.file 1 "./User/code/Src/main.c"
    1:./User/code/Src/main.c **** #include "main.h"
    2:./User/code/Src/main.c **** #include "cmsis_os.h"
    3:./User/code/Src/main.c **** #include "fatfs.h"
    4:./User/code/Src/main.c **** #include "../../../BSP/system.h"
    5:./User/code/Src/main.c **** 
    6:./User/code/Src/main.c **** osThreadId_t defaultTaskHandle;
-   7:./User/code/Src/main.c **** const osThreadAttr_t defaultTask_attributes = {
-   8:./User/code/Src/main.c ****   .name = "defaultTask",
-   9:./User/code/Src/main.c ****   .stack_size = 128 * 4,
-  10:./User/code/Src/main.c ****   .priority = (osPriority_t) osPriorityNormal,
-  11:./User/code/Src/main.c **** };
-  12:./User/code/Src/main.c **** 
-  13:./User/code/Src/main.c **** uint32_t test=0;
-  14:./User/code/Src/main.c **** uint16_t __attribute__((section (".exSDRAM")))sdram_test[1000];
+ARM GAS  /tmp/ccbcoRUy.s 			page 2
+
+
+   7:./User/code/Src/main.c **** 
+   8:./User/code/Src/main.c **** const osThreadAttr_t defaultTask_attributes = {
+   9:./User/code/Src/main.c ****   .name = "defaultTask",
+  10:./User/code/Src/main.c ****   .stack_size = 128 * 4,
+  11:./User/code/Src/main.c ****   .priority = (osPriority_t) osPriorityNormal,
+  12:./User/code/Src/main.c **** };
+  13:./User/code/Src/main.c **** 
+  14:./User/code/Src/main.c **** uint32_t test=0;
   15:./User/code/Src/main.c **** 
-  16:./User/code/Src/main.c **** uint16_t read_test[100];
+  16:./User/code/Src/main.c **** void StartDefaultTask(void *argument);
   17:./User/code/Src/main.c **** 
-  18:./User/code/Src/main.c **** void PeriphCommonClock_Config(void);
-  19:./User/code/Src/main.c **** 
-  20:./User/code/Src/main.c **** void StartDefaultTask(void *argument);
-  21:./User/code/Src/main.c **** 
-  22:./User/code/Src/main.c **** int main(void)
-  23:./User/code/Src/main.c **** {
-  59              		.loc 1 23 1
-  60              		.cfi_startproc
-  61              		@ args = 0, pretend = 0, frame = 0
-  62              		@ frame_needed = 1, uses_anonymous_args = 0
-  63 0000 80B5     		push	{r7, lr}
-  64              	.LCFI0:
-  65              		.cfi_def_cfa_offset 8
-  66              		.cfi_offset 7, -8
-  67              		.cfi_offset 14, -4
-  68 0002 00AF     		add	r7, sp, #0
-  69              	.LCFI1:
-  70              		.cfi_def_cfa_register 7
-  24:./User/code/Src/main.c ****   Hardware_Init();
-  71              		.loc 1 24 3
-  72 0004 FFF7FEFF 		bl	Hardware_Init
-  25:./User/code/Src/main.c ****   osKernelInitialize();
-  73              		.loc 1 25 3
-  74 0008 FFF7FEFF 		bl	osKernelInitialize
-  26:./User/code/Src/main.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
-  75              		.loc 1 26 23
-  76 000c 054A     		ldr	r2, .L3
-  77 000e 0021     		movs	r1, #0
-  78 0010 0548     		ldr	r0, .L3+4
-  79 0012 FFF7FEFF 		bl	osThreadNew
-  80 0016 0346     		mov	r3, r0
-  81              		.loc 1 26 21
-  82 0018 044A     		ldr	r2, .L3+8
-  83 001a 1360     		str	r3, [r2]
-  27:./User/code/Src/main.c ****   osKernelStart();
-  84              		.loc 1 27 3
-ARM GAS  /tmp/cc6NU76Q.s 			page 3
+  18:./User/code/Src/main.c **** int main(void)
+  19:./User/code/Src/main.c **** {
+  51              		.loc 1 19 1
+  52              		.cfi_startproc
+  53              		@ args = 0, pretend = 0, frame = 0
+  54              		@ frame_needed = 1, uses_anonymous_args = 0
+  55 0000 80B5     		push	{r7, lr}
+  56              	.LCFI0:
+  57              		.cfi_def_cfa_offset 8
+  58              		.cfi_offset 7, -8
+  59              		.cfi_offset 14, -4
+  60 0002 00AF     		add	r7, sp, #0
+  61              	.LCFI1:
+  62              		.cfi_def_cfa_register 7
+  20:./User/code/Src/main.c ****   Hardware_Init();
+  63              		.loc 1 20 3
+  64 0004 FFF7FEFF 		bl	Hardware_Init
+  21:./User/code/Src/main.c ****   osKernelInitialize();
+  65              		.loc 1 21 3
+  66 0008 FFF7FEFF 		bl	osKernelInitialize
+  22:./User/code/Src/main.c ****   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
+  67              		.loc 1 22 23
+  68 000c 054A     		ldr	r2, .L3
+  69 000e 0021     		movs	r1, #0
+  70 0010 0548     		ldr	r0, .L3+4
+  71 0012 FFF7FEFF 		bl	osThreadNew
+  72 0016 0346     		mov	r3, r0
+  73              		.loc 1 22 21
+  74 0018 044A     		ldr	r2, .L3+8
+  75 001a 1360     		str	r3, [r2]
+  23:./User/code/Src/main.c ****   osKernelStart();
+  76              		.loc 1 23 3
+  77 001c FFF7FEFF 		bl	osKernelStart
+  78              	.L2:
+  24:./User/code/Src/main.c **** 
+  25:./User/code/Src/main.c ****   while (1)
+  79              		.loc 1 25 9 discriminator 1
+  80 0020 FEE7     		b	.L2
+  81              	.L4:
+  82 0022 00BF     		.align	2
+  83              	.L3:
+  84 0024 00000000 		.word	defaultTask_attributes
+  85 0028 00000000 		.word	StartDefaultTask
+  86 002c 00000000 		.word	defaultTaskHandle
+  87              		.cfi_endproc
+  88              	.LFE338:
+ARM GAS  /tmp/ccbcoRUy.s 			page 3
 
 
-  85 001c FFF7FEFF 		bl	osKernelStart
-  86              	.L2:
-  28:./User/code/Src/main.c **** 
-  29:./User/code/Src/main.c ****   while (1)
-  87              		.loc 1 29 9 discriminator 1
-  88 0020 FEE7     		b	.L2
-  89              	.L4:
-  90 0022 00BF     		.align	2
-  91              	.L3:
-  92 0024 00000000 		.word	defaultTask_attributes
-  93 0028 00000000 		.word	StartDefaultTask
-  94 002c 00000000 		.word	defaultTaskHandle
-  95              		.cfi_endproc
-  96              	.LFE338:
-  98              		.section	.text.StartDefaultTask,"ax",%progbits
-  99              		.align	1
- 100              		.global	StartDefaultTask
- 101              		.syntax unified
- 102              		.thumb
- 103              		.thumb_func
- 104              		.fpu fpv5-d16
- 106              	StartDefaultTask:
- 107              	.LFB339:
-  30:./User/code/Src/main.c ****   {
-  31:./User/code/Src/main.c ****   }
-  32:./User/code/Src/main.c **** }
-  33:./User/code/Src/main.c **** 
-  34:./User/code/Src/main.c **** void StartDefaultTask(void *argument)
-  35:./User/code/Src/main.c **** {
- 108              		.loc 1 35 1
- 109              		.cfi_startproc
- 110              		@ args = 0, pretend = 0, frame = 16
- 111              		@ frame_needed = 1, uses_anonymous_args = 0
- 112 0000 80B5     		push	{r7, lr}
- 113              	.LCFI2:
- 114              		.cfi_def_cfa_offset 8
- 115              		.cfi_offset 7, -8
- 116              		.cfi_offset 14, -4
- 117 0002 84B0     		sub	sp, sp, #16
- 118              	.LCFI3:
- 119              		.cfi_def_cfa_offset 24
- 120 0004 00AF     		add	r7, sp, #0
- 121              	.LCFI4:
- 122              		.cfi_def_cfa_register 7
- 123 0006 7860     		str	r0, [r7, #4]
- 124              	.L10:
-  36:./User/code/Src/main.c ****   /* USER CODE BEGIN 5 */
-  37:./User/code/Src/main.c ****   /* Infinite loop */
-  38:./User/code/Src/main.c ****   for(;;)
-  39:./User/code/Src/main.c ****   {
-  40:./User/code/Src/main.c ****     test++;
- 125              		.loc 1 40 9
- 126 0008 144B     		ldr	r3, .L11
- 127 000a 1B68     		ldr	r3, [r3]
- 128 000c 0133     		adds	r3, r3, #1
- 129 000e 134A     		ldr	r2, .L11
- 130 0010 1360     		str	r3, [r2]
-ARM GAS  /tmp/cc6NU76Q.s 			page 4
+  90              		.section	.text.StartDefaultTask,"ax",%progbits
+  91              		.align	1
+  92              		.global	StartDefaultTask
+  93              		.syntax unified
+  94              		.thumb
+  95              		.thumb_func
+  96              		.fpu fpv5-d16
+  98              	StartDefaultTask:
+  99              	.LFB339:
+  26:./User/code/Src/main.c ****   {
+  27:./User/code/Src/main.c ****   }
+  28:./User/code/Src/main.c **** }
+  29:./User/code/Src/main.c **** 
+  30:./User/code/Src/main.c **** void StartDefaultTask(void *argument)
+  31:./User/code/Src/main.c **** {
+ 100              		.loc 1 31 1
+ 101              		.cfi_startproc
+ 102              		@ args = 0, pretend = 0, frame = 8
+ 103              		@ frame_needed = 1, uses_anonymous_args = 0
+ 104 0000 80B5     		push	{r7, lr}
+ 105              	.LCFI2:
+ 106              		.cfi_def_cfa_offset 8
+ 107              		.cfi_offset 7, -8
+ 108              		.cfi_offset 14, -4
+ 109 0002 82B0     		sub	sp, sp, #8
+ 110              	.LCFI3:
+ 111              		.cfi_def_cfa_offset 16
+ 112 0004 00AF     		add	r7, sp, #0
+ 113              	.LCFI4:
+ 114              		.cfi_def_cfa_register 7
+ 115 0006 7860     		str	r0, [r7, #4]
+ 116              	.L6:
+  32:./User/code/Src/main.c ****   /* USER CODE BEGIN 5 */
+  33:./User/code/Src/main.c ****   /* Infinite loop */
+  34:./User/code/Src/main.c ****   for(;;)
+  35:./User/code/Src/main.c ****   {
+  36:./User/code/Src/main.c ****     test++;
+ 117              		.loc 1 36 9 discriminator 1
+ 118 0008 044B     		ldr	r3, .L7
+ 119 000a 1B68     		ldr	r3, [r3]
+ 120 000c 0133     		adds	r3, r3, #1
+ 121 000e 034A     		ldr	r2, .L7
+ 122 0010 1360     		str	r3, [r2]
+  37:./User/code/Src/main.c **** 
+  38:./User/code/Src/main.c ****     osDelay(100);
+ 123              		.loc 1 38 5 discriminator 1
+ 124 0012 6420     		movs	r0, #100
+ 125 0014 FFF7FEFF 		bl	osDelay
+  36:./User/code/Src/main.c **** 
+ 126              		.loc 1 36 9 discriminator 1
+ 127 0018 F6E7     		b	.L6
+ 128              	.L8:
+ 129 001a 00BF     		.align	2
+ 130              	.L7:
+ 131 001c 00000000 		.word	test
+ 132              		.cfi_endproc
+ 133              	.LFE339:
+ARM GAS  /tmp/ccbcoRUy.s 			page 4
 
 
- 131              	.LBB2:
-  41:./User/code/Src/main.c ****     for(int i=0;i<1000;i++)
- 132              		.loc 1 41 13
- 133 0012 0023     		movs	r3, #0
- 134 0014 FB60     		str	r3, [r7, #12]
- 135              		.loc 1 41 5
- 136 0016 08E0     		b	.L6
- 137              	.L7:
-  42:./User/code/Src/main.c ****     {
-  43:./User/code/Src/main.c ****       sdram_test[i]=i;
- 138              		.loc 1 43 20 discriminator 3
- 139 0018 FB68     		ldr	r3, [r7, #12]
- 140 001a 99B2     		uxth	r1, r3
- 141 001c 104A     		ldr	r2, .L11+4
- 142 001e FB68     		ldr	r3, [r7, #12]
- 143 0020 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
-  41:./User/code/Src/main.c ****     for(int i=0;i<1000;i++)
- 144              		.loc 1 41 25 discriminator 3
- 145 0024 FB68     		ldr	r3, [r7, #12]
- 146 0026 0133     		adds	r3, r3, #1
- 147 0028 FB60     		str	r3, [r7, #12]
- 148              	.L6:
-  41:./User/code/Src/main.c ****     for(int i=0;i<1000;i++)
- 149              		.loc 1 41 5 discriminator 1
- 150 002a FB68     		ldr	r3, [r7, #12]
- 151 002c B3F57A7F 		cmp	r3, #1000
- 152 0030 F2DB     		blt	.L7
- 153              	.LBE2:
- 154              	.LBB3:
-  44:./User/code/Src/main.c ****     }
-  45:./User/code/Src/main.c **** 
-  46:./User/code/Src/main.c ****     for(int i=0;i<100;i++)
- 155              		.loc 1 46 13
- 156 0032 0023     		movs	r3, #0
- 157 0034 BB60     		str	r3, [r7, #8]
- 158              		.loc 1 46 5
- 159 0036 0AE0     		b	.L8
- 160              	.L9:
-  47:./User/code/Src/main.c ****     {
-  48:./User/code/Src/main.c ****       read_test[i]=sdram_test[i];
- 161              		.loc 1 48 30 discriminator 3
- 162 0038 094A     		ldr	r2, .L11+4
- 163 003a BB68     		ldr	r3, [r7, #8]
- 164 003c 32F81310 		ldrh	r1, [r2, r3, lsl #1]
- 165              		.loc 1 48 19 discriminator 3
- 166 0040 084A     		ldr	r2, .L11+8
- 167 0042 BB68     		ldr	r3, [r7, #8]
- 168 0044 22F81310 		strh	r1, [r2, r3, lsl #1]	@ movhi
-  46:./User/code/Src/main.c ****     {
- 169              		.loc 1 46 24 discriminator 3
- 170 0048 BB68     		ldr	r3, [r7, #8]
- 171 004a 0133     		adds	r3, r3, #1
- 172 004c BB60     		str	r3, [r7, #8]
- 173              	.L8:
-  46:./User/code/Src/main.c ****     {
- 174              		.loc 1 46 5 discriminator 1
- 175 004e BB68     		ldr	r3, [r7, #8]
-ARM GAS  /tmp/cc6NU76Q.s 			page 5
-
-
- 176 0050 632B     		cmp	r3, #99
- 177 0052 F1DD     		ble	.L9
- 178              	.LBE3:
-  49:./User/code/Src/main.c ****     }
-  50:./User/code/Src/main.c ****     osDelay(1);
- 179              		.loc 1 50 5
- 180 0054 0120     		movs	r0, #1
- 181 0056 FFF7FEFF 		bl	osDelay
-  40:./User/code/Src/main.c ****     for(int i=0;i<1000;i++)
- 182              		.loc 1 40 9
- 183 005a D5E7     		b	.L10
- 184              	.L12:
- 185              		.align	2
- 186              	.L11:
- 187 005c 00000000 		.word	test
- 188 0060 00000000 		.word	sdram_test
- 189 0064 00000000 		.word	read_test
- 190              		.cfi_endproc
- 191              	.LFE339:
- 193              		.text
- 194              	.Letext0:
- 195              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 196              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
- 197              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 198              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 199              		.file 6 "/usr/include/newlib/sys/_types.h"
- 200              		.file 7 "/usr/include/newlib/sys/reent.h"
- 201              		.file 8 "/usr/include/newlib/sys/lock.h"
- 202              		.file 9 "/usr/include/newlib/math.h"
- 203              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 204              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 205              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
- 206              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 207              		.file 14 "./Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
- 208              		.file 15 "./Libraries/FatFs/Inc/integer.h"
- 209              		.file 16 "./Libraries/FatFs/Inc/ff.h"
- 210              		.file 17 "./Libraries/FatFs/Inc/diskio.h"
- 211              		.file 18 "./Libraries/FatFs/Inc/ff_gen_drv.h"
- 212              		.file 19 "./User/code/Inc/user_diskio.h"
- 213              		.file 20 "./User/code/Inc/fatfs.h"
- 214              		.file 21 "/usr/include/newlib/stdlib.h"
- 215              		.file 22 "./User/code/Src/../../../BSP/Components/Inc/lcd.h"
-ARM GAS  /tmp/cc6NU76Q.s 			page 6
+ 135              		.text
+ 136              	.Letext0:
+ 137              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 138              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 139              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 140              		.file 5 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 141              		.file 6 "/usr/include/newlib/sys/_types.h"
+ 142              		.file 7 "/usr/include/newlib/sys/reent.h"
+ 143              		.file 8 "/usr/include/newlib/sys/lock.h"
+ 144              		.file 9 "/usr/include/newlib/math.h"
+ 145              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 146              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 147              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 148              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 149              		.file 14 "./Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h"
+ 150              		.file 15 "./Libraries/FatFs/Inc/integer.h"
+ 151              		.file 16 "./Libraries/FatFs/Inc/ff.h"
+ 152              		.file 17 "./Libraries/FatFs/Inc/diskio.h"
+ 153              		.file 18 "./Libraries/FatFs/Inc/ff_gen_drv.h"
+ 154              		.file 19 "./User/code/Inc/user_diskio.h"
+ 155              		.file 20 "./User/code/Inc/fatfs.h"
+ 156              		.file 21 "/usr/include/newlib/stdlib.h"
+ 157              		.file 22 "./User/code/Src/../../../BSP/Components/Inc/lcd.h"
+ARM GAS  /tmp/ccbcoRUy.s 			page 5
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 main.c
                             *COM*:0000000000000004 defaultTaskHandle
-     /tmp/cc6NU76Q.s:26     .rodata.defaultTask_attributes:0000000000000000 defaultTask_attributes
-     /tmp/cc6NU76Q.s:19     .rodata:0000000000000000 $d
-     /tmp/cc6NU76Q.s:23     .rodata.defaultTask_attributes:0000000000000000 $d
-     /tmp/cc6NU76Q.s:37     .bss.test:0000000000000000 test
-     /tmp/cc6NU76Q.s:34     .bss.test:0000000000000000 $d
-     /tmp/cc6NU76Q.s:44     .exSDRAM:0000000000000000 sdram_test
-     /tmp/cc6NU76Q.s:41     .exSDRAM:0000000000000000 $d
-                            *COM*:00000000000000c8 read_test
-     /tmp/cc6NU76Q.s:48     .text.main:0000000000000000 $t
-     /tmp/cc6NU76Q.s:56     .text.main:0000000000000000 main
-     /tmp/cc6NU76Q.s:92     .text.main:0000000000000024 $d
-     /tmp/cc6NU76Q.s:106    .text.StartDefaultTask:0000000000000000 StartDefaultTask
-     /tmp/cc6NU76Q.s:99     .text.StartDefaultTask:0000000000000000 $t
-     /tmp/cc6NU76Q.s:187    .text.StartDefaultTask:000000000000005c $d
+     /tmp/ccbcoRUy.s:26     .rodata.defaultTask_attributes:0000000000000000 defaultTask_attributes
+     /tmp/ccbcoRUy.s:19     .rodata:0000000000000000 $d
+     /tmp/ccbcoRUy.s:23     .rodata.defaultTask_attributes:0000000000000000 $d
+     /tmp/ccbcoRUy.s:37     .bss.test:0000000000000000 test
+     /tmp/ccbcoRUy.s:34     .bss.test:0000000000000000 $d
+     /tmp/ccbcoRUy.s:40     .text.main:0000000000000000 $t
+     /tmp/ccbcoRUy.s:48     .text.main:0000000000000000 main
+     /tmp/ccbcoRUy.s:84     .text.main:0000000000000024 $d
+     /tmp/ccbcoRUy.s:98     .text.StartDefaultTask:0000000000000000 StartDefaultTask
+     /tmp/ccbcoRUy.s:91     .text.StartDefaultTask:0000000000000000 $t
+     /tmp/ccbcoRUy.s:131    .text.StartDefaultTask:000000000000001c $d
 
 UNDEFINED SYMBOLS
 Hardware_Init
