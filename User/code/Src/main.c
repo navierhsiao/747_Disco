@@ -22,9 +22,7 @@ int main(void)
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
   osKernelStart();
 
-  while (1)
-  {
-  }
+  while (1);
 }
 
 void StartDefaultTask(void *argument)
