@@ -67,6 +67,7 @@ void Hardware_Init(void)
 static void BSP_Init(void)
 {
   //QSPI init
+  mt25tl01g_Init();
   //SDRAM init
   IS42S32800J_Init();
   //MCU internal temperature sensing init

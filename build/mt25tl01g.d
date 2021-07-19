@@ -1,5 +1,5 @@
-build/ltdc_dsi.o: BSP/Hardware/Src/ltdc_dsi.c \
- BSP/Hardware/Src/../../system.h \
+build/mt25tl01g.o: BSP/Components/Src/mt25tl01g.c \
+ BSP/Components/Src/../../system.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h \
  User/code/Inc/stm32h7xx_hal_conf.h \
  Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc.h \
@@ -69,18 +69,18 @@ build/ltdc_dsi.o: BSP/Hardware/Src/ltdc_dsi.c \
  Libraries/FreeRTOS/Source/include/task.h \
  Libraries/FreeRTOS/Source/include/list.h \
  Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h \
- BSP/Hardware/Src/../../Components/Inc/lcd.h \
- BSP/Hardware/Src/../../Components/Inc/touch.h \
- BSP/Hardware/Src/../../Components/Inc/is42s32800j.h \
- BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
- BSP/Hardware/Src/../../Components/Inc/mt25tl01g.h \
- BSP/Hardware/Src/../../Hardware/Inc/ltdc_dsi.h \
- BSP/Hardware/Src/../../Hardware/Inc/i2c.h \
- BSP/Hardware/Src/../../Hardware/Inc/qspi.h \
- BSP/Hardware/Src/../../Hardware/Inc/sdram.h \
- BSP/Hardware/Src/../../Hardware/Inc/uart.h
+ BSP/Components/Src/../../Components/Inc/lcd.h \
+ BSP/Components/Src/../../Components/Inc/touch.h \
+ BSP/Components/Src/../../Components/Inc/is42s32800j.h \
+ BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
+ BSP/Components/Src/../../Components/Inc/mt25tl01g.h \
+ BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h \
+ BSP/Components/Src/../../Hardware/Inc/i2c.h \
+ BSP/Components/Src/../../Hardware/Inc/qspi.h \
+ BSP/Components/Src/../../Hardware/Inc/sdram.h \
+ BSP/Components/Src/../../Hardware/Inc/uart.h
 
-BSP/Hardware/Src/../../system.h:
+BSP/Components/Src/../../system.h:
 
 Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h:
 
@@ -220,22 +220,22 @@ Libraries/FreeRTOS/Source/include/list.h:
 
 Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h:
 
-BSP/Hardware/Src/../../Components/Inc/lcd.h:
+BSP/Components/Src/../../Components/Inc/lcd.h:
 
-BSP/Hardware/Src/../../Components/Inc/touch.h:
+BSP/Components/Src/../../Components/Inc/touch.h:
 
-BSP/Hardware/Src/../../Components/Inc/is42s32800j.h:
+BSP/Components/Src/../../Components/Inc/is42s32800j.h:
 
-BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/sdram.h:
+BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h:
 
-BSP/Hardware/Src/../../Components/Inc/mt25tl01g.h:
+BSP/Components/Src/../../Components/Inc/mt25tl01g.h:
 
-BSP/Hardware/Src/../../Hardware/Inc/ltdc_dsi.h:
+BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h:
 
-BSP/Hardware/Src/../../Hardware/Inc/i2c.h:
+BSP/Components/Src/../../Hardware/Inc/i2c.h:
 
-BSP/Hardware/Src/../../Hardware/Inc/qspi.h:
+BSP/Components/Src/../../Hardware/Inc/qspi.h:
 
-BSP/Hardware/Src/../../Hardware/Inc/sdram.h:
+BSP/Components/Src/../../Hardware/Inc/sdram.h:
 
-BSP/Hardware/Src/../../Hardware/Inc/uart.h:
+BSP/Components/Src/../../Hardware/Inc/uart.h:

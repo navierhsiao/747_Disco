@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccju0g0W.s 			page 1
+ARM GAS  /tmp/ccIwRkHO.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -16,25 +16,1031 @@ ARM GAS  /tmp/ccju0g0W.s 			page 1
   13              		.text
   14              	.Ltext0:
   15              		.cfi_sections	.debug_frame
-  16              	.Letext0:
-  17              		.file 1 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
-  18              		.file 2 "./Libraries/CMSIS/Core/Include/core_cm7.h"
-  19              		.file 3 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
-  20              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
-  21              		.file 5 "/usr/include/newlib/sys/_types.h"
-  22              		.file 6 "/usr/include/newlib/sys/reent.h"
-  23              		.file 7 "/usr/include/newlib/sys/lock.h"
-  24              		.file 8 "/usr/include/newlib/math.h"
-  25              		.file 9 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
-  26              		.file 10 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
-  27              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
-  28              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
-  29              		.file 13 "/usr/include/newlib/stdlib.h"
-  30              		.file 14 "./BSP/Hardware/Src/../../Components/Inc/lcd.h"
-ARM GAS  /tmp/ccju0g0W.s 			page 2
+  16              		.section	.text.QSPI_object_Init,"ax",%progbits
+  17              		.align	1
+  18              		.global	QSPI_object_Init
+  19              		.arch armv7e-m
+  20              		.syntax unified
+  21              		.thumb
+  22              		.thumb_func
+  23              		.fpu fpv5-d16
+  25              	QSPI_object_Init:
+  26              	.LFB338:
+  27              		.file 1 "./BSP/Hardware/Src/qspi.c"
+   1:./BSP/Hardware/Src/qspi.c **** #include "../../system.h"
+   2:./BSP/Hardware/Src/qspi.c **** 
+   3:./BSP/Hardware/Src/qspi.c **** void QSPI_Init(QSPI_objectTypeDef *object);
+   4:./BSP/Hardware/Src/qspi.c **** void QSPI_Write_Command(QSPI_objectTypeDef *object,QSPI_CommandTypeDef *cmd);
+   5:./BSP/Hardware/Src/qspi.c **** void QSPI_Write_Data(QSPI_objectTypeDef *object,uint8_t *reg);
+   6:./BSP/Hardware/Src/qspi.c **** void QSPI_Read_Data(QSPI_objectTypeDef *object,uint8_t *reg);
+   7:./BSP/Hardware/Src/qspi.c **** void QSPI_Auto_Polling(QSPI_objectTypeDef *object,QSPI_CommandTypeDef *cmd,QSPI_AutoPollingTypeDef 
+   8:./BSP/Hardware/Src/qspi.c **** 
+   9:./BSP/Hardware/Src/qspi.c **** void QSPI_object_Init(QSPI_objectTypeDef *object,QSPI_objectAttr attr)
+  10:./BSP/Hardware/Src/qspi.c **** {
+  28              		.loc 1 10 1
+  29              		.cfi_startproc
+  30              		@ args = 40, pretend = 16, frame = 8
+  31              		@ frame_needed = 1, uses_anonymous_args = 0
+  32              		@ link register save eliminated.
+  33 0000 84B0     		sub	sp, sp, #16
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36 0002 B0B4     		push	{r4, r5, r7}
+  37              	.LCFI1:
+  38              		.cfi_def_cfa_offset 28
+  39              		.cfi_offset 4, -28
+  40              		.cfi_offset 5, -24
+  41              		.cfi_offset 7, -20
+  42 0004 83B0     		sub	sp, sp, #12
+  43              	.LCFI2:
+  44              		.cfi_def_cfa_offset 40
+  45 0006 00AF     		add	r7, sp, #0
+  46              	.LCFI3:
+  47              		.cfi_def_cfa_register 7
+  48 0008 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/ccIwRkHO.s 			page 2
+
+
+  49 000a 07F11C00 		add	r0, r7, #28
+  50 000e 80E80E00 		stm	r0, {r1, r2, r3}
+  11:./BSP/Hardware/Src/qspi.c ****     object->qspi_init=QSPI_Init;
+  51              		.loc 1 11 22
+  52 0012 7B68     		ldr	r3, [r7, #4]
+  53 0014 0F4A     		ldr	r2, .L2
+  54 0016 1A67     		str	r2, [r3, #112]
+  12:./BSP/Hardware/Src/qspi.c ****     object->qspi_writeCmd=QSPI_Write_Command;
+  55              		.loc 1 12 26
+  56 0018 7B68     		ldr	r3, [r7, #4]
+  57 001a 0F4A     		ldr	r2, .L2+4
+  58 001c 5A67     		str	r2, [r3, #116]
+  13:./BSP/Hardware/Src/qspi.c ****     object->qspi_writeData=QSPI_Write_Data;
+  59              		.loc 1 13 27
+  60 001e 7B68     		ldr	r3, [r7, #4]
+  61 0020 0E4A     		ldr	r2, .L2+8
+  62 0022 9A67     		str	r2, [r3, #120]
+  14:./BSP/Hardware/Src/qspi.c ****     object->qspi_readData=QSPI_Read_Data;
+  63              		.loc 1 14 26
+  64 0024 7B68     		ldr	r3, [r7, #4]
+  65 0026 0E4A     		ldr	r2, .L2+12
+  66 0028 DA67     		str	r2, [r3, #124]
+  15:./BSP/Hardware/Src/qspi.c ****     object->qspi_autoPolling=QSPI_Auto_Polling;
+  67              		.loc 1 15 29
+  68 002a 7B68     		ldr	r3, [r7, #4]
+  69 002c 0D4A     		ldr	r2, .L2+16
+  70 002e C3F88020 		str	r2, [r3, #128]
+  16:./BSP/Hardware/Src/qspi.c ****     object->object_attr=attr;
+  71              		.loc 1 16 24
+  72 0032 7B68     		ldr	r3, [r7, #4]
+  73 0034 03F14C04 		add	r4, r3, #76
+  74 0038 07F11C05 		add	r5, r7, #28
+  75 003c 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  76 003e 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  77 0040 0FCD     		ldmia	r5!, {r0, r1, r2, r3}
+  78 0042 0FC4     		stmia	r4!, {r0, r1, r2, r3}
+  79 0044 2B68     		ldr	r3, [r5]
+  80 0046 2360     		str	r3, [r4]
+  17:./BSP/Hardware/Src/qspi.c **** }
+  81              		.loc 1 17 1
+  82 0048 00BF     		nop
+  83 004a 0C37     		adds	r7, r7, #12
+  84              	.LCFI4:
+  85              		.cfi_def_cfa_offset 28
+  86 004c BD46     		mov	sp, r7
+  87              	.LCFI5:
+  88              		.cfi_def_cfa_register 13
+  89              		@ sp needed
+  90 004e B0BC     		pop	{r4, r5, r7}
+  91              	.LCFI6:
+  92              		.cfi_restore 7
+  93              		.cfi_restore 5
+  94              		.cfi_restore 4
+  95              		.cfi_def_cfa_offset 16
+  96 0050 04B0     		add	sp, sp, #16
+  97              	.LCFI7:
+  98              		.cfi_def_cfa_offset 0
+ARM GAS  /tmp/ccIwRkHO.s 			page 3
+
+
+  99 0052 7047     		bx	lr
+ 100              	.L3:
+ 101              		.align	2
+ 102              	.L2:
+ 103 0054 00000000 		.word	QSPI_Init
+ 104 0058 00000000 		.word	QSPI_Write_Command
+ 105 005c 00000000 		.word	QSPI_Write_Data
+ 106 0060 00000000 		.word	QSPI_Read_Data
+ 107 0064 00000000 		.word	QSPI_Auto_Polling
+ 108              		.cfi_endproc
+ 109              	.LFE338:
+ 111              		.section	.rodata
+ 112              		.align	2
+ 113              	.LC0:
+ 114 0000 2E2F4253 		.ascii	"./BSP/Hardware/Src/qspi.c\000"
+ 114      502F4861 
+ 114      72647761 
+ 114      72652F53 
+ 114      72632F71 
+ 115              		.section	.text.QSPI_Init,"ax",%progbits
+ 116              		.align	1
+ 117              		.global	QSPI_Init
+ 118              		.syntax unified
+ 119              		.thumb
+ 120              		.thumb_func
+ 121              		.fpu fpv5-d16
+ 123              	QSPI_Init:
+ 124              	.LFB339:
+  18:./BSP/Hardware/Src/qspi.c **** 
+  19:./BSP/Hardware/Src/qspi.c **** void QSPI_Init(QSPI_objectTypeDef *object)
+  20:./BSP/Hardware/Src/qspi.c **** {
+ 125              		.loc 1 20 1
+ 126              		.cfi_startproc
+ 127              		@ args = 0, pretend = 0, frame = 8
+ 128              		@ frame_needed = 1, uses_anonymous_args = 0
+ 129 0000 80B5     		push	{r7, lr}
+ 130              	.LCFI8:
+ 131              		.cfi_def_cfa_offset 8
+ 132              		.cfi_offset 7, -8
+ 133              		.cfi_offset 14, -4
+ 134 0002 82B0     		sub	sp, sp, #8
+ 135              	.LCFI9:
+ 136              		.cfi_def_cfa_offset 16
+ 137 0004 00AF     		add	r7, sp, #0
+ 138              	.LCFI10:
+ 139              		.cfi_def_cfa_register 7
+ 140 0006 7860     		str	r0, [r7, #4]
+  21:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Instance                = object->object_attr.Instance;
+ 141              		.loc 1 21 64
+ 142 0008 7B68     		ldr	r3, [r7, #4]
+ 143 000a DA6C     		ldr	r2, [r3, #76]
+ 144              		.loc 1 21 43
+ 145 000c 7B68     		ldr	r3, [r7, #4]
+ 146 000e 1A60     		str	r2, [r3]
+  22:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.ClockPrescaler     = object->object_attr.ClockPrescaler;
+ 147              		.loc 1 22 64
+ 148 0010 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccIwRkHO.s 			page 4
+
+
+ 149 0012 1A6D     		ldr	r2, [r3, #80]
+ 150              		.loc 1 22 43
+ 151 0014 7B68     		ldr	r3, [r7, #4]
+ 152 0016 5A60     		str	r2, [r3, #4]
+  23:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.FifoThreshold      = object->object_attr.FifoThreshold;
+ 153              		.loc 1 23 64
+ 154 0018 7B68     		ldr	r3, [r7, #4]
+ 155 001a 5A6D     		ldr	r2, [r3, #84]
+ 156              		.loc 1 23 43
+ 157 001c 7B68     		ldr	r3, [r7, #4]
+ 158 001e 9A60     		str	r2, [r3, #8]
+  24:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.SampleShifting     = object->object_attr.SampleShifting;
+ 159              		.loc 1 24 64
+ 160 0020 7B68     		ldr	r3, [r7, #4]
+ 161 0022 9A6D     		ldr	r2, [r3, #88]
+ 162              		.loc 1 24 43
+ 163 0024 7B68     		ldr	r3, [r7, #4]
+ 164 0026 DA60     		str	r2, [r3, #12]
+  25:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.FlashSize          = object->object_attr.FlashSize;
+ 165              		.loc 1 25 64
+ 166 0028 7B68     		ldr	r3, [r7, #4]
+ 167 002a DA6D     		ldr	r2, [r3, #92]
+ 168              		.loc 1 25 43
+ 169 002c 7B68     		ldr	r3, [r7, #4]
+ 170 002e 1A61     		str	r2, [r3, #16]
+  26:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.ChipSelectHighTime = object->object_attr.ChipSelectHighTime; 
+ 171              		.loc 1 26 64
+ 172 0030 7B68     		ldr	r3, [r7, #4]
+ 173 0032 1A6E     		ldr	r2, [r3, #96]
+ 174              		.loc 1 26 43
+ 175 0034 7B68     		ldr	r3, [r7, #4]
+ 176 0036 5A61     		str	r2, [r3, #20]
+  27:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.ClockMode          = object->object_attr.ClockMode;
+ 177              		.loc 1 27 64
+ 178 0038 7B68     		ldr	r3, [r7, #4]
+ 179 003a 5A6E     		ldr	r2, [r3, #100]
+ 180              		.loc 1 27 43
+ 181 003c 7B68     		ldr	r3, [r7, #4]
+ 182 003e 9A61     		str	r2, [r3, #24]
+  28:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.FlashID            = object->object_attr.DualFlash;
+ 183              		.loc 1 28 64
+ 184 0040 7B68     		ldr	r3, [r7, #4]
+ 185 0042 DA6E     		ldr	r2, [r3, #108]
+ 186              		.loc 1 28 43
+ 187 0044 7B68     		ldr	r3, [r7, #4]
+ 188 0046 DA61     		str	r2, [r3, #28]
+  29:./BSP/Hardware/Src/qspi.c ****     object->hqspi.Init.DualFlash          = object->object_attr.DualFlash;
+ 189              		.loc 1 29 64
+ 190 0048 7B68     		ldr	r3, [r7, #4]
+ 191 004a DA6E     		ldr	r2, [r3, #108]
+ 192              		.loc 1 29 43
+ 193 004c 7B68     		ldr	r3, [r7, #4]
+ 194 004e 1A62     		str	r2, [r3, #32]
+  30:./BSP/Hardware/Src/qspi.c ****     
+  31:./BSP/Hardware/Src/qspi.c ****     if(HAL_QSPI_Init(&object->hqspi) != HAL_OK)
+ 195              		.loc 1 31 8
+ 196 0050 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/ccIwRkHO.s 			page 5
+
+
+ 197 0052 1846     		mov	r0, r3
+ 198 0054 FFF7FEFF 		bl	HAL_QSPI_Init
+ 199 0058 0346     		mov	r3, r0
+ 200              		.loc 1 31 7
+ 201 005a 002B     		cmp	r3, #0
+ 202 005c 03D0     		beq	.L6
+  32:./BSP/Hardware/Src/qspi.c ****     {
+  33:./BSP/Hardware/Src/qspi.c ****       Error_Handler(__FILE__, __LINE__);
+ 203              		.loc 1 33 7
+ 204 005e 2121     		movs	r1, #33
+ 205 0060 0348     		ldr	r0, .L7
+ 206 0062 FFF7FEFF 		bl	Error_Handler
+ 207              	.L6:
+  34:./BSP/Hardware/Src/qspi.c ****     }
+  35:./BSP/Hardware/Src/qspi.c **** }
+ 208              		.loc 1 35 1
+ 209 0066 00BF     		nop
+ 210 0068 0837     		adds	r7, r7, #8
+ 211              	.LCFI11:
+ 212              		.cfi_def_cfa_offset 8
+ 213 006a BD46     		mov	sp, r7
+ 214              	.LCFI12:
+ 215              		.cfi_def_cfa_register 13
+ 216              		@ sp needed
+ 217 006c 80BD     		pop	{r7, pc}
+ 218              	.L8:
+ 219 006e 00BF     		.align	2
+ 220              	.L7:
+ 221 0070 00000000 		.word	.LC0
+ 222              		.cfi_endproc
+ 223              	.LFE339:
+ 225              		.section	.text.HAL_QSPI_MspInit,"ax",%progbits
+ 226              		.align	1
+ 227              		.global	HAL_QSPI_MspInit
+ 228              		.syntax unified
+ 229              		.thumb
+ 230              		.thumb_func
+ 231              		.fpu fpv5-d16
+ 233              	HAL_QSPI_MspInit:
+ 234              	.LFB340:
+  36:./BSP/Hardware/Src/qspi.c **** 
+  37:./BSP/Hardware/Src/qspi.c **** void HAL_QSPI_MspInit(QSPI_HandleTypeDef* hqspi)
+  38:./BSP/Hardware/Src/qspi.c **** {
+ 235              		.loc 1 38 1
+ 236              		.cfi_startproc
+ 237              		@ args = 0, pretend = 0, frame = 80
+ 238              		@ frame_needed = 1, uses_anonymous_args = 0
+ 239 0000 80B5     		push	{r7, lr}
+ 240              	.LCFI13:
+ 241              		.cfi_def_cfa_offset 8
+ 242              		.cfi_offset 7, -8
+ 243              		.cfi_offset 14, -4
+ 244 0002 94B0     		sub	sp, sp, #80
+ 245              	.LCFI14:
+ 246              		.cfi_def_cfa_offset 88
+ 247 0004 00AF     		add	r7, sp, #0
+ 248              	.LCFI15:
+ARM GAS  /tmp/ccIwRkHO.s 			page 6
+
+
+ 249              		.cfi_def_cfa_register 7
+ 250 0006 7860     		str	r0, [r7, #4]
+ 251              	.LBB2:
+  39:./BSP/Hardware/Src/qspi.c ****   GPIO_InitTypeDef gpio_init_structure;
+  40:./BSP/Hardware/Src/qspi.c **** 
+  41:./BSP/Hardware/Src/qspi.c ****   /*##-1- Enable peripherals and GPIO Clocks #################################*/
+  42:./BSP/Hardware/Src/qspi.c ****   /* Enable the QuadSPI memory interface clock */
+  43:./BSP/Hardware/Src/qspi.c ****   __HAL_RCC_QSPI_CLK_ENABLE();
+ 252              		.loc 1 43 3
+ 253 0008 9B4B     		ldr	r3, .L10
+ 254 000a D3F8D430 		ldr	r3, [r3, #212]
+ 255 000e 9A4A     		ldr	r2, .L10
+ 256 0010 43F48043 		orr	r3, r3, #16384
+ 257 0014 C2F8D430 		str	r3, [r2, #212]
+ 258 0018 974B     		ldr	r3, .L10
+ 259 001a D3F8D430 		ldr	r3, [r3, #212]
+ 260 001e 03F48043 		and	r3, r3, #16384
+ 261 0022 BB63     		str	r3, [r7, #56]
+ 262 0024 BB6B     		ldr	r3, [r7, #56]
+ 263              	.LBE2:
+  44:./BSP/Hardware/Src/qspi.c ****   /* Reset the QuadSPI memory interface */
+  45:./BSP/Hardware/Src/qspi.c ****   __HAL_RCC_QSPI_FORCE_RESET();
+ 264              		.loc 1 45 3
+ 265 0026 944B     		ldr	r3, .L10
+ 266 0028 DB6F     		ldr	r3, [r3, #124]
+ 267 002a 934A     		ldr	r2, .L10
+ 268 002c 43F48043 		orr	r3, r3, #16384
+ 269 0030 D367     		str	r3, [r2, #124]
+  46:./BSP/Hardware/Src/qspi.c ****   __HAL_RCC_QSPI_RELEASE_RESET();
+ 270              		.loc 1 46 3
+ 271 0032 914B     		ldr	r3, .L10
+ 272 0034 DB6F     		ldr	r3, [r3, #124]
+ 273 0036 904A     		ldr	r2, .L10
+ 274 0038 23F48043 		bic	r3, r3, #16384
+ 275 003c D367     		str	r3, [r2, #124]
+ 276              	.LBB3:
+  47:./BSP/Hardware/Src/qspi.c ****   /* Enable GPIO clocks */
+  48:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOB_CLK_ENABLE();
+ 277              		.loc 1 48 5
+ 278 003e 8E4B     		ldr	r3, .L10
+ 279 0040 D3F8E030 		ldr	r3, [r3, #224]
+ 280 0044 8C4A     		ldr	r2, .L10
+ 281 0046 43F00203 		orr	r3, r3, #2
+ 282 004a C2F8E030 		str	r3, [r2, #224]
+ 283 004e 8A4B     		ldr	r3, .L10
+ 284 0050 D3F8E030 		ldr	r3, [r3, #224]
+ 285 0054 03F00203 		and	r3, r3, #2
+ 286 0058 7B63     		str	r3, [r7, #52]
+ 287 005a 7B6B     		ldr	r3, [r7, #52]
+ 288              	.LBE3:
+ 289              	.LBB4:
+  49:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOG_CLK_ENABLE();
+ 290              		.loc 1 49 5
+ 291 005c 864B     		ldr	r3, .L10
+ 292 005e D3F8E030 		ldr	r3, [r3, #224]
+ 293 0062 854A     		ldr	r2, .L10
+ 294 0064 43F04003 		orr	r3, r3, #64
+ARM GAS  /tmp/ccIwRkHO.s 			page 7
+
+
+ 295 0068 C2F8E030 		str	r3, [r2, #224]
+ 296 006c 824B     		ldr	r3, .L10
+ 297 006e D3F8E030 		ldr	r3, [r3, #224]
+ 298 0072 03F04003 		and	r3, r3, #64
+ 299 0076 3B63     		str	r3, [r7, #48]
+ 300 0078 3B6B     		ldr	r3, [r7, #48]
+ 301              	.LBE4:
+ 302              	.LBB5:
+  50:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOD_CLK_ENABLE();
+ 303              		.loc 1 50 5
+ 304 007a 7F4B     		ldr	r3, .L10
+ 305 007c D3F8E030 		ldr	r3, [r3, #224]
+ 306 0080 7D4A     		ldr	r2, .L10
+ 307 0082 43F00803 		orr	r3, r3, #8
+ 308 0086 C2F8E030 		str	r3, [r2, #224]
+ 309 008a 7B4B     		ldr	r3, .L10
+ 310 008c D3F8E030 		ldr	r3, [r3, #224]
+ 311 0090 03F00803 		and	r3, r3, #8
+ 312 0094 FB62     		str	r3, [r7, #44]
+ 313 0096 FB6A     		ldr	r3, [r7, #44]
+ 314              	.LBE5:
+ 315              	.LBB6:
+  51:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOF_CLK_ENABLE();
+ 316              		.loc 1 51 5
+ 317 0098 774B     		ldr	r3, .L10
+ 318 009a D3F8E030 		ldr	r3, [r3, #224]
+ 319 009e 764A     		ldr	r2, .L10
+ 320 00a0 43F02003 		orr	r3, r3, #32
+ 321 00a4 C2F8E030 		str	r3, [r2, #224]
+ 322 00a8 734B     		ldr	r3, .L10
+ 323 00aa D3F8E030 		ldr	r3, [r3, #224]
+ 324 00ae 03F02003 		and	r3, r3, #32
+ 325 00b2 BB62     		str	r3, [r7, #40]
+ 326 00b4 BB6A     		ldr	r3, [r7, #40]
+ 327              	.LBE6:
+ 328              	.LBB7:
+  52:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOF_CLK_ENABLE();
+ 329              		.loc 1 52 5
+ 330 00b6 704B     		ldr	r3, .L10
+ 331 00b8 D3F8E030 		ldr	r3, [r3, #224]
+ 332 00bc 6E4A     		ldr	r2, .L10
+ 333 00be 43F02003 		orr	r3, r3, #32
+ 334 00c2 C2F8E030 		str	r3, [r2, #224]
+ 335 00c6 6C4B     		ldr	r3, .L10
+ 336 00c8 D3F8E030 		ldr	r3, [r3, #224]
+ 337 00cc 03F02003 		and	r3, r3, #32
+ 338 00d0 7B62     		str	r3, [r7, #36]
+ 339 00d2 7B6A     		ldr	r3, [r7, #36]
+ 340              	.LBE7:
+ 341              	.LBB8:
+  53:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOF_CLK_ENABLE();
+ 342              		.loc 1 53 5
+ 343 00d4 684B     		ldr	r3, .L10
+ 344 00d6 D3F8E030 		ldr	r3, [r3, #224]
+ 345 00da 674A     		ldr	r2, .L10
+ 346 00dc 43F02003 		orr	r3, r3, #32
+ 347 00e0 C2F8E030 		str	r3, [r2, #224]
+ARM GAS  /tmp/ccIwRkHO.s 			page 8
+
+
+ 348 00e4 644B     		ldr	r3, .L10
+ 349 00e6 D3F8E030 		ldr	r3, [r3, #224]
+ 350 00ea 03F02003 		and	r3, r3, #32
+ 351 00ee 3B62     		str	r3, [r7, #32]
+ 352 00f0 3B6A     		ldr	r3, [r7, #32]
+ 353              	.LBE8:
+ 354              	.LBB9:
+  54:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOG_CLK_ENABLE();
+ 355              		.loc 1 54 5
+ 356 00f2 614B     		ldr	r3, .L10
+ 357 00f4 D3F8E030 		ldr	r3, [r3, #224]
+ 358 00f8 5F4A     		ldr	r2, .L10
+ 359 00fa 43F04003 		orr	r3, r3, #64
+ 360 00fe C2F8E030 		str	r3, [r2, #224]
+ 361 0102 5D4B     		ldr	r3, .L10
+ 362 0104 D3F8E030 		ldr	r3, [r3, #224]
+ 363 0108 03F04003 		and	r3, r3, #64
+ 364 010c FB61     		str	r3, [r7, #28]
+ 365 010e FB69     		ldr	r3, [r7, #28]
+ 366              	.LBE9:
+ 367              	.LBB10:
+  55:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOH_CLK_ENABLE();
+ 368              		.loc 1 55 5
+ 369 0110 594B     		ldr	r3, .L10
+ 370 0112 D3F8E030 		ldr	r3, [r3, #224]
+ 371 0116 584A     		ldr	r2, .L10
+ 372 0118 43F08003 		orr	r3, r3, #128
+ 373 011c C2F8E030 		str	r3, [r2, #224]
+ 374 0120 554B     		ldr	r3, .L10
+ 375 0122 D3F8E030 		ldr	r3, [r3, #224]
+ 376 0126 03F08003 		and	r3, r3, #128
+ 377 012a BB61     		str	r3, [r7, #24]
+ 378 012c BB69     		ldr	r3, [r7, #24]
+ 379              	.LBE10:
+ 380              	.LBB11:
+  56:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOH_CLK_ENABLE();
+ 381              		.loc 1 56 5
+ 382 012e 524B     		ldr	r3, .L10
+ 383 0130 D3F8E030 		ldr	r3, [r3, #224]
+ 384 0134 504A     		ldr	r2, .L10
+ 385 0136 43F08003 		orr	r3, r3, #128
+ 386 013a C2F8E030 		str	r3, [r2, #224]
+ 387 013e 4E4B     		ldr	r3, .L10
+ 388 0140 D3F8E030 		ldr	r3, [r3, #224]
+ 389 0144 03F08003 		and	r3, r3, #128
+ 390 0148 7B61     		str	r3, [r7, #20]
+ 391 014a 7B69     		ldr	r3, [r7, #20]
+ 392              	.LBE11:
+ 393              	.LBB12:
+  57:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOG_CLK_ENABLE();
+ 394              		.loc 1 57 5
+ 395 014c 4A4B     		ldr	r3, .L10
+ 396 014e D3F8E030 		ldr	r3, [r3, #224]
+ 397 0152 494A     		ldr	r2, .L10
+ 398 0154 43F04003 		orr	r3, r3, #64
+ 399 0158 C2F8E030 		str	r3, [r2, #224]
+ 400 015c 464B     		ldr	r3, .L10
+ARM GAS  /tmp/ccIwRkHO.s 			page 9
+
+
+ 401 015e D3F8E030 		ldr	r3, [r3, #224]
+ 402 0162 03F04003 		and	r3, r3, #64
+ 403 0166 3B61     		str	r3, [r7, #16]
+ 404 0168 3B69     		ldr	r3, [r7, #16]
+ 405              	.LBE12:
+ 406              	.LBB13:
+  58:./BSP/Hardware/Src/qspi.c ****     __HAL_RCC_GPIOG_CLK_ENABLE();
+ 407              		.loc 1 58 5
+ 408 016a 434B     		ldr	r3, .L10
+ 409 016c D3F8E030 		ldr	r3, [r3, #224]
+ 410 0170 414A     		ldr	r2, .L10
+ 411 0172 43F04003 		orr	r3, r3, #64
+ 412 0176 C2F8E030 		str	r3, [r2, #224]
+ 413 017a 3F4B     		ldr	r3, .L10
+ 414 017c D3F8E030 		ldr	r3, [r3, #224]
+ 415 0180 03F04003 		and	r3, r3, #64
+ 416 0184 FB60     		str	r3, [r7, #12]
+ 417 0186 FB68     		ldr	r3, [r7, #12]
+ 418              	.LBE13:
+  59:./BSP/Hardware/Src/qspi.c **** 
+  60:./BSP/Hardware/Src/qspi.c ****   /*##-2- Configure peripheral GPIO ##########################################*/
+  61:./BSP/Hardware/Src/qspi.c ****   /* QSPI CLK GPIO pin configuration  */
+  62:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_2;
+ 419              		.loc 1 62 33
+ 420 0188 0423     		movs	r3, #4
+ 421 018a FB63     		str	r3, [r7, #60]
+  63:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Mode      = GPIO_MODE_AF_PP;
+ 422              		.loc 1 63 33
+ 423 018c 0223     		movs	r3, #2
+ 424 018e 3B64     		str	r3, [r7, #64]
+  64:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Speed     = GPIO_SPEED_FREQ_VERY_HIGH;
+ 425              		.loc 1 64 33
+ 426 0190 0323     		movs	r3, #3
+ 427 0192 BB64     		str	r3, [r7, #72]
+  65:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 428              		.loc 1 65 33
+ 429 0194 0023     		movs	r3, #0
+ 430 0196 7B64     		str	r3, [r7, #68]
+  66:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Alternate = GPIO_AF9_QUADSPI;
+ 431              		.loc 1 66 33
+ 432 0198 0923     		movs	r3, #9
+ 433 019a FB64     		str	r3, [r7, #76]
+  67:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOB, &gpio_init_structure);
+ 434              		.loc 1 67 3
+ 435 019c 07F13C03 		add	r3, r7, #60
+ 436 01a0 1946     		mov	r1, r3
+ 437 01a2 3648     		ldr	r0, .L10+4
+ 438 01a4 FFF7FEFF 		bl	HAL_GPIO_Init
+  68:./BSP/Hardware/Src/qspi.c **** 
+  69:./BSP/Hardware/Src/qspi.c ****   /* QSPI CS GPIO pin configuration  */
+  70:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_6;
+ 439              		.loc 1 70 33
+ 440 01a8 4023     		movs	r3, #64
+ 441 01aa FB63     		str	r3, [r7, #60]
+  71:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pull      = GPIO_PULLUP;
+ 442              		.loc 1 71 33
+ 443 01ac 0123     		movs	r3, #1
+ARM GAS  /tmp/ccIwRkHO.s 			page 10
+
+
+ 444 01ae 7B64     		str	r3, [r7, #68]
+  72:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Alternate = GPIO_AF10_QUADSPI;
+ 445              		.loc 1 72 33
+ 446 01b0 0A23     		movs	r3, #10
+ 447 01b2 FB64     		str	r3, [r7, #76]
+  73:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOG, &gpio_init_structure);
+ 448              		.loc 1 73 3
+ 449 01b4 07F13C03 		add	r3, r7, #60
+ 450 01b8 1946     		mov	r1, r3
+ 451 01ba 3148     		ldr	r0, .L10+8
+ 452 01bc FFF7FEFF 		bl	HAL_GPIO_Init
+  74:./BSP/Hardware/Src/qspi.c **** 
+  75:./BSP/Hardware/Src/qspi.c ****   /* QSPI D0 GPIO pin configuration  */
+  76:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_11;
+ 453              		.loc 1 76 33
+ 454 01c0 4FF40063 		mov	r3, #2048
+ 455 01c4 FB63     		str	r3, [r7, #60]
+  77:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pull      = GPIO_NOPULL;
+ 456              		.loc 1 77 33
+ 457 01c6 0023     		movs	r3, #0
+ 458 01c8 7B64     		str	r3, [r7, #68]
+  78:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Alternate = GPIO_AF9_QUADSPI;
+ 459              		.loc 1 78 33
+ 460 01ca 0923     		movs	r3, #9
+ 461 01cc FB64     		str	r3, [r7, #76]
+  79:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOD, &gpio_init_structure);
+ 462              		.loc 1 79 3
+ 463 01ce 07F13C03 		add	r3, r7, #60
+ 464 01d2 1946     		mov	r1, r3
+ 465 01d4 2B48     		ldr	r0, .L10+12
+ 466 01d6 FFF7FEFF 		bl	HAL_GPIO_Init
+  80:./BSP/Hardware/Src/qspi.c **** 
+  81:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_2;
+ 467              		.loc 1 81 33
+ 468 01da 0423     		movs	r3, #4
+ 469 01dc FB63     		str	r3, [r7, #60]
+  82:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Alternate = GPIO_AF9_QUADSPI;
+ 470              		.loc 1 82 33
+ 471 01de 0923     		movs	r3, #9
+ 472 01e0 FB64     		str	r3, [r7, #76]
+  83:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 473              		.loc 1 83 3
+ 474 01e2 07F13C03 		add	r3, r7, #60
+ 475 01e6 1946     		mov	r1, r3
+ 476 01e8 2748     		ldr	r0, .L10+16
+ 477 01ea FFF7FEFF 		bl	HAL_GPIO_Init
+  84:./BSP/Hardware/Src/qspi.c **** 
+  85:./BSP/Hardware/Src/qspi.c ****   /* QSPI D1 GPIO pin configuration  */
+  86:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_9;
+ 478              		.loc 1 86 33
+ 479 01ee 4FF40073 		mov	r3, #512
+ 480 01f2 FB63     		str	r3, [r7, #60]
+  87:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Alternate = GPIO_AF10_QUADSPI;
+ 481              		.loc 1 87 33
+ 482 01f4 0A23     		movs	r3, #10
+ 483 01f6 FB64     		str	r3, [r7, #76]
+  88:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOF, &gpio_init_structure);
+ARM GAS  /tmp/ccIwRkHO.s 			page 11
+
+
+ 484              		.loc 1 88 3
+ 485 01f8 07F13C03 		add	r3, r7, #60
+ 486 01fc 1946     		mov	r1, r3
+ 487 01fe 2348     		ldr	r0, .L10+20
+ 488 0200 FFF7FEFF 		bl	HAL_GPIO_Init
+  89:./BSP/Hardware/Src/qspi.c **** 
+  90:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_3;
+ 489              		.loc 1 90 33
+ 490 0204 0823     		movs	r3, #8
+ 491 0206 FB63     		str	r3, [r7, #60]
+  91:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Alternate = GPIO_AF9_QUADSPI;
+ 492              		.loc 1 91 33
+ 493 0208 0923     		movs	r3, #9
+ 494 020a FB64     		str	r3, [r7, #76]
+  92:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOH, &gpio_init_structure);
+ 495              		.loc 1 92 3
+ 496 020c 07F13C03 		add	r3, r7, #60
+ 497 0210 1946     		mov	r1, r3
+ 498 0212 1D48     		ldr	r0, .L10+16
+ 499 0214 FFF7FEFF 		bl	HAL_GPIO_Init
+  93:./BSP/Hardware/Src/qspi.c **** 
+  94:./BSP/Hardware/Src/qspi.c ****   /* QSPI D2 GPIO pin configuration  */
+  95:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_7;
+ 500              		.loc 1 95 33
+ 501 0218 8023     		movs	r3, #128
+ 502 021a FB63     		str	r3, [r7, #60]
+  96:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Alternate = GPIO_AF9_QUADSPI;
+ 503              		.loc 1 96 33
+ 504 021c 0923     		movs	r3, #9
+ 505 021e FB64     		str	r3, [r7, #76]
+  97:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOF, &gpio_init_structure);
+ 506              		.loc 1 97 3
+ 507 0220 07F13C03 		add	r3, r7, #60
+ 508 0224 1946     		mov	r1, r3
+ 509 0226 1948     		ldr	r0, .L10+20
+ 510 0228 FFF7FEFF 		bl	HAL_GPIO_Init
+  98:./BSP/Hardware/Src/qspi.c **** 
+  99:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_9;
+ 511              		.loc 1 99 33
+ 512 022c 4FF40073 		mov	r3, #512
+ 513 0230 FB63     		str	r3, [r7, #60]
+ 100:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOG, &gpio_init_structure);
+ 514              		.loc 1 100 3
+ 515 0232 07F13C03 		add	r3, r7, #60
+ 516 0236 1946     		mov	r1, r3
+ 517 0238 1148     		ldr	r0, .L10+8
+ 518 023a FFF7FEFF 		bl	HAL_GPIO_Init
+ 101:./BSP/Hardware/Src/qspi.c **** 
+ 102:./BSP/Hardware/Src/qspi.c ****   /* QSPI D3 GPIO pin configuration  */
+ 103:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_6;
+ 519              		.loc 1 103 33
+ 520 023e 4023     		movs	r3, #64
+ 521 0240 FB63     		str	r3, [r7, #60]
+ 104:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOF, &gpio_init_structure);
+ 522              		.loc 1 104 3
+ 523 0242 07F13C03 		add	r3, r7, #60
+ 524 0246 1946     		mov	r1, r3
+ARM GAS  /tmp/ccIwRkHO.s 			page 12
+
+
+ 525 0248 1048     		ldr	r0, .L10+20
+ 526 024a FFF7FEFF 		bl	HAL_GPIO_Init
+ 105:./BSP/Hardware/Src/qspi.c **** 
+ 106:./BSP/Hardware/Src/qspi.c ****   gpio_init_structure.Pin       = GPIO_PIN_14;
+ 527              		.loc 1 106 33
+ 528 024e 4FF48043 		mov	r3, #16384
+ 529 0252 FB63     		str	r3, [r7, #60]
+ 107:./BSP/Hardware/Src/qspi.c ****   HAL_GPIO_Init(GPIOG, &gpio_init_structure);
+ 530              		.loc 1 107 3
+ 531 0254 07F13C03 		add	r3, r7, #60
+ 532 0258 1946     		mov	r1, r3
+ 533 025a 0948     		ldr	r0, .L10+8
+ 534 025c FFF7FEFF 		bl	HAL_GPIO_Init
+ 108:./BSP/Hardware/Src/qspi.c **** 
+ 109:./BSP/Hardware/Src/qspi.c ****   /*##-3- Configure the NVIC for QSPI #########################################*/
+ 110:./BSP/Hardware/Src/qspi.c ****   /* NVIC configuration for QSPI interrupt */
+ 111:./BSP/Hardware/Src/qspi.c ****   HAL_NVIC_SetPriority(QUADSPI_IRQn, 0x0F, 0);
+ 535              		.loc 1 111 3
+ 536 0260 0022     		movs	r2, #0
+ 537 0262 0F21     		movs	r1, #15
+ 538 0264 5C20     		movs	r0, #92
+ 539 0266 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 112:./BSP/Hardware/Src/qspi.c ****   HAL_NVIC_EnableIRQ(QUADSPI_IRQn);
+ 540              		.loc 1 112 3
+ 541 026a 5C20     		movs	r0, #92
+ 542 026c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 113:./BSP/Hardware/Src/qspi.c **** }
+ 543              		.loc 1 113 1
+ 544 0270 00BF     		nop
+ 545 0272 5037     		adds	r7, r7, #80
+ 546              	.LCFI16:
+ 547              		.cfi_def_cfa_offset 8
+ 548 0274 BD46     		mov	sp, r7
+ 549              	.LCFI17:
+ 550              		.cfi_def_cfa_register 13
+ 551              		@ sp needed
+ 552 0276 80BD     		pop	{r7, pc}
+ 553              	.L11:
+ 554              		.align	2
+ 555              	.L10:
+ 556 0278 00440258 		.word	1476543488
+ 557 027c 00040258 		.word	1476527104
+ 558 0280 00180258 		.word	1476532224
+ 559 0284 000C0258 		.word	1476529152
+ 560 0288 001C0258 		.word	1476533248
+ 561 028c 00140258 		.word	1476531200
+ 562              		.cfi_endproc
+ 563              	.LFE340:
+ 565              		.section	.text.QSPI_Write_Command,"ax",%progbits
+ 566              		.align	1
+ 567              		.global	QSPI_Write_Command
+ 568              		.syntax unified
+ 569              		.thumb
+ 570              		.thumb_func
+ 571              		.fpu fpv5-d16
+ 573              	QSPI_Write_Command:
+ 574              	.LFB341:
+ARM GAS  /tmp/ccIwRkHO.s 			page 13
+
+
+ 114:./BSP/Hardware/Src/qspi.c **** 
+ 115:./BSP/Hardware/Src/qspi.c **** void QSPI_Write_Command(QSPI_objectTypeDef *object,QSPI_CommandTypeDef *cmd)
+ 116:./BSP/Hardware/Src/qspi.c **** {
+ 575              		.loc 1 116 1
+ 576              		.cfi_startproc
+ 577              		@ args = 0, pretend = 0, frame = 8
+ 578              		@ frame_needed = 1, uses_anonymous_args = 0
+ 579 0000 80B5     		push	{r7, lr}
+ 580              	.LCFI18:
+ 581              		.cfi_def_cfa_offset 8
+ 582              		.cfi_offset 7, -8
+ 583              		.cfi_offset 14, -4
+ 584 0002 82B0     		sub	sp, sp, #8
+ 585              	.LCFI19:
+ 586              		.cfi_def_cfa_offset 16
+ 587 0004 00AF     		add	r7, sp, #0
+ 588              	.LCFI20:
+ 589              		.cfi_def_cfa_register 7
+ 590 0006 7860     		str	r0, [r7, #4]
+ 591 0008 3960     		str	r1, [r7]
+ 117:./BSP/Hardware/Src/qspi.c ****     if(HAL_QSPI_Command(&object->hqspi,cmd,HAL_QSPI_TIMEOUT_DEFAULT_VALUE != HAL_OK))
+ 592              		.loc 1 117 8
+ 593 000a 7B68     		ldr	r3, [r7, #4]
+ 594 000c 0122     		movs	r2, #1
+ 595 000e 3968     		ldr	r1, [r7]
+ 596 0010 1846     		mov	r0, r3
+ 597 0012 FFF7FEFF 		bl	HAL_QSPI_Command
+ 598 0016 0346     		mov	r3, r0
+ 599              		.loc 1 117 7
+ 600 0018 002B     		cmp	r3, #0
+ 601 001a 03D0     		beq	.L14
+ 118:./BSP/Hardware/Src/qspi.c ****     {
+ 119:./BSP/Hardware/Src/qspi.c ****         Error_Handler(__FILE__, __LINE__);
+ 602              		.loc 1 119 9
+ 603 001c 7721     		movs	r1, #119
+ 604 001e 0348     		ldr	r0, .L15
+ 605 0020 FFF7FEFF 		bl	Error_Handler
+ 606              	.L14:
+ 120:./BSP/Hardware/Src/qspi.c ****     }
+ 121:./BSP/Hardware/Src/qspi.c **** }
+ 607              		.loc 1 121 1
+ 608 0024 00BF     		nop
+ 609 0026 0837     		adds	r7, r7, #8
+ 610              	.LCFI21:
+ 611              		.cfi_def_cfa_offset 8
+ 612 0028 BD46     		mov	sp, r7
+ 613              	.LCFI22:
+ 614              		.cfi_def_cfa_register 13
+ 615              		@ sp needed
+ 616 002a 80BD     		pop	{r7, pc}
+ 617              	.L16:
+ 618              		.align	2
+ 619              	.L15:
+ 620 002c 00000000 		.word	.LC0
+ 621              		.cfi_endproc
+ 622              	.LFE341:
+ 624              		.section	.text.QSPI_Write_Data,"ax",%progbits
+ARM GAS  /tmp/ccIwRkHO.s 			page 14
+
+
+ 625              		.align	1
+ 626              		.global	QSPI_Write_Data
+ 627              		.syntax unified
+ 628              		.thumb
+ 629              		.thumb_func
+ 630              		.fpu fpv5-d16
+ 632              	QSPI_Write_Data:
+ 633              	.LFB342:
+ 122:./BSP/Hardware/Src/qspi.c **** 
+ 123:./BSP/Hardware/Src/qspi.c **** void QSPI_Write_Data(QSPI_objectTypeDef *object,uint8_t *reg)
+ 124:./BSP/Hardware/Src/qspi.c **** {
+ 634              		.loc 1 124 1
+ 635              		.cfi_startproc
+ 636              		@ args = 0, pretend = 0, frame = 8
+ 637              		@ frame_needed = 1, uses_anonymous_args = 0
+ 638 0000 80B5     		push	{r7, lr}
+ 639              	.LCFI23:
+ 640              		.cfi_def_cfa_offset 8
+ 641              		.cfi_offset 7, -8
+ 642              		.cfi_offset 14, -4
+ 643 0002 82B0     		sub	sp, sp, #8
+ 644              	.LCFI24:
+ 645              		.cfi_def_cfa_offset 16
+ 646 0004 00AF     		add	r7, sp, #0
+ 647              	.LCFI25:
+ 648              		.cfi_def_cfa_register 7
+ 649 0006 7860     		str	r0, [r7, #4]
+ 650 0008 3960     		str	r1, [r7]
+ 125:./BSP/Hardware/Src/qspi.c ****     if (HAL_QSPI_Transmit(&object->hqspi, reg, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
+ 651              		.loc 1 125 9
+ 652 000a 7B68     		ldr	r3, [r7, #4]
+ 653 000c 41F28832 		movw	r2, #5000
+ 654 0010 3968     		ldr	r1, [r7]
+ 655 0012 1846     		mov	r0, r3
+ 656 0014 FFF7FEFF 		bl	HAL_QSPI_Transmit
+ 657 0018 0346     		mov	r3, r0
+ 658              		.loc 1 125 8
+ 659 001a 002B     		cmp	r3, #0
+ 660 001c 03D0     		beq	.L19
+ 126:./BSP/Hardware/Src/qspi.c ****     {
+ 127:./BSP/Hardware/Src/qspi.c ****         Error_Handler(__FILE__, __LINE__);
+ 661              		.loc 1 127 9
+ 662 001e 7F21     		movs	r1, #127
+ 663 0020 0348     		ldr	r0, .L20
+ 664 0022 FFF7FEFF 		bl	Error_Handler
+ 665              	.L19:
+ 128:./BSP/Hardware/Src/qspi.c ****     }
+ 129:./BSP/Hardware/Src/qspi.c **** }
+ 666              		.loc 1 129 1
+ 667 0026 00BF     		nop
+ 668 0028 0837     		adds	r7, r7, #8
+ 669              	.LCFI26:
+ 670              		.cfi_def_cfa_offset 8
+ 671 002a BD46     		mov	sp, r7
+ 672              	.LCFI27:
+ 673              		.cfi_def_cfa_register 13
+ 674              		@ sp needed
+ARM GAS  /tmp/ccIwRkHO.s 			page 15
+
+
+ 675 002c 80BD     		pop	{r7, pc}
+ 676              	.L21:
+ 677 002e 00BF     		.align	2
+ 678              	.L20:
+ 679 0030 00000000 		.word	.LC0
+ 680              		.cfi_endproc
+ 681              	.LFE342:
+ 683              		.section	.text.QSPI_Read_Data,"ax",%progbits
+ 684              		.align	1
+ 685              		.global	QSPI_Read_Data
+ 686              		.syntax unified
+ 687              		.thumb
+ 688              		.thumb_func
+ 689              		.fpu fpv5-d16
+ 691              	QSPI_Read_Data:
+ 692              	.LFB343:
+ 130:./BSP/Hardware/Src/qspi.c **** 
+ 131:./BSP/Hardware/Src/qspi.c **** void QSPI_Read_Data(QSPI_objectTypeDef *object,uint8_t *reg)
+ 132:./BSP/Hardware/Src/qspi.c **** {
+ 693              		.loc 1 132 1
+ 694              		.cfi_startproc
+ 695              		@ args = 0, pretend = 0, frame = 8
+ 696              		@ frame_needed = 1, uses_anonymous_args = 0
+ 697 0000 80B5     		push	{r7, lr}
+ 698              	.LCFI28:
+ 699              		.cfi_def_cfa_offset 8
+ 700              		.cfi_offset 7, -8
+ 701              		.cfi_offset 14, -4
+ 702 0002 82B0     		sub	sp, sp, #8
+ 703              	.LCFI29:
+ 704              		.cfi_def_cfa_offset 16
+ 705 0004 00AF     		add	r7, sp, #0
+ 706              	.LCFI30:
+ 707              		.cfi_def_cfa_register 7
+ 708 0006 7860     		str	r0, [r7, #4]
+ 709 0008 3960     		str	r1, [r7]
+ 133:./BSP/Hardware/Src/qspi.c ****     if (HAL_QSPI_Receive(&object->hqspi, reg, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
+ 710              		.loc 1 133 9
+ 711 000a 7B68     		ldr	r3, [r7, #4]
+ 712 000c 41F28832 		movw	r2, #5000
+ 713 0010 3968     		ldr	r1, [r7]
+ 714 0012 1846     		mov	r0, r3
+ 715 0014 FFF7FEFF 		bl	HAL_QSPI_Receive
+ 716 0018 0346     		mov	r3, r0
+ 717              		.loc 1 133 8
+ 718 001a 002B     		cmp	r3, #0
+ 719 001c 03D0     		beq	.L24
+ 134:./BSP/Hardware/Src/qspi.c ****     {
+ 135:./BSP/Hardware/Src/qspi.c ****         Error_Handler(__FILE__, __LINE__);
+ 720              		.loc 1 135 9
+ 721 001e 8721     		movs	r1, #135
+ 722 0020 0348     		ldr	r0, .L25
+ 723 0022 FFF7FEFF 		bl	Error_Handler
+ 724              	.L24:
+ 136:./BSP/Hardware/Src/qspi.c ****     }
+ 137:./BSP/Hardware/Src/qspi.c **** }
+ 725              		.loc 1 137 1
+ARM GAS  /tmp/ccIwRkHO.s 			page 16
+
+
+ 726 0026 00BF     		nop
+ 727 0028 0837     		adds	r7, r7, #8
+ 728              	.LCFI31:
+ 729              		.cfi_def_cfa_offset 8
+ 730 002a BD46     		mov	sp, r7
+ 731              	.LCFI32:
+ 732              		.cfi_def_cfa_register 13
+ 733              		@ sp needed
+ 734 002c 80BD     		pop	{r7, pc}
+ 735              	.L26:
+ 736 002e 00BF     		.align	2
+ 737              	.L25:
+ 738 0030 00000000 		.word	.LC0
+ 739              		.cfi_endproc
+ 740              	.LFE343:
+ 742              		.section	.text.QSPI_Auto_Polling,"ax",%progbits
+ 743              		.align	1
+ 744              		.global	QSPI_Auto_Polling
+ 745              		.syntax unified
+ 746              		.thumb
+ 747              		.thumb_func
+ 748              		.fpu fpv5-d16
+ 750              	QSPI_Auto_Polling:
+ 751              	.LFB344:
+ 138:./BSP/Hardware/Src/qspi.c **** 
+ 139:./BSP/Hardware/Src/qspi.c **** void QSPI_Auto_Polling(QSPI_objectTypeDef *object,QSPI_CommandTypeDef *cmd,QSPI_AutoPollingTypeDef 
+ 140:./BSP/Hardware/Src/qspi.c **** {
+ 752              		.loc 1 140 1
+ 753              		.cfi_startproc
+ 754              		@ args = 0, pretend = 0, frame = 16
+ 755              		@ frame_needed = 1, uses_anonymous_args = 0
+ 756 0000 80B5     		push	{r7, lr}
+ 757              	.LCFI33:
+ 758              		.cfi_def_cfa_offset 8
+ 759              		.cfi_offset 7, -8
+ 760              		.cfi_offset 14, -4
+ 761 0002 84B0     		sub	sp, sp, #16
+ 762              	.LCFI34:
+ 763              		.cfi_def_cfa_offset 24
+ 764 0004 00AF     		add	r7, sp, #0
+ 765              	.LCFI35:
+ 766              		.cfi_def_cfa_register 7
+ 767 0006 F860     		str	r0, [r7, #12]
+ 768 0008 B960     		str	r1, [r7, #8]
+ 769 000a 7A60     		str	r2, [r7, #4]
+ 141:./BSP/Hardware/Src/qspi.c ****     if (HAL_QSPI_AutoPolling(&object->hqspi, cmd, cofig, HAL_QPSI_TIMEOUT_DEFAULT_VALUE) != HAL_OK)
+ 770              		.loc 1 141 9
+ 771 000c F868     		ldr	r0, [r7, #12]
+ 772 000e 41F28833 		movw	r3, #5000
+ 773 0012 7A68     		ldr	r2, [r7, #4]
+ 774 0014 B968     		ldr	r1, [r7, #8]
+ 775 0016 FFF7FEFF 		bl	HAL_QSPI_AutoPolling
+ 776 001a 0346     		mov	r3, r0
+ 777              		.loc 1 141 8
+ 778 001c 002B     		cmp	r3, #0
+ 779 001e 03D0     		beq	.L29
+ 142:./BSP/Hardware/Src/qspi.c ****     {
+ARM GAS  /tmp/ccIwRkHO.s 			page 17
+
+
+ 143:./BSP/Hardware/Src/qspi.c ****         Error_Handler(__FILE__, __LINE__);
+ 780              		.loc 1 143 9
+ 781 0020 8F21     		movs	r1, #143
+ 782 0022 0348     		ldr	r0, .L30
+ 783 0024 FFF7FEFF 		bl	Error_Handler
+ 784              	.L29:
+ 144:./BSP/Hardware/Src/qspi.c ****     }
+ 145:./BSP/Hardware/Src/qspi.c **** }...
+ 785              		.loc 1 145 1
+ 786 0028 00BF     		nop
+ 787 002a 1037     		adds	r7, r7, #16
+ 788              	.LCFI36:
+ 789              		.cfi_def_cfa_offset 8
+ 790 002c BD46     		mov	sp, r7
+ 791              	.LCFI37:
+ 792              		.cfi_def_cfa_register 13
+ 793              		@ sp needed
+ 794 002e 80BD     		pop	{r7, pc}
+ 795              	.L31:
+ 796              		.align	2
+ 797              	.L30:
+ 798 0030 00000000 		.word	.LC0
+ 799              		.cfi_endproc
+ 800              	.LFE344:
+ 802              		.text
+ 803              	.Letext0:
+ 804              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 805              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 806              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 807              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
+ 808              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 809              		.file 7 "/usr/include/newlib/sys/_types.h"
+ 810              		.file 8 "/usr/include/newlib/sys/reent.h"
+ 811              		.file 9 "/usr/include/newlib/sys/lock.h"
+ 812              		.file 10 "/usr/include/newlib/math.h"
+ 813              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 814              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
+ 815              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_mdma.h"
+ 816              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 817              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_qspi.h"
+ 818              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 819              		.file 17 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 820              		.file 18 "/usr/include/newlib/stdlib.h"
+ 821              		.file 19 "./BSP/Hardware/Src/../../Components/Inc/lcd.h"
+ 822              		.file 20 "./BSP/Hardware/Src/../../Hardware/Inc/qspi.h"
+ARM GAS  /tmp/ccIwRkHO.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 qspi.c
+     /tmp/ccIwRkHO.s:17     .text.QSPI_object_Init:0000000000000000 $t
+     /tmp/ccIwRkHO.s:25     .text.QSPI_object_Init:0000000000000000 QSPI_object_Init
+     /tmp/ccIwRkHO.s:103    .text.QSPI_object_Init:0000000000000054 $d
+     /tmp/ccIwRkHO.s:123    .text.QSPI_Init:0000000000000000 QSPI_Init
+     /tmp/ccIwRkHO.s:573    .text.QSPI_Write_Command:0000000000000000 QSPI_Write_Command
+     /tmp/ccIwRkHO.s:632    .text.QSPI_Write_Data:0000000000000000 QSPI_Write_Data
+     /tmp/ccIwRkHO.s:691    .text.QSPI_Read_Data:0000000000000000 QSPI_Read_Data
+     /tmp/ccIwRkHO.s:750    .text.QSPI_Auto_Polling:0000000000000000 QSPI_Auto_Polling
+     /tmp/ccIwRkHO.s:112    .rodata:0000000000000000 $d
+     /tmp/ccIwRkHO.s:116    .text.QSPI_Init:0000000000000000 $t
+     /tmp/ccIwRkHO.s:221    .text.QSPI_Init:0000000000000070 $d
+     /tmp/ccIwRkHO.s:226    .text.HAL_QSPI_MspInit:0000000000000000 $t
+     /tmp/ccIwRkHO.s:233    .text.HAL_QSPI_MspInit:0000000000000000 HAL_QSPI_MspInit
+     /tmp/ccIwRkHO.s:556    .text.HAL_QSPI_MspInit:0000000000000278 $d
+     /tmp/ccIwRkHO.s:566    .text.QSPI_Write_Command:0000000000000000 $t
+     /tmp/ccIwRkHO.s:620    .text.QSPI_Write_Command:000000000000002c $d
+     /tmp/ccIwRkHO.s:625    .text.QSPI_Write_Data:0000000000000000 $t
+     /tmp/ccIwRkHO.s:679    .text.QSPI_Write_Data:0000000000000030 $d
+     /tmp/ccIwRkHO.s:684    .text.QSPI_Read_Data:0000000000000000 $t
+     /tmp/ccIwRkHO.s:738    .text.QSPI_Read_Data:0000000000000030 $d
+     /tmp/ccIwRkHO.s:743    .text.QSPI_Auto_Polling:0000000000000000 $t
+     /tmp/ccIwRkHO.s:798    .text.QSPI_Auto_Polling:0000000000000030 $d
 
-NO UNDEFINED SYMBOLS
+UNDEFINED SYMBOLS
+HAL_QSPI_Init
+Error_Handler
+HAL_GPIO_Init
+HAL_NVIC_SetPriority
+HAL_NVIC_EnableIRQ
+HAL_QSPI_Command
+HAL_QSPI_Transmit
+HAL_QSPI_Receive
+HAL_QSPI_AutoPolling

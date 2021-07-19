@@ -72,6 +72,7 @@ build/lcd.o: BSP/Components/Src/lcd.c BSP/Components/Src/../../system.h \
  BSP/Components/Src/../../Components/Inc/touch.h \
  BSP/Components/Src/../../Components/Inc/is42s32800j.h \
  BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
+ BSP/Components/Src/../../Components/Inc/mt25tl01g.h \
  BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h \
  BSP/Components/Src/../../Hardware/Inc/i2c.h \
  BSP/Components/Src/../../Hardware/Inc/qspi.h \
@@ -225,6 +226,8 @@ BSP/Components/Src/../../Components/Inc/touch.h:
 BSP/Components/Src/../../Components/Inc/is42s32800j.h:
 
 BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h:
+
+BSP/Components/Src/../../Components/Inc/mt25tl01g.h:
 
 BSP/Components/Src/../../Hardware/Inc/ltdc_dsi.h:
 

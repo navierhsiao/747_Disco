@@ -71,8 +71,9 @@ build/system.o: BSP/system.c BSP/system.h \
  BSP/Components/Inc/lcd.h BSP/Components/Inc/touch.h \
  BSP/Components/Inc/is42s32800j.h \
  BSP/Components/Inc/../../Hardware/Inc/sdram.h \
- BSP/Hardware/Inc/ltdc_dsi.h BSP/Hardware/Inc/i2c.h \
- BSP/Hardware/Inc/qspi.h BSP/Hardware/Inc/sdram.h BSP/Hardware/Inc/uart.h
+ BSP/Components/Inc/mt25tl01g.h BSP/Hardware/Inc/ltdc_dsi.h \
+ BSP/Hardware/Inc/i2c.h BSP/Hardware/Inc/qspi.h BSP/Hardware/Inc/sdram.h \
+ BSP/Hardware/Inc/uart.h
 
 BSP/system.h:
 
@@ -221,6 +222,8 @@ BSP/Components/Inc/touch.h:
 BSP/Components/Inc/is42s32800j.h:
 
 BSP/Components/Inc/../../Hardware/Inc/sdram.h:
+
+BSP/Components/Inc/mt25tl01g.h:
 
 BSP/Hardware/Inc/ltdc_dsi.h:
 

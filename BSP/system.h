@@ -10,6 +10,7 @@
 #include "Components/Inc/lcd.h"
 #include "Components/Inc/touch.h"
 #include "Components/Inc/is42s32800j.h"
+#include "Components/Inc/mt25tl01g.h"
 
 #include "Hardware/Inc/ltdc_dsi.h"
 #include "Hardware/Inc/i2c.h"

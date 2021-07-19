@@ -45,13 +45,14 @@ _Min_Stack_Size = 0x400 ; /* required amount of stack */
 /* Memories definition */
 MEMORY
 {
-  RAM    (xrw)   : ORIGIN = 0x24000000, LENGTH =  256K    /* Memory is divided. Actual start is 0x24000000 and actual length is 512K */
-  FLASH   (rx)   : ORIGIN = 0x08000000, LENGTH = 1024K    /* Memory is divided. Actual start is 0x08000000 and actual length is 2048K */
-  DTCMRAM (xrw)  : ORIGIN = 0x20000000, LENGTH = 128K
-  RAM_D2 (xrw)   : ORIGIN = 0x30000000, LENGTH = 288K
-  RAM_D3 (xrw)   : ORIGIN = 0x38000000, LENGTH = 64K
-  ITCMRAM (xrw)  : ORIGIN = 0x00000000, LENGTH = 64K
-  SDRAM (xrw)     : ORIGIN = 0XD0000000, LENGTH = 32768K
+  RAM    (xrw)      : ORIGIN = 0x24000000, LENGTH =  256K    /* Memory is divided. Actual start is 0x24000000 and actual length is 512K */
+  FLASH   (rx)      : ORIGIN = 0x08000000, LENGTH = 1024K    /* Memory is divided. Actual start is 0x08000000 and actual length is 2048K */
+  DTCMRAM (xrw)     : ORIGIN = 0x20000000, LENGTH = 128K
+  RAM_D2 (xrw)      : ORIGIN = 0x30000000, LENGTH = 288K
+  RAM_D3 (xrw)      : ORIGIN = 0x38000000, LENGTH = 64K
+  ITCMRAM (xrw)     : ORIGIN = 0x00000000, LENGTH = 64K
+  SDRAM (xrw)       : ORIGIN = 0XD0000000, LENGTH = 32768K
+  QSPI_FLASH (xrw)  : ORIGIN = 0x94400000, LENGTH = 30720K
 }
 
 /* Sections */
@@ -182,6 +183,11 @@ SECTIONS
     . = ABSOLUTE(0xD0000000);
     *(.exSDRAM) 
   } AT> SDRAM
+
+  .qspi_flash_section (NOLOAD) : {
+    . = ABSOLUTE(0x94400000);
+    *(.exSDRAM) 
+  } AT> QSPI_FLASH
 
   /* Remove information from the compiler libraries */
   /DISCARD/ :

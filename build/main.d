@@ -77,6 +77,7 @@ build/main.o: User/code/Src/main.c User/code/Inc/main.h \
  User/code/Src/../../../BSP/Components/Inc/touch.h \
  User/code/Src/../../../BSP/Components/Inc/is42s32800j.h \
  User/code/Src/../../../BSP/Components/Inc/../../Hardware/Inc/sdram.h \
+ User/code/Src/../../../BSP/Components/Inc/mt25tl01g.h \
  User/code/Src/../../../BSP/Hardware/Inc/ltdc_dsi.h \
  User/code/Src/../../../BSP/Hardware/Inc/i2c.h \
  User/code/Src/../../../BSP/Hardware/Inc/qspi.h \
@@ -250,6 +251,8 @@ User/code/Src/../../../BSP/Components/Inc/touch.h:
 User/code/Src/../../../BSP/Components/Inc/is42s32800j.h:
 
 User/code/Src/../../../BSP/Components/Inc/../../Hardware/Inc/sdram.h:
+
+User/code/Src/../../../BSP/Components/Inc/mt25tl01g.h:
 
 User/code/Src/../../../BSP/Hardware/Inc/ltdc_dsi.h:
 

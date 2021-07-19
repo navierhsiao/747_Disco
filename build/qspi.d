@@ -72,6 +72,7 @@ build/qspi.o: BSP/Hardware/Src/qspi.c BSP/Hardware/Src/../../system.h \
  BSP/Hardware/Src/../../Components/Inc/touch.h \
  BSP/Hardware/Src/../../Components/Inc/is42s32800j.h \
  BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
+ BSP/Hardware/Src/../../Components/Inc/mt25tl01g.h \
  BSP/Hardware/Src/../../Hardware/Inc/ltdc_dsi.h \
  BSP/Hardware/Src/../../Hardware/Inc/i2c.h \
  BSP/Hardware/Src/../../Hardware/Inc/qspi.h \
@@ -225,6 +226,8 @@ BSP/Hardware/Src/../../Components/Inc/touch.h:
 BSP/Hardware/Src/../../Components/Inc/is42s32800j.h:
 
 BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/sdram.h:
+
+BSP/Hardware/Src/../../Components/Inc/mt25tl01g.h:
 
 BSP/Hardware/Src/../../Hardware/Inc/ltdc_dsi.h:
 
