@@ -52,7 +52,7 @@ MEMORY
   RAM_D3 (xrw)      : ORIGIN = 0x38000000, LENGTH = 64K
   ITCMRAM (xrw)     : ORIGIN = 0x00000000, LENGTH = 64K
   SDRAM (xrw)       : ORIGIN = 0XD0000000, LENGTH = 32768K
-  QSPI_FLASH (xrw)  : ORIGIN = 0x94400000, LENGTH = 30720K
+  QSPI_FLASH (xrw)  : ORIGIN = 0x90000000, LENGTH = 32768K
 }
 
 /* Sections */
@@ -185,7 +185,7 @@ SECTIONS
   } AT> SDRAM
 
   .qspi_flash_section (NOLOAD) : {
-    . = ABSOLUTE(0x94400000);
+    . = ABSOLUTE(0x90000000);
     *(.exSDRAM) 
   } AT> QSPI_FLASH
 

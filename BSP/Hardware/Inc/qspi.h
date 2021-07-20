@@ -12,6 +12,7 @@ typedef struct
     uint32_t            ClockMode;         
     uint32_t            FlashID; 
     uint32_t            DualFlash;          
+    uint32_t            transferRate;
 }QSPI_objectAttr;
 
 typedef struct QSPI_objectStructDef
@@ -24,7 +25,13 @@ typedef struct QSPI_objectStructDef
     void (*qspi_writeData)      (struct QSPI_objectStructDef*,uint8_t *);
     void (*qspi_readData)       (struct QSPI_objectStructDef*,uint8_t *);
     void (*qspi_autoPolling)    (struct QSPI_objectStructDef*,QSPI_CommandTypeDef *,QSPI_AutoPollingTypeDef *);
+    void (*qspi_memoryMapped)   (struct QSPI_objectStructDef*,QSPI_CommandTypeDef *,QSPI_MemoryMappedTypeDef *);
 }QSPI_objectTypeDef;
+
+enum QSPI_TansferRate{
+    QSPI_STR_TRANSFER=1,
+    QSPI_DTR_TRANSFER=3
+};
 
 void QSPI_object_Init(QSPI_objectTypeDef *object,QSPI_objectAttr attr);
 
