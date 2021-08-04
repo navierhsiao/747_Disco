@@ -1,5 +1,7 @@
 #include "../../system.h"
 
+QSPI_objectTypeDef qspi_object;
+
 void MT25TL01G_ResetMemory(QSPI_objectTypeDef *object);
 void MT25TL01G_DummyCyclesCfg(QSPI_objectTypeDef *object);
 void MT25TL01G_EnableMemoryMappedMode(QSPI_objectTypeDef *object);
@@ -31,14 +33,12 @@ QSPI_objectAttr qspi_attr={
 
 void mt25tl01g_Init(void)
 {
-    QSPI_objectTypeDef qspi_object;
     const uint32_t size=(uint32_t)POSITION_VAL((uint32_t)MT25TL01G_FLASH_SIZE) - 1U;
     qspi_attr.FlashSize=size;
 
     QSPI_object_Init(&qspi_object,qspi_attr);
     qspi_object.qspi_init(&qspi_object);
 
-    MT25TL01G_ResetEnable(&qspi_object,0);
     MT25TL01G_ResetMemory(&qspi_object);
     MT25TL01G_AutoPollingMemReady(&qspi_object);
     MT25TL01G_Enter4BytesAddressMode(&qspi_object,0);
