@@ -14,7 +14,7 @@ const osThreadAttr_t defaultTask_attributes = {
 uint32_t test=0;
 
 void StartDefaultTask(void *argument);
-
+// uint8_t __attribute__((section (".exQSPI"))) test_array[200];
 int main(void)
 {
   Hardware_Init();
@@ -29,10 +29,20 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
+  uint8_t test[128];
   for(;;)
   {
-    test++;
+    for(int i=0;i<128;i++)
+    {
+      test[i]=i;
+    }
 
+    MT25TL01G_WriteBuffer(test,0x90000000,256);
+    // test++;
+    // for(int i=0;i<200;i++)
+    // {
+    //   test_array[i]=i;
+    // }
     osDelay(100);
   }
   /* USER CODE END 5 */

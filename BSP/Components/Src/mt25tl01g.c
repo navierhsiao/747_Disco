@@ -1,14 +1,13 @@
 #include "../../system.h"
 
-QSPI_objectTypeDef qspi_object;
+QSPI_objectTypeDef *qspi_object;
 
-void MT25TL01G_ResetMemory(QSPI_objectTypeDef *object);
 void MT25TL01G_DummyCyclesCfg(QSPI_objectTypeDef *object);
 void MT25TL01G_EnableMemoryMappedMode(QSPI_objectTypeDef *object);
 
 void MT25TL01G_Enter4BytesAddressMode(QSPI_objectTypeDef *object, uint8_t Mode);
 void MT25TL01G_ResetEnable(QSPI_objectTypeDef *object,uint8_t mode);
-void MT25TL01G_ResetMemoryCMD(QSPI_objectTypeDef *object,uint8_t mode);
+void MT25TL01G_ResetMemory(QSPI_objectTypeDef *object,uint8_t mode);
 void MT25TL01G_AutoPollingMemReady(QSPI_objectTypeDef *object);
 void MT25TL01G_WriteEnable(QSPI_objectTypeDef *object,uint8_t mode);
 void MT25TL01G_EnterQPIMode(QSPI_objectTypeDef *object);
@@ -19,14 +18,13 @@ void MT25TL01G_EnableMemoryMappedModeDTR(QSPI_objectTypeDef *object,uint8_t mode
 QSPI_objectAttr qspi_attr={
     .Instance               = QUADSPI,
     //STR:1，DTR：3
-    .ClockPrescaler         = QSPI_DTR_TRANSFER,
+    .ClockPrescaler         = 3,
     .FifoThreshold          = 1,
     //若為STR使用:QSPI_SAMPLE_SHIFTING_HALFCYCLE
     .SampleShifting         = QSPI_SAMPLE_SHIFTING_NONE,
-    .FlashSize              = 0,
-    .ChipSelectHighTime     = QSPI_CS_HIGH_TIME_4_CYCLE, /* Min 50ns for nonRead */
+    .FlashSize              = 1,
+    .ChipSelectHighTime     = QSPI_CS_HIGH_TIME_1_CYCLE, /* Min 50ns for nonRead */
     .ClockMode              = QSPI_CLOCK_MODE_0,
-    .FlashID                = QSPI_FLASH_ID_1,
     .DualFlash              = QSPI_DUALFLASH_ENABLE,
     .transferRate           = QSPI_DTR_TRANSFER
 };
@@ -36,26 +34,67 @@ void mt25tl01g_Init(void)
     const uint32_t size=(uint32_t)POSITION_VAL((uint32_t)MT25TL01G_FLASH_SIZE) - 1U;
     qspi_attr.FlashSize=size;
 
-    QSPI_object_Init(&qspi_object,qspi_attr);
-    qspi_object.qspi_init(&qspi_object);
+    qspi_object=QSPI_object_Init(qspi_attr);
 
-    MT25TL01G_ResetMemory(&qspi_object);
-    MT25TL01G_AutoPollingMemReady(&qspi_object);
-    MT25TL01G_Enter4BytesAddressMode(&qspi_object,0);
-    MT25TL01G_DummyCyclesCfg(&qspi_object);
-    MT25TL01G_ExitQPIMode(&qspi_object);
-    MT25TL01G_EnterQPIMode(&qspi_object);
+    //reset memory
+    MT25TL01G_ResetEnable(qspi_object,0);
+    MT25TL01G_ResetMemory(qspi_object,0);
+    MT25TL01G_AutoPollingMemReady(qspi_object);
+    MT25TL01G_ResetEnable(qspi_object,1);
+    MT25TL01G_ResetMemory(qspi_object,1);
 
-    MT25TL01G_EnableMemoryMappedMode(&qspi_object);
+    MT25TL01G_AutoPollingMemReady(qspi_object);
+    MT25TL01G_Enter4BytesAddressMode(qspi_object,1);
+    MT25TL01G_DummyCyclesCfg(qspi_object);
+    MT25TL01G_ExitQPIMode(qspi_object);
+    MT25TL01G_EnterQPIMode(qspi_object);
+
+    MT25TL01G_EnableMemoryMappedMode(qspi_object);
 }
 
-void MT25TL01G_ResetMemory(QSPI_objectTypeDef *object)
+/*
+*********************************************************************************************
+*                       operation functions
+*********************************************************************************************
+*/
+
+void MT25TL01G_WriteBuffer(uint8_t *buf, uint32_t writeAddr, uint16_t writeSize)
 {
-    MT25TL01G_ResetEnable(object,0);
-    MT25TL01G_ResetMemoryCMD(object,0);
-    MT25TL01G_AutoPollingMemReady(object);
-    MT25TL01G_ResetEnable(object,1);
-    MT25TL01G_ResetMemoryCMD(object,1);
+	QSPI_CommandTypeDef Command={0};
+	
+	qspi_object->txCplt = 0;
+
+	MT25TL01G_WriteEnable(qspi_object,1);
+	
+	/* 基本配置 */
+	Command.InstructionMode   = QSPI_INSTRUCTION_1_LINE;    /* 1线方式发送指令 */
+	Command.AddressSize       = QSPI_ADDRESS_32_BITS;       /* 32位地址 */
+	Command.AlternateByteMode = QSPI_ALTERNATE_BYTES_NONE;  /* 无交替字节 */
+	Command.DdrMode           = QSPI_DDR_MODE_DISABLE;      /* W25Q256JV不支持DDR */
+	Command.DdrHoldHalfCycle  = QSPI_DDR_HHC_ANALOG_DELAY;  /* DDR模式，数据输出延迟 */
+	Command.SIOOMode          = QSPI_SIOO_INST_ONLY_FIRST_CMD;	 /* 仅发送一次命令 */	
+	
+	/* 写序列配置 */
+	Command.Instruction = MT25TL01G_QUAD_IN_FAST_PROG_4_BYTE_ADDR_CMD; /* 32bit地址的4线快速写入命令 */
+	Command.DummyCycles = 0;                    /* 不需要空周期 */
+	Command.AddressMode = QSPI_ADDRESS_1_LINE; /* 4线地址方式 */
+	Command.DataMode    = QSPI_DATA_4_LINES;    /* 4线数据方式 */
+	Command.NbData      = writeSize;         /* 写数据大小 */   
+	Command.Address     = writeAddr;         /* 写入地址 */
+	
+    qspi_object->qspi_writeCmd(qspi_object,&Command);
+	
+    qspi_object->qspi_writeData_dma(qspi_object,buf);
+	
+	/* 等待数据发送完毕 */
+	while(qspi_object->txCplt == 0);
+	qspi_object->txCplt = 0;
+	
+	/* 等待Flash页编程完毕 */
+	qspi_object->statusMatch = 0;
+	MT25TL01G_AutoPollingMemReady(qspi_object);
+	while(qspi_object->statusMatch == 0);
+	qspi_object->statusMatch = 0;	
 }
 
 void MT25TL01G_DummyCyclesCfg(QSPI_objectTypeDef *object)
@@ -76,14 +115,15 @@ void MT25TL01G_DummyCyclesCfg(QSPI_objectTypeDef *object)
     command.SIOOMode          = QSPI_SIOO_INST_EVERY_CMD;
 
     object->qspi_writeCmd(object,&command);
-    object->qspi_readData(object,(uint8_t*)(&reg));
-    MT25TL01G_WriteEnable(object,0);
+    
+    object->qspi_readData_dma(object,(uint8_t*)(&reg));
+    MT25TL01G_WriteEnable(object,1);
     command.Instruction = MT25TL01G_WRITE_VOL_CFG_REG_CMD;
     MODIFY_REG(reg, 0xF0F0, ((MT25TL01G_DUMMY_CYCLES_READ_QUAD << 4) |
                                (MT25TL01G_DUMMY_CYCLES_READ_QUAD << 12)));
 
     object->qspi_writeCmd(object,&command);
-    object->qspi_writeData(object,(uint8_t*)(&reg));
+    object->qspi_writeData_dma(object,(uint8_t*)(&reg));
 }
 
 void MT25TL01G_EnableMemoryMappedMode(QSPI_objectTypeDef *object)
@@ -152,7 +192,7 @@ void MT25TL01G_ResetEnable(QSPI_objectTypeDef *object,uint8_t mode)
 }
 
 //mode=0:QSPI_INSTRUCTION_4_LINES，mode=1:QSPI_INSTRUCTION_1_LINE
-void MT25TL01G_ResetMemoryCMD(QSPI_objectTypeDef *object,uint8_t mode)
+void MT25TL01G_ResetMemory(QSPI_objectTypeDef *object,uint8_t mode)
 {
     QSPI_CommandTypeDef command;
 
@@ -173,8 +213,8 @@ void MT25TL01G_ResetMemoryCMD(QSPI_objectTypeDef *object,uint8_t mode)
 
 void MT25TL01G_AutoPollingMemReady(QSPI_objectTypeDef *object)
 {
-    QSPI_CommandTypeDef     command;
-    QSPI_AutoPollingTypeDef config;
+    QSPI_CommandTypeDef     command ={0};
+    QSPI_AutoPollingTypeDef config  ={0};
 
     /* Configure automatic polling mode to wait for memory ready */
     command.InstructionMode   = QSPI_INSTRUCTION_4_LINES;
@@ -225,7 +265,7 @@ void MT25TL01G_WriteEnable(QSPI_objectTypeDef *object,uint8_t mode)
     config.AutomaticStop   = QSPI_AUTOMATIC_STOP_ENABLE;
 
     command.Instruction    = MT25TL01G_READ_STATUS_REG_CMD;
-    command.DataMode       = (mode==0)?QSPI_INSTRUCTION_4_LINES:QSPI_INSTRUCTION_1_LINE;
+    command.DataMode       = (mode==0)?QSPI_DATA_4_LINES:QSPI_DATA_1_LINE;
 
     object->qspi_autoPolling(object,&command,&config);
 }

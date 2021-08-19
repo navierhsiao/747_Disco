@@ -191,6 +191,8 @@
 #define MT25TL01G_FSR_ERSUS                   ((uint8_t)0x40)    /*!< Erase operation suspended */
 #define MT25TL01G_FSR_READY                   ((uint8_t)0x80)    /*!< Ready or command in progress */
 
+
 void mt25tl01g_Init(void);
+void MT25TL01G_WriteBuffer(uint8_t *buf, uint32_t writeAddr, uint16_t writeSize);
 
 #endif
