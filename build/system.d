@@ -68,8 +68,9 @@ build/system.o: BSP/system.c BSP/system.h \
  Libraries/FreeRTOS/Source/include/task.h \
  Libraries/FreeRTOS/Source/include/list.h \
  Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h \
- BSP/Components/Inc/lcd.h BSP/Components/Inc/touch.h \
- BSP/Components/Inc/is42s32800j.h \
+ BSP/Components/Inc/lcd.h \
+ BSP/Components/Inc/../../Hardware/Inc/ltdc_dsi.h \
+ BSP/Components/Inc/touch.h BSP/Components/Inc/is42s32800j.h \
  BSP/Components/Inc/../../Hardware/Inc/sdram.h \
  BSP/Components/Inc/mt25tl01g.h BSP/Hardware/Inc/ltdc_dsi.h \
  BSP/Hardware/Inc/i2c.h BSP/Hardware/Inc/qspi.h BSP/Hardware/Inc/sdram.h \
@@ -216,6 +217,8 @@ Libraries/FreeRTOS/Source/include/list.h:
 Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h:
 
 BSP/Components/Inc/lcd.h:
+
+BSP/Components/Inc/../../Hardware/Inc/ltdc_dsi.h:
 
 BSP/Components/Inc/touch.h:
 

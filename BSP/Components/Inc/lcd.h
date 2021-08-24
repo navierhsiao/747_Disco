@@ -1,6 +1,8 @@
 #ifndef __LCD_H
 #define __LCD_H
 
+#include "../../Hardware/Inc/ltdc_dsi.h"
+
 /* List of OTM8009A used commands                                  */
 /* Detailed in OTM8009A Data Sheet 'DATA_SHEET_OTM8009A_V0 92.pdf' */
 /* Version of 14 June 2012                                         */
@@ -62,9 +64,6 @@
 #define  OTM8009A_CMD_ID2                   0xDB  /* Read ID2 command      */
 #define  OTM8009A_CMD_ID3                   0xDC  /* Read ID3 command      */
 
-#define OTM8009A_OK                (0)
-#define OTM8009A_ERROR             (-1)
-
 /* OTM8009A ID */
 #define OTM8009A_ID                 0x40U
 
@@ -114,97 +113,25 @@
 #define  OTM8009A_800X480_VBP               OTM8009A_480X800_VBP    /* Vertical back porch        */
 #define  OTM8009A_800X480_VFP               OTM8009A_480X800_VFP    /* Vertical front porch       */
 
-typedef int32_t (*LCD_GetTick_Func) (void);
-typedef int32_t (*LCD_Delay_Func)   (uint32_t);
-typedef int32_t (*LCD_WriteReg_Func)(uint16_t, uint16_t, uint8_t*, uint16_t);
-typedef int32_t (*LCD_ReadReg_Func) (uint16_t, uint16_t, uint8_t*, uint16_t);
-
-typedef int32_t (*LCD_Write_Func)(void *, uint16_t, uint8_t*, uint16_t);
-typedef int32_t (*LCD_Read_Func) (void *, uint16_t, uint8_t*, uint16_t);
-typedef struct
-{
-  LCD_Write_Func   WriteReg;
-  LCD_Read_Func    ReadReg;
-  void             *handle;
-} LCD_ctx_t;
-typedef struct
-{ 
-  uint32_t  Orientation;
-  uint32_t  ColorCode;
-  uint32_t  Brightness;
-} LCD_Ctx_t;
-
-typedef struct
-{
-  uint16_t                  Address;  
-  LCD_WriteReg_Func    WriteReg;
-  LCD_ReadReg_Func     ReadReg;  
-  LCD_GetTick_Func     GetTick; 
-} LCD_IO_t;
-
-typedef struct
-{
-  LCD_IO_t         IO;
-  LCD_ctx_t        Ctx; 
-  uint8_t               IsInitialized;
-} LCD_Object_t;
-
-typedef struct
-{
-  /* Control functions */
-  void    (*Init             )(void);
-  int32_t (*DeInit           )(LCD_Object_t*);
-  int32_t (*ReadID           )(LCD_Object_t*, uint32_t*);
-  int32_t (*DisplayOn        )(LCD_Object_t*);
-  int32_t (*DisplayOff       )(LCD_Object_t*);
-  int32_t (*SetBrightness    )(LCD_Object_t*, uint32_t); 
-  int32_t (*GetBrightness    )(LCD_Object_t*, uint32_t*);   
-  int32_t (*SetOrientation   )(LCD_Object_t*, uint32_t);
-  int32_t (*GetOrientation   )(LCD_Object_t*, uint32_t*);
-
-  /* Drawing functions*/
-  int32_t ( *SetCursor       ) (LCD_Object_t*, uint32_t, uint32_t); 
-  int32_t ( *DrawBitmap      ) (LCD_Object_t*, uint32_t, uint32_t, uint8_t *);
-  int32_t ( *FillRGBRect     ) (LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pData, uint32_t Width, uint32_t Height);
-  int32_t ( *DrawHLine       ) (LCD_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t);
-  int32_t ( *DrawVLine       ) (LCD_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t);
-  int32_t ( *FillRect        ) (LCD_Object_t*, uint32_t, uint32_t, uint32_t, uint32_t, uint32_t);
-  int32_t ( *GetPixel        ) (LCD_Object_t*, uint32_t, uint32_t, uint32_t*);
-  int32_t ( *SetPixel        ) (LCD_Object_t*, uint32_t, uint32_t, uint32_t);
-  int32_t ( *GetXSize        ) (LCD_Object_t*, uint32_t *);
-  int32_t ( *GetYSize        ) (LCD_Object_t*, uint32_t *);
-  
-}LCD_Drv_t;
 /**
   * @brief  OTM8009A_480X800 frequency divider
   */
 #define OTM8009A_480X800_FREQUENCY_DIVIDER  2   /* LCD Frequency divider      */
 
+typedef struct lcd_structDef
+{
+  ltdc_dsi_objectTypeDef  dsi_object;
+  uint32_t                colorCode;
+  uint32_t                orientation;
+  uint32_t                brightness;
+  void (*lcd_write_reg) (struct lcd_structDef *object,uint16_t reg, uint8_t *data, uint16_t length);
+  void (*lcd_read_reg)  (struct lcd_structDef *object,uint16_t reg, uint8_t *data, uint16_t length);
+}lcd_objectTypeDef;
 
-#define OTM8009A_ORIENTATION 1  //0:PORTRAIT 1:LANDSCAPE
+enum LCD_STATE{
+  LCD_OK=0,
+  LCD_ERROR=-1
+};
 
-int32_t LCD_read_reg(LCD_ctx_t *ctx, uint16_t reg, uint8_t *pdata, uint16_t length);
-int32_t LCD_write_reg(LCD_ctx_t *ctx, uint16_t reg, const uint8_t *pdata, uint16_t length);
-
-int32_t LCD_RegisterBusIO (LCD_Object_t *pObj, LCD_IO_t *pIO);
-
-void LCD_Init(void);
-int32_t LCD_ReadID(LCD_Object_t *pObj, uint32_t *Id);
-int32_t LCD_DisplayOn(LCD_Object_t *pObj);
-int32_t LCD_DisplayOff(LCD_Object_t *pObj);
-int32_t LCD_SetBrightness(LCD_Object_t *pObj, uint32_t Brightness);
-int32_t LCD_GetBrightness(LCD_Object_t *pObj, uint32_t *Brightness);
-int32_t LCD_SetOrientation(LCD_Object_t *pObj, uint32_t Orientation);
-int32_t LCD_GetOrientation(LCD_Object_t *pObj, uint32_t *Orientation);
-// int32_t LCD_SetCursor(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos);
-// int32_t LCD_DrawBitmap(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pBmp);
-// int32_t LCD_FillRGBRect(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint8_t *pData, uint32_t Width, uint32_t Height);
-// int32_t LCD_DrawHLine(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
-// int32_t LCD_DrawVLine(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Length, uint32_t Color);
-// int32_t LCD_FillRect(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Width, uint32_t Height, uint32_t Color);
-// int32_t LCD_SetPixel(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t Color);
-// int32_t LCD_GetPixel(LCD_Object_t *pObj, uint32_t Xpos, uint32_t Ypos, uint32_t *Color);
-int32_t LCD_GetXSize(LCD_Object_t *pObj, uint32_t *XSize);
-int32_t LCD_GetYSize(LCD_Object_t *pObj, uint32_t *YSize);
-extern LCD_Drv_t    LCD_Driver;
+void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientation);
 #endif

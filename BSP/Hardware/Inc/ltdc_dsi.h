@@ -1,6 +1,8 @@
 #ifndef __LTDC_DSI_H
 #define __LTDC_DSI_H
 
+#define LCD_FRAME_BUFFER        0xD0000000
+
 #define VSYNC           1
 #define VBP             1
 #define VFP             1
@@ -11,14 +13,17 @@
 #define LAYER0_ADDRESS  (0xD0000000)
 #define HACT            400
 
-void DSI_Config_Channel(DSI_LPCmdTypeDef *cmd);
-void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams);
-int DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
-int DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size);
+typedef struct ltdc_dsi_structDef
+{
+    DMA2D_HandleTypeDef hdma2d;
+    DSI_HandleTypeDef   hdsi;
+    LTDC_HandleTypeDef  hltdc;
+    __IO int32_t        pend_buffer;
 
-void LCD_LayerInit(uint16_t LayerIndex, uint32_t Address, int LCD_Xsize,int LCD_Ysize);
-void LTDC_DSI_Init(void);
-void LTDC_Enable(void);
-void LTDC_Set_Pitch(uint32_t linePitchInPixel,uint32_t layerIndex);
+    void (*dsi_IO_write)    (struct ltdc_dsi_structDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size);
+    void (*dsi_IO_read)     (struct ltdc_dsi_structDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size)
+}ltdc_dsi_objectTypeDef;
+
+void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object);
 
 #endif

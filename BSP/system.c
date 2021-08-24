@@ -51,6 +51,8 @@ void Hardware_Init(void)
   BSP_Init();
 }
 
+lcd_objectTypeDef otm8009a_obj;
+
 static void BSP_Init(void)
 {
   //QSPI init
@@ -63,6 +65,7 @@ static void BSP_Init(void)
   //GPIO init
   GPIO_Init();
   //LCD init
+  lcd_init(&otm8009a_obj,OTM8009A_FORMAT_RGB888,OTM8009A_ORIENTATION_LANDSCAPE);
   //CRC init
   CRC_Init();
 }

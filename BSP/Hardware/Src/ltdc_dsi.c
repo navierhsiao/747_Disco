@@ -8,290 +8,306 @@
 *   1.DSI(CLK->paramter->cmd->lpcmd)
 *   2.LTDC
 *   3.GPIO
-*
-*
-*
-*
-*
-*
+*   因LTDC相關的初始化參數較多，因此將設置參數直接放在初始化中處理
 **************************************************************************************
 */
 
-LTDC_HandleTypeDef hltdc;
-DSI_HandleTypeDef hdsi;
-DMA2D_HandleTypeDef hdma2d;
-
-static DSI_CmdCfgTypeDef CmdCfg;
-static DSI_LPCmdTypeDef LPCmd;
-static DSI_PLLInitTypeDef dsiPllInit;
-static RCC_PeriphCLKInitTypeDef PeriphClkInitStruct;
-
-static void LCD_Reset(void);
-static void LCD_MspInit(void);
-
-void DSI_Config_Channel(DSI_LPCmdTypeDef *cmd)
+static const uint32_t Buffers[] = 
 {
-    LPCmd=*cmd;
-    HAL_DSI_ConfigCommand(&hdsi, &LPCmd);
-}
+  LCD_FRAME_BUFFER,
+  LCD_FRAME_BUFFER + (800*480*4),  
+};
 
+ltdc_dsi_objectTypeDef *object_temp;
+void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size);
+void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size);
 
-void DSI_IO_WriteCmd(uint32_t NbrParams, uint8_t *pParams)
+void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
 {
-    if (NbrParams <= 1)
-        HAL_DSI_ShortWrite(&hdsi, 0, DSI_DCS_SHORT_PKT_WRITE_P1, pParams[0], pParams[1]);
-    else
-        HAL_DSI_LongWrite(&hdsi, 0, DSI_DCS_LONG_PKT_WRITE, NbrParams, pParams[NbrParams], pParams); 
-}
+  DSI_PLLInitTypeDef PLLInit = {0};
+  DSI_HOST_TimeoutTypeDef HostTimeouts = {0};
+  DSI_PHY_TimerTypeDef PhyTimings = {0};
+  DSI_LPCmdTypeDef LPCmd = {0};
+  DSI_CmdCfgTypeDef CmdCfg = {0};
+  LTDC_LayerCfgTypeDef pLayerCfg = {0};
 
-int DSI_IO_Write(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
-{
-  int ret = 0;
+  object_temp=object;
+  object->pend_buffer=-1;
+  //  DMA2D Init
+  __HAL_RCC_DMA2D_CLK_DISABLE();
 
-  if(Size <= 1U)
+  object->hdma2d.Instance=DMA2D;
+  object->hdma2d.Init.Mode = DMA2D_R2M;
+  object->hdma2d.Init.ColorMode = DMA2D_OUTPUT_RGB888;
+  object->hdma2d.Init.OutputOffset = 0;
+  if (HAL_DMA2D_Init(&object->hdma2d) != HAL_OK)
   {
-    if(HAL_DSI_ShortWrite(&hdsi, ChannelNbr, DSI_DCS_SHORT_PKT_WRITE_P1, Reg, (uint32_t)pData[Size]) != HAL_OK)
-    {
-      ret = -1;
-    }
-  }
-  else
-  {
-    if(HAL_DSI_LongWrite(&hdsi, ChannelNbr, DSI_DCS_LONG_PKT_WRITE, Size, (uint32_t)Reg, pData) != HAL_OK)
-    {
-      ret = -1;
-    }
+    Error_Handler(__FILE__, __LINE__);
   }
 
-  return ret;
-}
+  //  DSI HOST Init
 
-int DSI_IO_Read(uint16_t ChannelNbr, uint16_t Reg, uint8_t *pData, uint16_t Size)
-{
-  int ret = 0;
+  HAL_GPIO_WritePin(GPIOG , GPIO_PIN_3 , GPIO_PIN_RESET);
+  HAL_Delay(20);/* wait 20 ms */
+  HAL_GPIO_WritePin(GPIOG , GPIO_PIN_3, GPIO_PIN_SET);/* Deactivate XRES */
+  HAL_Delay(10);/* Wait for 10ms after releasing XRES before sending commands */
 
-  if(HAL_DSI_Read(&hdsi, ChannelNbr, pData, Size, DSI_DCS_SHORT_PKT_READ, Reg, pData) != HAL_OK)
+  object->hdsi.Instance = DSI;
+  object->hdsi.Init.AutomaticClockLaneControl = DSI_AUTO_CLK_LANE_CTRL_DISABLE;
+  object->hdsi.Init.TXEscapeCkdiv = 4;
+  object->hdsi.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
+  PLLInit.PLLNDIV = 99;
+  PLLInit.PLLIDF = DSI_PLL_IN_DIV5;
+  PLLInit.PLLODF = DSI_PLL_OUT_DIV1;
+  if (HAL_DSI_Init(&object->hdsi, &PLLInit) != HAL_OK)
   {
-    ret = -1;
+    Error_Handler(__FILE__, __LINE__);
+  }
+  HostTimeouts.TimeoutCkdiv = 1;
+  HostTimeouts.HighSpeedTransmissionTimeout = 0;
+  HostTimeouts.LowPowerReceptionTimeout = 0;
+  HostTimeouts.HighSpeedReadTimeout = 0;
+  HostTimeouts.LowPowerReadTimeout = 0;
+  HostTimeouts.HighSpeedWriteTimeout = 0;
+  HostTimeouts.HighSpeedWritePrespMode = DSI_HS_PM_DISABLE;
+  HostTimeouts.LowPowerWriteTimeout = 0;
+  HostTimeouts.BTATimeout = 0;
+  if (HAL_DSI_ConfigHostTimeouts(&object->hdsi, &HostTimeouts) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  PhyTimings.ClockLaneHS2LPTime = 28;
+  PhyTimings.ClockLaneLP2HSTime = 33;
+  PhyTimings.DataLaneHS2LPTime = 15;
+  PhyTimings.DataLaneLP2HSTime = 25;
+  PhyTimings.DataLaneMaxReadTime = 0;
+  PhyTimings.StopWaitTime = 0;
+  if (HAL_DSI_ConfigPhyTimer(&object->hdsi, &PhyTimings) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  if (HAL_DSI_ConfigFlowControl(&object->hdsi, DSI_FLOW_CONTROL_BTA) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  if (HAL_DSI_SetLowPowerRXFilter(&object->hdsi, 10000) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  if (HAL_DSI_ConfigErrorMonitor(&object->hdsi, HAL_DSI_ERROR_NONE) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  LPCmd.LPGenShortWriteNoP = DSI_LP_GSW0P_ENABLE;
+  LPCmd.LPGenShortWriteOneP = DSI_LP_GSW1P_ENABLE;
+  LPCmd.LPGenShortWriteTwoP = DSI_LP_GSW2P_ENABLE;
+  LPCmd.LPGenShortReadNoP = DSI_LP_GSR0P_ENABLE;
+  LPCmd.LPGenShortReadOneP = DSI_LP_GSR1P_ENABLE;
+  LPCmd.LPGenShortReadTwoP = DSI_LP_GSR2P_ENABLE;
+  LPCmd.LPGenLongWrite = DSI_LP_GLW_ENABLE;
+  LPCmd.LPDcsShortWriteNoP = DSI_LP_DSW0P_ENABLE;
+  LPCmd.LPDcsShortWriteOneP = DSI_LP_DSW1P_ENABLE;
+  LPCmd.LPDcsShortReadNoP = DSI_LP_DSR0P_ENABLE;
+  LPCmd.LPDcsLongWrite = DSI_LP_DLW_ENABLE;
+  LPCmd.LPMaxReadPacket = DSI_LP_MRDP_ENABLE;
+  LPCmd.AcknowledgeRequest = DSI_ACKNOWLEDGE_ENABLE;
+  if (HAL_DSI_ConfigCommand(&object->hdsi, &LPCmd) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  CmdCfg.VirtualChannelID = 0;
+  CmdCfg.ColorCoding = DSI_RGB888;
+  CmdCfg.CommandSize = 400;
+  CmdCfg.TearingEffectSource = DSI_TE_EXTERNAL;
+  CmdCfg.TearingEffectPolarity = DSI_TE_RISING_EDGE;
+  CmdCfg.HSPolarity = DSI_HSYNC_ACTIVE_HIGH;
+  CmdCfg.VSPolarity = DSI_VSYNC_ACTIVE_HIGH;
+  CmdCfg.DEPolarity = DSI_DATA_ENABLE_ACTIVE_HIGH;
+  CmdCfg.VSyncPol = DSI_VSYNC_RISING;
+  CmdCfg.AutomaticRefresh = DSI_AR_DISABLE;
+  CmdCfg.TEAcknowledgeRequest = DSI_TE_ACKNOWLEDGE_ENABLE;
+  if (HAL_DSI_ConfigAdaptedCommandMode(&object->hdsi, &CmdCfg) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  if (HAL_DSI_SetGenericVCID(&object->hdsi, 0) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
   }
 
-  return ret;
-}
-
-void LTDC_DSI_Init(void)
-{
-    GPIO_InitTypeDef GPIO_Init_Structure;
-    DSI_PHY_TimerTypeDef PhyTimings;
-
-    LCD_Reset();
-    LCD_MspInit();
-
-    /* Enable GPIOJ clock */
-    __HAL_RCC_GPIOJ_CLK_ENABLE();
+  //  LTDC init
+  object->hltdc.Instance = LTDC;
+  object->hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AH;
+  object->hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AH;
+  object->hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
+  object->hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+  object->hltdc.Init.HorizontalSync = 0;
+  object->hltdc.Init.VerticalSync = 0;
+  object->hltdc.Init.AccumulatedHBP = 2;
+  object->hltdc.Init.AccumulatedVBP = 2;
+  object->hltdc.Init.AccumulatedActiveW = 402;
+  object->hltdc.Init.AccumulatedActiveH = 482;
+  object->hltdc.Init.TotalWidth = 403;
+  object->hltdc.Init.TotalHeigh = 483;
+  object->hltdc.Init.Backcolor.Blue = 0;
+  object->hltdc.Init.Backcolor.Green = 0;
+  object->hltdc.Init.Backcolor.Red = 0;
+  if (HAL_LTDC_Init(&object->hltdc) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  pLayerCfg.WindowX0 = 0;
+  pLayerCfg.WindowX1 = 400;
+  pLayerCfg.WindowY0 = 0;
+  pLayerCfg.WindowY1 = 480;
+  pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB888;
+  pLayerCfg.Alpha = 255;
+  pLayerCfg.Alpha0 = 0;
+  pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
+  pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
+  pLayerCfg.FBStartAdress = 0xD0000000;
+  pLayerCfg.ImageWidth = 400;
+  pLayerCfg.ImageHeight = 480;
+  pLayerCfg.Backcolor.Blue = 0;
+  pLayerCfg.Backcolor.Green = 0;
+  pLayerCfg.Backcolor.Red = 0;
+  if (HAL_LTDC_ConfigLayer(&object->hltdc, &pLayerCfg, 0) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+  /* USER CODE BEGIN LTDC_Init 2 */
   
-    /* Configure DSI_TE pin from MB1166 : Tearing effect on separated GPIO from KoD LCD */
-    /* that is mapped on GPIOJ2 as alternate DSI function (DSI_TE)                      */
-    /* This pin is used only when the LCD and DSI link is configured in command mode    */
-    GPIO_Init_Structure.Pin       = GPIO_PIN_2;
-    GPIO_Init_Structure.Mode      = GPIO_MODE_AF_PP;
-    GPIO_Init_Structure.Pull      = GPIO_NOPULL;
-    GPIO_Init_Structure.Speed     = GPIO_SPEED_FREQ_HIGH;
-    GPIO_Init_Structure.Alternate = GPIO_AF13_DSI;
-    HAL_GPIO_Init(GPIOJ, &GPIO_Init_Structure);
+  /* Configure DSI PHY HS2LP and LP2HS timings */
+    
+  __HAL_LTDC_DISABLE(&object->hltdc);
+  
+  HAL_DSI_Start(&object->hdsi);
 
-    /* LCD clock configuration */
-    /* LCD clock configuration */
-    /* PLL3_VCO Input = HSE_VALUE/PLL3M = 5 Mhz */
-    /* PLL3_VCO Output = PLL3_VCO Input * PLL3N = 800 Mhz */
-    /* PLLLCDCLK = PLL3_VCO Output/PLL3R = 800/21 = 38.095 Mhz */
-    /* LTDC clock frequency = PLLLCDCLK = 38.095 Mhz */
+  object->dsi_IO_write=DSI_IO_WRITE;
+  object->dsi_IO_read=DSI_IO_READ;
+}
+
+void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* hdma2d)
+{
+  if(hdma2d->Instance==DMA2D)
+  {
+    __HAL_RCC_DMA2D_CLK_ENABLE();
+    /* DMA2D interrupt Init */
+    HAL_NVIC_SetPriority(DMA2D_IRQn, 7, 0);
+    HAL_NVIC_EnableIRQ(DMA2D_IRQn);
+  }
+}
+
+void HAL_DSI_MspInit(DSI_HandleTypeDef* hdsi)
+{
+  GPIO_InitTypeDef GPIO_InitStruct = {0};
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+  if(hdsi->Instance==DSI)
+  {
+  /** Initializes the peripherals clock
+  */
+    PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_DSI;
+    PeriphClkInitStruct.DsiClockSelection = RCC_DSICLKSOURCE_PHY;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+    {
+      Error_Handler(__FILE__, __LINE__);
+    }
+
+    /* Peripheral clock enable */
+    __HAL_RCC_DSI_CLK_ENABLE();
+
+    __HAL_RCC_GPIOJ_CLK_ENABLE();
+    /**DSIHOST GPIO Configuration
+    DSI_D1P     ------> DSIHOST_D1P
+    DSI_D1N     ------> DSIHOST_D1N
+    DSI_CKP     ------> DSIHOST_CKP
+    DSI_CKN     ------> DSIHOST_CKN
+    DSI_D0P     ------> DSIHOST_D0P
+    DSI_D0N     ------> DSIHOST_D0N
+    PJ2     ------> DSIHOST_TE
+    */
+    GPIO_InitStruct.Pin = GPIO_PIN_2;
+    GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+    GPIO_InitStruct.Alternate = GPIO_AF13_DSI;
+    HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
+
+    /* DSI interrupt Init */
+    HAL_NVIC_SetPriority(DSI_IRQn, 7, 0);
+    HAL_NVIC_EnableIRQ(DSI_IRQn);
+  }
+}
+
+void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
+{
+  RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+  if(hltdc->Instance==LTDC)
+  {
+  /** Initializes the peripherals clock
+  */
     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
     PeriphClkInitStruct.PLL3.PLL3M = 5;
-    PeriphClkInitStruct.PLL3.PLL3N = 160;
+    PeriphClkInitStruct.PLL3.PLL3N = 161;
     PeriphClkInitStruct.PLL3.PLL3P = 2;
     PeriphClkInitStruct.PLL3.PLL3Q = 2;
     PeriphClkInitStruct.PLL3.PLL3R = 21;
-
-    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
     PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
-    HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct);
-    /* Base address of DSI Host/Wrapper registers to be set before calling De-Init */
-    hdsi.Instance = DSI;
+    PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+    PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
+    if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+    {
+      Error_Handler(__FILE__, __LINE__);
+    }
 
-    HAL_DSI_DeInit(&hdsi);
-
-    dsiPllInit.PLLNDIV = 100;
-    dsiPllInit.PLLIDF = DSI_PLL_IN_DIV5;
-    dsiPllInit.PLLODF = DSI_PLL_OUT_DIV1;
-
-    hdsi.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
-    hdsi.Init.TXEscapeCkdiv = 0x4;
-    HAL_DSI_Init(&hdsi, &dsiPllInit);
-
-    /* Configure the DSI for Command mode */
-    CmdCfg.VirtualChannelID      = 0;
-    CmdCfg.HSPolarity            = DSI_HSYNC_ACTIVE_HIGH;
-    CmdCfg.VSPolarity            = DSI_VSYNC_ACTIVE_HIGH;
-    CmdCfg.DEPolarity            = DSI_DATA_ENABLE_ACTIVE_HIGH;
-    CmdCfg.CommandSize           = HACT;
-    CmdCfg.TearingEffectSource   = DSI_TE_EXTERNAL;
-    CmdCfg.TearingEffectPolarity = DSI_TE_RISING_EDGE;
-    CmdCfg.VSyncPol              = DSI_VSYNC_FALLING;
-    CmdCfg.AutomaticRefresh      = DSI_AR_DISABLE;
-    CmdCfg.TEAcknowledgeRequest  = DSI_TE_ACKNOWLEDGE_ENABLE;
-    CmdCfg.ColorCoding           = DSI_RGB888;
-
-    HAL_DSI_ConfigAdaptedCommandMode(&hdsi, &CmdCfg);
-
-    LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_ENABLE;
-    LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_ENABLE;
-    LPCmd.LPGenShortWriteTwoP   = DSI_LP_GSW2P_ENABLE;
-    LPCmd.LPGenShortReadNoP     = DSI_LP_GSR0P_ENABLE;
-    LPCmd.LPGenShortReadOneP    = DSI_LP_GSR1P_ENABLE;
-    LPCmd.LPGenShortReadTwoP    = DSI_LP_GSR2P_ENABLE;
-    LPCmd.LPGenLongWrite        = DSI_LP_GLW_ENABLE;
-    LPCmd.LPDcsShortWriteNoP    = DSI_LP_DSW0P_ENABLE;
-    LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_ENABLE;
-    LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_ENABLE;
-    LPCmd.LPDcsLongWrite        = DSI_LP_DLW_ENABLE;
-    HAL_DSI_ConfigCommand(&hdsi, &LPCmd);
-
-    /* Configure DSI PHY HS2LP and LP2HS timings */
-    PhyTimings.ClockLaneHS2LPTime = 35;
-    PhyTimings.ClockLaneLP2HSTime = 35;
-    PhyTimings.DataLaneHS2LPTime = 35;
-    PhyTimings.DataLaneLP2HSTime = 35;
-    PhyTimings.DataLaneMaxReadTime = 0;
-    PhyTimings.StopWaitTime = 10;
-    HAL_DSI_ConfigPhyTimer(&hdsi, &PhyTimings);
-
-    /* Initialize LTDC */
-    /* DeInit */
-    HAL_LTDC_DeInit(&hltdc);
-
-    /* LTDC Config */
-    /* Timing and polarity */
-    hltdc.Init.HorizontalSync = HSYNC;
-    hltdc.Init.VerticalSync = VSYNC;
-    hltdc.Init.AccumulatedHBP = HSYNC + HBP;
-    hltdc.Init.AccumulatedVBP = VSYNC + VBP;
-    hltdc.Init.AccumulatedActiveH = VSYNC + VBP + VACT;
-    hltdc.Init.AccumulatedActiveW = HSYNC + HBP + HACT;
-    hltdc.Init.TotalHeigh = VSYNC + VBP + VACT + VFP;
-    hltdc.Init.TotalWidth = HSYNC + HBP + HACT + HFP;
-
-    /* background value */
-    hltdc.Init.Backcolor.Blue = 0;
-    hltdc.Init.Backcolor.Green = 0;
-    hltdc.Init.Backcolor.Red = 0;
-
-    /* Polarity */
-    hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AL;
-    hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AL;
-    hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
-    hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
-    hltdc.Instance = LTDC;
-
-    HAL_LTDC_Init(&hltdc);
-    __HAL_LTDC_DISABLE(&hltdc);
-
-    /* Start DSI */
-    HAL_DSI_Start(&hdsi);
-}
-
-void LTDC_Enable(void)
-{
-  __HAL_LTDC_ENABLE(&hltdc);
-}
-
-void LTDC_Set_Pitch(uint32_t linePitchInPixel,uint32_t layerIndex)
-{
-  HAL_LTDC_SetPitch(&hltdc, linePitchInPixel, layerIndex);
-}
-
-void LCD_LayerInit(uint16_t LayerIndex, uint32_t Address, int LCD_Xsize,int LCD_Ysize)
-{
-    LTDC_LayerCfgTypeDef Layercfg;
-
-    /* Layer Init */
-    Layercfg.WindowX0 = 0;
-    Layercfg.WindowY0 = 0;
-    Layercfg.WindowY1 = LCD_Ysize;
-    Layercfg.FBStartAdress = Address;
-    Layercfg.Alpha = 255;
-    Layercfg.Alpha0 = 0;
-    Layercfg.Backcolor.Blue = 0;
-    Layercfg.Backcolor.Green = 0;
-    Layercfg.Backcolor.Red = 0;
-    Layercfg.ImageHeight = LCD_Ysize;
-
-    Layercfg.WindowX1 = LCD_Xsize / 2; //Note: Div2 due to screen being divided into 2 areas.
-    Layercfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB888;
-    Layercfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
-    Layercfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
-    Layercfg.ImageWidth = LCD_Xsize / 2; //Note: Div2 due to screen being divided into 2 areas.
-
-    HAL_LTDC_ConfigLayer(&hltdc, &Layercfg, LayerIndex);
-}
-
-static void LCD_Reset(void)
-{
-    GPIO_InitTypeDef gpio_init_structure;
-
-    __HAL_RCC_GPIOG_CLK_ENABLE();
-
-    /* Configure the GPIO on PG3 */
-    gpio_init_structure.Pin   = GPIO_PIN_3;
-    gpio_init_structure.Mode  = GPIO_MODE_OUTPUT_PP;
-    gpio_init_structure.Pull  = GPIO_PULLUP;
-    gpio_init_structure.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
-
-    HAL_GPIO_Init(GPIOG, &gpio_init_structure);
-
-    /* Activate XRES active low */
-    HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_RESET);
-
-    HAL_Delay(20); /* wait 20 ms */
-
-    /* Desactivate XRES */
-    HAL_GPIO_WritePin(GPIOG, GPIO_PIN_3, GPIO_PIN_SET);
-    
-    /* Wait for 10ms after releasing XRES before sending commands */
-    HAL_Delay(10);
-}
-
-static void LCD_MspInit(void)
-{
-    /** @brief Enable the LTDC clock */
+    /* Peripheral clock enable */
     __HAL_RCC_LTDC_CLK_ENABLE();
-
-    /** @brief Toggle Sw reset of LTDC IP */
-    __HAL_RCC_LTDC_FORCE_RESET();
-    __HAL_RCC_LTDC_RELEASE_RESET();
-
-    /** @brief Enable the DMA2D clock */
-    __HAL_RCC_DMA2D_CLK_ENABLE();
-
-    /** @brief Toggle Sw reset of DMA2D IP */
-    __HAL_RCC_DMA2D_FORCE_RESET();
-    __HAL_RCC_DMA2D_RELEASE_RESET();
-
-    /** @brief Enable DSI Host and wrapper clocks */
-    __HAL_RCC_DSI_CLK_ENABLE();
-
-    /** @brief Soft Reset the DSI Host and wrapper */
-    __HAL_RCC_DSI_FORCE_RESET();
-    __HAL_RCC_DSI_RELEASE_RESET();
-
-    /** @brief NVIC configuration for LTDC interrupt that is now enabled */
-    HAL_NVIC_SetPriority(LTDC_IRQn, 3, 0);
+    /* LTDC interrupt Init */
+    HAL_NVIC_SetPriority(LTDC_IRQn, 7, 0);
     HAL_NVIC_EnableIRQ(LTDC_IRQn);
+  }
 
-    /** @brief NVIC configuration for DMA2D interrupt that is now enabled */
-    HAL_NVIC_SetPriority(DMA2D_IRQn, 3, 0);
-    HAL_NVIC_EnableIRQ(DMA2D_IRQn);
+}
 
-    /** @brief NVIC configuration for DSI interrupt that is now enabled */
-    HAL_NVIC_SetPriority(DSI_IRQn, 3, 0);
-    HAL_NVIC_EnableIRQ(DSI_IRQn);
+void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
+{
+  // if(pend_buffer >= 0)
+  // { 
+  // /* Disable DSI Wrapper */
+  //   __HAL_DSI_WRAPPER_DISABLE(hdsi);
+  //   /* Update LTDC configuaration */
+  //   LTDC_LAYER(hdsi, 0)->CFBAR = ((uint32_t)Buffers[pend_buffer]);
+  //   __HAL_LTDC_RELOAD_CONFIG(&object_temp->hltdc);
+  //   /* Enable DSI Wrapper */
+  //   __HAL_DSI_WRAPPER_ENABLE(hdsi);
+    
+  //   front_buffer = pend_buffer;  
+  //   pend_buffer = -1;
+  // }
+}
+
+void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size)
+{
+  if (size <= 1U)
+  {
+      if (HAL_DSI_ShortWrite(&object->hdsi, chNbr, DSI_DCS_SHORT_PKT_WRITE_P1, size, (uint32_t)data[size]) != HAL_OK)
+      {
+          Error_Handler(__FILE__, __LINE__);
+      }
+  }
+  else
+  {
+      if (HAL_DSI_LongWrite(&object->hdsi, chNbr, DSI_DCS_LONG_PKT_WRITE, size, (uint32_t)reg, data) != HAL_OK)
+      {
+          Error_Handler(__FILE__, __LINE__);
+      }
+  }
+}
+
+void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size)
+{
+  if (HAL_DSI_Read(&object->hdsi, chNbr, data, size, DSI_DCS_SHORT_PKT_READ, reg, data) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
 }

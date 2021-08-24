@@ -70,6 +70,7 @@ build/is42s32800j.o: BSP/Components/Src/is42s32800j.c \
  Libraries/FreeRTOS/Source/include/list.h \
  Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h \
  BSP/Components/Src/../../Components/Inc/lcd.h \
+ BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/ltdc_dsi.h \
  BSP/Components/Src/../../Components/Inc/touch.h \
  BSP/Components/Src/../../Components/Inc/is42s32800j.h \
  BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/sdram.h \
@@ -221,6 +222,8 @@ Libraries/FreeRTOS/Source/include/list.h:
 Libraries/FreeRTOS/Source/CMSIS_RTOS/cmsis_os2.h:
 
 BSP/Components/Src/../../Components/Inc/lcd.h:
+
+BSP/Components/Src/../../Components/Inc/../../Hardware/Inc/ltdc_dsi.h:
 
 BSP/Components/Src/../../Components/Inc/touch.h:
 
