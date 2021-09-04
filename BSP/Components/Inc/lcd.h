@@ -118,14 +118,28 @@
   */
 #define OTM8009A_480X800_FREQUENCY_DIVIDER  2   /* LCD Frequency divider      */
 
+enum DISPLAY_STATE
+{
+  DISPLAY_ON  =1,
+  DISPLAY_OFF =2
+};
+
 typedef struct lcd_structDef
 {
   ltdc_dsi_objectTypeDef  dsi_object;
   uint32_t                colorCode;
   uint32_t                orientation;
   uint32_t                brightness;
-  void (*lcd_write_reg) (struct lcd_structDef *object,uint16_t reg, uint8_t *data, uint16_t length);
-  void (*lcd_read_reg)  (struct lcd_structDef *object,uint16_t reg, uint8_t *data, uint16_t length);
+  uint32_t                ID;
+  void (*lcd_write_reg)       (struct lcd_structDef *object,uint16_t reg, uint8_t *data, uint16_t length);
+  void (*lcd_read_reg)        (struct lcd_structDef *object,uint16_t reg, uint8_t *data, uint16_t length);
+
+  void (*lcd_readID)          (struct lcd_structDef *object);
+  void (*lcd_setBrightness)   (struct lcd_structDef *object,uint32_t brightness);
+  void (*lcd_displayOnOFF)    (struct lcd_structDef *object,uint8_t state);
+  void (*lcd_setOrientation)  (struct lcd_structDef *object,uint32_t orientation);
+  void (*lcd_getXsize)        (struct lcd_structDef *object,uint32_t *xSize);
+  void (*lcd_getYsize)        (struct lcd_structDef *object,uint32_t *ySize);
 }lcd_objectTypeDef;
 
 enum LCD_STATE{

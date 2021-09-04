@@ -21,6 +21,8 @@ static const uint32_t Buffers[] =
 ltdc_dsi_objectTypeDef *object_temp;
 void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size);
 void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size);
+void DSI_Refresh(ltdc_dsi_objectTypeDef *object);
+void copy_buffer(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize);
 
 void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
 {
@@ -185,6 +187,8 @@ void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
 
   object->dsi_IO_write=DSI_IO_WRITE;
   object->dsi_IO_read=DSI_IO_READ;
+  object->dsi_refresh=DSI_Refresh;
+  object->copy_buffer=copy_buffer;
 }
 
 void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* hdma2d)
@@ -224,7 +228,7 @@ void HAL_DSI_MspInit(DSI_HandleTypeDef* hdsi)
     DSI_CKN     ------> DSIHOST_CKN
     DSI_D0P     ------> DSIHOST_D0P
     DSI_D0N     ------> DSIHOST_D0N
-    PJ2     ------> DSIHOST_TE
+    PJ2         ------> DSIHOST_TE
     */
     GPIO_InitStruct.Pin = GPIO_PIN_2;
     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
@@ -233,6 +237,12 @@ void HAL_DSI_MspInit(DSI_HandleTypeDef* hdsi)
     GPIO_InitStruct.Alternate = GPIO_AF13_DSI;
     HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
 
+    GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+    GPIO_InitStruct.Pull = GPIO_NOPULL;
+    GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+    HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct); 
+
+    HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_12, GPIO_PIN_RESET);
     /* DSI interrupt Init */
     HAL_NVIC_SetPriority(DSI_IRQn, 7, 0);
     HAL_NVIC_EnableIRQ(DSI_IRQn);
@@ -269,6 +279,65 @@ void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
 
 }
 
+void LTDC_IRQHandler(void)
+{
+  HAL_LTDC_IRQHandler(&object_temp->hltdc);
+}
+
+void DMA2D_IRQHandler(void)
+{
+  HAL_DMA2D_IRQHandler(&object_temp->hdma2d);
+}
+
+void DSI_IRQHandler(void)
+{
+  HAL_DSI_IRQHandler(&object_temp->hdsi);
+}
+
+void copy_buffer(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize)
+{
+  uint32_t destination = (uint32_t)LCD_FRAME_BUFFER + (y * 800 + x) * 4;
+  uint32_t source      = (uint32_t)src;
+  
+  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
+  object->hdma2d.Init.Mode         = DMA2D_M2M;
+  object->hdma2d.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
+  object->hdma2d.Init.OutputOffset = 800 - xsize;
+  object->hdma2d.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
+  object->hdma2d.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */   
+  
+  /*##-2- DMA2D Callbacks Configuration ######################################*/
+  object->hdma2d.XferCpltCallback  = NULL;
+  
+  /*##-3- Foreground Configuration ###########################################*/
+  object->hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+  object->hdma2d.LayerCfg[1].InputAlpha = 0xFF;
+  object->hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
+  object->hdma2d.LayerCfg[1].InputOffset = 0;
+  object->hdma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
+  object->hdma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion */
+  
+  object->hdma2d.Instance          = DMA2D; 
+   
+  /* DMA2D Initialization */
+  if(HAL_DMA2D_Init(&object->hdma2d) == HAL_OK) 
+  {
+    if(HAL_DMA2D_ConfigLayer(&object->hdma2d, 1) == HAL_OK) 
+    {
+      if (HAL_DMA2D_Start(&object->hdma2d, source, destination, xsize, ysize) == HAL_OK)
+      {
+        /* Polling For DMA transfer */  
+        HAL_DMA2D_PollForTransfer(&object->hdma2d, 100);
+      }
+    }
+  }   
+}
+
+void HAL_DSI_TearingEffectCallback(DSI_HandleTypeDef* hdsi)
+{
+
+}
+
 void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
 {
   // if(pend_buffer >= 0)
@@ -290,7 +359,7 @@ void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, u
 {
   if (size <= 1U)
   {
-      if (HAL_DSI_ShortWrite(&object->hdsi, chNbr, DSI_DCS_SHORT_PKT_WRITE_P1, size, (uint32_t)data[size]) != HAL_OK)
+      if (HAL_DSI_ShortWrite(&object->hdsi, chNbr, DSI_DCS_SHORT_PKT_WRITE_P1, reg, (uint32_t)data[size]) != HAL_OK)
       {
           Error_Handler(__FILE__, __LINE__);
       }
@@ -307,6 +376,14 @@ void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, u
 void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size)
 {
   if (HAL_DSI_Read(&object->hdsi, chNbr, data, size, DSI_DCS_SHORT_PKT_READ, reg, data) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+}
+
+void DSI_Refresh(ltdc_dsi_objectTypeDef *object)
+{
+  if (HAL_DSI_Refresh(&object->hdsi) != HAL_OK)
   {
     Error_Handler(__FILE__, __LINE__);
   }

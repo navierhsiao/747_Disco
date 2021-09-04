@@ -1,14 +1,30 @@
 #include "../../system.h"
 
-//Todo:加入與LCD相關的驅動程式
+static const uint8_t LcdRegData27[] = {0x00, 0x00, 0x03, 0x1F};
+static const uint8_t LcdRegData28[] = {0x00, 0x00, 0x01, 0xDF};
+
 void LCD_write_reg(lcd_objectTypeDef *object,uint16_t reg, uint8_t *data, uint16_t length);
 void LCD_read_reg(lcd_objectTypeDef *object,uint16_t reg, uint8_t *data, uint16_t length);
+
+void lcd_readID(lcd_objectTypeDef *object);
+void lcd_setBrightness(lcd_objectTypeDef *object,uint32_t brightness);
+void lcd_displayOnOFF(lcd_objectTypeDef *object,uint8_t state);
+void lcd_setOrientation(lcd_objectTypeDef *object,uint32_t orientation);
+void lcd_getXsize(lcd_objectTypeDef *object,uint32_t *xSize);
+void lcd_getYsize(lcd_objectTypeDef *object,uint32_t *ySize);
 
 void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientation)
 {
   LTDC_DSI_object_Init(&object->dsi_object);
   object->lcd_write_reg=LCD_write_reg;
   object->lcd_read_reg=LCD_read_reg;
+
+  object->lcd_readID=lcd_readID;
+  object->lcd_setBrightness=lcd_setBrightness;
+  object->lcd_displayOnOFF=lcd_displayOnOFF;
+  object->lcd_setOrientation=lcd_setOrientation;
+  object->lcd_getXsize=lcd_getXsize;
+  object->lcd_getYsize=lcd_getYsize;
 
   static const uint8_t lcd_reg_data1[]  = {0x80,0x09,0x01};
   static const uint8_t lcd_reg_data2[]  = {0x80,0x09};
@@ -35,8 +51,7 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
   static const uint8_t lcd_reg_data23[] = {0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x25,0x0B,0x09,0x01};
   static const uint8_t lcd_reg_data24[] = {0x26,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00};
   static const uint8_t lcd_reg_data25[] = {0xFF,0xFF,0xFF};
-  static const uint8_t LcdRegData27[] = {0x00, 0x00, 0x03, 0x1F};
-  static const uint8_t LcdRegData28[] = {0x00, 0x00, 0x01, 0xDF};
+
   static const uint8_t short_reg_data[] = {
     0x00,0x00,0x80,0x30,0x8A,0x40,0xB1,0xA9,0x91,0x34,0xB4,0x50,0x4E,0x81,0x66,0xA1,0x08,
     0x92,0x01,0x95,0x94,0x33,0xA3,0x1B,0x82,0x83,0x83,0x0E,0xA6,0xA0,0xB0,0xC0,0xD0,0x90,
@@ -257,7 +272,7 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
   the orientation mode is portrait  */
   if(orientation == OTM8009A_ORIENTATION_LANDSCAPE)
   {
-	uint8_t tmp = OTM8009A_MADCTR_MODE_LANDSCAPE;
+	  uint8_t tmp = OTM8009A_MADCTR_MODE_LANDSCAPE;
     object->lcd_write_reg(object, OTM8009A_CMD_MADCTR, &tmp, 0);
     object->lcd_write_reg(object, OTM8009A_CMD_CASET, LcdRegData27, 4);
     object->lcd_write_reg(object, OTM8009A_CMD_PASET, LcdRegData28, 4);
@@ -316,8 +331,97 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
 
   HAL_LTDC_SetPitch(&object->dsi_object.hltdc, 800, 0);
   __HAL_LTDC_ENABLE(&object->dsi_object.hltdc);
-}
 
+  // __HAL_DSI_WRAPPER_ENABLE(&object->dsi_object.hdsi);
+}
+/*
+*********************************************************************************************
+*                             控制功能
+*********************************************************************************************
+*/
+void lcd_readID(lcd_objectTypeDef *object)
+{
+  object->lcd_read_reg(object,OTM8009A_CMD_ID1,&object->ID,0);
+}
+//brightness:0x00-0xFF
+void lcd_setBrightness(lcd_objectTypeDef *object,uint32_t brightness)
+{
+  object->brightness=brightness;
+  object->lcd_write_reg(object,OTM8009A_CMD_WRDISBV,&object->brightness,0);
+
+  uint8_t data=0;
+  object->lcd_read_reg(object,0x52,(uint8_t*)&data,0);
+}
+void lcd_displayOnOFF(lcd_objectTypeDef *object,uint8_t state)
+{
+  uint8_t display=0;
+
+  if(state==DISPLAY_ON)
+  {
+    object->lcd_write_reg(object,OTM8009A_CMD_DISPON,&display,0);
+  }
+  else if(state==DISPLAY_OFF)
+  {
+    object->lcd_write_reg(object,OTM8009A_CMD_DISPOFF,&display,0);
+  }
+}
+void lcd_setOrientation(lcd_objectTypeDef *object,uint32_t orientation)
+{
+  uint8_t tmp = OTM8009A_MADCTR_MODE_LANDSCAPE;
+  uint8_t tmp1 = OTM8009A_MADCTR_MODE_PORTRAIT;
+
+  if(orientation==OTM8009A_ORIENTATION_LANDSCAPE)
+  {
+    object->lcd_write_reg(object,OTM8009A_CMD_MADCTR,&tmp,0);
+    object->lcd_write_reg(object,OTM8009A_CMD_CASET,LcdRegData27,4);
+    object->lcd_write_reg(object,OTM8009A_CMD_PASET,LcdRegData28,4);
+
+    object->orientation=OTM8009A_ORIENTATION_LANDSCAPE;
+  }
+  else if(orientation==OTM8009A_ORIENTATION_PORTRAIT)
+  {
+    object->lcd_write_reg(object,OTM8009A_CMD_MADCTR,&tmp1,0);
+    object->lcd_write_reg(object,OTM8009A_CMD_CASET,LcdRegData27,4);
+    object->lcd_write_reg(object,OTM8009A_CMD_PASET,LcdRegData28,4);
+
+    object->orientation=OTM8009A_ORIENTATION_PORTRAIT;
+  }
+}
+void lcd_getXsize(lcd_objectTypeDef *object,uint32_t *xSize)
+{
+  switch(object->orientation)
+  {
+    case OTM8009A_ORIENTATION_PORTRAIT:
+      *xSize=OTM8009A_480X800_WIDTH;
+      break;
+    case OTM8009A_ORIENTATION_LANDSCAPE:
+      *xSize=OTM8009A_800X480_WIDTH;
+      break;
+  }
+}
+void lcd_getYsize(lcd_objectTypeDef *object,uint32_t *ySize)
+{
+  switch(object->orientation)
+  {
+    case OTM8009A_ORIENTATION_PORTRAIT:
+      *ySize=OTM8009A_480X800_HEIGHT;
+      break;
+    case OTM8009A_ORIENTATION_LANDSCAPE:
+      *ySize=OTM8009A_800X480_HEIGHT;
+      break;
+  }
+}
+/*
+*********************************************************************************************
+*                             繪圖功能
+*********************************************************************************************
+*/
+
+/*
+*********************************************************************************************
+*                             讀取用功能
+*********************************************************************************************
+*/
 void LCD_write_reg(lcd_objectTypeDef *object,uint16_t reg, uint8_t *data, uint16_t length)
 {
   object->dsi_object.dsi_IO_write(&object->dsi_object,0,reg,data,length);

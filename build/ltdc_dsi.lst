@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccwdWOWj.s 			page 1
+ARM GAS  /tmp/cc6KjUc4.s 			page 1
 
 
    1              		.cpu cortex-m7
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
   15:./BSP/Hardware/Src/ltdc_dsi.c **** static const uint32_t Buffers[] = 
   16:./BSP/Hardware/Src/ltdc_dsi.c **** {
   17:./BSP/Hardware/Src/ltdc_dsi.c ****   LCD_FRAME_BUFFER,
-ARM GAS  /tmp/ccwdWOWj.s 			page 2
+ARM GAS  /tmp/cc6KjUc4.s 			page 2
 
 
   18:./BSP/Hardware/Src/ltdc_dsi.c ****   LCD_FRAME_BUFFER + (800*480*4),  
@@ -67,10 +67,12 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
   21:./BSP/Hardware/Src/ltdc_dsi.c **** ltdc_dsi_objectTypeDef *object_temp;
   22:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint1
   23:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16
-  24:./BSP/Hardware/Src/ltdc_dsi.c **** 
-  25:./BSP/Hardware/Src/ltdc_dsi.c **** void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
-  26:./BSP/Hardware/Src/ltdc_dsi.c **** {
-  40              		.loc 1 26 1
+  24:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_Refresh(ltdc_dsi_objectTypeDef *object);
+  25:./BSP/Hardware/Src/ltdc_dsi.c **** void copy_buffer(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,
+  26:./BSP/Hardware/Src/ltdc_dsi.c **** 
+  27:./BSP/Hardware/Src/ltdc_dsi.c **** void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
+  28:./BSP/Hardware/Src/ltdc_dsi.c **** {
+  40              		.loc 1 28 1
   41              		.cfi_startproc
   42              		@ args = 0, pretend = 0, frame = 232
   43              		@ frame_needed = 1, uses_anonymous_args = 0
@@ -86,22 +88,22 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
   53              	.LCFI2:
   54              		.cfi_def_cfa_register 7
   55 0006 7860     		str	r0, [r7, #4]
-  27:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_PLLInitTypeDef PLLInit = {0};
-  56              		.loc 1 27 22
+  29:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_PLLInitTypeDef PLLInit = {0};
+  56              		.loc 1 29 22
   57 0008 07F1DC03 		add	r3, r7, #220
   58 000c 0022     		movs	r2, #0
   59 000e 1A60     		str	r2, [r3]
   60 0010 5A60     		str	r2, [r3, #4]
   61 0012 9A60     		str	r2, [r3, #8]
-  28:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_HOST_TimeoutTypeDef HostTimeouts = {0};
-  62              		.loc 1 28 27
+  30:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_HOST_TimeoutTypeDef HostTimeouts = {0};
+  62              		.loc 1 30 27
   63 0014 07F1B803 		add	r3, r7, #184
   64 0018 2422     		movs	r2, #36
   65 001a 0021     		movs	r1, #0
   66 001c 1846     		mov	r0, r3
   67 001e FFF7FEFF 		bl	memset
-  29:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_PHY_TimerTypeDef PhyTimings = {0};
-  68              		.loc 1 29 24
+  31:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_PHY_TimerTypeDef PhyTimings = {0};
+  68              		.loc 1 31 24
   69 0022 07F1A003 		add	r3, r7, #160
   70 0026 0022     		movs	r2, #0
   71 0028 1A60     		str	r2, [r3]
@@ -110,151 +112,151 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
   74 002e DA60     		str	r2, [r3, #12]
   75 0030 1A61     		str	r2, [r3, #16]
   76 0032 5A61     		str	r2, [r3, #20]
-  30:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_LPCmdTypeDef LPCmd = {0};
-  77              		.loc 1 30 20
+  32:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_LPCmdTypeDef LPCmd = {0};
+  77              		.loc 1 32 20
   78 0034 07F16C03 		add	r3, r7, #108
   79 0038 3422     		movs	r2, #52
   80 003a 0021     		movs	r1, #0
   81 003c 1846     		mov	r0, r3
+ARM GAS  /tmp/cc6KjUc4.s 			page 3
+
+
   82 003e FFF7FEFF 		bl	memset
-  31:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_CmdCfgTypeDef CmdCfg = {0};
-ARM GAS  /tmp/ccwdWOWj.s 			page 3
-
-
-  83              		.loc 1 31 21
+  33:./BSP/Hardware/Src/ltdc_dsi.c ****   DSI_CmdCfgTypeDef CmdCfg = {0};
+  83              		.loc 1 33 21
   84 0042 07F14003 		add	r3, r7, #64
   85 0046 2C22     		movs	r2, #44
   86 0048 0021     		movs	r1, #0
   87 004a 1846     		mov	r0, r3
   88 004c FFF7FEFF 		bl	memset
-  32:./BSP/Hardware/Src/ltdc_dsi.c ****   LTDC_LayerCfgTypeDef pLayerCfg = {0};
-  89              		.loc 1 32 24
+  34:./BSP/Hardware/Src/ltdc_dsi.c ****   LTDC_LayerCfgTypeDef pLayerCfg = {0};
+  89              		.loc 1 34 24
   90 0050 07F10C03 		add	r3, r7, #12
   91 0054 3422     		movs	r2, #52
   92 0056 0021     		movs	r1, #0
   93 0058 1846     		mov	r0, r3
   94 005a FFF7FEFF 		bl	memset
-  33:./BSP/Hardware/Src/ltdc_dsi.c **** 
-  34:./BSP/Hardware/Src/ltdc_dsi.c ****   object_temp=object;
-  95              		.loc 1 34 14
+  35:./BSP/Hardware/Src/ltdc_dsi.c **** 
+  36:./BSP/Hardware/Src/ltdc_dsi.c ****   object_temp=object;
+  95              		.loc 1 36 14
   96 005e C94A     		ldr	r2, .L14
   97 0060 7B68     		ldr	r3, [r7, #4]
   98 0062 1360     		str	r3, [r2]
-  35:./BSP/Hardware/Src/ltdc_dsi.c ****   object->pend_buffer=-1;
-  99              		.loc 1 35 22
+  37:./BSP/Hardware/Src/ltdc_dsi.c ****   object->pend_buffer=-1;
+  99              		.loc 1 37 22
  100 0064 7B68     		ldr	r3, [r7, #4]
  101 0066 4FF0FF32 		mov	r2, #-1
  102 006a C3F82C21 		str	r2, [r3, #300]
-  36:./BSP/Hardware/Src/ltdc_dsi.c ****   //  DMA2D Init
-  37:./BSP/Hardware/Src/ltdc_dsi.c ****   __HAL_RCC_DMA2D_CLK_DISABLE();
- 103              		.loc 1 37 3
+  38:./BSP/Hardware/Src/ltdc_dsi.c ****   //  DMA2D Init
+  39:./BSP/Hardware/Src/ltdc_dsi.c ****   __HAL_RCC_DMA2D_CLK_DISABLE();
+ 103              		.loc 1 39 3
  104 006e C64B     		ldr	r3, .L14+4
  105 0070 D3F8D430 		ldr	r3, [r3, #212]
  106 0074 C44A     		ldr	r2, .L14+4
  107 0076 23F01003 		bic	r3, r3, #16
  108 007a C2F8D430 		str	r3, [r2, #212]
-  38:./BSP/Hardware/Src/ltdc_dsi.c **** 
-  39:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Instance=DMA2D;
- 109              		.loc 1 39 26
+  40:./BSP/Hardware/Src/ltdc_dsi.c **** 
+  41:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Instance=DMA2D;
+ 109              		.loc 1 41 26
  110 007e 7B68     		ldr	r3, [r7, #4]
  111 0080 C24A     		ldr	r2, .L14+8
  112 0082 1A60     		str	r2, [r3]
-  40:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.Mode = DMA2D_R2M;
- 113              		.loc 1 40 28
+  42:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.Mode = DMA2D_R2M;
+ 113              		.loc 1 42 28
  114 0084 7B68     		ldr	r3, [r7, #4]
  115 0086 4FF44032 		mov	r2, #196608
  116 008a 5A60     		str	r2, [r3, #4]
-  41:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.ColorMode = DMA2D_OUTPUT_RGB888;
- 117              		.loc 1 41 33
+  43:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.ColorMode = DMA2D_OUTPUT_RGB888;
+ 117              		.loc 1 43 33
  118 008c 7B68     		ldr	r3, [r7, #4]
  119 008e 0122     		movs	r2, #1
  120 0090 9A60     		str	r2, [r3, #8]
-  42:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.OutputOffset = 0;
- 121              		.loc 1 42 36
+  44:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.OutputOffset = 0;
+ 121              		.loc 1 44 36
  122 0092 7B68     		ldr	r3, [r7, #4]
  123 0094 0022     		movs	r2, #0
  124 0096 DA60     		str	r2, [r3, #12]
-  43:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DMA2D_Init(&object->hdma2d) != HAL_OK)
- 125              		.loc 1 43 7
+  45:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DMA2D_Init(&object->hdma2d) != HAL_OK)
+ 125              		.loc 1 45 7
+ARM GAS  /tmp/cc6KjUc4.s 			page 4
+
+
  126 0098 7B68     		ldr	r3, [r7, #4]
  127 009a 1846     		mov	r0, r3
-ARM GAS  /tmp/ccwdWOWj.s 			page 4
-
-
  128 009c FFF7FEFF 		bl	HAL_DMA2D_Init
  129 00a0 0346     		mov	r3, r0
- 130              		.loc 1 43 6
+ 130              		.loc 1 45 6
  131 00a2 002B     		cmp	r3, #0
  132 00a4 03D0     		beq	.L2
-  44:./BSP/Hardware/Src/ltdc_dsi.c ****   {
-  45:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 133              		.loc 1 45 5
- 134 00a6 2D21     		movs	r1, #45
+  46:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+  47:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 133              		.loc 1 47 5
+ 134 00a6 2F21     		movs	r1, #47
  135 00a8 B948     		ldr	r0, .L14+12
  136 00aa FFF7FEFF 		bl	Error_Handler
  137              	.L2:
-  46:./BSP/Hardware/Src/ltdc_dsi.c ****   }
-  47:./BSP/Hardware/Src/ltdc_dsi.c **** 
-  48:./BSP/Hardware/Src/ltdc_dsi.c ****   //  DSI HOST Init
+  48:./BSP/Hardware/Src/ltdc_dsi.c ****   }
   49:./BSP/Hardware/Src/ltdc_dsi.c **** 
-  50:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_GPIO_WritePin(GPIOG , GPIO_PIN_3 , GPIO_PIN_RESET);
- 138              		.loc 1 50 3
+  50:./BSP/Hardware/Src/ltdc_dsi.c ****   //  DSI HOST Init
+  51:./BSP/Hardware/Src/ltdc_dsi.c **** 
+  52:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_GPIO_WritePin(GPIOG , GPIO_PIN_3 , GPIO_PIN_RESET);
+ 138              		.loc 1 52 3
  139 00ae 0022     		movs	r2, #0
  140 00b0 0821     		movs	r1, #8
  141 00b2 B848     		ldr	r0, .L14+16
  142 00b4 FFF7FEFF 		bl	HAL_GPIO_WritePin
-  51:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_Delay(20);/* wait 20 ms */
- 143              		.loc 1 51 3
+  53:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_Delay(20);/* wait 20 ms */
+ 143              		.loc 1 53 3
  144 00b8 1420     		movs	r0, #20
  145 00ba FFF7FEFF 		bl	HAL_Delay
-  52:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_GPIO_WritePin(GPIOG , GPIO_PIN_3, GPIO_PIN_SET);/* Deactivate XRES */
- 146              		.loc 1 52 3
+  54:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_GPIO_WritePin(GPIOG , GPIO_PIN_3, GPIO_PIN_SET);/* Deactivate XRES */
+ 146              		.loc 1 54 3
  147 00be 0122     		movs	r2, #1
  148 00c0 0821     		movs	r1, #8
  149 00c2 B448     		ldr	r0, .L14+16
  150 00c4 FFF7FEFF 		bl	HAL_GPIO_WritePin
-  53:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_Delay(10);/* Wait for 10ms after releasing XRES before sending commands */
- 151              		.loc 1 53 3
+  55:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_Delay(10);/* Wait for 10ms after releasing XRES before sending commands */
+ 151              		.loc 1 55 3
  152 00c8 0A20     		movs	r0, #10
  153 00ca FFF7FEFF 		bl	HAL_Delay
-  54:./BSP/Hardware/Src/ltdc_dsi.c **** 
-  55:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Instance = DSI;
- 154              		.loc 1 55 25
+  56:./BSP/Hardware/Src/ltdc_dsi.c **** 
+  57:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Instance = DSI;
+ 154              		.loc 1 57 25
  155 00ce 7B68     		ldr	r3, [r7, #4]
  156 00d0 4FF0A042 		mov	r2, #1342177280
  157 00d4 9A66     		str	r2, [r3, #104]
-  56:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Init.AutomaticClockLaneControl = DSI_AUTO_CLK_LANE_CTRL_DISABLE;
- 158              		.loc 1 56 47
+  58:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Init.AutomaticClockLaneControl = DSI_AUTO_CLK_LANE_CTRL_DISABLE;
+ 158              		.loc 1 58 47
  159 00d6 7B68     		ldr	r3, [r7, #4]
  160 00d8 0022     		movs	r2, #0
  161 00da DA66     		str	r2, [r3, #108]
-  57:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Init.TXEscapeCkdiv = 4;
- 162              		.loc 1 57 35
+  59:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Init.TXEscapeCkdiv = 4;
+ 162              		.loc 1 59 35
  163 00dc 7B68     		ldr	r3, [r7, #4]
  164 00de 0422     		movs	r2, #4
  165 00e0 1A67     		str	r2, [r3, #112]
-  58:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
- 166              		.loc 1 58 35
+  60:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdsi.Init.NumberOfLanes = DSI_TWO_DATA_LANES;
+ 166              		.loc 1 60 35
  167 00e2 7B68     		ldr	r3, [r7, #4]
+ARM GAS  /tmp/cc6KjUc4.s 			page 5
+
+
  168 00e4 0122     		movs	r2, #1
  169 00e6 5A67     		str	r2, [r3, #116]
-ARM GAS  /tmp/ccwdWOWj.s 			page 5
-
-
-  59:./BSP/Hardware/Src/ltdc_dsi.c ****   PLLInit.PLLNDIV = 99;
- 170              		.loc 1 59 19
+  61:./BSP/Hardware/Src/ltdc_dsi.c ****   PLLInit.PLLNDIV = 99;
+ 170              		.loc 1 61 19
  171 00e8 6323     		movs	r3, #99
  172 00ea C7F8DC30 		str	r3, [r7, #220]
-  60:./BSP/Hardware/Src/ltdc_dsi.c ****   PLLInit.PLLIDF = DSI_PLL_IN_DIV5;
- 173              		.loc 1 60 18
+  62:./BSP/Hardware/Src/ltdc_dsi.c ****   PLLInit.PLLIDF = DSI_PLL_IN_DIV5;
+ 173              		.loc 1 62 18
  174 00ee 0523     		movs	r3, #5
  175 00f0 C7F8E030 		str	r3, [r7, #224]
-  61:./BSP/Hardware/Src/ltdc_dsi.c ****   PLLInit.PLLODF = DSI_PLL_OUT_DIV1;
- 176              		.loc 1 61 18
+  63:./BSP/Hardware/Src/ltdc_dsi.c ****   PLLInit.PLLODF = DSI_PLL_OUT_DIV1;
+ 176              		.loc 1 63 18
  177 00f4 0023     		movs	r3, #0
  178 00f6 C7F8E430 		str	r3, [r7, #228]
-  62:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_Init(&object->hdsi, &PLLInit) != HAL_OK)
- 179              		.loc 1 62 7
+  64:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_Init(&object->hdsi, &PLLInit) != HAL_OK)
+ 179              		.loc 1 64 7
  180 00fa 7B68     		ldr	r3, [r7, #4]
  181 00fc 6833     		adds	r3, r3, #104
  182 00fe 07F1DC02 		add	r2, r7, #220
@@ -262,58 +264,58 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  184 0104 1846     		mov	r0, r3
  185 0106 FFF7FEFF 		bl	HAL_DSI_Init
  186 010a 0346     		mov	r3, r0
- 187              		.loc 1 62 6
+ 187              		.loc 1 64 6
  188 010c 002B     		cmp	r3, #0
  189 010e 03D0     		beq	.L3
-  63:./BSP/Hardware/Src/ltdc_dsi.c ****   {
-  64:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 190              		.loc 1 64 5
- 191 0110 4021     		movs	r1, #64
+  65:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+  66:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 190              		.loc 1 66 5
+ 191 0110 4221     		movs	r1, #66
  192 0112 9F48     		ldr	r0, .L14+12
  193 0114 FFF7FEFF 		bl	Error_Handler
  194              	.L3:
-  65:./BSP/Hardware/Src/ltdc_dsi.c ****   }
-  66:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.TimeoutCkdiv = 1;
- 195              		.loc 1 66 29
+  67:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+  68:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.TimeoutCkdiv = 1;
+ 195              		.loc 1 68 29
  196 0118 0123     		movs	r3, #1
  197 011a C7F8B830 		str	r3, [r7, #184]
-  67:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedTransmissionTimeout = 0;
- 198              		.loc 1 67 45
+  69:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedTransmissionTimeout = 0;
+ 198              		.loc 1 69 45
  199 011e 0023     		movs	r3, #0
  200 0120 C7F8BC30 		str	r3, [r7, #188]
-  68:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.LowPowerReceptionTimeout = 0;
- 201              		.loc 1 68 41
+  70:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.LowPowerReceptionTimeout = 0;
+ 201              		.loc 1 70 41
  202 0124 0023     		movs	r3, #0
  203 0126 C7F8C030 		str	r3, [r7, #192]
-  69:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedReadTimeout = 0;
- 204              		.loc 1 69 37
+  71:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedReadTimeout = 0;
+ 204              		.loc 1 71 37
  205 012a 0023     		movs	r3, #0
  206 012c C7F8C430 		str	r3, [r7, #196]
-  70:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.LowPowerReadTimeout = 0;
- 207              		.loc 1 70 36
+  72:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.LowPowerReadTimeout = 0;
+ 207              		.loc 1 72 36
  208 0130 0023     		movs	r3, #0
  209 0132 C7F8C830 		str	r3, [r7, #200]
-  71:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedWriteTimeout = 0;
- 210              		.loc 1 71 38
+  73:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedWriteTimeout = 0;
+ 210              		.loc 1 73 38
  211 0136 0023     		movs	r3, #0
+ARM GAS  /tmp/cc6KjUc4.s 			page 6
+
+
  212 0138 C7F8CC30 		str	r3, [r7, #204]
-  72:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedWritePrespMode = DSI_HS_PM_DISABLE;
-ARM GAS  /tmp/ccwdWOWj.s 			page 6
-
-
- 213              		.loc 1 72 40
+  74:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.HighSpeedWritePrespMode = DSI_HS_PM_DISABLE;
+ 213              		.loc 1 74 40
  214 013c 0023     		movs	r3, #0
  215 013e C7F8D030 		str	r3, [r7, #208]
-  73:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.LowPowerWriteTimeout = 0;
- 216              		.loc 1 73 37
+  75:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.LowPowerWriteTimeout = 0;
+ 216              		.loc 1 75 37
  217 0142 0023     		movs	r3, #0
  218 0144 C7F8D430 		str	r3, [r7, #212]
-  74:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.BTATimeout = 0;
- 219              		.loc 1 74 27
+  76:./BSP/Hardware/Src/ltdc_dsi.c ****   HostTimeouts.BTATimeout = 0;
+ 219              		.loc 1 76 27
  220 0148 0023     		movs	r3, #0
  221 014a C7F8D830 		str	r3, [r7, #216]
-  75:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigHostTimeouts(&object->hdsi, &HostTimeouts) != HAL_OK)
- 222              		.loc 1 75 7
+  77:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigHostTimeouts(&object->hdsi, &HostTimeouts) != HAL_OK)
+ 222              		.loc 1 77 7
  223 014e 7B68     		ldr	r3, [r7, #4]
  224 0150 6833     		adds	r3, r3, #104
  225 0152 07F1B802 		add	r2, r7, #184
@@ -321,46 +323,46 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  227 0158 1846     		mov	r0, r3
  228 015a FFF7FEFF 		bl	HAL_DSI_ConfigHostTimeouts
  229 015e 0346     		mov	r3, r0
- 230              		.loc 1 75 6
+ 230              		.loc 1 77 6
  231 0160 002B     		cmp	r3, #0
  232 0162 03D0     		beq	.L4
-  76:./BSP/Hardware/Src/ltdc_dsi.c ****   {
-  77:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 233              		.loc 1 77 5
- 234 0164 4D21     		movs	r1, #77
+  78:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+  79:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 233              		.loc 1 79 5
+ 234 0164 4F21     		movs	r1, #79
  235 0166 8A48     		ldr	r0, .L14+12
  236 0168 FFF7FEFF 		bl	Error_Handler
  237              	.L4:
-  78:./BSP/Hardware/Src/ltdc_dsi.c ****   }
-  79:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.ClockLaneHS2LPTime = 28;
- 238              		.loc 1 79 33
+  80:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+  81:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.ClockLaneHS2LPTime = 28;
+ 238              		.loc 1 81 33
  239 016c 1C23     		movs	r3, #28
  240 016e C7F8A030 		str	r3, [r7, #160]
-  80:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.ClockLaneLP2HSTime = 33;
- 241              		.loc 1 80 33
+  82:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.ClockLaneLP2HSTime = 33;
+ 241              		.loc 1 82 33
  242 0172 2123     		movs	r3, #33
  243 0174 C7F8A430 		str	r3, [r7, #164]
-  81:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.DataLaneHS2LPTime = 15;
- 244              		.loc 1 81 32
+  83:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.DataLaneHS2LPTime = 15;
+ 244              		.loc 1 83 32
  245 0178 0F23     		movs	r3, #15
  246 017a C7F8A830 		str	r3, [r7, #168]
-  82:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.DataLaneLP2HSTime = 25;
- 247              		.loc 1 82 32
+  84:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.DataLaneLP2HSTime = 25;
+ 247              		.loc 1 84 32
  248 017e 1923     		movs	r3, #25
  249 0180 C7F8AC30 		str	r3, [r7, #172]
-  83:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.DataLaneMaxReadTime = 0;
- 250              		.loc 1 83 34
+  85:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.DataLaneMaxReadTime = 0;
+ 250              		.loc 1 85 34
  251 0184 0023     		movs	r3, #0
  252 0186 C7F8B030 		str	r3, [r7, #176]
-  84:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.StopWaitTime = 0;
- 253              		.loc 1 84 27
+  86:./BSP/Hardware/Src/ltdc_dsi.c ****   PhyTimings.StopWaitTime = 0;
+ 253              		.loc 1 86 27
  254 018a 0023     		movs	r3, #0
  255 018c C7F8B430 		str	r3, [r7, #180]
-  85:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigPhyTimer(&object->hdsi, &PhyTimings) != HAL_OK)
- 256              		.loc 1 85 7
-ARM GAS  /tmp/ccwdWOWj.s 			page 7
+ARM GAS  /tmp/cc6KjUc4.s 			page 7
 
 
+  87:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigPhyTimer(&object->hdsi, &PhyTimings) != HAL_OK)
+ 256              		.loc 1 87 7
  257 0190 7B68     		ldr	r3, [r7, #4]
  258 0192 6833     		adds	r3, r3, #104
  259 0194 07F1A002 		add	r2, r7, #160
@@ -368,134 +370,134 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  261 019a 1846     		mov	r0, r3
  262 019c FFF7FEFF 		bl	HAL_DSI_ConfigPhyTimer
  263 01a0 0346     		mov	r3, r0
- 264              		.loc 1 85 6
+ 264              		.loc 1 87 6
  265 01a2 002B     		cmp	r3, #0
  266 01a4 03D0     		beq	.L5
-  86:./BSP/Hardware/Src/ltdc_dsi.c ****   {
-  87:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 267              		.loc 1 87 5
- 268 01a6 5721     		movs	r1, #87
+  88:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+  89:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 267              		.loc 1 89 5
+ 268 01a6 5921     		movs	r1, #89
  269 01a8 7948     		ldr	r0, .L14+12
  270 01aa FFF7FEFF 		bl	Error_Handler
  271              	.L5:
-  88:./BSP/Hardware/Src/ltdc_dsi.c ****   }
-  89:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigFlowControl(&object->hdsi, DSI_FLOW_CONTROL_BTA) != HAL_OK)
- 272              		.loc 1 89 7
+  90:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+  91:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigFlowControl(&object->hdsi, DSI_FLOW_CONTROL_BTA) != HAL_OK)
+ 272              		.loc 1 91 7
  273 01ae 7B68     		ldr	r3, [r7, #4]
  274 01b0 6833     		adds	r3, r3, #104
  275 01b2 0421     		movs	r1, #4
  276 01b4 1846     		mov	r0, r3
  277 01b6 FFF7FEFF 		bl	HAL_DSI_ConfigFlowControl
  278 01ba 0346     		mov	r3, r0
- 279              		.loc 1 89 6
+ 279              		.loc 1 91 6
  280 01bc 002B     		cmp	r3, #0
  281 01be 03D0     		beq	.L6
-  90:./BSP/Hardware/Src/ltdc_dsi.c ****   {
-  91:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 282              		.loc 1 91 5
- 283 01c0 5B21     		movs	r1, #91
+  92:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+  93:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 282              		.loc 1 93 5
+ 283 01c0 5D21     		movs	r1, #93
  284 01c2 7348     		ldr	r0, .L14+12
  285 01c4 FFF7FEFF 		bl	Error_Handler
  286              	.L6:
-  92:./BSP/Hardware/Src/ltdc_dsi.c ****   }
-  93:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_SetLowPowerRXFilter(&object->hdsi, 10000) != HAL_OK)
- 287              		.loc 1 93 7
+  94:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+  95:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_SetLowPowerRXFilter(&object->hdsi, 10000) != HAL_OK)
+ 287              		.loc 1 95 7
  288 01c8 7B68     		ldr	r3, [r7, #4]
  289 01ca 6833     		adds	r3, r3, #104
  290 01cc 42F21071 		movw	r1, #10000
  291 01d0 1846     		mov	r0, r3
  292 01d2 FFF7FEFF 		bl	HAL_DSI_SetLowPowerRXFilter
  293 01d6 0346     		mov	r3, r0
- 294              		.loc 1 93 6
+ 294              		.loc 1 95 6
  295 01d8 002B     		cmp	r3, #0
  296 01da 03D0     		beq	.L7
-  94:./BSP/Hardware/Src/ltdc_dsi.c ****   {
-  95:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 297              		.loc 1 95 5
- 298 01dc 5F21     		movs	r1, #95
+  96:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+  97:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 297              		.loc 1 97 5
+ 298 01dc 6121     		movs	r1, #97
  299 01de 6C48     		ldr	r0, .L14+12
  300 01e0 FFF7FEFF 		bl	Error_Handler
  301              	.L7:
-  96:./BSP/Hardware/Src/ltdc_dsi.c ****   }
-  97:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigErrorMonitor(&object->hdsi, HAL_DSI_ERROR_NONE) != HAL_OK)
-ARM GAS  /tmp/ccwdWOWj.s 			page 8
+ARM GAS  /tmp/cc6KjUc4.s 			page 8
 
 
- 302              		.loc 1 97 7
+  98:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+  99:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigErrorMonitor(&object->hdsi, HAL_DSI_ERROR_NONE) != HAL_OK)
+ 302              		.loc 1 99 7
  303 01e4 7B68     		ldr	r3, [r7, #4]
  304 01e6 6833     		adds	r3, r3, #104
  305 01e8 0021     		movs	r1, #0
  306 01ea 1846     		mov	r0, r3
  307 01ec FFF7FEFF 		bl	HAL_DSI_ConfigErrorMonitor
  308 01f0 0346     		mov	r3, r0
- 309              		.loc 1 97 6
+ 309              		.loc 1 99 6
  310 01f2 002B     		cmp	r3, #0
  311 01f4 03D0     		beq	.L8
-  98:./BSP/Hardware/Src/ltdc_dsi.c ****   {
-  99:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 312              		.loc 1 99 5
- 313 01f6 6321     		movs	r1, #99
+ 100:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 101:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 312              		.loc 1 101 5
+ 313 01f6 6521     		movs	r1, #101
  314 01f8 6548     		ldr	r0, .L14+12
  315 01fa FFF7FEFF 		bl	Error_Handler
  316              	.L8:
- 100:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 101:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortWriteNoP = DSI_LP_GSW0P_ENABLE;
- 317              		.loc 1 101 28
+ 102:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 103:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortWriteNoP = DSI_LP_GSW0P_ENABLE;
+ 317              		.loc 1 103 28
  318 01fe 4FF48073 		mov	r3, #256
  319 0202 FB66     		str	r3, [r7, #108]
- 102:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortWriteOneP = DSI_LP_GSW1P_ENABLE;
- 320              		.loc 1 102 29
+ 104:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortWriteOneP = DSI_LP_GSW1P_ENABLE;
+ 320              		.loc 1 104 29
  321 0204 4FF40073 		mov	r3, #512
  322 0208 3B67     		str	r3, [r7, #112]
- 103:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortWriteTwoP = DSI_LP_GSW2P_ENABLE;
- 323              		.loc 1 103 29
+ 105:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortWriteTwoP = DSI_LP_GSW2P_ENABLE;
+ 323              		.loc 1 105 29
  324 020a 4FF48063 		mov	r3, #1024
  325 020e 7B67     		str	r3, [r7, #116]
- 104:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortReadNoP = DSI_LP_GSR0P_ENABLE;
- 326              		.loc 1 104 27
+ 106:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortReadNoP = DSI_LP_GSR0P_ENABLE;
+ 326              		.loc 1 106 27
  327 0210 4FF40063 		mov	r3, #2048
  328 0214 BB67     		str	r3, [r7, #120]
- 105:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortReadOneP = DSI_LP_GSR1P_ENABLE;
- 329              		.loc 1 105 28
+ 107:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortReadOneP = DSI_LP_GSR1P_ENABLE;
+ 329              		.loc 1 107 28
  330 0216 4FF48053 		mov	r3, #4096
  331 021a FB67     		str	r3, [r7, #124]
- 106:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortReadTwoP = DSI_LP_GSR2P_ENABLE;
- 332              		.loc 1 106 28
+ 108:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenShortReadTwoP = DSI_LP_GSR2P_ENABLE;
+ 332              		.loc 1 108 28
  333 021c 4FF40053 		mov	r3, #8192
  334 0220 C7F88030 		str	r3, [r7, #128]
- 107:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenLongWrite = DSI_LP_GLW_ENABLE;
- 335              		.loc 1 107 24
+ 109:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPGenLongWrite = DSI_LP_GLW_ENABLE;
+ 335              		.loc 1 109 24
  336 0224 4FF48043 		mov	r3, #16384
  337 0228 C7F88430 		str	r3, [r7, #132]
- 108:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsShortWriteNoP = DSI_LP_DSW0P_ENABLE;
- 338              		.loc 1 108 28
+ 110:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsShortWriteNoP = DSI_LP_DSW0P_ENABLE;
+ 338              		.loc 1 110 28
  339 022c 4FF48033 		mov	r3, #65536
  340 0230 C7F88830 		str	r3, [r7, #136]
- 109:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsShortWriteOneP = DSI_LP_DSW1P_ENABLE;
- 341              		.loc 1 109 29
+ 111:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsShortWriteOneP = DSI_LP_DSW1P_ENABLE;
+ 341              		.loc 1 111 29
  342 0234 4FF40033 		mov	r3, #131072
  343 0238 C7F88C30 		str	r3, [r7, #140]
- 110:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsShortReadNoP = DSI_LP_DSR0P_ENABLE;
- 344              		.loc 1 110 27
+ 112:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsShortReadNoP = DSI_LP_DSR0P_ENABLE;
+ARM GAS  /tmp/cc6KjUc4.s 			page 9
+
+
+ 344              		.loc 1 112 27
  345 023c 4FF48023 		mov	r3, #262144
-ARM GAS  /tmp/ccwdWOWj.s 			page 9
-
-
  346 0240 C7F89030 		str	r3, [r7, #144]
- 111:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsLongWrite = DSI_LP_DLW_ENABLE;
- 347              		.loc 1 111 24
+ 113:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPDcsLongWrite = DSI_LP_DLW_ENABLE;
+ 347              		.loc 1 113 24
  348 0244 4FF40023 		mov	r3, #524288
  349 0248 C7F89430 		str	r3, [r7, #148]
- 112:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPMaxReadPacket = DSI_LP_MRDP_ENABLE;
- 350              		.loc 1 112 25
+ 114:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.LPMaxReadPacket = DSI_LP_MRDP_ENABLE;
+ 350              		.loc 1 114 25
  351 024c 4FF08073 		mov	r3, #16777216
  352 0250 C7F89830 		str	r3, [r7, #152]
- 113:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.AcknowledgeRequest = DSI_ACKNOWLEDGE_ENABLE;
- 353              		.loc 1 113 28
+ 115:./BSP/Hardware/Src/ltdc_dsi.c ****   LPCmd.AcknowledgeRequest = DSI_ACKNOWLEDGE_ENABLE;
+ 353              		.loc 1 115 28
  354 0254 0223     		movs	r3, #2
  355 0256 C7F89C30 		str	r3, [r7, #156]
- 114:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigCommand(&object->hdsi, &LPCmd) != HAL_OK)
- 356              		.loc 1 114 7
+ 116:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigCommand(&object->hdsi, &LPCmd) != HAL_OK)
+ 356              		.loc 1 116 7
  357 025a 7B68     		ldr	r3, [r7, #4]
  358 025c 6833     		adds	r3, r3, #104
  359 025e 07F16C02 		add	r2, r7, #108
@@ -503,66 +505,66 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  361 0264 1846     		mov	r0, r3
  362 0266 FFF7FEFF 		bl	HAL_DSI_ConfigCommand
  363 026a 0346     		mov	r3, r0
- 364              		.loc 1 114 6
+ 364              		.loc 1 116 6
  365 026c 002B     		cmp	r3, #0
  366 026e 03D0     		beq	.L9
- 115:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 116:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 367              		.loc 1 116 5
- 368 0270 7421     		movs	r1, #116
+ 117:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 118:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 367              		.loc 1 118 5
+ 368 0270 7621     		movs	r1, #118
  369 0272 4748     		ldr	r0, .L14+12
  370 0274 FFF7FEFF 		bl	Error_Handler
  371              	.L9:
- 117:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 118:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.VirtualChannelID = 0;
- 372              		.loc 1 118 27
+ 119:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 120:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.VirtualChannelID = 0;
+ 372              		.loc 1 120 27
  373 0278 0023     		movs	r3, #0
  374 027a 3B64     		str	r3, [r7, #64]
- 119:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.ColorCoding = DSI_RGB888;
- 375              		.loc 1 119 22
+ 121:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.ColorCoding = DSI_RGB888;
+ 375              		.loc 1 121 22
  376 027c 0523     		movs	r3, #5
  377 027e 7B64     		str	r3, [r7, #68]
- 120:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.CommandSize = 400;
- 378              		.loc 1 120 22
+ 122:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.CommandSize = 400;
+ 378              		.loc 1 122 22
  379 0280 4FF4C873 		mov	r3, #400
  380 0284 BB64     		str	r3, [r7, #72]
- 121:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.TearingEffectSource = DSI_TE_EXTERNAL;
- 381              		.loc 1 121 30
+ 123:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.TearingEffectSource = DSI_TE_EXTERNAL;
+ 381              		.loc 1 123 30
  382 0286 1023     		movs	r3, #16
  383 0288 FB64     		str	r3, [r7, #76]
- 122:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.TearingEffectPolarity = DSI_TE_RISING_EDGE;
- 384              		.loc 1 122 32
+ 124:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.TearingEffectPolarity = DSI_TE_RISING_EDGE;
+ 384              		.loc 1 124 32
  385 028a 0023     		movs	r3, #0
  386 028c 3B65     		str	r3, [r7, #80]
- 123:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.HSPolarity = DSI_HSYNC_ACTIVE_HIGH;
- 387              		.loc 1 123 21
+ 125:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.HSPolarity = DSI_HSYNC_ACTIVE_HIGH;
+ 387              		.loc 1 125 21
+ARM GAS  /tmp/cc6KjUc4.s 			page 10
+
+
  388 028e 0023     		movs	r3, #0
  389 0290 7B65     		str	r3, [r7, #84]
-ARM GAS  /tmp/ccwdWOWj.s 			page 10
-
-
- 124:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.VSPolarity = DSI_VSYNC_ACTIVE_HIGH;
- 390              		.loc 1 124 21
+ 126:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.VSPolarity = DSI_VSYNC_ACTIVE_HIGH;
+ 390              		.loc 1 126 21
  391 0292 0023     		movs	r3, #0
  392 0294 BB65     		str	r3, [r7, #88]
- 125:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.DEPolarity = DSI_DATA_ENABLE_ACTIVE_HIGH;
- 393              		.loc 1 125 21
+ 127:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.DEPolarity = DSI_DATA_ENABLE_ACTIVE_HIGH;
+ 393              		.loc 1 127 21
  394 0296 0023     		movs	r3, #0
  395 0298 FB65     		str	r3, [r7, #92]
- 126:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.VSyncPol = DSI_VSYNC_RISING;
- 396              		.loc 1 126 19
+ 128:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.VSyncPol = DSI_VSYNC_RISING;
+ 396              		.loc 1 128 19
  397 029a 8023     		movs	r3, #128
  398 029c 3B66     		str	r3, [r7, #96]
- 127:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.AutomaticRefresh = DSI_AR_DISABLE;
- 399              		.loc 1 127 27
+ 129:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.AutomaticRefresh = DSI_AR_DISABLE;
+ 399              		.loc 1 129 27
  400 029e 0023     		movs	r3, #0
  401 02a0 7B66     		str	r3, [r7, #100]
- 128:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.TEAcknowledgeRequest = DSI_TE_ACKNOWLEDGE_ENABLE;
- 402              		.loc 1 128 31
+ 130:./BSP/Hardware/Src/ltdc_dsi.c ****   CmdCfg.TEAcknowledgeRequest = DSI_TE_ACKNOWLEDGE_ENABLE;
+ 402              		.loc 1 130 31
  403 02a2 0123     		movs	r3, #1
  404 02a4 BB66     		str	r3, [r7, #104]
- 129:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigAdaptedCommandMode(&object->hdsi, &CmdCfg) != HAL_OK)
- 405              		.loc 1 129 7
+ 131:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_ConfigAdaptedCommandMode(&object->hdsi, &CmdCfg) != HAL_OK)
+ 405              		.loc 1 131 7
  406 02a6 7B68     		ldr	r3, [r7, #4]
  407 02a8 6833     		adds	r3, r3, #104
  408 02aa 07F14002 		add	r2, r7, #64
@@ -570,138 +572,138 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  410 02b0 1846     		mov	r0, r3
  411 02b2 FFF7FEFF 		bl	HAL_DSI_ConfigAdaptedCommandMode
  412 02b6 0346     		mov	r3, r0
- 413              		.loc 1 129 6
+ 413              		.loc 1 131 6
  414 02b8 002B     		cmp	r3, #0
  415 02ba 03D0     		beq	.L10
- 130:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 131:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 416              		.loc 1 131 5
- 417 02bc 8321     		movs	r1, #131
+ 132:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 133:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 416              		.loc 1 133 5
+ 417 02bc 8521     		movs	r1, #133
  418 02be 3448     		ldr	r0, .L14+12
  419 02c0 FFF7FEFF 		bl	Error_Handler
  420              	.L10:
- 132:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 133:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_SetGenericVCID(&object->hdsi, 0) != HAL_OK)
- 421              		.loc 1 133 7
+ 134:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 135:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_SetGenericVCID(&object->hdsi, 0) != HAL_OK)
+ 421              		.loc 1 135 7
  422 02c4 7B68     		ldr	r3, [r7, #4]
  423 02c6 6833     		adds	r3, r3, #104
  424 02c8 0021     		movs	r1, #0
  425 02ca 1846     		mov	r0, r3
  426 02cc FFF7FEFF 		bl	HAL_DSI_SetGenericVCID
  427 02d0 0346     		mov	r3, r0
- 428              		.loc 1 133 6
+ 428              		.loc 1 135 6
  429 02d2 002B     		cmp	r3, #0
  430 02d4 03D0     		beq	.L11
- 134:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 135:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 431              		.loc 1 135 5
- 432 02d6 8721     		movs	r1, #135
+ 136:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 137:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 431              		.loc 1 137 5
+ 432 02d6 8921     		movs	r1, #137
+ARM GAS  /tmp/cc6KjUc4.s 			page 11
+
+
  433 02d8 2D48     		ldr	r0, .L14+12
  434 02da FFF7FEFF 		bl	Error_Handler
-ARM GAS  /tmp/ccwdWOWj.s 			page 11
-
-
  435              	.L11:
- 136:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 137:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 138:./BSP/Hardware/Src/ltdc_dsi.c ****   //  LTDC init
- 139:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Instance = LTDC;
- 436              		.loc 1 139 26
+ 138:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 139:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 140:./BSP/Hardware/Src/ltdc_dsi.c ****   //  LTDC init
+ 141:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Instance = LTDC;
+ 436              		.loc 1 141 26
  437 02de 7B68     		ldr	r3, [r7, #4]
  438 02e0 2D4A     		ldr	r2, .L14+20
  439 02e2 C3F88420 		str	r2, [r3, #132]
- 140:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AH;
- 440              		.loc 1 140 33
+ 142:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.HSPolarity = LTDC_HSPOLARITY_AH;
+ 440              		.loc 1 142 33
  441 02e6 7B68     		ldr	r3, [r7, #4]
  442 02e8 4FF00042 		mov	r2, #-2147483648
  443 02ec C3F88820 		str	r2, [r3, #136]
- 141:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AH;
- 444              		.loc 1 141 33
+ 143:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.VSPolarity = LTDC_VSPOLARITY_AH;
+ 444              		.loc 1 143 33
  445 02f0 7B68     		ldr	r3, [r7, #4]
  446 02f2 4FF08042 		mov	r2, #1073741824
  447 02f6 C3F88C20 		str	r2, [r3, #140]
- 142:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
- 448              		.loc 1 142 33
+ 144:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.DEPolarity = LTDC_DEPOLARITY_AL;
+ 448              		.loc 1 144 33
  449 02fa 7B68     		ldr	r3, [r7, #4]
  450 02fc 0022     		movs	r2, #0
  451 02fe C3F89020 		str	r2, [r3, #144]
- 143:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
- 452              		.loc 1 143 33
+ 145:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.PCPolarity = LTDC_PCPOLARITY_IPC;
+ 452              		.loc 1 145 33
  453 0302 7B68     		ldr	r3, [r7, #4]
  454 0304 0022     		movs	r2, #0
  455 0306 C3F89420 		str	r2, [r3, #148]
- 144:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.HorizontalSync = 0;
- 456              		.loc 1 144 37
+ 146:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.HorizontalSync = 0;
+ 456              		.loc 1 146 37
  457 030a 7B68     		ldr	r3, [r7, #4]
  458 030c 0022     		movs	r2, #0
  459 030e C3F89820 		str	r2, [r3, #152]
- 145:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.VerticalSync = 0;
- 460              		.loc 1 145 35
+ 147:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.VerticalSync = 0;
+ 460              		.loc 1 147 35
  461 0312 7B68     		ldr	r3, [r7, #4]
  462 0314 0022     		movs	r2, #0
  463 0316 C3F89C20 		str	r2, [r3, #156]
- 146:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedHBP = 2;
- 464              		.loc 1 146 37
+ 148:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedHBP = 2;
+ 464              		.loc 1 148 37
  465 031a 7B68     		ldr	r3, [r7, #4]
  466 031c 0222     		movs	r2, #2
  467 031e C3F8A020 		str	r2, [r3, #160]
- 147:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedVBP = 2;
- 468              		.loc 1 147 37
+ 149:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedVBP = 2;
+ 468              		.loc 1 149 37
  469 0322 7B68     		ldr	r3, [r7, #4]
  470 0324 0222     		movs	r2, #2
  471 0326 C3F8A420 		str	r2, [r3, #164]
- 148:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedActiveW = 402;
- 472              		.loc 1 148 41
+ 150:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedActiveW = 402;
+ 472              		.loc 1 150 41
  473 032a 7B68     		ldr	r3, [r7, #4]
  474 032c 4FF4C972 		mov	r2, #402
  475 0330 C3F8A820 		str	r2, [r3, #168]
- 149:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedActiveH = 482;
- 476              		.loc 1 149 41
+ 151:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.AccumulatedActiveH = 482;
+ARM GAS  /tmp/cc6KjUc4.s 			page 12
+
+
+ 476              		.loc 1 151 41
  477 0334 7B68     		ldr	r3, [r7, #4]
-ARM GAS  /tmp/ccwdWOWj.s 			page 12
-
-
  478 0336 4FF4F172 		mov	r2, #482
  479 033a C3F8AC20 		str	r2, [r3, #172]
- 150:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.TotalWidth = 403;
- 480              		.loc 1 150 33
+ 152:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.TotalWidth = 403;
+ 480              		.loc 1 152 33
  481 033e 7B68     		ldr	r3, [r7, #4]
  482 0340 40F29312 		movw	r2, #403
  483 0344 C3F8B020 		str	r2, [r3, #176]
- 151:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.TotalHeigh = 483;
- 484              		.loc 1 151 33
+ 153:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.TotalHeigh = 483;
+ 484              		.loc 1 153 33
  485 0348 7B68     		ldr	r3, [r7, #4]
  486 034a 40F2E312 		movw	r2, #483
  487 034e C3F8B420 		str	r2, [r3, #180]
- 152:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.Backcolor.Blue = 0;
- 488              		.loc 1 152 37
+ 154:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.Backcolor.Blue = 0;
+ 488              		.loc 1 154 37
  489 0352 7B68     		ldr	r3, [r7, #4]
  490 0354 0022     		movs	r2, #0
  491 0356 83F8B820 		strb	r2, [r3, #184]
- 153:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.Backcolor.Green = 0;
- 492              		.loc 1 153 38
+ 155:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.Backcolor.Green = 0;
+ 492              		.loc 1 155 38
  493 035a 7B68     		ldr	r3, [r7, #4]
  494 035c 0022     		movs	r2, #0
  495 035e 83F8B920 		strb	r2, [r3, #185]
- 154:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.Backcolor.Red = 0;
- 496              		.loc 1 154 36
+ 156:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hltdc.Init.Backcolor.Red = 0;
+ 496              		.loc 1 156 36
  497 0362 7B68     		ldr	r3, [r7, #4]
  498 0364 0022     		movs	r2, #0
  499 0366 83F8BA20 		strb	r2, [r3, #186]
- 155:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_LTDC_Init(&object->hltdc) != HAL_OK)
- 500              		.loc 1 155 7
+ 157:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_LTDC_Init(&object->hltdc) != HAL_OK)
+ 500              		.loc 1 157 7
  501 036a 7B68     		ldr	r3, [r7, #4]
  502 036c 8433     		adds	r3, r3, #132
  503 036e 1846     		mov	r0, r3
  504 0370 FFF7FEFF 		bl	HAL_LTDC_Init
  505 0374 0346     		mov	r3, r0
- 506              		.loc 1 155 6
+ 506              		.loc 1 157 6
  507 0376 002B     		cmp	r3, #0
  508 0378 10D0     		beq	.L12
- 156:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 157:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 509              		.loc 1 157 5
- 510 037a 9D21     		movs	r1, #157
+ 158:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 159:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 509              		.loc 1 159 5
+ 510 037a 9F21     		movs	r1, #159
  511 037c 0448     		ldr	r0, .L14+12
  512 037e FFF7FEFF 		bl	Error_Handler
  513 0382 0BE0     		b	.L15
@@ -716,75 +718,75 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  522 0398 00100050 		.word	1342181376
  523              	.L15:
  524              	.L12:
- 158:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 159:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowX0 = 0;
-ARM GAS  /tmp/ccwdWOWj.s 			page 13
+ARM GAS  /tmp/cc6KjUc4.s 			page 13
 
 
- 525              		.loc 1 159 22
+ 160:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 161:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowX0 = 0;
+ 525              		.loc 1 161 22
  526 039c 0023     		movs	r3, #0
  527 039e FB60     		str	r3, [r7, #12]
- 160:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowX1 = 400;
- 528              		.loc 1 160 22
+ 162:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowX1 = 400;
+ 528              		.loc 1 162 22
  529 03a0 4FF4C873 		mov	r3, #400
  530 03a4 3B61     		str	r3, [r7, #16]
- 161:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowY0 = 0;
- 531              		.loc 1 161 22
+ 163:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowY0 = 0;
+ 531              		.loc 1 163 22
  532 03a6 0023     		movs	r3, #0
  533 03a8 7B61     		str	r3, [r7, #20]
- 162:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowY1 = 480;
- 534              		.loc 1 162 22
+ 164:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.WindowY1 = 480;
+ 534              		.loc 1 164 22
  535 03aa 4FF4F073 		mov	r3, #480
  536 03ae BB61     		str	r3, [r7, #24]
- 163:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB888;
- 537              		.loc 1 163 25
+ 165:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.PixelFormat = LTDC_PIXEL_FORMAT_RGB888;
+ 537              		.loc 1 165 25
  538 03b0 0123     		movs	r3, #1
  539 03b2 FB61     		str	r3, [r7, #28]
- 164:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Alpha = 255;
- 540              		.loc 1 164 19
+ 166:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Alpha = 255;
+ 540              		.loc 1 166 19
  541 03b4 FF23     		movs	r3, #255
  542 03b6 3B62     		str	r3, [r7, #32]
- 165:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Alpha0 = 0;
- 543              		.loc 1 165 20
+ 167:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Alpha0 = 0;
+ 543              		.loc 1 167 20
  544 03b8 0023     		movs	r3, #0
  545 03ba 7B62     		str	r3, [r7, #36]
- 166:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
- 546              		.loc 1 166 29
+ 168:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.BlendingFactor1 = LTDC_BLENDING_FACTOR1_PAxCA;
+ 546              		.loc 1 168 29
  547 03bc 4FF4C063 		mov	r3, #1536
  548 03c0 BB62     		str	r3, [r7, #40]
- 167:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
- 549              		.loc 1 167 29
+ 169:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.BlendingFactor2 = LTDC_BLENDING_FACTOR2_PAxCA;
+ 549              		.loc 1 169 29
  550 03c2 0723     		movs	r3, #7
  551 03c4 FB62     		str	r3, [r7, #44]
- 168:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.FBStartAdress = 0xD0000000;
- 552              		.loc 1 168 27
+ 170:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.FBStartAdress = 0xD0000000;
+ 552              		.loc 1 170 27
  553 03c6 4FF05043 		mov	r3, #-805306368
  554 03ca 3B63     		str	r3, [r7, #48]
- 169:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.ImageWidth = 400;
- 555              		.loc 1 169 24
+ 171:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.ImageWidth = 400;
+ 555              		.loc 1 171 24
  556 03cc 4FF4C873 		mov	r3, #400
  557 03d0 7B63     		str	r3, [r7, #52]
- 170:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.ImageHeight = 480;
- 558              		.loc 1 170 25
+ 172:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.ImageHeight = 480;
+ 558              		.loc 1 172 25
  559 03d2 4FF4F073 		mov	r3, #480
  560 03d6 BB63     		str	r3, [r7, #56]
- 171:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Backcolor.Blue = 0;
- 561              		.loc 1 171 28
+ 173:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Backcolor.Blue = 0;
+ 561              		.loc 1 173 28
  562 03d8 0023     		movs	r3, #0
  563 03da 87F83C30 		strb	r3, [r7, #60]
- 172:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Backcolor.Green = 0;
- 564              		.loc 1 172 29
+ 174:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Backcolor.Green = 0;
+ 564              		.loc 1 174 29
  565 03de 0023     		movs	r3, #0
  566 03e0 87F83D30 		strb	r3, [r7, #61]
- 173:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Backcolor.Red = 0;
- 567              		.loc 1 173 27
-ARM GAS  /tmp/ccwdWOWj.s 			page 14
+ARM GAS  /tmp/cc6KjUc4.s 			page 14
 
 
+ 175:./BSP/Hardware/Src/ltdc_dsi.c ****   pLayerCfg.Backcolor.Red = 0;
+ 567              		.loc 1 175 27
  568 03e4 0023     		movs	r3, #0
  569 03e6 87F83E30 		strb	r3, [r7, #62]
- 174:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_LTDC_ConfigLayer(&object->hltdc, &pLayerCfg, 0) != HAL_OK)
- 570              		.loc 1 174 7
+ 176:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_LTDC_ConfigLayer(&object->hltdc, &pLayerCfg, 0) != HAL_OK)
+ 570              		.loc 1 176 7
  571 03ea 7B68     		ldr	r3, [r7, #4]
  572 03ec 8433     		adds	r3, r3, #132
  573 03ee 07F10C01 		add	r1, r7, #12
@@ -792,23 +794,23 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  575 03f4 1846     		mov	r0, r3
  576 03f6 FFF7FEFF 		bl	HAL_LTDC_ConfigLayer
  577 03fa 0346     		mov	r3, r0
- 578              		.loc 1 174 6
+ 578              		.loc 1 176 6
  579 03fc 002B     		cmp	r3, #0
  580 03fe 03D0     		beq	.L13
- 175:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 176:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 581              		.loc 1 176 5
- 582 0400 B021     		movs	r1, #176
- 583 0402 0F48     		ldr	r0, .L17
+ 177:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 178:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 581              		.loc 1 178 5
+ 582 0400 B221     		movs	r1, #178
+ 583 0402 1348     		ldr	r0, .L17
  584 0404 FFF7FEFF 		bl	Error_Handler
  585              	.L13:
- 177:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 178:./BSP/Hardware/Src/ltdc_dsi.c ****   /* USER CODE BEGIN LTDC_Init 2 */
- 179:./BSP/Hardware/Src/ltdc_dsi.c ****   
- 180:./BSP/Hardware/Src/ltdc_dsi.c ****   /* Configure DSI PHY HS2LP and LP2HS timings */
- 181:./BSP/Hardware/Src/ltdc_dsi.c ****     
- 182:./BSP/Hardware/Src/ltdc_dsi.c ****   __HAL_LTDC_DISABLE(&object->hltdc);
- 586              		.loc 1 182 3
+ 179:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 180:./BSP/Hardware/Src/ltdc_dsi.c ****   /* USER CODE BEGIN LTDC_Init 2 */
+ 181:./BSP/Hardware/Src/ltdc_dsi.c ****   
+ 182:./BSP/Hardware/Src/ltdc_dsi.c ****   /* Configure DSI PHY HS2LP and LP2HS timings */
+ 183:./BSP/Hardware/Src/ltdc_dsi.c ****     
+ 184:./BSP/Hardware/Src/ltdc_dsi.c ****   __HAL_LTDC_DISABLE(&object->hltdc);
+ 586              		.loc 1 184 3
  587 0408 7B68     		ldr	r3, [r7, #4]
  588 040a D3F88430 		ldr	r3, [r3, #132]
  589 040e 9A69     		ldr	r2, [r3, #24]
@@ -816,798 +818,1303 @@ ARM GAS  /tmp/ccwdWOWj.s 			page 1
  591 0412 D3F88430 		ldr	r3, [r3, #132]
  592 0416 22F00102 		bic	r2, r2, #1
  593 041a 9A61     		str	r2, [r3, #24]
- 183:./BSP/Hardware/Src/ltdc_dsi.c ****   
- 184:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_DSI_Start(&object->hdsi);
- 594              		.loc 1 184 3
+ 185:./BSP/Hardware/Src/ltdc_dsi.c ****   
+ 186:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_DSI_Start(&object->hdsi);
+ 594              		.loc 1 186 3
  595 041c 7B68     		ldr	r3, [r7, #4]
  596 041e 6833     		adds	r3, r3, #104
  597 0420 1846     		mov	r0, r3
  598 0422 FFF7FEFF 		bl	HAL_DSI_Start
- 185:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 186:./BSP/Hardware/Src/ltdc_dsi.c ****   object->dsi_IO_write=DSI_IO_WRITE;
- 599              		.loc 1 186 23
+ 187:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 188:./BSP/Hardware/Src/ltdc_dsi.c ****   object->dsi_IO_write=DSI_IO_WRITE;
+ 599              		.loc 1 188 23
  600 0426 7B68     		ldr	r3, [r7, #4]
- 601 0428 064A     		ldr	r2, .L17+4
+ 601 0428 0A4A     		ldr	r2, .L17+4
  602 042a C3F83021 		str	r2, [r3, #304]
- 187:./BSP/Hardware/Src/ltdc_dsi.c ****   object->dsi_IO_read=DSI_IO_READ;
- 603              		.loc 1 187 22
+ 189:./BSP/Hardware/Src/ltdc_dsi.c ****   object->dsi_IO_read=DSI_IO_READ;
+ 603              		.loc 1 189 22
  604 042e 7B68     		ldr	r3, [r7, #4]
- 605 0430 054A     		ldr	r2, .L17+8
+ 605 0430 094A     		ldr	r2, .L17+8
  606 0432 C3F83421 		str	r2, [r3, #308]
- 188:./BSP/Hardware/Src/ltdc_dsi.c **** }
- 607              		.loc 1 188 1
- 608 0436 00BF     		nop
- 609 0438 E837     		adds	r7, r7, #232
-ARM GAS  /tmp/ccwdWOWj.s 			page 15
+ 190:./BSP/Hardware/Src/ltdc_dsi.c ****   object->dsi_refresh=DSI_Refresh;
+ 607              		.loc 1 190 22
+ARM GAS  /tmp/cc6KjUc4.s 			page 15
 
 
- 610              	.LCFI3:
- 611              		.cfi_def_cfa_offset 8
- 612 043a BD46     		mov	sp, r7
- 613              	.LCFI4:
- 614              		.cfi_def_cfa_register 13
- 615              		@ sp needed
- 616 043c 80BD     		pop	{r7, pc}
- 617              	.L18:
- 618 043e 00BF     		.align	2
- 619              	.L17:
- 620 0440 00000000 		.word	.LC0
- 621 0444 00000000 		.word	DSI_IO_WRITE
- 622 0448 00000000 		.word	DSI_IO_READ
- 623              		.cfi_endproc
- 624              	.LFE338:
- 626              		.section	.text.HAL_DMA2D_MspInit,"ax",%progbits
- 627              		.align	1
- 628              		.global	HAL_DMA2D_MspInit
- 629              		.syntax unified
- 630              		.thumb
- 631              		.thumb_func
- 632              		.fpu fpv5-d16
- 634              	HAL_DMA2D_MspInit:
- 635              	.LFB339:
- 189:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 190:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* hdma2d)
- 191:./BSP/Hardware/Src/ltdc_dsi.c **** {
- 636              		.loc 1 191 1
- 637              		.cfi_startproc
- 638              		@ args = 0, pretend = 0, frame = 16
- 639              		@ frame_needed = 1, uses_anonymous_args = 0
- 640 0000 80B5     		push	{r7, lr}
- 641              	.LCFI5:
- 642              		.cfi_def_cfa_offset 8
- 643              		.cfi_offset 7, -8
- 644              		.cfi_offset 14, -4
- 645 0002 84B0     		sub	sp, sp, #16
- 646              	.LCFI6:
- 647              		.cfi_def_cfa_offset 24
- 648 0004 00AF     		add	r7, sp, #0
- 649              	.LCFI7:
- 650              		.cfi_def_cfa_register 7
- 651 0006 7860     		str	r0, [r7, #4]
- 192:./BSP/Hardware/Src/ltdc_dsi.c ****   if(hdma2d->Instance==DMA2D)
- 652              		.loc 1 192 12
- 653 0008 7B68     		ldr	r3, [r7, #4]
- 654 000a 1B68     		ldr	r3, [r3]
- 655              		.loc 1 192 5
- 656 000c 0E4A     		ldr	r2, .L22
- 657 000e 9342     		cmp	r3, r2
- 658 0010 16D1     		bne	.L21
- 659              	.LBB2:
- 193:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 194:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_DMA2D_CLK_ENABLE();
- 660              		.loc 1 194 5
- 661 0012 0E4B     		ldr	r3, .L22+4
- 662 0014 D3F8D430 		ldr	r3, [r3, #212]
-ARM GAS  /tmp/ccwdWOWj.s 			page 16
+ 608 0436 7B68     		ldr	r3, [r7, #4]
+ 609 0438 084A     		ldr	r2, .L17+12
+ 610 043a C3F83821 		str	r2, [r3, #312]
+ 191:./BSP/Hardware/Src/ltdc_dsi.c ****   object->copy_buffer=copy_buffer;
+ 611              		.loc 1 191 22
+ 612 043e 7B68     		ldr	r3, [r7, #4]
+ 613 0440 074A     		ldr	r2, .L17+16
+ 614 0442 C3F83C21 		str	r2, [r3, #316]
+ 192:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 615              		.loc 1 192 1
+ 616 0446 00BF     		nop
+ 617 0448 E837     		adds	r7, r7, #232
+ 618              	.LCFI3:
+ 619              		.cfi_def_cfa_offset 8
+ 620 044a BD46     		mov	sp, r7
+ 621              	.LCFI4:
+ 622              		.cfi_def_cfa_register 13
+ 623              		@ sp needed
+ 624 044c 80BD     		pop	{r7, pc}
+ 625              	.L18:
+ 626 044e 00BF     		.align	2
+ 627              	.L17:
+ 628 0450 00000000 		.word	.LC0
+ 629 0454 00000000 		.word	DSI_IO_WRITE
+ 630 0458 00000000 		.word	DSI_IO_READ
+ 631 045c 00000000 		.word	DSI_Refresh
+ 632 0460 00000000 		.word	copy_buffer
+ 633              		.cfi_endproc
+ 634              	.LFE338:
+ 636              		.section	.text.HAL_DMA2D_MspInit,"ax",%progbits
+ 637              		.align	1
+ 638              		.global	HAL_DMA2D_MspInit
+ 639              		.syntax unified
+ 640              		.thumb
+ 641              		.thumb_func
+ 642              		.fpu fpv5-d16
+ 644              	HAL_DMA2D_MspInit:
+ 645              	.LFB339:
+ 193:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 194:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* hdma2d)
+ 195:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 646              		.loc 1 195 1
+ 647              		.cfi_startproc
+ 648              		@ args = 0, pretend = 0, frame = 16
+ 649              		@ frame_needed = 1, uses_anonymous_args = 0
+ 650 0000 80B5     		push	{r7, lr}
+ 651              	.LCFI5:
+ 652              		.cfi_def_cfa_offset 8
+ 653              		.cfi_offset 7, -8
+ 654              		.cfi_offset 14, -4
+ 655 0002 84B0     		sub	sp, sp, #16
+ 656              	.LCFI6:
+ 657              		.cfi_def_cfa_offset 24
+ 658 0004 00AF     		add	r7, sp, #0
+ 659              	.LCFI7:
+ 660              		.cfi_def_cfa_register 7
+ 661 0006 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/cc6KjUc4.s 			page 16
 
 
- 663 0018 0C4A     		ldr	r2, .L22+4
- 664 001a 43F01003 		orr	r3, r3, #16
- 665 001e C2F8D430 		str	r3, [r2, #212]
- 666 0022 0A4B     		ldr	r3, .L22+4
- 667 0024 D3F8D430 		ldr	r3, [r3, #212]
- 668 0028 03F01003 		and	r3, r3, #16
- 669 002c FB60     		str	r3, [r7, #12]
- 670 002e FB68     		ldr	r3, [r7, #12]
- 671              	.LBE2:
- 195:./BSP/Hardware/Src/ltdc_dsi.c ****     /* DMA2D interrupt Init */
- 196:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_SetPriority(DMA2D_IRQn, 7, 0);
- 672              		.loc 1 196 5
- 673 0030 0022     		movs	r2, #0
- 674 0032 0721     		movs	r1, #7
- 675 0034 5A20     		movs	r0, #90
- 676 0036 FFF7FEFF 		bl	HAL_NVIC_SetPriority
- 197:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_EnableIRQ(DMA2D_IRQn);
- 677              		.loc 1 197 5
- 678 003a 5A20     		movs	r0, #90
- 679 003c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
- 680              	.L21:
- 198:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 199:./BSP/Hardware/Src/ltdc_dsi.c **** }
- 681              		.loc 1 199 1
- 682 0040 00BF     		nop
- 683 0042 1037     		adds	r7, r7, #16
- 684              	.LCFI8:
- 685              		.cfi_def_cfa_offset 8
- 686 0044 BD46     		mov	sp, r7
- 687              	.LCFI9:
- 688              		.cfi_def_cfa_register 13
- 689              		@ sp needed
- 690 0046 80BD     		pop	{r7, pc}
- 691              	.L23:
- 692              		.align	2
- 693              	.L22:
- 694 0048 00100052 		.word	1375735808
- 695 004c 00440258 		.word	1476543488
- 696              		.cfi_endproc
- 697              	.LFE339:
- 699              		.section	.text.HAL_DSI_MspInit,"ax",%progbits
- 700              		.align	1
- 701              		.global	HAL_DSI_MspInit
- 702              		.syntax unified
- 703              		.thumb
- 704              		.thumb_func
- 705              		.fpu fpv5-d16
- 707              	HAL_DSI_MspInit:
- 708              	.LFB340:
- 200:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 201:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_DSI_MspInit(DSI_HandleTypeDef* hdsi)
- 202:./BSP/Hardware/Src/ltdc_dsi.c **** {
- 709              		.loc 1 202 1
- 710              		.cfi_startproc
- 711              		@ args = 0, pretend = 0, frame = 232
- 712              		@ frame_needed = 1, uses_anonymous_args = 0
- 713 0000 80B5     		push	{r7, lr}
-ARM GAS  /tmp/ccwdWOWj.s 			page 17
+ 196:./BSP/Hardware/Src/ltdc_dsi.c ****   if(hdma2d->Instance==DMA2D)
+ 662              		.loc 1 196 12
+ 663 0008 7B68     		ldr	r3, [r7, #4]
+ 664 000a 1B68     		ldr	r3, [r3]
+ 665              		.loc 1 196 5
+ 666 000c 0E4A     		ldr	r2, .L22
+ 667 000e 9342     		cmp	r3, r2
+ 668 0010 16D1     		bne	.L21
+ 669              	.LBB2:
+ 197:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 198:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_DMA2D_CLK_ENABLE();
+ 670              		.loc 1 198 5
+ 671 0012 0E4B     		ldr	r3, .L22+4
+ 672 0014 D3F8D430 		ldr	r3, [r3, #212]
+ 673 0018 0C4A     		ldr	r2, .L22+4
+ 674 001a 43F01003 		orr	r3, r3, #16
+ 675 001e C2F8D430 		str	r3, [r2, #212]
+ 676 0022 0A4B     		ldr	r3, .L22+4
+ 677 0024 D3F8D430 		ldr	r3, [r3, #212]
+ 678 0028 03F01003 		and	r3, r3, #16
+ 679 002c FB60     		str	r3, [r7, #12]
+ 680 002e FB68     		ldr	r3, [r7, #12]
+ 681              	.LBE2:
+ 199:./BSP/Hardware/Src/ltdc_dsi.c ****     /* DMA2D interrupt Init */
+ 200:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_SetPriority(DMA2D_IRQn, 7, 0);
+ 682              		.loc 1 200 5
+ 683 0030 0022     		movs	r2, #0
+ 684 0032 0721     		movs	r1, #7
+ 685 0034 5A20     		movs	r0, #90
+ 686 0036 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 201:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_EnableIRQ(DMA2D_IRQn);
+ 687              		.loc 1 201 5
+ 688 003a 5A20     		movs	r0, #90
+ 689 003c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 690              	.L21:
+ 202:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 203:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 691              		.loc 1 203 1
+ 692 0040 00BF     		nop
+ 693 0042 1037     		adds	r7, r7, #16
+ 694              	.LCFI8:
+ 695              		.cfi_def_cfa_offset 8
+ 696 0044 BD46     		mov	sp, r7
+ 697              	.LCFI9:
+ 698              		.cfi_def_cfa_register 13
+ 699              		@ sp needed
+ 700 0046 80BD     		pop	{r7, pc}
+ 701              	.L23:
+ 702              		.align	2
+ 703              	.L22:
+ 704 0048 00100052 		.word	1375735808
+ 705 004c 00440258 		.word	1476543488
+ 706              		.cfi_endproc
+ 707              	.LFE339:
+ 709              		.section	.text.HAL_DSI_MspInit,"ax",%progbits
+ 710              		.align	1
+ 711              		.global	HAL_DSI_MspInit
+ARM GAS  /tmp/cc6KjUc4.s 			page 17
 
 
- 714              	.LCFI10:
- 715              		.cfi_def_cfa_offset 8
- 716              		.cfi_offset 7, -8
- 717              		.cfi_offset 14, -4
- 718 0002 BAB0     		sub	sp, sp, #232
- 719              	.LCFI11:
- 720              		.cfi_def_cfa_offset 240
- 721 0004 00AF     		add	r7, sp, #0
- 722              	.LCFI12:
- 723              		.cfi_def_cfa_register 7
- 724 0006 7860     		str	r0, [r7, #4]
- 203:./BSP/Hardware/Src/ltdc_dsi.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
- 725              		.loc 1 203 20
- 726 0008 07F1D403 		add	r3, r7, #212
- 727 000c 0022     		movs	r2, #0
- 728 000e 1A60     		str	r2, [r3]
- 729 0010 5A60     		str	r2, [r3, #4]
- 730 0012 9A60     		str	r2, [r3, #8]
- 731 0014 DA60     		str	r2, [r3, #12]
- 732 0016 1A61     		str	r2, [r3, #16]
- 204:./BSP/Hardware/Src/ltdc_dsi.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
- 733              		.loc 1 204 28
- 734 0018 07F11403 		add	r3, r7, #20
- 735 001c C022     		movs	r2, #192
- 736 001e 0021     		movs	r1, #0
- 737 0020 1846     		mov	r0, r3
- 738 0022 FFF7FEFF 		bl	memset
- 205:./BSP/Hardware/Src/ltdc_dsi.c ****   if(hdsi->Instance==DSI)
- 739              		.loc 1 205 10
- 740 0026 7B68     		ldr	r3, [r7, #4]
- 741 0028 1B68     		ldr	r3, [r3]
- 742              		.loc 1 205 5
- 743 002a B3F1A04F 		cmp	r3, #1342177280
- 744 002e 4BD1     		bne	.L27
- 206:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 207:./BSP/Hardware/Src/ltdc_dsi.c ****   /** Initializes the peripherals clock
- 208:./BSP/Hardware/Src/ltdc_dsi.c ****   */
- 209:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_DSI;
- 745              		.loc 1 209 46
- 746 0030 4FF08063 		mov	r3, #67108864
- 747 0034 7B61     		str	r3, [r7, #20]
- 210:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.DsiClockSelection = RCC_DSICLKSOURCE_PHY;
- 748              		.loc 1 210 43
- 749 0036 0023     		movs	r3, #0
- 750 0038 3B66     		str	r3, [r7, #96]
- 211:./BSP/Hardware/Src/ltdc_dsi.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
- 751              		.loc 1 211 9
- 752 003a 07F11403 		add	r3, r7, #20
- 753 003e 1846     		mov	r0, r3
- 754 0040 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
- 755 0044 0346     		mov	r3, r0
- 756              		.loc 1 211 8
- 757 0046 002B     		cmp	r3, #0
- 758 0048 03D0     		beq	.L26
- 212:./BSP/Hardware/Src/ltdc_dsi.c ****     {
- 213:./BSP/Hardware/Src/ltdc_dsi.c ****       Error_Handler(__FILE__, __LINE__);
- 759              		.loc 1 213 7
-ARM GAS  /tmp/ccwdWOWj.s 			page 18
+ 712              		.syntax unified
+ 713              		.thumb
+ 714              		.thumb_func
+ 715              		.fpu fpv5-d16
+ 717              	HAL_DSI_MspInit:
+ 718              	.LFB340:
+ 204:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 205:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_DSI_MspInit(DSI_HandleTypeDef* hdsi)
+ 206:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 719              		.loc 1 206 1
+ 720              		.cfi_startproc
+ 721              		@ args = 0, pretend = 0, frame = 232
+ 722              		@ frame_needed = 1, uses_anonymous_args = 0
+ 723 0000 80B5     		push	{r7, lr}
+ 724              	.LCFI10:
+ 725              		.cfi_def_cfa_offset 8
+ 726              		.cfi_offset 7, -8
+ 727              		.cfi_offset 14, -4
+ 728 0002 BAB0     		sub	sp, sp, #232
+ 729              	.LCFI11:
+ 730              		.cfi_def_cfa_offset 240
+ 731 0004 00AF     		add	r7, sp, #0
+ 732              	.LCFI12:
+ 733              		.cfi_def_cfa_register 7
+ 734 0006 7860     		str	r0, [r7, #4]
+ 207:./BSP/Hardware/Src/ltdc_dsi.c ****   GPIO_InitTypeDef GPIO_InitStruct = {0};
+ 735              		.loc 1 207 20
+ 736 0008 07F1D403 		add	r3, r7, #212
+ 737 000c 0022     		movs	r2, #0
+ 738 000e 1A60     		str	r2, [r3]
+ 739 0010 5A60     		str	r2, [r3, #4]
+ 740 0012 9A60     		str	r2, [r3, #8]
+ 741 0014 DA60     		str	r2, [r3, #12]
+ 742 0016 1A61     		str	r2, [r3, #16]
+ 208:./BSP/Hardware/Src/ltdc_dsi.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+ 743              		.loc 1 208 28
+ 744 0018 07F11403 		add	r3, r7, #20
+ 745 001c C022     		movs	r2, #192
+ 746 001e 0021     		movs	r1, #0
+ 747 0020 1846     		mov	r0, r3
+ 748 0022 FFF7FEFF 		bl	memset
+ 209:./BSP/Hardware/Src/ltdc_dsi.c ****   if(hdsi->Instance==DSI)
+ 749              		.loc 1 209 10
+ 750 0026 7B68     		ldr	r3, [r7, #4]
+ 751 0028 1B68     		ldr	r3, [r3]
+ 752              		.loc 1 209 5
+ 753 002a B3F1A04F 		cmp	r3, #1342177280
+ 754 002e 60D1     		bne	.L27
+ 210:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 211:./BSP/Hardware/Src/ltdc_dsi.c ****   /** Initializes the peripherals clock
+ 212:./BSP/Hardware/Src/ltdc_dsi.c ****   */
+ 213:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_DSI;
+ 755              		.loc 1 213 46
+ 756 0030 4FF08063 		mov	r3, #67108864
+ 757 0034 7B61     		str	r3, [r7, #20]
+ 214:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.DsiClockSelection = RCC_DSICLKSOURCE_PHY;
+ 758              		.loc 1 214 43
+ARM GAS  /tmp/cc6KjUc4.s 			page 18
 
 
- 760 004a D521     		movs	r1, #213
- 761 004c 2048     		ldr	r0, .L28
- 762 004e FFF7FEFF 		bl	Error_Handler
- 763              	.L26:
- 764              	.LBB3:
- 214:./BSP/Hardware/Src/ltdc_dsi.c ****     }
- 215:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 216:./BSP/Hardware/Src/ltdc_dsi.c ****     /* Peripheral clock enable */
- 217:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_DSI_CLK_ENABLE();
- 765              		.loc 1 217 5
- 766 0052 204B     		ldr	r3, .L28+4
- 767 0054 D3F8E430 		ldr	r3, [r3, #228]
- 768 0058 1E4A     		ldr	r2, .L28+4
- 769 005a 43F01003 		orr	r3, r3, #16
- 770 005e C2F8E430 		str	r3, [r2, #228]
- 771 0062 1C4B     		ldr	r3, .L28+4
- 772 0064 D3F8E430 		ldr	r3, [r3, #228]
- 773 0068 03F01003 		and	r3, r3, #16
- 774 006c 3B61     		str	r3, [r7, #16]
- 775 006e 3B69     		ldr	r3, [r7, #16]
- 776              	.LBE3:
- 777              	.LBB4:
- 218:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 219:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_GPIOJ_CLK_ENABLE();
- 778              		.loc 1 219 5
- 779 0070 184B     		ldr	r3, .L28+4
- 780 0072 D3F8E030 		ldr	r3, [r3, #224]
- 781 0076 174A     		ldr	r2, .L28+4
- 782 0078 43F40073 		orr	r3, r3, #512
- 783 007c C2F8E030 		str	r3, [r2, #224]
- 784 0080 144B     		ldr	r3, .L28+4
- 785 0082 D3F8E030 		ldr	r3, [r3, #224]
- 786 0086 03F40073 		and	r3, r3, #512
- 787 008a FB60     		str	r3, [r7, #12]
- 788 008c FB68     		ldr	r3, [r7, #12]
- 789              	.LBE4:
- 220:./BSP/Hardware/Src/ltdc_dsi.c ****     /**DSIHOST GPIO Configuration
- 221:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D1P     ------> DSIHOST_D1P
- 222:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D1N     ------> DSIHOST_D1N
- 223:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_CKP     ------> DSIHOST_CKP
- 224:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_CKN     ------> DSIHOST_CKN
- 225:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D0P     ------> DSIHOST_D0P
- 226:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D0N     ------> DSIHOST_D0N
- 227:./BSP/Hardware/Src/ltdc_dsi.c ****     PJ2     ------> DSIHOST_TE
- 228:./BSP/Hardware/Src/ltdc_dsi.c ****     */
- 229:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Pin = GPIO_PIN_2;
- 790              		.loc 1 229 25
- 791 008e 0423     		movs	r3, #4
- 792 0090 C7F8D430 		str	r3, [r7, #212]
- 230:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
- 793              		.loc 1 230 26
- 794 0094 0223     		movs	r3, #2
- 795 0096 C7F8D830 		str	r3, [r7, #216]
- 231:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
- 796              		.loc 1 231 26
- 797 009a 0023     		movs	r3, #0
- 798 009c C7F8DC30 		str	r3, [r7, #220]
-ARM GAS  /tmp/ccwdWOWj.s 			page 19
+ 759 0036 0023     		movs	r3, #0
+ 760 0038 3B66     		str	r3, [r7, #96]
+ 215:./BSP/Hardware/Src/ltdc_dsi.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 761              		.loc 1 215 9
+ 762 003a 07F11403 		add	r3, r7, #20
+ 763 003e 1846     		mov	r0, r3
+ 764 0040 FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 765 0044 0346     		mov	r3, r0
+ 766              		.loc 1 215 8
+ 767 0046 002B     		cmp	r3, #0
+ 768 0048 03D0     		beq	.L26
+ 216:./BSP/Hardware/Src/ltdc_dsi.c ****     {
+ 217:./BSP/Hardware/Src/ltdc_dsi.c ****       Error_Handler(__FILE__, __LINE__);
+ 769              		.loc 1 217 7
+ 770 004a D921     		movs	r1, #217
+ 771 004c 2B48     		ldr	r0, .L28
+ 772 004e FFF7FEFF 		bl	Error_Handler
+ 773              	.L26:
+ 774              	.LBB3:
+ 218:./BSP/Hardware/Src/ltdc_dsi.c ****     }
+ 219:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 220:./BSP/Hardware/Src/ltdc_dsi.c ****     /* Peripheral clock enable */
+ 221:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_DSI_CLK_ENABLE();
+ 775              		.loc 1 221 5
+ 776 0052 2B4B     		ldr	r3, .L28+4
+ 777 0054 D3F8E430 		ldr	r3, [r3, #228]
+ 778 0058 294A     		ldr	r2, .L28+4
+ 779 005a 43F01003 		orr	r3, r3, #16
+ 780 005e C2F8E430 		str	r3, [r2, #228]
+ 781 0062 274B     		ldr	r3, .L28+4
+ 782 0064 D3F8E430 		ldr	r3, [r3, #228]
+ 783 0068 03F01003 		and	r3, r3, #16
+ 784 006c 3B61     		str	r3, [r7, #16]
+ 785 006e 3B69     		ldr	r3, [r7, #16]
+ 786              	.LBE3:
+ 787              	.LBB4:
+ 222:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 223:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_GPIOJ_CLK_ENABLE();
+ 788              		.loc 1 223 5
+ 789 0070 234B     		ldr	r3, .L28+4
+ 790 0072 D3F8E030 		ldr	r3, [r3, #224]
+ 791 0076 224A     		ldr	r2, .L28+4
+ 792 0078 43F40073 		orr	r3, r3, #512
+ 793 007c C2F8E030 		str	r3, [r2, #224]
+ 794 0080 1F4B     		ldr	r3, .L28+4
+ 795 0082 D3F8E030 		ldr	r3, [r3, #224]
+ 796 0086 03F40073 		and	r3, r3, #512
+ 797 008a FB60     		str	r3, [r7, #12]
+ 798 008c FB68     		ldr	r3, [r7, #12]
+ 799              	.LBE4:
+ 224:./BSP/Hardware/Src/ltdc_dsi.c ****     /**DSIHOST GPIO Configuration
+ 225:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D1P     ------> DSIHOST_D1P
+ 226:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D1N     ------> DSIHOST_D1N
+ 227:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_CKP     ------> DSIHOST_CKP
+ 228:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_CKN     ------> DSIHOST_CKN
+ 229:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D0P     ------> DSIHOST_D0P
+ 230:./BSP/Hardware/Src/ltdc_dsi.c ****     DSI_D0N     ------> DSIHOST_D0N
+ARM GAS  /tmp/cc6KjUc4.s 			page 19
 
 
- 232:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
- 799              		.loc 1 232 27
- 800 00a0 0023     		movs	r3, #0
- 801 00a2 C7F8E030 		str	r3, [r7, #224]
- 233:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Alternate = GPIO_AF13_DSI;
- 802              		.loc 1 233 31
- 803 00a6 0D23     		movs	r3, #13
- 804 00a8 C7F8E430 		str	r3, [r7, #228]
- 234:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
- 805              		.loc 1 234 5
- 806 00ac 07F1D403 		add	r3, r7, #212
- 807 00b0 1946     		mov	r1, r3
- 808 00b2 0948     		ldr	r0, .L28+8
- 809 00b4 FFF7FEFF 		bl	HAL_GPIO_Init
- 235:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 236:./BSP/Hardware/Src/ltdc_dsi.c ****     /* DSI interrupt Init */
- 237:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_SetPriority(DSI_IRQn, 7, 0);
- 810              		.loc 1 237 5
- 811 00b8 0022     		movs	r2, #0
- 812 00ba 0721     		movs	r1, #7
- 813 00bc 7B20     		movs	r0, #123
- 814 00be FFF7FEFF 		bl	HAL_NVIC_SetPriority
- 238:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_EnableIRQ(DSI_IRQn);
+ 231:./BSP/Hardware/Src/ltdc_dsi.c ****     PJ2         ------> DSIHOST_TE
+ 232:./BSP/Hardware/Src/ltdc_dsi.c ****     */
+ 233:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Pin = GPIO_PIN_2;
+ 800              		.loc 1 233 25
+ 801 008e 0423     		movs	r3, #4
+ 802 0090 C7F8D430 		str	r3, [r7, #212]
+ 234:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
+ 803              		.loc 1 234 26
+ 804 0094 0223     		movs	r3, #2
+ 805 0096 C7F8D830 		str	r3, [r7, #216]
+ 235:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 806              		.loc 1 235 26
+ 807 009a 0023     		movs	r3, #0
+ 808 009c C7F8DC30 		str	r3, [r7, #220]
+ 236:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+ 809              		.loc 1 236 27
+ 810 00a0 0023     		movs	r3, #0
+ 811 00a2 C7F8E030 		str	r3, [r7, #224]
+ 237:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Alternate = GPIO_AF13_DSI;
+ 812              		.loc 1 237 31
+ 813 00a6 0D23     		movs	r3, #13
+ 814 00a8 C7F8E430 		str	r3, [r7, #228]
+ 238:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct);
  815              		.loc 1 238 5
- 816 00c2 7B20     		movs	r0, #123
- 817 00c4 FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
- 818              	.L27:
- 239:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 240:./BSP/Hardware/Src/ltdc_dsi.c **** }
- 819              		.loc 1 240 1
- 820 00c8 00BF     		nop
- 821 00ca E837     		adds	r7, r7, #232
- 822              	.LCFI13:
- 823              		.cfi_def_cfa_offset 8
- 824 00cc BD46     		mov	sp, r7
- 825              	.LCFI14:
- 826              		.cfi_def_cfa_register 13
- 827              		@ sp needed
- 828 00ce 80BD     		pop	{r7, pc}
- 829              	.L29:
- 830              		.align	2
- 831              	.L28:
- 832 00d0 00000000 		.word	.LC0
- 833 00d4 00440258 		.word	1476543488
- 834 00d8 00240258 		.word	1476535296
- 835              		.cfi_endproc
- 836              	.LFE340:
- 838              		.section	.text.HAL_LTDC_MspInit,"ax",%progbits
- 839              		.align	1
- 840              		.global	HAL_LTDC_MspInit
- 841              		.syntax unified
- 842              		.thumb
- 843              		.thumb_func
- 844              		.fpu fpv5-d16
- 846              	HAL_LTDC_MspInit:
- 847              	.LFB341:
- 241:./BSP/Hardware/Src/ltdc_dsi.c **** 
-ARM GAS  /tmp/ccwdWOWj.s 			page 20
+ 816 00ac 07F1D403 		add	r3, r7, #212
+ 817 00b0 1946     		mov	r1, r3
+ 818 00b2 1448     		ldr	r0, .L28+8
+ 819 00b4 FFF7FEFF 		bl	HAL_GPIO_Init
+ 239:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 240:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
+ 820              		.loc 1 240 26
+ 821 00b8 0123     		movs	r3, #1
+ 822 00ba C7F8D830 		str	r3, [r7, #216]
+ 241:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Pull = GPIO_NOPULL;
+ 823              		.loc 1 241 26
+ 824 00be 0023     		movs	r3, #0
+ 825 00c0 C7F8DC30 		str	r3, [r7, #220]
+ 242:./BSP/Hardware/Src/ltdc_dsi.c ****     GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+ 826              		.loc 1 242 27
+ 827 00c4 0223     		movs	r3, #2
+ 828 00c6 C7F8E030 		str	r3, [r7, #224]
+ 243:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_GPIO_Init(GPIOJ, &GPIO_InitStruct); 
+ 829              		.loc 1 243 5
+ 830 00ca 07F1D403 		add	r3, r7, #212
+ 831 00ce 1946     		mov	r1, r3
+ 832 00d0 0C48     		ldr	r0, .L28+8
+ 833 00d2 FFF7FEFF 		bl	HAL_GPIO_Init
+ 244:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 245:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_12, GPIO_PIN_RESET);
+ 834              		.loc 1 245 5
+ 835 00d6 0022     		movs	r2, #0
+ 836 00d8 4FF48051 		mov	r1, #4096
+ 837 00dc 0948     		ldr	r0, .L28+8
+ 838 00de FFF7FEFF 		bl	HAL_GPIO_WritePin
+ 246:./BSP/Hardware/Src/ltdc_dsi.c ****     /* DSI interrupt Init */
+ 247:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_SetPriority(DSI_IRQn, 7, 0);
+ 839              		.loc 1 247 5
+ARM GAS  /tmp/cc6KjUc4.s 			page 20
 
 
- 242:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
- 243:./BSP/Hardware/Src/ltdc_dsi.c **** {
- 848              		.loc 1 243 1
- 849              		.cfi_startproc
- 850              		@ args = 0, pretend = 0, frame = 208
- 851              		@ frame_needed = 1, uses_anonymous_args = 0
- 852 0000 80B5     		push	{r7, lr}
- 853              	.LCFI15:
- 854              		.cfi_def_cfa_offset 8
- 855              		.cfi_offset 7, -8
- 856              		.cfi_offset 14, -4
- 857 0002 B4B0     		sub	sp, sp, #208
- 858              	.LCFI16:
- 859              		.cfi_def_cfa_offset 216
- 860 0004 00AF     		add	r7, sp, #0
- 861              	.LCFI17:
- 862              		.cfi_def_cfa_register 7
- 863 0006 7860     		str	r0, [r7, #4]
- 244:./BSP/Hardware/Src/ltdc_dsi.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
- 864              		.loc 1 244 28
- 865 0008 07F11003 		add	r3, r7, #16
- 866 000c C022     		movs	r2, #192
- 867 000e 0021     		movs	r1, #0
- 868 0010 1846     		mov	r0, r3
- 869 0012 FFF7FEFF 		bl	memset
- 245:./BSP/Hardware/Src/ltdc_dsi.c ****   if(hltdc->Instance==LTDC)
- 870              		.loc 1 245 11
- 871 0016 7B68     		ldr	r3, [r7, #4]
- 872 0018 1B68     		ldr	r3, [r3]
- 873              		.loc 1 245 5
- 874 001a 1F4A     		ldr	r2, .L34
- 875 001c 9342     		cmp	r3, r2
- 876 001e 37D1     		bne	.L33
- 246:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 247:./BSP/Hardware/Src/ltdc_dsi.c ****   /** Initializes the peripherals clock
- 248:./BSP/Hardware/Src/ltdc_dsi.c ****   */
- 249:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
- 877              		.loc 1 249 46
- 878 0020 4FF00053 		mov	r3, #536870912
- 879 0024 3B61     		str	r3, [r7, #16]
- 250:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3M = 5;
- 880              		.loc 1 250 36
- 881 0026 0523     		movs	r3, #5
- 882 0028 7B63     		str	r3, [r7, #52]
- 251:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3N = 161;
- 883              		.loc 1 251 36
- 884 002a A123     		movs	r3, #161
- 885 002c BB63     		str	r3, [r7, #56]
- 252:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3P = 2;
- 886              		.loc 1 252 36
- 887 002e 0223     		movs	r3, #2
- 888 0030 FB63     		str	r3, [r7, #60]
- 253:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3Q = 2;
- 889              		.loc 1 253 36
- 890 0032 0223     		movs	r3, #2
- 891 0034 3B64     		str	r3, [r7, #64]
- 254:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3R = 21;
-ARM GAS  /tmp/ccwdWOWj.s 			page 21
+ 840 00e2 0022     		movs	r2, #0
+ 841 00e4 0721     		movs	r1, #7
+ 842 00e6 7B20     		movs	r0, #123
+ 843 00e8 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 248:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_EnableIRQ(DSI_IRQn);
+ 844              		.loc 1 248 5
+ 845 00ec 7B20     		movs	r0, #123
+ 846 00ee FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 847              	.L27:
+ 249:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 250:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 848              		.loc 1 250 1
+ 849 00f2 00BF     		nop
+ 850 00f4 E837     		adds	r7, r7, #232
+ 851              	.LCFI13:
+ 852              		.cfi_def_cfa_offset 8
+ 853 00f6 BD46     		mov	sp, r7
+ 854              	.LCFI14:
+ 855              		.cfi_def_cfa_register 13
+ 856              		@ sp needed
+ 857 00f8 80BD     		pop	{r7, pc}
+ 858              	.L29:
+ 859 00fa 00BF     		.align	2
+ 860              	.L28:
+ 861 00fc 00000000 		.word	.LC0
+ 862 0100 00440258 		.word	1476543488
+ 863 0104 00240258 		.word	1476535296
+ 864              		.cfi_endproc
+ 865              	.LFE340:
+ 867              		.section	.text.HAL_LTDC_MspInit,"ax",%progbits
+ 868              		.align	1
+ 869              		.global	HAL_LTDC_MspInit
+ 870              		.syntax unified
+ 871              		.thumb
+ 872              		.thumb_func
+ 873              		.fpu fpv5-d16
+ 875              	HAL_LTDC_MspInit:
+ 876              	.LFB341:
+ 251:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 252:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_LTDC_MspInit(LTDC_HandleTypeDef* hltdc)
+ 253:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 877              		.loc 1 253 1
+ 878              		.cfi_startproc
+ 879              		@ args = 0, pretend = 0, frame = 208
+ 880              		@ frame_needed = 1, uses_anonymous_args = 0
+ 881 0000 80B5     		push	{r7, lr}
+ 882              	.LCFI15:
+ 883              		.cfi_def_cfa_offset 8
+ 884              		.cfi_offset 7, -8
+ 885              		.cfi_offset 14, -4
+ 886 0002 B4B0     		sub	sp, sp, #208
+ 887              	.LCFI16:
+ 888              		.cfi_def_cfa_offset 216
+ 889 0004 00AF     		add	r7, sp, #0
+ 890              	.LCFI17:
+ 891              		.cfi_def_cfa_register 7
+ 892 0006 7860     		str	r0, [r7, #4]
+ARM GAS  /tmp/cc6KjUc4.s 			page 21
 
 
- 892              		.loc 1 254 36
- 893 0036 1523     		movs	r3, #21
- 894 0038 7B64     		str	r3, [r7, #68]
- 255:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
- 895              		.loc 1 255 38
- 896 003a 4FF40063 		mov	r3, #2048
- 897 003e BB64     		str	r3, [r7, #72]
- 256:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
- 898              		.loc 1 256 41
- 899 0040 0023     		movs	r3, #0
- 900 0042 FB64     		str	r3, [r7, #76]
- 257:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
- 901              		.loc 1 257 40
- 902 0044 0023     		movs	r3, #0
- 903 0046 3B65     		str	r3, [r7, #80]
- 258:./BSP/Hardware/Src/ltdc_dsi.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
- 904              		.loc 1 258 9
- 905 0048 07F11003 		add	r3, r7, #16
- 906 004c 1846     		mov	r0, r3
- 907 004e FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
- 908 0052 0346     		mov	r3, r0
- 909              		.loc 1 258 8
- 910 0054 002B     		cmp	r3, #0
- 911 0056 04D0     		beq	.L32
- 259:./BSP/Hardware/Src/ltdc_dsi.c ****     {
- 260:./BSP/Hardware/Src/ltdc_dsi.c ****       Error_Handler(__FILE__, __LINE__);
- 912              		.loc 1 260 7
- 913 0058 4FF48271 		mov	r1, #260
- 914 005c 0F48     		ldr	r0, .L34+4
- 915 005e FFF7FEFF 		bl	Error_Handler
- 916              	.L32:
- 917              	.LBB5:
- 261:./BSP/Hardware/Src/ltdc_dsi.c ****     }
- 262:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 263:./BSP/Hardware/Src/ltdc_dsi.c ****     /* Peripheral clock enable */
- 264:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_LTDC_CLK_ENABLE();
- 918              		.loc 1 264 5
- 919 0062 0F4B     		ldr	r3, .L34+8
- 920 0064 D3F8E430 		ldr	r3, [r3, #228]
- 921 0068 0D4A     		ldr	r2, .L34+8
- 922 006a 43F00803 		orr	r3, r3, #8
- 923 006e C2F8E430 		str	r3, [r2, #228]
- 924 0072 0B4B     		ldr	r3, .L34+8
- 925 0074 D3F8E430 		ldr	r3, [r3, #228]
- 926 0078 03F00803 		and	r3, r3, #8
- 927 007c FB60     		str	r3, [r7, #12]
- 928 007e FB68     		ldr	r3, [r7, #12]
- 929              	.LBE5:
- 265:./BSP/Hardware/Src/ltdc_dsi.c ****     /* LTDC interrupt Init */
- 266:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_SetPriority(LTDC_IRQn, 7, 0);
- 930              		.loc 1 266 5
- 931 0080 0022     		movs	r2, #0
- 932 0082 0721     		movs	r1, #7
- 933 0084 5820     		movs	r0, #88
- 934 0086 FFF7FEFF 		bl	HAL_NVIC_SetPriority
- 267:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_EnableIRQ(LTDC_IRQn);
- 935              		.loc 1 267 5
-ARM GAS  /tmp/ccwdWOWj.s 			page 22
+ 254:./BSP/Hardware/Src/ltdc_dsi.c ****   RCC_PeriphCLKInitTypeDef PeriphClkInitStruct = {0};
+ 893              		.loc 1 254 28
+ 894 0008 07F11003 		add	r3, r7, #16
+ 895 000c C022     		movs	r2, #192
+ 896 000e 0021     		movs	r1, #0
+ 897 0010 1846     		mov	r0, r3
+ 898 0012 FFF7FEFF 		bl	memset
+ 255:./BSP/Hardware/Src/ltdc_dsi.c ****   if(hltdc->Instance==LTDC)
+ 899              		.loc 1 255 11
+ 900 0016 7B68     		ldr	r3, [r7, #4]
+ 901 0018 1B68     		ldr	r3, [r3]
+ 902              		.loc 1 255 5
+ 903 001a 1F4A     		ldr	r2, .L34
+ 904 001c 9342     		cmp	r3, r2
+ 905 001e 37D1     		bne	.L33
+ 256:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 257:./BSP/Hardware/Src/ltdc_dsi.c ****   /** Initializes the peripherals clock
+ 258:./BSP/Hardware/Src/ltdc_dsi.c ****   */
+ 259:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PeriphClockSelection = RCC_PERIPHCLK_LTDC;
+ 906              		.loc 1 259 46
+ 907 0020 4FF00053 		mov	r3, #536870912
+ 908 0024 3B61     		str	r3, [r7, #16]
+ 260:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3M = 5;
+ 909              		.loc 1 260 36
+ 910 0026 0523     		movs	r3, #5
+ 911 0028 7B63     		str	r3, [r7, #52]
+ 261:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3N = 161;
+ 912              		.loc 1 261 36
+ 913 002a A123     		movs	r3, #161
+ 914 002c BB63     		str	r3, [r7, #56]
+ 262:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3P = 2;
+ 915              		.loc 1 262 36
+ 916 002e 0223     		movs	r3, #2
+ 917 0030 FB63     		str	r3, [r7, #60]
+ 263:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3Q = 2;
+ 918              		.loc 1 263 36
+ 919 0032 0223     		movs	r3, #2
+ 920 0034 3B64     		str	r3, [r7, #64]
+ 264:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3R = 21;
+ 921              		.loc 1 264 36
+ 922 0036 1523     		movs	r3, #21
+ 923 0038 7B64     		str	r3, [r7, #68]
+ 265:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3RGE = RCC_PLL3VCIRANGE_2;
+ 924              		.loc 1 265 38
+ 925 003a 4FF40063 		mov	r3, #2048
+ 926 003e BB64     		str	r3, [r7, #72]
+ 266:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3VCOSEL = RCC_PLL3VCOWIDE;
+ 927              		.loc 1 266 41
+ 928 0040 0023     		movs	r3, #0
+ 929 0042 FB64     		str	r3, [r7, #76]
+ 267:./BSP/Hardware/Src/ltdc_dsi.c ****     PeriphClkInitStruct.PLL3.PLL3FRACN = 0;
+ 930              		.loc 1 267 40
+ 931 0044 0023     		movs	r3, #0
+ 932 0046 3B65     		str	r3, [r7, #80]
+ 268:./BSP/Hardware/Src/ltdc_dsi.c ****     if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInitStruct) != HAL_OK)
+ 933              		.loc 1 268 9
+ 934 0048 07F11003 		add	r3, r7, #16
+ARM GAS  /tmp/cc6KjUc4.s 			page 22
 
 
- 936 008a 5820     		movs	r0, #88
- 937 008c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
- 938              	.L33:
- 268:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 269:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 270:./BSP/Hardware/Src/ltdc_dsi.c **** }
- 939              		.loc 1 270 1
- 940 0090 00BF     		nop
- 941 0092 D037     		adds	r7, r7, #208
- 942              	.LCFI18:
- 943              		.cfi_def_cfa_offset 8
- 944 0094 BD46     		mov	sp, r7
- 945              	.LCFI19:
- 946              		.cfi_def_cfa_register 13
- 947              		@ sp needed
- 948 0096 80BD     		pop	{r7, pc}
- 949              	.L35:
- 950              		.align	2
- 951              	.L34:
- 952 0098 00100050 		.word	1342181376
- 953 009c 00000000 		.word	.LC0
- 954 00a0 00440258 		.word	1476543488
- 955              		.cfi_endproc
- 956              	.LFE341:
- 958              		.section	.text.HAL_DSI_EndOfRefreshCallback,"ax",%progbits
- 959              		.align	1
- 960              		.global	HAL_DSI_EndOfRefreshCallback
- 961              		.syntax unified
- 962              		.thumb
- 963              		.thumb_func
- 964              		.fpu fpv5-d16
- 966              	HAL_DSI_EndOfRefreshCallback:
- 967              	.LFB342:
- 271:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 272:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
- 273:./BSP/Hardware/Src/ltdc_dsi.c **** {
- 968              		.loc 1 273 1
- 969              		.cfi_startproc
- 970              		@ args = 0, pretend = 0, frame = 8
- 971              		@ frame_needed = 1, uses_anonymous_args = 0
- 972              		@ link register save eliminated.
- 973 0000 80B4     		push	{r7}
- 974              	.LCFI20:
- 975              		.cfi_def_cfa_offset 4
- 976              		.cfi_offset 7, -4
- 977 0002 83B0     		sub	sp, sp, #12
- 978              	.LCFI21:
- 979              		.cfi_def_cfa_offset 16
- 980 0004 00AF     		add	r7, sp, #0
- 981              	.LCFI22:
- 982              		.cfi_def_cfa_register 7
- 983 0006 7860     		str	r0, [r7, #4]
- 274:./BSP/Hardware/Src/ltdc_dsi.c ****   // if(pend_buffer >= 0)
- 275:./BSP/Hardware/Src/ltdc_dsi.c ****   // { 
- 276:./BSP/Hardware/Src/ltdc_dsi.c ****   // /* Disable DSI Wrapper */
- 277:./BSP/Hardware/Src/ltdc_dsi.c ****   //   __HAL_DSI_WRAPPER_DISABLE(hdsi);
- 278:./BSP/Hardware/Src/ltdc_dsi.c ****   //   /* Update LTDC configuaration */
-ARM GAS  /tmp/ccwdWOWj.s 			page 23
+ 935 004c 1846     		mov	r0, r3
+ 936 004e FFF7FEFF 		bl	HAL_RCCEx_PeriphCLKConfig
+ 937 0052 0346     		mov	r3, r0
+ 938              		.loc 1 268 8
+ 939 0054 002B     		cmp	r3, #0
+ 940 0056 04D0     		beq	.L32
+ 269:./BSP/Hardware/Src/ltdc_dsi.c ****     {
+ 270:./BSP/Hardware/Src/ltdc_dsi.c ****       Error_Handler(__FILE__, __LINE__);
+ 941              		.loc 1 270 7
+ 942 0058 4FF48771 		mov	r1, #270
+ 943 005c 0F48     		ldr	r0, .L34+4
+ 944 005e FFF7FEFF 		bl	Error_Handler
+ 945              	.L32:
+ 946              	.LBB5:
+ 271:./BSP/Hardware/Src/ltdc_dsi.c ****     }
+ 272:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 273:./BSP/Hardware/Src/ltdc_dsi.c ****     /* Peripheral clock enable */
+ 274:./BSP/Hardware/Src/ltdc_dsi.c ****     __HAL_RCC_LTDC_CLK_ENABLE();
+ 947              		.loc 1 274 5
+ 948 0062 0F4B     		ldr	r3, .L34+8
+ 949 0064 D3F8E430 		ldr	r3, [r3, #228]
+ 950 0068 0D4A     		ldr	r2, .L34+8
+ 951 006a 43F00803 		orr	r3, r3, #8
+ 952 006e C2F8E430 		str	r3, [r2, #228]
+ 953 0072 0B4B     		ldr	r3, .L34+8
+ 954 0074 D3F8E430 		ldr	r3, [r3, #228]
+ 955 0078 03F00803 		and	r3, r3, #8
+ 956 007c FB60     		str	r3, [r7, #12]
+ 957 007e FB68     		ldr	r3, [r7, #12]
+ 958              	.LBE5:
+ 275:./BSP/Hardware/Src/ltdc_dsi.c ****     /* LTDC interrupt Init */
+ 276:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_SetPriority(LTDC_IRQn, 7, 0);
+ 959              		.loc 1 276 5
+ 960 0080 0022     		movs	r2, #0
+ 961 0082 0721     		movs	r1, #7
+ 962 0084 5820     		movs	r0, #88
+ 963 0086 FFF7FEFF 		bl	HAL_NVIC_SetPriority
+ 277:./BSP/Hardware/Src/ltdc_dsi.c ****     HAL_NVIC_EnableIRQ(LTDC_IRQn);
+ 964              		.loc 1 277 5
+ 965 008a 5820     		movs	r0, #88
+ 966 008c FFF7FEFF 		bl	HAL_NVIC_EnableIRQ
+ 967              	.L33:
+ 278:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 279:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 280:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 968              		.loc 1 280 1
+ 969 0090 00BF     		nop
+ 970 0092 D037     		adds	r7, r7, #208
+ 971              	.LCFI18:
+ 972              		.cfi_def_cfa_offset 8
+ 973 0094 BD46     		mov	sp, r7
+ 974              	.LCFI19:
+ 975              		.cfi_def_cfa_register 13
+ 976              		@ sp needed
+ 977 0096 80BD     		pop	{r7, pc}
+ 978              	.L35:
+ 979              		.align	2
+ARM GAS  /tmp/cc6KjUc4.s 			page 23
 
 
- 279:./BSP/Hardware/Src/ltdc_dsi.c ****   //   LTDC_LAYER(hdsi, 0)->CFBAR = ((uint32_t)Buffers[pend_buffer]);
- 280:./BSP/Hardware/Src/ltdc_dsi.c ****   //   __HAL_LTDC_RELOAD_CONFIG(&object_temp->hltdc);
- 281:./BSP/Hardware/Src/ltdc_dsi.c ****   //   /* Enable DSI Wrapper */
- 282:./BSP/Hardware/Src/ltdc_dsi.c ****   //   __HAL_DSI_WRAPPER_ENABLE(hdsi);
- 283:./BSP/Hardware/Src/ltdc_dsi.c ****     
- 284:./BSP/Hardware/Src/ltdc_dsi.c ****   //   front_buffer = pend_buffer;  
- 285:./BSP/Hardware/Src/ltdc_dsi.c ****   //   pend_buffer = -1;
- 286:./BSP/Hardware/Src/ltdc_dsi.c ****   // }
- 287:./BSP/Hardware/Src/ltdc_dsi.c **** }
- 984              		.loc 1 287 1
- 985 0008 00BF     		nop
- 986 000a 0C37     		adds	r7, r7, #12
- 987              	.LCFI23:
- 988              		.cfi_def_cfa_offset 4
- 989 000c BD46     		mov	sp, r7
- 990              	.LCFI24:
- 991              		.cfi_def_cfa_register 13
- 992              		@ sp needed
- 993 000e 5DF8047B 		ldr	r7, [sp], #4
- 994              	.LCFI25:
- 995              		.cfi_restore 7
- 996              		.cfi_def_cfa_offset 0
- 997 0012 7047     		bx	lr
- 998              		.cfi_endproc
- 999              	.LFE342:
- 1001              		.section	.text.DSI_IO_WRITE,"ax",%progbits
- 1002              		.align	1
- 1003              		.global	DSI_IO_WRITE
- 1004              		.syntax unified
- 1005              		.thumb
- 1006              		.thumb_func
- 1007              		.fpu fpv5-d16
- 1009              	DSI_IO_WRITE:
- 1010              	.LFB343:
- 288:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 289:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint1
- 290:./BSP/Hardware/Src/ltdc_dsi.c **** {
- 1011              		.loc 1 290 1
- 1012              		.cfi_startproc
- 1013              		@ args = 4, pretend = 0, frame = 16
- 1014              		@ frame_needed = 1, uses_anonymous_args = 0
- 1015 0000 90B5     		push	{r4, r7, lr}
- 1016              	.LCFI26:
- 1017              		.cfi_def_cfa_offset 12
- 1018              		.cfi_offset 4, -12
- 1019              		.cfi_offset 7, -8
- 1020              		.cfi_offset 14, -4
- 1021 0002 87B0     		sub	sp, sp, #28
- 1022              	.LCFI27:
- 1023              		.cfi_def_cfa_offset 40
- 1024 0004 02AF     		add	r7, sp, #8
- 1025              	.LCFI28:
- 1026              		.cfi_def_cfa 7, 32
- 1027 0006 F860     		str	r0, [r7, #12]
- 1028 0008 7B60     		str	r3, [r7, #4]
- 1029 000a 0B46     		mov	r3, r1	@ movhi
- 1030 000c 7B81     		strh	r3, [r7, #10]	@ movhi
-ARM GAS  /tmp/ccwdWOWj.s 			page 24
+ 980              	.L34:
+ 981 0098 00100050 		.word	1342181376
+ 982 009c 00000000 		.word	.LC0
+ 983 00a0 00440258 		.word	1476543488
+ 984              		.cfi_endproc
+ 985              	.LFE341:
+ 987              		.section	.text.LTDC_IRQHandler,"ax",%progbits
+ 988              		.align	1
+ 989              		.global	LTDC_IRQHandler
+ 990              		.syntax unified
+ 991              		.thumb
+ 992              		.thumb_func
+ 993              		.fpu fpv5-d16
+ 995              	LTDC_IRQHandler:
+ 996              	.LFB342:
+ 281:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 282:./BSP/Hardware/Src/ltdc_dsi.c **** void LTDC_IRQHandler(void)
+ 283:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 997              		.loc 1 283 1
+ 998              		.cfi_startproc
+ 999              		@ args = 0, pretend = 0, frame = 0
+ 1000              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1001 0000 80B5     		push	{r7, lr}
+ 1002              	.LCFI20:
+ 1003              		.cfi_def_cfa_offset 8
+ 1004              		.cfi_offset 7, -8
+ 1005              		.cfi_offset 14, -4
+ 1006 0002 00AF     		add	r7, sp, #0
+ 1007              	.LCFI21:
+ 1008              		.cfi_def_cfa_register 7
+ 284:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_LTDC_IRQHandler(&object_temp->hltdc);
+ 1009              		.loc 1 284 35
+ 1010 0004 034B     		ldr	r3, .L37
+ 1011 0006 1B68     		ldr	r3, [r3]
+ 1012              		.loc 1 284 3
+ 1013 0008 8433     		adds	r3, r3, #132
+ 1014 000a 1846     		mov	r0, r3
+ 1015 000c FFF7FEFF 		bl	HAL_LTDC_IRQHandler
+ 285:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1016              		.loc 1 285 1
+ 1017 0010 00BF     		nop
+ 1018 0012 80BD     		pop	{r7, pc}
+ 1019              	.L38:
+ 1020              		.align	2
+ 1021              	.L37:
+ 1022 0014 00000000 		.word	object_temp
+ 1023              		.cfi_endproc
+ 1024              	.LFE342:
+ 1026              		.section	.text.DMA2D_IRQHandler,"ax",%progbits
+ 1027              		.align	1
+ 1028              		.global	DMA2D_IRQHandler
+ 1029              		.syntax unified
+ 1030              		.thumb
+ 1031              		.thumb_func
+ 1032              		.fpu fpv5-d16
+ 1034              	DMA2D_IRQHandler:
+ 1035              	.LFB343:
+ARM GAS  /tmp/cc6KjUc4.s 			page 24
 
 
- 1031 000e 1346     		mov	r3, r2	@ movhi
- 1032 0010 3B81     		strh	r3, [r7, #8]	@ movhi
- 291:./BSP/Hardware/Src/ltdc_dsi.c ****   if (size <= 1U)
- 1033              		.loc 1 291 6
- 1034 0012 3B8C     		ldrh	r3, [r7, #32]
- 1035 0014 012B     		cmp	r3, #1
- 1036 0016 16D8     		bhi	.L38
- 292:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 293:./BSP/Hardware/Src/ltdc_dsi.c ****       if (HAL_DSI_ShortWrite(&object->hdsi, chNbr, DSI_DCS_SHORT_PKT_WRITE_P1, size, (uint32_t)data
- 1037              		.loc 1 293 11
- 1038 0018 FB68     		ldr	r3, [r7, #12]
- 1039 001a 03F16800 		add	r0, r3, #104
- 1040 001e 7989     		ldrh	r1, [r7, #10]
- 1041 0020 3C8C     		ldrh	r4, [r7, #32]
- 1042              		.loc 1 293 100
- 1043 0022 3B8C     		ldrh	r3, [r7, #32]
- 1044 0024 7A68     		ldr	r2, [r7, #4]
- 1045 0026 1344     		add	r3, r3, r2
- 1046 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
- 1047              		.loc 1 293 11
- 1048 002a 0093     		str	r3, [sp]
- 1049 002c 2346     		mov	r3, r4
- 1050 002e 1522     		movs	r2, #21
- 1051 0030 FFF7FEFF 		bl	HAL_DSI_ShortWrite
- 1052 0034 0346     		mov	r3, r0
- 1053              		.loc 1 293 10
- 1054 0036 002B     		cmp	r3, #0
- 1055 0038 1AD0     		beq	.L40
- 294:./BSP/Hardware/Src/ltdc_dsi.c ****       {
- 295:./BSP/Hardware/Src/ltdc_dsi.c ****           Error_Handler(__FILE__, __LINE__);
- 1056              		.loc 1 295 11
- 1057 003a 40F22711 		movw	r1, #295
- 1058 003e 0E48     		ldr	r0, .L41
- 1059 0040 FFF7FEFF 		bl	Error_Handler
- 296:./BSP/Hardware/Src/ltdc_dsi.c ****       }
- 297:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 298:./BSP/Hardware/Src/ltdc_dsi.c ****   else
- 299:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 300:./BSP/Hardware/Src/ltdc_dsi.c ****       if (HAL_DSI_LongWrite(&object->hdsi, chNbr, DSI_DCS_LONG_PKT_WRITE, size, (uint32_t)reg, data
- 301:./BSP/Hardware/Src/ltdc_dsi.c ****       {
- 302:./BSP/Hardware/Src/ltdc_dsi.c ****           Error_Handler(__FILE__, __LINE__);
- 303:./BSP/Hardware/Src/ltdc_dsi.c ****       }
- 304:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 305:./BSP/Hardware/Src/ltdc_dsi.c **** }
- 1060              		.loc 1 305 1
- 1061 0044 14E0     		b	.L40
- 1062              	.L38:
- 300:./BSP/Hardware/Src/ltdc_dsi.c ****       {
- 1063              		.loc 1 300 11
- 1064 0046 FB68     		ldr	r3, [r7, #12]
- 1065 0048 03F16800 		add	r0, r3, #104
- 1066 004c 7989     		ldrh	r1, [r7, #10]
- 1067 004e 3C8C     		ldrh	r4, [r7, #32]
- 1068 0050 3B89     		ldrh	r3, [r7, #8]
- 1069 0052 7A68     		ldr	r2, [r7, #4]
- 1070 0054 0192     		str	r2, [sp, #4]
- 1071 0056 0093     		str	r3, [sp]
-ARM GAS  /tmp/ccwdWOWj.s 			page 25
+ 286:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 287:./BSP/Hardware/Src/ltdc_dsi.c **** void DMA2D_IRQHandler(void)
+ 288:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1036              		.loc 1 288 1
+ 1037              		.cfi_startproc
+ 1038              		@ args = 0, pretend = 0, frame = 0
+ 1039              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1040 0000 80B5     		push	{r7, lr}
+ 1041              	.LCFI22:
+ 1042              		.cfi_def_cfa_offset 8
+ 1043              		.cfi_offset 7, -8
+ 1044              		.cfi_offset 14, -4
+ 1045 0002 00AF     		add	r7, sp, #0
+ 1046              	.LCFI23:
+ 1047              		.cfi_def_cfa_register 7
+ 289:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_DMA2D_IRQHandler(&object_temp->hdma2d);
+ 1048              		.loc 1 289 36
+ 1049 0004 034B     		ldr	r3, .L40
+ 1050 0006 1B68     		ldr	r3, [r3]
+ 1051              		.loc 1 289 3
+ 1052 0008 1846     		mov	r0, r3
+ 1053 000a FFF7FEFF 		bl	HAL_DMA2D_IRQHandler
+ 290:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1054              		.loc 1 290 1
+ 1055 000e 00BF     		nop
+ 1056 0010 80BD     		pop	{r7, pc}
+ 1057              	.L41:
+ 1058 0012 00BF     		.align	2
+ 1059              	.L40:
+ 1060 0014 00000000 		.word	object_temp
+ 1061              		.cfi_endproc
+ 1062              	.LFE343:
+ 1064              		.section	.text.DSI_IRQHandler,"ax",%progbits
+ 1065              		.align	1
+ 1066              		.global	DSI_IRQHandler
+ 1067              		.syntax unified
+ 1068              		.thumb
+ 1069              		.thumb_func
+ 1070              		.fpu fpv5-d16
+ 1072              	DSI_IRQHandler:
+ 1073              	.LFB344:
+ 291:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 292:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_IRQHandler(void)
+ 293:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1074              		.loc 1 293 1
+ 1075              		.cfi_startproc
+ 1076              		@ args = 0, pretend = 0, frame = 0
+ 1077              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1078 0000 80B5     		push	{r7, lr}
+ 1079              	.LCFI24:
+ 1080              		.cfi_def_cfa_offset 8
+ 1081              		.cfi_offset 7, -8
+ 1082              		.cfi_offset 14, -4
+ 1083 0002 00AF     		add	r7, sp, #0
+ 1084              	.LCFI25:
+ 1085              		.cfi_def_cfa_register 7
+ 294:./BSP/Hardware/Src/ltdc_dsi.c ****   HAL_DSI_IRQHandler(&object_temp->hdsi);
+ARM GAS  /tmp/cc6KjUc4.s 			page 25
 
 
- 1072 0058 2346     		mov	r3, r4
- 1073 005a 3922     		movs	r2, #57
- 1074 005c FFF7FEFF 		bl	HAL_DSI_LongWrite
- 1075 0060 0346     		mov	r3, r0
- 300:./BSP/Hardware/Src/ltdc_dsi.c ****       {
- 1076              		.loc 1 300 10
- 1077 0062 002B     		cmp	r3, #0
- 1078 0064 04D0     		beq	.L40
- 302:./BSP/Hardware/Src/ltdc_dsi.c ****       }
- 1079              		.loc 1 302 11
- 1080 0066 4FF49771 		mov	r1, #302
- 1081 006a 0348     		ldr	r0, .L41
- 1082 006c FFF7FEFF 		bl	Error_Handler
- 1083              	.L40:
- 1084              		.loc 1 305 1
- 1085 0070 00BF     		nop
- 1086 0072 1437     		adds	r7, r7, #20
- 1087              	.LCFI29:
- 1088              		.cfi_def_cfa_offset 12
- 1089 0074 BD46     		mov	sp, r7
- 1090              	.LCFI30:
- 1091              		.cfi_def_cfa_register 13
- 1092              		@ sp needed
- 1093 0076 90BD     		pop	{r4, r7, pc}
- 1094              	.L42:
- 1095              		.align	2
- 1096              	.L41:
- 1097 0078 00000000 		.word	.LC0
- 1098              		.cfi_endproc
- 1099              	.LFE343:
- 1101              		.section	.text.DSI_IO_READ,"ax",%progbits
- 1102              		.align	1
- 1103              		.global	DSI_IO_READ
- 1104              		.syntax unified
- 1105              		.thumb
- 1106              		.thumb_func
- 1107              		.fpu fpv5-d16
- 1109              	DSI_IO_READ:
- 1110              	.LFB344:
- 306:./BSP/Hardware/Src/ltdc_dsi.c **** 
- 307:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16
- 308:./BSP/Hardware/Src/ltdc_dsi.c **** {
- 1111              		.loc 1 308 1
- 1112              		.cfi_startproc
- 1113              		@ args = 4, pretend = 0, frame = 16
- 1114              		@ frame_needed = 1, uses_anonymous_args = 0
- 1115 0000 90B5     		push	{r4, r7, lr}
- 1116              	.LCFI31:
- 1117              		.cfi_def_cfa_offset 12
- 1118              		.cfi_offset 4, -12
- 1119              		.cfi_offset 7, -8
- 1120              		.cfi_offset 14, -4
- 1121 0002 89B0     		sub	sp, sp, #36
- 1122              	.LCFI32:
- 1123              		.cfi_def_cfa_offset 48
- 1124 0004 04AF     		add	r7, sp, #16
- 1125              	.LCFI33:
-ARM GAS  /tmp/ccwdWOWj.s 			page 26
+ 1086              		.loc 1 294 34
+ 1087 0004 034B     		ldr	r3, .L43
+ 1088 0006 1B68     		ldr	r3, [r3]
+ 1089              		.loc 1 294 3
+ 1090 0008 6833     		adds	r3, r3, #104
+ 1091 000a 1846     		mov	r0, r3
+ 1092 000c FFF7FEFF 		bl	HAL_DSI_IRQHandler
+ 295:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1093              		.loc 1 295 1
+ 1094 0010 00BF     		nop
+ 1095 0012 80BD     		pop	{r7, pc}
+ 1096              	.L44:
+ 1097              		.align	2
+ 1098              	.L43:
+ 1099 0014 00000000 		.word	object_temp
+ 1100              		.cfi_endproc
+ 1101              	.LFE344:
+ 1103              		.section	.text.copy_buffer,"ax",%progbits
+ 1104              		.align	1
+ 1105              		.global	copy_buffer
+ 1106              		.syntax unified
+ 1107              		.thumb
+ 1108              		.thumb_func
+ 1109              		.fpu fpv5-d16
+ 1111              	copy_buffer:
+ 1112              	.LFB345:
+ 296:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 297:./BSP/Hardware/Src/ltdc_dsi.c **** void copy_buffer(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,
+ 298:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1113              		.loc 1 298 1
+ 1114              		.cfi_startproc
+ 1115              		@ args = 8, pretend = 0, frame = 24
+ 1116              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1117 0000 80B5     		push	{r7, lr}
+ 1118              	.LCFI26:
+ 1119              		.cfi_def_cfa_offset 8
+ 1120              		.cfi_offset 7, -8
+ 1121              		.cfi_offset 14, -4
+ 1122 0002 88B0     		sub	sp, sp, #32
+ 1123              	.LCFI27:
+ 1124              		.cfi_def_cfa_offset 40
+ 1125 0004 02AF     		add	r7, sp, #8
+ 1126              	.LCFI28:
+ 1127              		.cfi_def_cfa 7, 32
+ 1128 0006 F860     		str	r0, [r7, #12]
+ 1129 0008 B960     		str	r1, [r7, #8]
+ 1130 000a 1146     		mov	r1, r2
+ 1131 000c 1A46     		mov	r2, r3
+ 1132 000e 0B46     		mov	r3, r1	@ movhi
+ 1133 0010 FB80     		strh	r3, [r7, #6]	@ movhi
+ 1134 0012 1346     		mov	r3, r2	@ movhi
+ 1135 0014 BB80     		strh	r3, [r7, #4]	@ movhi
+ 299:./BSP/Hardware/Src/ltdc_dsi.c ****   uint32_t destination = (uint32_t)LCD_FRAME_BUFFER + (y * 800 + x) * 4;
+ 1136              		.loc 1 299 58
+ 1137 0016 BB88     		ldrh	r3, [r7, #4]
+ 1138 0018 4FF44872 		mov	r2, #800
+ 1139 001c 02FB03F2 		mul	r2, r2, r3
+ARM GAS  /tmp/cc6KjUc4.s 			page 26
 
 
- 1126              		.cfi_def_cfa 7, 32
- 1127 0006 F860     		str	r0, [r7, #12]
- 1128 0008 7B60     		str	r3, [r7, #4]
- 1129 000a 0B46     		mov	r3, r1	@ movhi
- 1130 000c 7B81     		strh	r3, [r7, #10]	@ movhi
- 1131 000e 1346     		mov	r3, r2	@ movhi
- 1132 0010 3B81     		strh	r3, [r7, #8]	@ movhi
- 309:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_Read(&object->hdsi, chNbr, data, size, DSI_DCS_SHORT_PKT_READ, reg, data) != HAL_OK)
- 1133              		.loc 1 309 7
- 1134 0012 FB68     		ldr	r3, [r7, #12]
- 1135 0014 03F16800 		add	r0, r3, #104
- 1136 0018 7989     		ldrh	r1, [r7, #10]
- 1137 001a 3C8C     		ldrh	r4, [r7, #32]
- 1138 001c 3B89     		ldrh	r3, [r7, #8]
- 1139 001e 7A68     		ldr	r2, [r7, #4]
- 1140 0020 0292     		str	r2, [sp, #8]
- 1141 0022 0193     		str	r3, [sp, #4]
- 1142 0024 0623     		movs	r3, #6
- 1143 0026 0093     		str	r3, [sp]
- 1144 0028 2346     		mov	r3, r4
- 1145 002a 7A68     		ldr	r2, [r7, #4]
- 1146 002c FFF7FEFF 		bl	HAL_DSI_Read
- 1147 0030 0346     		mov	r3, r0
- 1148              		.loc 1 309 6
- 1149 0032 002B     		cmp	r3, #0
- 1150 0034 04D0     		beq	.L45
- 310:./BSP/Hardware/Src/ltdc_dsi.c ****   {
- 311:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
- 1151              		.loc 1 311 5
- 1152 0036 40F23711 		movw	r1, #311
- 1153 003a 0348     		ldr	r0, .L46
- 1154 003c FFF7FEFF 		bl	Error_Handler
- 1155              	.L45:
- 312:./BSP/Hardware/Src/ltdc_dsi.c ****   }
- 313:./BSP/Hardware/Src/ltdc_dsi.c **** }...
- 1156              		.loc 1 313 1
- 1157 0040 00BF     		nop
- 1158 0042 1437     		adds	r7, r7, #20
- 1159              	.LCFI34:
- 1160              		.cfi_def_cfa_offset 12
- 1161 0044 BD46     		mov	sp, r7
- 1162              	.LCFI35:
- 1163              		.cfi_def_cfa_register 13
- 1164              		@ sp needed
- 1165 0046 90BD     		pop	{r4, r7, pc}
- 1166              	.L47:
- 1167              		.align	2
- 1168              	.L46:
- 1169 0048 00000000 		.word	.LC0
- 1170              		.cfi_endproc
- 1171              	.LFE344:
- 1173              		.text
- 1174              	.Letext0:
- 1175              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
- 1176              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
- 1177              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
- 1178              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
-ARM GAS  /tmp/ccwdWOWj.s 			page 27
+ 1140              		.loc 1 299 64
+ 1141 0020 FB88     		ldrh	r3, [r7, #6]
+ 1142 0022 1344     		add	r3, r3, r2
+ 1143              		.loc 1 299 69
+ 1144 0024 9B00     		lsls	r3, r3, #2
+ 1145              		.loc 1 299 12
+ 1146 0026 03F15043 		add	r3, r3, #-805306368
+ 1147 002a 7B61     		str	r3, [r7, #20]
+ 300:./BSP/Hardware/Src/ltdc_dsi.c ****   uint32_t source      = (uint32_t)src;
+ 1148              		.loc 1 300 12
+ 1149 002c BB68     		ldr	r3, [r7, #8]
+ 1150 002e 3B61     		str	r3, [r7, #16]
+ 301:./BSP/Hardware/Src/ltdc_dsi.c ****   
+ 302:./BSP/Hardware/Src/ltdc_dsi.c ****   /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
+ 303:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.Mode         = DMA2D_M2M;
+ 1151              		.loc 1 303 36
+ 1152 0030 FB68     		ldr	r3, [r7, #12]
+ 1153 0032 0022     		movs	r2, #0
+ 1154 0034 5A60     		str	r2, [r3, #4]
+ 304:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
+ 1155              		.loc 1 304 36
+ 1156 0036 FB68     		ldr	r3, [r7, #12]
+ 1157 0038 0022     		movs	r2, #0
+ 1158 003a 9A60     		str	r2, [r3, #8]
+ 305:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.OutputOffset = 800 - xsize;
+ 1159              		.loc 1 305 42
+ 1160 003c 3B8C     		ldrh	r3, [r7, #32]
+ 1161 003e C3F54873 		rsb	r3, r3, #800
+ 1162 0042 1A46     		mov	r2, r3
+ 1163              		.loc 1 305 36
+ 1164 0044 FB68     		ldr	r3, [r7, #12]
+ 1165 0046 DA60     		str	r2, [r3, #12]
+ 306:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
+ 1166              		.loc 1 306 37
+ 1167 0048 FB68     		ldr	r3, [r7, #12]
+ 1168 004a 0022     		movs	r2, #0
+ 1169 004c 1A61     		str	r2, [r3, #16]
+ 307:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */   
+ 1170              		.loc 1 307 37
+ 1171 004e FB68     		ldr	r3, [r7, #12]
+ 1172 0050 0022     		movs	r2, #0
+ 1173 0052 5A61     		str	r2, [r3, #20]
+ 308:./BSP/Hardware/Src/ltdc_dsi.c ****   
+ 309:./BSP/Hardware/Src/ltdc_dsi.c ****   /*##-2- DMA2D Callbacks Configuration ######################################*/
+ 310:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.XferCpltCallback  = NULL;
+ 1174              		.loc 1 310 36
+ 1175 0054 FB68     		ldr	r3, [r7, #12]
+ 1176 0056 0022     		movs	r2, #0
+ 1177 0058 1A62     		str	r2, [r3, #32]
+ 311:./BSP/Hardware/Src/ltdc_dsi.c ****   
+ 312:./BSP/Hardware/Src/ltdc_dsi.c ****   /*##-3- Foreground Configuration ###########################################*/
+ 313:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.LayerCfg[1].AlphaMode = DMA2D_NO_MODIF_ALPHA;
+ 1178              		.loc 1 313 40
+ 1179 005a FB68     		ldr	r3, [r7, #12]
+ 1180 005c 0022     		movs	r2, #0
+ 1181 005e DA64     		str	r2, [r3, #76]
+ 314:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.LayerCfg[1].InputAlpha = 0xFF;
+ARM GAS  /tmp/cc6KjUc4.s 			page 27
 
 
- 1179              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
- 1180              		.file 7 "/usr/include/newlib/sys/_types.h"
- 1181              		.file 8 "/usr/include/newlib/sys/reent.h"
- 1182              		.file 9 "/usr/include/newlib/sys/lock.h"
- 1183              		.file 10 "/usr/include/newlib/math.h"
- 1184              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
- 1185              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h"
- 1186              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
- 1187              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma2d.h"
- 1188              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dsi.h"
- 1189              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
- 1190              		.file 17 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_ltdc.h"
- 1191              		.file 18 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
- 1192              		.file 19 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
- 1193              		.file 20 "/usr/include/newlib/stdlib.h"
- 1194              		.file 21 "./BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/ltdc_dsi.h"
-ARM GAS  /tmp/ccwdWOWj.s 			page 28
+ 1182              		.loc 1 314 41
+ 1183 0060 FB68     		ldr	r3, [r7, #12]
+ 1184 0062 FF22     		movs	r2, #255
+ 1185 0064 1A65     		str	r2, [r3, #80]
+ 315:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.LayerCfg[1].InputColorMode = DMA2D_INPUT_ARGB8888;
+ 1186              		.loc 1 315 45
+ 1187 0066 FB68     		ldr	r3, [r7, #12]
+ 1188 0068 0022     		movs	r2, #0
+ 1189 006a 9A64     		str	r2, [r3, #72]
+ 316:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.LayerCfg[1].InputOffset = 0;
+ 1190              		.loc 1 316 42
+ 1191 006c FB68     		ldr	r3, [r7, #12]
+ 1192 006e 0022     		movs	r2, #0
+ 1193 0070 5A64     		str	r2, [r3, #68]
+ 317:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.LayerCfg[1].RedBlueSwap = DMA2D_RB_REGULAR; /* No ForeGround Red/Blue swap */
+ 1194              		.loc 1 317 42
+ 1195 0072 FB68     		ldr	r3, [r7, #12]
+ 1196 0074 0022     		movs	r2, #0
+ 1197 0076 9A65     		str	r2, [r3, #88]
+ 318:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.LayerCfg[1].AlphaInverted = DMA2D_REGULAR_ALPHA; /* No ForeGround Alpha inversion 
+ 1198              		.loc 1 318 44
+ 1199 0078 FB68     		ldr	r3, [r7, #12]
+ 1200 007a 0022     		movs	r2, #0
+ 1201 007c 5A65     		str	r2, [r3, #84]
+ 319:./BSP/Hardware/Src/ltdc_dsi.c ****   
+ 320:./BSP/Hardware/Src/ltdc_dsi.c ****   object->hdma2d.Instance          = DMA2D; 
+ 1202              		.loc 1 320 36
+ 1203 007e FB68     		ldr	r3, [r7, #12]
+ 1204 0080 124A     		ldr	r2, .L48
+ 1205 0082 1A60     		str	r2, [r3]
+ 321:./BSP/Hardware/Src/ltdc_dsi.c ****    
+ 322:./BSP/Hardware/Src/ltdc_dsi.c ****   /* DMA2D Initialization */
+ 323:./BSP/Hardware/Src/ltdc_dsi.c ****   if(HAL_DMA2D_Init(&object->hdma2d) == HAL_OK) 
+ 1206              		.loc 1 323 6
+ 1207 0084 FB68     		ldr	r3, [r7, #12]
+ 1208 0086 1846     		mov	r0, r3
+ 1209 0088 FFF7FEFF 		bl	HAL_DMA2D_Init
+ 1210 008c 0346     		mov	r3, r0
+ 1211              		.loc 1 323 5
+ 1212 008e 002B     		cmp	r3, #0
+ 1213 0090 18D1     		bne	.L47
+ 324:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 325:./BSP/Hardware/Src/ltdc_dsi.c ****     if(HAL_DMA2D_ConfigLayer(&object->hdma2d, 1) == HAL_OK) 
+ 1214              		.loc 1 325 8
+ 1215 0092 FB68     		ldr	r3, [r7, #12]
+ 1216 0094 0121     		movs	r1, #1
+ 1217 0096 1846     		mov	r0, r3
+ 1218 0098 FFF7FEFF 		bl	HAL_DMA2D_ConfigLayer
+ 1219 009c 0346     		mov	r3, r0
+ 1220              		.loc 1 325 7
+ 1221 009e 002B     		cmp	r3, #0
+ 1222 00a0 10D1     		bne	.L47
+ 326:./BSP/Hardware/Src/ltdc_dsi.c ****     {
+ 327:./BSP/Hardware/Src/ltdc_dsi.c ****       if (HAL_DMA2D_Start(&object->hdma2d, source, destination, xsize, ysize) == HAL_OK)
+ 1223              		.loc 1 327 11
+ 1224 00a2 F868     		ldr	r0, [r7, #12]
+ 1225 00a4 3A8C     		ldrh	r2, [r7, #32]
+ARM GAS  /tmp/cc6KjUc4.s 			page 28
+
+
+ 1226 00a6 BB8C     		ldrh	r3, [r7, #36]
+ 1227 00a8 0093     		str	r3, [sp]
+ 1228 00aa 1346     		mov	r3, r2
+ 1229 00ac 7A69     		ldr	r2, [r7, #20]
+ 1230 00ae 3969     		ldr	r1, [r7, #16]
+ 1231 00b0 FFF7FEFF 		bl	HAL_DMA2D_Start
+ 1232 00b4 0346     		mov	r3, r0
+ 1233              		.loc 1 327 10
+ 1234 00b6 002B     		cmp	r3, #0
+ 1235 00b8 04D1     		bne	.L47
+ 328:./BSP/Hardware/Src/ltdc_dsi.c ****       {
+ 329:./BSP/Hardware/Src/ltdc_dsi.c ****         /* Polling For DMA transfer */  
+ 330:./BSP/Hardware/Src/ltdc_dsi.c ****         HAL_DMA2D_PollForTransfer(&object->hdma2d, 100);
+ 1236              		.loc 1 330 9
+ 1237 00ba FB68     		ldr	r3, [r7, #12]
+ 1238 00bc 6421     		movs	r1, #100
+ 1239 00be 1846     		mov	r0, r3
+ 1240 00c0 FFF7FEFF 		bl	HAL_DMA2D_PollForTransfer
+ 1241              	.L47:
+ 331:./BSP/Hardware/Src/ltdc_dsi.c ****       }
+ 332:./BSP/Hardware/Src/ltdc_dsi.c ****     }
+ 333:./BSP/Hardware/Src/ltdc_dsi.c ****   }   
+ 334:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1242              		.loc 1 334 1
+ 1243 00c4 00BF     		nop
+ 1244 00c6 1837     		adds	r7, r7, #24
+ 1245              	.LCFI29:
+ 1246              		.cfi_def_cfa_offset 8
+ 1247 00c8 BD46     		mov	sp, r7
+ 1248              	.LCFI30:
+ 1249              		.cfi_def_cfa_register 13
+ 1250              		@ sp needed
+ 1251 00ca 80BD     		pop	{r7, pc}
+ 1252              	.L49:
+ 1253              		.align	2
+ 1254              	.L48:
+ 1255 00cc 00100052 		.word	1375735808
+ 1256              		.cfi_endproc
+ 1257              	.LFE345:
+ 1259              		.section	.text.HAL_DSI_TearingEffectCallback,"ax",%progbits
+ 1260              		.align	1
+ 1261              		.global	HAL_DSI_TearingEffectCallback
+ 1262              		.syntax unified
+ 1263              		.thumb
+ 1264              		.thumb_func
+ 1265              		.fpu fpv5-d16
+ 1267              	HAL_DSI_TearingEffectCallback:
+ 1268              	.LFB346:
+ 335:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 336:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_DSI_TearingEffectCallback(DSI_HandleTypeDef* hdsi)
+ 337:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1269              		.loc 1 337 1
+ 1270              		.cfi_startproc
+ 1271              		@ args = 0, pretend = 0, frame = 8
+ 1272              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1273              		@ link register save eliminated.
+ 1274 0000 80B4     		push	{r7}
+ARM GAS  /tmp/cc6KjUc4.s 			page 29
+
+
+ 1275              	.LCFI31:
+ 1276              		.cfi_def_cfa_offset 4
+ 1277              		.cfi_offset 7, -4
+ 1278 0002 83B0     		sub	sp, sp, #12
+ 1279              	.LCFI32:
+ 1280              		.cfi_def_cfa_offset 16
+ 1281 0004 00AF     		add	r7, sp, #0
+ 1282              	.LCFI33:
+ 1283              		.cfi_def_cfa_register 7
+ 1284 0006 7860     		str	r0, [r7, #4]
+ 338:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 339:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1285              		.loc 1 339 1
+ 1286 0008 00BF     		nop
+ 1287 000a 0C37     		adds	r7, r7, #12
+ 1288              	.LCFI34:
+ 1289              		.cfi_def_cfa_offset 4
+ 1290 000c BD46     		mov	sp, r7
+ 1291              	.LCFI35:
+ 1292              		.cfi_def_cfa_register 13
+ 1293              		@ sp needed
+ 1294 000e 5DF8047B 		ldr	r7, [sp], #4
+ 1295              	.LCFI36:
+ 1296              		.cfi_restore 7
+ 1297              		.cfi_def_cfa_offset 0
+ 1298 0012 7047     		bx	lr
+ 1299              		.cfi_endproc
+ 1300              	.LFE346:
+ 1302              		.section	.text.HAL_DSI_EndOfRefreshCallback,"ax",%progbits
+ 1303              		.align	1
+ 1304              		.global	HAL_DSI_EndOfRefreshCallback
+ 1305              		.syntax unified
+ 1306              		.thumb
+ 1307              		.thumb_func
+ 1308              		.fpu fpv5-d16
+ 1310              	HAL_DSI_EndOfRefreshCallback:
+ 1311              	.LFB347:
+ 340:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 341:./BSP/Hardware/Src/ltdc_dsi.c **** void HAL_DSI_EndOfRefreshCallback(DSI_HandleTypeDef *hdsi)
+ 342:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1312              		.loc 1 342 1
+ 1313              		.cfi_startproc
+ 1314              		@ args = 0, pretend = 0, frame = 8
+ 1315              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1316              		@ link register save eliminated.
+ 1317 0000 80B4     		push	{r7}
+ 1318              	.LCFI37:
+ 1319              		.cfi_def_cfa_offset 4
+ 1320              		.cfi_offset 7, -4
+ 1321 0002 83B0     		sub	sp, sp, #12
+ 1322              	.LCFI38:
+ 1323              		.cfi_def_cfa_offset 16
+ 1324 0004 00AF     		add	r7, sp, #0
+ 1325              	.LCFI39:
+ 1326              		.cfi_def_cfa_register 7
+ 1327 0006 7860     		str	r0, [r7, #4]
+ 343:./BSP/Hardware/Src/ltdc_dsi.c ****   // if(pend_buffer >= 0)
+ARM GAS  /tmp/cc6KjUc4.s 			page 30
+
+
+ 344:./BSP/Hardware/Src/ltdc_dsi.c ****   // { 
+ 345:./BSP/Hardware/Src/ltdc_dsi.c ****   // /* Disable DSI Wrapper */
+ 346:./BSP/Hardware/Src/ltdc_dsi.c ****   //   __HAL_DSI_WRAPPER_DISABLE(hdsi);
+ 347:./BSP/Hardware/Src/ltdc_dsi.c ****   //   /* Update LTDC configuaration */
+ 348:./BSP/Hardware/Src/ltdc_dsi.c ****   //   LTDC_LAYER(hdsi, 0)->CFBAR = ((uint32_t)Buffers[pend_buffer]);
+ 349:./BSP/Hardware/Src/ltdc_dsi.c ****   //   __HAL_LTDC_RELOAD_CONFIG(&object_temp->hltdc);
+ 350:./BSP/Hardware/Src/ltdc_dsi.c ****   //   /* Enable DSI Wrapper */
+ 351:./BSP/Hardware/Src/ltdc_dsi.c ****   //   __HAL_DSI_WRAPPER_ENABLE(hdsi);
+ 352:./BSP/Hardware/Src/ltdc_dsi.c ****     
+ 353:./BSP/Hardware/Src/ltdc_dsi.c ****   //   front_buffer = pend_buffer;  
+ 354:./BSP/Hardware/Src/ltdc_dsi.c ****   //   pend_buffer = -1;
+ 355:./BSP/Hardware/Src/ltdc_dsi.c ****   // }
+ 356:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1328              		.loc 1 356 1
+ 1329 0008 00BF     		nop
+ 1330 000a 0C37     		adds	r7, r7, #12
+ 1331              	.LCFI40:
+ 1332              		.cfi_def_cfa_offset 4
+ 1333 000c BD46     		mov	sp, r7
+ 1334              	.LCFI41:
+ 1335              		.cfi_def_cfa_register 13
+ 1336              		@ sp needed
+ 1337 000e 5DF8047B 		ldr	r7, [sp], #4
+ 1338              	.LCFI42:
+ 1339              		.cfi_restore 7
+ 1340              		.cfi_def_cfa_offset 0
+ 1341 0012 7047     		bx	lr
+ 1342              		.cfi_endproc
+ 1343              	.LFE347:
+ 1345              		.section	.text.DSI_IO_WRITE,"ax",%progbits
+ 1346              		.align	1
+ 1347              		.global	DSI_IO_WRITE
+ 1348              		.syntax unified
+ 1349              		.thumb
+ 1350              		.thumb_func
+ 1351              		.fpu fpv5-d16
+ 1353              	DSI_IO_WRITE:
+ 1354              	.LFB348:
+ 357:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 358:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint1
+ 359:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1355              		.loc 1 359 1
+ 1356              		.cfi_startproc
+ 1357              		@ args = 4, pretend = 0, frame = 16
+ 1358              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1359 0000 90B5     		push	{r4, r7, lr}
+ 1360              	.LCFI43:
+ 1361              		.cfi_def_cfa_offset 12
+ 1362              		.cfi_offset 4, -12
+ 1363              		.cfi_offset 7, -8
+ 1364              		.cfi_offset 14, -4
+ 1365 0002 87B0     		sub	sp, sp, #28
+ 1366              	.LCFI44:
+ 1367              		.cfi_def_cfa_offset 40
+ 1368 0004 02AF     		add	r7, sp, #8
+ 1369              	.LCFI45:
+ 1370              		.cfi_def_cfa 7, 32
+ARM GAS  /tmp/cc6KjUc4.s 			page 31
+
+
+ 1371 0006 F860     		str	r0, [r7, #12]
+ 1372 0008 7B60     		str	r3, [r7, #4]
+ 1373 000a 0B46     		mov	r3, r1	@ movhi
+ 1374 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 1375 000e 1346     		mov	r3, r2	@ movhi
+ 1376 0010 3B81     		strh	r3, [r7, #8]	@ movhi
+ 360:./BSP/Hardware/Src/ltdc_dsi.c ****   if (size <= 1U)
+ 1377              		.loc 1 360 6
+ 1378 0012 3B8C     		ldrh	r3, [r7, #32]
+ 1379 0014 012B     		cmp	r3, #1
+ 1380 0016 16D8     		bhi	.L53
+ 361:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 362:./BSP/Hardware/Src/ltdc_dsi.c ****       if (HAL_DSI_ShortWrite(&object->hdsi, chNbr, DSI_DCS_SHORT_PKT_WRITE_P1, reg, (uint32_t)data[
+ 1381              		.loc 1 362 11
+ 1382 0018 FB68     		ldr	r3, [r7, #12]
+ 1383 001a 03F16800 		add	r0, r3, #104
+ 1384 001e 7989     		ldrh	r1, [r7, #10]
+ 1385 0020 3C89     		ldrh	r4, [r7, #8]
+ 1386              		.loc 1 362 99
+ 1387 0022 3B8C     		ldrh	r3, [r7, #32]
+ 1388 0024 7A68     		ldr	r2, [r7, #4]
+ 1389 0026 1344     		add	r3, r3, r2
+ 1390 0028 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 1391              		.loc 1 362 11
+ 1392 002a 0093     		str	r3, [sp]
+ 1393 002c 2346     		mov	r3, r4
+ 1394 002e 1522     		movs	r2, #21
+ 1395 0030 FFF7FEFF 		bl	HAL_DSI_ShortWrite
+ 1396 0034 0346     		mov	r3, r0
+ 1397              		.loc 1 362 10
+ 1398 0036 002B     		cmp	r3, #0
+ 1399 0038 1AD0     		beq	.L55
+ 363:./BSP/Hardware/Src/ltdc_dsi.c ****       {
+ 364:./BSP/Hardware/Src/ltdc_dsi.c ****           Error_Handler(__FILE__, __LINE__);
+ 1400              		.loc 1 364 11
+ 1401 003a 4FF4B671 		mov	r1, #364
+ 1402 003e 0E48     		ldr	r0, .L56
+ 1403 0040 FFF7FEFF 		bl	Error_Handler
+ 365:./BSP/Hardware/Src/ltdc_dsi.c ****       }
+ 366:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 367:./BSP/Hardware/Src/ltdc_dsi.c ****   else
+ 368:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 369:./BSP/Hardware/Src/ltdc_dsi.c ****       if (HAL_DSI_LongWrite(&object->hdsi, chNbr, DSI_DCS_LONG_PKT_WRITE, size, (uint32_t)reg, data
+ 370:./BSP/Hardware/Src/ltdc_dsi.c ****       {
+ 371:./BSP/Hardware/Src/ltdc_dsi.c ****           Error_Handler(__FILE__, __LINE__);
+ 372:./BSP/Hardware/Src/ltdc_dsi.c ****       }
+ 373:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 374:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1404              		.loc 1 374 1
+ 1405 0044 14E0     		b	.L55
+ 1406              	.L53:
+ 369:./BSP/Hardware/Src/ltdc_dsi.c ****       {
+ 1407              		.loc 1 369 11
+ 1408 0046 FB68     		ldr	r3, [r7, #12]
+ 1409 0048 03F16800 		add	r0, r3, #104
+ 1410 004c 7989     		ldrh	r1, [r7, #10]
+ 1411 004e 3C8C     		ldrh	r4, [r7, #32]
+ARM GAS  /tmp/cc6KjUc4.s 			page 32
+
+
+ 1412 0050 3B89     		ldrh	r3, [r7, #8]
+ 1413 0052 7A68     		ldr	r2, [r7, #4]
+ 1414 0054 0192     		str	r2, [sp, #4]
+ 1415 0056 0093     		str	r3, [sp]
+ 1416 0058 2346     		mov	r3, r4
+ 1417 005a 3922     		movs	r2, #57
+ 1418 005c FFF7FEFF 		bl	HAL_DSI_LongWrite
+ 1419 0060 0346     		mov	r3, r0
+ 369:./BSP/Hardware/Src/ltdc_dsi.c ****       {
+ 1420              		.loc 1 369 10
+ 1421 0062 002B     		cmp	r3, #0
+ 1422 0064 04D0     		beq	.L55
+ 371:./BSP/Hardware/Src/ltdc_dsi.c ****       }
+ 1423              		.loc 1 371 11
+ 1424 0066 40F27311 		movw	r1, #371
+ 1425 006a 0348     		ldr	r0, .L56
+ 1426 006c FFF7FEFF 		bl	Error_Handler
+ 1427              	.L55:
+ 1428              		.loc 1 374 1
+ 1429 0070 00BF     		nop
+ 1430 0072 1437     		adds	r7, r7, #20
+ 1431              	.LCFI46:
+ 1432              		.cfi_def_cfa_offset 12
+ 1433 0074 BD46     		mov	sp, r7
+ 1434              	.LCFI47:
+ 1435              		.cfi_def_cfa_register 13
+ 1436              		@ sp needed
+ 1437 0076 90BD     		pop	{r4, r7, pc}
+ 1438              	.L57:
+ 1439              		.align	2
+ 1440              	.L56:
+ 1441 0078 00000000 		.word	.LC0
+ 1442              		.cfi_endproc
+ 1443              	.LFE348:
+ 1445              		.section	.text.DSI_IO_READ,"ax",%progbits
+ 1446              		.align	1
+ 1447              		.global	DSI_IO_READ
+ 1448              		.syntax unified
+ 1449              		.thumb
+ 1450              		.thumb_func
+ 1451              		.fpu fpv5-d16
+ 1453              	DSI_IO_READ:
+ 1454              	.LFB349:
+ 375:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 376:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16
+ 377:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1455              		.loc 1 377 1
+ 1456              		.cfi_startproc
+ 1457              		@ args = 4, pretend = 0, frame = 16
+ 1458              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1459 0000 90B5     		push	{r4, r7, lr}
+ 1460              	.LCFI48:
+ 1461              		.cfi_def_cfa_offset 12
+ 1462              		.cfi_offset 4, -12
+ 1463              		.cfi_offset 7, -8
+ 1464              		.cfi_offset 14, -4
+ 1465 0002 89B0     		sub	sp, sp, #36
+ARM GAS  /tmp/cc6KjUc4.s 			page 33
+
+
+ 1466              	.LCFI49:
+ 1467              		.cfi_def_cfa_offset 48
+ 1468 0004 04AF     		add	r7, sp, #16
+ 1469              	.LCFI50:
+ 1470              		.cfi_def_cfa 7, 32
+ 1471 0006 F860     		str	r0, [r7, #12]
+ 1472 0008 7B60     		str	r3, [r7, #4]
+ 1473 000a 0B46     		mov	r3, r1	@ movhi
+ 1474 000c 7B81     		strh	r3, [r7, #10]	@ movhi
+ 1475 000e 1346     		mov	r3, r2	@ movhi
+ 1476 0010 3B81     		strh	r3, [r7, #8]	@ movhi
+ 378:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_Read(&object->hdsi, chNbr, data, size, DSI_DCS_SHORT_PKT_READ, reg, data) != HAL_OK)
+ 1477              		.loc 1 378 7
+ 1478 0012 FB68     		ldr	r3, [r7, #12]
+ 1479 0014 03F16800 		add	r0, r3, #104
+ 1480 0018 7989     		ldrh	r1, [r7, #10]
+ 1481 001a 3C8C     		ldrh	r4, [r7, #32]
+ 1482 001c 3B89     		ldrh	r3, [r7, #8]
+ 1483 001e 7A68     		ldr	r2, [r7, #4]
+ 1484 0020 0292     		str	r2, [sp, #8]
+ 1485 0022 0193     		str	r3, [sp, #4]
+ 1486 0024 0623     		movs	r3, #6
+ 1487 0026 0093     		str	r3, [sp]
+ 1488 0028 2346     		mov	r3, r4
+ 1489 002a 7A68     		ldr	r2, [r7, #4]
+ 1490 002c FFF7FEFF 		bl	HAL_DSI_Read
+ 1491 0030 0346     		mov	r3, r0
+ 1492              		.loc 1 378 6
+ 1493 0032 002B     		cmp	r3, #0
+ 1494 0034 04D0     		beq	.L60
+ 379:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 380:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 1495              		.loc 1 380 5
+ 1496 0036 4FF4BE71 		mov	r1, #380
+ 1497 003a 0348     		ldr	r0, .L61
+ 1498 003c FFF7FEFF 		bl	Error_Handler
+ 1499              	.L60:
+ 381:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 382:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1500              		.loc 1 382 1
+ 1501 0040 00BF     		nop
+ 1502 0042 1437     		adds	r7, r7, #20
+ 1503              	.LCFI51:
+ 1504              		.cfi_def_cfa_offset 12
+ 1505 0044 BD46     		mov	sp, r7
+ 1506              	.LCFI52:
+ 1507              		.cfi_def_cfa_register 13
+ 1508              		@ sp needed
+ 1509 0046 90BD     		pop	{r4, r7, pc}
+ 1510              	.L62:
+ 1511              		.align	2
+ 1512              	.L61:
+ 1513 0048 00000000 		.word	.LC0
+ 1514              		.cfi_endproc
+ 1515              	.LFE349:
+ 1517              		.section	.text.DSI_Refresh,"ax",%progbits
+ 1518              		.align	1
+ARM GAS  /tmp/cc6KjUc4.s 			page 34
+
+
+ 1519              		.global	DSI_Refresh
+ 1520              		.syntax unified
+ 1521              		.thumb
+ 1522              		.thumb_func
+ 1523              		.fpu fpv5-d16
+ 1525              	DSI_Refresh:
+ 1526              	.LFB350:
+ 383:./BSP/Hardware/Src/ltdc_dsi.c **** 
+ 384:./BSP/Hardware/Src/ltdc_dsi.c **** void DSI_Refresh(ltdc_dsi_objectTypeDef *object)
+ 385:./BSP/Hardware/Src/ltdc_dsi.c **** {
+ 1527              		.loc 1 385 1
+ 1528              		.cfi_startproc
+ 1529              		@ args = 0, pretend = 0, frame = 8
+ 1530              		@ frame_needed = 1, uses_anonymous_args = 0
+ 1531 0000 80B5     		push	{r7, lr}
+ 1532              	.LCFI53:
+ 1533              		.cfi_def_cfa_offset 8
+ 1534              		.cfi_offset 7, -8
+ 1535              		.cfi_offset 14, -4
+ 1536 0002 82B0     		sub	sp, sp, #8
+ 1537              	.LCFI54:
+ 1538              		.cfi_def_cfa_offset 16
+ 1539 0004 00AF     		add	r7, sp, #0
+ 1540              	.LCFI55:
+ 1541              		.cfi_def_cfa_register 7
+ 1542 0006 7860     		str	r0, [r7, #4]
+ 386:./BSP/Hardware/Src/ltdc_dsi.c ****   if (HAL_DSI_Refresh(&object->hdsi) != HAL_OK)
+ 1543              		.loc 1 386 7
+ 1544 0008 7B68     		ldr	r3, [r7, #4]
+ 1545 000a 6833     		adds	r3, r3, #104
+ 1546 000c 1846     		mov	r0, r3
+ 1547 000e FFF7FEFF 		bl	HAL_DSI_Refresh
+ 1548 0012 0346     		mov	r3, r0
+ 1549              		.loc 1 386 6
+ 1550 0014 002B     		cmp	r3, #0
+ 1551 0016 04D0     		beq	.L65
+ 387:./BSP/Hardware/Src/ltdc_dsi.c ****   {
+ 388:./BSP/Hardware/Src/ltdc_dsi.c ****     Error_Handler(__FILE__, __LINE__);
+ 1552              		.loc 1 388 5
+ 1553 0018 4FF4C271 		mov	r1, #388
+ 1554 001c 0348     		ldr	r0, .L66
+ 1555 001e FFF7FEFF 		bl	Error_Handler
+ 1556              	.L65:
+ 389:./BSP/Hardware/Src/ltdc_dsi.c ****   }
+ 390:./BSP/Hardware/Src/ltdc_dsi.c **** }
+ 1557              		.loc 1 390 1
+ 1558 0022 00BF     		nop
+ 1559 0024 0837     		adds	r7, r7, #8
+ 1560              	.LCFI56:
+ 1561              		.cfi_def_cfa_offset 8
+ 1562 0026 BD46     		mov	sp, r7
+ 1563              	.LCFI57:
+ 1564              		.cfi_def_cfa_register 13
+ 1565              		@ sp needed
+ 1566 0028 80BD     		pop	{r7, pc}
+ 1567              	.L67:
+ 1568 002a 00BF     		.align	2
+ARM GAS  /tmp/cc6KjUc4.s 			page 35
+
+
+ 1569              	.L66:
+ 1570 002c 00000000 		.word	.LC0
+ 1571              		.cfi_endproc
+ 1572              	.LFE350:
+ 1574              		.text
+ 1575              	.Letext0:
+ 1576              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 1577              		.file 3 "./Libraries/CMSIS/Core/Include/core_cm7.h"
+ 1578              		.file 4 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/system_stm32h7xx.h"
+ 1579              		.file 5 "./Libraries/CMSIS/Device/ST/STM32H7xx/Include/stm32h747xx.h"
+ 1580              		.file 6 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stddef.h"
+ 1581              		.file 7 "/usr/include/newlib/sys/_types.h"
+ 1582              		.file 8 "/usr/include/newlib/sys/reent.h"
+ 1583              		.file 9 "/usr/include/newlib/sys/lock.h"
+ 1584              		.file 10 "/usr/include/newlib/math.h"
+ 1585              		.file 11 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_def.h"
+ 1586              		.file 12 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_rcc_ex.h"
+ 1587              		.file 13 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_gpio.h"
+ 1588              		.file 14 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dma2d.h"
+ 1589              		.file 15 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_dsi.h"
+ 1590              		.file 16 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_flash.h"
+ 1591              		.file 17 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_ltdc.h"
+ 1592              		.file 18 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal_uart.h"
+ 1593              		.file 19 "./Libraries/STM32H7xx_HAL_Driver/Inc/stm32h7xx_hal.h"
+ 1594              		.file 20 "/usr/include/newlib/stdlib.h"
+ 1595              		.file 21 "./BSP/Hardware/Src/../../Components/Inc/../../Hardware/Inc/ltdc_dsi.h"
+ARM GAS  /tmp/cc6KjUc4.s 			page 36
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 ltdc_dsi.c
-     /tmp/ccwdWOWj.s:17     .rodata.Buffers:0000000000000000 $d
-     /tmp/ccwdWOWj.s:20     .rodata.Buffers:0000000000000000 Buffers
+     /tmp/cc6KjUc4.s:17     .rodata.Buffers:0000000000000000 $d
+     /tmp/cc6KjUc4.s:20     .rodata.Buffers:0000000000000000 Buffers
                             *COM*:0000000000000004 object_temp
-     /tmp/ccwdWOWj.s:25     .rodata:0000000000000000 $d
-     /tmp/ccwdWOWj.s:29     .text.LTDC_DSI_object_Init:0000000000000000 $t
-     /tmp/ccwdWOWj.s:37     .text.LTDC_DSI_object_Init:0000000000000000 LTDC_DSI_object_Init
-     /tmp/ccwdWOWj.s:517    .text.LTDC_DSI_object_Init:0000000000000384 $d
-     /tmp/ccwdWOWj.s:526    .text.LTDC_DSI_object_Init:000000000000039c $t
-     /tmp/ccwdWOWj.s:620    .text.LTDC_DSI_object_Init:0000000000000440 $d
-     /tmp/ccwdWOWj.s:1009   .text.DSI_IO_WRITE:0000000000000000 DSI_IO_WRITE
-     /tmp/ccwdWOWj.s:1109   .text.DSI_IO_READ:0000000000000000 DSI_IO_READ
-     /tmp/ccwdWOWj.s:627    .text.HAL_DMA2D_MspInit:0000000000000000 $t
-     /tmp/ccwdWOWj.s:634    .text.HAL_DMA2D_MspInit:0000000000000000 HAL_DMA2D_MspInit
-     /tmp/ccwdWOWj.s:694    .text.HAL_DMA2D_MspInit:0000000000000048 $d
-     /tmp/ccwdWOWj.s:700    .text.HAL_DSI_MspInit:0000000000000000 $t
-     /tmp/ccwdWOWj.s:707    .text.HAL_DSI_MspInit:0000000000000000 HAL_DSI_MspInit
-     /tmp/ccwdWOWj.s:832    .text.HAL_DSI_MspInit:00000000000000d0 $d
-     /tmp/ccwdWOWj.s:839    .text.HAL_LTDC_MspInit:0000000000000000 $t
-     /tmp/ccwdWOWj.s:846    .text.HAL_LTDC_MspInit:0000000000000000 HAL_LTDC_MspInit
-     /tmp/ccwdWOWj.s:952    .text.HAL_LTDC_MspInit:0000000000000098 $d
-     /tmp/ccwdWOWj.s:959    .text.HAL_DSI_EndOfRefreshCallback:0000000000000000 $t
-     /tmp/ccwdWOWj.s:966    .text.HAL_DSI_EndOfRefreshCallback:0000000000000000 HAL_DSI_EndOfRefreshCallback
-     /tmp/ccwdWOWj.s:1002   .text.DSI_IO_WRITE:0000000000000000 $t
-     /tmp/ccwdWOWj.s:1097   .text.DSI_IO_WRITE:0000000000000078 $d
-     /tmp/ccwdWOWj.s:1102   .text.DSI_IO_READ:0000000000000000 $t
-     /tmp/ccwdWOWj.s:1169   .text.DSI_IO_READ:0000000000000048 $d
+     /tmp/cc6KjUc4.s:25     .rodata:0000000000000000 $d
+     /tmp/cc6KjUc4.s:29     .text.LTDC_DSI_object_Init:0000000000000000 $t
+     /tmp/cc6KjUc4.s:37     .text.LTDC_DSI_object_Init:0000000000000000 LTDC_DSI_object_Init
+     /tmp/cc6KjUc4.s:517    .text.LTDC_DSI_object_Init:0000000000000384 $d
+     /tmp/cc6KjUc4.s:526    .text.LTDC_DSI_object_Init:000000000000039c $t
+     /tmp/cc6KjUc4.s:628    .text.LTDC_DSI_object_Init:0000000000000450 $d
+     /tmp/cc6KjUc4.s:1353   .text.DSI_IO_WRITE:0000000000000000 DSI_IO_WRITE
+     /tmp/cc6KjUc4.s:1453   .text.DSI_IO_READ:0000000000000000 DSI_IO_READ
+     /tmp/cc6KjUc4.s:1525   .text.DSI_Refresh:0000000000000000 DSI_Refresh
+     /tmp/cc6KjUc4.s:1111   .text.copy_buffer:0000000000000000 copy_buffer
+     /tmp/cc6KjUc4.s:637    .text.HAL_DMA2D_MspInit:0000000000000000 $t
+     /tmp/cc6KjUc4.s:644    .text.HAL_DMA2D_MspInit:0000000000000000 HAL_DMA2D_MspInit
+     /tmp/cc6KjUc4.s:704    .text.HAL_DMA2D_MspInit:0000000000000048 $d
+     /tmp/cc6KjUc4.s:710    .text.HAL_DSI_MspInit:0000000000000000 $t
+     /tmp/cc6KjUc4.s:717    .text.HAL_DSI_MspInit:0000000000000000 HAL_DSI_MspInit
+     /tmp/cc6KjUc4.s:861    .text.HAL_DSI_MspInit:00000000000000fc $d
+     /tmp/cc6KjUc4.s:868    .text.HAL_LTDC_MspInit:0000000000000000 $t
+     /tmp/cc6KjUc4.s:875    .text.HAL_LTDC_MspInit:0000000000000000 HAL_LTDC_MspInit
+     /tmp/cc6KjUc4.s:981    .text.HAL_LTDC_MspInit:0000000000000098 $d
+     /tmp/cc6KjUc4.s:988    .text.LTDC_IRQHandler:0000000000000000 $t
+     /tmp/cc6KjUc4.s:995    .text.LTDC_IRQHandler:0000000000000000 LTDC_IRQHandler
+     /tmp/cc6KjUc4.s:1022   .text.LTDC_IRQHandler:0000000000000014 $d
+     /tmp/cc6KjUc4.s:1027   .text.DMA2D_IRQHandler:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1034   .text.DMA2D_IRQHandler:0000000000000000 DMA2D_IRQHandler
+     /tmp/cc6KjUc4.s:1060   .text.DMA2D_IRQHandler:0000000000000014 $d
+     /tmp/cc6KjUc4.s:1065   .text.DSI_IRQHandler:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1072   .text.DSI_IRQHandler:0000000000000000 DSI_IRQHandler
+     /tmp/cc6KjUc4.s:1099   .text.DSI_IRQHandler:0000000000000014 $d
+     /tmp/cc6KjUc4.s:1104   .text.copy_buffer:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1255   .text.copy_buffer:00000000000000cc $d
+     /tmp/cc6KjUc4.s:1260   .text.HAL_DSI_TearingEffectCallback:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1267   .text.HAL_DSI_TearingEffectCallback:0000000000000000 HAL_DSI_TearingEffectCallback
+     /tmp/cc6KjUc4.s:1303   .text.HAL_DSI_EndOfRefreshCallback:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1310   .text.HAL_DSI_EndOfRefreshCallback:0000000000000000 HAL_DSI_EndOfRefreshCallback
+     /tmp/cc6KjUc4.s:1346   .text.DSI_IO_WRITE:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1441   .text.DSI_IO_WRITE:0000000000000078 $d
+     /tmp/cc6KjUc4.s:1446   .text.DSI_IO_READ:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1513   .text.DSI_IO_READ:0000000000000048 $d
+     /tmp/cc6KjUc4.s:1518   .text.DSI_Refresh:0000000000000000 $t
+     /tmp/cc6KjUc4.s:1570   .text.DSI_Refresh:000000000000002c $d
 
 UNDEFINED SYMBOLS
 memset
@@ -1620,6 +2127,9 @@ HAL_DSI_ConfigHostTimeouts
 HAL_DSI_ConfigPhyTimer
 HAL_DSI_ConfigFlowControl
 HAL_DSI_SetLowPowerRXFilter
+ARM GAS  /tmp/cc6KjUc4.s 			page 37
+
+
 HAL_DSI_ConfigErrorMonitor
 HAL_DSI_ConfigCommand
 HAL_DSI_ConfigAdaptedCommandMode
@@ -1631,6 +2141,13 @@ HAL_NVIC_SetPriority
 HAL_NVIC_EnableIRQ
 HAL_RCCEx_PeriphCLKConfig
 HAL_GPIO_Init
+HAL_LTDC_IRQHandler
+HAL_DMA2D_IRQHandler
+HAL_DSI_IRQHandler
+HAL_DMA2D_ConfigLayer
+HAL_DMA2D_Start
+HAL_DMA2D_PollForTransfer
 HAL_DSI_ShortWrite
 HAL_DSI_LongWrite
 HAL_DSI_Read
+HAL_DSI_Refresh
