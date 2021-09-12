@@ -11,10 +11,10 @@ const osThreadAttr_t defaultTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 
-uint32_t test=0;
+uint32_t array_addr=0;
 
 void StartDefaultTask(void *argument);
-uint8_t test_array[200];
+
 int main(void)
 {
   Hardware_Init();
@@ -29,22 +29,9 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-
   for(;;)
   {
-    // for(int i=0;i<128;i++)
-    // {
-    //   test[i]=i;
-    // }
-
-    // MT25TL01G_WriteBuffer(test,0x90000000,256);
-    // test++;
-    for(int i=0;i<200;i++)
-    {
-      uint32_t *addr=NULL;
-      addr=0x90000000+4*i;
-      test_array[i]=(uint8_t)(*addr);
-    }
+    otm8009a_obj.dsi_object.dsi_refresh(&otm8009a_obj.dsi_object);  
     osDelay(100);
   }
   /* USER CODE END 5 */

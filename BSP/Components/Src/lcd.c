@@ -311,26 +311,23 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
   /* DSI host from LTDC incoming pixels in video mode */
   object->lcd_write_reg(object, OTM8009A_CMD_RAMWR, &short_reg_data[44], 0);
 
-  /* Configure the audio driver */
-  HAL_DSI_ShortWrite(&object->dsi_object.hdsi, 0, DSI_DCS_SHORT_PKT_WRITE_P1, OTM8009A_CMD_DISPOFF, 0x00);
-
   DSI_LPCmdTypeDef LPCmd = {0};
 
-  LPCmd.LPGenShortWriteNoP = DSI_LP_GSW0P_DISABLE;
-  LPCmd.LPGenShortWriteOneP = DSI_LP_GSW1P_DISABLE;
-  LPCmd.LPGenShortWriteTwoP = DSI_LP_GSW2P_DISABLE;
-  LPCmd.LPGenShortReadNoP = DSI_LP_GSR0P_DISABLE;
-  LPCmd.LPGenShortReadOneP = DSI_LP_GSR1P_DISABLE;
-  LPCmd.LPGenShortReadTwoP = DSI_LP_GSR2P_DISABLE;
-  LPCmd.LPGenLongWrite = DSI_LP_GLW_DISABLE;
-  LPCmd.LPDcsShortWriteNoP = DSI_LP_DSW0P_DISABLE;
-  LPCmd.LPDcsShortWriteOneP = DSI_LP_DSW1P_DISABLE;
-  LPCmd.LPDcsShortReadNoP = DSI_LP_DSR0P_DISABLE;
-  LPCmd.LPDcsLongWrite = DSI_LP_DLW_DISABLE;
+  LPCmd.LPGenShortWriteNoP    = DSI_LP_GSW0P_DISABLE;
+  LPCmd.LPGenShortWriteOneP   = DSI_LP_GSW1P_DISABLE;
+  LPCmd.LPGenShortWriteTwoP   = DSI_LP_GSW2P_DISABLE;
+  LPCmd.LPGenShortReadNoP     = DSI_LP_GSR0P_DISABLE;
+  LPCmd.LPGenShortReadOneP    = DSI_LP_GSR1P_DISABLE;
+  LPCmd.LPGenShortReadTwoP    = DSI_LP_GSR2P_DISABLE;
+  LPCmd.LPGenLongWrite        = DSI_LP_GLW_DISABLE;
+  LPCmd.LPDcsShortWriteNoP    = DSI_LP_DSW0P_DISABLE;
+  LPCmd.LPDcsShortWriteOneP   = DSI_LP_DSW1P_DISABLE;
+  LPCmd.LPDcsShortReadNoP     = DSI_LP_DSR0P_DISABLE;
+  LPCmd.LPDcsLongWrite        = DSI_LP_DLW_DISABLE;
   HAL_DSI_ConfigCommand(&object->dsi_object.hdsi, &LPCmd);
-
-  HAL_LTDC_SetPitch(&object->dsi_object.hltdc, 800, 0);
-  __HAL_LTDC_ENABLE(&object->dsi_object.hltdc);
+  
+  HAL_DSI_ConfigFlowControl(&object->dsi_object.hdsi, DSI_FLOW_CONTROL_BTA);
+  HAL_DSI_ForceRXLowPower(&object->dsi_object.hdsi, ENABLE);  
 
   // __HAL_DSI_WRAPPER_ENABLE(&object->dsi_object.hdsi);
 }

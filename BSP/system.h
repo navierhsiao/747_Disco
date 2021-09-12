@@ -18,7 +18,7 @@
 #include "Hardware/Inc/sdram.h"
 #include "Hardware/Inc/uart.h"
 
-
+extern lcd_objectTypeDef otm8009a_obj;
 void Hardware_Init(void);
 void Error_Handler(char *file, uint32_t line);
 
