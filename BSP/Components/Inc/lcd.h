@@ -2,7 +2,7 @@
 #define __LCD_H
 
 #include "../../Hardware/Inc/ltdc_dsi.h"
-
+#include "Fonts/fonts.h"
 /* List of OTM8009A used commands                                  */
 /* Detailed in OTM8009A Data Sheet 'DATA_SHEET_OTM8009A_V0 92.pdf' */
 /* Version of 14 June 2012                                         */
@@ -169,6 +169,8 @@ typedef struct lcd_structDef
   void (*lcd_getYsize)        (struct lcd_structDef *object,uint32_t *ySize);
 
   void (*lcd_draw_line)       (struct lcd_structDef *object,uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint32_t color);
+  void (*lcd_draw_rect)       (struct lcd_structDef *object,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize,uint32_t color);
+  void (*lcd_showString)      (struct lcd_structDef *object,uint16_t x,uint16_t y,sFONT *fonts,uint32_t color,const char *string,...);
 }lcd_objectTypeDef;
 
 enum LCD_STATE{

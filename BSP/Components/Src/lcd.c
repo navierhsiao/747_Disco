@@ -1,4 +1,6 @@
 #include "../../system.h"
+#include <stdarg.h>
+#include <string.h>
 
 #define ABS(X)                 ((X) > 0 ? (X) : -(X))
 
@@ -15,8 +17,12 @@ void lcd_setOrientation(lcd_objectTypeDef *object,uint32_t orientation);
 void lcd_getXsize(lcd_objectTypeDef *object,uint32_t *xSize);
 void lcd_getYsize(lcd_objectTypeDef *object,uint32_t *ySize);
 
-void LCD_draw_pixel(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint16_t color);
+void LCD_draw_pixel(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint32_t color);
+void LCD_draw_char(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint8_t chr,sFONT *fonts,uint32_t color);
+
 void LCD_draw_line(lcd_objectTypeDef *object,uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint32_t color);
+void LCD_draw_rect(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize,uint32_t color);
+void LCD_showString(lcd_objectTypeDef *object,uint16_t x,uint16_t y,sFONT *fonts,uint32_t color,const char *string,...);
 
 void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientation)
 {
@@ -32,6 +38,8 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
   object->lcd_getYsize=lcd_getYsize;
 
   object->lcd_draw_line=LCD_draw_line;
+  object->lcd_draw_rect=LCD_draw_rect;
+  object->lcd_showString=LCD_showString;
 
   static const uint8_t lcd_reg_data1[]  = {0x80,0x09,0x01};
   static const uint8_t lcd_reg_data2[]  = {0x80,0x09};
@@ -335,8 +343,6 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
   
   HAL_DSI_ConfigFlowControl(&object->dsi_object.hdsi, DSI_FLOW_CONTROL_BTA);
   HAL_DSI_ForceRXLowPower(&object->dsi_object.hdsi, ENABLE);  
-
-  // __HAL_DSI_WRAPPER_ENABLE(&object->dsi_object.hdsi);
 }
 /*
 *********************************************************************************************
@@ -420,12 +426,57 @@ void lcd_getYsize(lcd_objectTypeDef *object,uint32_t *ySize)
 *                             繪圖功能
 *********************************************************************************************
 */
-void LCD_draw_pixel(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint16_t color)
+//內部使用function
+void LCD_draw_pixel(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint32_t color)
 {
   /* Write data value to SDRAM memory */
   *(__IO uint32_t*) (LCD_FRAME_BUFFER + (4U*(y*Xsize + x))) = color;
 }
 
+void LCD_draw_char(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint8_t chr,sFONT *fonts,uint32_t color)
+{
+  uint32_t offset=0;
+  uint32_t height=0;
+  uint32_t width=0;
+  uint32_t line=0;
+
+  uint8_t *pchar;
+  uint8_t *chr_data;
+
+  chr_data=&fonts->table[(chr-' ')*fonts->Height*((fonts->Width+7)/8)];
+  height=fonts->Height;
+  width=fonts->Width;
+  offset=8*((width+7)/8)-width;
+
+  for(int i=0;i<height;i++)
+  {
+    pchar=((uint8_t*)chr_data+(width+7)/8*i);
+
+    switch (((width+7)/8))
+    {
+    case 1:
+      line=pchar[0];
+      break;
+    case 2:
+      line=(pchar[0]<< 8)|pchar[1];
+      break;
+    case 3:
+    default:
+      line =(pchar[0]<< 16)|(pchar[1]<< 8)|pchar[2];
+      break;
+    }
+
+    for(int j=0;j<width;j++)
+    {
+      if(line & (1 << (width- j + offset- 1)))
+      {
+        LCD_draw_pixel(object,(x+j),(y+i),color);
+      }
+    }
+  }
+}
+
+//提供外部使用
 void LCD_draw_line(lcd_objectTypeDef *object,uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint32_t color)
 {
   int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0,
@@ -498,6 +549,35 @@ void LCD_draw_line(lcd_objectTypeDef *object,uint16_t x1,uint16_t y1,uint16_t x2
 
   object->dsi_object.dsi_refresh(&object->dsi_object);
 }
+
+void LCD_draw_rect(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize,uint32_t color)
+{
+  uint32_t address=0;
+
+  /* Get the rectangle start address */
+  address = (LCD_FRAME_BUFFER) + (4*(Xsize*y + x));
+  object->dsi_object.copy_buffer_R2M(&object->dsi_object,(uint32_t*)address,xsize,ysize,(Xsize-xsize),color);
+}
+
+void LCD_showString(lcd_objectTypeDef *object,uint16_t x,uint16_t y,sFONT *fonts,uint32_t color,const char *string,...)
+{
+  va_list ap;
+  uint16_t xpos=0;
+  uint8_t count=0;
+
+  va_start(ap, string);
+  char temp[100]={0};
+  vsprintf(temp,string,ap);
+  va_end(ap);
+  
+  while(temp[count]!=0&xpos<Xsize)
+  {
+    LCD_draw_char(object,x+xpos,y,temp[count],fonts,color);
+    xpos+=fonts->Width;
+    count++;
+  }
+}
+
 /*
 *********************************************************************************************
 *                             讀取用功能

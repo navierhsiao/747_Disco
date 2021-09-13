@@ -22,7 +22,8 @@ ltdc_dsi_objectTypeDef *object_temp;
 void DSI_IO_WRITE(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size);
 void DSI_IO_READ(ltdc_dsi_objectTypeDef *object,uint16_t chNbr, uint16_t reg, uint8_t* data, uint16_t size);
 void DSI_Refresh(ltdc_dsi_objectTypeDef *object);
-void copy_buffer(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize);
+void copy_buffer_M2M(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize);
+void copy_buffer_R2M(ltdc_dsi_objectTypeDef *object,uint32_t *dst,uint16_t xsize,uint16_t ysize,uint16_t offline,uint32_t color);
 
 void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
 {
@@ -199,7 +200,8 @@ void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
   object->dsi_IO_write=DSI_IO_WRITE;
   object->dsi_IO_read=DSI_IO_READ;
   object->dsi_refresh=DSI_Refresh;
-  object->copy_buffer=copy_buffer;
+  object->copy_buffer_M2M=copy_buffer_M2M;
+  object->copy_buffer_R2M=copy_buffer_R2M;
 }
 
 void HAL_DMA2D_MspInit(DMA2D_HandleTypeDef* hdma2d)
@@ -305,7 +307,7 @@ void DSI_IRQHandler(void)
   HAL_DSI_IRQHandler(&object_temp->hdsi);
 }
 
-void copy_buffer(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize)
+void copy_buffer_M2M(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_t y,uint16_t xsize,uint16_t ysize)
 {
   uint32_t destination = (uint32_t)LCD_FRAME_BUFFER + (y * 800 + x) * 4;
   uint32_t source      = (uint32_t)src;
@@ -336,6 +338,31 @@ void copy_buffer(ltdc_dsi_objectTypeDef *object,uint32_t *src,uint16_t x,uint16_
     if(HAL_DMA2D_ConfigLayer(&object->hdma2d, 1) == HAL_OK) 
     {
       if (HAL_DMA2D_Start(&object->hdma2d, source, destination, xsize, ysize) == HAL_OK)
+      {
+        /* Polling For DMA transfer */  
+        HAL_DMA2D_PollForTransfer(&object->hdma2d, 100);
+      }
+    }
+  }   
+}
+
+void copy_buffer_R2M(ltdc_dsi_objectTypeDef *object,uint32_t *dst,uint16_t xsize,uint16_t ysize,uint16_t offline,uint32_t color)
+{
+  /*##-1- Configure the DMA2D Mode, Color Mode and output offset #############*/ 
+  object->hdma2d.Init.Mode         = DMA2D_R2M;
+  object->hdma2d.Init.ColorMode    = DMA2D_OUTPUT_ARGB8888;
+  object->hdma2d.Init.OutputOffset = offline;
+  object->hdma2d.Init.AlphaInverted = DMA2D_REGULAR_ALPHA;  /* No Output Alpha Inversion*/  
+  object->hdma2d.Init.RedBlueSwap   = DMA2D_RB_REGULAR;     /* No Output Red & Blue swap */   
+  
+  object->hdma2d.Instance          = DMA2D; 
+   
+  /* DMA2D Initialization */
+  if(HAL_DMA2D_Init(&object->hdma2d) == HAL_OK) 
+  {
+    if(HAL_DMA2D_ConfigLayer(&object->hdma2d, 1) == HAL_OK) 
+    {
+      if (HAL_DMA2D_Start(&object->hdma2d, color, (uint32_t*)dst, xsize, ysize) == HAL_OK)
       {
         /* Polling For DMA transfer */  
         HAL_DMA2D_PollForTransfer(&object->hdma2d, 100);

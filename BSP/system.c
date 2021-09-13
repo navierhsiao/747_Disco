@@ -1,6 +1,7 @@
 #include "system.h"
 #include "image_320x240_argb8888.h"
 #include "life_augmented_argb8888.h"
+#include "Components/Src/Fonts/fonts.h"
 
 #define DEVICE_IS_CUT_2_1()      (HAL_GetREVID() & 0x21ff) ? 1 : 0
 #define DEVICE_IS_CUT_2_X()      (HAL_GetREVID() & 0x2fff) ? 1 : 0
@@ -70,7 +71,9 @@ static void BSP_Init(void)
   lcd_init(&otm8009a_obj,OTM8009A_FORMAT_RGB888,OTM8009A_ORIENTATION_LANDSCAPE);
   //CRC init
   // CRC_Init();
+  otm8009a_obj.lcd_draw_rect(&otm8009a_obj,0,0,800,480,LCD_COLOR_DARKGRAY);
   otm8009a_obj.lcd_draw_line(&otm8009a_obj,5,0,5,200,LCD_COLOR_WHITE);
+  otm8009a_obj.lcd_showString(&otm8009a_obj,20,100,&Font24,LCD_COLOR_ORANGE,"test %d %f",1234,12.37);
 }
 
 static void SystemClock_Config(void)
