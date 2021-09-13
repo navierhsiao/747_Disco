@@ -10,9 +10,10 @@
 #define HSYNC           1
 #define HBP             1
 #define HFP             1
-#define LAYER0_ADDRESS  (0xD0000000)
-#define HACT            400
+#define HACT            800
 
+#define Xsize           800
+#define Ysize           480
 typedef struct ltdc_dsi_structDef
 {
     DMA2D_HandleTypeDef hdma2d;

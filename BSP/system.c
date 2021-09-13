@@ -70,8 +70,7 @@ static void BSP_Init(void)
   lcd_init(&otm8009a_obj,OTM8009A_FORMAT_RGB888,OTM8009A_ORIENTATION_LANDSCAPE);
   //CRC init
   // CRC_Init();
-  otm8009a_obj.dsi_object.copy_buffer(&otm8009a_obj.dsi_object,image_320x240_argb8888, 240, 160, 320, 240);
-  otm8009a_obj.dsi_object.dsi_refresh(&otm8009a_obj.dsi_object);
+  otm8009a_obj.lcd_draw_line(&otm8009a_obj,5,0,5,200,LCD_COLOR_WHITE);
 }
 
 static void SystemClock_Config(void)

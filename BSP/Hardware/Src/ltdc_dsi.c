@@ -12,17 +12,6 @@
 **************************************************************************************
 */
 
-#define VSYNC               1 
-#define VBP                 1 
-#define VFP                 1
-#define VACT                480
-#define HSYNC               1
-#define HBP                 1
-#define HFP                 1
-#define HACT                800
-
-#define Xsize               800
-#define Ysize               480
 static const uint32_t Buffers[] = 
 {
   LCD_FRAME_BUFFER,
@@ -70,7 +59,7 @@ void LTDC_DSI_object_Init(ltdc_dsi_objectTypeDef *object)
   //  DMA2D Init
 
   // object->hdma2d.Instance=DMA2D;
-  // object->hdma2d.Init.Mode = DMA2D_R2M;
+  // object->hdma2d.Init.Mode = DMA2D_M2M;
   // object->hdma2d.Init.ColorMode = DMA2D_OUTPUT_RGB888;
   // object->hdma2d.Init.OutputOffset = 0;
   // if (HAL_DMA2D_Init(&object->hdma2d) != HAL_OK)

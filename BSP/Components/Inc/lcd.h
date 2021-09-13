@@ -118,6 +118,33 @@
   */
 #define OTM8009A_480X800_FREQUENCY_DIVIDER  2   /* LCD Frequency divider      */
 
+//color code
+#define LCD_COLOR_BLUE          0xFF0000FFUL
+#define LCD_COLOR_GREEN         0xFF00FF00UL
+#define LCD_COLOR_RED           0xFFFF0000UL
+#define LCD_COLOR_CYAN          0xFF00FFFFUL
+#define LCD_COLOR_MAGENTA       0xFFFF00FFUL
+#define LCD_COLOR_YELLOW        0xFFFFFF00UL
+#define LCD_COLOR_LIGHTBLUE     0xFF8080FFUL
+#define LCD_COLOR_LIGHTGREEN    0xFF80FF80UL
+#define LCD_COLOR_LIGHTRED      0xFFFF8080UL
+#define LCD_COLOR_LIGHTCYAN     0xFF80FFFFUL
+#define LCD_COLOR_LIGHTMAGENTA  0xFFFF80FFUL
+#define LCD_COLOR_LIGHTYELLOW   0xFFFFFF80UL
+#define LCD_COLOR_DARKBLUE      0xFF000080UL
+#define LCD_COLOR_DARKGREEN     0xFF008000UL
+#define LCD_COLOR_DARKRED       0xFF800000UL
+#define LCD_COLOR_DARKCYAN      0xFF008080UL
+#define LCD_COLOR_DARKMAGENTA   0xFF800080UL
+#define LCD_COLOR_DARKYELLOW    0xFF808000UL
+#define LCD_COLOR_WHITE         0xFFFFFFFFUL
+#define LCD_COLOR_LIGHTGRAY     0xFFD3D3D3UL
+#define LCD_COLOR_GRAY          0xFF808080UL
+#define LCD_COLOR_DARKGRAY      0xFF404040UL
+#define LCD_COLOR_BLACK         0xFF000000UL
+#define LCD_COLOR_BROWN         0xFFA52A2AUL
+#define LCD_COLOR_ORANGE        0xFFFFA500UL
+
 enum DISPLAY_STATE
 {
   DISPLAY_ON  =1,
@@ -140,6 +167,8 @@ typedef struct lcd_structDef
   void (*lcd_setOrientation)  (struct lcd_structDef *object,uint32_t orientation);
   void (*lcd_getXsize)        (struct lcd_structDef *object,uint32_t *xSize);
   void (*lcd_getYsize)        (struct lcd_structDef *object,uint32_t *ySize);
+
+  void (*lcd_draw_line)       (struct lcd_structDef *object,uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint32_t color);
 }lcd_objectTypeDef;
 
 enum LCD_STATE{

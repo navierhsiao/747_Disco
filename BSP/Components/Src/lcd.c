@@ -1,5 +1,7 @@
 #include "../../system.h"
 
+#define ABS(X)                 ((X) > 0 ? (X) : -(X))
+
 static const uint8_t LcdRegData27[] = {0x00, 0x00, 0x03, 0x1F};
 static const uint8_t LcdRegData28[] = {0x00, 0x00, 0x01, 0xDF};
 
@@ -13,6 +15,9 @@ void lcd_setOrientation(lcd_objectTypeDef *object,uint32_t orientation);
 void lcd_getXsize(lcd_objectTypeDef *object,uint32_t *xSize);
 void lcd_getYsize(lcd_objectTypeDef *object,uint32_t *ySize);
 
+void LCD_draw_pixel(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint16_t color);
+void LCD_draw_line(lcd_objectTypeDef *object,uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint32_t color);
+
 void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientation)
 {
   LTDC_DSI_object_Init(&object->dsi_object);
@@ -25,6 +30,8 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
   object->lcd_setOrientation=lcd_setOrientation;
   object->lcd_getXsize=lcd_getXsize;
   object->lcd_getYsize=lcd_getYsize;
+
+  object->lcd_draw_line=LCD_draw_line;
 
   static const uint8_t lcd_reg_data1[]  = {0x80,0x09,0x01};
   static const uint8_t lcd_reg_data2[]  = {0x80,0x09};
@@ -413,7 +420,84 @@ void lcd_getYsize(lcd_objectTypeDef *object,uint32_t *ySize)
 *                             繪圖功能
 *********************************************************************************************
 */
+void LCD_draw_pixel(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint16_t color)
+{
+  /* Write data value to SDRAM memory */
+  *(__IO uint32_t*) (LCD_FRAME_BUFFER + (4U*(y*Xsize + x))) = color;
+}
 
+void LCD_draw_line(lcd_objectTypeDef *object,uint16_t x1,uint16_t y1,uint16_t x2,uint16_t y2,uint32_t color)
+{
+  int16_t deltax = 0, deltay = 0, x = 0, y = 0, xinc1 = 0, xinc2 = 0,
+  yinc1 = 0, yinc2 = 0, den = 0, num = 0, numadd = 0, numpixels = 0,
+  curpixel = 0;
+  int32_t x_diff, y_diff;
+
+  x_diff = x2 - x1;
+  y_diff = y2 - y1;
+
+  deltax = ABS(x_diff);         /* The absolute difference between the x's */
+  deltay = ABS(y_diff);         /* The absolute difference between the y's */
+  x = x1;                       /* Start x off at the first pixel */
+  y = y1;                       /* Start y off at the first pixel */
+
+  if (x2 >= x1)                 /* The x-values are increasing */
+  {
+    xinc1 = 1;
+    xinc2 = 1;
+  }
+  else                          /* The x-values are decreasing */
+  {
+    xinc1 = -1;
+    xinc2 = -1;
+  }
+
+  if (y2 >= y1)                 /* The y-values are increasing */
+  {
+    yinc1 = 1;
+    yinc2 = 1;
+  }
+  else                          /* The y-values are decreasing */
+  {
+    yinc1 = -1;
+    yinc2 = -1;
+  }
+
+  if (deltax >= deltay)         /* There is at least one x-value for every y-value */
+  {
+    xinc1 = 0;                  /* Don't change the x when numerator >= denominator */
+    yinc2 = 0;                  /* Don't change the y for every iteration */
+    den = deltax;
+    num = deltax / 2;
+    numadd = deltay;
+    numpixels = deltax;         /* There are more x-values than y-values */
+  }
+  else                          /* There is at least one y-value for every x-value */
+  {
+    xinc2 = 0;                  /* Don't change the x for every iteration */
+    yinc1 = 0;                  /* Don't change the y when numerator >= denominator */
+    den = deltay;
+    num = deltay / 2;
+    numadd = deltax;
+    numpixels = deltay;         /* There are more y-values than x-values */
+  }
+
+  for (curpixel = 0; curpixel <= numpixels; curpixel++)
+  {
+    LCD_draw_pixel(object,x, y, color);   /* Draw the current pixel */
+    num += numadd;                            /* Increase the numerator by the top of the fraction */
+    if (num >= den)                           /* Check if numerator >= denominator */
+    {
+      num -= den;                             /* Calculate the new numerator value */
+      x += xinc1;                             /* Change the x as appropriate */
+      y += yinc1;                             /* Change the y as appropriate */
+    }
+    x += xinc2;                               /* Change the x as appropriate */
+    y += yinc2;                               /* Change the y as appropriate */
+  }
+
+  object->dsi_object.dsi_refresh(&object->dsi_object);
+}
 /*
 *********************************************************************************************
 *                             讀取用功能
