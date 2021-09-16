@@ -21,7 +21,6 @@ static void CRC_Init(void);
 static void GPIO_Init(void);
 static uint32_t TEMP_SENSOR_Init(void);
 
-lcd_objectTypeDef otm8009a_obj;
 
 void Hardware_Init(void)
 {
@@ -68,12 +67,10 @@ static void BSP_Init(void)
   //GPIO init
   GPIO_Init();
   //LCD init
-  lcd_init(&otm8009a_obj,OTM8009A_FORMAT_RGB888,OTM8009A_ORIENTATION_LANDSCAPE);
+
   //CRC init
-  // CRC_Init();
-  otm8009a_obj.lcd_draw_rect(&otm8009a_obj,0,0,800,480,LCD_COLOR_DARKGRAY);
-  otm8009a_obj.lcd_draw_line(&otm8009a_obj,5,0,5,200,LCD_COLOR_WHITE);
-  otm8009a_obj.lcd_showString(&otm8009a_obj,20,100,&Font24,LCD_COLOR_ORANGE,"test %d %f",1234,12.37);
+  CRC_Init();
+
 }
 
 static void SystemClock_Config(void)
