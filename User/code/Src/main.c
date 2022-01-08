@@ -28,6 +28,7 @@ void touchTask(void *argument);
 int main(void)
 {
   Hardware_Init();
+  HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
   lcd_init(&otm8009a_obj,OTM8009A_FORMAT_RGB888,OTM8009A_ORIENTATION_LANDSCAPE);
   touch_object_init(&touch_object,OTM8009A_ORIENTATION_LANDSCAPE);
 
@@ -53,6 +54,7 @@ void StartDefaultTask(void *argument)
 
 void touchTask(void *argument)
 {
+  HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_12, GPIO_PIN_SET);
   while(1)
   {
     if(touch_object.chip_id!=0)

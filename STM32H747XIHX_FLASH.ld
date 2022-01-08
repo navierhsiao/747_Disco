@@ -179,10 +179,10 @@ SECTIONS
     . = ALIGN(8);
   } >RAM
 
-  .sdram_section (NOLOAD) : {
+  /* .sdram_section (NOLOAD) : {
     . = ABSOLUTE(0xD0000000);
     *(.exSDRAM) 
-  } AT> SDRAM
+  } AT> SDRAM */
 
   .qspi_flash_section  : {
     ExtThirdPartyHeader = .;

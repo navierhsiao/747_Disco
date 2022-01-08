@@ -3,14 +3,18 @@
 static osSemaphoreId BspI2cSemaphore = 0;
 
 void I2C_Init(i2c_objectTypeDef* object);
-void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
-void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
+void I2C_Write_mem(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
+void I2C_Read_mem(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
+uint8_t I2C_Write(i2c_objectTypeDef* object,uint16_t deviceAddr,uint8_t *pData,uint16_t size);
+uint8_t I2C_Read(i2c_objectTypeDef* object,uint16_t deviceAddr,uint8_t *pData,uint16_t size);
 
 void I2C_Object_Init(i2c_objectTypeDef *object,i2c_objectAttr attr)
 {
   object->i2c_init=I2C_Init;
-  object->i2c_readReg=I2C_ReadReg;
-  object->i2c_writeReg=I2C_WriteReg;
+  object->i2c_read_mem=I2C_Read_mem;
+  object->i2c_write_mem=I2C_Write_mem;
+  object->i2c_read=I2C_Read;
+  object->i2c_write=I2C_Write;
   object->object_attr=attr;
 
   object->i2c_init(object);
@@ -73,18 +77,30 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
 
 }
 
-void I2C_WriteReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *data,uint16_t size,uint16_t length)
+void I2C_Write_mem(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *data,uint16_t size,uint16_t length)
 {
-    if(HAL_I2C_Mem_Write(&object->hi2c, deviceAddr, reg, size, data, length,1000) != HAL_OK)
-    {    
-      Error_Handler(__FILE__, __LINE__);
-    }
+  if(HAL_I2C_Mem_Write(&object->hi2c, deviceAddr, reg, size, data, length,1000) != HAL_OK)
+  {    
+    Error_Handler(__FILE__, __LINE__);
+  }
 }
 
-void I2C_ReadReg(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *data,uint16_t size,uint16_t length)
+void I2C_Read_mem(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *data,uint16_t size,uint16_t length)
 {
-    if (HAL_I2C_Mem_Read(&object->hi2c, deviceAddr, reg, size, data, length,1000) != HAL_OK)
-    {
-      Error_Handler(__FILE__, __LINE__);
-    }
+  if (HAL_I2C_Mem_Read(&object->hi2c, deviceAddr, reg, size, data, length,1000) != HAL_OK)
+  {
+    Error_Handler(__FILE__, __LINE__);
+  }
+}
+
+uint8_t I2C_Write(i2c_objectTypeDef* object,uint16_t deviceAddr,uint8_t *data,uint16_t size)
+{
+  uint8_t state=HAL_I2C_Master_Transmit(&object->hi2c, deviceAddr, size, data,2000);
+  return state;
+}
+
+uint8_t I2C_Read(i2c_objectTypeDef* object,uint16_t deviceAddr,uint8_t *data,uint16_t size)
+{
+  uint8_t state=HAL_I2C_Master_Receive(&object->hi2c, deviceAddr, size, data,2000);
+  return state;
 }
