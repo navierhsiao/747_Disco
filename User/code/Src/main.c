@@ -19,7 +19,7 @@ const osThreadAttr_t touchTask_attributes = {
 };
 
 uint32_t array_addr=0;
-lcd_objectTypeDef otm8009a_obj;
+lcd_objectTypeDef lcd_obj;
 touch_objectTypeDef touch_object;
 
 void StartDefaultTask(void *argument);
@@ -31,8 +31,8 @@ int main(void)
   Hardware_Init();
   HAL_GPIO_WritePin(GPIOB, GPIO_PIN_8, GPIO_PIN_SET);
   
-  lcd_init(&otm8009a_obj,0,0);
-  // touch_object_init(&touch_object,0);
+  lcd_init(&lcd_obj,0,0);
+  touch_object_init(&touch_object,0);
 
   osKernelInitialize();
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
@@ -57,8 +57,6 @@ void StartDefaultTask(void *argument)
 void touchTask(void *argument)
 {
   HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_12, GPIO_PIN_SET);
-  uint16_t x_count=0;
-  uint16_t y_count=0;
   while(1)
   {
     // if(touch_object.chip_id!=0)
@@ -72,7 +70,11 @@ void touchTask(void *argument)
     
     // otm8009a_obj.lcd_draw_rect(&otm8009a_obj,0,0,480,854,LCD_COLOR_DARKGRAY);
 
-    otm8009a_obj.lcd_draw_rect(&otm8009a_obj,0,0,480,854,LCD_COLOR_DARKGRAY);
+    lcd_obj.lcd_draw_rect(&lcd_obj,0,0,480,854,LCD_COLOR_DARKGRAY);
+    if(touch_object.chip_id!=0)
+    {
+      touch_object.touch_scanState(&touch_object);
+    }
     // otm8009a_obj.lcd_draw_rect(&otm8009a_obj,0,0,480,50,LCD_COLOR_WHITE);
 
     // otm8009a_obj.lcd_draw_rect(&otm8009a_obj,0,200,480,200,LCD_COLOR_DARKRED);

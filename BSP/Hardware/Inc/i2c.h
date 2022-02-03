@@ -20,7 +20,6 @@ typedef struct  i2c_objectStructDef
     I2C_HandleTypeDef hi2c;
     i2c_objectAttr object_attr;
 
-    void    (*i2c_init)         (struct i2c_objectStructDef*);
     void    (*i2c_write_mem)    (struct i2c_objectStructDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *data,uint16_t size,uint16_t length);
     void    (*i2c_read_mem)     (struct i2c_objectStructDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *data,uint16_t size,uint16_t length);
     uint8_t (*i2c_write)        (struct i2c_objectStructDef* object,uint16_t deviceAddr,uint8_t *data,uint16_t size);

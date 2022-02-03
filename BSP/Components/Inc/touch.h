@@ -3,9 +3,9 @@
 
 #include "../../Hardware/Inc/i2c.h"
 
-#define MAX_WIDTH           800
-#define MAX_HEIGHT          480
-#define MAX_TOUCH           5
+#define MAX_WIDTH           480
+#define MAX_HEIGHT          854
+#define MAX_TOUCH           3
 
 #define GT_INT          HAL_GPIO_ReadPin(GPIOK,GPIO_PIN_7)  
 
@@ -31,13 +31,14 @@
 typedef struct touch_structDef
 {
     i2c_objectTypeDef i2c_object;
-    uint8_t touch_state;
-    uint16_t x[MAX_TOUCH];
-    uint16_t y[MAX_TOUCH];
-    uint8_t chip_id;
-    uint8_t orientation;
-    uint8_t chip_wr_reg;
-    uint8_t chip_rd_reg;
+    uint8_t     touch_state;
+    uint16_t    x[MAX_TOUCH];
+    uint16_t    y[MAX_TOUCH];
+    uint16_t    chip_id;
+    uint8_t     numOfPoints;
+    uint8_t     orientation;
+    uint8_t     chip_wr_reg;
+    uint8_t     chip_rd_reg;
 
     void (*touch_get_chipID)    (struct touch_structDef *object);
     void (*touch_scanState)     (struct touch_structDef *object);

@@ -236,7 +236,7 @@ static void GPIO_Init(void)
   __HAL_RCC_GPIOA_CLK_ENABLE();
   __HAL_RCC_GPIOF_CLK_ENABLE();
   __HAL_RCC_GPIOB_CLK_ENABLE();
-  __HAL_RCC_GPIOK_CLK_ENABLE();
+  // __HAL_RCC_GPIOK_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_12, GPIO_PIN_RESET);
@@ -273,12 +273,12 @@ static void GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
       
-  //touch INT-下拉
-  GPIO_InitStruct.Pin = GPIO_PIN_7;
-  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-  GPIO_InitStruct.Pull = GPIO_PULLDOWN;
-  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-  HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
+  // //touch INT-下拉
+  // GPIO_InitStruct.Pin = GPIO_PIN_7;
+  // GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  // GPIO_InitStruct.Pull = GPIO_PULLDOWN;
+  // GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  // HAL_GPIO_Init(GPIOK, &GPIO_InitStruct);
 }
 
 static uint32_t TEMP_SENSOR_Init(void)

@@ -1,7 +1,5 @@
 #include "../../system.h"
 
-static osSemaphoreId BspI2cSemaphore = 0;
-
 void I2C_Init(i2c_objectTypeDef* object);
 void I2C_Write_mem(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
 void I2C_Read_mem(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uint8_t *pData,uint16_t size,uint16_t length);
@@ -10,18 +8,12 @@ uint8_t I2C_Read(i2c_objectTypeDef* object,uint16_t deviceAddr,uint8_t *pData,ui
 
 void I2C_Object_Init(i2c_objectTypeDef *object,i2c_objectAttr attr)
 {
-  object->i2c_init=I2C_Init;
   object->i2c_read_mem=I2C_Read_mem;
   object->i2c_write_mem=I2C_Write_mem;
   object->i2c_read=I2C_Read;
   object->i2c_write=I2C_Write;
   object->object_attr=attr;
 
-  object->i2c_init(object);
-}
-
-void I2C_Init(i2c_objectTypeDef* object)
-{
   object->hi2c.Instance = object->object_attr.Instance;
   object->hi2c.Init.Timing = object->object_attr.Timing;
   object->hi2c.Init.OwnAddress1 = object->object_attr.OwnAddress1;
@@ -58,7 +50,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     {
       Error_Handler(__FILE__, __LINE__);
     }
-
+    __HAL_RCC_I2C4_CLK_ENABLE();
     __HAL_RCC_GPIOD_CLK_ENABLE();
     /**I2C4 GPIO Configuration
     PD12     ------> I2C4_SCL
@@ -72,7 +64,7 @@ void HAL_I2C_MspInit(I2C_HandleTypeDef* hi2c)
     HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
     /* Peripheral clock enable */
-    __HAL_RCC_I2C4_CLK_ENABLE();
+    
   }
 
 }
@@ -95,12 +87,12 @@ void I2C_Read_mem(i2c_objectTypeDef* object,uint16_t deviceAddr,uint16_t reg,uin
 
 uint8_t I2C_Write(i2c_objectTypeDef* object,uint16_t deviceAddr,uint8_t *data,uint16_t size)
 {
-  uint8_t state=HAL_I2C_Master_Transmit(&object->hi2c, deviceAddr, size, data,2000);
+  uint8_t state=HAL_I2C_Master_Transmit(&object->hi2c, deviceAddr, data, size,2000);
   return state;
 }
 
 uint8_t I2C_Read(i2c_objectTypeDef* object,uint16_t deviceAddr,uint8_t *data,uint16_t size)
 {
-  uint8_t state=HAL_I2C_Master_Receive(&object->hi2c, deviceAddr, size, data,2000);
+  uint8_t state=HAL_I2C_Master_Receive(&object->hi2c, deviceAddr, data, size,2000);
   return state;
 }
