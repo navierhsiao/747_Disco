@@ -290,7 +290,7 @@ void lcd_getYsize(lcd_objectTypeDef *object,uint32_t *ySize)
 void LCD_draw_pixel(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint32_t color)
 {
   /* Write data value to SDRAM memory */
-  *(__IO uint32_t*) (LCD_FRAME_BUFFER + (4U*(y*Xsize + x))) = color;
+  *(__IO uint32_t*) (LCD_FRAME_BUFFER + (3U*(y*Xsize + x))) = color;
 }
 
 void LCD_draw_char(lcd_objectTypeDef *object,uint16_t x,uint16_t y,uint8_t chr,sFONT *fonts,uint32_t color)

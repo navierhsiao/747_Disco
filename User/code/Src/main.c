@@ -74,6 +74,9 @@ void touchTask(void *argument)
     if(touch_object.chip_id!=0)
     {
       touch_object.touch_scanState(&touch_object);
+      lcd_obj.lcd_showString(&lcd_obj,0,0,&Font24,LCD_COLOR_WHITE,"touch state=%d",touch_object.touch_state);
+      lcd_obj.lcd_showString(&lcd_obj,0,24,&Font24,LCD_COLOR_WHITE,"touch x=%d,y=%d",touch_object.x[0],touch_object.y[0]);
+      lcd_obj.dsi_object.dsi_refresh(&lcd_obj.dsi_object);
     }
     // otm8009a_obj.lcd_draw_rect(&otm8009a_obj,0,0,480,50,LCD_COLOR_WHITE);
 
