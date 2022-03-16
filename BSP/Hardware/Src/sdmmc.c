@@ -1,35 +1,37 @@
 #include "../../system.h"
 
-sdmmc_objectTypeDef sd_object;
+sdmmc_objectTypeDef sd_object_temp;
 
 void sdmmc_readBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t index,uint32_t number);
 void sdmmc_writeBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t index,uint32_t number);
 void sdmmc_erase(sdmmc_objectTypeDef *object,uint32_t index,uint32_t number);
 void sdmmc_get_cardInfo(sdmmc_objectTypeDef *object);
+void sdmmc_scan_card_state(sdmmc_objectTypeDef *object);
 
 sdmmc_objectTypeDef *sdmmc_object_init()
 {
-    sd_object.hsdmmc.Instance = SDMMC1;
-    sd_object.hsdmmc.Init.ClockEdge = SDMMC_CLOCK_EDGE_RISING; 
-    sd_object.hsdmmc.Init.ClockPowerSave = SDMMC_CLOCK_POWER_SAVE_DISABLE; 
-    sd_object.hsdmmc.Init.BusWide = SDMMC_BUS_WIDE_4B; 
-    sd_object.hsdmmc.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE; 
-    sd_object.hsdmmc.Init.ClockDiv = SDMMC_NSpeed_CLK_DIV;
-    if (HAL_SD_Init(&sd_object.hsdmmc) != HAL_OK)
+    sd_object_temp.hsdmmc.Instance = SDMMC1;
+    sd_object_temp.hsdmmc.Init.ClockEdge = SDMMC_CLOCK_EDGE_RISING; 
+    sd_object_temp.hsdmmc.Init.ClockPowerSave = SDMMC_CLOCK_POWER_SAVE_DISABLE; 
+    sd_object_temp.hsdmmc.Init.BusWide = SDMMC_BUS_WIDE_4B; 
+    sd_object_temp.hsdmmc.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE; 
+    sd_object_temp.hsdmmc.Init.ClockDiv = 0xFA;
+    if (HAL_SD_Init(&sd_object_temp.hsdmmc) != HAL_OK)
     {
         Error_Handler(__FILE__, __LINE__);
     }
-    if (HAL_SD_ConfigWideBusOperation(&sd_object.hsdmmc, SDMMC_BUS_WIDE_4B) != HAL_OK)
+    if (HAL_SD_ConfigWideBusOperation(&sd_object_temp.hsdmmc, SDMMC_BUS_WIDE_4B) != HAL_OK)
     {
         Error_Handler(__FILE__, __LINE__);
     }
 
-    sd_object.sdmmc_readBlocks_DMA=sdmmc_readBlock_DMA;
-    sd_object.sdmmc_writeBlocks_DMA=sdmmc_writeBlock_DMA;
-    sd_object.sdmmc_erace=sdmmc_erase;
-    sd_object.sdmmc_get_cardInfo=sdmmc_get_cardInfo;
+    sd_object_temp.sdmmc_readBlocks_DMA=sdmmc_readBlock_DMA;
+    sd_object_temp.sdmmc_writeBlocks_DMA=sdmmc_writeBlock_DMA;
+    sd_object_temp.sdmmc_erace=sdmmc_erase;
+    sd_object_temp.sdmmc_get_cardInfo=sdmmc_get_cardInfo;
+    sd_object_temp.sdmmc_scan_card_state=sdmmc_scan_card_state;
 
-    return &sd_object;
+    return &sd_object_temp;
 }
 
 void HAL_SD_MspInit(SD_HandleTypeDef *hsd)
@@ -54,13 +56,13 @@ void HAL_SD_MspInit(SD_HandleTypeDef *hsd)
         __HAL_RCC_GPIOD_CLK_ENABLE();
 
         /**SDMMC1 GPIO Configuration
-        PC10     ------> SDMMC1_D2
-        PC11     ------> SDMMC1_D3
-        PC12     ------> SDMMC1_CK
+        PC10    ------> SDMMC1_D2
+        PC11    ------> SDMMC1_D3
+        PC12    ------> SDMMC1_CK
         PD2     ------> SDMMC1_CMD
         PC8     ------> SDMMC1_D0
         PC9     ------> SDMMC1_D1
-        DET -> PI8
+        DET     ------> PI8(init at system.c)
         */
         GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_8
                             |GPIO_PIN_9;
@@ -77,12 +79,6 @@ void HAL_SD_MspInit(SD_HandleTypeDef *hsd)
         GPIO_InitStruct.Alternate = GPIO_AF12_SDIO1;
         HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
-        /* Configure Input mode for SD detection pin */
-        GPIO_InitStruct.Pin = GPIO_PIN_8;
-        GPIO_InitStruct.Pull = GPIO_PULLUP;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
-        GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
-        HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);
 
         /* NVIC configuration for SDIO interrupts */
         HAL_NVIC_SetPriority(SDMMC1_IRQn, 8, 0);
@@ -92,7 +88,7 @@ void HAL_SD_MspInit(SD_HandleTypeDef *hsd)
 
 void SDMMC1_IRQHandler(void)
 {
-  HAL_SD_IRQHandler(&sd_object.hsdmmc);
+  HAL_SD_IRQHandler(&sd_object_temp.hsdmmc);
 }
 
 void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
@@ -134,5 +130,17 @@ void sdmmc_get_cardInfo(sdmmc_objectTypeDef *object)
     if(HAL_SD_GetCardInfo(&object->hsdmmc,&object->cardInfo)!=HAL_OK)
     {
         Error_Handler(__FILE__, __LINE__);
+    }
+}
+
+void sdmmc_scan_card_state(sdmmc_objectTypeDef *object)
+{
+    if(HAL_GPIO_ReadPin(GPIOI,GPIO_PIN_8)==0)
+    {
+        object->is_card_detected=1;
+    }
+    else
+    {
+        object->is_card_detected=0;
     }
 }

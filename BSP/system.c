@@ -66,8 +66,8 @@ static void BSP_Init(void)
   //RTC init
   //GPIO init
   GPIO_Init();
-  //LCD init
-
+  //SD init
+  
   //CRC init
   CRC_Init();
 
@@ -272,7 +272,13 @@ static void GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
-      
+
+  /* Configure Input mode for SD detection pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);    
   // //touch INT-下拉
   // GPIO_InitStruct.Pin = GPIO_PIN_7;
   // GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
