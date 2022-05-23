@@ -2,6 +2,7 @@
 #include "cmsis_os.h"
 #include "fatfs.h"
 #include "../../../BSP/system.h"
+#include "usb_device.h"
 
 osThreadId_t defaultTaskHandle;
 osThreadId_t touchTaskID;
@@ -103,6 +104,8 @@ void touchTask(void *argument)
 void sdTask(void *argument)
 {
   uint8_t read_flag=0;
+  HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_1, GPIO_PIN_SET);
+  MX_USB_DEVICE_Init();
   for(;;)
   {
     if(sd_object!=NULL)
