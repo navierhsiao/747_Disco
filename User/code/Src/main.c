@@ -1,10 +1,11 @@
 #include "main.h"
 #include "cmsis_os.h"
-#include "fatfs.h"
 #include "../../../BSP/system.h"
+#include "usb_device.h"
 
 osThreadId_t defaultTaskHandle;
 osThreadId_t touchTaskID;
+osThreadId_t sdTaskID;
 
 const osThreadAttr_t defaultTask_attributes = {
   .name = "defaultTask",
@@ -18,12 +19,19 @@ const osThreadAttr_t touchTask_attributes = {
   .priority = (osPriority_t) osPriorityNormal,
 };
 
-uint32_t array_addr=0;
+const osThreadAttr_t sdTask_attributes = {
+  .name = "SDTask",
+  .stack_size = 1024,
+  .priority = (osPriority_t) osPriorityNormal2,
+};
+
 lcd_objectTypeDef otm8009a_obj;
 touch_objectTypeDef touch_object;
+sdmmc_objectTypeDef *sd_object;
 
 void StartDefaultTask(void *argument);
 void touchTask(void *argument);
+void sdTask(void *argument);
 
 int main(void)
 {
@@ -34,6 +42,7 @@ int main(void)
   osKernelInitialize();
   defaultTaskHandle = osThreadNew(StartDefaultTask, NULL, &defaultTask_attributes);
   touchTaskID=osThreadNew(touchTask, NULL, &touchTask_attributes);
+  sdTaskID=osThreadNew(sdTask, NULL, &sdTask_attributes);
   osKernelStart();
 
   while (1);
@@ -43,7 +52,6 @@ void StartDefaultTask(void *argument)
 {
   /* USER CODE BEGIN 5 */
   /* Infinite loop */
-  uint8_t count=0;
   for(;;)
   {
     osDelay(1000);
@@ -63,7 +71,42 @@ void touchTask(void *argument)
       otm8009a_obj.lcd_showString(&otm8009a_obj,0,24,&Font24,LCD_COLOR_WHITE,"touch x=%d,y=%d",touch_object.x[0],touch_object.y[0]);
       otm8009a_obj.dsi_object.dsi_refresh(&otm8009a_obj.dsi_object);  
     }
-    osDelay(20);
+    osDelay(10);
+  }
+}
+
+void sdTask(void *argument)
+{
+  uint8_t read_flag=0;
+  // HAL_GPIO_WritePin(GPIOJ, GPIO_PIN_1, GPIO_PIN_SET);
+  MX_USB_DEVICE_Init();
+  for(;;)
+  {
+    if(sd_object!=NULL)
+    {
+      sd_object->sdmmc_scan_card_state(sd_object);
+      if(sd_object->is_card_detected)
+      {
+        if(read_flag==0)
+        {
+          sd_object->sdmmc_get_cardInfo(sd_object);
+          read_flag=1;
+        }
+      }
+      else
+      {
+        read_flag=0;
+      }
+    }
+    else
+    {
+      if(IS_SD_INSERTED==0)
+      {
+        sd_object=sdmmc_object_init();
+      }
+    }
+    
+    osDelay(100);
   }
 }
 

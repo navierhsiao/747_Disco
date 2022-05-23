@@ -1,6 +1,4 @@
 #include "system.h"
-#include "image_320x240_argb8888.h"
-#include "life_augmented_argb8888.h"
 #include "Components/Src/Fonts/fonts.h"
 
 #define DEVICE_IS_CUT_2_1()      (HAL_GetREVID() & 0x21ff) ? 1 : 0
@@ -264,6 +262,13 @@ static void GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_PULLUP;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
   HAL_GPIO_Init(GPIOG, &GPIO_InitStruct);
+
+  /* Configure Input mode for SD detection pin */
+  GPIO_InitStruct.Pin = GPIO_PIN_8;
+  GPIO_InitStruct.Pull = GPIO_PULLUP;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
+  GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
+  HAL_GPIO_Init(GPIOI, &GPIO_InitStruct);    
 }
 
 static uint32_t TEMP_SENSOR_Init(void)
