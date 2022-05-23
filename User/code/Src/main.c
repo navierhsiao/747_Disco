@@ -63,7 +63,7 @@ void touchTask(void *argument)
       otm8009a_obj.lcd_showString(&otm8009a_obj,0,24,&Font24,LCD_COLOR_WHITE,"touch x=%d,y=%d",touch_object.x[0],touch_object.y[0]);
       otm8009a_obj.dsi_object.dsi_refresh(&otm8009a_obj.dsi_object);  
     }
-    osDelay(10);
+    osDelay(15);
   }
 }
 
