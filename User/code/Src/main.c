@@ -70,6 +70,14 @@ void touchTask(void *argument)
       otm8009a_obj.lcd_showString(&otm8009a_obj,0,0,&Font24,LCD_COLOR_WHITE,"touch state=%d",touch_object.touch_state);
       otm8009a_obj.lcd_showString(&otm8009a_obj,0,24,&Font24,LCD_COLOR_WHITE,"touch x=%d,y=%d",touch_object.x[0],touch_object.y[0]);
       otm8009a_obj.dsi_object.dsi_refresh(&otm8009a_obj.dsi_object);  
+      if(IS_SD_INSERTED==0)
+      {
+        if(sd_object!=NULL)
+        {
+            otm8009a_obj.lcd_showString(&otm8009a_obj,0,48,&Font24,LCD_COLOR_WHITE,"sd card inserted");
+            otm8009a_obj.lcd_showString(&otm8009a_obj,0,72,&Font24,LCD_COLOR_WHITE,"sd card capacity: %d MB",(uint32_t)((sd_object->cardInfo.LogBlockNbr)>>11));
+        }
+      }
     }
     osDelay(10);
   }
@@ -95,6 +103,7 @@ void sdTask(void *argument)
       }
       else
       {
+        sd_object=NULL;
         read_flag=0;
       }
     }
