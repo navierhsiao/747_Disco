@@ -27,7 +27,7 @@ const osThreadAttr_t sdTask_attributes = {
 
 lcd_objectTypeDef otm8009a_obj;
 touch_objectTypeDef touch_object;
-sdmmc_objectTypeDef *sd_object;
+
 
 void StartDefaultTask(void *argument);
 void touchTask(void *argument);
@@ -70,14 +70,14 @@ void touchTask(void *argument)
       otm8009a_obj.lcd_showString(&otm8009a_obj,0,0,&Font24,LCD_COLOR_WHITE,"touch state=%d",touch_object.touch_state);
       otm8009a_obj.lcd_showString(&otm8009a_obj,0,24,&Font24,LCD_COLOR_WHITE,"touch x=%d,y=%d",touch_object.x[0],touch_object.y[0]);
       otm8009a_obj.dsi_object.dsi_refresh(&otm8009a_obj.dsi_object);  
-      if(IS_SD_INSERTED==0)
-      {
-        if(sd_object!=NULL)
-        {
-            otm8009a_obj.lcd_showString(&otm8009a_obj,0,48,&Font24,LCD_COLOR_WHITE,"sd card inserted");
-            otm8009a_obj.lcd_showString(&otm8009a_obj,0,72,&Font24,LCD_COLOR_WHITE,"sd card capacity: %d MB",(uint32_t)((sd_object->cardInfo.LogBlockNbr)>>11));
-        }
-      }
+      // if(IS_SD_INSERTED==0)
+      // {
+      //   if(sd_object!=NULL)
+      //   {
+      //       otm8009a_obj.lcd_showString(&otm8009a_obj,0,48,&Font24,LCD_COLOR_WHITE,"sd card inserted");
+      //       otm8009a_obj.lcd_showString(&otm8009a_obj,0,72,&Font24,LCD_COLOR_WHITE,"sd card capacity: %d MB",(uint32_t)((sd_object->cardInfo.LogBlockNbr)>>11));
+      //   }
+      // }
     }
     osDelay(10);
   }
@@ -90,30 +90,30 @@ void sdTask(void *argument)
   MX_USB_DEVICE_Init();
   for(;;)
   {
-    if(sd_object!=NULL)
-    {
-      sd_object->sdmmc_scan_card_state(sd_object);
-      if(sd_object->is_card_detected)
-      {
-        if(read_flag==0)
-        {
-          sd_object->sdmmc_get_cardInfo(sd_object);
-          read_flag=1;
-        }
-      }
-      else
-      {
-        sd_object=NULL;
-        read_flag=0;
-      }
-    }
-    else
-    {
-      if(IS_SD_INSERTED==0)
-      {
-        sd_object=sdmmc_object_init();
-      }
-    }
+    // if(sd_object!=NULL)
+    // {
+    //   sd_object->sdmmc_scan_card_state(sd_object);
+    //   if(sd_object->is_card_detected)
+    //   {
+    //     if(read_flag==0)
+    //     {
+    //       sd_object->sdmmc_get_cardInfo(sd_object);
+    //       read_flag=1;
+    //     }
+    //   }
+    //   else
+    //   {
+    //     sd_object=NULL;
+    //     read_flag=0;
+    //   }
+    // }
+    // else
+    // {
+    //   if(IS_SD_INSERTED==0)
+    //   {
+    //     sd_object=sdmmc_object_init();
+    //   }
+    // }
     
     osDelay(100);
   }

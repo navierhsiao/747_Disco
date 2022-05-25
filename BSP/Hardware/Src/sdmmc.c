@@ -6,6 +6,7 @@ void sdmmc_readBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t ind
 void sdmmc_writeBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t index,uint32_t number);
 void sdmmc_erase(sdmmc_objectTypeDef *object,uint32_t index,uint32_t number);
 void sdmmc_get_cardInfo(sdmmc_objectTypeDef *object);
+void sdmmc_get_card_state(sdmmc_objectTypeDef *object);
 void sdmmc_scan_card_state(sdmmc_objectTypeDef *object);
 
 sdmmc_objectTypeDef *sdmmc_object_init()
@@ -131,6 +132,11 @@ void sdmmc_get_cardInfo(sdmmc_objectTypeDef *object)
     {
         Error_Handler(__FILE__, __LINE__);
     }
+}
+
+void sdmmc_get_card_state(sdmmc_objectTypeDef *object)
+{
+    object->state=HAL_SD_GetCardState(&object->hsdmmc);
 }
 
 void sdmmc_scan_card_state(sdmmc_objectTypeDef *object)
