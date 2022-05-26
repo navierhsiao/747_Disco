@@ -2,7 +2,7 @@
 #define __LCD_H
 
 #include "../../Hardware/Inc/ltdc_dsi.h"
-// #include "Fonts/fonts.h"
+#include "Fonts/fonts.h"
 /* List of OTM8009A used commands                                  */
 /* Detailed in OTM8009A Data Sheet 'DATA_SHEET_OTM8009A_V0 92.pdf' */
 /* Version of 14 June 2012                                         */

@@ -150,10 +150,10 @@ int8_t STORAGE_Read_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t bl
   if (IS_SD_INSERTED==0)
   {
     sd_object->sdmmc_readBlocks_DMA(sd_object,(uint32_t *) buf,blk_addr,blk_len);
-    sd_object->sdmmc_get_card_state(sd_object);
-
+    
     while (sd_object->state != SD_TRANSFER_OK)
     {
+      sd_object->sdmmc_get_card_state(sd_object);
     }
 
     state = 0;
@@ -175,12 +175,11 @@ int8_t STORAGE_Write_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t b
 
   if (IS_SD_INSERTED==0)
   {
-    BSP_SD_WriteBlocks(0, (uint32_t *) buf, blk_addr, blk_len);
     sd_object->sdmmc_writeBlocks_DMA(sd_object,(uint32_t *) buf,blk_addr,blk_len);
-    sd_object->sdmmc_get_card_state(sd_object);
-
+    
     while (sd_object->state != SD_TRANSFER_OK)
     {
+      sd_object->sdmmc_get_card_state(sd_object);
     }
 
     state = 0;

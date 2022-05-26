@@ -16,7 +16,7 @@ sdmmc_objectTypeDef *sdmmc_object_init()
     sd_object_temp.hsdmmc.Init.ClockPowerSave = SDMMC_CLOCK_POWER_SAVE_DISABLE; 
     sd_object_temp.hsdmmc.Init.BusWide = SDMMC_BUS_WIDE_4B; 
     sd_object_temp.hsdmmc.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE; 
-    sd_object_temp.hsdmmc.Init.ClockDiv = 0xFA;
+    sd_object_temp.hsdmmc.Init.ClockDiv = 2;
     if (HAL_SD_Init(&sd_object_temp.hsdmmc) != HAL_OK)
     {
         Error_Handler(__FILE__, __LINE__);
@@ -30,7 +30,9 @@ sdmmc_objectTypeDef *sdmmc_object_init()
     sd_object_temp.sdmmc_writeBlocks_DMA=sdmmc_writeBlock_DMA;
     sd_object_temp.sdmmc_erace=sdmmc_erase;
     sd_object_temp.sdmmc_get_cardInfo=sdmmc_get_cardInfo;
+    sd_object_temp.sdmmc_get_card_state=sdmmc_get_card_state;
     sd_object_temp.sdmmc_scan_card_state=sdmmc_scan_card_state;
+
 
     return &sd_object_temp;
 }
@@ -63,7 +65,7 @@ void HAL_SD_MspInit(SD_HandleTypeDef *hsd)
         PD2     ------> SDMMC1_CMD
         PC8     ------> SDMMC1_D0
         PC9     ------> SDMMC1_D1
-        DET     ------> PI8(init at system.c)
+        PI8     ------> DET(init at system.c)
         */
         GPIO_InitStruct.Pin = GPIO_PIN_10|GPIO_PIN_11|GPIO_PIN_12|GPIO_PIN_8
                             |GPIO_PIN_9;
@@ -106,7 +108,7 @@ void sdmmc_readBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t ind
 {
     if(HAL_SD_ReadBlocks_DMA(&object->hsdmmc,(uint8_t*)data,index,number)!=HAL_OK)
     {
-        Error_Handler(__FILE__, __LINE__);
+        // Error_Handler(__FILE__, __LINE__);
     }
 }
 
@@ -114,7 +116,7 @@ void sdmmc_writeBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t in
 {
     if(HAL_SD_WriteBlocks_DMA(&object->hsdmmc,(uint8_t*)data,index,number)!=HAL_OK)
     {
-        Error_Handler(__FILE__, __LINE__);
+        // Error_Handler(__FILE__, __LINE__);
     }
 }
 
@@ -136,7 +138,7 @@ void sdmmc_get_cardInfo(sdmmc_objectTypeDef *object)
 
 void sdmmc_get_card_state(sdmmc_objectTypeDef *object)
 {
-    object->state=HAL_SD_GetCardState(&object->hsdmmc);
+    object->state=(int32_t)((HAL_SD_GetCardState(&object->hsdmmc) == HAL_SD_CARD_TRANSFER ) ? SD_TRANSFER_OK : SD_TRANSFER_BUSY);
 }
 
 void sdmmc_scan_card_state(sdmmc_objectTypeDef *object)
