@@ -6,7 +6,7 @@ void sdmmc_readBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t ind
 void sdmmc_writeBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t index,uint32_t number);
 void sdmmc_erase(sdmmc_objectTypeDef *object,uint32_t index,uint32_t number);
 void sdmmc_get_cardInfo(sdmmc_objectTypeDef *object);
-void sdmmc_get_card_state(sdmmc_objectTypeDef *object);
+HAL_SD_CardStateTypeDef sdmmc_get_card_state(sdmmc_objectTypeDef *object);
 void sdmmc_scan_card_state(sdmmc_objectTypeDef *object);
 
 sdmmc_objectTypeDef *sdmmc_object_init()
@@ -16,7 +16,7 @@ sdmmc_objectTypeDef *sdmmc_object_init()
     sd_object_temp.hsdmmc.Init.ClockPowerSave = SDMMC_CLOCK_POWER_SAVE_DISABLE; 
     sd_object_temp.hsdmmc.Init.BusWide = SDMMC_BUS_WIDE_4B; 
     sd_object_temp.hsdmmc.Init.HardwareFlowControl = SDMMC_HARDWARE_FLOW_CONTROL_DISABLE; 
-    sd_object_temp.hsdmmc.Init.ClockDiv = 2;
+    sd_object_temp.hsdmmc.Init.ClockDiv = 10;
     if (HAL_SD_Init(&sd_object_temp.hsdmmc) != HAL_OK)
     {
         Error_Handler(__FILE__, __LINE__);
@@ -71,20 +71,20 @@ void HAL_SD_MspInit(SD_HandleTypeDef *hsd)
                             |GPIO_PIN_9;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_PULLUP;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
         GPIO_InitStruct.Alternate = GPIO_AF12_SDIO1;
         HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
         GPIO_InitStruct.Pin = GPIO_PIN_2;
         GPIO_InitStruct.Mode = GPIO_MODE_AF_PP;
         GPIO_InitStruct.Pull = GPIO_PULLUP;
-        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_VERY_HIGH;
+        GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_HIGH;
         GPIO_InitStruct.Alternate = GPIO_AF12_SDIO1;
         HAL_GPIO_Init(GPIOD, &GPIO_InitStruct);
 
 
         /* NVIC configuration for SDIO interrupts */
-        HAL_NVIC_SetPriority(SDMMC1_IRQn, 8, 0);
+        HAL_NVIC_SetPriority(SDMMC1_IRQn, 4, 0);
         HAL_NVIC_EnableIRQ(SDMMC1_IRQn);
     }
 }
@@ -96,28 +96,42 @@ void SDMMC1_IRQHandler(void)
 
 void HAL_SD_TxCpltCallback(SD_HandleTypeDef *hsd)
 {
-  
+  sd_object_temp.tx_cplt=1;
 }
 
 void HAL_SD_RxCpltCallback(SD_HandleTypeDef *hsd)
 {
-  
+  sd_object_temp.rx_cplt=1;
 }
 
 void sdmmc_readBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t index,uint32_t number)
 {
+#if USE_DMA==1
     if(HAL_SD_ReadBlocks_DMA(&object->hsdmmc,(uint8_t*)data,index,number)!=HAL_OK)
     {
-        // Error_Handler(__FILE__, __LINE__);
+        Error_Handler(__FILE__, __LINE__);
     }
+#else
+    if(HAL_SD_ReadBlocks(&object->hsdmmc,(uint8_t*)data,index,number,1000)!=HAL_OK)
+    {
+        Error_Handler(__FILE__, __LINE__);
+    }
+#endif
 }
 
 void sdmmc_writeBlock_DMA(sdmmc_objectTypeDef *object,uint32_t *data,uint32_t index,uint32_t number)
 {
+#if USE_DMA==1
     if(HAL_SD_WriteBlocks_DMA(&object->hsdmmc,(uint8_t*)data,index,number)!=HAL_OK)
     {
-        // Error_Handler(__FILE__, __LINE__);
+        Error_Handler(__FILE__, __LINE__);
     }
+#else 
+    if(HAL_SD_WriteBlocks(&object->hsdmmc,(uint8_t*)data,index,number,1000)!=HAL_OK)
+    {
+        Error_Handler(__FILE__, __LINE__);
+    }
+#endif
 }
 
 void sdmmc_erase(sdmmc_objectTypeDef *object,uint32_t index,uint32_t number)
@@ -136,9 +150,9 @@ void sdmmc_get_cardInfo(sdmmc_objectTypeDef *object)
     }
 }
 
-void sdmmc_get_card_state(sdmmc_objectTypeDef *object)
+HAL_SD_CardStateTypeDef sdmmc_get_card_state(sdmmc_objectTypeDef *object)
 {
-    object->state=(int32_t)((HAL_SD_GetCardState(&object->hsdmmc) == HAL_SD_CARD_TRANSFER ) ? SD_TRANSFER_OK : SD_TRANSFER_BUSY);
+    return (int32_t)((HAL_SD_GetCardState(&object->hsdmmc) == HAL_SD_CARD_TRANSFER ) ? SD_TRANSFER_OK : SD_TRANSFER_BUSY);
 }
 
 void sdmmc_scan_card_state(sdmmc_objectTypeDef *object)

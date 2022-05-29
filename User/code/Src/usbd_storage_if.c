@@ -5,7 +5,6 @@
 #define STORAGE_BLK_NBR                  0x10000
 #define STORAGE_BLK_SIZ                  0x200
 
-
 const int8_t STORAGE_Inquirydata_HS[] = {/* 36 */
 
   /* LUN 0 */
@@ -108,8 +107,7 @@ int8_t STORAGE_IsReady_HS(uint8_t lun)
 
     }
 
-    sd_object->sdmmc_get_card_state(sd_object);
-    if (sd_object->state == SD_TRANSFER_OK)
+    if (sd_object->sdmmc_get_card_state(sd_object)==0)
     {
       status = 0;
     }
@@ -149,12 +147,21 @@ int8_t STORAGE_Read_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t bl
 
   if (IS_SD_INSERTED==0)
   {
+    sd_object->rx_cplt=0;
     sd_object->sdmmc_readBlocks_DMA(sd_object,(uint32_t *) buf,blk_addr,blk_len);
     
-    while (sd_object->state != SD_TRANSFER_OK)
+#if USE_DMA==1
+    while (sd_object->rx_cplt!=1)
     {
-      sd_object->sdmmc_get_card_state(sd_object);
     }
+
+    uint32_t alignedAddr = (uint32_t)buf & ~0x1F;
+    SCB_InvalidateDCache_by_Addr((uint32_t*)alignedAddr, blk_len*BLOCKSIZE + ((uint32_t)buf - alignedAddr));
+#else
+    while(sd_object->sdmmc_get_card_state(sd_object)!=SD_TRANSFER_OK)
+    {
+    }
+#endif
 
     state = 0;
   }
@@ -175,13 +182,18 @@ int8_t STORAGE_Write_HS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t b
 
   if (IS_SD_INSERTED==0)
   {
+    sd_object->tx_cplt=0;
     sd_object->sdmmc_writeBlocks_DMA(sd_object,(uint32_t *) buf,blk_addr,blk_len);
     
-    while (sd_object->state != SD_TRANSFER_OK)
+#if USE_DMA==1
+    while (sd_object->tx_cplt!=1)
     {
-      sd_object->sdmmc_get_card_state(sd_object);
     }
-
+#else
+    while(sd_object->sdmmc_get_card_state(sd_object)!=SD_TRANSFER_OK)
+    {
+    }
+#endif
     state = 0;
   }
   return state;
