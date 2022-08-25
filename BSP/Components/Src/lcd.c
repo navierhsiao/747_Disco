@@ -4,6 +4,23 @@
 
 #define ABS(X)                 ((X) > 0 ? (X) : -(X))
 
+pwm_tim_objectInitAttr pwm_tim_initAttr={
+   .instance            = TIM2,
+   .frequency           = 20000,
+   .CounterMode         = TIM_COUNTERMODE_UP,     
+   .ClockDivision       = TIM_CLOCKDIVISION_DIV1,  
+   .AutoReloadPreload   = TIM_AUTORELOAD_PRELOAD_DISABLE, 
+   .enabled_channel[0]  = CHANNEL_RESET,
+   .enabled_channel[1]  = CHANNEL_ENABLED,
+   .enabled_channel[2]  = CHANNEL_RESET,
+   .enabled_channel[3]  = CHANNEL_RESET,
+   .enabled_channel[4]  = CHANNEL_RESET,
+   .enabled_channel[5]  = CHANNEL_RESET,
+   .OCMode              = TIM_OCMODE_PWM1,       
+   .OCPolarity          = TIM_OCPOLARITY_HIGH,  
+   .OCFastMode          = TIM_OCFAST_DISABLE  
+};
+
 static const uint8_t LcdRegData27[] = {0x00, 0x00, 0x03, 0x1F};
 static const uint8_t LcdRegData28[] = {0x00, 0x00, 0x01, 0xDF};
 
@@ -28,6 +45,8 @@ void LCD_showString(lcd_objectTypeDef *object,uint16_t x,uint16_t y,sFONT *fonts
 void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientation)
 {
   LTDC_DSI_object_Init(&object->dsi_object);
+  pwm_tim_objectInit(&object->tim_object,pwm_tim_initAttr);
+
   object->lcd_write_reg_short=LCD_write_reg_short;
   object->lcd_write_reg_long=LCD_write_reg_long;
   object->lcd_read_reg=LCD_read_reg;
@@ -39,6 +58,8 @@ void lcd_init(lcd_objectTypeDef *object,uint32_t colorCoding,uint32_t orientatio
   object->lcd_getXsize=lcd_getXsize;
   object->lcd_getYsize=lcd_getYsize;
 
+  object->lcd_set_backLight(object,10000);
+  
   object->lcd_draw_line=LCD_draw_line;
   object->lcd_draw_rect=LCD_draw_rect;
   object->lcd_showString=LCD_showString;
